@@ -1,0 +1,44 @@
+/*-----------------------------------------------------------
+* Template Name    : OTT WhiteLabel Platform
+* Author Name      : Shiv Kumar Prajapat
+* File Description : This files Includes all Style CSS
+*------------------------------------------------------------*/
+
+/*======================================================================
+ Table of Content:
+=================================
+  Global CSS
+=================================
+
+01. Color
+02. Variables
+03. Fonts
+04. Mixins
+05. Utils
+06. Media Query
+07. react-datepicker
+08. inputs
+09. Theme
+
+=================================
+ // ? Helper
+================================*/
+
+@import "helper/abstracts/color";
+@import "helper/abstracts/variables";
+@import "helper/fonts";
+@import "helper/mixin";
+@import "helper/utils";
+@import "helper/media-query";
+
+/*================================
+ // ? components
+=================================*/
+
+@import './components/react-datepicker';
+@import './components/inputs';
+
+/*================================
+ // ? Theme
+=================================*/
+@import './theme';

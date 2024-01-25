@@ -1,0 +1,378 @@
+.counsellor-item { position: relative; overflow: hidden;  @include transition_05;  border-radius: 16px;
+    .counsellor-img { transform: scale(1.05); img {
+    -webkit-backface-visibility: hidden; 
+    -ms-transform: translateZ(0); /* IE 9 */
+    -webkit-transform: translateZ(0); /* Chrome, Safari, Opera */
+    transform: translateZ(0);
+} @include transition_05; padding-top:114%; border-radius: 16px; overflow: hidden; background-position: top left; background-repeat: no-repeat; background-size: cover; }
+    .counsellor-name { font-weight: $fw-700; font-size: 20px; line-height: 30px; color:$white; text-shadow: 0px 2px 8px $light-black-1; }
+    .counsellor-info {  border-radius: 0 0 16px 16px; position: absolute; width: 100%; bottom: 0; left: 0; padding:59px 24px 24px;  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.4) 39.73%, rgba(0, 0, 0, 0.6) 100%);
+    .rating { margin-top: 2px; display: flex; align-items: center; p { margin-left: 8px; color:$light-blue; margin-bottom: 0; } }
+    .btn-box { margin-top: 6px; max-height: 0; overflow: hidden;  @include transition_05;  }
+}
+&:hover { .counsellor-img{  transform: scale(1); } .counsellor-info .btn-box { max-height: 35px;} }
+}
+.book-now { padding:8px 24px; width: 100%; border:0; @include transition_05; font-weight: $fw-600; font-size: 16px; line-height: 19px; color: $text_blue;  background: $light-blue; box-shadow: 0px 0px 8px $light-blue-6; border-radius: 8px;
+&:hover { background-color: $text_blue; color:$white; }
+}
+.counsellor-box .row > [class^="col-"] { margin-bottom: 24px; overflow: hidden; &:last-child ,&:nth-last-child(2) { margin-bottom: 0; } }
+
+.seperator { margin:0 12px; font-weight: $fw-500; font-size: 18px; line-height: 24px; color:$light-black; letter-spacing: 0.1px;}
+.infobasic { margin-bottom: 40px; h4 { color:$black; margin-bottom: 16px; } p { color:$light-black; line-height: 32px; font-weight: 500; &:last-child{  margin-bottom: 0; } } }
+/* session history box */
+.view-stu-report {
+  padding: 17px;
+  background: #EEF6FC;
+  border-radius: 16px;
+  text-align: center;
+}
+.reason-box {
+  margin-top: 32px;
+  h4 {
+    margin-bottom: 24px;
+    color: #0D2D44;
+}
+}
+.logo-border-box {
+
+  height: 100%;
+  padding: 28px;
+  border: 2px solid #EEF6FC;
+  border-radius: 16px;
+  h6 {
+    color: #5E686F;
+}
+  .user-info-content-box { position: relative ; z-index: 1;
+    h6 {
+    color: #5E686F;
+}
+    display: flex;
+    align-items: center;
+    img {
+      width: 56px;
+      height: 56px;
+  }
+}
+.user-infobox {
+  text-align: left;
+  margin-left: 16px;
+  h4 {
+    color: #0D2D44;
+}
+}
+}
+.counsellor-infobox { img { width: 48px; height: 48px; border-radius: 50%; } display: flex; align-items: center; .counsinfo { margin-left: 16px; p { margin-bottom: 4px; font-weight: $fw-500; font-size: 16px; line-height: 24px; }  } }
+.table-tab .whitebox-layout {
+  padding-left:0;
+  .react-bootstrap-table table thead tr ,.react-bootstrap-table table tr { border:0; }
+  .button-box { a { margin-right:16px;&:last-child(){ margin-right: 0; } } }
+}
+.react-bootstrap-table-pagination .page-item .page-link { text-align: center; }
+.pending-sessions { padding-left: 32px; font-weight: $fw-500; font-size: 16px; line-height: 28px;color: $light-black; font-style: italic;}
+.session-history-box { 
+  .counselling-page { margin-bottom: 16px; }
+  .heading-box { border-bottom: 2px solid $light-blue; }
+  .nav-pills { .nav-item { .nav-link { cursor: pointer; position: relative; padding:6px 32px 27px; background-color: transparent; border:0; color:$light-black; font-weight: $fw-500; font-size: 18px; line-height: 28px; 
+  &:after { content: ""; position: absolute; left:0; bottom:-1px; width: 100%; height: 4px;  }
+  &:hover:after { animation: borderline 1s ease forwards; width: 100%; }
+  &.active:after ,&:hover:after{ background-color: $text_blue; }
+  }
+ } }
+ }
+ .filter-time-btn { 
+  cursor: pointer;
+  .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ position: relative; box-shadow: none !important; }
+  .filter-custom__control::before ,.filter-custom__control--is-focused::before,.filter-custom__control--menu-is-open::before{ content:''; position: absolute; left: 13px; top:50%; transform: translateY(-50%); background: url('../../../images/timeicon.svg')no-repeat center center/cover; width: 20px; height: 20px; }
+.css-1hb7zxy-IndicatorsContainer ,.filter-custom__indicators{ display: none !important; }
+  .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ padding: 10px 16px 10px 40px; border-radius: 8px; width: auto; font-size: 16px; line-height: 24px; border: 2px solid $light-blue !important;}
+     .filter-custom__control--is-focused,.filter-custom__control--menu-is-open:hover { border-color:$light-blue !important; box-shadow: none; }
+     .filter-custom__value-container { cursor: pointer; padding:0; }
+     .filter-custom__placeholder , .css-qc6sy-singleValue { margin: 0;  }
+     /* options */
+    .filter-custom__option--is-focused ,.filter-custom__option--is-selected{ padding: 0; background: $text_blue !important; color:$white; }
+     .filter-custom__menu-list { cursor: pointer; margin:0; padding: 0; border:0; }
+     .filter-custom__menu { cursor: pointer; box-shadow: none; background: $white !important; border-radius: 8px; overflow: hidden; z-index: 99; box-shadow: 0px 16px 65px rgba(33, 112, 172, 0.08), 0px 8.1px 28.3359px rgba(33, 112, 172, 0.054), 0px 3.2px 10.5625px rgba(33, 112, 172, 0.04), 0px 0.7px 3.75781px rgba(33, 112, 172, 0.026);}
+     .filter-custom__menu-list > div ,.filter-custom__option { cursor: pointer; padding:10px 20px; font-size: 16px; line-height: 24px;  }
+     .filter-custom__input-container {
+         padding:0; margin:0; }
+      &.withrightimg {
+        .filter-custom__control::before ,.filter-custom__control--is-focused::before,.filter-custom__control--menu-is-open::before { right:13px; left:auto; background-image: url('../../../images/arrow-down.svg'); }
+        .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ padding: 10px 40px 10px 16px; }
+      }
+        }
+ /* reschedule page design */
+ .light-blue-bgbox { margin-bottom: 24px;  padding:24px 32px; background-color: $light-blue; border-radius: 16px; &:last-child(){ margin-bottom: 0; }  }
+ .date-time-box { display: flex; justify-content: space-between; align-items: center; 
+.box-title { color:$black; }
+.time-date,.itemee { display: flex; align-items: center;  }
+.itemee  { margin-right: 60px; &:last-child{ margin-right: 0; } .img-box { padding:3px; width: 40px; height: 40px; border-radius: 50%; background-color: $white; display: flex; justify-content: center; align-items: center; } h4 { margin-left: 20px; color:$text_blue; font-weight: $fw-600; } }
+}
+.slot-availablity { margin:0 -12px; margin-top: 36px; padding-left: 0; margin-bottom: 0; display: flex;  flex-wrap: wrap; &.four-col { li {  width: auto !important; display: inline-block; padding:0 9px; button { width: 181px; } } } &.small-space { li { padding:0 5px; margin-bottom: 10px; } }
+  li { margin-bottom: 24px; width: calc(100% / 5); padding:0 12px;  } }
+.whitebtn { &.lightbg { background: $light-blue; } img { margin-right: 11px; } padding:16px 16px 16px 22px; background: $white; border-radius: 16px; font-weight: $fw-600; color:$text-dark-3; border: 0; display: flex; align-items: center; width: 100%; &:hover,&.active { img { @include hoverimgwhite;  } background-color: $text_blue; color:$white; } }
+.form-control.big-textarea.cancelbox, .drop-boxes.big-textarea.cancelbox { height:14.4vw;  } 
+.counselling-btnbox { .itemee { margin-right: 24px; } }
+//responsive css
+  @media (min-width:1400px) and (max-width:1599px) {
+    .counsellor-item { border-radius: 14px;
+        .counsellor-img { border-radius: 14px;  }
+        .counsellor-name { font-size: 17px; line-height: 26px;  }
+        .counsellor-info {  border-radius: 0 0 14px 14px; padding:50px 20px 20px;  
+        .rating { margin-top: 2px;  p { margin-left: 6px; } }
+        .btn-box { margin-top: 5px; }
+    }
+    &:hover { .counsellor-info .btn-box { max-height: 31px;} }
+    }
+    .book-now { padding:6px 20px; font-size: 16px; line-height: 19px; 
+    }
+    .counsellor-box .row > [class^="col-"] { margin-bottom: 24px; }
+.seperator { margin:0 8px; font-size: 16px; line-height: 22px; }
+/* session history box */
+.counsellor-infobox {  .counsinfo { margin-left: 12px; p { margin-bottom: 3px; font-size: 16px; line-height: 24px; }  } }
+.table-tab .whitebox-layout {
+  .button-box { a { margin-right:12px; } }
+}
+.pending-sessions { padding-left: 26px; font-size: 16px; line-height: 28px;}
+.session-history-box { 
+  .counselling-page { margin-bottom:12px; }
+  .nav-pills { .nav-item { .nav-link { padding:6px 20px 23px; font-size: 16px; line-height: 24px; 
+  &:after { bottom:-1px; height: 3px;  }
+  }
+ } }
+ }
+ /* reschedule page design */
+ .light-blue-bgbox { margin-bottom: 20px;  padding:20px 26px; border-radius: 16px;  }
+ .date-time-box { 
+.itemee  { margin-right: 60px; .img-box { padding:3px; width: 35px; height: 35px; } h4 { margin-left: 20px;  } }
+}
+.slot-availablity { margin:0 -10px; margin-top:20px; &.four-col { li {  padding:0 6px; button { width: 159px; } } }
+  li { margin-bottom:20px; width: calc(100% / 4); padding:0 10px;  } } 
+.whitebtn { img { margin-right: 8px; width:16px;  } padding:12px 12px 12px 20px; border-radius: 12px;  }
+.slot-availablity li { &:last-child ,&:nth-last-child(1) ,&:nth-last-child(2),&:nth-last-child(3){ margin-bottom:0 ; } }
+.form-control.big-textarea.cancelbox, .drop-boxes.big-textarea.cancelbox { height:12.4vw;  } 
+.infobasic { margin-bottom: 30px; h4 {  margin-bottom: 12px; } p { line-height: 30px; } }
+.counselling-btnbox { .itemee { margin-right: 20px; } }
+}
+@media (min-width:1200px) and (max-width:1399px) {
+    .counsellor-item { border-radius: 14px;
+        .counsellor-img { border-radius: 14px;  }
+        .counsellor-name { font-size: 17px; line-height: 26px;  }
+        .counsellor-info {  border-radius: 0 0 14px 14px; padding:50px 20px 20px;  
+        .rating { margin-top: 2px;  p { margin-left: 6px; } }
+        .btn-box { margin-top: 5px; }
+    }
+    &:hover { .counsellor-info .btn-box { max-height: 31px;} }
+    }
+    .book-now { padding:6px 20px; font-size: 16px; line-height: 19px; 
+    }
+    .counsellor-box .row > [class^="col-"] { margin-bottom: 24px; }
+    .seperator { margin:0 5px; font-size: 12px; line-height: 22px; }
+    /* session history box */
+.counsellor-infobox {  .counsinfo { margin-left: 10px; p { margin-bottom: 3px; font-size: 16px; line-height: 24px; }  } }
+.table-tab .whitebox-layout {
+  .button-box { a { margin-right:12px; } }
+}
+.pending-sessions { padding-left: 22px; font-size: 14px; line-height: 20px;}
+.session-history-box { 
+  .counselling-page { margin-bottom:8px; }
+  .nav-pills { .nav-item { .nav-link { padding:6px 12px 17px; font-size: 14px; line-height: 20px; 
+  &:after { bottom:-1px; height: 3px;  }
+  }
+ } }
+ }
+  /* reschedule page design */
+  .light-blue-bgbox { margin-bottom: 20px;  padding:14px 18px; border-radius: 16px;  }
+  .date-time-box { 
+ .itemee  { margin-right: 12px; .img-box { padding:3px; width: 30px; height: 30px; } h4 { margin-left: 16px;  } }
+ }
+ .slot-availablity { margin:0 -8px; margin-top:20px; &.four-col { li {  padding:0 6px; button { width: 138px; } } }
+   li { margin-bottom:20px; width: calc(100% / 3); padding:0 8px;  } }
+ .whitebtn { img { margin-right: 8px; width:16px;  } padding:12px 12px 12px 16px; border-radius: 12px;  }
+ .slot-availablity li { &:last-child ,&:nth-last-child(1) ,&:nth-last-child(2){ margin-bottom:0 ; } }
+ .form-control.big-textarea.cancelbox, .drop-boxes.big-textarea.cancelbox { height:17.4vw;  } 
+ .infobasic { margin-bottom: 24px; h4 {  margin-bottom: 12px; } p { line-height: 28px; } }
+ .counselling-btnbox { .itemee { margin-right: 16px; } }
+}
+@media (min-width:992px) and (max-width:1199px) {
+  .logo-border-box{padding: 20px;}
+    .counsellor-item { border-radius: 14px;
+        .counsellor-img { border-radius: 14px;  }
+        .counsellor-name { font-size: 17px; line-height: 26px;  }
+        .counsellor-info {  border-radius: 0 0 14px 14px; padding:50px 20px 20px;  
+        .rating { margin-top: 2px;  p { margin-left: 6px; } }
+        .btn-box { margin-top: 5px; }
+    }
+    &:hover { .counsellor-info .btn-box { max-height: 31px;} }
+    }
+    .book-now { padding:6px 20px; font-size: 16px; line-height: 19px; 
+    }
+    .counsellor-box .row > [class^="col-"] { margin-bottom: 24px; }
+    .seperator { margin:0 10px; font-size: 16px; line-height: 22px; }
+    /* session history box */
+.counsellor-infobox {  .counsinfo { margin-left: 10px; p { margin-bottom:2px; font-size: 14px; line-height:20px; }  a {  font-size: 13px; line-height: 19px;  } } }
+.table-tab .whitebox-layout {
+  .button-box { a { margin-right:12px;} }
+}
+.pending-sessions { padding-left: 22px; font-size: 14px; line-height: 20px;}
+.session-history-box { 
+  .react-bootstrap-table table { min-width: 750px; }
+  .heading-box { flex-direction: column-reverse; }
+  .counselling-page { margin-bottom:8px; text-align: right; }
+  .nav-pills { .nav-item { .nav-link { padding:6px 12px 17px; font-size: 14px; line-height: 20px; 
+  &:after { bottom:-1px; height: 3px;  }
+  }
+ } }
+ }
+   /* reschedule page design */
+   .light-blue-bgbox { margin-bottom: 20px;  padding:14px 18px; border-radius: 16px;  }
+   .date-time-box { 
+  .itemee  { margin-right: 12px; .img-box { padding:3px; width: 30px; height: 30px; } h4 { margin-left: 16px;  } }
+  }
+  .slot-availablity { margin:0 -8px; margin-top:20px; &.four-col { li { margin-bottom: 8px; padding:0 4px; button { width: 138px; } } }
+    li { margin-bottom:20px; width: calc(100% / 4); padding:0 8px;  } }
+  .whitebtn { img { margin-right: 8px; width:16px;  } padding:12px 12px 12px 16px; border-radius: 12px;  }
+  .slot-availablity li { &:last-child ,&:nth-last-child(1) ,&:nth-last-child(2) ,&:nth-last-child(3){ margin-bottom:0 ; } }
+  .reschedule-page .counsellor-box .row > [class^="col-"] { margin-bottom: 24px; &:last-child  { margin-bottom: 0; }  }
+  .form-control.big-textarea.cancelbox, .drop-boxes.big-textarea.cancelbox { height:160px;  } 
+  .infobasic { margin-bottom: 24px; h4 {  margin-bottom: 12px; } p { line-height: 26px; } }
+  .counselling-btnbox { .itemee { margin-right: 16px; } }
+  .filter-time-btn { 
+    .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ font-size: 14px; line-height:22px;}
+       .filter-custom__menu-list > div ,.filter-custom__option { font-size: 14px; line-height:22px;  }
+  }
+}
+@media (min-width:768px) and (max-width:991px) {
+  .logo-border-box{padding: 18px;}
+    .counsellor-item { border-radius: 10px;
+        .counsellor-img { border-radius: 10px;  }
+        .counsellor-name { font-size: 16px; line-height: 24px;  }
+        .counsellor-info {  border-radius: 0 0 10px 10px; padding:40px 16px 16px;  
+        .rating { margin-top: 2px;  p { margin-left: 6px; } }
+        .btn-box { margin-top: 5px; }
+    }
+    &:hover { .counsellor-info .btn-box { max-height: 31px;} }
+    }
+    .book-now { padding:6px 20px; font-size: 16px; line-height: 19px; 
+    }
+    .counsellor-box .row > [class^="col-"] { margin-bottom: 20px; &:nth-last-child(2) { margin-bottom:20px; } }
+    .seperator { margin:0 5px; font-size: 16px; line-height: 22px; }
+    /* session history box */
+.counsellor-infobox {  .counsinfo { margin-left: 10px; p { margin-bottom:2px; font-size: 14px; line-height:20px; }  a {  font-size: 13px; line-height: 19px;  } } }
+.table-tab .whitebox-layout {
+  .button-box { a { margin-right:12px;} }
+}
+.pending-sessions { padding-left: 22px; font-size: 14px; line-height: 20px;}
+.session-history-box { 
+  .react-bootstrap-table table { min-width: 750px; }
+  .heading-box { flex-direction: column-reverse; }
+  .counselling-page { margin-bottom:8px; text-align: right; }
+  .nav-pills { .nav-item { .nav-link { padding:6px 9px 17px; font-size: 14px; line-height: 20px; 
+  &:after { bottom:-1px; height: 3px;  }
+  }
+ } }
+ }
+ .filter-time-btn { 
+  .filter-custom__control::before ,.filter-custom__control--is-focused::before,.filter-custom__control--menu-is-open::before{  left: 10px; top:50%; transform: translateY(-50%); background-image: url('../../../images/timeicon.svg'); width: 16px; height: 16px; }
+  .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ padding:6px 12px 6px 30px; border-radius: 8px; width: auto; font-size: 14px; line-height:22px; border: 2px solid $light-blue !important;}
+     .filter-custom__menu-list > div ,.filter-custom__option { cursor: pointer; padding:10px 12px; font-size: 14px; line-height:22px;  }
+     &.withrightimg {
+      .filter-custom__control::before ,.filter-custom__control--is-focused::before,.filter-custom__control--menu-is-open::before { right:10px; }
+      .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ padding:6px 30px 6px 12px; }
+    }
+}
+   /* reschedule page design */
+   .light-blue-bgbox { margin-bottom: 20px;  padding:14px 18px; border-radius: 16px;  }
+   .date-time-box { 
+  .itemee  { margin-right: 12px; .img-box { padding:3px; width: 30px; height: 30px; } h4 { margin-left: 16px;  } }
+  }
+  .slot-availablity { margin:0 -8px; margin-top:20px; &.four-col { li { margin-bottom: 8px; padding:0 4px; button { width: 138px; } } }
+    li { margin-bottom:20px; width: calc(100% / 3); padding:0 8px;  } }
+  .whitebtn { img { margin-right: 8px; width:16px;  } padding:10px 10px 10px 16px; border-radius: 12px;  font-size: 14px; line-height: 22px; }
+  .slot-availablity li { &:last-child ,&:nth-last-child(2) ,&:nth-last-child(3) { margin-bottom:0 ; } }
+  .reschedule-page .counsellor-box .row > [class^="col-"] { margin-bottom: 24px; &:last-child  { margin-bottom: 0; }  }
+  .form-control.big-textarea.cancelbox, .drop-boxes.big-textarea.cancelbox { height:180px;  } 
+  .infobasic { margin-bottom: 20px; h4 {  margin-bottom: 10px; } p { line-height:25px; } }
+  .counselling-btnbox { .itemee { margin-right: 14px; } }
+}
+@media (max-width:767px) { 
+  .logo-border-box{padding: 16px;}
+  .logo-border-box .user-info-content-box img {
+    width: 42px;
+    height: 42px;
+}
+    .counsellor-item { border-radius: 10px;
+        .counsellor-img { border-radius: 10px;  }
+        .counsellor-name { font-size: 16px; line-height: 24px;  }
+        .counsellor-info {  border-radius: 0 0 10px 10px; padding:40px 16px 16px;  
+        .rating { margin-top: 2px;  p { margin-left: 6px; } }
+        .btn-box { margin-top: 5px; }
+    }
+    &:hover { .counsellor-info .btn-box { max-height: 31px;} }
+    }
+    .book-now { padding:6px 20px; font-size: 16px; line-height: 19px; 
+    }
+    .counsellor-box .row > [class^="col-"] { margin-bottom: 20px; &:nth-last-child(2) { margin-bottom:20px; } }
+    .seperator { margin:0 5px; font-size: 16px; line-height: 22px; }
+    /* session history box */
+    .counsellor-infobox {  .counsinfo { margin-left: 10px; p { margin-bottom:2px; font-size: 14px; line-height:20px; }  a {  font-size: 13px; line-height: 19px;  } } }
+    .table-tab .whitebox-layout {
+      .button-box { a { margin-right:12px;} }
+    }
+    .pending-sessions { padding-left: 15px; font-size: 14px; line-height: 20px;}
+    .session-history-box { 
+      .react-bootstrap-table table { min-width: 750px; }
+      .heading-box { flex-direction: column-reverse; }
+      .counselling-page { margin-bottom:12px; text-align: right; }
+      .nav-pills { .nav-item { .nav-link { padding:6px 9px 17px; font-size: 14px; line-height: 20px; 
+      &:after { bottom:-1px; height: 3px;  }
+      }
+     } }
+     }
+     .filter-time-btn { 
+      .filter-custom__control::before ,.filter-custom__control--is-focused::before,.filter-custom__control--menu-is-open::before{  left: 10px; top:50%; transform: translateY(-50%); background-image: url('../../../images/timeicon.svg'); width: 16px; height: 16px; }
+      .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ padding:6px 12px 6px 30px; border-radius: 8px; width: auto; font-size: 14px; line-height:22px; border: 2px solid $light-blue !important;}
+         .filter-custom__menu-list > div ,.filter-custom__option { cursor: pointer; padding:10px 12px; ; font-size: 14px; line-height:22px; }
+         &.withrightimg {
+          .filter-custom__control::before ,.filter-custom__control--is-focused::before,.filter-custom__control--menu-is-open::before { right:10px; }
+          .filter-custom__control ,.filter-custom__control--is-focused,.filter-custom__control--menu-is-open{ padding:6px 30px 6px 12px; }
+        }
+    }
+       /* reschedule page design */
+   .light-blue-bgbox { margin-bottom: 20px;  padding:14px 18px; border-radius: 16px;  }
+   .date-time-box { display: block; .box-title { margin-bottom: 20px; }
+  .itemee  { margin-right: 12px; .img-box { padding:3px; width: 30px; height: 30px; } h4 { margin-left: 16px;  } }
+  }
+  .slot-availablity { margin:0 -8px; margin-top:20px; &.four-col { li { margin-bottom: 8px; padding:0 4px; button { width: 138px; } } }
+    li { margin-bottom:12px; width: calc(100% / 3); padding:0 8px;  } }
+  .whitebtn { img { margin-right: 8px; width:16px;  } padding:10px 10px 10px 16px; border-radius: 12px;  font-size: 14px; line-height: 22px; }
+  .slot-availablity li { &:last-child ,&:nth-last-child(2)   { margin-bottom:0 ; } &:nth-last-child(3){ margin-bottom: 12px; } }
+  .reschedule-page .counsellor-box .row > [class^="col-"] { margin-bottom: 24px; &:last-child  { margin-bottom: 0; }  }
+  .form-control.big-textarea.cancelbox, .drop-boxes.big-textarea.cancelbox { height:150px;  } 
+  .infobasic { margin-bottom: 20px; h4 {  margin-bottom: 10px; } p { line-height:25px; } }
+  .counselling-btnbox { .itemee { margin-right: 12px; } }
+  }
+  @media (max-width:575px) {
+    .counselling-page.heading-box { display: block; h5 { margin-bottom: 15px; }  }
+           /* reschedule page design */
+  .slot-availablity { 
+    li { margin-bottom:20px; width: calc(100% / 2); padding:0 8px;  } }
+  .whitebtn { img { margin-right: 8px; width:16px;  } padding:10px 10px 10px 16px; border-radius: 12px;  font-size: 14px; line-height: 22px; }
+  .slot-availablity li { &:last-child ,&:nth-last-child(2) { margin-bottom:0; } }
+  .reschedule-page .counsellor-box .row > [class^="col-"] { margin-bottom: 24px; &:last-child  { margin-bottom: 0; }  }
+  }
+  /* animations  */
+  @keyframes borderline {
+		0% {  transform: scaleX(1); transform-origin: right;}
+		50% { transform: scaleX(0);  transform-origin: right;}
+		50.01% { transform: scaleX(0);  transform-origin: left;}
+		100% {  transform: scaleX(1); transform-origin: left;}
+	}
+	@-webkit-keyframes borderline {
+		0% {  transform: scaleX(1); transform-origin: right;}
+		50% { transform: scaleX(0);  transform-origin: right;}
+		50.01% { transform: scaleX(0);  transform-origin: left;}
+		100% {  transform: scaleX(1); transform-origin: left;}
+	}
+@media(min-width:1600px){
+  .slot-availablity li { &:last-child ,&:nth-last-child(1) ,&:nth-last-child(2),&:nth-last-child(3),&:nth-last-child(4){ margin-bottom:0 ; } }
+}

@@ -7,7 +7,6 @@ const IV_VALUE = 'abcdef9876543210abcdef9876543210'
 const loggerMiddleware = function (req, res, next) {
     const { method, url, headers } = req
 
-    // Log the request information
     // console.log(`[Request] ${method} ${url}`)
     // console.log('[Request Headers]', headers)
 

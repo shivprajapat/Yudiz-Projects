@@ -150,11 +150,13 @@ class Role {
       }
 
       const data = await RoleModel.create([{ bIsDefault, sName, sKey: keygen(sName), sBackGroundColor: s.sBackGroundColor, sTextColor: s.sTextColor, iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f'), iLastUpdateBy: req.employee._id, aPermissions: aPermission }])
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Role', sService: 'addRole', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Role', sService: 'addRole', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await take.create(logs)
+
+      await queuePush('logs', logs)
 
       // await notificationsender(req, data._id, ' role is create ', true, true, req.employee._id, `${config.urlPrefix}/role/${data._id}`)
       return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].role), {
@@ -170,21 +172,28 @@ class Role {
       const role = await RoleModel.findById({ _id: req.params.id, eStatus: 'Y' }).lean()
       if (!role) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].role))
 
-      if (role.bIsDefault) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].assigned_to_system.replace('##', messages[req.userLanguage].role))
+      if (role.bIsSystem || role.bIsDefault) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].assigned_to_system.replace('##', messages[req.userLanguage].role))
 
+      // console.log('1', role)
       // const employeeProfile = await EmployeeModel.findOne({ 'aSkills.iSkillId': { $in: [req.params.id] }, eStatus: 'Y' }, {}).lean()
       // if (employeeProfile) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].in_used_employee.replace('##', messages[req.userLanguage].skill))
 
       // checkn if role is exzist in empployee or not
-      const roleExistinEmployee = await EmployeeModel.findOne({ 'aRoles.iRoleId': role._id }).lean()
-      if (roleExistinEmployee) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].assigned_to_employee.replace('##', messages[req.userLanguage].role))
+      // const roleExistinEmployee = await EmployeeModel.findOne({ 'aRole.iRoleId': role._id }).lean()
+
+      // if (roleExistinEmployee) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].assigned_to_employee.replace('##', messages[req.userLanguage].role))
 
       if (role && role.eStatus === 'Y') {
         const data = await RoleModel.findByIdAndUpdate({ _id: req.params.id }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].role))
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Role', sService: 'deleteRole', eAction: 'Delete', oOldFields: data }
+        // let take = `Logs${new Date().getFullYear()}`
 
-        await Logs.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Role', sService: 'deleteRole', eAction: 'Delete', oOldFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+
+        // await take.create(logs)
 
         // await notificationsender(req, data._id, ' role is delete ', true, true, req.employee._id, `${config.urlPrefix}/role/${data._id}`)
         return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].role))
@@ -201,6 +210,7 @@ class Role {
       const { sName, aPermission } = req.body
       const role = await RoleModel.findById({ _id: req.params.id, eStatus: 'Y' }).lean()
       if (!role) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].role))
+
       if (role && role.eStatus === 'Y') {
         const roleKey = await RoleModel.findOne({ sKey: keygen(sName), eStatus: 'Y', _id: { $ne: req.params.id } }).lean()
         if (roleKey) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].role))
@@ -240,14 +250,21 @@ class Role {
         //     }
         //   }
         // }
+        const data = {}
+        if (role.bIsSystem) {
+          const data = await RoleModel.findByIdAndUpdate({ _id: req.params.id }, { iLastUpdateBy: req.employee._id, aPermissions: aPermission }, { runValidators: true, new: true })
+        } else {
+          const data = await RoleModel.findByIdAndUpdate({ _id: req.params.id }, { sName, sKey: keygen(sName), iLastUpdateBy: req.employee._id, aPermissions: aPermission }, { runValidators: true, new: true })
+        }
 
-        const data = await RoleModel.findByIdAndUpdate({ _id: req.params.id }, { sName, sKey: keygen(sName), iLastUpdateBy: req.employee._id, aPermissions: aPermission }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].role))
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Role', sService: 'updateSkills', eAction: 'Update', oOldFields: role, oNewFields: data }
-        await take.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Role', sService: 'updateSkills', eAction: 'Update', oOldFields: role, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+        // await take.create(logs)
 
         // await notificationsender(req, data._id, ' role is update ', true, true, req.employee._id, `${config.urlPrefix}/role/${data._id}`)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].role))
@@ -281,7 +298,10 @@ class Role {
       let total = 0
 
       if (limit !== 'all') {
-        [roles, total] = await Promise.all([RoleModel.find(query).sort(sorting).skip(Number(page)).limit(Number(limit)).lean(),
+        [roles, total] = await Promise.all([RoleModel.find(query).sort(sorting).skip(Number(page)).limit(Number(limit)).populate({
+          path: 'aPermissions',
+          select: 'sKey sName sModule eStatus bIsActive'
+        }).lean(),
         RoleModel.countDocuments({ ...query }).lean()])
       } else {
         [roles, total] = await Promise.all([RoleModel.find(query).sort(sorting).lean(),
@@ -295,6 +315,24 @@ class Role {
       }
     } catch (error) {
       return catchError('Role.getRoles', error, req, res)
+    }
+  }
+
+  async getRole(req, res) {
+    try {
+      const { id } = req.params
+
+      const data = await RoleModel.findOne({ _id: id, eStatus: 'Y' }).populate({
+        path: 'aPermissions',
+        match: { eStatus: 'Y' },
+        select: 'sKey sName sModule eStatus bIsActive bIsSystem'
+      }).lean()
+
+      if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].role))
+
+      return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].role), data)
+    } catch (error) {
+      return catchError('Role.getRole', error, req, res)
     }
   }
 }

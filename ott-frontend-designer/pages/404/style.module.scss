@@ -1,0 +1,35 @@
+.error {
+  min-height: 100vh;
+  display: flex;
+  place-items: center;
+  text-align: center;
+
+  img {
+    max-width: 80%;
+    height: auto;
+    animation: up 2.5s linear infinite;
+    margin-bottom: 20px;
+  }
+
+  @keyframes up {
+    0% {
+      transform: translateY(-10px)
+    }
+
+    50% {
+      transform: translateY(10px)
+    }
+
+    100% {
+      transform: translateY(-10px)
+    }
+  }
+
+  >* {
+    color: var(--white-color);
+  }
+
+  p {
+    margin: 10px 0 20px
+  }
+}

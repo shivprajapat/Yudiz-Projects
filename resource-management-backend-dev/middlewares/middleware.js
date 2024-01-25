@@ -109,6 +109,48 @@ const isOtherPermission = async function (req, res, next) {
   try {
     if (req.employee?.aTotalPermissions.includes('VIEW_COST')) req.employee.bViewCost = true
     else req.employee.bViewCost = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_CLIENT') || req.employee?.aTotalPermissions.includes('VIEW_ALL_CLIENT')) req.employee.bViewClient = true
+    else req.employee.bViewClient = false
+
+    return next()
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+const checkExtraPermissison = async function (req, res, next) {
+  try {
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_DASHBOARD_STATISTICS')) req.employee.bDashboardStatistic = true
+    else req.employee.bDashboardStatistic = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_DASHBOARD_MONTHLY_CHART')) req.employee.bDashboardMonthlyChart = true
+    else req.employee.bDashboardMonthlyChart = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_DASHBOARD_LATEST_PROJECTS')) req.employee.bDashboardLatestProjects = true
+    else req.employee.bDashboardLatestProjects = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_DASHBOARD_PROJECT_LINE')) req.employee.bDashboardProjectLine = true
+    else req.employee.bDashboardProjectLine = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_PROJECT')) req.employee.bAllProjects = true
+    else req.employee.bAllProjects = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_DASHBOARD_WORKLOGS')) req.employee.bAllDashBoardWorklogs = true
+    else req.employee.bAllDashBoardWorklogs = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_PROJECT_OVERVIEW')) req.employee.bAllProjectsOverView = true
+    else req.employee.bAllProjectsOverView = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_WORKLOGS')) req.employee.bAllWorklogs = true
+    else req.employee.bAllWorklogs = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_CLIENT')) req.employee.bAllClient = true
+    else req.employee.bAllClient = false
+
+    if (req.employee?.aTotalPermissions.includes('VIEW_ALL_CLOSED_PROJECT')) req.employee.bAllClosedProject = true
+    else req.employee.bAllClosedProject = false
+
     return next()
   } catch (error) {
     console.log(error)
@@ -212,7 +254,7 @@ const isAuthorized = function (permission) {
     // console.log(req.route)
     // return next()
     try {
-      console.log('permission from route set', permission)
+      // console.log('permission from route set', permission)
 
       let prefix = permission.split('_')[0]
 
@@ -374,5 +416,6 @@ module.exports = {
   decryptForForgotPassword,
   paginationValue,
   isAuthorized,
-  isOtherPermission
+  isOtherPermission,
+  checkExtraPermissison
 }

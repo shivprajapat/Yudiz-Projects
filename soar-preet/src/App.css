@@ -1,0 +1,39 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.App {
+  text-align: center;
+  background-color: #343c5c;
+}
+
+.blink {
+  color: red;
+  margin-right: 0.5rem;
+  animation: blink 2s steps(5, start) infinite;
+  -webkit-animation: blink 1s steps(5, start) infinite;
+}
+@keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+@-webkit-keyframes blink {
+  to {
+    visibility: hidden;
+  }
+}
+
+.needle {
+  width: 0;
+  height: 0;
+  bottom: 16px;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-bottom: 80px solid #D9D9D9;
+  border-bottom-left-radius: 50%;
+  border-bottom-right-radius: 50%;
+  position: absolute;
+  transform-origin: 0 100%;
+  left: 50%;
+}

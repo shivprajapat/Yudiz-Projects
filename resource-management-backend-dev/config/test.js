@@ -1,7 +1,8 @@
 const test = {
   PORT: process.env.PORT || 7001,
-  EMPLOYEE_DB_URL: 'mongodb://localhost:27017/resource_management',
-  EMPLOYEE_DB_URL_BACK_UP: 'mongodb://localhost:27017/resource_management',
+  ENV: 'test',
+  EMPLOYEE_DB_URL: 'mongodb://localhost:27017/resource_managementtest',
+  EMPLOYEE_DB_URL_BACK_UP: 'mongodb://localhost:27017/resource_managementtest',
   JWT_SECRET: 'resources_management#yudiz',
   JWT_VALIDITY: '365d',
   MAIL_TRANSPORTER: {
@@ -12,7 +13,8 @@ const test = {
       user: process.env.SMTP_USERNAME || 'test321240@gmail.com',
       pass: process.env.SMTP_PASSWORD || 'jrtgxhnpdkegbxhp'
     },
-    secure: false
+    secure: false,
+    requireTLS: false
   },
   PUBLIC_KEY: `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAzftQUP2TnEYhQDNXbPTO
@@ -56,7 +58,7 @@ ESMyHbOMdL5kjfsL6kx+SDnu7Q==
   REDIS_HOST: 'redis-18950.c11.us-east-1-3.ec2.cloud.redislabs.com',
   REDIS_PORT: 18950,
   REDIS_PASSWORD: 'tnqUd4TtSmw4MUnLN7oaWybFwviDpJfN',
-  threshold: 1000,
+  threshold: 10,
   downloadThreshold: 1,
   local: '127.0.0.1',
   Region: 'ap-south-1',
@@ -92,7 +94,9 @@ ESMyHbOMdL5kjfsL6kx+SDnu7Q==
     subject: 'Gmail API NodeJS'
   },
   sendGrid: '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',
-  urlPrefix: 'localhost:3000/'
+  urlPrefix: 'localhost:3000/',
+  setLink: '',
+  USERS_DB_URL: ''
 
 }
 

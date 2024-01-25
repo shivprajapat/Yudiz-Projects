@@ -4,7 +4,7 @@ const { handleCatchError } = require('../helper/utilities.services')
 
 const config = require('../config/config')
 
-const ResourceManagementDB = connection(config.EMPLOYEE_DB_URL)
+const ResourceManagementDB = connection(process.env.EMPLOYEE_DB_URL)
 
 // const ResourceManagementBackUpDB = connectionBackUp(config.EMPLOYEE_DB_URL_BACK_UP)
 

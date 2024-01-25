@@ -1,0 +1,71 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Form, Button } from 'react-bootstrap'
+import Select from 'react-select'
+
+import PermissionProvider from 'shared/components/permission-provider'
+import { TAG_MIGRATION_TYPES, URL_PREFIX } from 'shared/constants'
+
+function TagMigrationAssignedTagsItemRow({ tag, index, selectedTag, onSelect, bulkPermission, onDelete, onChangeTagType, onTagMerge }) {
+  const defaultValue = TAG_MIGRATION_TYPES.filter((item) => item.value === tag.eType)
+  return (
+    <tr key={tag._id}>
+      <td>
+        <PermissionProvider isAllowedTo={bulkPermission} isArray>
+          <Form.Check
+            type="checkbox"
+            id={selectedTag[index]?._id}
+            name={selectedTag[index]?._id}
+            checked={selectedTag[index]?.value}
+            className="form-check m-0"
+            onChange={onSelect}
+            label="&nbsp;"
+          />
+        </PermissionProvider>
+      </td>
+      <td>{tag.sName ? tag.sName : '-'}</td>
+      <td className="migration-dropdown-td">
+        <div className="migration-dropdown">
+          <Select
+            options={TAG_MIGRATION_TYPES}
+            defaultValue={defaultValue}
+            className="react-select"
+            classNamePrefix="select"
+            onChange={(e) => {
+              onChangeTagType(e, tag.iTermId, tag._id)
+            }}
+          />
+        </div>
+      </td>
+      <td>{tag.sAssignedName ? tag.sAssignedName : '-'}</td>
+      <td>
+        <a className="link" href={`${URL_PREFIX}${tag?.sSlug}`} target="_blank" rel="noreferrer">
+          <Button variant="link" className="square icon-btn">
+            <i className="icon-language d-block" />
+          </Button>
+        </a>
+        <PermissionProvider isAllowedTo="LIST_MIGRATION_TAG">
+          <Button variant="link" className="square icon-btn" onClick={() => onTagMerge(tag._id)}>
+            <i className="icon-merge d-block" />
+          </Button>
+        </PermissionProvider>
+        <PermissionProvider isAllowedTo="LIST_MIGRATION_TAG">
+          <Button variant="link" className="square icon-btn" onClick={() => onDelete(tag._id)}>
+            <i className="icon-delete d-block" />
+          </Button>
+        </PermissionProvider>
+      </td>
+    </tr>
+  )
+}
+TagMigrationAssignedTagsItemRow.propTypes = {
+  tag: PropTypes.object,
+  index: PropTypes.number,
+  selectedTag: PropTypes.array,
+  bulkPermission: PropTypes.array,
+  onSelect: PropTypes.func,
+  onDelete: PropTypes.func,
+  onChangeTagType: PropTypes.func,
+  onTagMerge: PropTypes.func
+}
+export default TagMigrationAssignedTagsItemRow

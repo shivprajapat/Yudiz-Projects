@@ -342,12 +342,15 @@ class WorkLogs {
 
         const data = await WorkLogsModel.create({ ...req.body, iCreatedBy: req.employee._id, iLastUpdatedBy: req.employee._id, nMinutes: +req.body.nMinutes, nCost: Calculation, eProjectType: project.eProjectType, sCurrencyName, sCurrencySymbol, eCurrencyTakenFlag: currencyTakenFlag })
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
+        // take = ResourceManagementDB.model(take, Logs)
 
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data }
-        await take.create(logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+
+        // await take.create(logs)
         // notificationsender(req, data._id, ' worklog is create ', true, true, req.employee._id)
 
         return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].workLogs))
@@ -468,11 +471,11 @@ class WorkLogs {
           }
         }
 
-        console.log(req.body)
+        // console.log(req.body)
 
         if (req.body.eWorkLogsType === 'CR') {
           if (req.body.bIsNonBillable) {
-            console.log('CR non', req.body.iCrId, req.body.iProjectId, req.body.iEmployeeId, req.body.nMinutes, Calculation)
+            // console.log('CR non', req.body.iCrId, req.body.iProjectId, req.body.iEmployeeId, req.body.nMinutes, Calculation)
             const a = await CrWiseEmployeeModel.updateOne({
               iCrId: req.body.iCrId,
               iProjectId: req.body.iProjectId,
@@ -498,7 +501,7 @@ class WorkLogs {
                 nRemainingCost: Calculation
               }
             })
-            console.log(a, b)
+            // console.log(a, b)
             // await Promise.all(CrWiseEmployeeModel.updateOne({
             //   iCrId: req.body.iCrId,
             //   iProjectId: req.body.iProjectId,
@@ -525,7 +528,7 @@ class WorkLogs {
             //   }
             // }))
           } else {
-            console.log('CR', req.body.iCrId, req.body.iProjectId, req.body.iEmployeeId, req.body.nMinutes, Calculation)
+            // console.log('CR', req.body.iCrId, req.body.iProjectId, req.body.iEmployeeId, req.body.nMinutes, Calculation)
             try {
               const a = await CrWiseEmployeeModel.updateOne({
                 iCrId: req.body.iCrId,
@@ -548,7 +551,7 @@ class WorkLogs {
                   nRemainingCost: Calculation
                 }
               })
-              console.log(a, b)
+              // console.log(a, b)
               // await Promise.all(CrWiseEmployeeModel.updateOne({
               //   iCrId: req.body.iCrId,
               //   iProjectId: req.body.iProjectId,
@@ -604,12 +607,15 @@ class WorkLogs {
 
         const data = await WorkLogsModel.create({ ...req.body, iCreatedBy: req.employee._id, iLastUpdatedBy: req.employee._id, nMinutes: +req.body.nMinutes, nCost: Calculation, eProjectType: project.eProjectType, sCurrencyName, sCurrencySymbol, eCurrencyTakenFlag: currencyTakenFlag })
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
+        // take = ResourceManagementDB.model(take, Logs)
 
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data }
-        await take.create(logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+
+        // await take.create(logs)
         // notificationsender(req, data._id, ' worklog is create ', true, true, req.employee._id)
         return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].workLogs))
       }
@@ -676,7 +682,7 @@ class WorkLogs {
       const projectType = project.eProjectType
 
       if (projectType === 'Dedicated') {
-        console.log('Dedicated')
+        // console.log('Dedicated')
 
         const query = {
           iProjectId: req.body.iProjectId,
@@ -739,10 +745,13 @@ class WorkLogs {
               nOrgRemainingCost: +(((+req.body.nMinutes) * EmployeeGet?.nCost) / 60)
             }
           })
-          let take = `Logs${new Date().getFullYear()}`
-          take = ResourceManagementDB.model(take, Logs)
-          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data }
-          await take.create(logs)
+          // let take = `Logs${new Date().getFullYear()}`
+          // take = ResourceManagementDB.model(take, Logs)
+          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+          await queuePush('logs', logs)
+
+          // await take.create(logs)
 
           // await ProjectModel.updateOne({
           //   iProjectId: req.body.iProjectId,
@@ -798,10 +807,11 @@ class WorkLogs {
             nOrgRemainingCost: +(((+req.body.nMinutes) * EmployeeGet?.nCost) / 60)
           })
 
-          let take = `Logs${new Date().getFullYear()}`
-          take = ResourceManagementDB.model(take, Logs)
-          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data }
-          await take.create(logs)
+          // let take = `Logs${new Date().getFullYear()}`
+          // take = ResourceManagementDB.model(take, Logs)
+          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+          await queuePush('logs', logs)
+          // await take.create(logs)
           // await ProjectModel.updateOne({
           //   iProjectId: req.body.iProjectId,
           //   eStatus: 'Y'
@@ -888,10 +898,11 @@ class WorkLogs {
             }
           }
           )
-          let take = `Logs${new Date().getFullYear()}`
-          take = ResourceManagementDB.model(take, Logs)
-          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data }
-          await take.create(logs)
+          // let take = `Logs${new Date().getFullYear()}`
+          // take = ResourceManagementDB.model(take, Logs)
+          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+          await queuePush('logs', logs)
+          // await take.create(logs)
         } else {
           await ProjectWiseEmployeeModel.updateOne({
             iProjectId: req.body.iProjectId,
@@ -950,10 +961,11 @@ class WorkLogs {
               nOrgRemainingCost: +(((+req.body.nMinutes) * EmployeeGet?.nCost) / 60)
             }
           })
-          let take = `Logs${new Date().getFullYear()}`
-          take = ResourceManagementDB.model(take, Logs)
-          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data }
-          await take.create(logs)
+          // let take = `Logs${new Date().getFullYear()}`
+          // take = ResourceManagementDB.model(take, Logs)
+          const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'addWorkLogs', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+          await queuePush('logs', logs)// await take.create(logs)
         }
         return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].workLogs))
       }
@@ -964,7 +976,7 @@ class WorkLogs {
   }
 
   async getWorkLogs(req, res) {
-    console.log('getWorkLogs')
+    // console.log('getWorkLogs')
     try {
       const { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', project = 'all', person = 'me', date = '' } = req.query
 
@@ -1074,7 +1086,7 @@ class WorkLogs {
 
       const jobProfileData = await EmployeeModel.findOne({ _id: req.employee._id }, { iJobProfileId: 1 }).populate({ path: 'iJobProfileId', select: 'nLevel' }).lean()
 
-      console.log(jobProfileData)
+      // console.log(jobProfileData)
       const jobLevelMatch = 3
 
       if (project === 'all' && person === 'all') {
@@ -1101,7 +1113,7 @@ class WorkLogs {
 
           const projects = await ProjectModel.aggregate(query)
 
-          console.log(projects)
+          // console.log(projects)
 
           // let projects = await ProjectModel.find(query).distinct('_id').lean()
 
@@ -1153,7 +1165,7 @@ class WorkLogs {
 
           const projects = await ProjectModel.aggregate(query)
 
-          console.log(projects)
+          // console.log(projects)
 
           // let projects = await ProjectModel.find(query).distinct('_id').lean()
 
@@ -1273,7 +1285,7 @@ class WorkLogs {
   }
 
   async getWorkLogsV2(req, res) {
-    console.log('getWorkLogsV2')
+    // console.log('getWorkLogsV2')
     try {
       const { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', project = 'all', person = 'me', date = '' } = req.query
 
@@ -1387,13 +1399,123 @@ class WorkLogs {
         }
       }
 
-      const jobProfileData = await EmployeeModel.findOne({ _id: req.employee._id }, { iJobProfileId: 1, eShowAllProjects: 1 }).populate({ path: 'iJobProfileId', select: 'nLevel' }).lean()
+      // const jobProfileData = await EmployeeModel.findOne({ _id: req.employee._id }, { iJobProfileId: 1, eShowAllProjects: 1 }).populate({ path: 'iJobProfileId', select: 'nLevel' }).lean()
 
-      console.log(jobProfileData)
-      const jobLevelMatch = 3
+      // console.log(jobProfileData)
+      // const jobLevelMatch = 3
+
+      // if (project === 'all' && person === 'all') {
+      //   if (jobProfileData.eShowAllProjects === 'ALL') {
+      //     // const projectEmployee = await ProjectWiseEmployeeModel.find({ eStatus: 'Y', iEmployeeId: ObjectId(req.employee._id) }, { iProjectId: 1 }).lean()
+      //     // const department = await DepartmentModel.findOne({ eStatus: 'Y', _id: ObjectId(req.employee.iDepartmentId) }).lean()
+      //     const query = [
+      //       {
+      //         $match: {
+      //           eStatus: 'Y',
+      //           'flag.2': 'Y'
+      //         }
+      //       }
+      //     ]
+
+      //     // if (!['OPERATION', 'ADMIN', 'HR', 'MANAGEMENT'].includes(department.sKey)) {
+      //     //   query[0].$match.$or = [
+      //     //     { iBDId: ObjectId(req.employee._id) },
+      //     //     { iProjectManagerId: ObjectId(req.employee._id) },
+      //     //     { iBAId: ObjectId(req.employee._id) },
+      //     //     { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
+      //     //   ]
+      //     // }
+
+      //     const projects = await ProjectModel.aggregate(query)
+
+      //     console.log(projects)
+
+      //     // let projects = await ProjectModel.find(query).distinct('_id').lean()
+
+      //     // let projectWiseEmployee = await ProjectWiseEmployeeModel.find({ iEmployeeId: req.employee._id }).distinct('iProjectId').lean()
+
+      //     // projectWiseEmployee = projectWiseEmployee.map((project) => {
+      //     //   return project.toString()
+      //     // })
+
+      //     // projects = projects.map((project) => {
+      //     //   return project.toString()
+      //     // })
+
+      //     // let filterProjects = [...projects]
+
+      //     // for (let i = 0; i < projectWiseEmployee.length; i++) {
+      //     //   if (!filterProjects.includes(projectWiseEmployee[i])) {
+      //     //     filterProjects.push(projectWiseEmployee[i])
+      //     //   }
+      //     // }
+
+      //     // filterProjects = filterProjects.map((project) => ObjectId(project))
+
+      //     // q[0].$match.iProjectId = {
+      //     //   $in: [
+      //     //     ...projects.map((project) => ObjectId(project._id))
+      //     //   ]
+      //     // }
+      //   } else {
+      //     const projectEmployee = await ProjectWiseEmployeeModel.find({ eStatus: 'Y', iEmployeeId: ObjectId(req.employee._id) }, { iProjectId: 1 }).lean()
+      //     const department = await DepartmentModel.findOne({ eStatus: 'Y', _id: ObjectId(req.employee.iDepartmentId) }).lean()
+      //     const query = [
+      //       {
+      //         $match: {
+      //           eStatus: 'Y',
+      //           'flag.2': 'Y'
+      //         }
+      //       }
+      //     ]
+
+      //     // console.log('projectEmployee', projectEmployee)
+
+      //     // if (!['OPERATION', 'ADMIN', 'HR', 'MANAGEMENT'].includes(department.sKey)) {
+      //     query[0].$match.$or = [
+      //       { iBDId: ObjectId(req.employee._id) },
+      //       { iProjectManagerId: ObjectId(req.employee._id) },
+      //       { iBAId: ObjectId(req.employee._id) },
+      //       { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
+      //     ]
+      //     // }
+
+      //     const projects = await ProjectModel.aggregate(query)
+
+      //     console.log(projects)
+
+      //     // let projects = await ProjectModel.find(query).distinct('_id').lean()
+
+      //     // let projectWiseEmployee = await ProjectWiseEmployeeModel.find({ iEmployeeId: req.employee._id }).distinct('iProjectId').lean()
+
+      //     // projectWiseEmployee = projectWiseEmployee.map((project) => {
+      //     //   return project.toString()
+      //     // })
+
+      //     // projects = projects.map((project) => {
+      //     //   return project.toString()
+      //     // })
+
+      //     // let filterProjects = [...projects]
+
+      //     // for (let i = 0; i < projectWiseEmployee.length; i++) {
+      //     //   if (!filterProjects.includes(projectWiseEmployee[i])) {
+      //     //     filterProjects.push(projectWiseEmployee[i])
+      //     //   }
+      //     // }
+
+      //     // filterProjects = filterProjects.map((project) => ObjectId(project))
+
+      //     q[0].$match.iProjectId = {
+      //       $in: [
+      //         ...projects.map((project) => ObjectId(project._id))
+      //       ]
+      //     }
+      //   }
+      // }
 
       if (project === 'all' && person === 'all') {
-        if (jobProfileData.eShowAllProjects === 'ALL') {
+        if (req.employee.bAllWorklogs || req.employee.bAllDashBoardWorklogs) {
           // const projectEmployee = await ProjectWiseEmployeeModel.find({ eStatus: 'Y', iEmployeeId: ObjectId(req.employee._id) }, { iProjectId: 1 }).lean()
           // const department = await DepartmentModel.findOne({ eStatus: 'Y', _id: ObjectId(req.employee.iDepartmentId) }).lean()
           const query = [
@@ -1416,7 +1538,7 @@ class WorkLogs {
 
           const projects = await ProjectModel.aggregate(query)
 
-          console.log(projects)
+          // console.log(projects)
 
           // let projects = await ProjectModel.find(query).distinct('_id').lean()
 
@@ -1470,7 +1592,7 @@ class WorkLogs {
 
           const projects = await ProjectModel.aggregate(query)
 
-          console.log(projects)
+          // console.log(projects)
 
           // let projects = await ProjectModel.find(query).distinct('_id').lean()
 
@@ -1592,8 +1714,8 @@ class WorkLogs {
   async deleteWorkLogs(req, res) {
     try {
       const workLogs = await WorkLogsModel.findOne({ _id: req.params.id })
-      console.log(workLogs)
-      console.log(req.employee._id)
+      // console.log(workLogs)
+      // console.log(req.employee._id)
 
       if (!workLogs) {
         return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].workLogs))
@@ -1624,7 +1746,7 @@ class WorkLogs {
       } else {
         if (workLogs.iProjectId) {
           const projectType = await ProjectModel.findById({ _id: workLogs.iProjectId })
-          console.log(projectType)
+          // console.log(projectType)
 
           if (projectType.eProjectType === 'Dedicated') {
             if (!workLogs.bIsNonBillable) {
@@ -1634,11 +1756,12 @@ class WorkLogs {
               await DashboardProjectIndicatorModel.updateOne({ iProjectId: workLogs.iProjectId, eStatus: 'Y' }, { $inc: { nRemainingMinute: (parseInt(-workLogs.nMinutes)), nRemainingCost: (parseInt(-workLogs.nCost)), nNonBillableMinute: -(parseInt(workLogs?.nNonBillableMinute || 0)), nNonBillableCost: -(parseInt(workLogs?.nNonBillableCost || 0)) } })
               await ProjectWiseEmployeeModel.updateOne({ iProjectId: workLogs.iProjectId, iEmployeeId: workLogs.iEmployeeId }, { $inc: { nRemainingMinute: (parseInt(-workLogs.nMinutes)), nRemainingCost: (parseInt(-workLogs.nCost)), nNonBillableMinute: -(parseInt(workLogs?.nNonBillableMinute || 0)), nNonBillableCost: -(parseInt(workLogs?.nNonBillableCost || 0)) } })
             }
-            const data = await WorkLogsModel.findOneAndUpdate({ _id: req.params.id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdatedBy: req.employee._id }, { new: true })
 
-            const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'deleteWorkLogs', eAction: 'Delete', oOldFields: data }
-            await Logs.create(logs)
-            return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].workLogs))
+            // const data = await WorkLogsModel.findOneAndUpdate({ _id: req.params.id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdatedBy: req.employee._id }, { new: true })
+
+            // const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'deleteWorkLogs', eAction: 'Delete', oOldFields: workLogs, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+            // await queuePush('Logs', logs)
+            // return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].workLogs))
           } else {
             const projectDepartment = await DashboardProjectDepartmentModel.findOne({ iProjectId: workLogs.iProjectId, iDepartmentId: workLogs.iDepartmentId }).lean()
             if (!projectDepartment) {
@@ -1658,8 +1781,9 @@ class WorkLogs {
       }
       const data = await WorkLogsModel.findOneAndUpdate({ _id: req.params.id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdatedBy: req.employee._id }, { new: true })
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'deleteWorkLogs', eAction: 'Delete', oOldFields: data }
-      await Logs.create(logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'deleteWorkLogs', eAction: 'Delete', oOldFields: workLogs, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('Logs', logs)
+      // await Logs.create(logs)
       // notificationsender(req, data._id, ' worklog is delete ', true, true, req.employee._id)
       return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].workLogs))
     } catch (error) {
@@ -1739,7 +1863,7 @@ class WorkLogs {
               nOrgRemainingCost: -((+workLogs.nMinutes) * workLogs.nOrgCost)
             }
           })
-          console.log(a)
+          // console.log(a)
 
           // await ProjectModel.updateOne({
           //   iProjectId: req.body.iProjectId,
@@ -1831,6 +1955,10 @@ class WorkLogs {
 
       const data = await WorkLogsModel.findOneAndUpdate({ _id: req.params.id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdatedBy: req.employee._id }, { new: true })
 
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'WorkLogs', sService: 'deleteWorkLogs', eAction: 'Delete', oOldFields: workLogs, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('Logs', logs)
+
       return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].workLogs))
     } catch (error) {
       return catchError('WorkLogs.deleteWorkLogs', error, req, res)
@@ -1851,7 +1979,7 @@ class WorkLogs {
 
       if (req.body.iProjectId) {
         const project = await ProjectModel.findOne({ _id: req.body.iProjectId }).lean()
-        console.log(project)
+        // console.log(project)
         if (!project) {
           return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].project))
         }
@@ -1860,7 +1988,7 @@ class WorkLogs {
       let employee
       if (req.body.iEmployeeId) {
         employee = await EmployeeModel.findOne({ _id: req.body.iEmployeeId }).lean()
-        console.log(employee)
+        // console.log(employee)
         if (!employee) {
           return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].employee))
         } else {
@@ -1875,7 +2003,7 @@ class WorkLogs {
           return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].date_grater_then)
         }
         const diff = endTime.getTime() - startTime.getTime()
-        console.log(diff)
+        // console.log(diff)
 
         if (diff < 0) {
           return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].invalid_date)
@@ -1892,7 +2020,7 @@ class WorkLogs {
 
       if (req.body.iCrId) {
         const cr = await CrModel.findOne({ _id: req.body.iCrId, iProjectId: req.body.iProjectId }).lean()
-        console.log(cr)
+        // console.log(cr)
         if (!cr) {
           return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].changeRequest))
         }
@@ -1990,11 +2118,11 @@ class WorkLogs {
       const workLogs = await WorkLogsModel.findOne({ _id: id, eStatus: 'Y' })
       if (!workLogs) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].workLogs))
 
-      console.log(req.body)
+      // console.log(req.body)
 
-      console.log(req.body.iProjectId !== workLogs.iProjectId.toString())
-      console.log(req.body.iProjectId)
-      console.log(workLogs.iProjectId.toString())
+      // console.log(req.body.iProjectId !== workLogs.iProjectId.toString())
+      // console.log(req.body.iProjectId)
+      // console.log(workLogs.iProjectId.toString())
 
       if (req.body.iProjectId !== workLogs.iProjectId.toString()) return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].project_not_same.replace('##', messages[req.userLanguage].project))
 
@@ -2019,7 +2147,7 @@ class WorkLogs {
         }
         // req.body.nMinutes = nMinutes
       }
-
+      let data = null
       if (project.eProjectType === 'Dedicated') {
         const query = {
           iProjectId: req.body.iProjectId,
@@ -2108,7 +2236,7 @@ class WorkLogs {
               nOrgRemainingCost: (((+req.body.nMinutes) * workLogs.nOrgCost))
             }
           })
-          await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
+          data = await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
             dTaskStartTime: req.body.dTaskStartTime,
             dTaskEndTime: req.body.dTaskEndTime,
             nCost: (+req.body.nMinutes) * workLogs.nClientCost,
@@ -2143,7 +2271,7 @@ class WorkLogs {
               nOrgRemainingCost: +(((+req.body.nMinutes) * workLogs.nOrgCost))
             }
           })
-          await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
+          data = await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
             dTaskStartTime: req.body.dTaskStartTime,
             dTaskEndTime: req.body.dTaskEndTime,
             nCost: (+req.body.nMinutes) * workLogs.nClientCost,
@@ -2251,12 +2379,10 @@ class WorkLogs {
             eStatus: 'Y'
           }, {
             $inc: {
-              $inc: {
-                nRemainingMinute: -(+workLogs.nMinutes),
-                nRemainingCost: -((+workLogs.nMinutes) * workLogs?.nOrgCost),
-                nOrgRemainingMinute: -(+workLogs.nMinutes),
-                nOrgRemainingCost: -((+workLogs.nMinutes) * workLogs?.nOrgCost)
-              }
+              nRemainingMinute: -(+workLogs.nMinutes),
+              nRemainingCost: -((+workLogs.nMinutes) * workLogs?.nOrgCost),
+              nOrgRemainingMinute: -(+workLogs.nMinutes),
+              nOrgRemainingCost: -((+workLogs.nMinutes) * workLogs?.nOrgCost)
             }
           })
         }
@@ -2277,7 +2403,7 @@ class WorkLogs {
             }
           })
 
-          await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
+          data = await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
             dTaskStartTime: req.body.dTaskStartTime,
             dTaskEndTime: req.body.dTaskEndTime,
             nCost: (+req.body.nMinutes) * workLogs.nOrgCost,
@@ -2329,7 +2455,7 @@ class WorkLogs {
             }
           })
 
-          await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
+          data = await WorkLogsModel.findByIdAndUpdate({ _id: id }, {
             dTaskStartTime: req.body.dTaskStartTime,
             dTaskEndTime: req.body.dTaskEndTime,
             nCost: (+req.body.nMinutes) * workLogs.nOrgCost,
@@ -2365,6 +2491,10 @@ class WorkLogs {
           })
         }
       }
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: workLogs._id, eModule: 'WorkLogs', sService: 'deleteWorkLogs', eAction: 'Delete', oOldFields: workLogs, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('Logs', logs)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].workLogs))
     } catch (error) {
@@ -2451,10 +2581,11 @@ class WorkLogs {
       const workLogsTag = await WorkLogTagsModel.findOne({ _id: id }).lean()
       if (!workLogsTag) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].workLogsTag))
 
-      await WorkLogTagsModel.updateOne({ _id: id }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
+      const updateWorkLogTags = await WorkLogTagsModel.findOneAndUpdate({ _id: id }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: workLogsTag._id, eModule: 'WorkLogs Tags', sService: 'deleteWorkLogsTags', eAction: 'Delete', oOldFields: workLogsTag }
-      await Logs.create(logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: workLogsTag._id, eModule: 'WorkLogs Tags', sService: 'deleteWorkLogsTags', eAction: 'Delete', oOldFields: workLogsTag, oNewFields: updateWorkLogTags, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await Logs.create(logs)
+      await queuePush('logs', logs)
       // notificationsenderForWorkLogsTags(req, workLogsTag.id, ' worklogs tag is delete ', true, true, req.employee._id)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].workLogsTag))
@@ -2546,16 +2677,16 @@ class WorkLogs {
     try {
       const data = await EmployeeModel.find({ eStatus: 'Y' }).lean()
       const data1 = await EmployeeModel.find({ eStatus: 'Y' }).lean()
-      console.log('data', data.length)
-      console.log('data1', data1.length)
+      // console.log('data', data.length)
+      // console.log('data1', data1.length)
       const jobProfile = await JobProfileModel.find({ eStatus: 'Y' }).lean()
-      console.log('jobProfile', jobProfile.length)
+      // console.log('jobProfile', jobProfile.length)
       const jobProfile1 = await JobProfileModel.find({ eStatus: 'Y' }).lean()
-      console.log('jobProfile1', jobProfile1.length)
+      // console.log('jobProfile1', jobProfile1.length)
       const starttime = new Date()
       ok1(jobProfile1.length)
       const endtime = new Date()
-      console.log('time', endtime - starttime)
+      // console.log('time', endtime - starttime)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].workLogs), { data, data1, jobProfile, jobProfile1 })
     } catch (error) {
       console.log(error)
@@ -2565,15 +2696,15 @@ class WorkLogs {
 
 async function ok1(a) {
   try {
-    console.log('a', a)
+    // console.log('a', a)
     const project = await ProjectModel.find({ eStatus: 'Y' }).lean()
     const project1 = await ProjectModel.find({ eStatus: 'Y' }).lean()
 
-    console.log(project.length, 'ok1 project')
-    console.log(project1.length, 'ok1 project1')
+    // console.log(project.length, 'ok1 project')
+    // console.log(project1.length, 'ok1 project1')
 
     const dataaa = await EmployeeModel.find({ eStatus: 'Y' }).lean()
-    console.log(dataaa.length, 'ok1 employee')
+    // console.log(dataaa.length, 'ok1 employee')
   } catch (error) {
     console.log(error)
   }

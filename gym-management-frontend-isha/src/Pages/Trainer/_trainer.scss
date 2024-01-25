@@ -1,0 +1,57 @@
+@import 'Assets/Style/variables';
+
+.type {
+    .personal {
+        font-size: 8px;
+        font-weight: 700;
+        color: $ola-color;
+        border: 1px solid $ola-color;
+        border-radius: 15px;
+        padding: 5px 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.2mm;
+        background-color: white;
+        transition: 0.2s ease-in-out;
+        
+        &:hover {
+            cursor: pointer;
+            background-color: $ola-color;
+            color: white;
+        }
+    }
+    .general {
+        font-size: 8px;
+        font-weight: 700;
+        color: $green-color;
+        border: 1px solid $green-color;
+        border-radius: 15px;
+        padding: 5px 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.2mm;
+        background-color: white;
+        transition: 0.2s ease-in-out;
+        
+        &:hover {
+            cursor: pointer;
+            background-color: $green-color;
+            color: white;
+        }
+    }
+}
+
+.delete-info {
+    font-size: 13px;
+    font-weight: 300;
+}
+
+.expert-level {
+    svg {
+        width: 13px;
+    }
+    top: -2px;
+    position: relative;
+}
+
+.experience {
+    text-transform: capitalize;
+}

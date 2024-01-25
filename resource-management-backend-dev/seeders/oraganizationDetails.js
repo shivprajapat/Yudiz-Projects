@@ -11,10 +11,10 @@ const OrganizationDetails = [
         nMaxMinutesPerMonth: 9600,
         nFoundedYear: 1947,
         sLogo: '',
-        sUrl: 'https://jr-web-developer.s3.ap-south-1.amazonaws.com/Organization/OrgDetails/1685437976644_ascascac1.jpg',
+        sUrl: 'https://jr-web-developer.s3.ap-south-1.amazonaws.com/Organization/OrgDetails/1690805878959_yudiz.jpg',
         sOrganizationUrl: 'http://rmp.webdevprojects.cloud/login',
-        dRemoveNetworkLogsDate: { type: Date, default: new Date() },
-        dRemoveOperationLogsDate: { type: Date, default: new Date() }
+        dRemoveNetworkLogsDate: new Date(),
+        dRemoveOperationLogsDate: new Date()
     }
 ]
 

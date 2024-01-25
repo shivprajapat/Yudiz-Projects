@@ -1,0 +1,52 @@
+@import "@/assets/scss/helper/mixin";
+
+.switch_wrap {
+    cursor: pointer;
+
+    &_label {
+        position: relative;
+        display: inline-block;
+        width: 52px;
+        height: 32px;
+
+        input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        span {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(270deg, var(--white-0-color) 0%, var(--neutrals-60-color) 97.32%),
+                linear-gradient(0deg, var(--neutrals-white-color), var(--neutrals-white-color));
+            border-radius: 16px;
+            transition: .4s;
+
+            &::before {
+                position: absolute;
+                content: "";
+                height: 24px;
+                width: 24px;
+                left: 4px;
+                bottom: 4px;
+                background: #FFFFFF99;
+                transition: .4s;
+                border-radius: 50%;
+            }
+        }
+
+        input:checked+span {
+            background: var(--primary-color);
+        }
+
+        input:checked+span:before {
+            background-color: var(--white-color);
+            transform: translateX(19px);
+        }
+    }
+}

@@ -1,0 +1,6 @@
+@import "@/assets/scss/helper/mixin";
+
+.search {
+    h4 {@include font-size(22, 30, 600)}
+    div[class="flex-center"]{margin-bottom: 16px;}
+}

@@ -100,18 +100,19 @@ class Currency {
   async addCurrency(req, res) {
     try {
       let { sName, sSymbol, nUSDCompare } = req.body
-      console.log(sName, sSymbol, nUSDCompare)
+      // console.log(sName, sSymbol, nUSDCompare)
       sName = searchValidateCurrency(sName)
       sSymbol = searchValidateCurrency(sSymbol).toUpperCase()
       const currency = await CurrencyModel.findOne({ sName: camelCase(sName), sSymbol, eStatus: 'Y' }).lean()
       if (currency) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].currency))
       const data = await CurrencyModel.create({ sName: camelCase(sName), sSymbol, nUSDCompare: Number(req.body.nUSDCompare.toFixed(2)), iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f'), iLastUpdateBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f') })
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Currency', sService: 'addCurrency', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Currency', sService: 'addCurrency', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('logs', logs)
+      // await take.create(logs)
       // console.log(data)
       // const putData = { ...data }
 
@@ -139,13 +140,14 @@ class Currency {
       if (currency && currency.eStatus === 'Y') {
         const data = await CurrencyModel.findByIdAndUpdate({ _id: req.params.id }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].currency))
-        let take = `Logs${new Date().getFullYear()}`
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Currency', sService: 'deleteCurrency', eAction: 'Delete', oOldFields: currency, oNewFields: data }
-        await take.create(logs)
+        // let take = `Logs${new Date().getFullYear()}`
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Currency', sService: 'deleteCurrency', eAction: 'Delete', oOldFields: currency, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+        await queuePush('logs', logs)
         await queuePush('Currency:Add', { iLastUpdateBy: data.iLastUpdateBy, _id: data._id, action: 'delete', sName: data.sName, sSymbol: data.sSymbol })
         // await deleteCurrencyToEveryEmployee(data)
-        await notificationsender(req, data._id, ' currency is delete ', true, true, req.employee._id, `${config.urlPrefix}/dashboard`)
+        // await notificationsender(req, data._id, ' currency is delete ', true, true, req.employee._id, `${config.urlPrefix}/dashboard`)
         return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].currency))
       }
 
@@ -315,7 +317,7 @@ async function addNewCurrencyToEveryEmployee(data) {
     const stop = performance.now()
     const inSeconds = (stop - start) / 1000
     const rounded = Number(inSeconds).toFixed(3)
-    console.log(`businessLogic: ${rounded}s`)
+    // console.log(`businessLogic: ${rounded}s`)
   } catch (error) {
     console.log(error)
   }
@@ -374,7 +376,7 @@ async function deleteCurrencyToEveryEmployee(data) {
     const stop = performance.now()
     const inSeconds = (stop - start) / 1000
     const rounded = Number(inSeconds).toFixed(3)
-    console.log(`businessLogic: ${rounded}s`)
+    // console.log(`businessLogic: ${rounded}s`)
   } catch (error) {
     console.log(error)
   }
@@ -398,7 +400,7 @@ async function addNewEmployeesCurrency(data) {
       })
       )
     } else {
-      console.log('no currency exist')
+      // console.log('no currency exist')
     }
   } catch (error) {
     console.log(error)

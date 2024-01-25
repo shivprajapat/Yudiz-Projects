@@ -1,0 +1,8 @@
+<svg version="1.2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 15" width="20" height="15">
+	<title>Group 116-svg</title>
+	<style>
+		.s0 { fill: none;stroke: #53514f;stroke-linecap: round;stroke-linejoin: round;stroke-width: 2 } 
+	</style>
+	<path id="Layer" class="s0" d="m8 8c0 0.5 0.2 1 0.6 1.4 0.4 0.4 0.9 0.6 1.4 0.6 0.5 0 1-0.2 1.4-0.6 0.4-0.4 0.6-0.9 0.6-1.4 0-0.5-0.2-1-0.6-1.4-0.4-0.4-0.9-0.6-1.4-0.6-0.5 0-1 0.2-1.4 0.6-0.4 0.4-0.6 0.9-0.6 1.4z"/>
+	<path id="Layer" class="s0" d="m19 8q-3.6 6-9 6-5.4 0-9-6 3.6-6 9-6 5.4 0 9 6z"/>
+</svg>

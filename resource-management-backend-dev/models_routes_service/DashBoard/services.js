@@ -10,7 +10,7 @@ const DashboardCrIndicatorModel = require('./dashboardCrIndicator.model')
 // const DashboardCrDepartmentModel = require('./dashboardCrDepartment.model')
 const DepartmentModel = require('../Department/model')
 // const DashboardProjectDepartmentModel = require('./dashboardProjectDepartment.model')
-
+const { queuePush } = require('../../helper/redis')
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId
 
@@ -48,7 +48,9 @@ class DashBoard {
 
       // return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].details), data)
 
-      if (employee.eShowAllProjects === 'ALL') {
+      // console.log(req.employee.bDashboardLatestProjects)
+
+      if (req.employee.bDashboardStatistic) {
         const [totalProjects, newProjects, completedProjects, onHoldProjects, onPending, inProgress] = await Promise.all([Projects.countDocuments({ eStatus: 'Y' }).lean(),
         Projects.countDocuments({ eStatus: 'Y', eProjectStatus: { $nin: ['Pending', 'Completed'] }, dContractStartDate: { $gte: new Date(new Date().setDate(new Date().getDate() - 30)) } }).lean(),
         Projects.countDocuments({ eStatus: 'Y', eProjectStatus: 'Completed' }).lean(),
@@ -468,6 +470,8 @@ class DashBoard {
         const totalProjectId = new Set()
         const totalProjectsFixed = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y', eProjectType: 'Fixed' } }).lean()
 
+        console.log('totalProjectsFixed', totalProjectsFixed)
+
         // console.log('totalProjectsFixed', totalProjectsFixed)
 
         if (totalProjectsFixed.length) {
@@ -872,7 +876,6 @@ class DashBoard {
           onHoldOwnProjects: onHoldProjectId.size,
           onPendingOwnProjects: pendingProjectId.size,
           inProgressOwnProjects: inProgressProjectId.size
-
         }
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].details), { data, eShowAllProjects: employee.eShowAllProjects })
       }
@@ -882,8 +885,12 @@ class DashBoard {
   }
 
   async monthlyProjects(req, res) {
-    let { year = new Date().getFullYear(), eShow = 'ALL', page = 0, limit = 5 } = req.query
+    let { year = new Date().getFullYear(), eShow = 'OWN', page = 0, limit = 5 } = req.query
     year = parseInt(year)
+
+    // console.log(req.query)
+
+    // console.log(req.employee.bDashboardMonthlyChart)
 
     // console.log('year', year)
     // console.log('eShow', eShow)
@@ -892,158 +899,408 @@ class DashBoard {
 
     if (!employee) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].notFound.replace('##', 'Employee'))
 
-    if (employee.eShowAllProjects === 'ALL' && eShow === 'ALL') {
-      try {
-        const monthlyProjects = await Projects.aggregate([
-          {
-            $match: {
-              eStatus: 'Y',
-              eProjectStatus: { $nin: ['Cancelled'] }
-              // $expr: {
-              //   $eq: [{ $year: '$dCreatedAt' }, year]
-              // }
-            }
-          },
-          // {
-          //   $group: {
-          //     _id: {
-          //       $month: '$dCreatedAt'
-          //     },
-          //     dCreatedAt: { $first: '$dCreatedAt' },
-          //     count: { $sum: 1 }
-          //   }
-          // },
-          // {
-          //   $sort: {
-          //     _id: 1
-          //   }
-          // },
-          // {
-          //   $project: {
-          //     _id: 0,
-          //     month: '$_id',
-          //     count: '$count',
-          //     dCreatedAt: '$dCreatedAt'
-          //   }
+    // if (req.employee.bDashboardMonthlyChart) {
+    //   try {
+    //     const monthlyProjects = await Projects.aggregate([
+    //       {
+    //         $match: {
+    //           eStatus: 'Y',
+    //           eProjectStatus: { $nin: ['Cancelled'] }
+    //           // $expr: {
+    //           //   $eq: [{ $year: '$dCreatedAt' }, year]
+    //           // }
+    //         }
+    //       },
+    //       // {
+    //       //   $group: {
+    //       //     _id: {
+    //       //       $month: '$dCreatedAt'
+    //       //     },
+    //       //     dCreatedAt: { $first: '$dCreatedAt' },
+    //       //     count: { $sum: 1 }
+    //       //   }
+    //       // },
+    //       // {
+    //       //   $sort: {
+    //       //     _id: 1
+    //       //   }
+    //       // },
+    //       // {
+    //       //   $project: {
+    //       //     _id: 0,
+    //       //     month: '$_id',
+    //       //     count: '$count',
+    //       //     dCreatedAt: '$dCreatedAt'
+    //       //   }
+    //       // }
+    //       {
+    //         $project: {
+    //           _id: 1,
+    //           sName: 1,
+    //           sLogo: 1,
+    //           eProjectType: 1,
+    //           dStartDate: {
+    //             $cond: {
+    //               if: { $eq: ['$eProjectType', 'Fixed'] },
+    //               then: '$dStartDate',
+    //               else: '$dContractStartDate'
+    //             }
+    //           }
+    //         }
+    //       },
+    //       {
+    //         $match: {
+    //           $expr: {
+    //             $eq: [{ $year: '$dStartDate' }, year]
+    //           }
+    //         }
+    //       },
+    //       {
+    //         $group: {
+    //           _id: {
+    //             $month: '$dStartDate'
+    //           },
+    //           sProject: { $addToSet: '$sName' },
+    //           count: { $sum: 1 }
+    //         }
+    //       },
+    //       {
+    //         $sort: {
+    //           _id: 1
+    //         }
+    //       },
+    //       {
+    //         $project: {
+    //           _id: 0,
+    //           month: '$_id',
+    //           count: '$count',
+    //           sProject: '$sProject'
+    //         }
+    //       }
+    //     ])
+
+    //     // console.log('monthlyProjects', monthlyProjects)
+
+    //     // const yearlyProjects = await Projects.aggregate([
+    //     //   {
+    //     //     $match: {
+    //     //       eStatus: 'Y',
+    //     //       eProjectStatus: { $nin: ['Cancelled'] }
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $project: {
+    //     //       _id: 1,
+    //     //       sName: 1,
+    //     //       sLogo: 1,
+    //     //       eProjectType: 1,
+    //     //       dStartDate: {
+    //     //         $cond: {
+    //     //           if: { $eq: ['$eProjectType', 'Fixed'] },
+    //     //           then: '$dStartDate',
+    //     //           else: '$dContractStartDate'
+    //     //         }
+    //     //       }
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $group: {
+    //     //       _id: {
+    //     //         $year: '$dStartDate'
+    //     //       },
+    //     //       dCreatedAt: { $first: '$dStartDate' },
+    //     //       count: { $sum: 1 }
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $sort: {
+    //     //       _id: 1
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $project: {
+    //     //       _id: 0,
+    //     //       year: '$_id',
+    //     //       count: '$count',
+    //     //       dCreatedAt: '$dCreatedAt'
+    //     //     }
+    //     //   }
+    //     // ])
+
+    //     // console.log('monthlyProjects', monthlyProjects)
+    //     // console.log('yearlyProjects', yearlyProjects)
+
+    //     // const yearData = calculateYear(yearlyProjects)
+
+    //     const data = {
+    //       monthlyProjects
+    //       // ...yearData
+    //     }
+    //     return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].details), { data, eShowAllProjects: employee.eShowAllProjects })
+    //   } catch (error) {
+    //     return catchError('DashBoard.newProjects', error, req, res)
+    //   }
+    // } else {
+    //   const totalProjectId = new Set()
+    //   const totalProjectsFixed = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y' } }).lean()
+
+    //   if (totalProjectsFixed.length) {
+    //     totalProjectsFixed.forEach(element => {
+    //       if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+    //     })
+    //   }
+
+    //   const othersProjectFixed = await Projects.find({
+    //     eStatus: 'Y',
+    //     $or: [
+    //       { iBDId: ObjectId(req.employee._id) },
+    //       { iBAId: ObjectId(req.employee._id) },
+    //       { iProjectManagerId: ObjectId(req.employee._id) }
+    //     ]
+    //   })
+
+    //   if (othersProjectFixed.length) {
+    //     othersProjectFixed.forEach(element => {
+    //       if (element?._id) totalProjectId.add(element._id.toString())
+    //     })
+    //   }
+
+    //   console.log('totalProjectId', totalProjectId)
+
+    //   try {
+    //     const monthlyProjects = await Projects.aggregate([
+    //       {
+    //         $match: {
+    //           eStatus: 'Y',
+    //           eProjectStatus: { $nin: ['Cancelled'] },
+    //           _id: { $in: [...totalProjectId].map(a => ObjectId(a)) }
+    //         }
+    //       },
+    //       {
+    //         $project: {
+    //           _id: 1,
+    //           sName: 1,
+    //           sLogo: 1,
+    //           eProjectType: 1,
+    //           dStartDate: {
+    //             $cond: {
+    //               if: { $eq: ['$eProjectType', 'Fixed'] },
+    //               then: '$dStartDate',
+    //               else: '$dContractStartDate'
+    //             }
+    //           }
+    //         }
+    //       },
+    //       {
+    //         $match: {
+    //           $expr: {
+    //             $eq: [{ $year: '$dStartDate' }, year]
+    //           }
+    //         }
+    //       },
+    //       {
+    //         $group: {
+    //           _id: {
+    //             $month: '$dStartDate'
+    //           },
+    //           sProject: { $addToSet: '$sName' },
+    //           count: { $sum: 1 }
+    //         }
+    //       },
+    //       {
+    //         $sort: {
+    //           _id: 1
+    //         }
+    //       },
+    //       {
+    //         $project: {
+    //           _id: 0,
+    //           month: '$_id',
+    //           count: '$count',
+    //           sProject: '$sProject'
+    //         }
+    //       }
+    //     ])
+
+    //     console.log(monthlyProjects)
+
+    //     // const yearlyProjects = await Projects.aggregate([
+    //     //   {
+    //     //     $match: {
+    //     //       eStatus: 'Y',
+    //     //       eProjectStatus: { $nin: ['Cancelled'] },
+    //     //       _id: { $in: [...totalProjectId].map(a => ObjectId(a)) }
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $project: {
+    //     //       _id: 1,
+    //     //       sName: 1,
+    //     //       sLogo: 1,
+    //     //       eProjectType: 1,
+    //     //       dStartDate: {
+    //     //         $cond: {
+    //     //           if: { $eq: ['$eProjectType', 'Fixed'] },
+    //     //           then: '$dStartDate',
+    //     //           else: '$dContractStartDate'
+    //     //         }
+    //     //       }
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $group: {
+    //     //       _id: {
+    //     //         $year: '$dStartDate'
+    //     //       },
+    //     //       dCreatedAt: { $first: '$dStartDate' },
+    //     //       count: { $sum: 1 }
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $sort: {
+    //     //       _id: 1
+    //     //     }
+    //     //   },
+    //     //   {
+    //     //     $project: {
+    //     //       _id: 0,
+    //     //       year: '$_id',
+    //     //       count: '$count',
+    //     //       dCreatedAt: '$dStartDate'
+    //     //     }
+    //     //   }
+    //     // ])
+
+    //     // const yearData = calculateYear(yearlyProjects)
+
+    //     const data = {
+    //       monthlyProjects
+    //       // ...yearData
+    //     }
+    //     // console.log('monthlyProjects', monthlyProjects)
+    //     return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].details), { eShowAllProjects: employee.eShowAllProjects, data })
+    //   } catch (error) {
+    //     return catchError('DashBoard.newProjects', error, req, res)
+    //   }
+    // }
+
+    const q = [
+      {
+        $match: {
+          eStatus: 'Y',
+          eProjectStatus: { $nin: ['Cancelled'] }
+          // $expr: {
+          //   $eq: [{ $year: '$dCreatedAt' }, year]
           // }
-          {
-            $project: {
-              _id: 1,
-              sName: 1,
-              sLogo: 1,
-              eProjectType: 1,
-              dStartDate: {
-                $cond: {
-                  if: { $eq: ['$eProjectType', 'Fixed'] },
-                  then: '$dStartDate',
-                  else: '$dContractStartDate'
-                }
-              }
-            }
-          },
-          {
-            $match: {
-              $expr: {
-                $eq: [{ $year: '$dStartDate' }, year]
-              }
-            }
-          },
-          {
-            $group: {
-              _id: {
-                $month: '$dStartDate'
-              },
-              sProject: { $addToSet: '$sName' },
-              count: { $sum: 1 }
-            }
-          },
-          {
-            $sort: {
-              _id: 1
-            }
-          },
-          {
-            $project: {
-              _id: 0,
-              month: '$_id',
-              count: '$count',
-              sProject: '$sProject'
+        }
+      },
+      // {
+      //   $group: {
+      //     _id: {
+      //       $month: '$dCreatedAt'
+      //     },
+      //     dCreatedAt: { $first: '$dCreatedAt' },
+      //     count: { $sum: 1 }
+      //   }
+      // },
+      // {
+      //   $sort: {
+      //     _id: 1
+      //   }
+      // },
+      // {
+      //   $project: {
+      //     _id: 0,
+      //     month: '$_id',
+      //     count: '$count',
+      //     dCreatedAt: '$dCreatedAt'
+      //   }
+      // }
+      {
+        $project: {
+          _id: 1,
+          sName: 1,
+          sLogo: 1,
+          eProjectType: 1,
+          dStartDate: {
+            $cond: {
+              if: { $eq: ['$eProjectType', 'Fixed'] },
+              then: '$dStartDate',
+              else: '$dContractStartDate'
             }
           }
-        ])
-
-        // console.log('monthlyProjects', monthlyProjects)
-
-        // const yearlyProjects = await Projects.aggregate([
-        //   {
-        //     $match: {
-        //       eStatus: 'Y',
-        //       eProjectStatus: { $nin: ['Cancelled'] }
-        //     }
-        //   },
-        //   {
-        //     $project: {
-        //       _id: 1,
-        //       sName: 1,
-        //       sLogo: 1,
-        //       eProjectType: 1,
-        //       dStartDate: {
-        //         $cond: {
-        //           if: { $eq: ['$eProjectType', 'Fixed'] },
-        //           then: '$dStartDate',
-        //           else: '$dContractStartDate'
-        //         }
-        //       }
-        //     }
-        //   },
-        //   {
-        //     $group: {
-        //       _id: {
-        //         $year: '$dStartDate'
-        //       },
-        //       dCreatedAt: { $first: '$dStartDate' },
-        //       count: { $sum: 1 }
-        //     }
-        //   },
-        //   {
-        //     $sort: {
-        //       _id: 1
-        //     }
-        //   },
-        //   {
-        //     $project: {
-        //       _id: 0,
-        //       year: '$_id',
-        //       count: '$count',
-        //       dCreatedAt: '$dCreatedAt'
-        //     }
-        //   }
-        // ])
-
-        // console.log('monthlyProjects', monthlyProjects)
-        // console.log('yearlyProjects', yearlyProjects)
-
-        // const yearData = calculateYear(yearlyProjects)
-
-        const data = {
-          monthlyProjects
-          // ...yearData
         }
-        return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].details), { data, eShowAllProjects: employee.eShowAllProjects })
-      } catch (error) {
-        return catchError('DashBoard.newProjects', error, req, res)
+      },
+      {
+        $match: {
+          $expr: {
+            $eq: [{ $year: '$dStartDate' }, year]
+          }
+        }
+      },
+      {
+        $group: {
+          _id: {
+            $month: '$dStartDate'
+          },
+          sProject: { $addToSet: '$sName' },
+          count: { $sum: 1 }
+        }
+      },
+      {
+        $sort: {
+          _id: 1
+        }
+      },
+      {
+        $project: {
+          _id: 0,
+          month: '$_id',
+          count: '$count',
+          sProject: '$sProject'
+        }
+      }
+    ]
+
+    if (req.employee.bDashboardMonthlyChart) {
+      if (eShow === 'OWN') {
+        const totalProjectId = new Set()
+        const totalProjects = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y' } }).lean()
+
+        if (totalProjects.length) {
+          totalProjects.forEach(element => {
+            if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+          })
+        }
+
+        const othersProjects = await Projects.find({
+          eStatus: 'Y',
+          $or: [
+            { iBDId: ObjectId(req.employee._id) },
+            { iBAId: ObjectId(req.employee._id) },
+            { iProjectManagerId: ObjectId(req.employee._id) }
+          ]
+        })
+
+        if (othersProjects.length) {
+          othersProjects.forEach(element => {
+            if (element?._id) totalProjectId.add(element._id.toString())
+          })
+        }
+
+        q[0].$match._id = { $in: [...totalProjectId].map(a => ObjectId(a)) }
       }
     } else {
       const totalProjectId = new Set()
-      const totalProjectsFixed = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y' } }).lean()
+      const totalProjects = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y' } }).lean()
 
-      if (totalProjectsFixed.length) {
-        totalProjectsFixed.forEach(element => {
+      if (totalProjects.length) {
+        totalProjects.forEach(element => {
           if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
         })
       }
 
-      const othersProjectFixed = await Projects.find({
+      const othersProjects = await Projects.find({
         eStatus: 'Y',
         $or: [
           { iBDId: ObjectId(req.employee._id) },
@@ -1052,141 +1309,33 @@ class DashBoard {
         ]
       })
 
-      if (othersProjectFixed.length) {
-        othersProjectFixed.forEach(element => {
+      if (othersProjects.length) {
+        othersProjects.forEach(element => {
           if (element?._id) totalProjectId.add(element._id.toString())
         })
       }
 
-      console.log('totalProjectId', totalProjectId)
-
-      try {
-        const monthlyProjects = await Projects.aggregate([
-          {
-            $match: {
-              eStatus: 'Y',
-              eProjectStatus: { $nin: ['Cancelled'] },
-              _id: { $in: [...totalProjectId].map(a => ObjectId(a)) }
-            }
-          },
-          {
-            $project: {
-              _id: 1,
-              sName: 1,
-              sLogo: 1,
-              eProjectType: 1,
-              dStartDate: {
-                $cond: {
-                  if: { $eq: ['$eProjectType', 'Fixed'] },
-                  then: '$dStartDate',
-                  else: '$dContractStartDate'
-                }
-              }
-            }
-          },
-          {
-            $match: {
-              $expr: {
-                $eq: [{ $year: '$dStartDate' }, year]
-              }
-            }
-          },
-          {
-            $group: {
-              _id: {
-                $month: '$dStartDate'
-              },
-              sProject: { $addToSet: '$sName' },
-              count: { $sum: 1 }
-            }
-          },
-          {
-            $sort: {
-              _id: 1
-            }
-          },
-          {
-            $project: {
-              _id: 0,
-              month: '$_id',
-              count: '$count',
-              sProject: '$sProject'
-            }
-          }
-        ])
-
-        console.log(monthlyProjects)
-
-        // const yearlyProjects = await Projects.aggregate([
-        //   {
-        //     $match: {
-        //       eStatus: 'Y',
-        //       eProjectStatus: { $nin: ['Cancelled'] },
-        //       _id: { $in: [...totalProjectId].map(a => ObjectId(a)) }
-        //     }
-        //   },
-        //   {
-        //     $project: {
-        //       _id: 1,
-        //       sName: 1,
-        //       sLogo: 1,
-        //       eProjectType: 1,
-        //       dStartDate: {
-        //         $cond: {
-        //           if: { $eq: ['$eProjectType', 'Fixed'] },
-        //           then: '$dStartDate',
-        //           else: '$dContractStartDate'
-        //         }
-        //       }
-        //     }
-        //   },
-        //   {
-        //     $group: {
-        //       _id: {
-        //         $year: '$dStartDate'
-        //       },
-        //       dCreatedAt: { $first: '$dStartDate' },
-        //       count: { $sum: 1 }
-        //     }
-        //   },
-        //   {
-        //     $sort: {
-        //       _id: 1
-        //     }
-        //   },
-        //   {
-        //     $project: {
-        //       _id: 0,
-        //       year: '$_id',
-        //       count: '$count',
-        //       dCreatedAt: '$dStartDate'
-        //     }
-        //   }
-        // ])
-
-        // const yearData = calculateYear(yearlyProjects)
-
-        const data = {
-          monthlyProjects
-          // ...yearData
-        }
-        // console.log('monthlyProjects', monthlyProjects)
-        return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].details), { eShowAllProjects: employee.eShowAllProjects, data })
-      } catch (error) {
-        return catchError('DashBoard.newProjects', error, req, res)
-      }
+      q[0].$match._id = { $in: [...totalProjectId].map(a => ObjectId(a)) }
     }
+
+    const monthlyProjects = await Projects.aggregate(q)
+
+    const data = {
+      monthlyProjects
+    }
+
+    return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].details), { eShowAllProjects: employee?.eShowAllProjects || 'ALL', data })
   }
 
   async latestProjects(req, res) {
-    const { eShow = 'ALL', page = 0, limit = 0 } = req.query
+    const { eShow = 'OWN', page = 0, limit = 0 } = req.query
 
     try {
       const employee = await EmployeeModel.findOne({ _id: req.employee._id }, { eShowAllProjects: 1 }).lean()
 
       if (!employee) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].notFound.replace('##', 'Employee'))
 
-      if (employee.eShowAllProjects === 'ALL' && eShow === 'ALL') {
+      if (req.employee.bDashboardLatestProjects && eShow === 'ALL') {
         const latestFixedProjects = await Projects.find({
           eStatus: 'Y',
           eProjectStatus: { $nin: ['Pending'] },
@@ -1412,9 +1561,813 @@ class DashBoard {
     }
   }
 
+  // async projectIndicator(req, res) {
+  //   try {
+  //     let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', eProjectType = '', iBDId = '', iProjectManagerId = '', eProjectStatus = '' } = req.query
+
+  //     // console.log(req.employee._id)
+
+  //     const orderBy = order && order === 'asc' ? 1 : -1
+
+  //     eProjectType = eProjectType.trim()
+
+  //     const projectEmployee = await ProjectwiseemployeeModel.find({ eStatus: 'Y', iEmployeeId: ObjectId(req.employee._id) }, { iProjectId: 1 }).lean()
+  //     const department = await DepartmentModel.findOne({ eStatus: 'Y', _id: ObjectId(req.employee.iDepartmentId) }).lean()
+
+  //     const jobProfileData = await EmployeeModel.findOne({ _id: req.employee._id }, { iJobProfileId: 1, eShowAllProjects: 1 }).populate({ path: 'iJobProfileId', select: 'nLevel' }).lean()
+
+  //     const q = [
+  //       {
+  //         $match: {
+  //           eStatus: 'Y'
+  //         }
+  //       },
+  //       {
+  //         $lookup: {
+  //           from: 'currencies',
+  //           let: { currencyId: '$iCurrencyId' },
+  //           pipeline: [
+  //             {
+  //               $match: {
+  //                 $expr: {
+  //                   $and: [
+  //                     { $eq: ['$_id', '$$currencyId'] }
+  //                   ]
+  //                 },
+  //                 eStatus: 'Y'
+  //               }
+  //             },
+  //             {
+  //               $project: {
+  //                 _id: 1,
+  //                 sName: 1,
+  //                 sSymbol: 1
+  //               }
+  //             }
+  //           ],
+  //           as: 'currency'
+  //         }
+  //       },
+  //       {
+  //         $unwind: {
+  //           path: '$currency',
+  //           preserveNullAndEmptyArrays: true
+  //         }
+  //       },
+  //       {
+  //         $lookup: {
+  //           from: 'projectwisetechnologies',
+  //           let: { projectId: '$_id' },
+  //           pipeline: [
+  //             {
+  //               $match: {
+  //                 $expr: {
+  //                   $and: [
+  //                     { $eq: ['$iProjectId', '$$projectId'] }
+  //                   ]
+  //                 },
+  //                 eStatus: 'Y'
+  //               }
+  //             },
+  //             {
+  //               $lookup: {
+  //                 from: 'technologies',
+  //                 let: { technologyId: '$iTechnologyId' },
+  //                 pipeline: [
+  //                   {
+  //                     $match: {
+  //                       $expr: {
+  //                         $and: [
+  //                           { $eq: ['$_id', '$$technologyId'] }
+  //                         ]
+  //                       },
+  //                       eStatus: 'Y'
+  //                     }
+  //                   },
+  //                   {
+  //                     $project: {
+  //                       sName: 1,
+  //                       sBackGroundColor: 1,
+  //                       sTextColor: 1
+  //                     }
+  //                   }
+  //                 ],
+  //                 as: 'technology'
+  //               }
+  //             },
+  //             {
+  //               $unwind: {
+  //                 path: '$technology',
+  //                 preserveNullAndEmptyArrays: true
+  //               }
+  //             },
+  //             {
+  //               $project: {
+  //                 iTechnologyId: 1,
+  //                 iProjectId: 1,
+  //                 sName: '$technology.sName',
+  //                 sBackGroundColor: '$technology.sBackGroundColor',
+  //                 sTextColor: '$technology.sTextColor'
+  //               }
+  //             }
+  //           ],
+  //           as: 'projectTechnologies'
+  //         }
+  //       },
+  //       {
+  //         $lookup: {
+  //           from: 'projectwiseemployees',
+  //           let: { projectId: '$_id' },
+  //           pipeline: [
+  //             {
+  //               $match: {
+  //                 $expr: {
+  //                   $and: [
+  //                     { $eq: ['$iProjectId', '$$projectId'] },
+  //                     { eStatus: 'Y' }
+  //                   ]
+  //                 },
+  //                 eStatus: 'Y'
+  //               }
+  //             },
+  //             {
+  //               $project: {
+  //                 _id: 1,
+  //                 iProjectId: 1,
+  //                 iEmployeeId: 1,
+  //                 iDepartmentId: 1,
+  //                 nMinutes: 1,
+  //                 nAvailabilityMinutes: 1,
+  //                 sReview: 1,
+  //                 eProjectType: 1,
+  //                 eCostType: 1,
+  //                 nMaxMinutes: 1,
+  //                 nMinMinutes: 1,
+  //                 nRemainingMinute: 1,
+  //                 nRemainingCost: {
+  //                   $cond: {
+  //                     if: { $eq: [req.employee.bViewCost, true] },
+  //                     then: { $ifNull: ['$nRemainingCost', 0] },
+  //                     else: '$$REMOVE'
+  //                   }
+  //                 },
+  //                 nNonBillableMinute: 1,
+  //                 nNonBillableCost: {
+  //                   $cond: {
+  //                     if: { $eq: [req.employee.bViewCost, true] },
+  //                     then: { $ifNull: ['$nNonBillableCost', 0] },
+  //                     else: '$$REMOVE'
+  //                   }
+  //                 },
+  //                 nOrgRemainingMinute: 1,
+  //                 nOrgRemainingCost: {
+  //                   $cond: {
+  //                     if: { $eq: [req.employee.bViewCost, true] },
+  //                     then: { $ifNull: ['$nOrgRemainingCost', 0] },
+  //                     else: '$$REMOVE'
+  //                   }
+  //                 },
+  //                 nOrgNonBillableMinute: 1,
+  //                 nOrgNonBillableCost: {
+  //                   $cond: {
+  //                     if: { $eq: [req.employee.bViewCost, true] },
+  //                     then: { $ifNull: ['$nOrgNonBillableCost', 0] },
+  //                     else: '$$REMOVE'
+  //                   }
+  //                 },
+  //                 nCost: {
+  //                   $cond: {
+  //                     if: { $eq: [req.employee.bViewCost, true] },
+  //                     then: { $ifNull: ['$nCost', 0] },
+  //                     else: '$$REMOVE'
+  //                   }
+  //                 },
+  //                 nClientCost: {
+  //                   $cond: {
+  //                     if: { $eq: [req.employee.bViewCost, true] },
+  //                     then: { $ifNull: ['$nClientCost', 0] },
+  //                     else: '$$REMOVE'
+  //                   }
+  //                 }
+  //               }
+  //             }
+  //           ],
+  //           as: 'projectwiseemployees'
+  //         }
+  //       },
+  //       {
+  //         $project: {
+  //           _id: 1,
+  //           sName: 1,
+  //           eProjectType: 1,
+  //           eProjectStatus: 1,
+  //           sCost: {
+  //             $cond: {
+  //               if: { $eq: [req.employee.bViewCost, true] },
+  //               then: { $ifNull: ['$sCost', '0'] },
+  //               else: '$$REMOVE'
+  //             }
+  //           },
+  //           nTimeLineDays: { $ifNull: ['$nTimeLineDays', 0] },
+  //           dStartDate: { $ifNull: ['$dStartDate', null] },
+  //           dEndDate: { $ifNull: ['$dEndDate', null] },
+  //           sSymbol: { $ifNull: ['$currency.sSymbol', 'USD'] },
+  //           sCurrencyName: { $ifNull: ['$currency.sName', 'Us Dollar'] },
+  //           projectTechnologies: { $ifNull: ['$projectTechnologies', []] },
+  //           iBDId: { $ifNull: ['$iBDId', null] },
+  //           iBAId: { $ifNull: ['$iBAId', null] },
+  //           iProjectManagerId: { $ifNull: ['$iProjectManagerId', null] },
+  //           dCreatedAt: { $ifNull: ['$dCreatedAt', null] },
+  //           dUpdatedAt: { $ifNull: ['$dUpdatedAt', null] },
+  //           projectwiseemployees: { $ifNull: ['$projectwiseemployees', []] },
+  //           isWorkLogAdd: { $in: [ObjectId(req.employee._id), '$projectwiseemployees.iEmployeeId'] }
+  //         }
+  //       }
+  //     ]
+
+  //     // if (!['OPERATION', 'ADMIN', 'HR', 'MANAGEMENT'].includes(department.sKey)) {
+  //     //   q[0].$match.$or = [
+  //     //     { iBDId: ObjectId(req.employee._id) },
+  //     //     { iProjectManagerId: ObjectId(req.employee._id) },
+  //     //     { iBAId: ObjectId(req.employee._id) },
+  //     //     { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
+  //     //   ]
+  //     // }
+
+  //     if (jobProfileData.eShowAllProjects === 'OWN') {
+  //       const query = [
+  //         {
+  //           $match: {
+  //             eStatus: 'Y',
+  //             'flag.2': 'Y'
+  //           }
+  //         }
+  //       ]
+
+  //       // console.log('projectEmployee', projectEmployee)
+
+  //       // if (!['OPERATION', 'ADMIN', 'HR', 'MANAGEMENT'].includes(department.sKey)) {
+  //       query[0].$match.$or = [
+  //         { iBDId: ObjectId(req.employee._id) },
+  //         { iProjectManagerId: ObjectId(req.employee._id) },
+  //         { iBAId: ObjectId(req.employee._id) },
+  //         { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
+  //       ]
+  //       // }
+
+  //       const projects = await Projects.aggregate(query)
+  //       q[0].$match._id = {
+  //         $in: [
+  //           ...projects.map((project) => ObjectId(project._id))
+  //         ]
+  //       }
+  //     }
+
+  //     if (sort && sort === 'dCreatedAt') {
+  //       q.push({
+  //         $sort: {
+  //           dCreatedAt: orderBy
+  //         }
+  //       })
+  //     }
+
+  //     if (eProjectType && ['Fixed', 'Dedicated'].includes(eProjectType) && eProjectType !== '') {
+  //       q[0].$match.eProjectType = eProjectType
+  //     }
+
+  //     if (iBDId && iBDId !== '' && isValidId(iBDId)) {
+  //       q[0].$match.iBDId = ObjectId(iBDId)
+  //     }
+  //     if (iProjectManagerId && iProjectManagerId !== '' && isValidId(iProjectManagerId)) {
+  //       q[0].$match.iProjectManagerId = ObjectId(iProjectManagerId)
+  //     }
+
+  //     if (eProjectStatus && eProjectStatus !== '' && ['In Progress', 'Completed', 'On Hold', 'Cancelled', 'Pending', 'Closed'].includes(eProjectStatus)) {
+  //       q[0].$match.eProjectStatus = eProjectStatus
+  //     }
+
+  //     if (search) {
+  //       q.push({
+  //         $match: {
+  //           $or: [
+  //             { sName: { $regex: search, $options: 'i' } }
+  //           ]
+  //         }
+  //       })
+  //     }
+
+  //     const count_query = [...q]
+
+  //     count_query.push({ $count: 'count' })
+
+  //     // sort = sort === 'client' ? 'client.sClientName' : sort
+  //     // sort = sort === 'technology' ? 'technology.sTechnologyName' : sort
+  //     // sort = sort === 'projecttag' ? 'projecttag.sProjectTagName' : sort
+  //     // sort = sort === 'sName' ? 'sName' : sort
+  //     // sort = sort === 'dEndDate' ? 'dEndDate' : sort
+
+  //     // const sorting = { [sort]: orderBy }
+
+  //     // q.push({ $sort: sorting })
+  //     if (limit !== 'all') {
+  //       q.push({ $skip: parseInt(page) })
+  //       q.push({ $limit: parseInt(limit) })
+  //     }
+
+  //     const [count, projects] = await Promise.all([Projects.aggregate(count_query), Projects.aggregate(q)])
+
+  //     const all = []
+
+  //     for (const i of projects) {
+  //       const query = [
+  //         {
+  //           $match: { eStatus: 'Y', _id: i._id }
+  //         },
+  //         {
+  //           $project: {
+  //             _id: 1
+  //           }
+  //         },
+  //         {
+  //           $lookup: {
+  //             from: 'dashboardprojectindicators',
+  //             let: { project: '$_id' },
+  //             pipeline: [
+  //               {
+  //                 $match: {
+  //                   eStatus: 'Y',
+  //                   $expr: {
+  //                     $and: [
+  //                       { $eq: ['$iProjectId', '$$project'] }
+  //                     ]
+  //                   }
+  //                 }
+  //               },
+  //               {
+  //                 $project: {
+  //                   _id: 1,
+  //                   iProjectId: 1,
+  //                   eStatus: 1,
+  //                   sCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$sCost', '0'] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nCost', '0'] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nTimeLineDays: { $ifNull: ['$nTimeLineDays', 0] },
+  //                   nMinutes: { $ifNull: ['$nMinutes', 0] },
+  //                   nRemainingMinute: { $ifNull: ['$nRemainingMinute', 0] },
+  //                   nRemainingCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nRemainingCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nNonBillableMinute: { $ifNull: ['$nNonBillableMinute', 0] },
+  //                   nNonBillableCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nNonBillableCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nOrgRemainingMinute: { $ifNull: ['$nOrgRemainingMinute', 0] },
+  //                   nOrgRemainingCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nOrgRemainingCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nOrgNonBillableMinute: { $ifNull: ['$nOrgNonBillableMinute', 0] },
+  //                   nOrgNonBillableCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nOrgNonBillableCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   eProjectType: 1,
+  //                   dCreatedAt: 1,
+  //                   dUpdatedAt: 1
+  //                 }
+  //               }
+  //             ],
+  //             as: 'projectIndicator'
+  //           }
+  //         },
+  //         {
+  //           $unwind: {
+  //             path: '$projectIndicator',
+  //             preserveNullAndEmptyArrays: true
+  //           }
+  //         },
+  //         {
+  //           $lookup: {
+  //             from: 'dashboardprojectdepartments',
+  //             let: { project: '$_id' },
+  //             pipeline: [
+  //               {
+  //                 $match: {
+  //                   eStatus: 'Y',
+  //                   $expr: {
+  //                     $and: [
+  //                       { $eq: ['$iProjectId', '$$project'] }
+  //                     ]
+  //                   }
+  //                 }
+  //               },
+  //               {
+  //                 $lookup: {
+  //                   from: 'departments',
+  //                   let: { department: '$iDepartmentId' },
+  //                   pipeline: [
+  //                     {
+  //                       $match: {
+  //                         eStatus: 'Y',
+  //                         $expr: {
+  //                           $and: [
+  //                             { $eq: ['$_id', '$$department'] }
+  //                           ]
+  //                         }
+  //                       }
+  //                     }
+  //                   ],
+  //                   as: 'department'
+  //                 }
+  //               },
+  //               {
+  //                 $unwind: {
+  //                   path: '$department',
+  //                   preserveNullAndEmptyArrays: true
+  //                 }
+  //               },
+  //               {
+  //                 $project: {
+  //                   _id: '$department._id',
+  //                   sName: '$department.sName',
+  //                   sBackGroundColor: '$department.sBackGroundColor',
+  //                   sTextColor: '$department.sTextColor',
+  //                   iProjectId: 1,
+  //                   nMinutes: { $ifNull: ['$nMinutes', 0] },
+  //                   nCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nRemainingMinute: { $ifNull: ['$nRemainingMinute', 0] },
+  //                   nRemainingCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nRemainingCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nNonBillableMinute: { $ifNull: ['$nNonBillableMinute', 0] },
+  //                   nNonBillableCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nNonBillableCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   }
+  //                 }
+  //               }
+  //             ],
+  //             as: 'projectDepartment'
+  //           }
+  //         },
+  //         {
+  //           $lookup: {
+  //             from: 'dashboardcrindicators',
+  //             let: { project: '$_id' },
+  //             pipeline: [
+  //               {
+  //                 $match: {
+  //                   eStatus: 'Y',
+  //                   $expr: {
+  //                     $and: [
+  //                       { $eq: ['$iProjectId', '$$project'] }
+  //                     ]
+  //                   }
+  //                 }
+  //               },
+  //               {
+  //                 $lookup: {
+  //                   from: 'changerequests',
+  //                   let: { crId: '$iCrId' },
+  //                   pipeline: [
+  //                     {
+  //                       $match: {
+  //                         eStatus: 'Y',
+  //                         $expr: {
+  //                           $and: [
+  //                             { $eq: ['$_id', '$$crId'] }
+  //                           ]
+  //                         }
+  //                       }
+  //                     },
+  //                     {
+  //                       $project: {
+  //                         _id: 1,
+  //                         sName: 1
+  //                       }
+  //                     }
+  //                   ],
+  //                   as: 'changeRequests'
+  //                 }
+  //               },
+  //               {
+  //                 $unwind: {
+  //                   path: '$changeRequests',
+  //                   preserveNullAndEmptyArrays: true
+  //                 }
+  //               },
+  //               {
+  //                 $project: {
+  //                   iCrId: 1,
+  //                   iProjectId: 1,
+  //                   nTimeLineDays: { $ifNull: ['$nTimeLineDays', 0] },
+  //                   nMinutes: { $ifNull: ['$nMinutes', 0] },
+  //                   nCost: { $ifNull: ['$nCost', 0] },
+  //                   nRemainingMinute: { $ifNull: ['$nRemainingMinute', 0] },
+  //                   nRemainingCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nRemainingCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   nNonBillableMinute: { $ifNull: ['$nNonBillableMinute', 0] },
+  //                   nNonBillableCost: {
+  //                     $cond: {
+  //                       if: { $eq: [req.employee.bViewCost, true] },
+  //                       then: { $ifNull: ['$nNonBillableCost', 0] },
+  //                       else: '$$REMOVE'
+  //                     }
+  //                   },
+  //                   sName: '$changeRequests.sName'
+  //                 }
+  //               }
+  //             ],
+  //             as: 'crIndicators'
+  //           }
+  //         }
+  //         // {
+  //         //   $lookup: {
+  //         //     from: 'projectwisetechnologies',
+  //         //     let: { project: '$_id' },
+  //         //     pipeline: [
+  //         //       {
+  //         //         $match: {
+  //         //           eStatus: 'Y',
+  //         //           $expr: {
+  //         //             $and: [
+  //         //               { $eq: ['$iProjectId', '$$project'] }
+  //         //             ]
+  //         //           }
+  //         //         }
+  //         //       },
+  //         //       {
+  //         //         $lookup: {
+  //         //           from: 'technologies',
+  //         //           let: { technology: '$iTechnologyId' },
+  //         //           pipeline: [
+  //         //             {
+  //         //               $match: {
+  //         //                 eStatus: 'Y',
+  //         //                 $expr: {
+  //         //                   $and: [
+  //         //                     { $eq: ['$_id', '$$technology'] }
+  //         //                   ]
+  //         //                 }
+  //         //               }
+  //         //             }
+  //         //           ],
+  //         //           as: 'technology'
+  //         //         }
+  //         //       },
+  //         //       {
+  //         //         $unwind: {
+  //         //           path: '$technology',
+  //         //           preserveNullAndEmptyArrays: true
+  //         //         }
+  //         //       },
+  //         //       {
+  //         //         $project: {
+  //         //           _id: '$technology._id',
+  //         //           sName: '$technology.sName',
+  //         //           sKey: '$technology.sKey',
+  //         //           sTextColor: '$technology.sTextColor',
+  //         //           sBackGroundColor: '$technology.sBackGroundColor',
+  //         //           iProjectId: 1
+  //         //         }
+  //         //       }
+  //         //     ],
+  //         //     as: 'projectWiseTechnology'
+  //         //   }
+  //         // },
+  //         // {
+  //         //   $lookup: {
+  //         //     from: 'projectwisetags',
+  //         //     let: { project: '$_id' },
+  //         //     pipeline: [
+  //         //       {
+  //         //         $match: {
+  //         //           eStatus: 'Y',
+  //         //           $expr: {
+  //         //             $and: [
+  //         //               { $eq: ['$iProjectId', '$$project'] }
+  //         //             ]
+  //         //           }
+  //         //         }
+  //         //       },
+  //         //       {
+  //         //         $lookup: {
+  //         //           from: 'projecttags',
+  //         //           let: { projecttag: '$iProjectTagId' },
+  //         //           pipeline: [
+  //         //             {
+  //         //               $match: {
+  //         //                 eStatus: 'Y',
+  //         //                 $expr: {
+  //         //                   $and: [
+  //         //                     { $eq: ['$_id', '$$projecttag'] }
+  //         //                   ]
+  //         //                 }
+  //         //               }
+  //         //             }
+  //         //           ],
+  //         //           as: 'projecttag'
+  //         //         }
+  //         //       },
+  //         //       {
+  //         //         $unwind: {
+  //         //           path: '$projecttag',
+  //         //           preserveNullAndEmptyArrays: true
+  //         //         }
+  //         //       },
+  //         //       {
+  //         //         $project: {
+  //         //           _id: '$projecttag._id',
+  //         //           sName: '$projecttag.sName',
+  //         //           sKey: '$projecttag.sKey',
+  //         //           sTextColor: '$projecttag.sTextColor',
+  //         //           sBackGroundColor: '$projecttag.sBackGroundColor',
+  //         //           iProjectId: 1
+  //         //         }
+  //         //       }
+  //         //     ],
+  //         //     as: 'projectWiseTag'
+  //         //   }
+  //         // }
+  //       ]
+
+  //       const projectIndicators = await Projects.aggregate(query)
+  //       i.projectIndicator = projectIndicators[0]?.projectIndicator || {}
+  //       i.projectDepartment = projectIndicators[0]?.projectDepartment || []
+  //       // i.projectWiseTag = projectIndicators[0].projectWiseTag
+  //       // i.projectWiseTechnology = projectIndicators[0].projectWiseTechnology
+  //       // i.changerequests = projectIndicators[0].changeRequests
+  //       i.crIndicators = projectIndicators[0].crIndicators
+
+  //       if (i.eProjectType === 'Dedicated') {
+  //         const q = [
+  //           {
+  //             $match: {
+  //               eStatus: 'Y',
+  //               iProjectId: i._id
+  //             }
+  //           },
+  //           {
+  //             $lookup: {
+  //               from: 'departments',
+  //               let: { department: '$iDepartmentId' },
+  //               pipeline: [
+  //                 {
+  //                   $match: {
+  //                     eStatus: 'Y',
+  //                     $expr: {
+  //                       $and: [
+  //                         { $eq: ['$_id', '$$department'] }
+  //                       ]
+  //                     }
+  //                   }
+  //                 }
+  //               ],
+  //               as: 'department'
+  //             }
+  //           },
+  //           {
+  //             $unwind: {
+  //               path: '$department',
+  //               preserveNullAndEmptyArrays: true
+  //             }
+  //           },
+  //           {
+  //             $project: {
+  //               _id: '$department._id',
+  //               sName: '$department.sName',
+  //               sBackGroundColor: '$department.sBackGroundColor',
+  //               sTextColor: '$department.sTextColor',
+  //               iProjectId: 1,
+  //               nMinutes: { $ifNull: ['$nMinutes', '0'] },
+  //               nCost: { $ifNull: ['$nCost', '0'] },
+  //               nRemainingMinute: { $ifNull: ['$nRemainingMinute', '0'] },
+  //               nRemainingCost: { $ifNull: ['$nRemainingCost', '0'] },
+  //               nNonBillableMinute: { $ifNull: ['$nNonBillableMinute', '0'] },
+  //               nNonBillableCost: { $ifNull: ['$nNonBillableCost', '0'] }
+  //             }
+  //           },
+  //           {
+  //             $group: {
+  //               _id: {
+  //                 _id: '$_id'
+  //               },
+  //               sName: { $first: '$sName' },
+  //               sBackGroundColor: { $first: '$sBackGroundColor' },
+  //               sTextColor: { $first: '$sTextColor' },
+  //               iProjectId: { $first: '$iProjectId' },
+  //               nMinutes: { $sum: '$nMinutes' },
+  //               nCost: { $sum: '$nCost' },
+  //               nRemainingMinute: { $sum: '$nRemainingMinute' },
+  //               nRemainingCost: { $sum: '$nRemainingCost' },
+  //               nNonBillableMinute: { $sum: '$nNonBillableMinute' },
+  //               nNonBillableCost: { $sum: '$nNonBillableCost' }
+  //             }
+  //           },
+  //           {
+  //             $project: {
+  //               _id: '$_id._id',
+  //               sName: 1,
+  //               sBackGroundColor: 1,
+  //               sTextColor: 1,
+  //               iProjectId: 1,
+  //               nMinutes: 1,
+  //               nCost: {
+  //                 $cond: {
+  //                   if: { $eq: [req.employee.bViewCost, true] },
+  //                   then: { $ifNull: ['$nCost', 0] },
+  //                   else: '$$REMOVE'
+  //                 }
+  //               },
+  //               nRemainingMinute: 1,
+  //               nRemainingCost: {
+  //                 $cond: {
+  //                   if: { $eq: [req.employee.bViewCost, true] },
+  //                   then: { $ifNull: ['$nRemainingCost', 0] },
+  //                   else: '$$REMOVE'
+  //                 }
+  //               },
+  //               nNonBillableMinute: 1,
+  //               nNonBillableCost: {
+  //                 $cond: {
+  //                   if: { $eq: [req.employee.bViewCost, true] },
+  //                   then: { $ifNull: ['$nNonBillableCost', 0] },
+  //                   else: '$$REMOVE'
+  //                 }
+  //               }
+  //             }
+  //           }
+  //         ]
+  //         const data = await ProjectwiseemployeeModel.aggregate(q)
+  //         i.projectDepartment = (data.length > 0) ? data : []
+  //       }
+
+  //       all.push(i)
+
+  //       // const cr = await ChangeRequestModel.find({ iProjectId: i._id, eStatus: 'Y' })
+  //       // if (cr.length > 0) {
+  //       //   i.changeRequest = cr.length
+  //       // } else {
+  //       //   i.changeRequest = 0
+  //       // }
+  //     }
+
+  //     if (req.path === '/DownloadExcel') {
+  //       return projects
+  //     } else {
+  //       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { all, count: count[0]?.count || 0 })
+  //     }
+  //   } catch (error) {
+  //     return catchError('DashBoard.indicator', error, req, res)
+  //   }
+  // }
+
   async projectIndicator(req, res) {
     try {
-      let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', eProjectType = '', iBDId = '', iProjectManagerId = '', eProjectStatus = '' } = req.query
+      let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', eProjectType = '', iBDId = '', iProjectManagerId = '', eProjectStatus = '', eShow = 'OWN' } = req.query
 
       // console.log(req.employee._id)
 
@@ -1620,8 +2573,20 @@ class DashBoard {
               }
             },
             nTimeLineDays: { $ifNull: ['$nTimeLineDays', 0] },
-            dStartDate: { $ifNull: ['$dStartDate', null] },
-            dEndDate: { $ifNull: ['$dEndDate', null] },
+            dStartDate: {
+              $cond: {
+                if: { $eq: ['$eProjectType', 'Fixed'] },
+                then: { $ifNull: ['$dStartDate', null] },
+                else: { $ifNull: ['$dContractStartDate', null] }
+              }
+            },
+            dEndDate: {
+              $cond: {
+                if: { $eq: ['$eProjectType', 'Fixed'] },
+                then: { $ifNull: ['$dEndDate', null] },
+                else: { $ifNull: ['$dContractEndDate', null] }
+              }
+            },
             sSymbol: { $ifNull: ['$currency.sSymbol', 'USD'] },
             sCurrencyName: { $ifNull: ['$currency.sName', 'Us Dollar'] },
             projectTechnologies: { $ifNull: ['$projectTechnologies', []] },
@@ -1645,34 +2610,110 @@ class DashBoard {
       //   ]
       // }
 
-      if (jobProfileData.eShowAllProjects === 'OWN') {
-        const query = [
-          {
-            $match: {
-              eStatus: 'Y',
-              'flag.2': 'Y'
-            }
+      if (req.employee.bAllProjectsOverView) {
+        if (eShow === 'OWN') {
+          const employeeProjects = await ProjectwiseemployeeModel.find({ iEmployeeId: req.employee._id, eStatus: 'Y' }).lean()
+
+          // console.log('employeeProjects', employeeProjects)
+
+          const otherProjectsEmployee = await Projects.find({
+            $or: [
+              {
+                iBAId: req.employee._id
+              },
+              {
+                iBDId: req.employee._id
+              },
+              {
+                iProjectManagerId: req.employee._id
+              }
+            ],
+            eStatus: 'Y'
+          })
+
+          const totalProjects = new Set()
+
+          for (const project of otherProjectsEmployee) {
+            totalProjects.add(project._id)
           }
-        ]
 
-        // console.log('projectEmployee', projectEmployee)
+          for (const project of employeeProjects) {
+            totalProjects.add(project.iProjectId)
+          }
 
-        // if (!['OPERATION', 'ADMIN', 'HR', 'MANAGEMENT'].includes(department.sKey)) {
-        query[0].$match.$or = [
-          { iBDId: ObjectId(req.employee._id) },
-          { iProjectManagerId: ObjectId(req.employee._id) },
-          { iBAId: ObjectId(req.employee._id) },
-          { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
-        ]
-        // }
+          const totalProjectArray = [...totalProjects]
 
-        const projects = await Projects.aggregate(query)
-        q[0].$match._id = {
-          $in: [
-            ...projects.map((project) => ObjectId(project._id))
-          ]
+          q[0].$match._id = { $in: [...totalProjectArray].map(a => ObjectId(a)) }
+
+          q[0].$match.eStatus = 'Y'
+          q[0].$match['flag.2'] = 'Y'
         }
+      } else {
+        const employeeProjects = await ProjectwiseemployeeModel.find({ iEmployeeId: req.employee._id, eStatus: 'Y' }).lean()
+
+        // console.log('employeeProjects', employeeProjects)
+
+        const otherProjectsEmployee = await Projects.find({
+          $or: [
+            {
+              iBAId: req.employee._id
+            },
+            {
+              iBDId: req.employee._id
+            },
+            {
+              iProjectManagerId: req.employee._id
+            }
+          ],
+          eStatus: 'Y'
+        })
+
+        const totalProjects = new Set()
+
+        for (const project of otherProjectsEmployee) {
+          totalProjects.add(project._id)
+        }
+
+        for (const project of employeeProjects) {
+          totalProjects.add(project.iProjectId)
+        }
+
+        const totalProjectArray = [...totalProjects]
+
+        q[0].$match._id = { $in: [...totalProjectArray].map(a => ObjectId(a)) }
+
+        q[0].$match.eStatus = 'Y'
+        q[0].$match['flag.2'] = 'Y'
       }
+
+      // if (jobProfileData.eShowAllProjects === 'OWN') {
+      //   const query = [
+      //     {
+      //       $match: {
+      //         eStatus: 'Y',
+      //         'flag.2': 'Y'
+      //       }
+      //     }
+      //   ]
+
+      //   // console.log('projectEmployee', projectEmployee)
+
+      //   // if (!['OPERATION', 'ADMIN', 'HR', 'MANAGEMENT'].includes(department.sKey)) {
+      //   query[0].$match.$or = [
+      //     { iBDId: ObjectId(req.employee._id) },
+      //     { iProjectManagerId: ObjectId(req.employee._id) },
+      //     { iBAId: ObjectId(req.employee._id) },
+      //     { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
+      //   ]
+      //   // }
+
+      //   const projects = await Projects.aggregate(query)
+      //   q[0].$match._id = {
+      //     $in: [
+      //       ...projects.map((project) => ObjectId(project._id))
+      //     ]
+      //   }
+      // }
 
       if (sort && sort === 'dCreatedAt') {
         q.push({
@@ -2238,7 +3279,34 @@ class DashBoard {
 
       const { eProjectStatus } = req.body
       if (!['In Progress', 'Completed', 'On Hold', 'Cancelled', 'Pending', 'Closed'].includes(eProjectStatus)) return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].invalid.replace('##', messages[req.userLanguage].status))
-      const update = await Projects.findOneAndUpdate({ _id: id, eStatus: 'Y' }, { eProjectStatus }, { new: true }).lean()
+
+      const obj = {
+        eProjectStatus
+      }
+
+      // if (ProjectExist.dCreatedAt === null && ProjectExist.eProjectType === 'Fixed' && ['On Hold', 'In Progress', 'Completed', 'Closed'].includes(ProjectExist.eProjectType)) {
+      //   obj.dStartDate = new Date()
+      // }
+
+      // if (ProjectExist.dContractStartDate === null && ProjectExist.eProjectType === 'Dedicated' && ['On Hold', 'In Progress', 'Completed', 'Closed'].includes(ProjectExist.eProjectType)) {
+      //   obj.dContractStartDate = new Date()
+      // }
+
+      if (ProjectExist.eProjectType === 'Fixed') {
+        obj.dStartDate = ProjectExist.dStartDate
+        obj.eProjectType = ProjectExist.eProjectType
+      } else {
+        // console.log('ProjectExist.dContractStartDate', ProjectExist.dContractStartDate)
+
+        obj.eProjectType = ProjectExist.eProjectType
+        obj.dContractStartDate = ProjectExist.dContractStartDate
+      }
+
+      const update = await Projects.findOneAndUpdate({ _id: id, eStatus: 'Y' }, obj, { new: true }).lean()
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: ProjectExist._id, eModule: 'DashBoard', sService: 'updateProjectStatus', eAction: 'Update', oOldFields: ProjectExist, oNewFields: update, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('logs', logs)
+
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), update)
     } catch (error) {
       return catchError('DashBoard.updateProjectStatus', error, req, res)
@@ -2247,13 +3315,15 @@ class DashBoard {
 
   async projectsNearToEnd(req, res) {
     try {
-      const { eShow = 'ALL', page = 0, limit = 5 } = req.query
+      const { eShow = 'OWN', page = 0, limit = 5 } = req.query
 
       const employee = await EmployeeModel.findOne({ _id: req.employee._id }, { eShowAllProjects: 1 }).lean()
 
       if (!employee) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].notFound.replace('##', 'Employee'))
 
-      if (employee.eShowAllProjects === 'ALL' && eShow === 'ALL') {
+      // console.log('req.employee.bDashboardProjectLine', req.employee.bDashboardProjectLine)
+
+      if (req.employee.bDashboardProjectLine && eShow === 'ALL') {
         const latestFixedProjects = await Projects.aggregate([
           {
             $match: {
@@ -2614,6 +3684,171 @@ class DashBoard {
 
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { data, eShowAllProjects: employee.eShowAllProjects })
       }
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  async projectsNearToEndV1(req, res) {
+    try {
+      const { eShow = 'OWN', page = 0, limit = 5 } = req.query
+
+      const employee = await EmployeeModel.findOne({ _id: req.employee._id }, { eShowAllProjects: 1 }).lean()
+
+      if (!employee) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].notFound.replace('##', 'Employee'))
+
+      // console.log('req.employee.bDashboardProjectLine', req.employee.bDashboardProjectLine)
+
+      const q = [
+        {
+          $match: {
+            eStatus: 'Y',
+            eProjectStatus: { $in: ['In Progress'] }
+          }
+        },
+        {
+          $project: {
+            _id: 1,
+            sName: 1,
+            sLogo: 1,
+            eProjectStatus: 1,
+            eProjectType: 1,
+            dStartDate: new Date(),
+            dEndDate: {
+              $cond: {
+                if: { $eq: ['$eProjectType', 'Fixed'] },
+                then: { $ifNull: ['$dStartDate', new Date()] },
+                else: { $ifNull: ['$dContractStartDate', new Date()] }
+              }
+            }
+          }
+        },
+        {
+          $project: {
+            _id: 1,
+            sName: 1,
+            sLogo: 1,
+            eProjectStatus: 1,
+            eProjectType: 1,
+            dStartDate: 1,
+            dEndDate: 1,
+            years: {
+              $dateDiff:
+              {
+                startDate: '$dStartDate',
+                endDate: '$dEndDate',
+                unit: 'year'
+              }
+            },
+            months: {
+              $dateDiff: {
+                startDate: '$dStartDate',
+                endDate: '$dEndDate',
+                unit: 'month'
+              }
+            },
+            days: {
+              $dateDiff: {
+                startDate: '$dStartDate',
+                endDate: '$dEndDate',
+                unit: 'day'
+              }
+            },
+            hours: {
+              $dateDiff: {
+                startDate: '$dStartDate',
+                endDate: '$dEndDate',
+                unit: 'hour'
+              }
+            },
+            weeks: {
+              $dateDiff: {
+                startDate: '$dStartDate',
+                endDate: '$dEndDate',
+                unit: 'week'
+              }
+            },
+            milliseconds: {
+              $dateDiff: {
+                startDate: '$dStartDate',
+                endDate: '$dEndDate',
+                unit: 'millisecond'
+              }
+            }
+          }
+        }
+      ]
+
+      if (req.employee.bDashboardProjectLine) {
+        if (eShow === 'OWN') {
+          const employeeProjects = await ProjectwiseemployeeModel.find({ iEmployeeId: req.employee._id, eStatus: 'Y' }).lean()
+
+          // console.log('employeeProjects', employeeProjects)
+
+          const otherProjectsEmployee = await Projects.find({
+            $or: [
+              {
+                iBAId: req.employee._id
+              },
+              {
+                iBDId: req.employee._id
+              },
+              {
+                iProjectManagerId: req.employee._id
+              }
+            ],
+            eStatus: 'Y'
+          })
+
+          const totalProjects = new Set()
+
+          for (const project of otherProjectsEmployee) {
+            totalProjects.add(project._id)
+          }
+
+          for (const project of employeeProjects) {
+            totalProjects.add(project.iProjectId)
+          }
+
+          q[0].$match._id = { $in: [...totalProjects].map((id) => mongoose.Types.ObjectId(id)) }
+        }
+      } else {
+        const employeeProjects = await ProjectwiseemployeeModel.find({ iEmployeeId: req.employee._id, eStatus: 'Y' }).lean()
+
+        // console.log('employeeProjects', employeeProjects)
+
+        const otherProjectsEmployee = await Projects.find({
+          $or: [
+            {
+              iBAId: req.employee._id
+            },
+            {
+              iBDId: req.employee._id
+            },
+            {
+              iProjectManagerId: req.employee._id
+            }
+          ],
+          eStatus: 'Y'
+        })
+
+        const totalProjects = new Set()
+
+        for (const project of otherProjectsEmployee) {
+          totalProjects.add(project._id)
+        }
+
+        for (const project of employeeProjects) {
+          totalProjects.add(project.iProjectId)
+        }
+
+        q[0].$match._id = { $in: [...totalProjects].map((id) => mongoose.Types.ObjectId(id)) }
+      }
+      const totalProjects = await Projects.aggregate(q)
+
+      const data = [...totalProjects].sort((a, b) => new Date(a?.milliseconds) - new Date(b?.milliseconds)).slice(0, 5)
+
+      return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { data, eShowAllProjects: employee.eShowAllProjects })
     } catch (error) {
       console.log(error)
     }

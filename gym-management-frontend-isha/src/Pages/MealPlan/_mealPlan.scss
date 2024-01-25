@@ -1,0 +1,33 @@
+@import 'Assets/Style/variables';
+
+.content {
+    display: contents;
+    span {
+        font-size: 11px;
+        font-style: italic;
+        font-weight: 400;
+        color: $yellow-color;
+        letter-spacing: 0.3mm;
+    }
+}
+
+.column-design {
+    .display {
+        font-size: 11px;
+        color: $subtitle;
+    }
+}
+
+.start {
+    color: $green-color !important;
+    font-weight: 400 !important;
+}
+
+.end {
+    color: $red-color !important;
+    font-weight: 400 !important;
+}
+
+.text-truncate {
+    max-width: 150px;
+}

@@ -125,10 +125,32 @@ const Roles = [
       'VIEW_DASHBOARD_MONTHLY_CHART',
       'VIEW_DASHBOARD_WORKLOGS',
       'VIEW_DASHBOARD_LATEST_PROJECTS',
-      'VIEW_DASHBOARD_PROJECT_LINE'
+      'VIEW_DASHBOARD_PROJECT_LINE',
+
+      'VIEW_ALL_DASHBOARD_STATISTICS',
+
+      'VIEW_ALL_DASHBOARD_MONTHLY_CHART',
+
+      'VIEW_ALL_DASHBOARD_WORKLOGS',
+
+      'VIEW_ALL_DASHBOARD_LATEST_PROJECTS',
+
+      'VIEW_ALL_DASHBOARD_PROJECT_LINE',
+
+      'VIEW_ALL_PROJECT_OVERVIEW',
+
+      'VIEW_ALL_WORKLOGS',
+
+      'VIEW_ALL_PROJECT',
+
+      'VIEW_ALL_CLIENT',
+
+      'VIEW_ALL_CLOSED_PROJECT'
 
     ],
-    eStatus: 'Y'
+    eStatus: 'Y',
+    bIsDefault: false,
+    bIsSystem: true
   },
   {
     sBackGroundColor: 'hsl(50deg, 100%, 90%)',
@@ -252,6 +274,8 @@ const Roles = [
       'VIEW_COST'
 
     ],
+    bIsDefault: false,
+    bIsSystem: true,
     eStatus: 'Y'
   },
   {
@@ -319,6 +343,8 @@ const Roles = [
       'VIEW_COST'
 
     ],
+    bIsDefault: false,
+    bIsSystem: true,
     eStatus: 'Y'
   },
   {
@@ -386,6 +412,8 @@ const Roles = [
       'VIEW_COST'
 
     ],
+    bIsDefault: false,
+    bIsSystem: true,
     eStatus: 'Y'
   },
   {
@@ -453,6 +481,8 @@ const Roles = [
       'VIEW_COST'
 
     ],
+    bIsDefault: false,
+    bIsSystem: true,
     eStatus: 'Y'
   },
   {
@@ -461,6 +491,7 @@ const Roles = [
     sName: 'Employees',
     sKey: 'EMPLOYEES',
     bIsDefault: true,
+    bIsSystem: true,
     aPermissions: [
       'VIEW_DASHBOARD',
 

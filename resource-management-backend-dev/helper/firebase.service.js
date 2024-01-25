@@ -1,121 +1,7 @@
 /* eslint-disable camelcase */
-const admin = require('firebase-admin')
-const FIREBASE_PRIVATE_KEY = require('./resource-management-f8560-97a2b372eb19.json')
-// const config = require('../config/config')
-admin.initializeApp({
-  credential: admin.credential.cert(FIREBASE_PRIVATE_KEY)
-})
 
 const OneSignal = require('@onesignal/node-onesignal')
 const { handleCatchError } = require('./utilities.services')
-
-const messaging = admin.messaging()
-
-const subscribeUsers = async (sPushToken) => {
-  try {
-    const data = await messaging.subscribeToTopic(sPushToken, 'All')
-    return data
-  } catch (error) {
-    handleCatchError(error)
-  }
-}
-
-const unsubscribeUsers = async (sPushToken, topic = 'All') => {
-  let data
-  try {
-    if (!Array.isArray(sPushToken)) {
-      sPushToken = [sPushToken]
-    }
-    const ONESIGNAL_APP_ID = 'd231d9d1-8145-47d0-8694-333473c635d9'
-    const app_key_provider = {
-      getToken() {
-        return 'YWViZWRkY2EtYjA4Mi00YTc3LTljYzMtMWM1ZjZhZGRjNTZl'
-      }
-    }
-
-    const configuration = OneSignal.createConfiguration({
-      authMethods: {
-        app_key: {
-          tokenProvider: app_key_provider
-        }
-      }
-    })
-
-    const client = new OneSignal.DefaultApi(configuration)
-    if (sPushToken.length > 0) {
-      // const players = await client.deletePlayer(ONESIGNAL_APP_ID, sPushToken[0])
-      // console.log('players', players)
-
-      for (let i = 0; i < sPushToken.length; i++) {
-        console.log('sPushToken', sPushToken[i])
-        try {
-          const playerExists = await client.getPlayer(ONESIGNAL_APP_ID, sPushToken[i])
-          if (playerExists) {
-            await client.deletePlayer(ONESIGNAL_APP_ID, sPushToken[i])
-          }
-        } catch (error) {
-          console.log(error)
-        }
-      }
-
-      console.log('sPushToken', 'sPushToken -=================================================================== ')
-    }
-    return data
-  } catch (error) {
-    handleCatchError(error)
-  }
-}
-
-const pushNotification = async (sPushToken, sTitle, sBody) => {
-  try {
-    const chunkSize = 1000
-    const chunks = Math.ceil(sPushToken.length / chunkSize)
-
-    let data
-
-    for (let i = 0; i < chunks; i++) {
-      const start = i * chunkSize
-      const end = (i + 1) * chunkSize
-      const chunk = sPushToken.slice(start, end)
-
-      const message = {
-        notification: {
-          title: sTitle,
-          body: sBody,
-          image: 'https://jr-web-developer.s3.ap-south-1.amazonaws.com/Default/90px-CC_some_rights_reserved.jpg'
-        },
-        token: chunk
-      }
-      data = await messaging.send(message)
-    }
-
-    return data
-  } catch (error) {
-    handleCatchError(error)
-  }
-}
-
-const pushTopicNotification1 = async (sTopic, sTitle, sBody) => {
-  try {
-    const message = {
-      notification: {
-        title: sTitle,
-        body: sBody,
-        image: 'https://jr-web-developer.s3.ap-south-1.amazonaws.com/Default/90px-CC_some_rights_reserved.jpg'
-      },
-      topic: sTopic
-    }
-    let data
-    try {
-      data = await messaging.send(message)
-    } catch (error) {
-      console.log(error)
-    }
-    return data
-  } catch (error) {
-    handleCatchError(error)
-  }
-}
 
 const pushTopicNotification = async (sTopic, sTitle, sBody) => {
   try {
@@ -323,9 +209,6 @@ const pushNotificationUsingTokens = async (data) => {
 }
 
 module.exports = {
-  subscribeUsers,
-  unsubscribeUsers,
-  pushNotification,
   pushTopicNotification,
   pushNotificationUsingTokens
 }

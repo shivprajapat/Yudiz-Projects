@@ -1,0 +1,399 @@
+// for hide button box 
+.hide-button-box{
+  .title-header {
+    .button-box {
+      display: none;
+    }
+  }
+}
+.add-new-form {
+  .main-layout {
+    padding: 32px;
+    background: $white;
+    box-shadow: 0px 4px 16px rgba(33, 112, 172, 0.05);
+    border-radius: 16px;
+  }
+
+  .heading-box {
+    margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .btn-box {
+    display: flex;
+    button {
+      margin-right: 20px;
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+}
+.optionaddbox {
+  padding-left: 30px;
+  display: flex;
+  align-items: flex-start;
+}
+.optionaddbox,
+.quesbox {
+  .form-group.checkbox-box {
+    margin-top: 14px;
+    margin-left: 8px;
+    .form-check-input {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+    .form-check {
+      margin-right: 24px;
+    }
+  }
+}
+.quesbox .form-group.checkbox-box {
+  .form-check {
+    margin-right: 24px;
+  }
+}
+.quesbox,
+.optionitembox {
+  .text-input {
+    .form-control {
+      display: block;
+    }
+  }
+  &.has-image {
+    .document-file-input {
+      display: block;
+    }
+  }
+}
+.option-item {
+  width: 50%;
+}
+.add-remove-btn {
+  margin-top: 15px;
+  display: inline-block;
+  margin-left: 20px;
+  button {
+    margin-bottom: 8px;
+    padding: 0;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 32px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  & > div {
+    &:last-child {
+      button {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+/* checkbox */
+.checkbox-packagetype {
+  display: none;
+}
+.selected-type .checkbox-packagetype {
+  display: block;
+}
+.package-type-checkbox {
+  padding: 20px 33px;
+  background-color: $light-blue;
+  border-radius: 16px;
+  .form-check {
+    padding-right: 5px;
+    width: calc(100% / 4);
+  }
+}
+//responsive css
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .add-new-form {
+    .main-layout {
+      padding: 26px;
+      border-radius: 14px;
+    }
+    .heading-box {
+      margin-bottom: 20px;
+    }
+    .btn-box {
+      button {
+        margin-right: 18px;
+      }
+    }
+  }
+  .optionaddbox {
+    padding-left: 20px;
+  }
+  .optionaddbox,
+  .quesbox {
+    .form-group.checkbox-box {
+      margin-top: 12px;
+      margin-left: 6px;
+      .form-check {
+        margin-right: 20px;
+      }
+    }
+  }
+  .quesbox .form-group.checkbox-box {
+    .form-check {
+      margin-right: 20px;
+    }
+  }
+  .option-item {
+    width: 60%;
+  }
+  .add-remove-btn {
+    margin-top: 15px;
+    margin-left: 20px;
+    button {
+      margin-bottom: 8px;
+      width: 40px;
+      height: 40px;
+      font-size: 28px;
+    }
+  }
+  .package-type-checkbox {
+    padding: 16px 20px;
+    border-radius: 12px;
+    .form-check {
+      width: calc(100% / 4);
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .add-new-form {
+    .main-layout {
+      padding: 22px;
+      border-radius: 14px;
+    }
+    .heading-box {
+      margin-bottom: 20px;
+    }
+    .btn-box {
+      button {
+        margin-right: 15px;
+      }
+    }
+  }
+  .optionaddbox {
+    padding-left: 20px;
+  }
+  .optionaddbox,
+  .quesbox {
+    .form-group.checkbox-box {
+      margin-top: 12px;
+      margin-left: 6px;
+      .form-check {
+        margin-right: 20px;
+      }
+    }
+  }
+  .quesbox .form-group.checkbox-box {
+    .form-check {
+      margin-right: 20px;
+    }
+  }
+  .option-item {
+    width: 60%;
+  }
+  .add-remove-btn {
+    margin-top: 15px;
+    margin-left: 20px;
+    button {
+      margin-bottom: 8px;
+      width: 40px;
+      height: 40px;
+      font-size: 28px;
+    }
+  }
+  .package-type-checkbox {
+    padding: 14px 18px;
+    border-radius: 12px;
+    .form-check {
+      width: calc(100% / 4);
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .add-new-form {
+    .main-layout {
+      padding: 20px;
+      border-radius: 14px;
+    }
+    .heading-box {
+      margin-bottom: 20px;
+    }
+    .btn-box {
+      button {
+        margin-right: 12px;
+      }
+    }
+  }
+  .optionaddbox {
+    padding-left: 20px;
+  }
+  .optionaddbox,
+  .quesbox {
+    .form-group.checkbox-box {
+      margin-top: 12px;
+      margin-left: 6px;
+      .form-check {
+        margin-right: 20px;
+      }
+    }
+  }
+  .quesbox .form-group.checkbox-box {
+    .form-check {
+      margin-right: 20px;
+    }
+  }
+  .option-item {
+    width: 80%;
+  }
+  .add-remove-btn {
+    margin-top: 15px;
+    margin-left: 20px;
+    button {
+      margin-bottom: 8px;
+      width: 40px;
+      height: 40px;
+      font-size: 28px;
+    }
+  }
+  .package-type-checkbox {
+    padding: 8px 10px;
+    border-radius: 8px;
+    flex-wrap: wrap;
+    .form-check {
+      margin-bottom: 5px;
+      width: calc(100% / 2);
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .add-new-form {
+    .main-layout {
+      padding: 20px;
+      border-radius: 14px;
+    }
+    .heading-box {
+      margin-bottom: 16px;
+    }
+    .btn-box {
+      button {
+        margin-right: 12px;
+      }
+    }
+  }
+  .optionaddbox {
+    padding-left: 16px;
+  }
+  .optionaddbox,
+  .quesbox {
+    .form-group.checkbox-box {
+      margin-top: 8px;
+      margin-left: 5px;
+      .form-check {
+        margin-right: 14px;
+      }
+    }
+  }
+  .quesbox .form-group.checkbox-box {
+    .form-check {
+      margin-right: 14px;
+    }
+  }
+  .option-item {
+    width: 90%;
+  }
+  .add-remove-btn {
+    margin-top: 10px;
+    margin-left: 12px;
+    button {
+      margin-bottom: 8px;
+      width: 30px;
+      height: 30px;
+      font-size: 22px;
+    }
+  }
+  .package-type-checkbox {
+    padding: 8px 10px;
+    border-radius: 8px;
+    flex-wrap: wrap;
+    .form-check {
+      margin-bottom: 5px;
+      width: calc(100% / 2);
+      label {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .add-new-form {
+    .main-layout {
+      padding: 15px;
+      border-radius: 12px;
+    }
+    .heading-box {
+      margin-bottom: 16px;
+    }
+    .btn-box {
+      button {
+        margin-right: 8px;
+      }
+    }
+  }
+  .optionaddbox {
+    padding-left: 16px;
+  }
+  .optionaddbox,
+  .quesbox {
+    .form-group.checkbox-box {
+      display: block !important;
+      margin-top: 8px;
+      margin-left: 5px;
+      .form-check {
+        margin-right: 14px;
+        display: inline-block !important;
+      }
+    }
+  }
+  .quesbox .form-group.checkbox-box {
+    .form-check {
+      margin-right: 14px;
+    }
+  }
+  .option-item {
+    width: 80%;
+  }
+  .add-remove-btn {
+    margin-top: 30px;
+    margin-left: 12px;
+    button {
+      margin-bottom: 8px;
+      width: 30px;
+      height: 30px;
+      font-size: 22px;
+    }
+  }
+  .package-type-checkbox {
+    padding: 5px 8px;
+    border-radius: 8px;
+    flex-wrap: wrap;
+    .form-check {
+      margin-bottom: 3px;
+      width: calc(100%);
+      label {
+        font-size: 14px;
+        line-height: 18px;
+      }
+    }
+  }
+}

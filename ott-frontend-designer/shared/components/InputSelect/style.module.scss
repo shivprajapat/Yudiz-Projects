@@ -1,0 +1,11 @@
+@import "@/assets/scss/helper/mixin";
+
+.input_select {
+  width: 160px;position: relative;cursor: pointer;
+  &_container {border: 1px solid;border-image-source: linear-gradient(360deg, var(--neutrals-60-color) 0%, var(--white-0-color) 100%);
+  &_items {background: var(--neutrals-20-color);background: linear-gradient(0deg, var(--neutrals-20-color), var(--neutrals-20-color)), linear-gradient(360deg, var(--neutrals-60-color) 0%, var(--white-0-color) 100%);cursor: pointer;padding-block: 8px;
+  span {display: block;border-bottom-left-radius: 5px;border-bottom-right-radius: 5px;padding: 8px 12px;}}
+  &_item {@include flex(center, space-between, null);height: 100%;width: 100%;padding: 12px;vertical-align: middle;position: relative;background: var(--neutrals-white-color);border-bottom: 1px solid var(--primary-color);border-top-left-radius: 5px;border-top-right-radius: 5px;}
+  &_arrow {img {transition: transform 0.3s}
+  &_active img {transform: rotate(180deg);}}}
+}

@@ -1,0 +1,15 @@
+.text-box{padding-top: 20px; margin-bottom: 20px; border: 1px solid black; color: black;}
+.ullist{margin: 0px 0px 20px; list-style: none;}
+.ullist li{position: relative; font-size: 16px; line-height: 26px;}
+.ullist li::before{margin-right: 20px; font-weight: 600; content: attr(data-title); position: relative;}
+.insrt-section{max-width: 860px; margin: 0 auto; border: 2px solid;}
+.page-title h1{text-transform: uppercase; color: white; line-height: 36px; font-size: 26px; margin: 0px;}
+.page-title{  text-align: center; margin: 0 auto;}
+.page-header{padding: 14px 20px; background-color: black; display: inline-block; border-radius: 0px 0px 10px 10px;}
+.page-content{width: 95%; margin: 0 auto;}
+.page-content h2{text-align: center; margin: 20px 0px; text-transform: uppercase;}
+.page-content p{padding: 0px 20px 20px; font-size: 16px; line-height: 26px; margin: 0px;}
+.math-text{display: inline-flex; flex-direction: column; text-align: center;} 
+.math-text span{display: inline-block;}
+.divider{border-bottom: 1px solid;}
+.insrt-section img{max-width: 80%; margin-bottom: 20px}

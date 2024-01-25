@@ -1,14 +1,15 @@
-const { queuePop, queuePush, getDataUsingScore, deleteByScore } = require('./helper/redis')
+const { queuePop, queuePush, getDataUsingScore, deleteByScore, queueLength } = require('./helper/redis')
 const { pushTopicNotification, pushNotificationUsingTokens } = require('./helper/firebase.service')
 const { handleCatchError } = require('./helper/utilities.services')
 const NotificationModel = require('./models_routes_service/Notification/model')
 const s3 = require('./helper/s3')
-const { sendEmail } = require('./helper/email.service')
+
 const CurrencyService = require('./models_routes_service/Currency/services')
 const { excelProcess } = require('./models_routes_service/Logs/services')
 // const path = require('path')
 const config = require('./config/config')
-
+const LogsModel = require('./models_routes_service/Logs/model')
+const { ResourceManagementDB } = require('./database/mongoose')
 // const { ifExists } = require('./helper/s3')
 
 // const { uploadStream } = require('./helper/s3')
@@ -526,6 +527,32 @@ async function excelSenderProcess() {
   }
 }
 
+async function logCreation() {
+  let data
+  try {
+    data = await queuePop('logs', 20)
+    if (!data || data.length === 0) {
+      setTimeout(() => { logCreation() }, 10000)
+      return
+    }
+
+    data = data.map((item) => JSON.parse(item))
+
+    console.log(data)
+
+    for (let i = 0; i < data.length; i++) {
+      const take = ResourceManagementDB.model(data[i].sDbName, LogsModel)
+      await take.create(data[i])
+    }
+
+    logCreation()
+  } catch (error) {
+    console.log(error.message)
+    await queuePush('dead:logs', { data, error: error.message })
+    handleCatchError(error)
+  }
+}
+
 class InitQueue {
   constructor() {
     this.initqueue()
@@ -541,6 +568,7 @@ class InitQueue {
       await addCurrencyToEmployee()
       await excelSenderProcess()
       await sendEmployeeNotifications()
+      await logCreation()
     } catch (error) {
       handleCatchError(error)
     }

@@ -22,7 +22,7 @@ const enums = {
   depStatus: ['Yes', 'No', 'Delete'],
   skillStatus: ['Yes', 'No'],
   action: ['Create', 'Update', 'Delete'],
-  path: ['WorkLogs', 'Employee', 'Client', 'Department', 'Interview', 'JobProfile', 'Project', 'Notification', 'ProjectTag', 'Skill', 'Technology', 'User', 'ProjectWiseEmployee', 'OrganizationDetails', 'Currency', 'Role', 'Permission', 'WorkLogs Tags', 'Cr', 'Log'],
+  path: ['WorkLogs', 'Employee', 'Client', 'Department', 'Interview', 'JobProfile', 'Project', 'Notification', 'ProjectTag', 'Skill', 'Technology', 'User', 'ProjectWiseEmployee', 'OrganizationDetails', 'Currency', 'Role', 'Permission', 'WorkLogs Tags', 'Cr', 'Log', 'DashBoard', 'ORGBranches', 'ProjectWiseDepartment'],
   score: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
   empType: ['E', 'U', 'A', 'SA'],
   projectStatus: ['Pending', 'On Hold', 'In Progress', 'Completed', 'Closed'],

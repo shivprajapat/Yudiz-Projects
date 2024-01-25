@@ -25,8 +25,8 @@ router.post('/employee/signup/v1', setLanguage, validators.registerUserV1, valid
   .get('/employee/all/v1', setLanguage, isAuthenticated, isAuthorized('VIEW_EMPLOYEE'), employeeService.getAllEmployee)
 // .get('/employees/v1', setLanguage, isAuthenticated, validate, employeeService.EmployeeDetails)
 
-router.get('/user/profile/v1', setLanguage, isAuthenticated, isAuthorized('VIEW_USERPROFILE'), employeeService.getUser)
-router.get('/user/profile/getUserProjects/v1', setLanguage, isAuthenticated, isAuthorized('VIEW_USERPROFILE'), employeeService.getUserProjects)
+router.get('/user/profile/v1', setLanguage, isAuthenticated, employeeService.getUser)
+router.get('/user/profile/getUserProjects/v1', setLanguage, isAuthenticated, employeeService.getUserProjects)
 router.put('/user/profile/update/v1', setLanguage, isAuthenticated, isAuthorized('UPDATE_USERPROFILE'), employeeService.updateUserProfile)
 router.put('/user/profile/update/skills/v1', setLanguage, isAuthenticated, isAuthorized('UPDATE_USERPROFILE'), employeeService.updateUserSkills)
 

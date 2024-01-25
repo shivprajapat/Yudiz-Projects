@@ -140,12 +140,13 @@ class Department {
 
       const data = await DepartmentModel.create({ ...req.body, sKey: keygen(sName), sBackGroundColor: s.sBackGroundColor, sTextColor: s.sTextColor, iLastUpdateBy: req.employee._id, iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f'), ...ParentDepratmentData, aHeadId, sDescription })
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
+      // take = ResourceManagementDB.model(take, Logs)
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Department', sService: 'addDepartment', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Department', sService: 'addDepartment', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await take.create(logs)
+      await queuePush('logs', logs)
 
       // update all child department set i parent id to data._id
 
@@ -184,12 +185,14 @@ class Department {
         }
         const data = await DepartmentModel.findByIdAndUpdate({ _id: req.params.id }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].department))
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
+        // take = ResourceManagementDB.model(take, Logs)
 
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.id, eModule: 'Department', sService: 'deleteDepartments', eAction: 'Delete', oNewFields: data, oOldFields: department }
-        await take.create(logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Department', sService: 'deleteDepartments', eAction: 'Delete', oNewFields: data, oOldFields: department, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+
+        await queuePush('logs', logs)
 
         // await notificationsender(req, req.params.id, ' department is delete ', true, true, req.employee._id, `${config.urlPrefix}/dashboard`)
 
@@ -216,11 +219,13 @@ class Department {
         const data = await DepartmentModel.findByIdAndUpdate({ _id: req.params.id, eStatus: 'Y' }, { sName, sKey: keygen(sName), iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].department))
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.id, eModule: 'Department', sService: 'updateDepartments', eAction: 'Update', oNewFields: data, oOldFields: department }
-        await take.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.id, eModule: 'Department', sService: 'updateDepartments', eAction: 'Update', oNewFields: data, oOldFields: department, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+        // await take.create(logs)
 
         // await DepartmentModel.updateMany({ iParentId: req.params.id }, {
         //   iParentId: null
@@ -294,11 +299,13 @@ class Department {
         const data = await DepartmentModel.findByIdAndUpdate({ _id: req.params.id, eStatus: 'Y' }, { iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].department))
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.id, eModule: 'Department', sService: 'updateDepartments', eAction: 'Update', oNewFields: data, oOldFields: department }
-        await take.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Department', sService: 'updateDepartments', eAction: 'Update', oNewFields: data, oOldFields: department, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+        // await take.create(logs)
 
         // await DepartmentModel.updateMany({ iParentId: req.params.id }, {
         //   iParentId: null
@@ -376,8 +383,9 @@ class Department {
   async getDepartments(req, res) {
     try {
       let { page = 0, limit = 5, sorting = 'dCreatedAt', search = '' } = paginationValue(req.query)
+
       search = searchValidate(search)
-      console.log(search)
+      // console.log(search)
       const query = search && search.length
         ? {
           $or: [{ sKey: { $regex: new RegExp(search, 'i') } },
@@ -483,6 +491,10 @@ class Department {
       }
 
       const data = await DepartmentModel.findByIdAndUpdate({ _id: iDepartmentId }, { iParentId: null }, { runValidators: true, new: true })
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.id, eModule: 'Department', sService: 'deleteSubDepartment', eAction: 'Update', oNewFields: data, oOldFields: departmentExists, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
 
       await DepartmentModel.findByIdAndUpdate({ _id: iParentId }, { $inc: { nTotal: -data.nTotal, nMoved: -data.nMoved } }, { runValidators: true, new: true })
 

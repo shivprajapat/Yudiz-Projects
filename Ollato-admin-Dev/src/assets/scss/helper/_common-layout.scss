@@ -1,0 +1,666 @@
+.mr-0 {
+  margin-right: 0 !important;
+}
+//buttons
+.theme-btn {display: inline-block; white-space: nowrap; padding:14px 32px; border:2px solid $text_blue; text-transform: uppercase; background-color: $text_blue; color:$white; font-weight: $fw-600; font-size: 15px; line-height: 20px; border-radius: 16px; text-align: center; @include transition_05;
+  &.large-btn { padding:24px 32px; width: 100%; font-weight: $fw-700; font-size: 18px; line-height: 28px; border-radius: 24px;  }
+  &:hover { background-color: transparent; color:$text_blue; }
+&.red-btn { background-color: $red; border-color: $red;
+  &:hover { background-color: transparent; color:$red; }
+}
+.theme-btn{display: inline-block; white-space: nowrap;}
+&.gray-btn { background-color: $text-dark-3; border-color: $text-dark-3;
+  &:hover { background-color: transparent; color:$text-dark-3; }
+}
+&.dark-btn { background-color: $black; border-color: $black;
+  &:hover { background-color: transparent; color:$black; }
+}
+ &.lightgray-btn { background-color: $light-black; border-color: $light-black;
+  &:hover { background-color: transparent; color:$light-black; }
+}
+}
+.text-none { text-transform: none !important; }
+.action-btns { padding: 3px 16px 3px 8px; display: flex; align-items: center; font-size: 12px; line-height: 20px; letter-spacing: 0.4px; font-weight: $fw-500; border:1px solid transparent; border-radius: 4px;
+  img { margin-right: 7px; width: 16px; @include transition_03; }
+  &.img-btn { padding-right: 8px; }
+  &:hover { color:$white !important; img { @include hoverimgwhite; } }
+&.green-bg { border-color: $light-green-2; color:$green; background-color: $light-green-1; &:hover {  background: $green; } }
+&.light-blue-bg { border-color: $light-blue-4; color:$text_blue; background-color: $light-blue-3; &:hover {  background: $text_blue; } }
+&.light-red-bg { border-color: $light-red-2; color:$red; background-color: $light-red-1; &:hover {  background: $red; } }
+}
+.title-box { margin-bottom: 35px; &.has-subtitle { h2 { margin-bottom: 16px; } h4 { a { font-size: 22px; line-height: 34px; } }} }
+.middle-form { text-align: left; width: 79%; margin:12px auto; }
+.black-font { color:$black; }
+.theme-btn {
+  display: inline-block;
+  white-space: nowrap;
+  margin-bottom: 10px;
+  padding: 14px 32px;
+  border: 2px solid $text_blue;
+  text-transform: capitalize;
+  background-color: $text_blue;
+  color: $white;
+  font-weight: $fw-600;
+  font-size: 15px;
+  line-height: 20px;
+  border-radius: 16px;
+  text-align: center;
+  @include transition_05;
+  &.large-btn {
+    padding: 24px 32px;
+    width: 100%;
+    font-weight: $fw-700;
+    font-size: 18px;
+    line-height: 28px;
+    border-radius: 24px;
+  }
+  &:hover {
+    background-color: transparent;
+    color: $text_blue;
+  }
+  &.red-btn {
+    background-color: $red;
+    border-color: $red;
+    &:hover {
+      background-color: transparent;
+      color: $red;
+    }
+  }
+  &.blue-btn {
+    background-color: #2170ac;
+    border-color: #2170ac;
+    &:hover {
+      background-color: transparent;
+      color: #2170ac;
+    }
+  }
+  &.gray-btn {
+    background-color: $text-dark-3;
+    border-color: $text-dark-3;
+    &:hover {
+      background-color: transparent;
+      color: $text-dark-3;
+    }
+  }
+  &.dark-btn {
+    background-color: $black;
+    border-color: $black;
+    &:hover {
+      background-color: transparent;
+      color: $black;
+    }
+  }
+  &.lightgray-btn {
+    background-color: $light-black;
+    border-color: $light-black;
+    &:hover {
+      background-color: transparent;
+      color: $light-black;
+    }
+  }
+}
+.text-none {
+  text-transform: none !important;
+}
+.action-btns {
+  padding: 3px 16px 3px 8px;
+  display: flex;
+  align-items: center;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.4px;
+  font-weight: $fw-500;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  img {
+    margin-right: 7px;
+    width: 16px;
+    @include transition_03;
+  }
+  &.img-btn {
+    padding-right: 8px;
+  }
+  &:hover {
+    color: $white !important;
+    img {
+      @include hoverimgwhite;
+    }
+  }
+  &.green-bg {
+    border-color: $light-green-2;
+    color: $green;
+    background-color: $light-green-1;
+    &:hover {
+      background: $green;
+    }
+  }
+  &.light-blue-bg {
+    border-color: $light-blue-4;
+    color: $text_blue;
+    background-color: $light-blue-3;
+    &:hover {
+      background: $text_blue;
+    }
+  }
+  &.light-red-bg {
+    border-color: $light-red-2;
+    color: $red;
+    background-color: $light-red-1;
+    &:hover {
+      background: $red;
+    }
+  }
+}
+.title-box {
+  margin-bottom: 35px;
+  &.has-subtitle {
+    h2 {
+      margin-bottom: 16px;
+    }
+    h4 {
+      a {
+        font-size: 22px;
+        line-height: 34px;
+      }
+    }
+  }
+}
+.middle-form {
+  text-align: left;
+  width: 79%;
+  margin: 12px auto;
+}
+.black-font {
+  color: $black;
+}
+/* form */
+.light-bg {
+  text-align: left;
+  .form-control {
+    border-color: $light-blue !important;
+  }
+  .common-select-style {
+    .css-1pahdxg-control,
+    .css-1pahdxg-control:hover,
+    .dropdown__control--is-focused,
+    .dropdown__control--menu-is-open,
+    .css-1s2u09g-control,
+    .dropdown__control {
+      border-color: $light-blue !important;
+    }
+    &.error-occured {
+      .dropdown__control--is-focused,
+      .css-1pahdxg-control:hover,
+      .css-1pahdxg-control:hover,
+      .dropdown__control--is-focused,
+      .dropdown__control--menu-is-open,
+      .css-1s2u09g-control,
+      .dropdown__control {
+        border-color: $red !important;
+      }
+    }
+  }
+}
+label.form-label,
+.form-check label {
+  margin-bottom: 12px;
+  font-weight: $fw-600;
+  font-size: 16px;
+  line-height: 19px;
+  color: $black;
+}
+.form-control {
+  padding: 14px 28px;
+  background: $white;
+  border-radius: 16px;
+  font-weight: $fw-500;
+  font-size: 18px;
+  line-height: 24px;
+  color: $text-dark;
+  border: 2px solid transparent;
+  &.big-textarea {
+    height: 180px;
+  }
+  &::placeholder {
+    font-weight: $fw-500;
+    font-size: 16px;
+    line-height: 24px;
+    color: $light-black;
+  }
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    appearance: none !important;
+  }
+  &:focus {
+    box-shadow: none !important;
+    border-color: transparent;
+  }
+}
+.form-group {
+  margin-bottom: 32px;
+  &.error-occured {
+    .form-control {
+      border-color: $red !important;
+    }
+  }
+}
+.label-box {
+  margin-bottom: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  label {
+    margin-bottom: 0;
+  }
+}
+.password-box {
+  position: relative;
+  .show-hide-pass {
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 28px;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    background: url('../../images/status-false.svg') no-repeat center
+      center/cover;
+    &.show-pass {
+      background-image: url('../../images/status-true.svg');
+    }
+  }
+}
+.error-msg {
+  margin-top: 12px;
+  display: block;
+  text-align: right;
+  color: $red;
+  font-weight: $fw-500;
+  font-size: 16px;
+  line-height: 19px;
+}
+.verification-sign {
+  display: none;
+  width: 40px;
+}
+.verified .verification-sign {
+  display: block;
+}
+.verified .otp-verification-link span {
+  display: none;
+}
+.main-content-box {
+  padding: 35px 40px;
+}
+.border-line-dark .form-control {
+  border-color: $light-gray !important;
+  border-width: 1px;
+}
+.common-layout {
+  &.no-btn-box {
+    .title-header {
+      .button-box {
+        display: none !important;
+      }
+    }
+  }
+}
+//responsive css
+@media (min-width: 1400px) and (max-width: 1599px) {
+  //buttons
+  .theme-btn {
+    padding: 12px 28px;
+    font-size: 15px;
+    line-height: 20px;
+    border-radius: 16px;
+    &.large-btn {
+      padding: 16px 26px;
+      font-size: 17px;
+      line-height: 22px;
+    }
+  }
+  .title-box {
+    margin-bottom: 30px;
+    &.has-subtitle {
+      h4 {
+        a {
+          font-size: 20px;
+          line-height: 30px;
+        }
+      }
+    }
+  }
+  .middle-form {
+    width: 89%;
+    margin: 10px auto;
+  }
+  /* form */
+  label {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .form-control {
+    padding: 15px 26px;
+    font-size: 16px;
+    line-height: 22px;
+    &.big-textarea {
+      height: 160px;
+    }
+    &::placeholder {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .label-box {
+    margin-bottom: 10px;
+  }
+  .password-box {
+    &:after {
+      right: 8px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .error-msg {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .verified .verification-sign {
+    width: 35px;
+  }
+  .main-content-box {
+    padding: 30px 35px;
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .password-box .show-hide-pass{top: 26px;}
+  //buttons
+  .theme-btn {
+    padding: 10px 24px;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 12px;
+    &.large-btn {
+      padding: 14px 28px;
+      font-size: 17px;
+      line-height: 22px;
+    }
+  }
+  .title-box {
+    margin-bottom: 30px;
+    &.has-subtitle {
+      h4 {
+        a {
+          font-size: 18px;
+          line-height: 26px;
+        }
+      }
+    }
+  }
+  .middle-form {
+    width: 90%;
+    margin: 10px auto;
+  }
+  /* form */
+  label {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .form-control {
+    padding: 13px 24px;
+    font-size: 16px;
+    line-height: 22px;
+    &.big-textarea {
+      height: 140px;
+    }
+    &::placeholder {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .label-box {
+    margin-bottom: 10px;
+  }
+  .password-box {
+    &:after {
+      right: 8px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .error-msg {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .verified .verification-sign {
+    width: 32px;
+  }
+  .main-content-box {
+    padding: 25px 28px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  //buttons
+  .theme-btn {
+    padding: 8px 10px;
+    font-size: 14px;
+    line-height: 20px;
+    border-radius: 12px;
+    &.large-btn {
+      padding: 14px 28px;
+      font-size: 17px;
+      line-height: 22px;
+    }
+  }
+  .title-box {
+    margin-bottom: 30px;
+    &.has-subtitle {
+      h4 {
+        a {
+          font-size: 17px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .middle-form {
+    width: 86%;
+    margin: 10px auto;
+  }
+  /* form */
+  label {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .form-control {
+    padding: 13px 24px;
+    font-size: 16px;
+    line-height: 22px;
+    &.big-textarea {
+      height: 120px;
+    }
+    &::placeholder {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .label-box {
+    margin-bottom: 10px;
+  }
+  .password-box {
+    &:after {
+      right: 8px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .error-msg {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .verified .verification-sign {
+    width: 30px;
+  }
+  .main-content-box {
+    padding: 20px 25px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  //buttons
+  .theme-btn {
+    padding: 8px 14px;
+    font-size: 13px;
+    line-height: 20px;
+    border-radius: 8px;
+    &.large-btn {
+      padding: 14px 28px;
+      font-size: 17px;
+      line-height: 22px;
+    }
+  }
+  .title-box {
+    margin-bottom: 30px;
+    &.has-subtitle {
+      h4 {
+        a {
+          font-size: 17px;
+          line-height: 24px;
+        }
+      }
+    }
+  }
+
+  .middle-form {
+    width: 95%;
+    margin: 10px auto;
+  }
+  /* form */
+  label {
+    margin-bottom: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .form-control {
+    padding: 13px 24px;
+    font-size: 16px;
+    line-height: 22px;
+    &.big-textarea {
+      height: 100px;
+    }
+    &::placeholder {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .label-box {
+    margin-bottom: 10px;
+  }
+  .password-box {
+    &:after {
+      right: 8px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+  .error-msg {
+    margin-top: 10px;
+    font-size: 15px;
+    line-height: 18px;
+  }
+  .verified .verification-sign {
+    width: 28px;
+  }
+  .main-content-box {
+    padding: 18px 22px;
+  }
+}
+@media (max-width: 767px) {
+  //buttons
+  .theme-btn {
+    padding: 8px 12px;
+    font-size: 13px;
+    line-height: 18px;
+    border-radius: 8px;
+    &.large-btn {
+      padding: 9px 24px;
+      font-size: 16px;
+      line-height: 21px;
+    }
+  }
+  .title-box {
+    margin-bottom: 25px;
+    &.has-subtitle {
+      h4 {
+        a {
+          font-size: 16px;
+          line-height: 22px;
+        }
+      }
+    }
+  }
+  .middle-form {
+    width: 99%;
+    margin: 10px auto;
+  }
+  /* form */
+  label {
+    margin-bottom: 10px;
+    font-size: 14px;
+    line-height: 18px;
+  }
+  .form-control {
+    padding: 13px 17px;
+    font-size: 16px;
+    line-height: 22px;
+    &.big-textarea {
+      height: 80px;
+    }
+    &::placeholder {
+      font-size: 15px;
+      line-height: 22px;
+    }
+  }
+  .form-group {
+    margin-bottom: 24px;
+  }
+  .label-box {
+    margin-bottom: 5px;
+  }
+  .password-box {
+    &:after {
+      right: 6px;
+      width: 15px;
+      height: 15px;
+    }
+  }
+  .error-msg {
+    margin-top: 4px;
+    font-size: 12px;
+    line-height: 14px;
+  }
+  .verified .verification-sign {
+    width: 28px;
+  }
+  .main-content-box {
+    padding: 110px 22px 18px;
+  }
+}

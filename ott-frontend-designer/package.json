@@ -1,0 +1,26 @@
+{
+  "name": "ott-frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev -p 3002",
+    "build": "next build",
+    "start": "next start -p 5002",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@next/font": "13.1.1",
+    "bootstrap": "^5.2.3",
+    "eslint": "8.30.0",
+    "eslint-config-next": "13.1.1",
+    "next": "13.1.1",
+    "node-sass": "^8.0.0",
+    "react": "18.2.0",
+    "react-bootstrap": "^2.7.0",
+    "react-datepicker": "^4.9.0",
+    "react-dom": "18.2.0",
+    "react-otp-input": "^2.4.0",
+    "react-slick": "^0.29.0",
+    "slick-carousel": "^1.8.1"
+  }
+}

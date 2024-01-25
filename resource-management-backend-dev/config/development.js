@@ -4,6 +4,7 @@ const dev = {
   JWT_SECRET: 'resources_management#yudiz',
   JWT_VALIDITY: '365d',
   PORT: process.env.PORT || 3000,
+  ENV: 'dev',
   USERS_DB_URL: 'mongodb://localhost:27017/resource_management' || process.env.USERS_DB_URL,
   MAIL_TRANSPORTER: {
     service: process.env.SMTP_SERVICES || 'gmail',
@@ -58,7 +59,7 @@ ESMyHbOMdL5kjfsL6kx+SDnu7Q==
   REDIS_HOST: 'redis-18950.c11.us-east-1-3.ec2.cloud.redislabs.com',
   REDIS_PORT: 18950,
   REDIS_PASSWORD: 'tnqUd4TtSmw4MUnLN7oaWybFwviDpJfN',
-  threshold: 1000,
+  threshold: 10,
   downloadThreshold: 1,
   local: '127.0.0.1',
   Region: 'ap-south-1',

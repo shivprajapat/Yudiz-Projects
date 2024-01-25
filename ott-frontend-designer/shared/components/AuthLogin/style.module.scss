@@ -1,0 +1,46 @@
+@import "@/assets/scss/helper/mixin";
+
+.authLogin {
+  max-width: 475px;
+  margin-inline: auto;
+
+  article {
+    margin-top: 32px;
+
+    p {
+      margin-bottom: 16px;
+      color: var(--white-color);
+      @include font-size(14, 20, 400);
+    }
+  }
+
+  &_button {
+    @include flex(center, space-between, null);
+
+    // column-gap: 12px;
+    button {
+      padding: 10px 11px;
+      width: 123px;
+      @include flex(center, center, null);
+    }
+
+    button:first-child {
+      svg path {
+        fill: #1877F2;
+      }
+    }
+  }
+
+  &_heading {
+    margin-bottom: 32px;
+
+    h2 {
+      margin-bottom: 8px;
+      color: var(--white-color);
+    }
+
+    p {
+      color: var(--neutrals-70-color);
+    }
+  }
+}

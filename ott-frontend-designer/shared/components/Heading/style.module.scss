@@ -1,0 +1,45 @@
+@import "@/assets/scss/helper/mixin";
+
+.heading {
+  margin-bottom: 16px;
+
+  h4 {
+    font-weight: 400;
+  }
+
+  &_arrow {
+    @include flex(center, null, null);
+
+    img {
+      margin-right: 12px;
+      cursor: pointer;
+    }
+  }
+
+  &_delete_wrap {
+    @include flex(center, null, null);
+    cursor: pointer;
+
+    img {
+      margin-right: 8px;
+    }
+
+    p {
+      color: var(--error-color);
+      @include font-size(16, 20, 700);
+    }
+  }
+}
+
+.heading_block {
+  margin-bottom: 24px;
+
+  h6 {
+    margin-bottom: 8px;
+  }
+
+  p {
+    color: var(--neutrals-70-color);
+
+  }
+}

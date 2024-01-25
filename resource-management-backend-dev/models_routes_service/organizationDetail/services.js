@@ -185,11 +185,14 @@ class OrganizationDetails {
       if (details) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].organization_details))
 
       const data = await OrganizationDetailModel.create({ ...req.body, sKey: keygen(sName), iLastUpdateBy: req.employee._id, iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f') })
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'OrganizationDetails', sService: 'addOrganizationDetails', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'OrganizationDetails', sService: 'addOrganizationDetails', eAction: 'Create', oNewFields: data, sToken: req.token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
+
+      // await take.create(logs)
       // notificationsender(req, data._id, ' organizationDetails is create ', true, true)
       return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].organization_details))
     } catch (error) {
@@ -223,11 +226,12 @@ class OrganizationDetails {
           const data = await OrganizationDetailModel.findByIdAndUpdate({ _id: req.params.id }, { sName, sKey: keygen(sName), nHoursPerDay, iLastUpdateBy: req.employee._id, nDaysPerMonth }, { runValidators: true, new: true })
           if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].organization_details))
         }
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: req.params.id, eModule: 'OrganizationDetails', sService: 'updateOrganizationDetails', eAction: 'Update', oNewFields: data, oOldFields: details }
-        await take.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: req.params.id, eModule: 'OrganizationDetails', sService: 'updateOrganizationDetails', eAction: 'Update', oNewFields: data, oOldFields: details, sToken: req.token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+        await queuePush('logs', logs)
         // notificationsender(req, data._id, ' organizationDetails is update ', true, true)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].organization_details))
       }
@@ -255,7 +259,7 @@ class OrganizationDetails {
     try {
       const { sFileName, sContentType } = req.body
 
-      console.log(req.body)
+      // console.log(req.body)
 
       const bucket = `${config.s3Organization}/OrgDetails/`
 

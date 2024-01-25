@@ -1,0 +1,21 @@
+@import "@/assets/scss/helper/mixin";
+
+.account_details {
+    >section {
+        margin-bottom: 24px;
+
+        div[class='flex-space'] {
+            z-index: 1;
+            position: relative;
+        }
+    }
+
+    form {
+        width: 100%;
+        max-width: 496px;
+    }
+
+    &_buttons {
+        width: 154.67px;
+    }
+}

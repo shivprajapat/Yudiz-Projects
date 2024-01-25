@@ -14,7 +14,8 @@ const Role = Schema({
   aPermissions: [{ type: Schema.Types.ObjectId, ref: 'permissions' }],
   sBackGroundColor: { type: String },
   sTextColor: { type: String },
-  bIsDefault: { type: Boolean, default: false }
+  bIsDefault: { type: Boolean, default: false },
+  bIsSystem: { type: Boolean, default: false }
 }, { timestamps: { createdAt: 'dCreatedAt', updatedAt: 'dUpdatedAt' } })
 
 Role.index({ sName: 1 })

@@ -1,0 +1,67 @@
+@import "@/assets/scss/helper/mixin";
+
+.dropdown {
+  position: relative;
+  margin-inline: 16px;
+
+  &_btn {
+    composes: dark_btn from '../Button/style.module.scss';
+    padding: 8px;
+    background-color: var(--neutrals-white-color);
+
+    &[aria-expanded="true"] {
+      color: var(--white-color);
+      background-color: var(--primary-color) !important;
+      box-shadow: none !important;
+
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+
+    // &::after {
+    //   display: none !important;
+    // }
+  }
+
+  &_meun {
+    padding: 8px !important;
+    transform: translateX(-69%);
+    width: 112px;
+    height: 40px;
+    border: none;
+    background-color: var(--neutrals-35-color);
+    display: none;
+    position: absolute;
+    top: -52px;
+    border-radius: 4px;
+    left: 75px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      bottom: -9px;
+      left: 17px;
+      box-sizing: border-box;
+      border-style: solid;
+      border-width: 0 10px 12px 8px;
+      border-width: 12px 10px 0 8px;
+      border-color: var(--neutrals-35-color) transparent transparent transparent;
+    }
+
+    li {
+      display: inline-block;
+      cursor: pointer;
+
+      img {
+        width: 16px;
+        height: 16px;
+        ;
+      }
+    }
+  }
+
+  .active {
+    @include flex(center, space-between, null);
+  }
+}

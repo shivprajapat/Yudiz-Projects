@@ -1,0 +1,65 @@
+@import "@/assets/scss/helper/mixin";
+
+.movie_watching {
+    position: relative;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+    transform: scale(1);
+
+    &:hover {
+        z-index: 2;
+        transform: scale(1.2);
+
+        .movie_watching_inner_btn {
+            button {
+                opacity: 1;
+            }
+        }
+    }
+
+    &_inner {
+        border-radius: 8px;
+        position: relative;
+
+        &_btn {
+            position: absolute;
+            top: 8px;
+            z-index: 9;
+            width: 100%;
+            padding-inline: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+
+            button {
+                padding: 0;
+                width: 28px;
+                height: 28px;
+                opacity: 0;
+                background-color: var(--neutrals-25-color);
+
+                &:hover {
+                    background-color: var(--neutrals-25-color) !important;
+                }
+
+                img {
+                    width: 21px;
+                    height: 21px;
+                }
+            }
+
+        }
+
+        figure {
+            z-index: 2;
+            position: relative;
+            height: 122px;
+            margin: 0;
+
+            img {
+                height: 100% !important;
+                border-radius: 8px;
+            }
+        }
+    }
+}

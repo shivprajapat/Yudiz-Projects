@@ -22,7 +22,6 @@ const jwt = require('jsonwebtoken')
 const moment = require('moment')
 const RoleModel = require('../Role/model')
 const confg = require('../../config/config')
-
 // const OneSignal = require('onesignal-node')
 
 const { ResourceManagementDB } = require('../../database/mongoose')
@@ -47,7 +46,7 @@ const ObjectId = mongoose.Types.ObjectId
 async function notificationsender(req, params, sBody, isRecorded, isNotify, iLastUpdateBy, url) {
   try {
     const data = await PermissionModel.findOne({ _id: params })
-    console.log(data)
+    // console.log(data)
 
     const department = await DepartmentModel.find({
       eStatus: 'Y',
@@ -228,11 +227,11 @@ class Permission {
 
       const data = await PermissionModel.create([{ sName: permissionName(sName), sKey: permissionKey(sName), sModule: sModule.toUpperCase(), iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f'), iLastUpdateBy: req.employee._id, bIsActive: true }])
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Permission', sService: 'addPermission', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Permission', sService: 'addPermission', eAction: 'Create', oNewFields: data, sToken: req.token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('logs', logs)
 
       // await notificationsender(req, data._id, ' permission is create ', true, true, req.employee._id, `${config.urlPrefix}/permission/${data._id}`)
       return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].permission), {
@@ -267,9 +266,9 @@ class Permission {
       if (permission && permission.eStatus === 'Y') {
         const data = await PermissionModel.findByIdAndUpdate({ _id: req.params.id }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].permission))
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Permission', sService: 'deletePermission', eAction: 'Delete', oOldFields: data }
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Permission', sService: 'deletePermission', eAction: 'Delete', oOldFields: data, sToken: req.token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
 
-        await Logs.create(logs)
+        await queuePush('logs', logs)
 
         // await notificationsender(req, data._id, ' permission is delete ', true, true, req.employee.iLastUpdateBy, `${config.urlPrefix}/permission/${data._id}`)
         return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].permission))
@@ -292,11 +291,12 @@ class Permission {
         const data = await PermissionModel.findByIdAndUpdate({ _id: req.params.id, eStatus: 'Y' }, { bIsActive, iLastUpdateBy: req.employee._id, sName: permissionName(sName) }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].permission))
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Permission', sService: 'updatePermission', eAction: 'Update', oOldFields: permission, oNewFields: data }
-        await take.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Permission', sService: 'updatePermission', eAction: 'Update', oOldFields: permission, oNewFields: data, sToken: req.token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+        await queuePush('logs', logs)
         // await notificationsender(req, data._id, ' permission is update ', true, true, req.employee._id, `${config.urlPrefix}/permission/${data._id}`)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].permission))
       }
@@ -494,6 +494,7 @@ class Permission {
         })
         permissionRole = []
       }
+
       const userRole = []
       for (const r of role) {
         const roleExit = await RoleModel.findOne({ _id: ObjectId(r), eStatus: 'Y' }).lean()
@@ -512,14 +513,22 @@ class Permission {
 
       // if (!userRole.length) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].at_least_one.replace('##', messages[req.userLanguage].role))
 
-      const data = await EmployeeModel.findByIdAndUpdate({ _id: iEmployeeId, eStatus: 'Y' }, { aTotalPermissions: aPermissions, aRoles: userRole, iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
+      const data = await EmployeeModel.findByIdAndUpdate({ _id: iEmployeeId, eStatus: 'Y' }, { aTotalPermissions: aPermissions, aRole: userRole, iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
+      //  oBody: { type: Object },
+      // oParams: { type: Object },
+      // oQuery: { type: Object },
+      // sToken: { type: String }
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Permission', sService: 'updateUserPermission', eAction: 'Update', oOldFields: user, oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'updateUserPermission', eAction: 'Update', oOldFields: user, oNewFields: data, sToken: req.token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await take.create(logs)
+
+      await queuePush('logs', logs)
+
       // await notificationForUpdatePermission(req, data._id, ' permission is update ', true, true, req.employee._id, `${config.urlPrefix}/employee/${data._id}`)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].user))

@@ -1,0 +1,60 @@
+.timeline-item:first-child .timeline-border-odd,
+.timeline-item:last-child .timeline-border,
+.timeline-item:last-child::after {
+  @apply !hidden;
+}
+.timeline-item:nth-child(odd) .timeline-border,
+.timeline-item:nth-child(even) .timeline-border {
+  @apply hidden lg:block absolute h-[1px] w-[25px] 2xl:w-[46px];
+}
+.timeline-item:nth-child(odd) .timeline-border {
+  @apply -left-[30px] 2xl:-left-[50px];
+}
+.timeline-item:nth-child(even) .timeline-border {
+  @apply -right-[30px] 2xl:-right-[50px];
+}
+.timeline-item:nth-child(even) .timeline-border::before,
+.timeline-item:nth-child(odd) .timeline-border::before {
+  content: '';
+  @apply absolute -left-1 -right-1 border-t-2 border-dashed border-secondary-300;
+}
+.timeline-item:nth-child(even) .timeline-border-odd,
+.timeline-item:nth-child(odd) .timeline-border-odd {
+  @apply hidden lg:block absolute h-[2px] w-[105px] 2xl:w-[165px];
+}
+.timeline-item:nth-child(even) .timeline-border-odd {
+  @apply -left-[10%] md:-left-[13%] xl:-left-[10%] 2xl:-left-[16.5%];
+}
+.timeline-item:nth-child(odd) .timeline-border-odd {
+  @apply -right-[10%] md:-right-[13%] xl:-right-[10%] 2xl:-right-[16.5%];
+}
+.timeline-item:nth-child(even) .timeline-border-odd::after,
+.timeline-item:nth-child(odd) .timeline-border-odd::after {
+  content: '';
+  @apply absolute -left-1 -right-1 border-t-2 border-dashed border-secondary-300;
+}
+.timeline-item:nth-child(odd) .timeline-border-odd::before,
+.timeline-item:nth-child(even) .timeline-border-odd::before {
+  content: '';
+  @apply absolute bottom-0 border-l-2 border-dashed border-secondary-300 w-[1px] h-[300px] lg:h-[320px] 2xl:h-[310px];
+}
+.timeline-item:nth-child(odd) .timeline-border-odd::before {
+  @apply -right-1;
+}
+.timeline-item:nth-child(even) .timeline-border-odd::before {
+  @apply -left-1;
+}
+.timeline-item {
+  counter-increment: section;
+}
+
+.timeline-item:after {
+  content: counter(section) !important;
+  @apply absolute h-4 w-4 text-center text-white text-[10px] bg-secondary-300 z-10;
+}
+.timeline-item:nth-child(odd)::after {
+  @apply -left-[10px] 2xl:-left-[23px];
+}
+.timeline-item:nth-child(even)::after {
+  @apply -right-[10px] 2xl:-right-[23px];
+}

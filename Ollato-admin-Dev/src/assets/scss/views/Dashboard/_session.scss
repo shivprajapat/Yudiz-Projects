@@ -1,0 +1,68 @@
+.session-detail-page {  .btn-box { a { margin-right: 16px; &:last-child{ margin-right: 0; } } }  .row > [class^="col-"] { margin-bottom: 24px;  } }
+.logo-border-box { height: 100%; padding:28px; border: 2px solid $light-blue;
+    border-radius: 16px; .lightlogomark {  position: absolute; top:-21px; right: -16px; } }
+.user-info-content-box { display: flex; align-items: center;
+.userimg-box { width:64px; height: 64px; border-radius: 50%; &.big-cal { img { width: 56px; height: 56px; } } }
+.user-infobox { text-align:left; margin-left: 16px; h4 { color:$black; } h6 { color:$text-dark-3; }}  
+}
+.view-stu-report { padding:17px; background: $light-blue; border-radius: 16px; }
+.reason-box { margin-top: 32px; h4 { margin-bottom: 24px; } }
+.reason-box {
+    input[type="date"]::-webkit-calendar-picker-indicator{ 
+        background: url('../../../images/calendaricon.svg')no-repeat center center/cover !important;
+      }
+      input[type="time"]::-webkit-calendar-picker-indicator {  background: url('../../../images/timeicon.svg')no-repeat center center/cover !important;  } 
+    }
+    .switchbox .switch { margin-left: 16px; }
+//responsive css
+@media (min-width:1400px) and (max-width:1599px) {
+    .session-detail-page { .btn-box { a { margin-right: 12px; } } }
+    .logo-border-box { padding:22px; 
+        border-radius: 16px; .lightlogomark {  top:-21px; right: -16px; } }
+    .user-info-content-box { 
+    .userimg-box { width:58px; height: 58px;  &.big-cal { width:48px; height: 48px; img { width: 48px; height: 48px; } } }
+    .user-infobox { margin-left: 12px;  }  
+    }
+    .view-stu-report { padding:14px; border-radius: 16px; }
+}
+@media (min-width:1200px) and (max-width:1399px) {
+    .session-detail-page { .btn-box { a { margin-right: 12px; } } }
+    .logo-border-box { padding:22px; 
+        border-radius: 16px; .lightlogomark {  top:-21px; right: -16px; } }
+    .user-info-content-box { 
+    .userimg-box { width:58px; height: 58px;  &.big-cal { width:48px; height: 48px; img { width: 48px; height: 48px; } } }
+    .user-infobox { margin-left: 12px;  }  
+    }
+    .view-stu-report { padding:14px; border-radius: 16px; }
+}
+@media (min-width:992px) and (max-width:1199px) {
+.session-detail-page { .btn-box { a { margin-right: 12px; } } }
+    .logo-border-box { padding:22px; 
+        border-radius: 16px; .lightlogomark {  top:-21px; right: -16px; } }
+    .user-info-content-box { 
+    .userimg-box { width:50px; height: 50px;  &.big-cal { width:38px; height: 38px; img { width: 38px; height: 38px; } } }
+    .user-infobox { margin-left: 12px;  }  
+    }
+    .view-stu-report { padding:14px; border-radius: 16px; }
+}
+@media (min-width:768px) and (max-width:991px) {
+    .session-detail-page { .heading-box { text-align: left; display: block; }  .btn-box { display: block; margin-top: 10px; a { margin-bottom: 8px; display: inline-block; margin-right: 8px; } } }
+    .logo-border-box { padding:22px; 
+        border-radius: 16px; .lightlogomark { top: -7px;
+            right: -11px;
+            width: 75px; } }
+    .user-info-content-box { 
+    .userimg-box { width:50px; height: 50px;  &.big-cal { width:38px; height: 38px; img { width: 38px; height: 38px; } } }
+    .user-infobox { margin-left: 12px;  }  
+    }
+    .view-stu-report { padding:14px; border-radius: 16px; }
+}
+@media (max-width:767px) { 
+    .session-detail-page { .heading-box { text-align: left; display: block; }  .btn-box { display: block; margin-top: 10px; a { margin-bottom: 8px; display: inline-block; margin-right: 8px; } } }
+    .logo-border-box { padding:12px; border-radius: 16px; .lightlogomark { top: -7px; right: -11px; width: 70px; } }
+    .user-info-content-box { 
+    .userimg-box { width:50px; height: 50px;  &.big-cal { width:35px; height: 35px; img { width: 35px; height: 35px; } } }
+    .user-infobox { margin-left: 12px;  }  
+    }
+    .view-stu-report { padding:14px; border-radius: 16px; }
+}

@@ -1,0 +1,269 @@
+<!-- page-22 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.2/css/all.min.css"
+    />
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        text-align: justify;
+        font-family: "Libre Baskerville", serif;
+        width: 210mm;
+        margin: 0px auto;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/regular-page-bg.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .sub-page {
+        min-height: calc(29.7cm - 70px);
+      }
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+      .sub-page img {
+        width: 85%;
+        object-fit: cover;
+      }
+      p {
+        font-size: 13px;
+        line-height: 24px;
+        padding-bottom: 10px;
+      }
+      .page-content {
+        padding: 20px;
+      }
+      .fist-letter-big {
+        color: black;
+        font-size: 19px;
+      }
+      .color-latter {
+        color: #0f62ac;
+        font-weight: 700;
+      }
+
+      /* sub page  */
+      table,
+      td,
+      th {
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      tr td {
+        padding: 10px 8px;
+      }
+      .col-bg {
+        background-color: #4b93d2;
+      }
+      table {
+        margin: 0px auto 0px;
+      }
+      .heading h1 {
+        padding: 20px 0px;
+        font-size: 28px;
+        background-color: rgb(231, 231, 231);
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .bg-text {
+        max-width: 360px;
+        margin: 40px auto 0px;
+        text-align: center;
+      }
+      .bg-text p {
+        font-weight: 600;
+      }
+      .heading p {
+        text-transform: uppercase;
+        font-size: 19px;
+        text-align: center;
+      }
+      ul {
+        padding: 0px;
+        list-style: none;
+        text-align: center;
+      }
+      ul li {
+        line-height: 26px;
+        padding: 6px 0px;
+      }
+      /* ul li::after {
+        content: "\f381";
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        color: #0f62ac;
+        margin-left: 10px;
+      } */
+      .list-s {
+        padding: 0px;
+        list-style: none;
+      }
+      .findings-point-bg {
+        width: 50%;
+        margin: 0px auto;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 160px;
+        position: relative;
+        background: #d45546;
+      }
+      .findings-point-bg:after {
+        content: "";
+        position: absolute;
+        left: -80px;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-right: 80px solid #d45546;
+        border-top: 80px solid transparent;
+        border-bottom: 80px solid transparent;
+      }
+      .findings-point-bg:before {
+        content: "";
+        position: absolute;
+        right: -80px;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-left: 80px solid #d45546;
+        border-top: 80px solid transparent;
+        border-bottom: 80px solid transparent;
+      }
+      .findings-point-bg ul li {
+        font-size: 12px;
+      }
+      /* footer  */
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+      .footer-content p,
+      a {
+        padding-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      footer p,
+      a {
+        font-size: 11px;
+        line-height: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+          <div class="heading">
+            <h1>Conclusive Findings</h1>
+          </div>
+          <div style="padding: 30px 20px" class="content">
+            <p style="padding: 0px 0px 10px">
+              Time to find out where this journey has led you!
+            </p>
+
+            <p style="padding: 15px 0px">
+              A team of experienced Psychologists have generated the best suited
+              career choices for you to explore. They used scientific tools to
+              analyse every possible combination of careers which aligned with
+              your personal interest and innate aptitude in a positive manner.
+            </p>
+            <p>
+              After evaluating your strengths and interests, we suggest the
+              following career choices for you to consider;
+            </p>
+            <div style="text-align: center" class="findings-img">
+              <img
+                style="width: 80%"
+                src="<%= baseUrl %>/uploads/ollato-images/findings-img.png"
+                alt=""
+              />
+            </div>
+            <div class="findings-point-bg">
+              <ul>
+                <% for(var i=0; i < gotStudentTestResult.length; i++) { %>
+                <li>
+                  <%=gotStudentTestResult[i].career_profile_detail_name %>
+                </li>
+                <% } %>
+              </ul>
+            </div>
+            <p style="padding: 20px 0px; text-align: center; font-size: 13px">
+              *All generated career options have equal weightage and can be
+              considered in any order.
+            </p>
+            <p>
+              Moving ahead, apart from the obtained results, while making a
+              career choice please take into consideration other factors such as
+              your passion, lifestyle, academic performance, economic status and
+              available opportunities.
+            </p>
+            <p>Wishing you all the best for your future endeavours!</p>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    <b><%= user.first_name %> <%= user.last_name %></b>
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>21</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

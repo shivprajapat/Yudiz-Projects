@@ -1,0 +1,44 @@
+@import "./helper/mixin";
+
+* {margin: 0px;padding: 0px;box-sizing: border-box;}
+html {scroll-behavior: smooth;scroll-padding-top: 0}
+body {@include font-size(16, null, 400); background-color: var(--theme-secondary-color) !important;color: var(--white-color);font-family: 'Noto Sans';}
+html,body {overflow-x: hidden;}
+h1,h2,h3,h4,h5,h6,div,span,p{padding: 0px;margin: 0px;font-family: 'Noto Sans';}
+ul{ padding: 0; list-style: none; }
+a{text-decoration: none; outline: none; cursor: pointer;
+   &:focus,&:hover, &:active, &:visited, &:hover	{ text-decoration: none; outline: none;}}
+button {border: none;outline: none;}
+::selection {background-color: var(--primary-color);color: var(--white-color);}
+::-webkit-scrollbar {width: 0;}
+
+// Global Heading CSS
+
+@media (min-width: 1440px) and (max-width: 1680px) {
+  h1 {@include font-size(41, 53, 600);}
+  h2 {@include font-size(36, 47, 600);}
+  h3 {@include font-size(32, 42, 600);}
+  h4 {@include font-size(28, 37, 600);}
+  h5 {@include font-size(25, 32, 500);}
+  h6 {@include font-size(22, 29, 500);}
+  p {@include font-size(16, 20, 400);}
+  .font-18{@include font-size(18, 28, 400);}
+  .font-14{@include font-size(14, 20, 400);color: var(--white-60-color);}
+}
+
+@media (min-width: 768px) and (max-width: 1440px) {
+  h1 {@include font-size(36, 47, null);}
+  h2 {@include font-size(32, 42, null);}
+  h3 {@include font-size(28, 37, null);}
+  h4 {@include font-size(24, 34, null);}
+  h5 {@include font-size(22, 30, null);}
+  h6 {@include font-size(20, 26, null);}
+}
+@media (max-width: 767px) {
+  h1 {@include font-size(22, 28, null);}
+  h2 {@include font-size(20, 26, null);}
+  h3 {@include font-size(19, 24, null);}
+  h4 {@include font-size(18, 24, null);}
+  h5 {@include font-size(17, 22, null);}
+  h6 {@include font-size(16, 21, null);}
+}

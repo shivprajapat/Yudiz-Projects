@@ -1,0 +1,205 @@
+<!-- <page-5> -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        text-align: justify;
+        font-family: "Libre Baskerville", serif;
+        width: 210mm;
+        margin: 0px auto;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/regular-page-bg.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+
+      .sub-page {
+        padding: 50px 20px 0px;
+        min-height: calc(29.7cm - 70px) !important;
+      }
+
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+
+      .sub-page img {
+        width: 70%;
+        object-fit: cover;
+      }
+
+      p {
+        font-size: 13px;
+        line-height: 24px;
+        padding-bottom: 20px;
+      }
+
+      .page-content {
+        padding: 20px;
+      }
+
+      .fist-letter-big {
+        color: black;
+        font-size: 19px;
+      }
+
+      .color-latter {
+        color: #0f62ac;
+        font-weight: 700;
+      }
+
+      /* sub page  */
+      .qoutes-heading {
+        padding-top: 10px;
+        border-top: 2px solid #0f62ac;
+        max-width: 50%;
+        margin: 20px auto 0px;
+      }
+
+      .header-content {
+        text-align: center;
+      }
+
+      .welcome-summery {
+        margin-top: 100px;
+      }
+
+      /* footer  */
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .footer-content p,
+      a {
+        margin-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+
+      footer p,
+      a {
+        font-size: 11px;
+        line-height: 18px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+          <header>
+            <div class="header-content">
+              <h1>INTEREST</h1>
+              <div class="qoutes-heading">
+                <p style="font-weight: 600">
+                  " “Choose a job you love and you will never have to work a day
+                  in your life”
+                </p>
+                <p style="font-style: italic; font-weight: 600" class="name">
+                  -Confucius
+                </p>
+              </div>
+            </div>
+          </header>
+          <div>
+            <p>
+              Simply put, your likes and dislikes, preference for certain
+              activities and people can be defined as your set of interests.
+              Identifying interest areas gives us valuable information regarding
+              the nature of work we would like to see ourselves doing in the
+              future. Once we have knowledge regarding our interests, we can
+              explore those career options which are aligned with our interests.
+              <span style="font-weight: 600"
+                >However, one must remember that being interested in any
+                particular field does not imply one’s ability or skill in that
+                field.</span
+              >
+            </p>
+            <p>
+              This assessment explores your interest across multiple career
+              options to find the right career match for you. It is designed in
+              such a way that your responses are influenced by your unique
+              personality traits. Our interest assessment is based on John
+              Holland’s RIASEC Personality theory which speaks of six
+              personality types that correspond with separate categories of
+              occupations based on one’s interest. Scores obtained by you in
+              each domain have been presented along with an explanation, to give
+              you an idea about the relationship between your interests and
+              possible career paths that can be explored.
+            </p>
+          </div>
+          <div style="text-align: center" class="interest-img">
+            <img
+              style="width: 60%"
+              src="<%= baseUrl %>/uploads/ollato-images/interest-img.png"
+              alt=""
+            />
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    <b><%= user.first_name %> <%= user.last_name %></b>
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>04</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

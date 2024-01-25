@@ -1,0 +1,108 @@
+.no-breadcrumbs { .title-header { .breadcrumbs { a { display: none; } } }  }
+.no-dropdown { .title-header { .dropdown-btnbox { display: none; } } }
+.package-module {  ul { padding-left: 0; } }
+.common-white-box { margin-bottom: 32px; padding:32px 40px; display: flex; align-items: center; justify-content: space-between;  background: #FFFFFF; box-shadow: 0px 4px 16px rgba(33, 112, 172, 0.05); border-radius: 16px; 
+    .left-box { width: 73%; h5 { margin-bottom: 12px; } }
+    .right-box { width: 27%; display: flex; align-items: center; justify-content: end; .price-box { margin-right: 40px; text-align: right; h5 { margin-bottom: 2px; color:$black; } p { margin-bottom: 0; color:$text_blue;}} }
+    &:last-child { margin-bottom: 0; }
+}
+/* package-detail */
+.whitebox-layout { padding:32px; background: $white; box-shadow: 0px 4px 16px rgba(33, 112, 172, 0.05); border-radius: 16px;
+    .back-btn { margin-bottom: 16px; }
+    .common-white-box { box-shadow: none; padding:0; margin-bottom: 40px; .right-box { .price-box { margin-right: 0; }} }
+    .package-description { margin-bottom: 56px; p { margin-bottom: 40px; &:last-child{ margin-bottom: 0; } } }
+}
+/* active package */
+.active-package { .addon-package {
+    .title-header { margin-top: 48px; .dropdown-btnbox { display: none; } }
+  }
+}
+/* package history */
+.open-dropdown { position: relative; }
+.open-dropdown::after { content:""; position: absolute; top:0; left:0; background-color: $light-blue-5; width: 100%; height: 100%;  }
+//responsive css
+@media (min-width:1400px) and (max-width:1599px) {
+    .common-white-box { margin-bottom: 28px; padding:28px 36px; border-radius: 14px; 
+        .left-box { width: 62%;  h5 { margin-bottom: 10px; } }
+        .right-box { width: 38%; .price-box { margin-right: 34px; h5 { margin-bottom: 2px; } } }
+    }
+    /* package-detail */
+    .whitebox-layout { padding:26px; border-radius: 14px;
+        .back-btn { margin-bottom: 14px; }
+        .common-white-box {  margin-bottom: 34px; }
+        .package-description { margin-bottom: 52px; p { margin-bottom: 34px;  } }
+    }
+    /* active package */
+        .active-package { .addon-package {
+            .title-header { margin-top: 40px;  }
+        }
+    }
+}
+@media (min-width:1200px) and (max-width:1399px) {
+    .common-white-box { margin-bottom: 24px; padding:24px 32px; border-radius: 12px; 
+        .left-box { width: 60%; h5 { margin-bottom: 8px; } }
+        .right-box {  width: 40%; .price-box { margin-right: 28px; h5 { margin-bottom: 1px; } } }
+    }
+     /* package-detail */
+     .whitebox-layout { padding:22px; border-radius: 14px;
+        .back-btn { margin-bottom: 14px; }
+        .common-white-box {  margin-bottom: 30px; }
+        .package-description { margin-bottom: 42px; p { margin-bottom: 28px;  } }
+    }
+    /* active package */
+    .active-package { .addon-package {
+        .title-header { margin-top: 30px;  }
+    }
+}
+}
+@media (min-width:992px) and (max-width:1199px) {
+    .common-white-box { margin-bottom: 20px; padding:20px 28px; border-radius: 10px; 
+        .left-box { padding-right: 5px; width: 58%; h5 { margin-bottom: 6px; } }
+        .right-box {  width: 42%; .price-box { margin-right: 12px; h5 { margin-bottom: 1px; } } }
+    }
+     /* package-detail */
+     .whitebox-layout { padding:20px; border-radius: 14px;
+        .back-btn { margin-bottom: 12px; }
+        .common-white-box {  margin-bottom: 24px; }
+        .package-description { margin-bottom: 38px; p { margin-bottom: 24px;  } }
+    }
+    /* active package */
+        .active-package { .addon-package {
+            .title-header { margin-top: 28px;  }
+        }
+    }
+}
+@media (min-width:768px) and (max-width:991px) {
+    .common-white-box { margin-bottom: 15px; padding:16px 24px; border-radius: 10px; 
+        .left-box { padding-right: 5px; width: 58%; h5 { margin-bottom: 6px; } }
+        .right-box {  width: 42%; display: block; text-align: right; .price-box { margin-right: 0px; margin-bottom: 10px; h5 { margin-bottom: 1px; } } }
+    }
+     /* package-detail */
+     .whitebox-layout { padding:20px; border-radius: 14px;
+        .back-btn { margin-bottom: 12px; }
+        .common-white-box {  margin-bottom: 22px; }
+        .package-description { margin-bottom: 24px; p { margin-bottom: 16px;  } }
+    }
+    /* active package */
+    .active-package { .addon-package {
+        .title-header { margin-top: 22px;  }
+    }
+}
+}
+@media (max-width:767px) { 
+    .common-white-box { display: block; margin-bottom: 15px; padding:16px 24px; border-radius: 10px; 
+        .left-box { padding-right: 5px; width: 100%; h5 { margin-bottom: 6px; } }
+        .right-box { margin-top: 14px; width: 100%;  justify-content: space-between;  .price-box { margin-right: 5px; h5 { margin-bottom: 1px; } } }
+    }
+     /* package-detail */
+     .whitebox-layout {  padding:15px; border-radius: 12px; 
+        .back-btn { margin-bottom: 12px; }
+        .common-white-box {  margin-bottom: 22px; }
+        .package-description { margin-bottom: 24px; p { margin-bottom: 16px;  } }
+    }
+     /* active package */
+     .active-package { .common-white-box .right-box{ p {  text-align: left;  }} .addon-package {
+        .title-header { margin-top: 14px;  }
+    }
+}
+}

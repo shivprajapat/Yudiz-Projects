@@ -1,0 +1,221 @@
+<!-- page-1 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        font-family: "Libre Baskerville", serif;
+        width: 210mm;
+        min-height: 297mm;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/1st%20page%20bg.svg");
+        /* background-image: url("<%= baseUrl %>/uploads/ollato-images/High%20res%20logo.png"); */
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+        margin: 0px auto;
+      }
+
+      .sub-page {
+        min-height: calc(29.7cm - 70px);
+      }
+      .sub-page img {
+        max-width: 240px;
+      }
+
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+
+      .header {
+        padding-top: 100px;
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+      }
+
+      .logo {
+        margin: 0 auto;
+        border-bottom: 2px solid #0f62ac;
+      }
+
+      .detailed-assess {
+        margin-top: 100px;
+        text-align: center;
+      }
+
+      .text-bg-underline {
+        position: relative;
+      }
+
+      .text-bg-underline h4 {
+        display: inline-block;
+        background-color: white;
+        z-index: 1;
+        position: relative;
+        padding: 8px;
+      }
+
+      .text-bg-underline span {
+        position: absolute;
+        width: 100%;
+        height: 1px;
+        background-color: black;
+        left: 0;
+        top: 50%;
+        transform: translateY(50%);
+      }
+
+      .report ul li {
+        list-style: none;
+      }
+
+      .report ul li p {
+        font-size: 20px;
+        line-height: 36px;
+        text-transform: uppercase;
+      }
+
+      .report ul li p span {
+        margin-right: 14px;
+        text-transform: capitalize;
+      }
+
+      .report-details {
+        padding: 0px 100px;
+        margin-top: 100px;
+      }
+
+      /* footer  */
+      footer p,
+      a {
+        font-size: 12px;
+        line-height: 18px;
+      }
+
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+
+      .footer-content p,
+      a {
+        margin-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+          <div class="header">
+            <div class="logo">
+              <img
+                src="<%= baseUrl %>/uploads/ollato-images/logo.png"
+                alt=""
+              />
+            </div>
+            <p>A perfect partner for career solution</p>
+          </div>
+          <div class="detailed-assess">
+            <h1>DETAILED CAREER ASSESSMENT</h1>
+            <div class="text-bg-underline">
+              <h4>REPORT</h4>
+              <span></span>
+            </div>
+          </div>
+          <div class="report-details">
+            <div class="report">
+              <ul>
+                <li>
+                  <p>
+                    <span>name:</span> <%= user.first_name %> <%= user.last_name
+                    %>
+                  </p>
+                </li>
+
+                <li>
+                  <p><span>Std:</span> <%= user.grade %></p>
+                </li>
+                <li>
+                  <p><span>Student ID:</span> <%= user.id %></p>
+                </li>
+                <!-- <li>
+                <p><span>Divison:</span>B</p>
+              </li> -->
+                <li>
+                  <p>
+                    <span>Date of Assessment:</span><%=
+                    moment(date).format('DD/MM/YYYY') %>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac; text-align: center">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    &nbsp;
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>&nbsp;</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

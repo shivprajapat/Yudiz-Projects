@@ -1,0 +1,29 @@
+@import "../mixin";
+
+main {
+  margin-inline: auto;max-width: 1440px;width: 100%;position: relative;overflow-x: hidden;background-color: var(--theme-color);
+  .navbar-toggler{background-color: var(--primary-color);}
+  @media screen and (max-width: 1680px) {max-width: 1680px;}
+  .custom-slider{position: relative;overflow-x: clip;transition:0.3s;.slider-container{display: flex;transform: translateX(0px);transition: all 1s ease;column-gap: 8px;margin-left: 48px;} 
+  &:hover{.prev-btn,.next-btn{opacity: 1;}}}
+  .prev-btn,.next-btn{position: absolute;top: 0%;height: 100%;width: 50px;z-index: 1; opacity: 0;transition:0.3s;
+  img {max-width: 20px;}}
+  .prev-btn {left: 0;background: linear-gradient(270deg, var(--black-018-rgba) 0%, var(--black-185-rgba) 40.21%, var(--theme-secondary-color) 100%);
+  &:hover,&:focus {background: linear-gradient(270deg, var(--black-018-rgba) 0%, var(--black-185-rgba) 40.21%, var(--theme-secondary-color) 100%);}}
+  .next-btn {right: 0;background: linear-gradient(270deg, var(--theme-secondary-color) 0%, var(--black-185-rgba) 48.66%, var(--black-018-rgba) 83.33%); 
+  &:hover,&:focus {background: linear-gradient(270deg, var(--theme-secondary-color) 0%, var(--black-185-rgba) 48.66%, var(--black-018-rgba) 83.33%);}}
+  .banner-padding {position: relative;z-index: 1; padding: 140px 48px 48px;
+  @media screen and (max-width: 576px) {padding: 110px 20px 40px;}}
+  .small-padding {padding: 20px 0;}
+  .common-padding {margin-inline:48px;}
+  .common-margin {margin-top: -16% !important;margin-bottom: 40px;section {padding: 20px 0;}}
+  section{z-index: 1;}
+  .text-orange {@include font-size(14, 18, 600);color: var(--primary-75-color);}
+  .flex-center{@include flex(center,null,null);flex-wrap: wrap;}
+
+  // **Movies Card Size
+  .movies_big_grid,.genres_grid{display: grid;gap: 8px;>div{width: 100%; }}
+  .genres_grid{grid-template-columns: repeat(auto-fit, minmax(161px, 1fr))}
+  .movies_big_grid{grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));figure {height: 185.63px;}}
+  .flex-space{@include flex(center,space-between,null);}
+}

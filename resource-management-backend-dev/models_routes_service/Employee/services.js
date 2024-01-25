@@ -20,6 +20,8 @@ const moment = require('moment')
 const PermissionModel = require('../Permission/model')
 // const { sendNotifications, sendTimedNotification, downloadExcel, sendEmailQueue, sendProjectNotifications } = require('../../queue')
 
+const { sendEmail } = require('../../helper/email.service')
+
 const OtpModel = require('./employeeOtpVerification.model')
 const skillModel = require('../Skill/model')
 const ProjectWiseEmployeeModel = require('../Project/projectwiseemployee.model')
@@ -30,7 +32,6 @@ const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId
 
 const { ErrorResponseSender, catchError, pick, validateEmpId, validateEmail, validateMobile, validatePassword, hashPassword, encryption, projection, comparePassword, decryption, searchValidate, SuccessResponseSender, keygen } = require('../../helper/utilities.services')
-const { sendEmail } = require('../../helper/email.service')
 
 async function notificationsender(req, params, sBody, isRecorded, isNotify, iLastUpdateBy, url) {
   try {
@@ -119,7 +120,7 @@ async function notificationsender(req, params, sBody, isRecorded, isNotify, iLas
 class Employee {
   async CreateEmployee(req, res) {
     try {
-      req.body = pick(req.body, ['sName', 'sEmpId', 'sEmail', 'sMobNum', 'iDepartmentId', 'iJobProfileId', 'nExperience', 'eGrade', 'sResumeLink', 'nAvailabilityHours', 'aSkills', 'nAvailabilityHours', 'eAvailabilityStatus', 'sProfilePic', 'sResumeLink', 'aRole', 'aPermissions', 'iBranchId', 'eShowAllProjects'])
+      req.body = pick(req.body, ['sName', 'sEmpId', 'sEmail', 'sMobNum', 'iDepartmentId', 'iJobProfileId', 'nExperience', 'eGrade', 'sResumeLink', 'nAvailabilityHours', 'aSkills', 'nAvailabilityHours', 'eAvailabilityStatus', 'sProfilePic', 'sResumeLink', 'aRole', 'aPermissions', 'iBranchId'])
 
       // console.log(req.body)
 
@@ -220,7 +221,7 @@ class Employee {
 
       const EmployeeData = await EmployeeModel.create({ ...req.body, iCreatedBy: req.employee._id, aRole: userRole, aTotalPermissions: permission, iLastUpdateBy: req.employee._id, sPassword: '$2b$10$m7Y5OVcyBIJpJ9s3X4tAb.ruLZEMwt0NNaON.OIOjKCMZznT8oOMu' })
 
-      console.log('EMployeeData', EmployeeData)
+      // console.log('EMployeeData', EmployeeData)
 
       if (req.body?.sProfilePic && req.body?.sProfilePic !== '') {
         const params = {
@@ -452,7 +453,7 @@ class Employee {
   }
 
   async EmployeeDetails(req, res) {
-    console.log('EmployeeDetails')
+    // console.log('EmployeeDetails')
     try {
       let { page = 0, limit = 5, iDepartmentId, eAvailabilityStatus, search = '', sort = 'dCreatedAt', order } = req.query
       const orderBy = order && order === 'asc' ? 1 : -1
@@ -605,7 +606,7 @@ class Employee {
       const bucket = `${config.s3Employee}/`
 
       const data = await generateUploadUrl(`${sFileName}`, sContentType, bucket)
-      console.log(data)
+      // console.log(data)
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].presigned_succ, data })
     } catch (error) {
       catchError('Employee.getSignedUrl', error, req, res)
@@ -619,7 +620,7 @@ class Employee {
       if (!EmployeeData) {
         return res.status(status.NotFound).send({ success: true, status: status.NotFound, message: messages[req.userLanguage].notfound.replace('##', messages[req.userLanguage].employee) })
       }
-      req.body = pick(req.body, ['sName', 'sMobNum', 'sEmpId', 'sProfilePic', 'iDepartmentId', 'iJobProfileId', 'nExperience', 'eGrade', 'sResumeLink', 'aSkills', 'eAvailabilityStatus', 'nAvailabilityHours', 'iBranchId', 'eShowAllProjects'])
+      req.body = pick(req.body, ['sName', 'sMobNum', 'sEmpId', 'sProfilePic', 'iDepartmentId', 'iJobProfileId', 'nExperience', 'eGrade', 'sResumeLink', 'aSkills', 'eAvailabilityStatus', 'nAvailabilityHours', 'iBranchId'])
       const { sMobNum, sEmpId } = req.body
       if (!validateEmpId(sEmpId)) return res.status(status.BadRequest).jsonp({ status: jsonStatus.BadRequest, message: messages[req.userLanguage].invalid.replace('##', messages[req.userLanguage].empId) })
       if (!validateMobile(sMobNum)) return res.status(status.BadRequest).jsonp({ status: jsonStatus.BadRequest, message: messages[req.userLanguage].invalid.replace('##', messages[req.userLanguage].mobNum) })
@@ -798,7 +799,7 @@ class Employee {
           }
 
           const data = await s3.getObject(params)
-          console.log(data)
+          // console.log(data)
           if (data) {
             if (EmployeeData?.sProfilePic) {
               const s3Params = {
@@ -820,11 +821,11 @@ class Employee {
               Key: req.body.sProfilePic
             }
             await s3.deleteObject(params2)
-            console.log('params1', params1)
+            // console.log('params1', params1)
             req.body.sProfilePic = params1.Key
           }
         } catch (error) {
-          console.log('skuhis', error)
+          // console.log('skuhis', error)
           req.body.sProfilePic = EmployeeData.sProfilePic
         }
       }
@@ -860,7 +861,7 @@ class Employee {
             req.body.sResumeLink = params1.Key
           }
         } catch (error) {
-          console.log('skuhis', error)
+          // console.log('skuhis', error)
           req.body.sResumeLink = EmployeeData.sResumeLink
         }
       }
@@ -906,6 +907,7 @@ class Employee {
       // await notificationsender(req, newdataEmployee._id, ' employeedetails is update ', true, true, req.employee._id, `${config.urlPrefix}/employee-management/detail/${newdataEmployee._id}`)
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].employee) })
     } catch (error) {
+      console.log('error', error)
       return catchError('Employee.EmployeeUpdate', error, req, res)
     }
   }
@@ -987,8 +989,10 @@ class Employee {
       await OrgBranchModel.findByIdAndUpdate({ _id: employee.iBranchId }, { $inc: { nTotal: -1 } })
       await JobProfileModel.findByIdAndUpdate({ _id: employee.iJobProfileId }, { $inc: { nTotal: -1 } })
 
-      // const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'EmployeeDelete', eAction: 'Delete', oOldFields: employee, oNewFields: data }
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'EmployeeDelete', eAction: 'Delete', oOldFields: employee, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
       // await Logs.create(logs)
+      await queuePush('logs', logs)
       // await notificationsender(req, data._id, ' employee is delete ', true, true, req.employee._id, `${config.urlPrefix}/employee-management/detail/${data._id}`)
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].employee) })
     } catch (error) {
@@ -1035,12 +1039,13 @@ class Employee {
       // unsubscribeUsers(sPushToken, 'All')
 
       const data = await EmployeeModel.findByIdAndUpdate({ _id: req.employee._id, eStatus: 'Y' }, { $pull: { aJwtTokens: { sToken: { $ne: sToken } } } }, { new: true, runValidators: true })
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = await ResourceManagementDB.model(take, Logs)
+      // take = await ResourceManagementDB.model(take, Logs)
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'logout', eAction: 'Update', oNewFields: data }
-      await take.create(logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'logout', eAction: 'Update', oNewFields: data, oOldFields: token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await take.create(logs)
+      await queuePush('logs', logs)
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].succ_logout })
     } catch (error) {
       return catchError('Employee.logout', error, req, res)
@@ -1050,7 +1055,7 @@ class Employee {
   async reset_password(req, res) {
     try {
       const type = req.query.type
-      console.log(type)
+      // console.log(type)
       if (type !== 'otp' && type !== 'reset-link' && type !== 'set-link') {
         return res.status(status.NotFound).send({ success: false, status: status.NotFound, message: messages[req.userLanguage].typeNotFound })
       }
@@ -1099,15 +1104,16 @@ class Employee {
 
             const data = await EmployeeModel.findByIdAndUpdate({ _id: dataEmployee._id, eStatus: 'Y' }, { $set: { sPassword: password } }, { new: true })
 
-            console.log(data)
+            // console.log(data)
 
             const check = await OtpModel.findOneAndDelete({ sVerificationToken })
-            console.log(check)
-            let take = `Logs${new Date().getFullYear()}`
+            // console.log(check)
+            // let take = `Logs${new Date().getFullYear()}`
 
-            take = ResourceManagementDB.model(take, Logs)
-            const logs = { eActionBy: { eType: data.eEmpType, iId: data._id }, iId: data._id, eModule: 'Employee', sService: 'reset_password', eAction: 'Create', oNewFields: data }
-            await take.create(logs)
+            // take = ResourceManagementDB.model(take, Logs)
+            const logs = { eActionBy: { eType: data.eEmpType, iId: data._id }, iId: data._id, eModule: 'Employee', sService: 'reset_password', eAction: 'Create', oNewFields: data, oOldFields: dataEmployee, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+            // await take.create(logs)
+            await queuePush('logs', logs)
             return res.status(status.OK).send({ success: true, status: status.OK, messages: messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].password) })
           } else {
             return res.status(status.NotAcceptable).send({ success: false, status: status.NotAcceptable, messages: messages[req.userLanguage].new_confirm_password_same })
@@ -1137,16 +1143,17 @@ class Employee {
 
             const data = await EmployeeModel.findByIdAndUpdate({ _id: dataEmployee._id, eStatus: 'Y' }, { $set: { sPassword: password } }, { new: true })
 
-            console.log(data)
+            // console.log(data)
 
             const check = await OtpModel.findOneAndDelete({ sVerificationToken })
-            console.log(check)
-            let take = `Logs${new Date().getFullYear()}`
+            // console.log(check)
+            // let take = `Logs${new Date().getFullYear()}`
 
-            take = ResourceManagementDB.model(take, Logs)
+            // take = ResourceManagementDB.model(take, Logs)
 
-            const logs = { eActionBy: { eType: data.eEmpType, iId: data._id }, iId: data._id, eModule: 'Employee', sService: 'reset_password', eAction: 'Create', oNewFields: data }
-            await take.create(logs)
+            const logs = { eActionBy: { eType: data.eEmpType, iId: data._id }, iId: data._id, eModule: 'Employee', sService: 'reset_password', eAction: 'Create', oNewFields: data, oOldFields: dataEmployee, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+            // await take.create(logs)
+            await queuePush('logs', logs)
             return res.status(status.OK).send({ success: true, status: status.OK, messages: messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].password) })
           } else {
             return res.status(status.NotAcceptable).send({ success: false, status: status.NotAcceptable, messages: messages[req.userLanguage].new_confirm_password_same })
@@ -1161,23 +1168,34 @@ class Employee {
   async forgot_password(req, res) {
     try {
       req.body = pick(req.body, ['sLogin'])
-      console.log(req.body)
+      // console.log(req.body)
       const { sLogin } = req.body
       const isEmail = validateEmail(sLogin)
       const query = isEmail ? { sEmail: sLogin } : { sMobNum: sLogin }
       const type = isEmail ? 'reset-link' : 'otp'
-      const EmployeeData = await EmployeeModel.findOne(query)
+      const EmployeeData = await EmployeeModel.findOne({ ...query, eStatus: 'Y' })
       if (!EmployeeData) {
         return res.status(status.NotFound).send({ success: true, status: status.NotFound, messages: messages[req.userLanguage].We_cannot_find_an_account_with_that_email_address })
       }
       if (type === 'otp') {
         const generateOtp = Math.floor(1000 + Math.random() * 9000)
-        const userOtp = new OtpModel({
+        // const userOtp = new OtpModel({
+        //   sLogin,
+        //   sCode: generateOtp,
+        //   sType: type
+        // })
+        // await userOtp.save()
+
+        const data = await OtpModel.create({
           sLogin,
           sCode: generateOtp,
           sType: type
         })
-        await userOtp.save()
+
+        const logs = { eActionBy: { eType: EmployeeData.eEmpType, iId: EmployeeData._id }, iId: data._id, eModule: 'Employee', sService: 'forgot_password', eAction: 'Update', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+
         // sendOtp(EmployeeData.sEmpName, EmployeeData.sEmail, generateOtp)
         return res.status(status.OK).send({ success: true, status: status.OK, type, messages: messages[req.userLanguage].email_sent })
       }
@@ -1186,20 +1204,24 @@ class Employee {
         const token = jwt.sign({ data }, config.JWT_SECRET, {
           expiresIn: config.JWT_VALIDITY
         })
-        const userLink = new OtpModel({
+        const otpData = await OtpModel.create({
           sLogin,
           sVerificationToken: token,
           sType: type,
           dCreatedAt: moment().add(10, 'minutes').toDate()
         })
-        await userLink.save()
+
+        const logs = { eActionBy: { eType: EmployeeData.eEmpType, iId: EmployeeData._id }, iId: otpData._id, eModule: 'Employee', sService: 'forgot_password', eAction: 'Update', oNewFields: otpData, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
+
         const body = {
           type: 'Reset-Password',
           NAME: EmployeeData.sName,
           EMAIL: EmployeeData.sEmail,
           RESET: config.resetLink.replace('add_token', token)
         }
-        console.log(body)
+        // console.log(body)
         sendEmail(body)
         return res.status(status.OK).send({ success: true, status: status.OK, type, messages: messages[req.userLanguage].email_sent })
       } else {
@@ -1224,11 +1246,12 @@ class Employee {
       const [dataHash, dataToken] = await Promise.all([EmployeeModel.findByIdAndUpdate({ _id: req.employee._id, eStatus: 'Y' }, { sPassword: hashPassword(sNewPassword) }, { runValidators: true }), EmployeeModel.findByIdAndUpdate({ _id: req.employee._id, eStatus: 'Y' }, { $pull: { aJwtTokens: { sToken: { $ne: sToken } } } }, { runValidators: true })])
       if (!dataHash || !dataToken) return res.status(status.NotFound).jsonp({ status: jsonStatus.NotFound, message: messages[req.userLanguage].invalid.replace('##', messages[req.userLanguage].Credentials) })
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employee._id, eModule: 'Employee', sService: 'changePassword', eAction: 'Update', oNewFields: dataHash, oOldFields: employee }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employee._id, eModule: 'Employee', sService: 'changePassword', eAction: 'Update', oNewFields: dataHash, oOldFields: employee, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('logs', logs)
+      // await take.create(logs)
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].password) })
     } catch (error) {
       return catchError('Employee.changePassword', error, req, res)
@@ -1263,11 +1286,12 @@ class Employee {
       }
       const data = await EmployeeModel.findByIdAndUpdate({ _id: req.employee._id, eStatus: 'Y' }, { ...req.body }, { runValidators: true, new: true }).lean()
       if (!data) return res.status(status.NotFound).jsonp({ status: jsonStatus.NotFound, message: messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].user) })
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'updateUserProfile', eAction: 'Update', oNewFields: data, oOldFields: oldUserData }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'updateUserProfile', eAction: 'Update', oNewFields: data, oOldFields: oldUserData, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('logs', logs)
+      // await take.create(logs)
       // await notificationsender(req, data._id, ' employee updated profile ', true, true, req.employee._id, `${config.urlPrefix}/employee-management/detail/${data._id}`)
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].profile) })
     } catch (error) {
@@ -1352,9 +1376,11 @@ class Employee {
           }
         }
       ])
+
       if (!userDetail.length) return res.status(status.NotFound).jsonp({ status: jsonStatus.NotFound, message: messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].user) })
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].success.replace('##', messages[req.userLanguage].user), user: userDetail[0] })
     } catch (error) {
+      console.log(error)
       return catchError('Employee.getUser', error, req, res)
     }
   }
@@ -1417,14 +1443,19 @@ class Employee {
   async updateUserSkills(req, res) {
     try {
       const id = req.employee._id
+      const EmployeeExist = await EmployeeModel.findOne({
+        _id: id, eStatus: 'Y'
+      })
+      if (!EmployeeExist) return res.status(status.NotFound).jsonp({ status: jsonStatus.NotFound, message: messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].user) })
       const data = await EmployeeModel.findByIdAndUpdate({ _id: id, eStatus: 'Y' }, { aSkills: req.body.aSkills }, { runValidators: true }).lean()
       if (!data) return res.status(status.NotFound).jsonp({ status: jsonStatus.NotFound, message: messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].user) })
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'updateUserSkills', eAction: 'Update', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Employee', sService: 'updateUserSkills', eAction: 'Update', oNewFields: data, oOldFields: EmployeeExist, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await take.create(logs)
+      await queuePush('logs', logs)
       // await notificationsender(req, data._id, ' employee skills updated ', true, true, req.employee._id, `${config.urlPrefix}/employee-management/detail/${data._id}`)
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].skill) })
     } catch (error) {
@@ -1598,13 +1629,14 @@ class Employee {
       }
       const EmployeeExist = await EmployeeModel.findByIdAndUpdate({ _id: iEmployeeId }, { nPaid, iLastUpdateBy: req.employee._id }, {})
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
+      // take = ResourceManagementDB.model(take, Logs)
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employeeExist._id, eModule: 'Employee', sService: 'addCurrency', eAction: 'Create', oNewFields: EmployeeExist }
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employeeExist._id, eModule: 'Employee', sService: 'addCurrency', eAction: 'Create', oNewFields: EmployeeExist, oOldFields: employeeExist, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
 
-      await take.create(logs)
+      await queuePush('logs', logs)
+      // await take.create(logs)
       // await notificationsender(req, EmployeeExist._id, ' employee currency added ', true, true, req.employee, `${config.urlPrefix}/employee-management/detail/${EmployeeExist._id}`)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].currency))
@@ -1616,7 +1648,7 @@ class Employee {
   async updateCurrency(req, res) {
     try {
       const { iEmployeeId, nPaid, aCurrency } = req.body
-      console.log(req.body)
+      // console.log(req.body)
       const employeeExist = await EmployeeModel.findOne({ _id: iEmployeeId, eStatus: 'Y' })
       if (!employeeExist) return res.status(status.NotFound).jsonp({ status: jsonStatus.NotFound, message: messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].employee) })
 
@@ -1635,15 +1667,17 @@ class Employee {
           })
         }
         const EmployeeUpdate = await EmployeeModel.findByIdAndUpdate(iEmployeeId, { nPaid }, { new: true })
-        console.log(EmployeeUpdate)
+        // console.log(EmployeeUpdate)
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
+        // take = ResourceManagementDB.model(take, Logs)
 
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employeeExist._id, eModule: 'Employee', sService: 'updateCurrency', eAction: 'Update', oNewFields: EmployeeUpdate }
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employeeExist._id, eModule: 'Employee', sService: 'updateCurrency', eAction: 'Update', oNewFields: EmployeeUpdate, oOldFields: employeeExist, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
 
-        await take.create(logs)
+        await queuePush('logs', logs)
+
+        // await take.create(logs)
         // await notificationsender(req, EmployeeUpdate._id, ' employee currency updated ', true, true, req.employee._id, `${config.urlPrefix}/employee-management/detail/${EmployeeUpdate._id}`)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].currency))
       } else {
@@ -1715,14 +1749,16 @@ class Employee {
         }
 
         const EmployeeUpdate = await EmployeeModel.findByIdAndUpdate(iEmployeeId, { nPaid }, { new: true })
-        console.log(EmployeeUpdate)
+        // console.log(EmployeeUpdate)
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employeeExist._id, eModule: 'Employee', sService: 'updateCurrency', eAction: 'Update', oNewFields: EmployeeUpdate }
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: employeeExist._id, eModule: 'Employee', sService: 'updateCurrency', eAction: 'Update', oNewFields: EmployeeUpdate, oOldFields: employeeExist, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
 
-        await take.create(logs)
+        await queuePush('logs', logs)
+
+        // await take.create(logs)
         await notificationsender(req, EmployeeUpdate._id, ' employee currency updated ', true, true, req.employee._id, `${config.urlPrefix}/employee-management/detail/${EmployeeUpdate._id}`)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].currency))
       }
@@ -1744,7 +1780,7 @@ class Employee {
           match: { eStatus: 'Y', bIsActive: true },
           select: '_id sName sKey eStatus bIsActive '
         }).lean()
-        console.log(exist)
+        // console.log(exist)
         if (!exist) {
           return res.status(status.BadRequest).jsonp({ status: jsonStatus.BadRequest, message: messages[req.userLanguage].invalid.replace('##', messages[req.userLanguage].role) })
         } else {
@@ -1762,7 +1798,7 @@ class Employee {
           }
         }
       }
-      console.log(Role)
+      // console.log(Role)
 
       req.body.aRole = Role
       req.body.aTotalPermissions = Permission
@@ -1771,7 +1807,7 @@ class Employee {
 
       // update employee role
       const check = await EmployeeModel.findOneAndUpdate({ _id: req.employee._id }, { aRole: req.body.aRole, aTotalPermissions: req.body.aTotalPermissions })
-      console.log(check)
+      // console.log(check)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success, {
         aRole: req.body.aRole,
         aPermissions: req.body.aTotalPermissions
@@ -1787,21 +1823,32 @@ class Employee {
       const token = jwt.sign({ data }, config.JWT_SECRET, {
         expiresIn: config.JWT_VALIDITY
       })
-      const userLink = new OtpModel({
+      // const userLink = new OtpModel({
+      //   sLogin: 'pranav.kakadiya@yudiz.com',
+      //   sVerificationToken: token,
+      //   sType: 'Set-Password',
+      //   dStartAt: moment(),
+      //   dCreatedAt: moment().add(5, 'minutes').toDate()
+      // })
+
+      // await userLink.save()
+
+      const userLink = await OtpModel.create({
         sLogin: 'pranav.kakadiya@yudiz.com',
         sVerificationToken: token,
         sType: 'Set-Password',
         dStartAt: moment(),
         dCreatedAt: moment().add(5, 'minutes').toDate()
       })
-
-      await userLink.save()
       const body = {
         type: 'Set-Password',
         NAME: 'ramesh',
         EMAIL: 'pranav.kakadiya@yudiz.com',
         RESET: config.resetLink.replace('add_token', token).replace('reset-link', 'set-link')
       }
+      // const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: token._id, eModule: 'Employee', sService: 'setpassword', eAction: 'Create', oNewFields: token, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      // await queuePush('logs', logs)
 
       sendEmail(body)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success)

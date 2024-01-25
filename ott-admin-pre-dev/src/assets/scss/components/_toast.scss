@@ -1,0 +1,60 @@
+.toast {
+  border-radius: 10px;
+  position: fixed;
+  top: 25px;
+  right: 25px;
+  z-index: 9999;
+  padding: 12px;
+  background: var(--primary-color);
+
+  &.danger {
+    --text: #{$red-400};
+    --btn-text: #{$red-300};
+    background-color: $red-100;
+  }
+
+  &.success {
+    --text: #1a593e;
+    --btn-text: #1b593f;
+    background-color: #9ad9be;
+  }
+
+  .toast-body {
+    border-radius: 50px;
+    font-size: $fs-14;
+    font-weight: $fw-600;
+    color: var(--text);
+    padding: 0;
+    width: calc(100% - 20px);
+    line-height: 1;
+    margin-inline: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    > div:first-child {
+      svg {
+        margin-right: 5px;
+        filter: brightness(0) invert(1);
+      }
+    }
+    > div:last-child {
+      filter: brightness(0) invert(1);
+    }
+  }
+
+  .btn-link {
+    font-size: $fs-12;
+    color: var(--btn-text);
+    padding: 4px;
+
+    &::after {
+      display: none;
+    }
+  }
+
+  @include media-max(sm) {
+    width: calc(100% - 30px);
+    right: 15px;
+  }
+}

@@ -1,0 +1,126 @@
+import React, { useState } from 'react'
+import { Button, Dropdown } from 'react-bootstrap'
+// import { useApolloClient, useMutation } from '@apollo/client'
+import { FormattedMessage, useIntl } from 'react-intl'
+// import { useHistory } from 'react-router'
+
+import Drawer from '../drawer'
+// import { LOGOUT } from 'graph-ql/auth/Logout'
+// import { allRoutes } from 'shared/constants/AllRoutes'
+// import { GET_CURRENT_USER } from 'graph-ql/profile/query'
+// import { S3_PREFIX } from 'shared/constants'
+import ChangePassword from '../change-password'
+import { useNavigate } from 'react-router-dom'
+// import { route } from 'shared/constants/AllRoutes'
+import { useQuery, useQueryClient } from 'react-query'
+import { logout } from 'query/auth/auth.query'
+import { route } from 'shared/constants/AllRoutes'
+import { toaster } from 'helper/helper'
+// import { setCurrentUser } from 'shared/utils'
+// import { GlobalEventsContext } from '../global-events'
+
+function Header() {
+  const navigate = useNavigate()
+  const query = useQueryClient()
+  // const [user, setUser] = useState()
+  const [isChangePassOpen, setIsChangePassOpen] = useState(false)
+  // const client = useApolloClient()
+  // const history = useHistory()
+  // const {
+  //   state: { profileData }
+  // } = React.useContext(GlobalEventsContext)
+
+  // useQuery(GET_CURRENT_USER, {
+  //   onCompleted: (data) => {
+  //     if (data && data.getProfile) {
+  //       setUser(data.getProfile)
+  //       setCurrentUser(data.getProfile)
+  //     }
+  //   }
+  // })
+
+  // useEffect(() => {
+  //   profileData && setUser({ ...user, ...profileData })
+  // }, [profileData])
+
+  // const [logout] = useMutation(LOGOUT, {
+  //   onCompleted: (data) => {
+  //     if (data && data.adminLogout) {
+  //       localStorage.clear()
+  //       history.push(allRoutes.login)
+  //       client.resetStore()
+  //     }
+  //   }
+  // })
+
+  const [clickedLogOut, setClickedLogOut] = useState(false)
+
+  useQuery('logoutUser', () => logout(), {
+    enabled: clickedLogOut,
+    onSuccess: (res) => {
+      localStorage.clear()
+      navigate('/login')
+      toaster(res?.data?.message)
+    }
+  })
+
+  const handleLogout = () => {
+    setClickedLogOut(true)
+    query.invalidateQueries('logoutUser')
+  }
+
+  function handleEditProfile() {
+    navigate(route.editProfile)
+  }
+
+  function handleChangePass() {
+    setIsChangePassOpen(!isChangePassOpen)
+  }
+
+  return (
+    <header className='header d-flex align-items-center justify-content-between'>
+      <div className='header-left'>
+        <Dropdown>
+          <Dropdown.Toggle variant='link' className='square p-0 d-flex align-items-center'>
+            <div className='img d-flex align-items-center justify-content-center'>
+              {/* {user?.sUrl ? (
+                <img src={`${S3_PREFIX}${user?.sUrl}`} className="h-100 w-100 cover" alt={user?.sDisplayName} />
+              ) : (
+                <i className="icon-account"></i>
+              )} */}
+            </div>
+            {/* {user && user.sDisplayName} */}
+          </Dropdown.Toggle>
+          <Dropdown.Menu className='up-arrow'>
+            <Dropdown.Item onClick={handleEditProfile}>
+              <i className='icon-account'></i>
+              <FormattedMessage id='myProfile' />
+            </Dropdown.Item>
+            <Dropdown.Item onClick={handleChangePass}>
+              <i className='icon-lock'></i>
+              <FormattedMessage id='changePassword' />
+            </Dropdown.Item>
+            <Dropdown.Item onClick={() => handleLogout()}>
+              <i className='icon-logout'></i>
+              <FormattedMessage id='logout' />
+            </Dropdown.Item>
+          </Dropdown.Menu>
+        </Dropdown>
+      </div>
+      <div className='header-right'>
+        <Button className='icon-r square' variant='light'>
+          <i className='icon-notifications'></i>
+        </Button>
+      </div>
+      <Drawer
+        isOpen={isChangePassOpen}
+        onClose={() => setIsChangePassOpen(!isChangePassOpen)}
+        title={useIntl().formatMessage({ id: 'changePassword' })}
+      >
+        <ChangePassword handleChangePass={handleChangePass} />
+      </Drawer>
+    </header>
+  )
+}
+
+export default Header

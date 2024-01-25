@@ -1,19 +1,104 @@
 const config = require('../config/config')
 const aws = require('aws-sdk')
 const { handleCatchError } = require('../helper/utilities.services')
+const moment = require('moment')
 // const path = require('path')
 // const fs = require('fs')
 // const { queuePush, queuePop } = require('../queue')
 
-const region = config.Region
-const secretAccessKey = config.AWS_SECRET_ACCESS_KEY
-const accessKeyId = config.AWS_ACCESS_KEY_ID
-const BucketName = config.S3_BUCKET_NAME
-const signatureVersion = 'v4'
+require('dotenv').config()
 
-const s3 = new aws.S3({
-  region, secretAccessKey, accessKeyId, signatureVersion
-})
+let s3
+
+async function setProcessEnvUsingSecretManager() {
+  try {
+    if (process.env.NODE_ENV === 'production') {
+      console.log('production', {
+        region: process.env?.region,
+        secretAccessKey: process.env.secretAccessKey,
+        accessKeyId: process.env.accessKeyId,
+        signatureVersion: process.env?.signatureVersion,
+        sessionToken: process.env.sessionToken,
+        Expiration: process.env.Expiration
+      })
+
+      const client = new aws.SecretsManager({
+        region: process.env?.region || 'ap-south-1',
+        secretAccessKey: process.env.secretAccessKey,
+        accessKeyId: process.env.accessKeyId,
+        signatureVersion: process.env?.signatureVersion || 'v4',
+        sessionToken: process.env.sessionToken
+      })
+
+      const data = await client.getSecretValue({ SecretId: 'prod' }).promise()
+
+      if ('SecretString' in data) {
+        const secretData = JSON.parse(data.SecretString)
+        console.log('*'.repeat(100))
+        console.log('secretData', secretData)
+        console.log('*'.repeat(100))
+        for (const key in secretData) {
+          process.env[key] = secretData[key]
+        }
+
+        s3 = new aws.S3({
+          region: process.env?.region || 'ap-south-1',
+          secretAccessKey: process.env.secretAccessKey,
+          accessKeyId: process.env.accessKeyId,
+          signatureVersion: process.env.signatureVersion,
+          sessionToken: process.env.sessionToken
+        })
+      }
+    } else {
+      // Fallback to using config for non-production environment
+      for (const key in config) {
+        console.log('+'.repeat(100))
+        process.env[key] = config[key]
+        console.log('+'.repeat(100))
+      }
+
+      console.log('else', {
+        region: process.env?.Region,
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        signatureVersion: process.env?.signatureVersion || 'v4',
+        sessionToken: process.env.sessionToken
+      })
+      s3 = new aws.S3({
+        region: process.env.Region || 'ap-south-1',
+        secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+        accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+        signatureVersion: 'v4'
+      })
+      // console.log(process.env)
+    }
+  } catch (error) {
+    console.log('---------------------------', error)
+    return handleCatchError('setProcessEnvUsingSecretManager', error)
+  }
+}
+
+async function assumeRoleCheck() {
+  try {
+    aws.config.update({ region: 'ap-south-1' })
+
+    // console.log('node_ENV', process.env.NODE_ENV)
+    const s31 = await aws.config.credentialProvider.resolvePromise()
+
+    console.log('s31', s31)
+
+    process.env.region = 'ap-south-1'
+    process.env.secretAccessKey = s31.metadata.SecretAccessKey
+    process.env.accessKeyId = s31.metadata.AccessKeyId
+    process.env.signatureVersion = 'v4'
+    process.env.sessionToken = s31.metadata.Token
+    process.env.Expiration = s31.metadata.Expiration
+  } catch (error) {
+    console.log('!'.repeat(100))
+    console.log(error)
+    console.log('!'.repeat(100))
+  }
+}
 
 async function generateUploadUrl(sFileName = 'user', sContentType, path) {
   try {
@@ -27,11 +112,19 @@ async function generateUploadUrl(sFileName = 'user', sContentType, path) {
     fileKey = `${Date.now()}_${sFileName}`
 
     const params = {
-      Bucket: BucketName,
+      Bucket: process.env.S3_BUCKET_NAME,
       Key: s3Path + fileKey,
       Expires: 300,
       ContentType: sContentType
     }
+
+    console.log(process.env)
+
+    console.log('region', process.env.region)
+    console.log('secretAccessKey', process.env.secretAccessKey)
+    console.log('accessKeyId', process.env.accessKeyId)
+    console.log('signatureVersion', process.env?.signatureVersion || '')
+    console.log('sessionToken', process.env?.sessionToken || '')
 
     console.log('params', params)
 
@@ -48,7 +141,7 @@ async function generateUploadUrl(sFileName = 'user', sContentType, path) {
 async function generateUploadUrlForS3UsingPost(ContentType, fileName) {
   try {
     const params = {
-      Bucket: BucketName,
+      Bucket: process.env.S3_BUCKET_NAME,
       Expires: 300,
       Conditions: [
         ['content-length-range', 100, 5242880],
@@ -72,7 +165,7 @@ async function generateUploadUrlForS3UsingPost(ContentType, fileName) {
       }
     }
 
-    console.log('params', params)
+    // console.log('params', params)
 
     const uploadURL = s3.createPresignedPost(params)
 
@@ -123,7 +216,7 @@ async function deleteObjectFromS3(s3Params) {
 }
 
 async function findObjectFromS3(s3Params) {
-  s3.listObjects({ Bucket: s3Params.Bucket }, function(err, data) {
+  s3.listObjects({ Bucket: s3Params.Bucket }, function (err, data) {
     if (err) {
       handleCatchError('listS3.Object', err)
     } else {
@@ -173,7 +266,7 @@ async function getUrlOfObject(s3Params) {
 
 async function s3BucketSize() {
   return new Promise((resolve, reject) => {
-    s3.listObjects({ Bucket: BucketName }, (err, data) => {
+    s3.listObjects({ Bucket: process.env.S3_BUCKET_NAME }, (err, data) => {
       if (err) {
         reject(err)
       } else {
@@ -193,7 +286,7 @@ async function uploadFileToS3(s3Params) {
         reject(err)
       } else {
         resolve(data)
-        console.log('data', data)
+        // console.log('data', data)
       }
     })
   }
@@ -201,7 +294,7 @@ async function uploadFileToS3(s3Params) {
 }
 
 async function getObject(s3Params) {
-  console.log('s3Params', s3Params)
+  // console.log('s3Params', s3Params)
   return new Promise((resolve, reject) => {
     s3.getObject(s3Params, (err, data) => {
       if (err) {
@@ -217,13 +310,13 @@ async function getObject(s3Params) {
 async function getSignedUrlForExcel(fileKey) {
   try {
     const params = {
-      Bucket: BucketName,
+      Bucket: process.env.S3_BUCKET_NAME,
       Key: fileKey,
       Expires: 60 * 60 * 24
     }
 
     const url = s3.getSignedUrl('getObject', params)
-    console.log('url', url)
+    // console.log('url', url)
 
     return url
   } catch (error) {
@@ -231,241 +324,75 @@ async function getSignedUrlForExcel(fileKey) {
   }
 }
 
-// async function ifExists(file) {
-//   // console.log(file)
-//   // const fileName = path.join(config.s3Excel, file)
-
-//   // console.log(fileName)
-
-//   // const s3Params = {
-//   //   Bucket: BucketName,
-//   //   Key: 'flags/ad.png'
-//   // }
-
-//   // const data = await new Promise((resolve, reject) => {
-//   //   s3.headObject(s3Params, (err, data) => {
-//   //     if (err) {
-//   //       reject(err)
-//   //     } else {
-//   //       resolve(data)
-//   //     }
-//   //   })
-//   // console.log(data)
-
-//   // const data = await getObjectDetails(s3Params)
-//   // return data
-
-//   // if (!data) {
-
-//   // }
-
-//   // s3.getObject(s3Params, (err, data) => {
-//   //   if (err) {
-//   //     console.log(err)
-//   //   } else {
-//   //     console.log(data)
-//   //   }
-//   // })
-
-//   // return new Promise((resolve, reject) => {
-//   //   s3.headObject(s3Params, (err, data) => {
-//   //     if (err) {
-//   //       reject(err)
-//   //     } else {
-//   //       resolve(data)
-//   //     }
-//   //   })
-//   // }
-//   // )
-//   // })
-// }
-
-// async function uploadStream(data) {
-//   // const fileStream = fs.createReadStream('./resource-management-f8560-97a2b372eb19.json')
-//   // fileStream.on('error', function(err) {
-//   //   console.log('File Error', err)
-//   // })
-
-//   // const uploadParams = {
-//   //   Bucket: BucketName,
-//   //   Key: 'flagsA/ad.png',
-//   //   Body: fileStream
-//   // }
-
-//   // const data = await new Promise((resolve, reject) => {
-//   //   s3.upload(uploadParams, function(err, data) {
-//   //     if (err) {
-//   //       reject(err)
-//   //     }
-//   //     if (data) {
-//   //       resolve(data)
-//   //     }
-//   //   })
-//   // })
-//   // return data
-
-//   // const s3Params = {
-//   //   Bucket: BucketName,
-//   //   Key: 'images/abc.js',
-//   //   Body: fileStream
-//   // }
-//   // s3.upload(s3Params, function (err, data) {
-//   //   if (err) {
-//   //     console.log('Error', err)
-//   //   } if (data) {
-//   //     console.log('Upload Success', data.Location)
-//   //   }
-//   // })
-
-//   // const s3Stream = s3.upload(s3Params).createReadStream()
-//   // fileStream.pipe(s3Stream)
-//   // s3Stream.on('error', function(err) {
-//   //   console.log('S3 Error', err)
-//   // })
-//   // s3Stream.on('finish', function() {
-//   //   console.log('S3 Upload Finished')
-//   // })
-//   // return s3Stream
-
-//   // uplaod file from local to s3 bucket using stream
-//   // const fileStream = fs.createReadStream('./resource-management-f8560-97a2b372eb19.json')
-//   // fileStream.on('error', function(err) {
-//   //   console.log('File Error', err)
-//   // }
-//   // )
-
-//   // // const s3Params = {
-
-//   // const s3Params = {
-//   //   Bucket: BucketName,
-//   //   Key: 'flagsA/ad.png',
-//   //   Body: fileStream
-//   // }
-//   // s3.upload(s3Params, function (err, data) {
-//   //   if (err) {
-//   //     console.log('Error', err)
-//   //   } if (data) {
-//   //     console.log('Upload Success', data.Location)
-//   //   }
-//   // })
-
-//   // const s3Stream = s3.upload(s3Params).createReadStream()
-//   // fileStream.pipe(s3Stream)
-//   // s3Stream.on('error', function(err) {
-//   //   console.log('S3 Error', err)
-//   // })
-//   // s3Stream.on('finish', function() {
-//   //   console.log('S3 Upload Finished')
-//   // })
-//   // return s3Stream
-
-//   // u can use create Multipart when  tyhe file size goes above 100MB
-
-//   // console.log(file)
-
-//   // const path1 = path.join(__dirname, '..', file)
-//   // const rstream = createReadStream(resolve(path1))
-
-//   // rstream.once('error', (err) => {
-//   //   console.error(`unable to upload file ${path1}, ${err.message}`)
-//   // })
-
-//   // const parameters = {
-//   //   Bucket: BucketName,
-//   //   Key: `flagsA/${file}`
-//   // }
-//   // const opts = { }
-
-//   // parameters.Body = rstream
-//   // parameters.ContentType = getMIMEType(path1)
-//   // await s3.upload(parameters, opts).promise()
-
-//   // console.info(`${parameters.Key} (${parameters.ContentType}) uploaded in bucket ${parameters.Bucket}`)
-
-//   // console.log('S3 Upload Finished')
-
-//   // over file size 100MB
-
-//   // queuepop from queue
-
-//   const file = await queuePop('preflight_download_excel_2')
-
-//   const filePath = '/Users/yudiz/Documents/resource-management-node/ExcelFile/'
-
-//   const fileName = data.file
-
-//   if (!fileName) {
-//     throw new Error('the fileName is empty')
-//   }
-//   // if (!filePath) {
-//   //   throw new Error('the file absolute path is empty')
-//   // }
-
-//   const fileNameInS3 = `pranav/${fileName}` // the relative path inside the bucket
-//   console.info(`file name: ${fileNameInS3} file path: ${filePath}`)
-
-//   if (!fs.existsSync(filePath)) {
-//     throw new Error(`file does not exist: ${filePath}`)
-//   }
-
-//   const statsFile = fs.statSync(filePath)
-//   console.log(`file size: ${Math.round(statsFile.size / 1024 / 1024)}MB`)
-
-//   let uploadId
+// async function retriveNewToken() {
 //   try {
-//     const params = {
-//       Bucket: BucketName,
-//       Key: fileNameInS3
-//     }
-//     const result = await s3.createMultipartUpload(params).promise()
-//     uploadId = result.UploadId
-//     console.info(`csv ${fileNameInS3} multipart created with upload id: ${uploadId}`)
-//   } catch (e) {
-//     throw new Error(`Error creating S3 multipart. ${e.message}`)
-//   }
+//     // if (process.env.NODE_ENV === 'production') {
+//     // cehck expiation before 5 min
 
-//   const chunkSize = 10 * 1024 * 1024 // 10MB
-//   const readStream = fs.createReadStream(`${filePath}/${fileName}`)
+//     const expiration = moment(process.env.Expiration).subtract(5, 'minutes').format('YYYY-MM-DDTHH:mm:ss.SSSZ')
 
-//   console.log('readStream', readStream)
+//     const now = moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ')
 
-//   let partNumber = 0
-//   const parts = []
-//   let offset = 0
+//     console.log('expiration', expiration)
+//     console.log('now', now)
 
-//   while (offset < statsFile.size) {
-//     partNumber++
-//     const end = Math.min(offset + chunkSize, statsFile.size)
-
-//     const partParams = {
-//       Body: readStream,
-//       Bucket: BucketName,
-//       Key: fileNameInS3,
-//       PartNumber: partNumber,
-//       UploadId: uploadId
-//     }
-
-//     const partResult = await s3.uploadPart(partParams).promise()
-//     parts.push({
-//       ETag: partResult.ETag,
-//       PartNumber: partNumber
+//     // if (moment(now).isAfter(expiration)) {
+//     console.log('expired')
+//     const sts = new aws.STS({
+//       region: 'ap-south-1',
+//       secretAccessKey: process.env.secretAccessKey,
+//       accessKeyId: process.env.accessKeyId,
+//       signatureVersion: 'v4',
+//       sessionToken: process.env.sessionToken
 //     })
-//     offset = end
-//   }
 
-//   const completeParams = {
-//     Bucket: BucketName,
-//     Key: fileNameInS3,
-//     MultipartUpload: {
-//       Parts: parts
-//     },
-//     UploadId: uploadId
-//   }
+//     const data = await sts.getSessionToken({}).promise()
+//     console.log('data', data)
 
-//   const completeResult = await s3.completeMultipartUpload(completeParams).promise()
-//   console.log(`csv ${fileNameInS3} multipart completed with upload id: ${uploadId}`)
-//   return completeResult
+//     s3 = new aws.S3({
+//       region: process.env?.region || 'ap-south-1',
+//       secretAccessKey: data.Credentials.SecretAccessKey,
+//       accessKeyId: data.Credentials.AccessKeyId,
+//       signatureVersion: process.env?.signatureVersion || 'v4',
+//       sessionToken: data.Credentials.SessionToken
+//     })
+
+//     process.env.secretAccessKey = data.Credentials.SecretAccessKey
+//     process.env.accessKeyId = data.Credentials.AccessKeyId
+//     process.env.signatureVersion = 'v4'
+//     process.env.sessionToken = data.Credentials.SessionToken
+//     // } else {
+//     //   console.log('not expired')
+//     // }
+//     // } else {
+//     // console.log('not production')
+//     // }
+//   } catch (error) {
+//     console.log(error)
+//     handleCatchError('retriveNewToken', error)
+//   }
 // }
+
+async function retriveNewToken() {
+  try {
+    if (process.env.NODE_ENV === 'production') {
+      const expiration = moment(process.env.Expiration).subtract(5, 'minutes').format('YYYY-MM-DDTHH:mm:ss.SSSZ')
+
+      const now = moment().format('YYYY-MM-DDTHH:mm:ss.SSSZ')
+
+      console.log('expiration', expiration)
+      console.log('now', now)
+      if (moment(now).isAfter(expiration)) {
+        await assumeRoleCheck()
+        await setProcessEnvUsingSecretManager()
+      }
+    }
+  } catch (error) {
+    console.log('='.repeat(100))
+    console.log(error)
+    console.log('='.repeat(100))
+  }
+}
 
 // return new Promise((resolve, reject) => {
 //   s3.upload(s3Params, (err, data) => {
@@ -483,7 +410,10 @@ module.exports = {
   generateUploadUrlForS3UsingPost,
   s3BucketSize,
   s3,
-  getUrlOfObject
+  getUrlOfObject,
+  setProcessEnvUsingSecretManager,
+  assumeRoleCheck,
+  retriveNewToken
   // uploadStream
   // ifExists,
 

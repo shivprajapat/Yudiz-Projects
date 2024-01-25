@@ -1,0 +1,314 @@
+.common-dashboard-wrapper {
+  display: flex;
+  background-color: $dark-blue;
+  .sidebar-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 40px 24px;
+    width: 332px;
+    background-color: $dark-blue;
+  }
+  .main-content-box {
+    width: calc(100% - 332px);
+    background-color: $light-blue;
+    border-radius: 12px 0 0 12px;
+    max-height: 100vh;
+    overflow-y: auto;
+  }
+  .user-name {margin-bottom: 20px !important;
+    a:hover span{color: $white !important;}
+    a{ background-color: white; span{color: $text-blue; font-weight: 700; margin: 0px auto; text-transform: uppercase;} text-align: center; }
+  }
+}
+.sidebar-box {
+  .logo-box {
+    margin-bottom: 40px;
+  }
+  .sidebar-menu {
+    max-height: calc(100vh - 264px);
+    overflow: auto;
+    padding-left: 0;
+    li {
+      margin-bottom: 3px;
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &.active {
+        .menu-link {
+          background-color: $text-blue;
+          box-shadow: 0px 4px 16px rgba(13, 45, 68, 0.16);
+        }
+      }
+    }
+  }
+  .menu-link {
+    padding: 18px 24px;
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+    @include transition_03;
+    span {
+      margin-left: 20px;
+      display: block;
+      font-weight: $fw-500;
+      color: $white;
+      letter-spacing: 0;
+      line-height: 26px;
+      text-align: left;
+    }
+    &:hover {
+      background-color: $text-blue;
+      box-shadow: 0px 4px 16px rgba(13, 45, 68, 0.16);
+    }
+  }
+  .logout-btn {
+    margin-top: auto;
+    margin-bottom: 0;
+    .logout {
+      width: 100%;
+      img {
+        @include transition_03;
+      }
+      span {
+        color: $text-blue;
+      }
+      border: 0;
+      &:hover {
+        background-color: $red;
+        img {
+          @include hoverimgwhite;
+        }
+        span {
+          color: $white;
+        }
+      }
+    }
+  }
+}
+.notification-close-box {
+  display: none !important;
+}
+.sidebar-box .has-submenu {
+  &.active {
+    padding-bottom: 4px;
+    background-color: $light-blue-5;
+  }
+  border-radius: 8px;
+  ul.submenu {
+    padding-left: 68px;
+    li {
+      a {
+        text-align: left;
+        background-color: transparent;
+        box-shadow: none;
+        color: #fff;
+        font-size: 15px;
+        line-height: 24px;
+        margin: 10px 0;
+        display: block;
+        &.active,
+        &:hover {
+          color: $text-blue;
+        }
+      }
+    }
+  }
+}
+
+//Responsive Css
+@media (min-width: 1200px) and (max-width: 1599px) {
+  .common-dashboard-wrapper {
+    .sidebar-box {
+      padding: 36px 22px;
+      width: 330px;
+    }
+    .main-content-box {
+      width: calc(100% - 330px);
+      border-radius: 12px 0 0 12px;
+    }
+  }
+  .sidebar-box {
+    .logo-box {
+      margin-bottom: 36px;
+    }
+    .sidebar-menu {
+      max-height: calc(100vh - 236px);
+      li {
+        margin-bottom: 3px;
+      }
+    }
+    .menu-link {
+      padding: 18px 24px;
+      border-radius: 8px;
+      span {
+        margin-left: 18px;
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .common-dashboard-wrapper {
+    .sidebar-box {
+      padding: 30px 18px;
+      width: 300px;
+    }
+    .main-content-box {
+      width: calc(100% - 300px);
+      border-radius: 12px 0 0 12px;
+    }
+  }
+  .sidebar-box {
+    .logo-box {
+      margin-bottom: 30px;
+    }
+    .sidebar-menu {
+      max-height: calc(100vh - 214px);
+      li {
+        margin-bottom: 3px;
+      }
+    }
+    .menu-link {
+      padding: 16px 22px;
+      border-radius: 8px;
+      span {
+        margin-left: 15px;
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+  }
+  .sidebar-box .has-submenu {
+    ul.submenu {
+      li {
+        a {
+          font-size: 15px;
+          line-height: 25px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .common-dashboard-wrapper {
+    .sidebar-box {
+      padding: 30px 12px;
+      width: 230px;
+    }
+    .main-content-box {
+      width: calc(100% - 230px);
+      border-radius: 8px 0 0 8px;
+    }
+  }
+  .sidebar-box {
+    .logo-box {
+      margin-bottom: 20px;
+    }
+    .sidebar-menu {
+      max-height: calc(100vh - 189px);
+      li {
+        margin-bottom: 3px;
+      }
+    }
+    .menu-link {
+      padding: 12px 15px;
+      border-radius: 8px;
+      span {
+        margin-left: 12px;
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+  }
+  .sidebar-box .has-submenu {
+    ul.submenu {
+      li {
+        a {
+          font-size: 15px;
+          line-height: 25px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .common-dashboard-wrapper {
+    display: block;
+    background-color: $light-blue;
+    &.open-sidebar {
+      .sidebar-box {
+        left: 0;
+        z-index: 999;
+      }
+    }
+    .sidebar-box {
+      text-align: left;
+      position: fixed;
+      left: -9999px;
+      top: 0;
+      height: 100%;
+      padding: 20px 24px;
+      width: 100%;
+      z-index: -999;
+      @include transition_05;
+      .logo-box {
+        display: none;
+      }
+    }
+    .main-content-box {
+      margin-top: 88px;
+      max-height: 100%;
+      width: 100%;
+      border-radius: 8px 0 0 8px;
+    }
+  }
+  .sidebar-box {
+    .sidebar-menu {
+      max-height: calc(100vh - 140px);
+      li {
+        margin-bottom: 3px;
+      }
+    }
+    .menu-link {
+      border-radius: 8px;
+      span {
+        margin-left: 12px;
+        font-size: 17px;
+        line-height: 24px;
+      }
+    }
+    button.profile-box {
+      display: block;
+      background-color: transparent;
+      padding: 0;
+      border: 0;
+      margin: 0;
+      img {
+        margin: 0;
+      }
+    }
+    .mobile-profile {
+      display: flex;
+      align-items: center;
+    }
+    .profile-box {
+      margin-right: 0px;
+    }
+    .notification-close-box {
+      margin-bottom: 24px;
+      display: flex !important;
+      align-items: center;
+    }
+    .close-btn {
+      margin-left: 0px;
+      background-color: transparent;
+      border: none;
+    }
+  }
+}
+@media (min-width: 1401px) and (max-height: 820px) {
+}

@@ -1,0 +1,66 @@
+.dropdown {
+  &_btn {
+    composes: dark_btn from '../Button/style.module.scss';
+    padding: 8px;
+background-color: var(--neutrals-20-color);
+    img {
+      filter: brightness(0) invert(1);
+    }
+
+    &[aria-expanded="true"] {
+      color: var(--white-color);
+      background-color: var(--primary-color) !important;
+      box-shadow: none !important;
+    }
+
+    &::after {
+      display: none;
+    }
+  }
+
+  &_meun {
+    background: linear-gradient(246.5deg, var(--neutrals-37-color) -16.86%, var(--neutrals-20-color) 49.32%, var(--neutrals-40-color) 100%);
+    border-radius: 8px;
+    border: none;
+    padding: 8px;
+    margin-top: 10px !important;
+    transform: translateX(-69%);
+    width: 200px;
+
+    &::before {
+      position: absolute;
+      content: "";
+      top: -9px;
+      right: 17px;
+      box-sizing: border-box;
+      border-style: solid;
+      border-width: 0 10px 12px 8px;
+      border-color: transparent transparent var(--neutrals-35-color) transparent;
+    }
+
+    a {
+      padding: 8px 20px 8px 16px;
+      border-radius: 32px;
+      color: var(--white-color);
+      outline: none;
+
+      &:not(:last-child) {
+        margin-bottom: 4px;
+      }
+
+      &:active,
+      &:focus-visible,
+      &[class="dropdown-item active"] {
+        background: var(--neutrals-25-color);
+      }
+    }
+  }
+
+  .inputbutton {
+    padding: 12px 10px 5px;
+
+    button {
+      margin: 0 !important;
+    }
+  }
+}

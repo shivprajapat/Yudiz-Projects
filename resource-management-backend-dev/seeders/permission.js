@@ -77,7 +77,7 @@ const Permissions = [
     bIsActive: true
   },
   {
-    sName: 'UPDATE_SKILL',
+    sName: 'Update Skill',
     sKey: 'UPDATE_SKILL',
     sModule: 'SKILL',
     eStatus: 'Y',
@@ -675,6 +675,76 @@ const Permissions = [
     sName: 'View Dashboard Project Line',
     sKey: 'VIEW_DASHBOARD_PROJECT_LINE',
     sModule: 'DASHBOARD',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Dashboard Statistics',
+    sKey: 'VIEW_ALL_DASHBOARD_STATISTICS',
+    sModule: 'DASHBOARD',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Dashboard Monthly Chart',
+    sKey: 'VIEW_ALL_DASHBOARD_MONTHLY_CHART',
+    sModule: 'DASHBOARD',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Dashboard Worklogs',
+    sKey: 'VIEW_ALL_DASHBOARD_WORKLOGS',
+    sModule: 'DASHBOARD',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Dashboard Latest Projects',
+    sKey: 'VIEW_ALL_DASHBOARD_LATEST_PROJECTS',
+    sModule: 'DASHBOARD',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Dashboard Project Line',
+    sKey: 'VIEW_ALL_DASHBOARD_PROJECT_LINE',
+    sModule: 'DASHBOARD',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Project Overview',
+    sKey: 'VIEW_ALL_PROJECT_OVERVIEW',
+    sModule: 'PROJECT_OVERVIEW',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Worklogs',
+    sKey: 'VIEW_ALL_WORKLOGS',
+    sModule: 'WORKLOGS',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Project',
+    sKey: 'VIEW_ALL_PROJECT',
+    sModule: 'PROJECT',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Client',
+    sKey: 'VIEW_ALL_CLIENT',
+    sModule: 'CLIENT',
+    eStatus: 'Y',
+    bIsActive: true
+  },
+  {
+    sName: 'View All Closed Project',
+    sKey: 'VIEW_ALL_CLOSED_PROJECT',
+    sModule: 'PROJECT',
     eStatus: 'Y',
     bIsActive: true
   }

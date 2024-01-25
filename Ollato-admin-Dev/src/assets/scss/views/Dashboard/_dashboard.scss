@@ -1,0 +1,39 @@
+.common-white-box { 
+    &.withrightlogo { position: relative; overflow: hidden; h2 { line-height: 48px; } 
+    .right-box { position: absolute; bottom: -5px; right: 8px; }} }
+  .dashboard .row > [class^="col-"] { margin-bottom: 24px; &:last-child ,&:nth-last-child(2) { margin-bottom: 0; } }
+  //responsive css
+  @media (min-width:1400px) and (max-width:1599px) {
+    .common-white-box { 
+        &.withrightlogo { h2 { line-height:44px; } 
+        .right-box { bottom: -5px; right: 8px; }} }
+      .dashboard .row > [class^="col-"] { margin-bottom: 24px; }
+}
+@media (min-width:1200px) and (max-width:1399px) {
+    .common-white-box { 
+        &.withrightlogo { h2 { line-height:40px; } 
+        .left-box { width: 70%; }
+        .right-box { width: 30%; bottom: -5px; right: 8px; img { width: 70px; } }} }
+      .dashboard .row > [class^="col-"] { margin-bottom: 24px; }
+}
+@media (min-width:992px) and (max-width:1199px) {
+    .common-white-box { 
+        &.withrightlogo { h2 { line-height:40px; } 
+        .left-box { width: 85%; }
+        .right-box { width: 15%; bottom: -5px; right: 8px; img { width: 60px; } }} }
+      .dashboard .row > [class^="col-"] { margin-bottom: 24px; }
+}
+@media (min-width:768px) and (max-width:991px) {
+    .common-white-box { 
+        &.withrightlogo { h2 { line-height:40px; } 
+        .left-box { width: 85%; }
+        .right-box { width: 15%; bottom: -5px; right: 8px; img { width: 60px; } }} }
+      .dashboard .row > [class^="col-"] { margin-bottom: 20px; &:nth-last-child(2) { margin-bottom:20px; } }
+}
+@media (max-width:767px) { 
+    .common-white-box { 
+        &.withrightlogo { h2 { line-height:40px; } 
+        .left-box { width: 85%; }
+        .right-box { width: 15%; bottom: -5px; right: 8px; img { width: 60px; } }} }
+      .dashboard .row > [class^="col-"] { margin-bottom: 20px; &:nth-last-child(2) { margin-bottom:20px; } }
+  }

@@ -1,0 +1,44 @@
+:root {
+    --yellow: #D5951A;
+    --dark-blue: #172a36;
+    --error-color:#FF897D;
+    --white-color: #ffffff;
+    --black-color: #000000;
+    --theme-color: #121212;
+    --primary-color: #F26E21;
+    --primary-75-color: #F8B087;
+    --hexadecimal-black: #212121;
+    --neutrals-15-color: #262626;
+    --neutrals-20-color: #333333;
+    --neutrals-25-color: #3d3d3d;
+    --neutrals-30-color: #4D4D4D;
+    --neutrals-35-color: #4a4440;
+    --neutrals-37-color: #5A5049;
+    --neutrals-40-color: #634636;
+    --neutrals-50-color: #7a7a7a;
+    --neutrals-60-color: #999999;
+    --neutrals-70-color: #b8b8b8;
+    --neutrals-85-color: #d6d6d6;
+    --neutrals-96-color: #f5f5f5;
+    --theme-primary-color: #343434;
+    --theme-secondary-color: #1E1E1E;
+    --black-00-rgba: rgba(0, 0, 0, 0);
+    --black-018-rgba: rgba(18, 18, 18, 0);
+    --black-025-rgba: rgba(0, 0, 0, 0.25);
+    --black-185-rgba: rgba(18, 18, 18, 0.5);
+    --neutrals-black-color: rgba(0, 0, 0, 0.2);
+    --white-0-color: rgba(255, 255, 255, 0);
+    --white-10-color: rgba(255, 255, 255, 0.1);
+    --white-60-color: rgba(255, 255, 255, 0.6);
+    --neutrals-white-color: rgba(255, 255, 255, 0.2);
+    --movies-card-gradient: linear-gradient(90deg, #481D04 0%, #7B3D05 92.82%);
+    --theme-banner-gradient: radial-gradient(65% 204.27% at 65% 41.73%, rgba(13, 13, 13, 0) 0.21%, rgba(13, 13, 13, 0.7) 50.07%, rgba(13, 13, 13, 0.95) 99.19%);
+    --theme-orange-gradient: linear-gradient(180deg, #f26e21 25.14%, #f89d49 178.72%);
+    --error-gradient-color: linear-gradient(0deg, #DE3730, #DE3730),
+    linear-gradient(0deg, var(--neutrals-white-color), var(--neutrals-white-color));
+    --icon-gradient-color:linear-gradient(135.63deg, var(--primary-color) 6.25%, #913B08 101.05%);
+
+    // ! Font Family
+    --Poppins: "Poppins Bold";
+    --recoleta: "recoleta-regular";
+}

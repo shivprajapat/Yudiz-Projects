@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Test Push Notifiacation</title>
+  </head>
+  <body>
+    <h1>Hello</h1>
+
+    <script type="module">
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-app.js";
+      import {
+        getMessaging,
+        getToken,
+        onMessage,
+      } from "https://www.gstatic.com/firebasejs/9.9.0/firebase-messaging.js";
+
+      const firebaseConfig = {
+        apiKey: "AIzaSyBW3tYWM9tdzsy6selO0r2bfsxBPY97WDQ",
+        authDomain: "relationproject-85e38.firebaseapp.com",
+        projectId: "relationproject-85e38",
+        storageBucket: "relationproject-85e38.appspot.com",
+        messagingSenderId: "914310669187",
+        appId: "1:914310669187:web:614027f86ffc0c47c60cb6",
+        measurementId: "G-466BM7WZ1B",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const messaging = getMessaging(app);
+
+      function requestPermission() {
+        console.log("Requesting permission...");
+        try {
+          Notification.requestPermission().then((permission) => {
+            if (permission === "granted") {
+              console.log("Notification permission granted.");
+            }
+          });
+        } catch (error) {
+          return console.log(error.message);
+        }
+      }
+      requestPermission();
+
+      // Add the public key generated from the console here.
+      getToken(messaging, {
+        vapidKey:
+          "BIQukEkKfAHq7J3StAJO7k7kmE1p-Yve8VMwq9JpD3z5Lzo1PpOyryoUy_8AbCSZ-HqHih2qddr_Mjd62d-AeHY",
+      })
+        .then((token) => {
+          console.log(token);
+        })
+        .catch((err) => console.log("Error is: ", err.message));
+
+      onMessage(messaging, (payload) => {
+        console.log("Message received. ", payload);
+      });
+    </script>
+  </body>
+</html>

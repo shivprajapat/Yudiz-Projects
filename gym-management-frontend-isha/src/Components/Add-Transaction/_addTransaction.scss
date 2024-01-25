@@ -1,0 +1,23 @@
+@import 'Assets/Style/_variables.scss';
+
+.paid {
+    background: $green-color;
+    color: $white;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.remain {
+    background: $red-color;
+    color: $white;
+    font-size: 13px;
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+.modal-title {
+    .expired {
+        color: $red-color;
+    }
+}

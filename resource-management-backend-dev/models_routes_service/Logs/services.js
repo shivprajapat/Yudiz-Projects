@@ -19,7 +19,7 @@ const OrganizationDetailModel = require('../organizationDetail/model')
 const EmployeeModel = require('../Employee/model')
 
 const { ObjectId } = mongoose.Types
-const postmark = require('postmark')
+// const postmark = require('postmark')
 
 const ProjectWiseContractModel = require('../Project/projectwisecontract.model')
 const ProjectModel = require('../Project/model')
@@ -179,22 +179,22 @@ async function notificationsender(req, params, sBody, option, isRecorded, isNoti
 }
 
 class EmployeeLogs {
-  async sendMailPostmark(req, res) {
-    try {
-      const client = new postmark.ServerClient('6971ac56-118b-4fac-9ed1-f7f72de9741c')
+  // async sendMailPostmark(req, res) {
+  //   try {
+  //     const client = new postmark.ServerClient('6971ac56-118b-4fac-9ed1-f7f72de9741c')
 
-      const send = await client.sendEmail({
-        From: 'pranav.kakadiya@yudiz.com',
-        To: 'kakadiyapranav111@gmail.com',
-        Subject: 'Test',
-        TextBody: 'Test'
-      })
+  //     const send = await client.sendEmail({
+  //       From: 'pranav.kakadiya@yudiz.com',
+  //       To: 'kakadiyapranav111@gmail.com',
+  //       Subject: 'Test',
+  //       TextBody: 'Test'
+  //     })
 
-      return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].logs), send)
-    } catch (err) {
-      console.log(err)
-    }
-  }
+  //     return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].logs), send)
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
+  // }
 
   async LogsDetails(req, res) {
     try {
@@ -831,7 +831,7 @@ class EmployeeLogs {
       const stop = performance.now()
       const inSeconds = (stop - start) / 1000
       const rounded = Number(inSeconds).toFixed(3)
-      console.log(`businessLogic: ${rounded}s`)
+      // console.log(`businessLogic: ${rounded}s`)
       const workbook = new Excel.Workbook()
       const worksheet = workbook.addWorksheet(`${data.module}`)
       const j = []
@@ -1014,7 +1014,7 @@ class EmployeeLogs {
           })
         }
         if (data.module === 'DashBoard' && Object.values(data.requiredFields).includes('only_cr')) {
-          console.log('---------------------------------------- only cr ----------------------------------------')
+          // console.log('---------------------------------------- only cr ----------------------------------------')
 
           const total = []
 
@@ -1192,7 +1192,7 @@ class EmployeeLogs {
         }
 
         if (data.module === 'Logs') {
-          console.log('requiredFields', data.requiredFields)
+          // console.log('requiredFields', data.requiredFields)
 
           chunk = chunk.map((item) => {
             let roleName = ''
@@ -1231,7 +1231,7 @@ class EmployeeLogs {
       const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB']
       const i2 = Math.floor(Math.log(bytes) / Math.log(k))
       const size = parseFloat((bytes / Math.pow(k, i2)).toFixed(dm)) + ' ' + sizes[i2]
-      console.log(parseFloat((bytes / Math.pow(k, i2)).toFixed(dm)) + ' ' + sizes[i2])
+      // console.log(parseFloat((bytes / Math.pow(k, i2)).toFixed(dm)) + ' ' + sizes[i2])
 
       // generate chunk based file
       // console.log('data2', chunks)
@@ -1262,7 +1262,7 @@ class EmployeeLogs {
       const stop1 = performance.now()
       const inSeconds1 = (stop1 - start1) / 1000
       const rounded1 = Number(inSeconds1).toFixed(3)
-      console.log(`businessLogic: ${rounded1}s`)
+      // console.log(`businessLogic: ${rounded1}s`)
       // await notificationsender(req, req.employee._id, ' you will get excel very soon in mail ', 'completed', true, true, req.employee._id, '')
       await queuePush('file_excel1', { file: data2.Key, NAME: req.employee.sName, employee: req.employee._id, email: 'pranav.kakadiya@yudiz.com', flag: 0, aJwtTokens: req.employee.aJwtTokens, type: 'Excel-Data', Key: data2.Key, size })
     } catch (error) {
@@ -1289,7 +1289,7 @@ class EmployeeLogs {
       typeOfFile.push(data.Contents[0].Key.split('.')[1])
       totalDocumentSize = data.Contents[0].Size
 
-      console.log('data.Contents.length', data.Contents.length)
+      // console.log('data.Contents.length', data.Contents.length)
       let maxindex = 0
       let minindex = 0
       for (let i = 1; i < data.Contents.length; i++) {
@@ -1312,7 +1312,7 @@ class EmployeeLogs {
       smallSizeFileFileKey = { ...data.Contents[minindex], Size: formatBytes(data.Contents[minindex].Size) }
 
       if (totalDocumentSize > 5368709120) {
-        console.log('totalDocumentSize exceeded', totalDocumentSize)
+        // console.log('totalDocumentSize exceeded', totalDocumentSize)
       }
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].you_will_get_in_email.replace('##', messages[req.userLanguage].excel), {
@@ -1454,7 +1454,7 @@ class EmployeeLogs {
         return b.year - a.year
       })
 
-      console.log('filterCollections', filterCollections)
+      // console.log('filterCollections', filterCollections)
 
       const filterProperty = {
         dStartDate,
@@ -1501,7 +1501,7 @@ class EmployeeLogs {
         }
       })
 
-      console.log('filterCollections', filterCollections)
+      // console.log('filterCollections', filterCollections)
 
       if (dStartDate && dEndDate) {
         filterCollections = filterCollections.filter((collection) => {
@@ -1517,7 +1517,7 @@ class EmployeeLogs {
         })
       }
 
-      console.log(filterCollections)
+      // console.log(filterCollections)
 
       filterCollections = filterCollections.sort((a, b) => {
         return b.year - a.year
@@ -1539,7 +1539,7 @@ class EmployeeLogs {
       if (!(parseInt(dbLength))) {
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].logs), { a: [] })
       } else {
-        console.log('filterCollections[0].year', filterCollections[0].year)
+        // console.log('filterCollections[0].year', filterCollections[0].year)
         a = await logsGet(+filterCollections[0].year, +page, +limit, data, +`{${organizationDetails?.nFoundedYear}01}` || 194701, filterCollections, searchProperty, filterProperty, dbLength, 0, dCreatedAt, 'month')
       }
 
@@ -1579,12 +1579,12 @@ class EmployeeLogs {
 
   async removeNetLogsCron(req, res) {
     try {
-      console.log('removeNetLogsCron')
+      // console.log('removeNetLogsCron')
       const OrganizationDetail = await OrganizationDetailModel.findOne({}).lean()
-      console.log('OrganizationDetail', OrganizationDetail)
+      // console.log('OrganizationDetail', OrganizationDetail)
 
       const removeDate = OrganizationDetail.dRemoveNetworkLogsDate
-      console.log('removeDate', removeDate)
+      // console.log('removeDate', removeDate)
 
       // get month and year form date
       const month = removeDate.getMonth() + 1
@@ -1606,7 +1606,7 @@ class EmployeeLogs {
 
         const takeConnect = ResourceManagementDB.model(take, Network)
 
-        console.log('take', takeConnect)
+        // console.log('take', takeConnect)
         await takeConnect.updateMany({
           dCreatedAt: {
             $lte: new Date(removeDate)
@@ -1646,12 +1646,12 @@ class EmployeeLogs {
 
   async removeOpLogsCron(req, res) {
     try {
-      console.log('removeOpLogsCron')
+      // console.log('removeOpLogsCron')
       const OrganizationDetail = await OrganizationDetailModel.findOne({}).lean()
-      console.log('OrganizationDetail', OrganizationDetail)
+      // console.log('OrganizationDetail', OrganizationDetail)
 
       const removeDate = OrganizationDetail.dRemoveNetworkLogsDate
-      console.log('removeDate', removeDate)
+      // console.log('removeDate', removeDate)
 
       const year = removeDate.getFullYear()
 
@@ -1670,7 +1670,7 @@ class EmployeeLogs {
 
         const takeConnect = ResourceManagementDB.model(take, Network)
 
-        console.log('take', takeConnect)
+        // console.log('take', takeConnect)
         await takeConnect.updateMany({
           dCreatedAt: {
             $lte: new Date(removeDate)
@@ -1862,8 +1862,8 @@ class EmployeeLogs {
 
 async function logsGet(Year, page, limit, data, nFoundedYear, collectionExist = [], searchProperty = {}, filterProperty = {}, dbLength, i = 0, dCreatedAt, flag) {
   try {
-    console.log('logsGet', Year, page, limit, data, nFoundedYear, collectionExist, searchProperty, filterProperty, dbLength, i, dCreatedAt, flag)
-    console.log(Year, page, limit, nFoundedYear, collectionExist[i].year, searchProperty.sName)
+    // console.log('logsGet', Year, page, limit, data, nFoundedYear, collectionExist, searchProperty, filterProperty, dbLength, i, dCreatedAt, flag)
+    // console.log(Year, page, limit, nFoundedYear, collectionExist[i].year, searchProperty.sName)
 
     let take
     let takeConnect
@@ -1887,7 +1887,7 @@ async function logsGet(Year, page, limit, data, nFoundedYear, collectionExist = 
         $lte: new Date(filterProperty.dEndDate)
       }
 
-      console.log('obj.dCreatedAt', obj.dCreatedAt)
+      // console.log('obj.dCreatedAt', obj.dCreatedAt)
     }
     if (dCreatedAt) {
       obj.dCreatedAt = {
@@ -1895,7 +1895,7 @@ async function logsGet(Year, page, limit, data, nFoundedYear, collectionExist = 
       }
     }
 
-    console.log(obj)
+    // console.log(obj)
 
     // console.log('takeConnect', takeConnect)
 

@@ -1,0 +1,12 @@
+@import "@/assets/scss/helper/mixin";
+
+.movies {
+    // ! Details Page Design
+    &_details {
+        section{padding-bottom: 0 !important;}
+        &_inner{position: relative;h6{color: var(--white-color);@include font-size(28, 37, 600);margin-bottom: 16px;}}
+        &_grid {display: grid;gap: 8px;grid-template-columns: repeat(auto-fit, minmax(127.2px, 1fr));grid-row-gap: 16px;padding-bottom: 20px;
+        >div{width: 100%;}}
+    }
+    
+}

@@ -1,0 +1,228 @@
+<!-- page-6 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      .page {
+        text-align: center;
+        font-family: "Libre Baskerville", serif;
+        text-align: center;
+        width: 210mm;
+        margin: 0px auto;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/regular-page-bg.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .sub-page {
+        min-height: calc(29.7cm - 70px);
+      }
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+
+      /* sub page  */
+      .you-areas {
+        padding-top: 100px;
+        text-align: center;
+      }
+      .you-areas a {
+        color: black;
+        text-transform: uppercase;
+        font-size: 17px;
+        text-decoration: underline;
+      }
+      .box {
+        margin-right: 10px;
+        border: 1px solid #0f62ac;
+        width: 20px;
+        height: 20px;
+        background-color: #319ecc91;
+      }
+      .score {
+        padding-top: 50px;
+        padding-bottom: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      table,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      tr td {
+        padding: 20px;
+      }
+      table {
+        margin: 40px auto 0px;
+      }
+      .heading {
+        text-align: center;
+        background-color: #e7e7e7;
+      }
+      .heading h1 {
+        padding: 20px 0px;
+        font-size: 28px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      /* footer  */
+      footer p,
+      a {
+        font-size: 11px;
+        line-height: 18px;
+      }
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+      .footer-content p,
+      a {
+        margin-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+    </style>
+  </head>
+
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+          <div class="heading">
+            <h1>Interest Test</h1>
+          </div>
+          <div>
+            <canvas id="myChart" width="100" height="70"></canvas>
+          </div>
+          <div class="you-areas">
+            <a href="">your Dominant Interest Areas</a>
+            <table>
+              <tr>
+                <% for (var prop in interestDominantValue ) { %> <% if(prop <=
+                3){ %>
+                <td><%- interestDominantValue[prop] %></td>
+                <% } %> <% } %>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    <b><%= user.first_name %> <%= user.last_name %></b>
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>05</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+      <script>
+        var Data = JSON.parse(`<%- JSON.stringify(interestGraphLabel) %>`);
+        var labelsData = [];
+        for (var i = 0; i < Data.length; i++) {
+          labelsData.push(Data[i]);
+        }
+        var Data1 = JSON.parse(`<%- JSON.stringify(interestGraphValue) %>`);
+        var valuesData = [];
+        for (var i = 0; i < Data1.length; i++) {
+          valuesData.push(Data1[i]);
+        }
+        var ctx = document.getElementById("myChart");
+        var myChart = new Chart(ctx, {
+          type: "bar",
+          data: {
+            labels: labelsData,
+            datasets: [
+              {
+                label: "# score out of 10",
+                data: valuesData,
+                backgroundColor: [
+                  "rgba(255, 99, 132, 0.2)",
+                  "rgba(54, 162, 235, 0.2)",
+                  "rgba(255, 206, 86, 0.2)",
+                  "rgba(75, 192, 192, 0.2)",
+                  "rgba(153, 102, 255, 0.2)",
+                  "rgba(255, 159, 64, 0.2)",
+                ],
+                borderColor: [
+                  "rgba(255, 99, 132, 1)",
+                  "rgba(54, 162, 235, 1)",
+                  "rgba(255, 206, 86, 1)",
+                  "rgba(75, 192, 192, 1)",
+                  "rgba(153, 102, 255, 1)",
+                  "rgba(255, 159, 64, 1)",
+                ],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            indexAxis: "y",
+            scales: {
+              y: {
+                beginAtZero: true,
+                suggestedMax: 10,
+              },
+              x: {
+                suggestedMax: 10,
+              },
+            },
+          },
+        });
+      </script>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,318 @@
+// Helper
+@import './helper/variables';
+@import './helper/fonts';
+@import './helper/mixins';
+@import './helper/common-layout';
+@import './helper/typography';
+@import './helper/scrollbar';
+//components
+@import './Components/language';
+@import './Components/authleftlogo';
+@import './Components/backarrow';
+@import './Components/otp-modal';
+@import './Components/toasty';
+@import './Components/header';
+@import './Components/titleheader';
+@import './Components/sidebar';
+@import './Components/datatablestyle';
+@import './Components/addnewform';
+@import './Components/datecalender';
+@import './changes/changes';
+//views
+@import './views/auth/login';
+@import './views/auth/onetimepass';
+@import './views/auth/signup';
+@import './views/Dashboard/package';
+@import './views/Dashboard/dashboard';
+@import './views/Dashboard/test-process';
+@import './views/Dashboard/settings';
+@import './views/Dashboard/assessment';
+@import './views/Dashboard/counselling';
+
+.text-box {
+  padding-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid black;
+  color: black;
+}
+.ullist {
+  margin: 0px 0px 20px;
+  list-style: none;
+}
+.ullist li {
+  position: relative;
+  font-size: 16px;
+  line-height: 26px;
+}
+.ullist li::before {
+  margin-right: 20px;
+  font-weight: 600;
+  content: attr(data-title);
+  position: relative;
+}
+.insrt-section {
+  max-width: 860px;
+  margin: 0 auto;
+  border: 2px solid;
+}
+.page-title h1 {
+  text-transform: uppercase;
+  color: white;
+  line-height: 36px;
+  font-size: 26px;
+  margin: 0px;
+}
+.page-title {
+  text-align: center;
+  margin: 0 auto;
+}
+.page-header {
+  padding: 14px 20px;
+  background-color: black;
+  display: inline-block;
+  border-radius: 0px 0px 10px 10px;
+}
+.page-content {
+  width: 95%;
+  margin: 0 auto;
+}
+.page-content h2 {
+  text-align: center;
+  margin: 20px 0px;
+  text-transform: uppercase;
+}
+.page-content p {
+  padding: 0px 20px 20px;
+  font-size: 16px;
+  line-height: 26px;
+  margin: 0px;
+}
+.math-text {
+  display: inline-flex;
+  flex-direction: column;
+  text-align: center;
+}
+.math-text span {
+  display: inline-block;
+}
+.divider {
+  border-bottom: 1px solid;
+}
+.insrt-section img {
+  max-width: 80%;
+  margin-bottom: 20px;
+}
+.test-description {
+  margin: 0 auto;
+}
+.psa-qst span {
+  padding: 0px 5px;
+  text-align: center;
+  margin: 8px;
+}
+span.psa-underline {
+  border-bottom: 3px solid black;
+  text-align: center;
+  text-decoration: none;
+}
+
+.chartSection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  .innerChart {
+    width: 60%;
+  }
+}
+
+.testNameTitle {
+  font-size: 18px;
+}
+
+.assessment-button {
+  display: flex;
+  gap: 10px;
+}
+
+@media (max-width: 767px) {
+  .assessment-button {
+    margin-left: 0px !important;
+    margin-top: 20px;
+  }
+}
+.progress-lavel button {
+  border: none;
+  background: transparent;
+}
+
+.email-btn {
+  background-color: white;
+  padding: 6px;
+}
+
+.d-report-btn {
+  border: none;
+  background-color: transparent;
+}
+
+.email-btn {
+  pointer-events: none;
+  background-color: transparent;
+}
+
+// accordion nav
+.accordion-nav {
+  .accordion-button:not(.collapsed) {
+    box-shadow: none;
+  }
+  .accordion-item {
+    border: none;
+  }
+  ul {
+    text-align: left;
+  }
+  .accordion-button {
+    padding: 0px;
+    background: transparent;
+    border: none;
+    .menu-link {
+      min-width: 100%;
+    }
+  }
+  .accordion-item {
+    background-color: transparent;
+  }
+  .accordion-button:focus {
+    box-shadow: none;
+    border: none;
+  }
+  .accordion-button::after {
+    position: absolute;
+    right: 10px;
+    filter: invert(97%) sepia(15%) saturate(2%) hue-rotate(201deg)
+      brightness(111%) contrast(100%);
+  }
+  .accordion-button:not(.collapsed)::after {
+    filter: invert(97%) sepia(15%) saturate(2%) hue-rotate(201deg)
+      brightness(111%) contrast(100%);
+  }
+  .submenu {
+    a:hover {
+      color: #2170ac;
+    }
+    a {
+      color: white;
+    }
+    .accordion-button::after {
+      filter: invert(97%) sepia(15%) saturate(2%) hue-rotate(201deg)
+        brightness(111%) contrast(100%);
+    }
+    .theme-btn {
+      display: inline-block;
+      white-space: nowrap;
+      margin-bottom: 10px;
+      padding: 14px 32px;
+      border: 2px solid $text_blue;
+      text-transform: capitalize;
+      background-color: $text_blue;
+      color: $white;
+      font-weight: $fw-600;
+      font-size: 15px;
+      line-height: 20px;
+      border-radius: 16px;
+      text-align: center;
+      @include transition_05;
+      &.large-btn {
+        padding: 24px 32px;
+        width: 100%;
+        font-weight: $fw-700;
+        font-size: 18px;
+        line-height: 28px;
+        border-radius: 24px;
+      }
+      &:hover {
+        background-color: transparent;
+        color: $text_blue;
+      }
+      &.blue-btn {
+        background-color: #2170ac;
+        border-color: #2170ac;
+        &:hover {
+          background-color: transparent;
+          color: #2170ac;
+        }
+      }
+      &.gray-btn {
+        background-color: $text-dark-3;
+        border-color: $text-dark-3;
+        &:hover {
+          background-color: transparent;
+          color: $text-dark-3;
+        }
+      }
+      &.dark-btn {
+        background-color: $black;
+        border-color: $black;
+        &:hover {
+          background-color: transparent;
+          color: $black;
+        }
+      }
+      &.lightgray-btn {
+        background-color: $light-black;
+        border-color: $light-black;
+        &:hover {
+          background-color: transparent;
+          color: $light-black;
+        }
+      }
+      &.darkk-btn {
+        background-color: #2170ac;
+        border-color: #2170ac;
+        &:hover {
+          background-color: transparent;
+          color: #2170ac;
+        }
+      }
+    }
+
+    .text-a-center {
+      text-align: left;
+    }
+
+    .pro-image {
+      width: 104%;
+    }
+    .common-dashboard-wrapper .user-name a span {
+      color: #2170ac;
+      font-weight: 700;
+      margin: 0px auto;
+      text-transform: uppercase;
+    }
+    .user-name {
+      // margin-bottom: 20px !important;
+      a:hover span {
+        color: $white !important;
+      }
+      a {
+        background-color: white;
+        span {
+          color: $text-blue;
+          font-weight: 700;
+          margin: 0px auto;
+          text-transform: uppercase;
+        }
+        text-align: center;
+      }
+    }
+  }
+}
+.title-box.has-subtitle h4 a {
+  word-break: break-all;
+  padding-left: 10px;
+}
+.otp-verification-link {
+  background-color: white;
+  padding-left: 10px;
+}

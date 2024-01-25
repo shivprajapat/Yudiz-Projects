@@ -9,6 +9,9 @@ const { status, messages } = require('../../helper/api.responses')
 const { catchError, pick, validateEmail, validateMobile, SuccessResponseSender, ErrorResponseSender, paginationValue, searchValidate } = require('../../helper/utilities.services')
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId
+const ProjectWiseEmployeeModel = require('../Project/projectwiseemployee.model')
+
+const ProjectModel = require('../Project/model')
 
 const { queuePush } = require('../../helper/redis')
 
@@ -110,11 +113,13 @@ class Client {
       }
       const data = await ClientModel.create({ ...req.body, iLastUpdateBy: req.employee._id, iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f') })
 
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Client', sService: 'addClients', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Client', sService: 'addClients', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await take.create(logs)
+
+      await queuePush('logs', logs)
 
       // await notificationsender(req, data._id, ' client is create ', true, true, req.employee._id, `${config.urlPrefix}/client-management/detail/${data._id}`)
 
@@ -144,10 +149,11 @@ class Client {
       if (client && client.eStatus === 'Y') {
         const data = await ClientModel.findByIdAndUpdate({ _id: req.params.id }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].client))
-        let take = `Logs${new Date().getFullYear()}`
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: client._id, eModule: 'Client', sService: 'deleteClients', eAction: 'Delete', oOldFields: client, oNewFields: data }
-        await take.create(logs)
+        // let take = `Logs${new Date().getFullYear()}`
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: client._id, eModule: 'Client', sService: 'deleteClients', eAction: 'Delete', oOldFields: client, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+        await queuePush('logs', logs)
         // await notificationsender(req, data._id, ' client is delete ', true, true, req.employee._id, `${config.urlPrefix}/client-management`)
         return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].client))
       }
@@ -172,11 +178,14 @@ class Client {
       if (oldClientData && oldClientData.eStatus === 'Y') {
         const data = await ClientModel.findByIdAndUpdate({ _id: req.params.id }, { ...req.body, iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].client))
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: req.params.id, eModule: 'Client', sService: 'updateClients', eAction: 'Update', oNewFields: data, oOldFields: oldClientData }
-        await take.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: req.params.id, eModule: 'Client', sService: 'updateClients', eAction: 'Update', oNewFields: data, oOldFields: oldClientData, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+
+        await queuePush('logs', logs)
+
         // await notificationsender(req, data._id, ' client is update ', true, true, req.employee._id, `${config.urlPrefix}/client-management/detail/${data._id}`)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].client))
       }
@@ -188,8 +197,13 @@ class Client {
 
   async getClients(req, res) {
     try {
-      let { page = 0, limit = 5, sorting = 'dCreatedAt', search = '' } = paginationValue(req.query)
+      // console.log(req.query)
+      let { page = 0, limit = 5, sorting = 'dCreatedAt', search = '', eShow = 'OWN' } = paginationValue(req.query)
       search = searchValidate(search)
+
+      // console.log('eShow', eShow)
+      // console.log(req.employee.bAllClient)
+
       const query = search && search.length
         ? {
           $or: [{ sName: { $regex: new RegExp('^.*' + search + '.*', 'i') } },
@@ -199,6 +213,97 @@ class Client {
           eStatus: 'Y'
         }
         : { eStatus: 'Y' }
+
+      if (req.employee.bAllClient) {
+        if (eShow === 'OWN') {
+          const employeeProjects = await ProjectWiseEmployeeModel.find({ iEmployeeId: req.employee._id, eStatus: 'Y' }).lean()
+
+          // console.log('employeeProjects', employeeProjects)
+
+          const otherProjectsEmployee = await ProjectModel.find({
+            $or: [
+              {
+                iBAId: req.employee._id
+              },
+              {
+                iBDId: req.employee._id
+              },
+              {
+                iProjectManagerId: req.employee._id
+              }
+            ],
+            eStatus: 'Y'
+          })
+
+          const totalProjects = new Set()
+
+          for (const project of otherProjectsEmployee) {
+            totalProjects.add(project._id)
+          }
+
+          for (const project of employeeProjects) {
+            totalProjects.add(project.iProjectId)
+          }
+
+          // get Client based on project         _id: { $in: [...totalProjectFixedId].map(a => ObjectId(a)) }
+
+          const clientProject = await ProjectWiseClient.find({ iProjectId: { $in: [...totalProjects] }, eStatus: 'Y' }, { iClientId: 1, eStatus: 'Y' }).lean()
+
+          const totalClient = new Set()
+
+          for (const client of clientProject) {
+            totalClient.add(client.iClientId)
+          }
+
+          const totalClientArray = [...totalClient]
+
+          query._id = { $in: [...totalClientArray].map(a => ObjectId(a)) }
+        }
+      } else {
+        const employeeProjects = await ProjectWiseEmployeeModel.find({ iEmployeeId: req.employee._id, eStatus: 'Y' }).lean()
+
+        // console.log('employeeProjects', employeeProjects)
+
+        const otherProjectsEmployee = await ProjectModel.find({
+          $or: [
+            {
+              iBAId: req.employee._id
+            },
+            {
+              iBDId: req.employee._id
+            },
+            {
+              iProjectManagerId: req.employee._id
+            }
+          ],
+          eStatus: 'Y'
+        })
+
+        const totalProjects = new Set()
+
+        for (const project of otherProjectsEmployee) {
+          totalProjects.add(project._id)
+        }
+
+        for (const project of employeeProjects) {
+          totalProjects.add(project.iProjectId)
+        }
+
+        // get Client based on project         _id: { $in: [...totalProjectFixedId].map(a => ObjectId(a)) }
+
+        const clientProject = await ProjectWiseClient.find({ iProjectId: { $in: [...totalProjects] }, eStatus: 'Y' }, { iClientId: 1, eStatus: 'Y' }).lean()
+
+        const totalClient = new Set()
+
+        for (const client of clientProject) {
+          totalClient.add(client.iClientId)
+        }
+
+        const totalClientArray = [...totalClient]
+
+        query._id = { $in: [...totalClientArray].map(a => ObjectId(a)) }
+      }
+
       let clients = []; let total = 0
       if (limit !== 'all') {
         [clients, total] = await Promise.all([ClientModel.find(query).sort(sorting).skip(Number(page)).limit(Number(limit)).lean(), ClientModel.countDocuments({ ...query }).lean()])

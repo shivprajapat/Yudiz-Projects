@@ -1,0 +1,74 @@
+.title-header {flex-wrap: wrap; margin-bottom:30px; display: flex; align-items: center; justify-content: space-between; 
+    .button-box {text-align: right; button{ margin-right: 24px; &:last-child { margin-right: 0; } text-transform: none; } }
+.breadcrumbs {flex-wrap: wrap; margin:0 -10px; padding-left: 0; display: flex; align-items: center; 
+            li { margin:0 10px;
+                a   {white-space: nowrap; font-size: 20px; line-height: 24px; position: relative; font-weight: $fw-700; padding-left: 10px; margin-left: 10px; 
+                    &:before{ content: ""; position: absolute; top:50%; left: 0; transform: translate(-100% , -50%); width: 16px; height:22px; background: url('../../images/Separate.svg') no-repeat center center/cover; } 
+                    &:hover { text-decoration: underline; } 
+                } 
+                h3{white-space: nowrap;}
+                }
+            }
+}
+//responsive css
+@media (min-width:1400px) and (max-width:1599px) {
+    .title-header { margin-bottom:20px; 
+        .button-box { button{ margin-right: 20px; } }
+        .breadcrumbs { margin:0 -8px;
+                    li { margin:0 8px;
+                        a   { font-size: 22px; line-height: 26px; padding-left: 10px; margin-left: 10px; 
+                            &:before{ width: 14px; height:21px;} 
+                        } 
+                        }
+                    }
+        }
+}
+@media (min-width:1200px) and (max-width:1399px) {
+    .title-header { margin-bottom:20px; 
+        .button-box { button{ margin-right:10px; } }
+        .breadcrumbs { margin:0 -6px;
+                    li { margin:0 6px;
+                        a   { font-size: 20px; line-height: 26px; padding-left: 8px; margin-left: 8px; 
+                            &:before{ width: 12px; height:18px;} 
+                        } 
+                        }
+                    }
+        }
+}
+@media (min-width:992px) and (max-width:1199px) {
+    .title-header { margin-bottom:15px; 
+        .button-box { button{ margin-right: 4px; } }
+        .breadcrumbs { margin:0 -4px;
+                    li { margin:0 4px;
+                        a   { font-size: 20px; line-height: 22px; padding-left: 6px; margin-left: 6px; 
+                            &:before{ width: 10px; height:15px;} 
+                        } 
+                        }
+                    }
+        }
+}
+@media (min-width:768px) and (max-width:991px) {
+    .title-header { margin-bottom:10px; align-items: start;
+        .button-box { align-self: flex-start; button{ margin-right: 5px; } }
+        .breadcrumbs { margin:0 -5px; margin-bottom: 20px;
+                    li { margin:0 5px;
+                        a   { font-size: 16px; line-height: 20px; padding-left: 6px; margin-left: 6px; 
+                            &:before{ width: 10px; height:15px;} 
+                        } 
+                        }
+                    }
+        }
+}
+@media (max-width:767px) {
+    .title-header { margin-bottom:10px; align-items: start;
+        .button-box {text-align: left; align-self: flex-start; button{ margin-right: 5px;  } }
+        .breadcrumbs { margin:0 -5px; margin-bottom: 20px;
+                    li { margin:0 5px;
+                        a   { font-size: 14px; line-height: 18px; padding-left: 4px; margin-left: 4px; 
+                            &:before{ width: 8px; height:12px;} 
+                        } 
+                        }
+                    }
+        }
+        .add-new-form { .title-header { .breadcrumbs { margin-bottom: 14px; } } }
+}

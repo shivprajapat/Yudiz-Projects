@@ -1,0 +1,9 @@
+@import 'Assets/Style/variables';
+
+.info, .select-container, .input, .textarea-container {
+    label {
+        .important {
+            color: $red-color;
+        }
+    }    
+}

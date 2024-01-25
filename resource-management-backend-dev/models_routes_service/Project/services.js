@@ -37,7 +37,7 @@ const ObjectId = mongoose.Types.ObjectId
 const ejs = require('ejs')
 
 async function notificationsender(req, params, sBody, isRecorded, isNotify, iLastUpdateBy, url = '') {
-  console.log('params', params, sBody)
+  // console.log('params', params, sBody)
   const data = await ProjectModel.findOne({ _id: ObjectId(params) }).lean()
 
   let allEmployee = await EmployeeModel.find({ _id: { $in: [data.iProjectManagerId, data.iBAId, data.iBDId, data.iCreatedBy, data.iLastUpdateBy] }, eStatus: 'Y' }).lean()
@@ -253,8 +253,8 @@ class Project {
             }
 
             if (aProjectBaseDepartmentIdsToDelete.length > 0 || aProjectBaseEmployeeIdsToDelete.length > 0) {
-              console.log('aProjectBaseDepartmentIdsToDelete', aProjectBaseDepartmentIdsToDelete.length)
-              console.log('aProjectBaseEmployeeIdsToDelete', aProjectBaseEmployeeIdsToDelete.length)
+              // console.log('aProjectBaseDepartmentIdsToDelete', aProjectBaseDepartmentIdsToDelete.length)
+              // console.log('aProjectBaseEmployeeIdsToDelete', aProjectBaseEmployeeIdsToDelete.length)
               await ProjectWiseEmployee.updateMany({ iProject: req.body.iProjectId, eStatus: 'Y' }, { $set: { eStatus: 'N' } })
               await ProjectWiseDepartment.updateMany({ iProject: req.body.iProjectId, eStatus: 'Y' }, { $set: { eStatus: 'N' } })
               await DashboardProjectDepartmentModel.updateMany({ iProjectId: req.body.iProjectId, eStatus: 'Y' }, { $set: { eStatus: 'N' } })
@@ -285,7 +285,7 @@ class Project {
             return ErrorResponseSender(res, status.UnprocessableEntity, messages[req.userLanguage].project_type_not_change)
           }
 
-          console.log('flag', req.body.sLogo)
+          // console.log('flag', req.body.sLogo)
 
           if (projectExist.sLogo !== sLogo) {
             try {
@@ -316,11 +316,11 @@ class Project {
                   Key: sLogo
                 }
                 await s3.deleteObject(params2)
-                console.log('params1', params1)
+                // console.log('params1', params1)
                 req.body.sLogo = params1.Key
               }
             } catch (error) {
-              console.log('skuhis', error)
+              // console.log('skuhis', error)
               req.body.sLogo = projectExist.sLogo
             }
           }
@@ -355,7 +355,7 @@ class Project {
           // }
 
           const project = await ProjectModel.findByIdAndUpdate(req.body.iProjectId, { ...req.body, flag, iCreatedBy: req?.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f'), iLastUpdateBy: req.employee._id }, { new: true, runValidator: true }).lean()
-          console.log('project', project)
+          // console.log('project', project)
           if (!project) return ErrorResponseSender(res, status.ResourceNotFound, messages[req.userLanguage].not_found.replace('##', messages[req.userLanguage].project))
 
           // const projectWiseTechnology = await ProjectWiseTechnology.find({ iProjectId: req.body.iProjectId }).lean()
@@ -549,7 +549,7 @@ class Project {
 
           if (aProjectTag.length > 0) {
             await Promise.all(aProjectTag.map(async (tag) => {
-              console.log(tag)
+              // console.log(tag)
               return ProjectWiseTag.create({
                 iProjectId: projectId._id,
                 iProjectTagId: tag.iProjectTagId,
@@ -603,7 +603,7 @@ class Project {
 
           const aProjectBaseEmployee = await ProjectWiseEmployee.find({ iProjectId: req.body.iProjectId, eStatus: 'Y' }).lean()
           const aProjectBaseDepartment = await ProjectWiseDepartment.find({ iProjectId: req.body.iProjectId, eStatus: 'Y' }).lean()
-          console.log('aProjectBaseDepartment', aProjectBaseDepartment)
+          // console.log('aProjectBaseDepartment', aProjectBaseDepartment)
           const nTimeLineDays = req.body.nTimeLineDays
           let sDepartmentMinutes = 0
           let sDepartmentCosts = 0
@@ -613,12 +613,12 @@ class Project {
               sDepartmentCosts += item.nCost
             })
           }
-          console.log(sDepartmentMinutes, (parseInt(nTimeLineDays) * 8 * 60))
+          // console.log(sDepartmentMinutes, (parseInt(nTimeLineDays) * 8 * 60))
 
           if ((parseInt(nTimeLineDays) * 8 * 60) !== parseInt(sDepartmentMinutes)) {
             return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].timeLineError_project)
           }
-          console.log(sDepartmentCosts, req.body.sCost)
+          // console.log(sDepartmentCosts, req.body.sCost)
           if (parseInt(req.body.sCost) !== sDepartmentCosts) {
             return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].costError_project)
           }
@@ -635,13 +635,13 @@ class Project {
           const projectWiseEmployeeId = projectWiseEmployee.map(employee => ({ ...employee, iEmployeeId: employee.iEmployeeId.toString(), nMinutes: employee.nMinutes }))
           const projectWiseDepartmentId = projectWiseDepartment.map(department => ({ ...department, iDepartmentId: department.iDepartmentId.toString(), nMinutes: department.nMinutes || 0, nCost: department.nCost || 0 }))
 
-          console.log('projectWiseDepartmentId', projectWiseDepartmentId)
+          // console.log('projectWiseDepartmentId', projectWiseDepartmentId)
 
           let DashboardProjectDepartmentId = []
           if (project.eProjectType === 'Fixed') {
             DashboardProjectDepartmentId = DashboardProjectDepartment.map(department => ({ ...department, iDepartmentId: department.iDepartmentId.toString(), nMinutes: department.nMinutes || 0, nRemainingMinute: department.nRemainingMinute || 0, nCost: department.nCost || 0, nRemainingCost: department.nRemainingCost || 0 }))
           }
-          console.log('DashboardProjectDepartmentId', DashboardProjectDepartmentId)
+          // console.log('DashboardProjectDepartmentId', DashboardProjectDepartmentId)
 
           const aProjectBaseEmployeeId = aProjectBaseEmployee.map(employee => ({ ...employee, iEmployeeId: employee.iEmployeeId.toString(), nMinutes: employee?.nMinutes || 0 }))
           const aProjectBaseDepartmentId = aProjectBaseDepartment.map(department => ({ ...department, iDepartmentId: department.iDepartmentId.toString(), nMinutes: department?.nMinutes || 0, nCost: department?.nCost || 0 }))
@@ -710,9 +710,9 @@ class Project {
             aDashboardProjectDepartmentIdsToCreate = aProjectBaseDepartmentId.filter(department => !DashboardProjectDepartmentId.map(department => department.iDepartmentId).includes(department.iDepartmentId))
           }
 
-          console.log('aProjectBaseEmployeeIdsToCreate', aProjectBaseEmployeeIdsToCreate)
-          console.log('aProjectBaseDepartmentIdsToCreate', aProjectBaseDepartmentIdsToCreate)
-          console.log('aDashboardProjectDepartmentIdsToCreate', aDashboardProjectDepartmentIdsToCreate)
+          // console.log('aProjectBaseEmployeeIdsToCreate', aProjectBaseEmployeeIdsToCreate)
+          // console.log('aProjectBaseDepartmentIdsToCreate', aProjectBaseDepartmentIdsToCreate)
+          // console.log('aDashboardProjectDepartmentIdsToCreate', aDashboardProjectDepartmentIdsToCreate)
 
           await Promise.all(aProjectBaseEmployeeIdsToDelete.map(async (employee) => {
             return ProjectWiseEmployee.updateOne({ iEmployeeId: employee.iEmployeeId, iProjectId: req.body.iProjectId, eStatus: 'Y' }, {
@@ -762,7 +762,7 @@ class Project {
 
           if (project.eProjectType === 'Fixed') {
             const aDashboardProjectDepartmentId = DashboardProjectDepartmentId.filter(department => aProjectBaseDepartmentId.map(department => department.iDepartmentId).includes(department.iDepartmentId))
-            console.log('aDashboardProjectDepartmentId', aDashboardProjectDepartmentId)
+            // console.log('aDashboardProjectDepartmentId', aDashboardProjectDepartmentId)
 
             await Promise.all(aDashboardProjectDepartmentId.map(async (department) => {
               return DashboardProjectDepartmentModel.updateOne({ iDepartmentId: department.iDepartmentId, iProjectId: req.body.iProjectId, eStatus: 'Y' }, {
@@ -785,7 +785,7 @@ class Project {
                 nRemainingCost += dashboardProjectDepartment?.nRemainingCost || 0
               }
             }
-            console.log(nRemainingMinute, nRemainingCost)
+            // console.log(nRemainingMinute, nRemainingCost)
             await DashboardProjectIndicatorModel.updateOne({ iProjectId: req.body.iProjectId, eStatus: 'Y' }, {
               nRemainingMinute,
               nRemainingCost,
@@ -843,7 +843,7 @@ class Project {
           }))
 
           const dashboardProject = await DashboardProjectIndicatorModel.findOne({ iProjectId: req.body.iProjectId, eStatus: 'Y' }).lean()
-          console.log('dashboardProject', dashboardProject)
+          // console.log('dashboardProject', dashboardProject)
 
           if (!dashboardProject) {
             await DashboardProjectIndicatorModel.create({
@@ -859,15 +859,15 @@ class Project {
               iLastUpdateBy: req.employee._id
             })
           } else {
-            console.log({
-              nMinutes: sDepartmentMinutes,
-              nRemainingMinute: dashboardProject.nRemainingMinute,
-              nRemainingCost: dashboardProject.nRemainingCost,
-              sCost: req.body.sCost,
-              eStatus: 'Y',
-              nTimeLineDays: req.body.nTimeLineDays,
-              eProjectType: project.eProjectType
-            })
+            // console.log({
+            //   nMinutes: sDepartmentMinutes,
+            //   nRemainingMinute: dashboardProject.nRemainingMinute,
+            //   nRemainingCost: dashboardProject.nRemainingCost,
+            //   sCost: req.body.sCost,
+            //   eStatus: 'Y',
+            //   nTimeLineDays: req.body.nTimeLineDays,
+            //   eProjectType: project.eProjectType
+            // })
             await DashboardProjectIndicatorModel.updateOne({ iProjectId: req.body.iProjectId, eStatus: 'Y' },
               {
                 nMinutes: sDepartmentMinutes,
@@ -904,10 +904,10 @@ class Project {
             2: 'Y'
           }
           flag = { ...projectExist.flag, ...flag }
-          console.log(flag)
+          // console.log(flag)
 
           const dashboardProject = await DashboardProjectIndicatorModel.findOne({ iProjectId: req.body.iProjectId, eStatus: 'Y' }).lean()
-          console.log('dashboardProject', dashboardProject)
+          // console.log('dashboardProject', dashboardProject)
 
           if (!dashboardProject) {
             await DashboardProjectIndicatorModel.create({
@@ -1094,7 +1094,7 @@ class Project {
 
         const aProjectBaseContract = aContract.map(contract => contract.sContract)
 
-        console.log('Cotract all', aContract)
+        // console.log('Cotract all', aContract)
 
         const aProjectBaseContractsToDelete = ProjectWiseContractName.filter(contract => !aProjectBaseContract.includes(contract))
 
@@ -1104,8 +1104,8 @@ class Project {
           return ProjectWiseContractModel.updateOne({ iProjectId: req.body.iProjectId, sContract: contract, eStatus: 'Y' }, { eStatus: 'N' })
         }))
 
-        console.log('contractDelete', aProjectBaseContractsToDelete)
-        console.log('contractCreate', aProjectBaseContractsToCreate)
+        // console.log('contractDelete', aProjectBaseContractsToDelete)
+        // console.log('contractCreate', aProjectBaseContractsToCreate)
 
         if (aProjectBaseContractsToDelete.length > 0) {
           const objects = []
@@ -1185,7 +1185,7 @@ class Project {
 
         // const aProjectBaseContract = aContract.map(contract => contract.sContract)
 
-        console.log('Cotract all', aContract)
+        // console.log('Cotract all', aContract)
 
         const aProjectBaseContractsToDelete = ProjectWiseContract.filter(contract => {
           return !aContract.map(contract => contract.sContract).includes(contract.sContract)
@@ -1201,8 +1201,8 @@ class Project {
           return ProjectWiseContractModel.updateOne({ iProjectId: req.body.iProjectId, sContract: contract.sContract, eStatus: 'Y' }, { eStatus: 'N' })
         }))
 
-        console.log('contractDelete', aProjectBaseContractsToDelete)
-        console.log('contractCreate', aProjectBaseContractsToCreate)
+        // console.log('contractDelete', aProjectBaseContractsToDelete)
+        // console.log('contractCreate', aProjectBaseContractsToCreate)
 
         if (aProjectBaseContractsToDelete.length > 0) {
           const objects = []
@@ -1281,7 +1281,7 @@ class Project {
 
         // const aProjectBaseContract = aContract.map(contract => contract.sContract)
 
-        console.log('Cotract all', aContract)
+        // console.log('Cotract all', aContract)
 
         const aProjectBaseContractsToDelete = ProjectWiseContract.filter(contract => {
           return !aContract.map(contract => contract.sContract).includes(contract.sContract)
@@ -1297,8 +1297,8 @@ class Project {
           return ProjectWiseContractModel.updateOne({ iProjectId: req.body.iProjectId, sContract: contract.sContract, eStatus: 'Y' }, { eStatus: 'N' })
         }))
 
-        console.log('contractDelete', aProjectBaseContractsToDelete)
-        console.log('contractCreate', aProjectBaseContractsToCreate)
+        // console.log('contractDelete', aProjectBaseContractsToDelete)
+        // console.log('contractCreate', aProjectBaseContractsToCreate)
 
         if (aProjectBaseContractsToDelete.length > 0) {
           const objects = []
@@ -1369,12 +1369,12 @@ class Project {
       const projectExist = await ProjectModel.findOne({ _id: id, eStatus: 'Y' })
       if (!projectExist) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].project))
 
-      console.log('projectExist', projectExist)
+      // console.log('projectExist', projectExist)
 
       if (projectExist.eProjectStatus !== 'Pending') {
         return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].project_status.replace('##', messages[req.userLanguage][projectExist.eProjectStatus]))
       }
-
+      let project
       if (projectExist.eProjectStatus === 'Pending') {
         await ProjectWiseEmployee.updateMany({ iProjectId: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
         await ProjectWiseContractModel.updateMany({ iProjectId: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
@@ -1382,7 +1382,7 @@ class Project {
         await ProjectWiseClient.updateMany({ iProjectId: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
         await ProjectWiseTechnology.updateMany({ iProjectId: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
 
-        const project = await ProjectModel.updateOne({ _id: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
+        project = await ProjectModel.findOneAndUpdate({ _id: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { new: true })
         if (!project) return ErrorResponseSender(res, status.ResourceNotFound, messages[req.userLanguage].not_found.replace('##', messages[req.userLanguage].project))
 
         await DashboardProjectIndicatorModel.updateOne({ iProjectId: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
@@ -1398,29 +1398,29 @@ class Project {
         }
       } else {
         if (projectExist.eProjectType === 'Fixed') {
-          console.log('else------------------------------------------------------')
+          // console.log('else------------------------------------------------------')
           const worklogs = await WorkLogModel.find({ iProjectId: id, eStatus: 'Y' }).lean()
           if (worklogs.length > 0) {
             return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].workLogs))
           }
-          console.log('worklogs', worklogs)
+          // console.log('worklogs', worklogs)
           const crs = await ChangeRequestModel.find({ iProjectId: id, eStatus: 'Y' }).lean()
           if (crs.length > 0) {
             return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].project_cr))
           }
-          console.log('crs', crs)
+          // console.log('crs', crs)
           const departments = await ProjectWiseDepartment.find({ iProjectId: id, eStatus: 'Y' }).lean()
           if (departments.length > 0) {
             return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].project_department))
           }
-          console.log('departments', departments)
+          // console.log('departments', departments)
           const employees = await ProjectWiseEmployee.find({ iProjectId: id, eStatus: 'Y' }).lean()
           if (employees.length > 0) {
             return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].project_employees))
           }
-          console.log('employees', employees)
+          // console.log('employees', employees)
 
-          const project = await ProjectModel.findByIdAndUpdate({ _id: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
+          project = await ProjectModel.findByIdAndUpdate({ _id: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
           if (!project) return ErrorResponseSender(res, status.ResourceNotFound, messages[req.userLanguage].not_found.replace('##', messages[req.userLanguage].project))
 
           await DashboardProjectIndicatorModel.updateOne({ iProjectId: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
@@ -1444,7 +1444,7 @@ class Project {
           if (employees.length > 0) {
             return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].project_employees))
           }
-          const project = await ProjectModel.findByIdAndUpdate({ _id: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
+          project = await ProjectModel.findByIdAndUpdate({ _id: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
           if (!project) return ErrorResponseSender(res, status.ResourceNotFound, messages[req.userLanguage].not_found.replace('##', messages[req.userLanguage].project))
 
           await DashboardProjectIndicatorModel.updateOne({ iProjectId: id, eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
@@ -1457,8 +1457,9 @@ class Project {
         }
       }
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: projectExist._id, eModule: 'Project', sService: 'deleteProject', eAction: 'Delete', oOldFields: projectExist }
-      await Logs.create(logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: projectExist._id, eModule: 'Project', sService: 'deleteProject', eAction: 'Delete', oOldFields: projectExist, oNewFields: project, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await Logs.create(logs)
+      await queuePush('logs', logs)
 
       try {
         // notificationsender(req, projectExist._id, ' project delete ', true, true)
@@ -1476,10 +1477,10 @@ class Project {
     try {
       const projectType = await ProjectModel.findById({ _id: ObjectId(req.params.id), eStatus: 'Y' }, { eProjectType: 1 }).lean()
 
-      console.log(req.employee.aTotalPermissions)
-      console.log('projectType', projectType)
+      // console.log(req.employee.aTotalPermissions)
+      // console.log('projectType', projectType)
 
-      console.log('-------------------------------------------------', req.employee.bViewCost)
+      // console.log('-------------------------------------------------', req.employee.bViewCost)
 
       const query = [
         {
@@ -1807,6 +1808,58 @@ class Project {
             sCurrency: { $first: '$currency' },
             Estimator: { $first: '$Estimator' }
           }
+        },
+        {
+          $project: {
+            _id: '$_id',
+            sName: '$sName',
+            eProjectType: '$eProjectType',
+            sProjectDescription: '$sProjectDescription',
+            sLogo: '$sLogo',
+            eCostType: '$eCostType',
+            sCost: {
+              $cond: {
+                if: { $eq: [req.employee.bViewCost, true] },
+                then: { $ifNull: ['$sCost', 0] },
+                else: '$$REMOVE'
+              }
+            },
+            dBillingCycleDate: '$dBillingCycleDate',
+            dNoticePeriodDate: '$dNoticePeriodDate',
+            nMaxHours: '$nMaxHours',
+            nMinHours: '$nMinHours',
+            dContractStartDate: '$dContractStartDate',
+            dContractEndDate: '$dContractEndDate',
+            nTimeLineDays: '$nTimeLineDays',
+            dStartDate: '$dStartDate',
+            dEndDate: '$dEndDate',
+            eProjectStatus: '$eProjectStatus',
+            technology: '$technology',
+            department: '$department',
+            projecttag: '$projecttag',
+            contract: '$contract',
+            employee: '$employee',
+            BA: '$BA',
+            ProjectManager: '$ProjectManager',
+            BD: '$BD',
+            flag: '$flag',
+            sClient: {
+              $cond: {
+                if: { $eq: [req.employee.bViewClient, true] },
+                then: {
+                  $cond: {
+                    if: { $eq: [{ $size: '$sClient' }, []] },
+                    then: [],
+                    else: '$sClient'
+                  }
+                },
+                else: '$$REMOVE'
+              }
+            },
+            sCurrency: '$sCurrency',
+            Estimator: '$Estimator'
+          }
+
         }
       ]
 
@@ -1833,6 +1886,8 @@ class Project {
           }
         }
       }
+
+      // console.log('query', JSON.stringify(query))
 
       const project = await ProjectModel.aggregate(query)
 
@@ -1911,7 +1966,7 @@ class Project {
         }
       }
 
-      console.log('project', project)
+      // console.log('project', project)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { project: project[0] })
     } catch (error) {
@@ -1921,11 +1976,487 @@ class Project {
 
   async getProjects(req, res) {
     try {
-      let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', iTechnologyId, eProjectType, iDepartmentId, iEmployeeId } = req.query
+      let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', iTechnologyId, eProjectType, iDepartmentId, iEmployeeId, eShow = 'OWN' } = req.query
 
       const orderBy = order && order === 'asc' ? 1 : -1
 
-      console.log('req.query', req.query)
+      // console.log('req.query', req.query)
+
+      // console.log('req.employee.bAllProjects', req.employee.bAllProjects)
+      // console.log('req.employee.bViewClient', req.employee.bViewClient)
+
+      // if (req.employee.bAllProjects && eShow === 'ALL') {
+      //   const q = [
+      //     {
+      //       $match: { eStatus: 'Y', eProjectStatus: { $ne: 'Closed' } }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwisetechnologies',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'technologies',
+      //               let: { technologyId: '$iTechnologyId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$technologyId'] }, eStatus: 'Y' } },
+      //                 { $project: { sTechnologyName: '$sName' } }
+      //               ],
+      //               as: 'technology'
+      //             }
+      //           },
+      //           { $unwind: { path: '$technology', preserveNullAndEmptyArrays: true } },
+      //           { $sort: { 'technology.sTechnologyName': 1 } },
+      //           { $project: { _id: '$technology._id', sTechnologyName: '$technology.sTechnologyName' } }
+      //         ],
+      //         as: 'technology'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwisetags',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'projecttags',
+      //               let: { projectTagId: '$iProjectTagId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$projectTagId'] }, eStatus: 'Y' } },
+      //                 { $project: { sProjectTagName: '$sName', sBackGroundColor: '$sBackGroundColor', sTextColor: '$sTextColor' } }
+      //               ],
+      //               as: 'projecttag'
+      //             }
+      //           },
+      //           { $unwind: { path: '$projecttag', preserveNullAndEmptyArrays: true } },
+      //           { $sort: { 'projecttag.sProjectTagName': 1 } },
+      //           {
+      //             $project:
+      //             {
+      //               _id: '$projecttag._id',
+      //               sProjectTagName: '$projecttag.sProjectTagName',
+      //               sBackGroundColor: '$projecttag.sBackGroundColor',
+      //               sTextColor: '$projecttag.sTextColor'
+      //             }
+      //           }
+      //         ],
+      //         as: 'projecttag'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwiseclients',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'clients',
+      //               let: { clientId: '$iClientId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$clientId'] }, eStatus: 'Y' } },
+      //                 { $project: { sClientName: '$sName' } }
+      //               ],
+      //               as: 'client'
+      //             }
+      //           },
+      //           { $unwind: { path: '$client', preserveNullAndEmptyArrays: false } },
+      //           { $sort: { 'client.sClientName': 1 } },
+      //           {
+      //             $project:
+      //             {
+      //               _id: '$client._id',
+      //               sClientName: '$client.sClientName'
+      //             }
+      //           }
+      //           // { $replaceRoot: { newRoot: '$client' } }
+      //         ],
+      //         as: 'client'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwisedepartments',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'departments',
+      //               let: { departmentId: '$iDepartmentId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$departmentId'] }, eStatus: 'Y' } },
+      //                 { $project: { sDepartmentName: '$sName' } }
+      //               ],
+      //               as: 'department'
+      //             }
+      //           },
+      //           { $unwind: { path: '$department', preserveNullAndEmptyArrays: false } },
+      //           { $sort: { 'department.sDepartmentName': 1 } },
+      //           { $project: { sDepartmentName: '$department.sDepartmentName', iDepartmentId: '$department._id' } }
+      //         ],
+      //         as: 'department'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwiseemployees',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'employees',
+      //               let: { employeeId: '$iEmployeeId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$employeeId'] }, eStatus: 'Y' } },
+      //                 { $project: { sEmployeeName: '$sName' } }
+      //               ],
+      //               as: 'employee'
+      //             }
+      //           },
+      //           { $unwind: { path: '$employee', preserveNullAndEmptyArrays: true } },
+      //           { $sort: { 'employee.sEmployeeName': 1 } },
+      //           { $project: { sEmployeeName: '$employee.sEmployeeName', iEmployeeId: '$employee._id' } }
+      //         ],
+      //         as: 'employee'
+      //       }
+      //     },
+      //     {
+      //       $project: {
+      //         _id: '$_id',
+      //         sName: '$sName',
+      //         client: '$client',
+      //         technology: '$technology',
+      //         projecttag: '$projecttag',
+      //         dCreatedAt: '$dCreatedAt',
+      //         dEndDate: '$dEndDate',
+      //         eProjectType: '$eProjectType',
+      //         department: '$department',
+      //         employee: '$employee',
+      //         eProjectStatus: 1
+      //       }
+      //     }
+      //   ]
+
+      //   if (eProjectType) {
+      //     q[0].$match.eProjectType = eProjectType
+      //   }
+
+      //   if (iDepartmentId) {
+      //     q.push({ $match: { 'department.iDepartmentId': ObjectId(iDepartmentId) } })
+      //   }
+
+      //   if (iEmployeeId) {
+      //     q.push({ $match: { 'employee.iEmployeeId': ObjectId(iEmployeeId) } })
+      //   }
+
+      //   if (search) {
+      //     q.push({
+      //       $match: {
+      //         $or: [
+      //           { sName: { $regex: search, $options: 'i' } },
+      //           { 'client.sClientName': { $regex: search, $options: 'i' } },
+      //           { 'technology.sTechnologyName': { $regex: search, $options: 'i' } },
+      //           { 'projecttag.sProjectTagName': { $regex: search, $options: 'i' } }
+      //         ]
+      //       }
+      //     })
+      //   }
+
+      //   if (iTechnologyId) {
+      //     q.push({ $match: { 'technology._id': ObjectId(iTechnologyId) } })
+      //   }
+
+      //   const count_query = [...q]
+
+      //   count_query.push({ $count: 'count' })
+
+      //   sort = sort === 'client' ? 'client.sClientName' : sort
+      //   sort = sort === 'technology' ? 'technology.sTechnologyName' : sort // not working beacuse of array of object in technology
+      //   sort = sort === 'projecttag' ? 'projecttag.sProjectTagName' : sort// not working beacuse of array of object in projecttag
+      //   sort = sort === 'sName' ? 'sName' : sort
+      //   sort = sort === 'dEndDate' ? 'dEndDate' : sort
+
+      //   const sorting = { [sort]: orderBy }
+
+      //   q.push({ $sort: sorting })
+      //   if (limit !== 'all') {
+      //     q.push({ $skip: parseInt(page) })
+      //     q.push({ $limit: parseInt(limit) })
+      //   }
+
+      //   const [count, projects] = await Promise.all([ProjectModel.aggregate(count_query), ProjectModel.aggregate(q)])
+      //   if (req.path === '/DownloadExcel') {
+      //     return projects
+      //   } else {
+      //     return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { projects, count: count[0]?.count || 0 })
+      //   }
+      // } else {
+      //   const totalProjectId = new Set()
+      //   const totalProjectsFixed = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y', eProjectType: 'Fixed' } }).lean()
+
+      //   if (totalProjectsFixed.length) {
+      //     totalProjectsFixed.forEach(element => {
+      //       if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+      //     })
+      //   }
+
+      //   const othersProjectFixed = await ProjectModel.find({
+      //     eStatus: 'Y',
+      //     $or: [
+      //       { iBDId: ObjectId(req.employee._id) },
+      //       { iBAId: ObjectId(req.employee._id) },
+      //       { iProjectManagerId: ObjectId(req.employee._id) }
+      //     ]
+      //   })
+
+      //   if (othersProjectFixed.length) {
+      //     othersProjectFixed.forEach(element => {
+      //       if (element?._id) totalProjectId.add(element._id.toString())
+      //     })
+      //   }
+
+      //   const totalProjectsDedicated = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y', eProjectType: 'Dedicated' } }).lean()
+
+      //   // console.log('totalProjectsDedicated', totalProjectsDedicated)
+
+      //   if (totalProjectsDedicated.length) {
+      //     totalProjectsDedicated.forEach(element => {
+      //       if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+      //     })
+      //   }
+
+      //   const othersProjectDedicated = await ProjectModel.find({
+      //     eStatus: 'Y',
+      //     eProjectType: 'Dedicated',
+      //     $or: [
+      //       { iBDId: ObjectId(req.employee._id) },
+      //       { iBAId: ObjectId(req.employee._id) },
+      //       { iProjectManagerId: ObjectId(req.employee._id) }
+      //     ]
+      //   })
+
+      //   // console.log('othersProjectDedicated', othersProjectDedicated)
+
+      //   if (othersProjectDedicated.length) {
+      //     othersProjectDedicated.forEach(element => {
+      //       if (element?._id) totalProjectId.add(element._id.toString())
+      //     })
+      //   }
+      //   const q = [
+      //     {
+      //       $match: { eStatus: 'Y', eProjectStatus: { $ne: 'Closed' } }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwisetechnologies',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'technologies',
+      //               let: { technologyId: '$iTechnologyId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$technologyId'] }, eStatus: 'Y' } },
+      //                 { $project: { sTechnologyName: '$sName' } }
+      //               ],
+      //               as: 'technology'
+      //             }
+      //           },
+      //           { $unwind: { path: '$technology', preserveNullAndEmptyArrays: true } },
+      //           { $sort: { 'technology.sTechnologyName': 1 } },
+      //           { $project: { _id: '$technology._id', sTechnologyName: '$technology.sTechnologyName' } }
+      //         ],
+      //         as: 'technology'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwisetags',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'projecttags',
+      //               let: { projectTagId: '$iProjectTagId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$projectTagId'] }, eStatus: 'Y' } },
+      //                 { $project: { sProjectTagName: '$sName', sBackGroundColor: '$sBackGroundColor', sTextColor: '$sTextColor' } }
+      //               ],
+      //               as: 'projecttag'
+      //             }
+      //           },
+      //           { $unwind: { path: '$projecttag', preserveNullAndEmptyArrays: true } },
+      //           { $sort: { 'projecttag.sProjectTagName': 1 } },
+      //           {
+      //             $project:
+      //             {
+      //               _id: '$projecttag._id',
+      //               sProjectTagName: '$projecttag.sProjectTagName',
+      //               sBackGroundColor: '$projecttag.sBackGroundColor',
+      //               sTextColor: '$projecttag.sTextColor'
+      //             }
+      //           }
+      //         ],
+      //         as: 'projecttag'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwiseclients',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'clients',
+      //               let: { clientId: '$iClientId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$clientId'] }, eStatus: 'Y' } },
+      //                 { $project: { sClientName: '$sName' } }
+      //               ],
+      //               as: 'client'
+      //             }
+      //           },
+      //           { $unwind: { path: '$client', preserveNullAndEmptyArrays: false } },
+      //           { $sort: { 'client.sClientName': 1 } },
+      //           {
+      //             $project:
+      //             {
+      //               _id: '$client._id',
+      //               sClientName: '$client.sClientName'
+      //             }
+      //           }
+      //           // { $replaceRoot: { newRoot: '$client' } }
+      //         ],
+      //         as: 'client'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwisedepartments',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'departments',
+      //               let: { departmentId: '$iDepartmentId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$departmentId'] }, eStatus: 'Y' } },
+      //                 { $project: { sDepartmentName: '$sName' } }
+      //               ],
+      //               as: 'department'
+      //             }
+      //           },
+      //           { $unwind: { path: '$department', preserveNullAndEmptyArrays: false } },
+      //           { $sort: { 'department.sDepartmentName': 1 } },
+      //           { $project: { sDepartmentName: '$department.sDepartmentName', iDepartmentId: '$department._id' } }
+      //         ],
+      //         as: 'department'
+      //       }
+      //     },
+      //     {
+      //       $lookup: {
+      //         from: 'projectwiseemployees',
+      //         let: { projectId: '$_id' },
+      //         pipeline: [
+      //           { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+      //           {
+      //             $lookup: {
+      //               from: 'employees',
+      //               let: { employeeId: '$iEmployeeId' },
+      //               pipeline: [
+      //                 { $match: { $expr: { $eq: ['$_id', '$$employeeId'] }, eStatus: 'Y' } },
+      //                 { $project: { sEmployeeName: '$sName' } }
+      //               ],
+      //               as: 'employee'
+      //             }
+      //           },
+      //           { $unwind: { path: '$employee', preserveNullAndEmptyArrays: true } },
+      //           { $sort: { 'employee.sEmployeeName': 1 } },
+      //           { $project: { sEmployeeName: '$employee.sEmployeeName', iEmployeeId: '$employee._id' } }
+      //         ],
+      //         as: 'employee'
+      //       }
+      //     },
+      //     {
+      //       $project: {
+      //         _id: '$_id',
+      //         sName: '$sName',
+      //         client: '$client',
+      //         technology: '$technology',
+      //         projecttag: '$projecttag',
+      //         dCreatedAt: '$dCreatedAt',
+      //         dEndDate: '$dEndDate',
+      //         eProjectType: '$eProjectType',
+      //         department: '$department',
+      //         employee: '$employee',
+      //         eProjectStatus: 1
+      //       }
+      //     }
+      //   ]
+
+      //   if (eProjectType) {
+      //     q[0].$match.eProjectType = eProjectType
+      //   }
+
+      //   if (iDepartmentId) {
+      //     q.push({ $match: { 'department.iDepartmentId': ObjectId(iDepartmentId) } })
+      //   }
+
+      //   if (iEmployeeId) {
+      //     q.push({ $match: { 'employee.iEmployeeId': ObjectId(iEmployeeId) } })
+      //   }
+
+      //   if (search) {
+      //     q.push({
+      //       $match: {
+      //         $or: [
+      //           { sName: { $regex: search, $options: 'i' } },
+      //           { 'client.sClientName': { $regex: search, $options: 'i' } },
+      //           { 'technology.sTechnologyName': { $regex: search, $options: 'i' } },
+      //           { 'projecttag.sProjectTagName': { $regex: search, $options: 'i' } }
+      //         ]
+      //       }
+      //     })
+      //   }
+
+      //   if (iTechnologyId) {
+      //     q.push({ $match: { 'technology._id': ObjectId(iTechnologyId) } })
+      //   }
+
+      //   const count_query = [...q]
+
+      //   count_query.push({ $count: 'count' })
+
+      //   sort = sort === 'client' ? 'client.sClientName' : sort
+      //   sort = sort === 'technology' ? 'technology.sTechnologyName' : sort // not working beacuse of array of object in technology
+      //   sort = sort === 'projecttag' ? 'projecttag.sProjectTagName' : sort// not working beacuse of array of object in projecttag
+      //   sort = sort === 'sName' ? 'sName' : sort
+      //   sort = sort === 'dEndDate' ? 'dEndDate' : sort
+
+      //   const sorting = { [sort]: orderBy }
+
+      //   q.push({ $sort: sorting })
+      //   if (limit !== 'all') {
+      //     q.push({ $skip: parseInt(page) })
+      //     q.push({ $limit: parseInt(limit) })
+      //   }
+
+      //   const [count, projects] = await Promise.all([ProjectModel.aggregate(count_query), ProjectModel.aggregate(q)])
+      //   if (req.path === '/DownloadExcel') {
+      //     return projects
+      //   } else {
+      //     return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { projects, count: count[0]?.count || 0 })
+      //   }
+      // }
 
       const q = [
         {
@@ -2070,7 +2601,14 @@ class Project {
           $project: {
             _id: '$_id',
             sName: '$sName',
-            client: '$client',
+            client: {
+              $cond: {
+                if: { $eq: [req.employee.bViewClient, true] },
+                then: { $ifNull: ['$client', 0] },
+                else: '$$REMOVE'
+              }
+            },
+            // client: '$client',
             technology: '$technology',
             projecttag: '$projecttag',
             dCreatedAt: '$dCreatedAt',
@@ -2110,6 +2648,116 @@ class Project {
 
       if (iTechnologyId) {
         q.push({ $match: { 'technology._id': ObjectId(iTechnologyId) } })
+      }
+
+      if (req.employee.bAllProjects) {
+        if (eShow === 'OWN') {
+          const totalProjectId = new Set()
+          const totalProjectsFixed = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y', eProjectType: 'Fixed' } }).lean()
+
+          if (totalProjectsFixed.length) {
+            totalProjectsFixed.forEach(element => {
+              if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+            })
+          }
+
+          const othersProjectFixed = await ProjectModel.find({
+            eStatus: 'Y',
+            $or: [
+              { iBDId: ObjectId(req.employee._id) },
+              { iBAId: ObjectId(req.employee._id) },
+              { iProjectManagerId: ObjectId(req.employee._id) }
+            ]
+          })
+
+          if (othersProjectFixed.length) {
+            othersProjectFixed.forEach(element => {
+              if (element?._id) totalProjectId.add(element._id.toString())
+            })
+          }
+
+          const totalProjectsDedicated = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y', eProjectType: 'Dedicated' } }).lean()
+
+          // console.log('totalProjectsDedicated', totalProjectsDedicated)
+
+          if (totalProjectsDedicated.length) {
+            totalProjectsDedicated.forEach(element => {
+              if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+            })
+          }
+
+          const othersProjectDedicated = await ProjectModel.find({
+            eStatus: 'Y',
+            eProjectType: 'Dedicated',
+            $or: [
+              { iBDId: ObjectId(req.employee._id) },
+              { iBAId: ObjectId(req.employee._id) },
+              { iProjectManagerId: ObjectId(req.employee._id) }
+            ]
+          })
+
+          // console.log('othersProjectDedicated', othersProjectDedicated)
+
+          if (othersProjectDedicated.length) {
+            othersProjectDedicated.forEach(element => {
+              if (element?._id) totalProjectId.add(element._id.toString())
+            })
+          }
+          q.push({ $match: { _id: { $in: [...totalProjectId].map(a => ObjectId(a)) } } })
+        }
+      } else {
+        const totalProjectId = new Set()
+        const totalProjectsFixed = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y', eProjectType: 'Fixed' } }).lean()
+
+        if (totalProjectsFixed.length) {
+          totalProjectsFixed.forEach(element => {
+            if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+          })
+        }
+
+        const othersProjectFixed = await ProjectModel.find({
+          eStatus: 'Y',
+          $or: [
+            { iBDId: ObjectId(req.employee._id) },
+            { iBAId: ObjectId(req.employee._id) },
+            { iProjectManagerId: ObjectId(req.employee._id) }
+          ]
+        })
+
+        if (othersProjectFixed.length) {
+          othersProjectFixed.forEach(element => {
+            if (element?._id) totalProjectId.add(element._id.toString())
+          })
+        }
+
+        const totalProjectsDedicated = await ProjectwiseemployeeModel.find({ iEmployeeId: ObjectId(req.employee._id), eStatus: 'Y' }).populate({ path: 'iProjectId', match: { eStatus: 'Y', eProjectType: 'Dedicated' } }).lean()
+
+        // console.log('totalProjectsDedicated', totalProjectsDedicated)
+
+        if (totalProjectsDedicated.length) {
+          totalProjectsDedicated.forEach(element => {
+            if (element?.iProjectId) totalProjectId.add(element.iProjectId._id.toString())
+          })
+        }
+
+        const othersProjectDedicated = await ProjectModel.find({
+          eStatus: 'Y',
+          eProjectType: 'Dedicated',
+          $or: [
+            { iBDId: ObjectId(req.employee._id) },
+            { iBAId: ObjectId(req.employee._id) },
+            { iProjectManagerId: ObjectId(req.employee._id) }
+          ]
+        })
+
+        // console.log('othersProjectDedicated', othersProjectDedicated)
+
+        if (othersProjectDedicated.length) {
+          othersProjectDedicated.forEach(element => {
+            if (element?._id) totalProjectId.add(element._id.toString())
+          })
+        }
+        q.push({ $match: { _id: { $in: [...totalProjectId].map(a => ObjectId(a)) } } })
       }
 
       const count_query = [...q]
@@ -2452,11 +3100,225 @@ class Project {
     }
   }
 
+  async getProjectByEmployeev1(req, res) {
+    try {
+      const { page = 0, limit = 5, order, sort = 'dCreatedAt' } = req.query
+
+      const orderBy = order && order === 'asc' ? 1 : -1
+
+      const iEmployeeId = req.params?.id
+
+      const employeeLogin = await EmployeeModel.findOne({ eStatus: 'Y', _id: ObjectId(req.employee._id) }).populate({
+        path: 'iDepartmentId',
+        select: 'sName sKey'
+      }).lean()
+
+      const employeeProjects = await ProjectWiseEmployee.find({ iEmployeeId, eStatus: 'Y' }).lean()
+
+      // console.log('employeeProjects', employeeProjects)
+
+      const otherProjectsEmployee = await ProjectModel.find({
+        $or: [
+          {
+            iBAId: iEmployeeId
+          },
+          {
+            iBDId: iEmployeeId
+          },
+          {
+            iProjectManagerId: iEmployeeId
+          }
+        ],
+        eStatus: 'Y'
+      })
+
+      const totalProjects = new Set()
+
+      for (const project of otherProjectsEmployee) {
+        totalProjects.add(project._id)
+      }
+
+      for (const project of employeeProjects) {
+        totalProjects.add(project.iProjectId)
+      }
+
+      const q = [
+        {
+          $match: {
+            eStatus: 'Y',
+            _id: {
+              $in: [...totalProjects].map(
+                (id) => mongoose.Types.ObjectId(id)
+              )
+            }
+          }
+        },
+        {
+          $lookup: {
+            from: 'projectwiseclients',
+            let: { projectId: '$_id' },
+            pipeline: [
+              { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+              {
+                $lookup: {
+                  from: 'clients',
+                  let: { clientId: '$iClientId' },
+                  pipeline: [
+                    { $match: { $expr: { $eq: ['$_id', '$$clientId'] }, eStatus: 'Y' } },
+                    { $project: { sClientName: '$sName' } }
+                  ],
+                  as: 'client'
+                }
+              },
+              { $unwind: { path: '$client', preserveNullAndEmptyArrays: true } },
+              { $sort: { 'client.sClientName': 1 } },
+              { $project: { client: '$client' } }
+            ],
+            as: 'client'
+          }
+        },
+        {
+          $unwind: {
+            path: '$client',
+            preserveNullAndEmptyArrays: true
+          }
+        },
+        {
+          $lookup: {
+            from: 'projectwisetechnologies',
+            let: { projectId: '$_id' },
+            pipeline: [
+              { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+              {
+                $lookup: {
+                  from: 'technologies',
+                  let: { technologyId: '$iTechnologyId' },
+                  pipeline: [
+                    { $match: { $expr: { $eq: ['$_id', '$$technologyId'] }, eStatus: 'Y' } },
+                    { $project: { sTechnologyName: '$sName' } }
+                  ],
+                  as: 'technology'
+                }
+              },
+              { $unwind: { path: '$technology', preserveNullAndEmptyArrays: true } },
+              { $sort: { 'technology.sTechnologyName': 1 } },
+              { $project: { technology: '$technology' } }
+            ],
+            as: 'technology'
+          }
+        },
+        {
+          $unwind: {
+            path: '$technology',
+            preserveNullAndEmptyArrays: true
+          }
+        },
+        {
+          $lookup: {
+            from: 'projectwisetags',
+            let: { projectId: '$_id' },
+            pipeline: [
+              { $match: { $expr: { $eq: ['$iProjectId', '$$projectId'] }, eStatus: 'Y' } },
+              {
+                $lookup: {
+                  from: 'projecttags',
+                  let: { projectTagId: '$iProjectTagId' },
+                  pipeline: [
+                    { $match: { $expr: { $eq: ['$_id', '$$projectTagId'] }, eStatus: 'Y' } },
+                    { $project: { sProjectTagName: '$sName', sBackGroundColor: '$sBackGroundColor', sTextColor: '$sTextColor' } }
+                  ],
+                  as: 'projecttag'
+                }
+              },
+              { $unwind: { path: '$projecttag', preserveNullAndEmptyArrays: true } },
+              { $sort: { 'projecttag.sProjectTagName': 1 } },
+              { $project: { projecttag: '$projecttag' } }
+            ],
+            as: 'projecttag'
+          }
+        },
+        {
+          $unwind: {
+            path: '$projecttag',
+            preserveNullAndEmptyArrays: true
+          }
+        },
+        {
+          $group: {
+            _id: '$_id',
+            sName: { $first: '$sName' },
+            eProjectType: { $first: '$eProjectType' },
+            sLogo: { $first: '$sLogo' },
+            eProjectStatus: { $first: '$eProjectStatus' },
+            flag: { $first: '$flag' },
+            client: { $addToSet: '$client.client' },
+            technology: { $addToSet: '$technology.technology' },
+            projecttag: { $addToSet: '$projecttag.projecttag' }
+
+          }
+        },
+        {
+          $project: {
+            iProjectId: '$_id',
+            eProjectType: '$eProjectType',
+            sLogo: '$sLogo',
+            sName: '$sName',
+            client: {
+              $cond: {
+                if: { $eq: [req.employee.bViewClient, true] },
+                then: {
+                  $cond: {
+                    if: { $eq: [{ $size: '$client' }, []] },
+                    then: [],
+                    else: '$client'
+                  }
+                },
+                else: '$$REMOVE'
+              }
+            },
+            technology: '$technology',
+            projecttag: '$projecttag',
+            eProjectStatus: '$eProjectStatus',
+            flag: '$flag'
+          }
+        }
+      ]
+
+      const count_query = [...q]
+
+      count_query.push({ $count: 'count' })
+
+      // sort = sort === 'client' ? 'client.sClientName' : sort
+      // sort = sort === 'technology' ? 'technology.sTechnologyName' : sort
+      // sort = sort === 'projecttag' ? 'projecttag.sProjectTagName' : sort
+      // sort = sort === 'sName' ? 'sName' : sort
+      // sort = sort === 'dEndDate' ? 'dEndDate' : sort
+
+      // const sorting = { [sort]: orderBy }
+
+      // q.push({ $sort: sorting })
+      q.push({ $skip: parseInt(page) })
+      q.push({ $limit: parseInt(limit) })
+
+      const [count, projects] = await Promise.all([ProjectModel.aggregate(count_query), ProjectModel.aggregate(q)])
+
+      // projects = projects.map(item => ({ ...item, projecttag: item.projecttag.sort((a, b) => a.sProjectTagName > b.sProjectTagName), technology: item.technology.sort((a, b) => a.sTechnologyName > b.sTechnologyName), client: item.client.sort((a, b) => a.sClientName > b.sClientName) }))
+
+      return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { projects, count: count[0]?.count || 0 })
+    } catch (error) {
+      catchError('Project.getReviewByEmployee', error, req, res)
+    }
+  }
+
   async getSignedUrl(req, res) {
     try {
       const { sFileName, sContentType, iProjectId } = req.body
 
       const bucket = `${config.s3Project}/${iProjectId}/Contract/`
+
+      console.log('bucket', bucket)
+
+      console.log(s3)
 
       const data = await s3.generateUploadUrl(sFileName, sContentType, bucket)
 
@@ -2470,12 +3332,12 @@ class Project {
     try {
       const { sFileName, sContentType } = req.body
 
-      console.log('sFileName', sFileName)
+      // console.log('sFileName', sFileName)
 
       const bucket = `${config.s3Project}/`
 
       const data = await s3.generateUploadUrl(sFileName, sContentType, bucket)
-      console.log(data)
+      // console.log(data)
 
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].presigned_succ, data })
     } catch (error) {
@@ -2493,6 +3355,10 @@ class Project {
         Key: sFileName
       }
       const data = await s3.getObjectDetails(getparams)
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, eModule: 'Project', sService: 'getS3Contract', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
 
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].presigned_succ, data })
     } catch (error) {
@@ -2691,7 +3557,7 @@ class Project {
 
       const [count, projects] = await Promise.all([ProjectWiseEmployee.aggregate(count_query), ProjectWiseEmployee.aggregate(q)])
 
-      console.log('projects', projects)
+      // console.log('projects', projects)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { projects, count: count[0]?.count || 0 })
     } catch (error) {
@@ -2703,17 +3569,17 @@ class Project {
     try {
       const fileKey = req.body.sFileName
 
-      console.log('Trying to download file', fileKey)
+      // console.log('Trying to download file', fileKey)
 
       const params = {
         Bucket: config.S3_BUCKET_NAME,
         Key: fileKey
       }
 
-      console.log('options', params)
+      // console.log('options', params)
 
       const filePath = path.join(__dirname, '../../downloads/')
-      console.log('filePath', filePath)
+      // console.log('filePath', filePath)
       // await s3.getObject(options, (err, data) => {
       //   if (err) console.error(err)
       //   fs.writeFileSync(filePath, data.Body.toString())
@@ -2746,7 +3612,7 @@ class Project {
       // }
       // )
 
-      console.log('data', data)
+      // console.log('data', data)
 
       // create file using buffer
       // const data = await s3.getObject(params)
@@ -2827,8 +3693,9 @@ class Project {
       if (!deleteContract) {
         return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].contract))
       }
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: project._id, eModule: 'Project', sService: 'deleteContractByProject', eAction: 'Delete', oOldFields: project }
-      await Logs.create(logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: project._id, eModule: 'Project', sService: 'deleteContractByProject', eAction: 'Delete', oOldFields: project, oNewFields: deleteContract, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await Logs.create(logs)
+      await queuePush('Logs', logs)
       // notificationsender(req, project._id, ' contract is delete ', true, true)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].delete), { project })
     } catch (error) {
@@ -2841,9 +3708,9 @@ class Project {
       const { id } = req.params
       const { iProjectId, sReview } = req.body
 
-      console.log('id', id)
-      console.log('iProjectId', iProjectId)
-      console.log('sReview', sReview)
+      // console.log('id', id)
+      // console.log('iProjectId', iProjectId)
+      // console.log('sReview', sReview)
 
       const [employee, project] = await Promise.all([EmployeeModel.findOne({ _id: ObjectId(id), eStatus: 'Y' }), ProjectModel.findOne({ _id: ObjectId(iProjectId), eStatus: 'Y' })])
 
@@ -2859,11 +3726,12 @@ class Project {
       if (!data) {
         return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].review))
       }
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.iEmployeeId, eModule: 'ProjectWiseEmployee', sService: 'addReviewByEmployee', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.iEmployeeId, eModule: 'ProjectWiseEmployee', sService: 'addReviewByEmployee', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('Logs', logs)
+      // await take.create(logs)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].review), { data })
     } catch (error) {
@@ -2886,16 +3754,19 @@ class Project {
         return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].project))
       }
 
+      const review = await ProjectWiseEmployee.findOne({ iProjectId, iEmployeeId: id, eStatus: 'Y' })
+
       const data = await ProjectWiseEmployee.findOneAndUpdate({ iProjectId, iEmployeeId: id, eStatus: 'Y' }, { $set: { sReview } }, { new: true })
 
       if (!data) {
         return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].review))
       }
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.iEmployeeId, eModule: 'ProjectWiseEmployee', sService: 'updateReviewByEmployee', eAction: 'Update', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.iEmployeeId, eModule: 'ProjectWiseEmployee', sService: 'updateReviewByEmployee', eAction: 'Update', oNewFields: data, oOldFields: review, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('Logs', logs)
+      // await take.create(logs)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].review), { data })
     } catch (error) {
@@ -3115,8 +3986,8 @@ class Project {
           })
         }
 
-        console.log(sDepartmentMinutes)
-        console.log(sDepartmentCosts)
+        // console.log(sDepartmentMinutes)
+        // console.log(sDepartmentCosts)
 
         if ((parseInt(nTimeLineDays) * 8 * 60) !== (parseInt(sDepartmentMinutes) + parseInt(nMinutes) - parseInt(projectDepartment.nMinutes))) {
           return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].timeLineError_project)
@@ -3135,6 +4006,9 @@ class Project {
       } if (nCostInPercentage) {
         obj.nCostInPercentage = nCostInPercentage
       }
+
+      const projectWiseDepartment = await ProjectWiseDepartment.findOne({ iProjectId, iDepartmentId, eStatus: 'Y' })
+
       const data = await ProjectWiseDepartment.findOneAndUpdate({ iProjectId, iDepartmentId, eStatus: 'Y' }, obj, { new: true })
 
       await ProjectModel.updateOne({
@@ -3146,6 +4020,10 @@ class Project {
         dStartDate,
         dEndDate
       })
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseDepartment', sService: 'updateProjectdepartment', eAction: 'Update', oNewFields: data, oOldFields: projectWiseDepartment, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].department), { data })
     } catch (error) {
@@ -3167,7 +4045,7 @@ class Project {
       const project = await ProjectModel.findOne({ _id: ObjectId(iProjectId), eStatus: 'Y' })
       if (!project) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].project))
 
-      console.log(project.sCost)
+      // console.log(project.sCost)
 
       // if (project.flag['2'] === 'Y') {
       //   const aProjectBaseDepartment = await ProjectWiseDepartment.find({ iProjectId, eStatus: 'Y' })
@@ -3209,9 +4087,13 @@ class Project {
       if (!department) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].department))
 
       const projectWiseDepartment = await ProjectWiseDepartment.create({ iProjectId, iDepartmentId, nMinutes, nCost, eProjectType: project.eProjectType, nCostInPercentage })
-      console.log('============================================')
-      console.log('projectWiseDepartment', projectWiseDepartment)
-      console.log('============================================')
+      // console.log('============================================')
+      // console.log('projectWiseDepartment', projectWiseDepartment)
+      // console.log('============================================')
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: projectWiseDepartment._id, eModule: 'ProjectWiseDepartment', sService: 'addProjectdepartments', eAction: 'Create', oNewFields: projectWiseDepartment, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
 
       return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].department), { projectWiseDepartment })
     } catch (error) {
@@ -3234,7 +4116,9 @@ class Project {
       const crDepartment = await CrWiseDepartmentModel.find({ iProjectId, iDepartmentId, eStatus: 'Y' }).lean()
       if (crDepartment.length > 0) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].department))
 
-      const projectWiseDepartment = await ProjectWiseDepartment.updateOne({ iProjectId, iDepartmentId, eStatus: 'Y' }, { eStatus: 'N' })
+      const projectWiseDepartmentExist = await ProjectWiseDepartment.findOne({ iProjectId, iDepartmentId, eStatus: 'Y' })
+
+      const projectWiseDepartment = await ProjectWiseDepartment.findOneAndUpdate({ iProjectId, iDepartmentId, eStatus: 'Y' }, { eStatus: 'N' })
 
       const projectWiseEmployee = await ProjectWiseEmployee.find({ iProjectId, eStatus: 'Y' })
       if (projectWiseEmployee.length > 0) {
@@ -3247,6 +4131,10 @@ class Project {
           }
         }
       }
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: projectWiseDepartment._id, eModule: 'ProjectWiseDepartment', sService: 'deleteProjectdepartments', eAction: 'Create', oNewFields: projectWiseDepartment, oOldFields: projectWiseDepartmentExist, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].department), { projectWiseDepartment })
     } catch (error) {
@@ -3282,7 +4170,11 @@ class Project {
           if (!projectWiseDepartmentIds.includes(employee.iDepartmentId.toString())) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].department))
         }
 
-        await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost })
+        const data = await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'addProjectEmployee', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
       } else {
         if (!eCostType || !['Monthly', 'Hourly'].includes(eCostType)) return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].cost_type_required)
 
@@ -3295,7 +4187,11 @@ class Project {
 
         // // }
 
-        await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost })
+        const data = await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'addProjectEmployee', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
       }
       return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].employee))
     } catch (error) {
@@ -3320,7 +4216,11 @@ class Project {
           if (!projectWiseDepartmentIds.includes(employeeExits.iDepartmentId.toString())) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].department))
         }
 
-        await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employeeExits.iDepartmentId, eProjectType: employeeExits.eProjectType, eCostType })
+        const data = await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employeeExits.iDepartmentId, eProjectType: employeeExits.eProjectType, eCostType })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'addProjectEmployeeV2', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
 
         return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].employee))
       }
@@ -3335,7 +4235,11 @@ class Project {
           if (!projectWiseDepartmentIds.includes(employeeExits.iDepartmentId.toString())) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].department))
         }
 
-        await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employeeExits.iDepartmentId, eProjectType: employeeExits.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost, nClientCost })
+        const data = await ProjectWiseEmployee.create({ iProjectId, iEmployeeId, nAvailabilityMinutes, iDepartmentId: employeeExits.iDepartmentId, eProjectType: employeeExits.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost, nClientCost })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'addProjectEmployeeV2', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
 
         return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].employee))
       }
@@ -3362,10 +4266,18 @@ class Project {
       if (!projectWiseEmployee) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].employee))
 
       if (project.eProjectType === 'Fixed') {
-        await ProjectWiseEmployee.updateOne({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType })
+        const data = await ProjectWiseEmployee.findOneAndUpdate({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'updateProjectemployee', eAction: 'Update', oOldFields: projectWiseEmployee, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
       } else {
         if (!eCostType || !['Monthly', 'Hourly'].includes(eCostType)) return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].cost_type_required)
-        await ProjectWiseEmployee.updateOne({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost })
+        const data = await ProjectWiseEmployee.findOneAndUpdate({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'updateProjectemployee', eAction: 'Update', oOldFields: projectWiseEmployee, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
       }
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].employee))
     } catch (error) {
@@ -3392,12 +4304,20 @@ class Project {
       if (!projectWiseEmployee) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].employee))
 
       if (project.eProjectType === 'Fixed') {
-        await ProjectWiseEmployee.updateOne({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType })
+        const data = await ProjectWiseEmployee.findOneAndUpdate({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'updateProjectemployeeV2', eAction: 'Create', oNewFields: data, oOldFields: projectWiseEmployee, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
 
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].employee))
       } else {
         if (!eCostType || !['Monthly', 'Hourly'].includes(eCostType)) return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].cost_type_required)
-        await ProjectWiseEmployee.updateOne({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost, nClientCost })
+        const data = await ProjectWiseEmployee.updateOne({ iProjectId, iEmployeeId, eStatus: 'Y' }, { nAvailabilityMinutes: nAvailabilityMinutes || projectWiseEmployee.nAvailabilityMinutes, iDepartmentId: employee.iDepartmentId, eProjectType: project.eProjectType, eCostType, nMaxMinutes, nMinMinutes, nCost, nClientCost })
+
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseEmployee', sService: 'updateProjectemployeeV2', eAction: 'Update', oOldFields: projectWiseEmployee, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+        await queuePush('logs', logs)
 
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].employee))
       }
@@ -3411,7 +4331,7 @@ class Project {
       const { iEmployeeId } = req.body
 
       const employee = await EmployeeModel.findOne({ _id: ObjectId(iEmployeeId), eStatus: 'Y' })
-      console.log(employee)
+      // console.log(employee)
       if (!employee) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].employee))
 
       return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].employee))
@@ -3435,20 +4355,28 @@ class Project {
       const change_request = await CrWiseEmployeeModel.find({ iProjectId, iEmployeeId, eStatus: 'Y' }).lean()
       if (change_request.length > 0) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].change_request))
 
-      const projectWiseEmployee = await ProjectWiseEmployee.updateOne({ iProjectId, iEmployeeId, eStatus: 'Y' }, { eStatus: 'N' })
+      const projectWiseEmployeeExist = await ProjectWiseEmployee.findOne({ iProjectId, iEmployeeId, eStatus: 'Y' })
+
+      const projectWiseEmployee = await ProjectWiseEmployee.findOneAndUpdate({ iProjectId, iEmployeeId, eStatus: 'Y' }, { eStatus: 'N' })
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: projectWiseEmployee._id, eModule: 'ProjectWiseEmployee', sService: 'deleteProjectEmployee', eAction: 'Delete', oOldFields: projectWiseEmployeeExist, oNewFields: projectWiseEmployee, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
+
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].employee), { projectWiseEmployee })
     } catch (error) {
+      console.log('error', error)
       catchError('Project.deleteProjectEmployee', error, req, res)
     }
   }
 
   async updateProjectdepartments(req, res) {
     try {
-      console.log('req.body', req.body)
+      // console.log('req.body', req.body)
       const { aProjectBaseDepartment, nCost, nTimeLineDays, dStartDate, dEndDate } = req.body
       const { iProjectId } = req.params
 
-      console.log('aProjectBaseDepartment', aProjectBaseDepartment)
+      // console.log('aProjectBaseDepartment', aProjectBaseDepartment)
 
       const project = await ProjectModel.findOne({ _id: ObjectId(iProjectId), eStatus: 'Y' })
       if (!project) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].project))
@@ -3468,7 +4396,7 @@ class Project {
       let dMinutes = 0
 
       const daysCount = (new Date(dEndDate).getTime() - new Date(dStartDate).getTime()) / (1000 * 3600 * 24)
-      console.log('daysCount', daysCount)
+      // console.log('daysCount', daysCount)
 
       let sDepartmentMinutes = 0
       let sDepartmentCosts = 0
@@ -3494,7 +4422,7 @@ class Project {
       if (nCost !== sDepartmentCosts) {
         return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].costError_project)
       }
-      console.log('sDepartmentMinutes', sDepartmentMinutes)
+      // console.log('sDepartmentMinutes', sDepartmentMinutes)
 
       const projectWiseDepartment = await ProjectWiseDepartment.find({ iProjectId, eStatus: 'Y' }).lean()
 
@@ -3509,13 +4437,13 @@ class Project {
 
       const aProjectBaseDepartmentIdsToCreate = aProjectBaseDepartmentId.filter(department => !projectWiseDepartmentId.map(department => department.iDepartmentId).includes(department.iDepartmentId))
 
-      console.log('projectWiseDepartmentId', projectWiseDepartmentId)
-      console.log('aProjectBaseDepartmentIdsToDelete', aProjectBaseDepartmentIdsToDelete)
-      console.log('aProjectBaseDepartmentIdsToUpdate', aProjectBaseDepartmentIdsToUpdate)
-      console.log('aProjectBaseDepartmentIdsToCreate', aProjectBaseDepartmentIdsToCreate)
+      // console.log('projectWiseDepartmentId', projectWiseDepartmentId)
+      // console.log('aProjectBaseDepartmentIdsToDelete', aProjectBaseDepartmentIdsToDelete)
+      // console.log('aProjectBaseDepartmentIdsToUpdate', aProjectBaseDepartmentIdsToUpdate)
+      // console.log('aProjectBaseDepartmentIdsToCreate', aProjectBaseDepartmentIdsToCreate)
 
       if (aProjectBaseDepartmentIdsToDelete.length > 0) {
-        console.log('aProjectBaseDepartmentIdsToDelete', aProjectBaseDepartmentIdsToDelete)
+        // console.log('aProjectBaseDepartmentIdsToDelete', aProjectBaseDepartmentIdsToDelete)
         const query = {
           iProjectId: ObjectId(iProjectId),
           eStatus: 'Y'
@@ -3537,7 +4465,7 @@ class Project {
 
         const aProjectBaseDepartmentIdsToDeleteWithEmployee = aProjectBaseDepartmentIdsToDelete.filter(department => departmentEmployeeIds.includes(department.iDepartmentId))
         if (aProjectBaseDepartmentIdsToDeleteWithEmployee.length > 0) {
-          console.log('aProjectBaseDepartmentIdsToDeleteWithEmployee', aProjectBaseDepartmentIdsToDeleteWithEmployee)
+          // console.log('aProjectBaseDepartmentIdsToDeleteWithEmployee', aProjectBaseDepartmentIdsToDeleteWithEmployee)
           return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].employee))
         }
       }
@@ -3569,9 +4497,9 @@ class Project {
         aDashboardProjectDepartmentIdsToCreate = aProjectBaseDepartmentId.filter(department => !DashboardProjectDepartmentId.map(department => department.iDepartmentId).includes(department.iDepartmentId))
       }
 
-      console.log('DashboardProjectDepartmentId', DashboardProjectDepartmentId)
-      console.log('aDashboardProjectDepartmentIdsToDelete', aDashboardProjectDepartmentIdsToDelete)
-      console.log('aDashboardProjectDepartmentIdsToCreate', aDashboardProjectDepartmentIdsToCreate)
+      // console.log('DashboardProjectDepartmentId', DashboardProjectDepartmentId)
+      // console.log('aDashboardProjectDepartmentIdsToDelete', aDashboardProjectDepartmentIdsToDelete)
+      // console.log('aDashboardProjectDepartmentIdsToCreate', aDashboardProjectDepartmentIdsToCreate)
 
       if (project.eProjectType === 'Fixed') {
         let nRemainingMinute = 0
@@ -3583,8 +4511,8 @@ class Project {
             nRemainingCost += dashboardProjectDepartment.nRemainingCost || 0
           }
         }
-        console.log('nRemainingMinute for delete', nRemainingMinute)
-        console.log('nRemainingCost for delete', nRemainingCost)
+        // console.log('nRemainingMinute for delete', nRemainingMinute)
+        // console.log('nRemainingCost for delete', nRemainingCost)
         await DashboardProjectIndicatorModel.updateOne({ iProjectId, eStatus: 'Y' }, { $inc: { nRemainingMinute: -nRemainingMinute, nRemainingCost: -nRemainingCost }, eProjectType: project.eProjectType })
 
         await Promise.all(aDashboardProjectDepartmentIdsToDelete.map(async (department) => {
@@ -3606,8 +4534,8 @@ class Project {
             nRemainingCost += dashboardProjectDepartment.nRemainingCost || 0
           }
         }
-        console.log('nRemainingMinute for update', nRemainingMinute)
-        console.log('nRemainingCost for update', nRemainingCost)
+        // console.log('nRemainingMinute for update', nRemainingMinute)
+        // console.log('nRemainingCost for update', nRemainingCost)
         await DashboardProjectIndicatorModel.updateOne({ iProjectId, eStatus: 'Y' }, { nRemainingMinute, nRemainingCost, eProjectType: project.eProjectType })
       }
 
@@ -3680,7 +4608,7 @@ class Project {
       }))
 
       await Promise.all(aDashboardProjectDepartmentIdsToUpdate.map(async (department) => {
-        console.log('department', department)
+        // console.log('department', department)
         return DashboardProjectDepartmentModel.updateOne({ iDepartmentId: ObjectId(department.iDepartmentId), iProjectId: ObjectId(iProjectId), eStatus: 'Y' }, { nMinutes: department?.nMinutes || 0, nCost: department?.nCost || 0, eStatus: 'Y', eProjectType: project.eProjectType })
       }))
 
@@ -3771,12 +4699,16 @@ class Project {
       // }
 
       // if (jobProfileData.eShowAllProjects === 'OWN') {
-      q[0].$match.$or = [
-        { iBDId: ObjectId(req.employee._id) },
-        { iProjectManagerId: ObjectId(req.employee._id) },
-        { iBAId: ObjectId(req.employee._id) },
-        { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
-      ]
+
+      if (!req.employee.VIEW_ALL_PROJECT) {
+        q[0].$match.$or = [
+          { iBDId: ObjectId(req.employee._id) },
+          { iProjectManagerId: ObjectId(req.employee._id) },
+          { iBAId: ObjectId(req.employee._id) },
+          { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
+        ]
+      }
+
       // }
 
       // else {
@@ -3855,7 +4787,7 @@ class Project {
       if (!project) {
         return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].project))
       }
-      console.log('project', project)
+      // console.log('project', project)
       const q = [
         {
           $match: { iProjectId: ObjectId(id), eStatus: 'Y' }
@@ -3951,12 +4883,12 @@ class Project {
       let otp = 0; let otd = 0; let dtp = 0; let dtd = 0
 
       const project = await ProjectModel.findOne({ _id: ObjectId(id), eStatus: 'Y', eProjectType: 'Fixed' }).lean()
-      console.log('project', project)
+      // console.log('project', project)
       op = project.sCost
       otp = project.nTimeLineDays
 
       const ProjectDepartments = await ProjectWiseDepartment.find({ iProjectId: ObjectId(id), eStatus: 'Y' }).lean()
-      console.log('ProjectDepartments', ProjectDepartments)
+      // console.log('ProjectDepartments', ProjectDepartments)
 
       for (const i of ProjectDepartments) {
         od = od + i.nCost
@@ -3964,12 +4896,12 @@ class Project {
       }
 
       const dashboardProject = await DashboardProjectIndicatorModel.findOne({ iProjectId: ObjectId(id), eStatus: 'Y' }).lean()
-      console.log('dashboardProject', dashboardProject)
+      // console.log('dashboardProject', dashboardProject)
       dp = dashboardProject.sCost
       dtp = dashboardProject.nTimeLineDays
 
       const dashboardProjectDepartments = await DashboardProjectDepartmentModel.find({ iProjectId: ObjectId(id), eStatus: 'Y' }).lean()
-      console.log('dashboardProjectDepartments', dashboardProjectDepartments)
+      // console.log('dashboardProjectDepartments', dashboardProjectDepartments)
 
       for (const i of dashboardProjectDepartments) {
         dd = dd + i.nCost
@@ -3977,8 +4909,8 @@ class Project {
       }
 
       if (op !== dp || od !== dd || otp !== dtp || otd !== dtd) {
-        console.log('project', project)
-        console.log('op ', op, ' dp ', dp, ' od ', od, ' dd ', dd, ' otp ', otp, ' dtp ', dtp, ' otd ', otd, ' dtd ', dtd)
+        // console.log('project', project)
+        // console.log('op ', op, ' dp ', dp, ' od ', od, ' dd ', dd, ' otp ', otp, ' dtp ', dtp, ' otd ', otd, ' dtd ', dtd)
       }
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { project })
@@ -4052,8 +4984,8 @@ class Project {
         op = 0; od = 0; dp = 0; dd = 0; otp = 0; otd = 0; dtp = 0; dtd = 0
       }
 
-      console.log('successful', successful)
-      console.log('unSuccessful', unSuccessful)
+      // console.log('successful', successful)
+      // console.log('unSuccessful', unSuccessful)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { done: 'done', successful, unSuccessful })
     } catch (error) {
@@ -4070,8 +5002,8 @@ class Project {
       for (const i of projects) {
         const dashboard = await DashboardProjectIndicatorModel.findOne({ iProjectId: i._id, eStatus: 'Y' }).lean()
         if (dashboard) {
-          console.log('dashboard', dashboard?.nRemainingCost || 0)
-          console.log('dashboard', dashboard?.nRemainingMinute || 0)
+          // console.log('dashboard', dashboard?.nRemainingCost || 0)
+          // console.log('dashboard', dashboard?.nRemainingMinute || 0)
           count++
           const workLogs = await WorkLogModel.find({
             iProjectId: i._id,
@@ -4113,7 +5045,7 @@ class Project {
           }
         }
       }
-      console.log('count', count)
+      // console.log('count', count)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { done: 'done for Project only', successFull, unSuccessFull })
     } catch (error) {
       catchError('Project.calcWorkLogsBased', error, req, res)
@@ -4127,11 +5059,11 @@ class Project {
       const successFull = []
       const unSuccessFull = []
       for (const i of crs) {
-        console.log('i', i.sName)
+        // console.log('i', i.sName)
         const dashboard = await DashboardCrIndicatorModel.findOne({ iCrId: i._id, eStatus: 'Y' }).lean()
         if (dashboard) {
-          console.log('dashboard', dashboard?.nRemainingCost || 0)
-          console.log('dashboard', dashboard?.nRemainingMinute || 0)
+          // console.log('dashboard', dashboard?.nRemainingCost || 0)
+          // console.log('dashboard', dashboard?.nRemainingMinute || 0)
           count++
           const workLogs = await WorkLogModel.find({
             iCrId: i._id,
@@ -4146,7 +5078,7 @@ class Project {
             totalMinute = totalMinute + j?.nMinutes || 0
             total++
           }
-          console.log('total', total)
+          // console.log('total', total)
 
           if ((dashboard?.nRemainingCost || 0) === totalCost && (dashboard?.nRemainingMinute || 0) === totalMinute) {
             successFull.push({
@@ -4177,7 +5109,7 @@ class Project {
           }
         }
       }
-      console.log('count', count)
+      // console.log('count', count)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].change_request), { done: 'done for CR only', successFull, unSuccessFull })
     } catch (error) {
       catchError('Project.calcWorkLogsBasedCrs', error, req, res)
@@ -4366,13 +5298,13 @@ class Project {
       }
 
       const find = obj.find((i) => i[`.${extension}`])
-      console.log('find', Object.values(find)[0])
+      // console.log('find', Object.values(find)[0])
 
       if (!find) return ErrorResponseSender(res, status.BadRequest, messages[req.userLanguage].invalidFileExtension)
 
-      console.log('ContentType', ContentType)
+      // console.log('ContentType', ContentType)
       const data = await s3.generateUploadUrlForS3UsingPost(Object.values(find)[0], fileName)
-      console.log('data', data)
+      // console.log('data', data)
       const emailTemplatePath = path.join(
         __dirname,
         '../../view',
@@ -4391,7 +5323,7 @@ class Project {
         ContentType: data.url.fields['Content-Type'],
         success_action_status: data.url.fields.success_action_status
       })
-      console.log('datazHtml', datazHtml)
+      // console.log('datazHtml', datazHtml)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { data, datazHtml })
     } catch (error) {
       return catchError('Project.checks3post', error, req, res)
@@ -4492,7 +5424,7 @@ class Project {
   }
 
   async projectEmployeeOfDepartment(req, res) {
-    console.log('req.body', 'req.body')
+    // console.log('req.body', 'req.body')
     try {
       let employee = []
       let count = 0
@@ -4648,7 +5580,7 @@ class Project {
         }
       ]
       const employee = await ProjectWiseEmployee.aggregate(q)
-      console.log('employee', employee)
+      // console.log('employee', employee)
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { employee: employee[0] })
     } catch (error) {
       catchError('Project.getProjectEmployee', error, req, res)
@@ -4697,6 +5629,10 @@ class Project {
         sName: sContract.split('/')[sContract.split('/').length - 1]
       })
 
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: projectContract._id, eModule: 'ProjectWiseContract', sService: 'projectContract', eAction: 'Create', oNewFields: projectContract, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('Logs', logs)
+
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].create_success.replace('##', messages[req.userLanguage].contract), { projectContract })
     } catch (error) {
       catchError('Project.projectContract', error, req, res)
@@ -4711,13 +5647,13 @@ class Project {
       if (!projectExist) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].notfound.replace('##', messages[req.userLanguage].project))
 
       const objects = []
-
+      let projectContract
       if (id) {
-        const projectContract = await ProjectWiseContractModel.findOne({ _id: ObjectId(id), eStatus: 'Y' })
+        projectContract = await ProjectWiseContractModel.findOne({ _id: ObjectId(id), eStatus: 'Y' })
         if (!projectContract) objects.push(projectContract.sFileName)
       }
       if (sContract && !objects.length) {
-        const projectContract = await ProjectWiseContractModel.findOne({ sContract, eStatus: 'Y' })
+        projectContract = await ProjectWiseContractModel.findOne({ sContract, eStatus: 'Y' })
         if (!projectContract) objects.push(projectContract.sFileName)
       }
 
@@ -4729,7 +5665,7 @@ class Project {
         keys.push({ Key: sContract[k] })
       }
 
-      keys.map(item => console.log(item))
+      // keys.map(item => console.log(item))
 
       const deleteParams = {
         Bucket: config.S3_BUCKET_NAME,
@@ -4741,7 +5677,11 @@ class Project {
 
       await s3.deleteObjectsFromS3(deleteParams)
 
-      await ProjectWiseContractModel.updateOne({ _id: ObjectId(id), eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
+      const data = await ProjectWiseContractModel.findOneAndUpdate({ _id: ObjectId(id), eStatus: 'Y' }, { eStatus: 'N', iLastUpdateBy: req.employee._id })
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'ProjectWiseContract', sService: 'deleteS3Contract', eAction: 'Delete', oOldFields: projectContract, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('Logs', logs)
 
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].contract) })
     } catch (error) {
@@ -5052,11 +5992,11 @@ class Project {
 
   async getClosedProjects(req, res) {
     try {
-      let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', iTechnologyId, eProjectType, iDepartmentId, iEmployeeId } = req.query
+      let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt', iTechnologyId, eProjectType, iDepartmentId, iEmployeeId, eShow = 'OWN' } = req.query
 
       const orderBy = order && order === 'asc' ? 1 : -1
 
-      console.log('req.query', req.query)
+      // console.log('req.query', req.query)
 
       const jobProfileData = await EmployeeModel.findOne({ _id: req.employee._id }, { iJobProfileId: 1, eShowAllProjects: 1 }).populate({ path: 'iJobProfileId', select: 'nLevel' }).lean()
 
@@ -5216,15 +6156,35 @@ class Project {
         }
       ]
 
-      if (jobProfileData.eShowAllProjects === 'OWN') {
+      if (req.employee.bAllClosedProject) {
+        if (eShow === 'OWN') {
+          const projects = new Set()
+          const projectEmployee = await ProjectwiseemployeeModel.find({ eStatus: 'Y', iEmployeeId: ObjectId(req.employee._id) }, { iProjectId: 1 }).lean()
+          const department = await DepartmentModel.findOne({ eStatus: 'Y', _id: ObjectId(req.employee.iDepartmentId) }).lean()
+
+          for (const project of projectEmployee) {
+            projects.add(project.iProjectId)
+          }
+
+          q[0].$match.$or = [
+            { iBDId: ObjectId(req.employee._id) },
+            { iProjectManagerId: ObjectId(req.employee._id) },
+            { iBAId: ObjectId(req.employee._id) },
+            { _id: { $in: [...projects].map(a => ObjectId(a)) } }
+          ]
+        }
+      } else {
+        const projects = new Set()
         const projectEmployee = await ProjectwiseemployeeModel.find({ eStatus: 'Y', iEmployeeId: ObjectId(req.employee._id) }, { iProjectId: 1 }).lean()
         const department = await DepartmentModel.findOne({ eStatus: 'Y', _id: ObjectId(req.employee.iDepartmentId) }).lean()
-
+        for (const project of projectEmployee) {
+          projects.add(project.iProjectId)
+        }
         q[0].$match.$or = [
           { iBDId: ObjectId(req.employee._id) },
           { iProjectManagerId: ObjectId(req.employee._id) },
           { iBAId: ObjectId(req.employee._id) },
-          { _id: { $in: projectEmployee.map(a => a.iProjectId) } }
+          { _id: { $in: [...projects].map(a => ObjectId(a)) } }
         ]
       }
 
@@ -5294,6 +6254,10 @@ class Project {
       if (!project) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].notfound.replace('##', messages[req.userLanguage].project))
 
       const projectRetrive = await ProjectModel.findByIdAndUpdate({ _id: ObjectId(id), eStatus: 'Y' }, { eProjectStatus: 'In Progress', iLastUpdateBy: req.employee._id }, { new: true })
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: project._id, eModule: 'Project', sService: 'projectContract', eAction: 'Update', oOldFields: project, oNewFields: projectRetrive, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('Logs', logs)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].project))
     } catch (error) {

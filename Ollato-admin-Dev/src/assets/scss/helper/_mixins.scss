@@ -1,0 +1,4 @@
+//tranistion
+@mixin transition_05 { transition: all 0.5s ease; }
+@mixin transition_03 { transition: all 0.3s ease; }
+@mixin hoverimgwhite { filter: brightness(0) invert(1); }

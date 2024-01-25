@@ -9,7 +9,7 @@ router.get('/logs/v1', setLanguage, isAuthenticated, isAuthorized('VIEW_LOGS'), 
     .post('/DownloadExcel', setLanguage, isAuthenticated, checkDownLoadExcelLimitByIp, isAuthorized('DOWNLOAD_EXCEL'), logService.DownloadExcel)
     .get('/bucketInfo', isAuthorized('VIEW_S3BUCKETINFO'), logService.getBucket)
 
-    .post('/sendMailPostmark', setLanguage, isAuthenticated, logService.sendMailPostmark)
+    // .post('/sendMailPostmark', setLanguage, isAuthenticated, logService.sendMailPostmark)
 
     .post('/addLogs', logService.addLogs)
 

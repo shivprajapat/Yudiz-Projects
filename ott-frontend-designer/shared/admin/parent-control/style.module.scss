@@ -1,0 +1,13 @@
+@import "@/assets/scss/helper/mixin";
+
+.parent_control {
+    &_otp_wrap {
+        >div>div {
+            column-gap: 16px;
+        }
+    }
+
+    &_pin {
+        margin-top: 32px;
+    }
+}

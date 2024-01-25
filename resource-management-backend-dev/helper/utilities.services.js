@@ -239,7 +239,11 @@ const getIp = function (req) {
   try {
     let ip = req.header('x-forwarded-for') ? req.header('x-forwarded-for').split(',') : []
 
+    console.log(ip)
+
     ip = ip[0] || req.socket.remoteAddress
+
+    console.log(ip)
     return ip
   } catch (error) {
     handleCatchError(error)
@@ -279,13 +283,13 @@ const ErrorResponseSender = (res, statusCode = 500, message = 'internal server e
 }
 
 const paginationValue = (value) => {
-  const { page = 0, limit = 5, order, sort = 'dCreatedAt', search } = value
+  const { page = 0, limit = 5, order, sort = 'dCreatedAt', search, eShow = 'OWN' } = value
 
   const orderBy = order && order === 'asc' ? 1 : -1
 
   const sorting = { [sort]: orderBy }
 
-  return { page, limit, order, sorting, search }
+  return { page, limit, order, sorting, search, eShow }
 }
 
 const camelCase = (str) => {
@@ -445,8 +449,8 @@ const loggerMiddleware = function (req, res, next) {
   const { method, url, headers } = req
 
   // Log the request information
-  console.log(`[Request] ${method} ${url}`)
-  console.log('[Request Headers]', headers)
+  // console.log(`[Request] ${method} ${url}`)
+  // console.log('[Request Headers]', headers)
 
   // eTag for request)
 
@@ -473,8 +477,8 @@ const loggerMiddleware = function (req, res, next) {
   res.on('finish', async () => {
     const end = new Date()
     time = end.getTime() - start.getTime()
-    console.log(`[Response] ${method} ${url} ${time}ms`)
-    console.log('[Response Headers]', res.getHeaders())
+    // console.log(`[Response] ${method} ${url} ${time}ms`)
+    // console.log('[Response Headers]', res.getHeaders())
     // reponse status code
     console.log('[Response Status Code]', res.statusCode)
     await NetworkModel.create({

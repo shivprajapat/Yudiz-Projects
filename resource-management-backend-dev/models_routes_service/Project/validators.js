@@ -201,7 +201,7 @@ const validateProjects = function (req, res, next) {
   }
 
   if (!req.body.eProjectType) {
-    console.log('req.body.eProjectType', req.body.eProjectType)
+    // console.log('req.body.eProjectType', req.body.eProjectType)
     errors.push({ msg: 'Invalid Value', value: req.body?.flag || '', location: 'body', param: 'eProjectType' })
   }
 

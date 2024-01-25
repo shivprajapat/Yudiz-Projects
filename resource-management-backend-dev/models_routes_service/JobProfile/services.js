@@ -9,6 +9,8 @@ const { catchError, keygen, SuccessResponseSender, ErrorResponseSender, paginati
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Types.ObjectId
 
+const { AllowJobProfileToFetchPm, AllowJobProfileToFetchBde, AllowJobProfileToFetchBa } = require('../../helper/constatnt')
+
 const { queuePush } = require('../../helper/redis')
 
 const { ResourceManagementDB } = require('../../database/mongoose')
@@ -97,14 +99,14 @@ class JobProfile {
       const jobProfile = await JobProfileModel.findOne({ sKey: keygen(sName), sPrefix, eStatus: 'Y' }).lean()
       if (jobProfile) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].jobProfile))
       const data = await JobProfileModel.create({ ...req.body, sKey: keygen(sName), sPrefix, iLastUpdateBy: req.employee._id, iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f') })
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
+      // take = ResourceManagementDB.model(take, Logs)
 
-      console.log('take', take)
+      // console.log('take', take)
 
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'JobProfile', sService: 'addJobProfiles', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'JobProfile', sService: 'addJobProfiles', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('logs', logs)
 
       // await notificationsender(req, data._id, ' jobProfile is create ', true, true, req.employee._id, `${config.urlPrefix}/jobProfile/detail/${data._id}`)
       return SuccessResponseSender(res, status.Create, messages[req.userLanguage].add_success.replace('##', messages[req.userLanguage].jobProfile), {
@@ -131,12 +133,13 @@ class JobProfile {
       if (jobProfile && jobProfile.eStatus === 'Y') {
         const data = await JobProfileModel.findByIdAndUpdate({ _id: req.params.id }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { new: true, runValidators: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].jobProfile, data))
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
+        // take = ResourceManagementDB.model(take, Logs)
 
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'JobProfile', sService: 'deleteJobProfiles', eAction: 'Delete', oNewFields: data, oOldFields: jobProfile }
-        await take.create(logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'JobProfile', sService: 'deleteJobProfiles', eAction: 'Delete', oNewFields: data, oOldFields: jobProfile, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+        await queuePush('logs', logs)
 
         // await notificationsender(req, data._id, ' jobProfile is delete ', true, true, req.employee._id, `${config.urlPrefix}/jobProfile/detail/${data._id}`)
         return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].jobProfile, data))
@@ -152,8 +155,8 @@ class JobProfile {
     try {
       const { sName, sPrefix = '' } = req.body
       const jobProfile = await JobProfileModel.findById({ _id: req.params.id }).lean()
-      console.log(jobProfile)
-      console.log('req.body', req.body)
+      // console.log(jobProfile)
+      // console.log('req.body', req.body)
       if (!jobProfile) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].jobProfile))
       if (jobProfile && jobProfile.eStatus === 'Y' && jobProfile.bIsSystem === false) {
         const jobProfileKey = await JobProfileModel.findOne({ sKey: keygen(sName), sPrefix, eStatus: 'Y', _id: { $ne: req.params.id } }).lean()
@@ -177,12 +180,14 @@ class JobProfile {
         const data = await JobProfileModel.findByIdAndUpdate({ _id: req.params.id }, { iLastUpdateBy: req.employee._id, sDescription: req.body.sDescription, nLevel: req.body.nLevel }, { new: true, runValidators: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].jobProfile))
 
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
+        // take = ResourceManagementDB.model(take, Logs)
 
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'JobProfile', sService: 'updateJobProfiles', eAction: 'Update', oNewFields: data, oOldFields: jobProfile }
-        await take.create(logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'JobProfile', sService: 'updateJobProfiles', eAction: 'Update', oNewFields: data, oOldFields: jobProfile, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+
+        await queuePush('logs', logs)
 
         // await notificationsender(req, data._id, ' jobProfile is update ', true, true, req.employee._id, `${config.urlPrefix}/jobProfile/detail/${data._id}`)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].jobProfile))
@@ -352,6 +357,7 @@ class JobProfile {
   }
 
   async getBaEmployee(req, res) {
+    // console.log('req.query', req.query, AllowJobProfileToFetchBa)
     try {
       let { page = 0, limit = 5, search = '', order, sort = 'dCreatedAt' } = req.query
 
@@ -384,8 +390,7 @@ class JobProfile {
                   $expr: {
                     $and: [
                       { $eq: ['$_id', '$$departmentId'] },
-                      { $eq: ['$eStatus', 'Y'] },
-                      { $eq: ['$sKey', 'BUSINESSANALYST'] }
+                      { $eq: ['$eStatus', 'Y'] }
                     ]
                   }
                 }
@@ -412,7 +417,8 @@ class JobProfile {
                   $expr: {
                     $and: [
                       { $eq: ['$_id', '$$jobProfileId'] },
-                      { $eq: ['$eStatus', 'Y'] }
+                      { $eq: ['$eStatus', 'Y'] },
+                      { $in: ['$sKey', AllowJobProfileToFetchBa] }
                     ]
                   }
                 }
@@ -494,8 +500,8 @@ class JobProfile {
                   $expr: {
                     $and: [
                       { $eq: ['$_id', '$$departmentId'] },
-                      { $eq: ['$eStatus', 'Y'] },
-                      { $eq: ['$sKey', 'SALES'] }
+                      { $eq: ['$eStatus', 'Y'] }
+                      // { $eq: ['$sKey', 'SALES'] }
                     ]
                   }
                 }
@@ -522,7 +528,8 @@ class JobProfile {
                   $expr: {
                     $and: [
                       { $eq: ['$_id', '$$jobProfileId'] },
-                      { $eq: ['$eStatus', 'Y'] }
+                      { $eq: ['$eStatus', 'Y'] },
+                      { $in: ['$sKey', AllowJobProfileToFetchBde] }
                     ]
                   }
                 }
@@ -604,8 +611,8 @@ class JobProfile {
                   $expr: {
                     $and: [
                       { $eq: ['$_id', '$$departmentId'] },
-                      { $eq: ['$eStatus', 'Y'] },
-                      { $eq: ['$sKey', 'PRODUCTDEVELOPMENT'] }
+                      { $eq: ['$eStatus', 'Y'] }
+
                     ]
                   }
                 }
@@ -632,7 +639,8 @@ class JobProfile {
                   $expr: {
                     $and: [
                       { $eq: ['$_id', '$$jobProfileId'] },
-                      { $eq: ['$eStatus', 'Y'] }
+                      { $eq: ['$eStatus', 'Y'] },
+                      { $in: ['$sKey', AllowJobProfileToFetchPm] }
                     ]
                   }
                 }

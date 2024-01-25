@@ -1,0 +1,25 @@
+.common-layout { min-height: 100vh; display: flex; flex-wrap: wrap; flex:1 0 100%;
+    .ollato-logo-sec { padding:0 100px; position: relative; background: #0d2d44; width: 60%; display: flex; align-items: center; justify-content: center;  }
+    .form-box-section { padding:40px 40px 64px; background: #EEF6FC; width: 40%; display: flex; justify-content: space-between; flex-direction: column; max-height: 100vh;
+      overflow-y: auto; &.justify-content-center { padding-bottom:40px; } }
+    @media (min-width:1400px) and (max-width:1599px) {
+      .ollato-logo-sec { padding:0 80px; }
+      .form-box-section { padding:30px 30px 54px; &.justify-content-center { padding-bottom:30px; } }
+    }
+    @media (min-width:1200px) and (max-width:1399px) {
+      .ollato-logo-sec { padding:0 70px; width:57%;}
+      .form-box-section { padding:25px 25px 44px;  width:43%; &.justify-content-center { padding-bottom:25px; } }
+    }
+    @media (min-width:992px) and (max-width:1199px) {
+      .ollato-logo-sec { padding:0 60px; width:55%;}
+      .form-box-section { padding:20px 20px 32px;  width:45%; &.justify-content-center { padding-bottom:20px; } }
+    }
+    @media (min-width:768px) and (max-width:991px) {
+      .ollato-logo-sec { padding:0 50px; width:52%;}
+      .form-box-section { padding:15px 15px 26px;  width:48%; &.justify-content-center { padding-bottom:15px; } }
+    }
+    @media (max-width:767px) {
+      .ollato-logo-sec { padding:20px 50px; width:100%;}
+      .form-box-section { padding:15px 15px 20px;  width:100%; &.justify-content-center { padding-bottom:15px; } }
+    }
+  }

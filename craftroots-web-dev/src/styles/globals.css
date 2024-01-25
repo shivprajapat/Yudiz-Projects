@@ -1,0 +1,178 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './fonts';
+@import './variable';
+@import './multiRangeSlider';
+@import './section';
+@import './accordion';
+@import './timeline.css';
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 50px;
+}
+body {
+  font-family: 'Jost';
+  font-weight: 400;
+  overflow-x: hidden;
+  @apply text-grey-900;
+}
+@layer base {
+  ::selection {
+    @apply bg-primary text-white;
+  }
+  input[type='number'] {
+    -moz-appearance: textfield;
+    @apply focus:outline-none;
+  }
+  .remove-scrollbar::-webkit-scrollbar {
+    @apply w-0;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    @apply hidden;
+  }
+  input::-webkit-outer-spin-button,
+  input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+  /* Firefox */
+  input[type='number'] {
+    -moz-appearance: textfield;
+  }
+  /*   button:disabled{
+    @apply border-grey-500 text-grey-500;
+
+  } */
+  ul {
+    @apply m-0 p-0 list-none;
+  }
+  button {
+    @apply outline-none;
+  }
+  input {
+    @apply outline-none focus:shadow-none;
+  }
+  .banner-text {
+    font-family: 'adelia';
+    @apply text-xl leading-[2.2] md:leading-10 md:text-[21px] lg:text-[30px] 2xl:text-[46px] 2xl:leading-relaxed;
+  }
+  h1 {
+    @apply text-2xl leading-8 font-playfairDisplay md:text-[35px] md:leading-10 lg:text-[40px] lg:leading-[46px] xl:text-[46px] xl:leading-[56px];
+  }
+  h2 {
+    @apply text-2xl font-playfairDisplay leading-8 font-semibold lg:text-[36px] lg:leading-[46px];
+  }
+  h3 {
+    @apply text-3xl leading-8 font-playfairDisplay md:text-4xl md:leading-[44px];
+  }
+  h4 {
+    @apply text-3xl leading-8 font-playfairDisplay md:text-[32px] md:leading-[38px];
+  }
+  h5 {
+    @apply text-2xl leading-7 font-playfairDisplay md:text-[28px] md:leading-[36px];
+  }
+  h6 {
+    @apply text-[24px] leading-7 font-playfairDisplay md:text-2xl md:leading-8;
+  }
+
+  textarea {
+    @apply resize-none;
+  }
+  .center-box {
+    @apply absolute -translate-x-1/2 -translate-y-1/2 top-2/4 left-1/2;
+  }
+  input[type='number']::-webkit-inner-spin-button,
+  input[type='number']::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0;
+  }
+
+  .error-text {
+    @apply block text-error mt-1 text-xs md:text-sm capitalize leading-4;
+  }
+  .modal {
+    @apply fixed inset-x-0 inset-y-0 z-[999] opacity-0 invisible flex items-center justify-center;
+    -moz-transition: opacity 200ms ease-in-out;
+    -o-transition: opacity 200ms ease-in-out;
+    -webkit-transition: opacity 200ms ease-in-out;
+    transition: opacity 200ms ease-in-out;
+  }
+  .modal.active {
+    @apply visible opacity-100;
+  }
+  .modal-body {
+    @apply fixed inset-0 z-10 bg-gray-900 bg-opacity-50 transition-opacity;
+  }
+  .modal-content {
+    @apply relative z-50 overflow-y-auto w-fit mx-auto;
+  }
+  .modal-bg {
+    @apply flex min-h-full justify-center p-4 text-center items-center sm:p-0;
+  }
+  .modal-size {
+    @apply relative transform overflow-hidden max-w-2xl lg:max-w-4xl;
+  }
+  .modal-size > div {
+    @apply bg-white p-4 sm:p-8;
+  }
+}
+@layer components {
+  .icon-close {
+    @apply duration-300 ease-in-out flex items-center justify-center w-8 h-8 rounded-full border-none outline-none bg-gray-100 hover:bg-secondary-100;
+  }
+  .icon-close img {
+    @apply duration-300 ease-in-out w-5 h-5;
+  }
+  .icon-close:hover img {
+    filter: brightness(0) invert(1);
+  }
+  .icon-close:hover svg path {
+    @apply fill-white;
+  }
+}
+
+@layer utilities {
+  .fill-mode-forwards {
+    animation-fill-mode: forwards;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .horizontal-slider {
+    width: 100%;
+    overflow-x: scroll;
+    display: flex !important;
+    padding-right: 12px;
+  }
+  .horizontal-slider::-webkit-scrollbar {
+    width: 0 !important;
+  }
+  .horizontal-slider::-webkit-scrollbar-thumb {
+    @apply bg-transparent;
+  }
+  .horizontal-slider .product-item {
+    width: 50%;
+    display: flex;
+    flex: 0 0 50%;
+  }
+  .newsletter form {
+    @apply mx-auto;
+  }
+}
+
+#nprogress .bar {
+  @apply !bg-secondary-200 !h-[3px] rounded-sm;
+}
+#nprogress .bar .peg {
+  @apply hidden;
+}
+
+#nprogress .spinner {
+  @apply !hidden;
+}

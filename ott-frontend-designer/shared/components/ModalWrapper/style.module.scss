@@ -1,0 +1,55 @@
+.wrapper_section {
+  border-radius: 12px;
+  position: relative;
+  border: 1px solid;
+  border-image-source: linear-gradient(360deg, var(--neutrals-60-color) 0%, var(--white-0-color) 100%);
+  background: linear-gradient(0deg, var(--neutrals-20-color), var(--neutrals-20-color)), linear-gradient(360deg, var(--neutrals-60-color) 0%, var(--white-0-color) 100%);
+  overflow: hidden;
+  border-radius: 8px;
+  height: 100%;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    filter: blur(90px);
+    border-radius: 100%;
+  }
+
+  &::before {
+    top: 0;
+    right: 0;
+    background: #FBD0B7;
+    width: 120px;
+    height: 120px;
+  }
+
+  &::after {
+    bottom: -13%;
+    left: -6%;
+    background: #D4560C;
+    width: 100px;
+    height: 100px;
+  }
+
+  &_shadow {
+    box-shadow: inset 0px -1px 0 1px #554d49;
+  }
+
+  &_space {
+    margin-bottom: 24px;
+  }
+
+  &_space_lg {
+    padding: 40px;
+  }
+
+  &_space_md {
+    padding: 16px;
+  }
+
+  article {
+    position: relative;
+    z-index: 1;
+  }
+}

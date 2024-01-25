@@ -1,0 +1,510 @@
+.assessment-box {
+  padding: 24px 40px;
+  .student-code {
+    margin-left: 32px;
+    h2 {
+      line-height: 1;
+    }
+  }
+}
+.assessment-item-box {
+  margin-top: 24px;
+  .accordion-item {
+    background: none;
+    padding: 0;
+    margin-bottom: 24px;
+    border-radius: 0;
+    border: 0;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    .accordion-button {
+      padding: 32px 40px;
+      h5 {
+        font-weight: $fw-600;
+      }
+      background: $white;
+      box-shadow: 0px 4px 16px $light-blue-2;
+      &::after {
+        border: 1px solid $light-blue-1;
+        margin: 0;
+        border-radius: 8px;
+        width: 32px;
+        height: 32px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-size: auto;
+        background-position: center;
+        background-image: url('../../../images/ass-arrow.svg');
+      }
+      border-radius: 16px;
+      &:not(.collapsed) {
+        box-shadow: 0px 10px 16px $light-blue-5;
+        &::after {
+          background-image: url('../../../images/ass-arrow.svg');
+        }
+      }
+    }
+  }
+  .accordion-item:last-of-type .accordion-button.collapsed {
+    border-radius: 16px !important;
+  }
+  .progress-box {
+    margin-right: 0;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    .progress {
+      margin: 0 24px;
+      width: 200px;
+      height: 10px;
+      background-color: $light-blue;
+    }
+  }
+  .accordion-body {
+    margin: 22px 0 26px;
+    padding: 0 24px;
+  }
+  .subtest-box {
+    padding: 15px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: $white;
+    border: 1px solid $light-blue-1;
+    border-radius: 16px;
+    margin-bottom: 8px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    h4 {
+      color: $text-dark-3;
+      font-weight: $fw-600;
+    }
+    .status-box {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      h6 {
+        font-weight: $fw-500;
+        font-size: 20px;
+        line-height: 30px;
+        color: $text-dark-5;
+      }
+      img {
+        margin-left: 16px;
+      }
+    }
+  }
+}
+.status-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  h6 {
+    font-weight: $fw-500;
+    font-size: 20px;
+    line-height: 30px;
+    color: $text-dark-5;
+  }
+  img {
+    margin-left: 16px;
+  }
+}
+.findings-point-bg {
+  width: 50%;
+ margin: 0px auto;
+ color: white;
+ display: flex;
+ align-items: center;
+ justify-content: center;
+  height: 140px;
+  position: relative;
+  background: #d45546;
+  ul{
+    margin: 0px;
+    text-align: center;
+    padding: 0px;
+    li:not(:last-child){margin-bottom: 12px;}
+  }
+}
+.findings-point-bg:after {
+  content: "";
+  position: absolute;
+  left: -70px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-right: 70px solid #d45546;
+  border-top: 70px solid transparent;
+  border-bottom: 70px solid transparent;
+ 
+}
+.findings-point-bg:before {
+  content: "";
+  position: absolute;
+  right: -70px;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-left: 70px solid #d45546;
+  border-top: 70px solid transparent;
+  border-bottom: 70px solid transparent;
+}
+.chart-image{
+  text-align: center;
+  img{max-width: 700px; width: 100%;}
+}
+.chart-img{flex-direction: column; padding-top: 30px;}
+//responsive css
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .assessment-box {
+    padding: 20px 34px;
+    .student-code {
+      margin-left: 26px;
+    }
+  }
+  .assessment-item-box {
+    margin-top: 20px;
+    .accordion-item {
+      margin-bottom: 20px;
+      .accordion-button {
+        padding: 28px 34px;
+        border-radius: 16px;
+        &::after {
+          width: 32px;
+          height: 32px;
+        }
+      }
+    }
+    .accordion-item:last-of-type .accordion-button.collapsed {
+      border-radius: 16px !important;
+    }
+    .progress-box {
+      .progress {
+        margin: 0 20px;
+        width: 160px;
+        height: 8px;
+      }
+    }
+    .accordion-body {
+      margin: 18px 0 22px;
+      padding: 0 20px;
+    }
+    .subtest-box {
+      padding: 12px 34px;
+      border-radius: 16px;
+      margin-bottom: 6px;
+      .status-box {
+        h6 {
+          font-size: 18px;
+          line-height: 24px;
+        }
+        img {
+          margin-left: 12px;
+        }
+      }
+    }
+  }
+  .status-box {
+    h6 {
+      font-size: 18px;
+      line-height: 24px;
+    }
+    img {
+      margin-left: 12px;
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .assessment-box {
+    padding: 18px 30px;
+    .student-code {
+      margin-left: 22px;
+    }
+  }
+  .assessment-item-box {
+    margin-top: 16px;
+    .accordion-item {
+      margin-bottom: 16px;
+      .accordion-button {
+        padding: 24px 30px;
+        border-radius: 12px;
+        &::after {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+    .accordion-item:last-of-type .accordion-button.collapsed {
+      border-radius: 12px !important;
+    }
+    .progress-box {
+      .progress {
+        margin: 0 16px;
+        width: 120px;
+        height: 8px;
+      }
+    }
+    .accordion-body {
+      margin: 14px 0 18px;
+      padding: 0 16px;
+    }
+    .subtest-box {
+      padding: 12px 28px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+      .status-box {
+        h6 {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        img {
+          margin-left: 10px;
+          width: 44px;
+        }
+      }
+    }
+  }
+  .status-box {
+    h6 {
+      font-size: 16px;
+      line-height: 22px;
+    }
+    img {
+      margin-left: 10px;
+      width: 44px;
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .assessment-box {
+    padding: 18px 30px;
+    .student-code {
+      margin-left: 22px;
+    }
+  }
+  .assessment-item-box {
+    margin-top: 16px;
+    .accordion-item {
+      margin-bottom: 16px;
+      .accordion-button {
+        padding: 18px 28px;
+        border-radius: 12px;
+        &::after {
+          width: 26px;
+          height: 26px;
+          border-radius: 6px;
+        }
+      }
+    }
+    .accordion-item:last-of-type .accordion-button.collapsed {
+      border-radius: 12px !important;
+    }
+    .progress-box {
+      .progress {
+        margin: 0 16px;
+        width: 120px;
+        height: 8px;
+      }
+    }
+    .accordion-body {
+      margin: 14px 0 18px;
+      padding: 0 16px;
+    }
+    .subtest-box {
+      padding: 6px 28px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+      .status-box {
+        h6 {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        img {
+          margin-left: 10px;
+          width: 40px;
+        }
+      }
+    }
+  }
+  .status-box {
+    h6 {
+      font-size: 16px;
+      line-height: 22px;
+    }
+    img {
+      margin-left: 10px;
+      width: 40px;
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .assessment-box {
+    padding: 18px 30px;
+    .student-code {
+      margin-left: 22px;
+    }
+  }
+  .assessment-item-box {
+    margin-top: 16px;
+    .accordion-item {
+      margin-bottom: 16px;
+      .accordion-button {
+        padding: 18px 28px;
+        border-radius: 12px;
+        &::after {
+          width: 26px;
+          height: 26px;
+          border-radius: 6px;
+        }
+      }
+    }
+    .accordion-item:last-of-type .accordion-button.collapsed {
+      border-radius: 12px !important;
+    }
+    .progress-box {
+      .progress {
+        margin: 0 16px;
+        width: 100px;
+        height: 6px;
+      }
+    }
+    .accordion-body {
+      margin: 14px 0 18px;
+      padding: 0 16px;
+    }
+    .subtest-box {
+      padding: 6px 28px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+      .status-box {
+        h6 {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        img {
+          margin-left: 10px;
+          width: 40px;
+        }
+      }
+    }
+  }
+  .status-box {
+    h6 {
+      font-size: 16px;
+      line-height: 22px;
+    }
+    img {
+      margin-left: 10px;
+      width: 40px;
+    }
+  }
+}
+@media (max-width: 767px) {
+  .findings-point-bg {
+    width: 90%;
+   margin: 0px auto;
+   color: white;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+    height: 100px;
+    position: relative;
+    background: #d45546;
+    ul{
+      margin: 0px;
+      text-align: center;
+      padding: 0px;
+      li{font-size: 14px; line-height: 18px;}
+      li:not(:last-child){margin-bottom: 6px;}
+    }
+  }
+  .findings-point-bg:after {
+    content: "";
+    position: absolute;
+    left: -50px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-right: 50px solid #d45546;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+   
+  }
+  .findings-point-bg:before {
+    content: "";
+    position: absolute;
+    right: -50px;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    border-left: 50px solid #d45546;
+    border-top: 50px solid transparent;
+    border-bottom: 50px solid transparent;
+  }
+  .assessment-box {
+    padding: 16px 20px;
+    & > .assessmenticon {
+      width: 50px;
+    }
+    .student-code {
+      margin-left: 22px;
+    }
+  }
+  .assessment-item-box {
+    margin-top: 16px;
+    .accordion-item {
+      margin-bottom: 16px;
+      .accordion-button {
+        padding: 18px 28px;
+        border-radius: 12px;
+        &::after {
+          width: 26px;
+          height: 26px;
+          border-radius: 6px;
+        }
+      }
+    }
+    .accordion-item:last-of-type .accordion-button.collapsed {
+      border-radius: 12px !important;
+    }
+    .progress-box {
+      .progress {
+        margin: 0 16px;
+        width: 100px;
+        height: 6px;
+      }
+    }
+    .accordion-body {
+      margin: 14px 0 18px;
+      padding: 0 16px;
+    }
+    .subtest-box {
+      padding: 6px 16px;
+      border-radius: 12px;
+      margin-bottom: 6px;
+      .status-box {
+        h6 {
+          font-size: 16px;
+          line-height: 22px;
+        }
+        img {
+          margin-left: 10px;
+          width: 38px;
+        }
+      }
+    }
+  }
+  .status-box {
+    h6 {
+      font-size: 16px;
+      line-height: 22px;
+    }
+    img {
+      margin-left: 10px;
+      width: 38px;
+    }
+  }
+}

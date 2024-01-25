@@ -1,0 +1,108 @@
+.rating {
+  display: flex;
+  gap: 4px;
+  .blur-star {
+    color: #2170ac;
+  }
+
+  svg {
+    font-size: 20px;
+    color: #808080;
+  }
+}
+.bullet-point {
+  text-align: left;
+  p {
+    margin-bottom: 10px;
+  }
+}
+.left-box {
+  text-align: left;
+}
+.formlink {
+  font-weight: 600;
+  font-size: 15px;
+  line-height: 20px;
+  color: #2170ac;
+  text-decoration: none;
+  transition: all 0.5s ease;
+  border: none;
+  background-color: transparent;
+}
+
+.formlink:hover {
+  color: #0d2d44;
+}
+.package-dHTML {
+  p {
+    margin-bottom: 8px !important;
+  }
+}
+
+.profile-boxx {
+  width: 48px;
+  height: 48px;
+  border-radius: 100%;
+  overflow: hidden;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.failed-text {
+  color: red;
+}
+
+.back-btn {
+  background: transparent;
+  border: none;
+}
+.coupon_code {
+  margin-bottom: 10px;
+  .form-control {
+    padding: 12px 20px;
+  }
+  position: relative;
+  button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 20px;
+    background: transparent;
+    border: none;
+    padding: 6px;
+    color: $text_blue;
+    font-weight: 500;
+  }
+}
+
+.error-coupon {
+  border: 3px solid red;
+}
+
+.coun-img {
+  border-radius: 50%;
+}
+
+.new-logo{
+  text-align: center;
+}
+
+.new-logo a{
+  display: inline-block;
+}
+
+.new-logo img{
+  max-width: 120px;
+}
+
+.mobile-logo img{
+  max-width: 80px;
+}
+
+.login-logo img{
+  max-width: 600px;
+  width: 100%;
+}

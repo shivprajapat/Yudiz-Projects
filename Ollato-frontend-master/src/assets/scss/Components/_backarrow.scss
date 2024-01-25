@@ -1,0 +1,23 @@
+.back-btn { margin-bottom: 40px; 
+a       { display: flex; align-items: center; color:$black; font-weight: $fw-500; font-size: 16px; line-height: 19px; img { margin-right: 10px; } }  }
+/* responsive css */
+@media (min-width:1400px) and (max-width:1599px) {
+    .back-btn { margin-bottom: 34px; 
+        a       { img { margin-right: 8px; } }  }
+  }
+  @media (min-width:1200px) and (max-width:1399px) {
+    .back-btn { margin-bottom: 30px; 
+        a       { font-size: 15px; line-height: 18px; img { margin-right: 6px;  max-width: 30px;} }  }
+  }
+  @media (min-width:992px) and (max-width:1199px) {
+    .back-btn { margin-bottom: 30px; 
+        a       { font-size: 15px; line-height: 18px; img { margin-right: 6px; max-width: 24px; } }  }
+  }
+  @media (min-width:768px) and (max-width:991px) {
+    .back-btn { margin-bottom: 24px; 
+        a       { font-size: 15px; line-height: 18px; img { margin-right: 6px; max-width: 24px; } }  }
+  }
+  @media (max-width:767px) {
+    .back-btn { margin-bottom: 20px; 
+        a       { font-size: 14px; line-height: 17px; img { margin-right: 4px; max-width: 28px;} }  }
+  }

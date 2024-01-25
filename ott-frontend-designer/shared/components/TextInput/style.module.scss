@@ -1,0 +1,5 @@
+@import "@/assets/scss/helper/mixin";
+.input {
+  border: none;padding: 0 20px;width: 380px;color: var(--white-color);@include font-size(14, null, 400);background: var(--neutrals-20-color);border-radius: 24px;outline: none;flex: 1;height: 36px;}
+  .has_search {input {padding-left: 38px;}span {position: absolute;z-index: 2;display: block;width: 46px;height: 36px;line-height: 33px;text-align: center;pointer-events: none;}
+}

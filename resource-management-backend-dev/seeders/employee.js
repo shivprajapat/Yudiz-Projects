@@ -2,13 +2,13 @@ const { hashPassword } = require('../helper/utilities.services')
 
 const Employees = [
   {
-    sName: 'Super Admin',
-    sEmpId: 1119,
-    sMobNum: '1234567890',
+    sName: 'Doli Vadiya',
+    sEmpId: 1162,
+    sMobNum: '8401607270',
     eGrade: 'A', // client grade
     eStatus: 'Y',
-    sPassword: 'SuperAdmin@123',
-    sEmail: 'pranav.kakadiya@yudiz.com',
+    sPassword: 'SuperAdminD@123',
+    sEmail: 'doli@yudiz.com',
     iJobProfileId: 'HRMANAGER',
     iDepartmentId: 'HR',
     nExperience: 10,
@@ -19,27 +19,29 @@ const Employees = [
     eDevType: 'Dedicated',
     sReview: '',
     nPerhoursRate: 0,
-    nPaid: 10
+    nPaid: 10,
+    iBranchId: 'BSQUARE'
   },
   {
-    sName: 'Admin',
-    sEmpId: 1129,
-    sMobNum: '1234567777',
+    sName: 'Leet Hudka',
+    sEmpId: 1468,
+    sMobNum: '8866220031',
     eGrade: 'A', // client grade
     eStatus: 'Y',
-    sPassword: 'Admin@123',
-    sEmail: 'preet.jasani@yudiz.com',
+    sPassword: 'SuperAdminL@123',
+    sEmail: 'leet.h@yudiz.in',
     iJobProfileId: 'HRMANAGER',
     iDepartmentId: 'HR',
     nExperience: 10,
     nAvailabilityHours: 8,
     eAvailabilityStatus: 'Available',
-    aRole: ['ADMIN'],
+    aRole: ['SUPERADMIN'],
     eEmpType: 'E',
     eDevType: 'Dedicated',
     sReview: '',
     nPerhoursRate: 0,
-    nPaid: 10
+    nPaid: 10,
+    iBranchId: 'BSQUARE'
   }
 ]
 
@@ -52,6 +54,7 @@ class EmployeeSeeder {
     this.PermissionModel = require('../models_routes_service/Permission/model')
     this.CurrencyModel = require('../models_routes_service/Currency/model')
     this.EmployeeCurrencyModel = require('../models_routes_service/Employee/employeeCurrency.model')
+    this.OrganizationBranchModel = require('../models_routes_service/OrganizationBranch/model')
 
     this.Employees = Employees
     this.Name = 'EmployeeSeeder'
@@ -73,6 +76,13 @@ class EmployeeSeeder {
         if (!department) {
           throw new Error('Department not found')
         }
+
+        const organizationBrach = await this.OrganizationBranchModel.findOne({ sKey: employee.iBranchId, eStatus: 'Y' })
+
+        if (!organizationBrach) {
+          throw new Error('OrganizationBranch not found')
+        }
+
         const role = []
         const permission = []
         for (const r of employee.aRole) {
@@ -123,7 +133,8 @@ class EmployeeSeeder {
           eDevType: employee.eDevType,
           sReview: employee.sReview,
           nPerhoursRate: employee.nPerhoursRate,
-          nPaid: employee.nPaid
+          nPaid: employee.nPaid,
+          iBranchId: organizationBrach._id
         })
 
         const currencyExist = await this.CurrencyModel.find({ eStatus: 'Y' }).lean()
@@ -141,6 +152,20 @@ class EmployeeSeeder {
           })
           )
         }
+      }
+
+      // find total Employee
+
+      const totalEmployee = await this.EmployeeModel.find({ eStatus: 'Y' }).lean()
+
+      for (const employee of totalEmployee) {
+        // jobProfile count update
+
+        await this.JobProfileModel.updateOne({ _id: employee.iJobProfileId }, { $inc: { nTotal: 1 } })
+
+        await this.DepartmentModel.updateOne({ _id: employee.iDepartmentId }, { $inc: { nTotal: 1 } })
+
+        await this.OrganizationBranchModel.updateOne({ _id: employee.iBranchId }, { $inc: { nCurrentEmployee: 1 } })
       }
     } catch (error) {
       console.log(error)

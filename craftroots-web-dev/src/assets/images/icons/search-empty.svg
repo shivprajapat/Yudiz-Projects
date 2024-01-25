@@ -1,0 +1,19 @@
+<svg width="150" height="150" viewBox="0 0 150 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="150" height="150" fill="white"/>
+<circle cx="74.5" cy="75.5" r="54.5" fill="#FEFAF6"/>
+<circle cx="128.5" cy="110.5" r="3.5" stroke="#E59238" stroke-width="2"/>
+<circle cx="115" cy="75" r="2.5" stroke="#C8AA5D"/>
+<rect x="106" y="23" width="12.5581" height="4.18605" rx="2.09302" fill="#FBE6D7"/>
+<rect x="120" y="30" width="12.5581" height="4.18605" rx="2.09302" fill="#FBE6D7"/>
+<rect x="42" y="128" width="12.5581" height="2.7907" rx="1.39535" fill="#FBE6D7"/>
+<rect x="33" y="123" width="12.5581" height="2.7907" rx="1.39535" fill="#FBE6D7"/>
+<circle cx="68.0098" cy="67.0098" r="25.9983" transform="rotate(-45 68.0098 67.0098)" stroke="#704E2A" stroke-width="6"/>
+<rect x="84.293" y="86.9119" width="5.11735" height="17.0578" transform="rotate(-45 84.293 86.9119)" fill="#704E2A"/>
+<rect x="88.5146" y="93.5447" width="8.52891" height="22.1752" rx="2" transform="rotate(-45 88.5146 93.5447)" fill="#704E2A"/>
+<path d="M106 47L110.125 44L114.25 47L118.375 44L122.5 47L126.625 44L130.75 47L134.875 44L139 47" stroke="#E59238" stroke-width="2"/>
+<path d="M15 109L19.125 106L23.25 109L27.375 106L31.5 109L35.625 106L39.75 109L43.875 106L48 109" stroke="#E59238" stroke-width="2"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M36.1674 43.7814L27.8407 35.2042L29.0811 34L37.4078 42.5772L36.1674 43.7814Z" fill="#C8AA5D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M33.5473 46.6212L25.2205 38.044L26.4609 36.8398L34.7877 45.4171L33.5473 46.6212Z" fill="#C8AA5D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M33.3266 34.1844L24.9998 42.7617L26.2402 43.9658L34.567 35.3886L33.3266 34.1844Z" fill="#C8AA5D"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M36.1674 36.8866L27.8407 45.4638L29.0811 46.668L37.4078 38.0907L36.1674 36.8866Z" fill="#C8AA5D"/>
+</svg>

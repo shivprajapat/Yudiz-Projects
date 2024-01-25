@@ -18,7 +18,7 @@ async function notificationsenderInterview(req, params, sBody) {
   try {
     const data = await InterviewModel.findOne({ _id: params }).lean()
     const project = await ProjectModel.findOne({ _id: data.iProjectId }).lean()
-    console.log('project', project)
+    // console.log('project', project)
 
     const allEmployee = await EmployeeModel.find({ _id: { $in: [project.iProjectManagerId, project.iBAId, project.iBDId, project.iCreatedBy, project.iLastUpdateBy, data.iLastUpdateBy, data.iCreatedBy] }, eStatus: 'Y' }).lean()
 
@@ -62,7 +62,7 @@ async function notificationsenderInterview(req, params, sBody) {
 
 async function notificationsender(req, params, sTitle = 'Resource Management', sBody) {
   const data = await ProjectModel.findOne({ _id: params }).lean()
-  console.log('data', data)
+  // console.log('data', data)
 
   const allEmployee = await EmployeeModel.find({ _id: { $in: [data.iProjectManagerId, data.iBAId, data.iBDId, data.iCreatedBy, data.iLastUpdateBy] }, eStatus: 'Y' }).lean()
 
@@ -94,7 +94,7 @@ async function notificationsender(req, params, sTitle = 'Resource Management', s
 
   const putData = { sPushToken, sTitle: 'Resource Management', sBody: `${data.sName}${sBody}`, sLogo: data.sLogo, sType: 'project', metadata, aSenderId: ids }
 
-  console.log('putData', putData)
+  // console.log('putData', putData)
   await queuePush('Project:Notification', putData)
 }
 
@@ -168,7 +168,7 @@ async function notificationsenderForEmployee(req, params, sTitle = 'Resource Man
 
     const putData = { sPushToken, sTitle: 'Resource Management', sBody, sLogo: employeeDetails?.sLogo || '', sType: 'employee', metadata, aSenderId: ids }
 
-    console.log('putData', putData)
+    // console.log('putData', putData)
     await queuePush('Employee:Notification', putData)
   }
 }
@@ -346,7 +346,7 @@ const getFreeEmployees = async (_id, sName, sBody) => {
 const getScheduleInterview = async () => {
   try {
     const interviews = await InterviewModel.find({ eStatus: 'Y', dInterviewDate: { $gt: Date.now() } }).lean()
-    console.log(interviews)
+    // console.log(interviews)
     const date = new Date()
 
     if (interviews.length) {
@@ -354,9 +354,9 @@ const getScheduleInterview = async () => {
         const { dInterviewDate } = interview
         const endDate = new Date(dInterviewDate)
         const diff = Math.abs(endDate.getTime() - date.getTime())
-        console.log(diff)
+        // console.log(diff)
         const diffDays = Math.ceil(diff / (1000 * 3600 * 24))
-        console.log(diffDays)
+        // console.log(diffDays)
 
         if (diffDays >= 30 && diffDays < 31) {
           notificationsenderInterview('req', interview._id, 'next month')
@@ -436,12 +436,12 @@ async function init() {
 }
 
 async function init1() {
-  console.log('init1 cron working')
+  // console.log('init1 cron working')
   // getScheduleInterview()
 }
 
 async function backUpdatabase(minutes, stringName) {
-  console.log('---------------------------------start---------------------------------')
+  // console.log('---------------------------------start---------------------------------')
   try {
     // create a connection to database first target second source using mongoClient
     const MongoClient = require('mongodb').MongoClient
@@ -452,11 +452,11 @@ async function backUpdatabase(minutes, stringName) {
     const client = new MongoClient(DB_URI)
 
     const data1 = await client.connect()
-    console.log('data1', data1)
+    // console.log('data1', data1)
 
     const db = client.db()
     const collections = await db.admin().listDatabases()
-    console.log(collections)
+    // console.log(collections)
 
     // second target
     const DB_URI1 = `mongodb://localhost:27017/resource_managementa_${stringName}_${minutes}`
@@ -524,13 +524,13 @@ async function backUpdatabase(minutes, stringName) {
 
 async function init2(minutes) {
   const stringName = new Date().toLocaleString('en-Us', { timeZone: 'Asia/Kolkata' })
-  console.log('name', Date())
-
+  // console.log('name', Date())
+  //
   // random number
 
   // await backUpdatabase(minutes, makeRandomeString(5))
-  console.log(new Date().toLocaleString('en-Us', { timeZone: 'Asia/Kolkata' }))
-  console.log('init2 cron working', minutes)
+  // console.log(new Date().toLocaleString('en-Us', { timeZone: 'Asia/Kolkata' }))
+  // console.log('init2 cron working', minutes)
 }
 
 class CronInit {

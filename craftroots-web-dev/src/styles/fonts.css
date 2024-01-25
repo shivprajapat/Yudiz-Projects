@@ -1,0 +1,17 @@
+@font-face {
+  font-family: 'adelia';
+  src: url('../assets/fonts/adelia.woff2') format('woff2'),
+    url('../assets/fonts/adelia.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'adelia';
+  src: url('../assets/fonts/adelia.woff2') format('woff2'),
+    url('../assets/fonts/adelia.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}

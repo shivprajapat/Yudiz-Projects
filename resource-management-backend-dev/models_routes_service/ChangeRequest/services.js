@@ -263,7 +263,7 @@ class ChangeRequest {
           }
         })
 
-        console.log('aCrBasedDepartment', aCrBasedDepartment)
+        // console.log('aCrBasedDepartment', aCrBasedDepartment)
 
         await DashboardCrDepartmentModel.insertMany(aCrBasedDepartment)
       }
@@ -395,7 +395,7 @@ class ChangeRequest {
         query.iEmployeeId = {
           $in: aCrWiseEmployeeIdsToDelete.map(employee => employee.iEmployeeId)
         }
-        console.log(query)
+        // console.log(query)
         const worklogs = await WorkLogModel.find(query).lean()
 
         if (worklogs.length > 0) {
@@ -404,8 +404,8 @@ class ChangeRequest {
       }
 
       await Promise.all(aCrWiseEmployeeIdsToDelete.map(async (employee) => {
-        console.log(employee)
-        console.log(req.params.id)
+        // console.log(employee)
+        // console.log(req.params.id)
 
         return CrWiseEmployeeModel.updateOne({ iEmployeeId: employee.iEmployeeId, iCrId: req.params.id }, { $set: { eStatus: 'N', iLastUpdateBy: req.employee._id } })
       }
@@ -422,7 +422,7 @@ class ChangeRequest {
       ))
 
       await Promise.all(aCrWiseEmployeeId.map(async (employee) => {
-        console.log(employee)
+        // console.log(employee)
         return CrWiseEmployeeModel.updateOne({ iEmployeeId: employee.iEmployeeId, iCrId: req.params.id }, { nMinutes: employee?.nMinutes || 0, eStatus: 'Y', iLastUpdateBy: req.employee._id })
       }))
 
@@ -483,12 +483,12 @@ class ChangeRequest {
         }))
       }
 
-      console.log('eCrStatus', req.body.eCrStatus)
+      // console.log('eCrStatus', req.body.eCrStatus)
       const data = await ChangeRequestModel.updateOne({ _id: req.params.id }, { $set: { eCrStatus: req.body.eCrStatus, nTimeLineDays, nCost: req.body.nCost, dEndDate: req.body.dEndDate, dStartDate: req.body.dStartDate, iLastUpdateBy: req.employee._id } }, { new: true, runValidators: true })
       let take = `Logs${new Date().getFullYear()}`
 
       take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data.id, eModule: 'Cr', sService: 'updateChangeRequest', eAction: 'Update', oNewFields: data, oOldFields: crExist }
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Cr', sService: 'updateChangeRequest', eAction: 'Update', oNewFields: data, oOldFields: crExist }
       await take.create(logs)
       // await notificationsender(req, data._id, ' cr is update ', true, true, req.employee._id, `${config.urlPrefix}/change-request/detail/${data._id}`)
 
@@ -543,7 +543,7 @@ class ChangeRequest {
     try {
       // projectId
 
-      console.log('getChange Request')
+      // console.log('getChange Request')
 
       let { page = 0, limit = 5, iProjectId, search = '', sort = 'dCreatedAt', order } = req.query
       const orderBy = order && order === 'asc' ? 1 : -1
@@ -835,8 +835,8 @@ class ChangeRequest {
 
       const [count, project] = await Promise.all([ChangeRequestModel.aggregate(count_query), ChangeRequestModel.aggregate(q)])
 
-      console.log(count, project)
-      console.log(req.userLanguage)
+      // console.log(count, project)
+      // console.log(req.userLanguage)
 
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].success.replace('##', messages[req.userLanguage].project), { count: count[0]?.count || 0, project })
     } catch (error) {
@@ -1124,25 +1124,25 @@ class ChangeRequest {
 
   async etc(req, res) {
     try {
-      console.log('req.body')
+      // console.log('req.body')
       const { id } = req.query
 
       const cr = await ChangeRequestModel.findOne({ _id: ObjectId(id) }).lean()
-      console.log(cr)
+      // console.log(cr)
 
       const employee = await CrWiseEmployeeModel.find({ eStatus: 'Y', iCrId: id }).populate({ path: 'iEmployeeId', eStatus: 'Y', select: 'sName iDepartmentId' }).sort({ sName: 1 }).lean()
-      console.log(employee)
+      // console.log(employee)
 
       const aCrWiseDepartmentIdsToDelete = await CrWiseDepartmentModel.find({ eStatus: 'Y' }).select('iDepartmentId')
 
-      console.log(aCrWiseDepartmentIdsToDelete)
+      // console.log(aCrWiseDepartmentIdsToDelete)
 
       const aEmployeeToDelete = employee.filter(employee => aCrWiseDepartmentIdsToDelete.map(department => department.iDepartmentId.toString()).includes(employee.iEmployeeId.iDepartmentId.toString()))
       await Promise.all(aEmployeeToDelete.map(async (employee) => {
-        console.log(employee)
+        // console.log(employee)
         const data = await CrWiseEmployeeModel.find({ eStatus: 'Y', iEmployeeId: employee.iEmployeeId._id, iCrId: req.params.iCrId }).lean()
-        console.log(data)
-        console.log(employee.iEmployeeId._id)
+        // console.log(data)
+        // console.log(employee.iEmployeeId._id)
         return CrWiseEmployeeModel.updateOne({ iEmployeeId: employee.iEmployeeId._id, iCrId: ObjectId(id) }, { $set: { eStatus: 'N', iLastUpdateBy: req.employee._id } })
       }))
 

@@ -42,8 +42,8 @@ const CreateEmployee = [
   body('sEmpId').not().isEmpty(),
   body('iJobProfileId').not().isEmpty(),
   body('nExperience').not().isEmpty(),
-  body('iBranchId').not().isEmpty().isMongoId(),
-  body('eShowAllProjects').not().isEmpty().isIn(['OWN', 'ALL'])
+  body('iBranchId').not().isEmpty().isMongoId()
+  // body('eShowAllProjects').not().isEmpty().isIn(['OWN', 'ALL'])
   // body('eGrade').not().isEmpty()
 ]
 
@@ -56,8 +56,8 @@ const EmployeeUpdate = [
   body('sEmpId').not().isEmpty(),
   body('iJobProfileId').not().isEmpty(),
   body('nExperience').not().isEmpty(),
-  body('iBranchId').not().isEmpty().isMongoId(),
-  body('eShowAllProjects').not().isEmpty().isIn(['OWN', 'ALL'])
+  body('iBranchId').not().isEmpty().isMongoId()
+  // body('eShowAllProjects').not().isEmpty().isIn(['OWN', 'ALL'])
   // body('eGrade').not().isEmpty()
 ]
 

@@ -1,0 +1,68 @@
+@mixin flex($items, $justify, $direction) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex !important;
+  -webkit-align-items: $items;
+  align-items: $items;
+  -webkit-justify-content: $justify;
+  justify-content: $justify;
+  -webkit-flex-direction: $direction;
+  flex-direction: $direction;
+}
+
+// @include flex(center, center, null);
+
+// background image
+@mixin bgImage($image) {
+  background: url($image);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+// @include bgImage("/images/1.jpg");
+
+@mixin textEllipsis() {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// @include textEllipsis();
+@mixin font-size($font-size, $line-height: normal, $font-weight: normal) {
+  font-size: $font-size * 1px;
+
+  // font-size: $font-size * 0.1rem;
+  // example using rem values and 62.5% font-size so 1rem = 10px
+
+  @if $line-height==normal {
+    line-height: normal;
+  }
+
+  @else {
+    line-height: #{$line-height}px;
+  }
+
+  @if $font-weight==normal {
+    font-weight: normal;
+  }
+
+  @else {
+    font-weight: #{$font-weight};
+  }
+}
+
+// @include font-size(12, 18, 900);
+
+// Clearfix
+@mixin clearfix {
+  &:after {
+    content: "";
+    clear: both;
+    display: table;
+  }
+}
+
+//   @include clearfix;

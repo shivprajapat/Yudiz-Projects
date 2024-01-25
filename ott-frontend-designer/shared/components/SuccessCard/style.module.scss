@@ -1,0 +1,33 @@
+@import "@/assets/scss/helper/mixin";
+
+.success_card {
+    width: 100%;
+    margin-inline: auto;
+
+    p {
+        text-align: center;
+    }
+
+    &_icon {
+        width: 64px;
+        height: 64px;
+        margin-inline: auto;
+        background: var(--icon-gradient-color);
+        border-radius: 8px;
+        @include flex(center, center, null);
+        margin-bottom: 24px;
+
+        img {
+            width: 30px;
+            height: auto;
+        }
+    }
+
+    &_size_l {
+        max-width: 475px;
+    }
+
+    &_size_m {
+        max-width: 271px;
+    }
+}

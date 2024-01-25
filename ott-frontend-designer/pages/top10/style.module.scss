@@ -1,0 +1,5 @@
+.top10{
+    &_grid{display: grid;gap: 8px;grid-template-columns: repeat(auto-fit, minmax(217.33px, 1fr));
+        >div{width: 100%;
+        figure {height: 326px;}}}
+}

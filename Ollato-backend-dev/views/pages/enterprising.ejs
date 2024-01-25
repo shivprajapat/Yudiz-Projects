@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        text-align: justify;
+        font-family: "Libre Baskerville", serif;
+        width: 210mm;
+        margin: 0px auto;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/regular-page-bg.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .sub-page {
+        padding: 50px 20px 0px;
+        min-height: calc(29.7cm - 70px) !important;
+      }
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+      .sub-page img {
+        width: 100%;
+        object-fit: cover;
+      }
+      p {
+        font-size: 13px;
+        line-height: 24px;
+        padding-bottom: 20px;
+      }
+      .page-content {
+        padding: 20px;
+      }
+      .fist-letter-big {
+        color: black;
+        font-size: 19px;
+      }
+      .color-latter {
+        color: #0f62ac;
+        font-weight: 700;
+      }
+
+      /* sub page  */
+      table,
+      td {
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      tr td {
+        padding: 10px 8px;
+      }
+      .col-bg {
+        background-color: #4b93d2;
+      }
+      table {
+        margin: 40px auto 0px;
+      }
+      .heading {
+        padding-bottom: 30px;
+      }
+      .bg-text {
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/Roll-1.svg");
+        width: 410px;
+        height: 130px;
+        display: flex;
+        margin: 40px auto 0px;
+        align-items: center;
+        padding: 20px;
+        background-position: center;
+        text-align: center;
+        background-size: 100%;
+        background-repeat: no-repeat;
+      }
+      .bg-text p {
+        font-weight: 600;
+        padding: 0px;
+      }
+      .heading p {
+        text-transform: uppercase;
+        font-size: 19px;
+        text-align: center;
+      }
+      /* footer  */
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+      .footer-content p,
+      a {
+        margin-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      footer p,
+      a {
+        font-size: 11px;
+        line-height: 18px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+          <div class="heading">
+            <p><%= interest[4].test_detail_name %></p>
+            <table>
+              <tr>
+                <% for(var i=1; i <= 10 ; i++) { %> <% if(i <=
+                interest[4].score_round){ %>
+                <td class="col-bg"><%=i%></td>
+                <% } else{ %>
+                <td><%=i%></td>
+                <% } %> <% } %>
+              </tr>
+            </table>
+          </div>
+          <div class="content">
+            <p><%= interest[4].description %></p>
+          </div>
+          <div class="bg-text">
+            <p style="margin-bottom: 0px">
+              Related Subjects: Business Studies, Management, Political Science,
+              Economics, Accounting
+            </p>
+          </div>
+          <div style="padding-top: 40px" class="heading">
+            <p><%= interest[5].test_detail_name %></p>
+            <table>
+              <tr>
+                <% for(var i=1; i <= 10 ; i++) { %> <% if(i <=
+                interest[5].score_round){ %>
+                <td class="col-bg"><%=i%></td>
+                <% } else{ %>
+                <td><%=i%></td>
+                <% } %> <% } %>
+              </tr>
+            </table>
+          </div>
+          <div class="content">
+            <p><%= interest[5].description %></p>
+            <div class="bg-text">
+              <p style="margin-bottom: 0px">
+                Related Subjects: Finance, Business Studies, Accountancy, Basic
+                computing courses, Information Management
+              </p>
+            </div>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    <b><%= user.first_name %> <%= user.last_name %></b>
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>08</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

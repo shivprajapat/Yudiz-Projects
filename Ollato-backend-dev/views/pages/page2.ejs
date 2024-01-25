@@ -1,0 +1,143 @@
+<!-- page-2 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        text-align: justify;
+        font-family: "Libre Baskerville", serif;
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0px auto;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/regular-page-bg.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .sub-page {
+        min-height: calc(29.7cm - 70px) !important;
+      }
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+      .sub-page img {
+        padding: 20px;
+        width: 85%;
+        object-fit: cover;
+      }
+      p {
+        font-size: 13px;
+        line-height: 24px;
+        padding-bottom: 20px;
+      }
+      .page-content {
+        padding: 20px;
+      }
+      .fist-letter-big {
+        color: black;
+        font-size: 19px;
+      }
+      .color-latter {
+        color: #0f62ac;
+        font-weight: 700;
+      }
+
+      /* footer  */
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+      .footer-content p,
+      a {
+        margin-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      footer p,
+      a {
+        font-size: 11px;
+        line-height: 18px;
+        padding: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+         <div style="text-align: center;"> 
+          <img src="<%= baseUrl %>/uploads/ollato-images/page-2-img.png" alt=""/>
+          </div>
+          <div class="page-content">
+            <p>
+              <span class="fist-letter-big">We</span> can all relate to some of the statements mentioned above. Deciding which career path to embark on can be both an exhilarating as well as nerve racking experience. The world today is a reservoir of endless opportunities and discovering what works best for us is of paramount importance.
+            </p>
+            <p>
+              We at <span class="color-latter">Ollato</span> are committed to help you make an informed career choice by providing expert career guidance with the help of scientific tools. Career guidance empowers individual to explore career options that are available to them by discovering one’s abilities, interests, personality, personal strengths as well as limitations.
+            </p>
+            <p>
+              <span class="color-latter">“Ollato Comprehensive Career Assessment”</span> is a standardized psychometric assessment for the Indian population which has been developed for the purpose of helping individuals discover their strengths, interests, potentials and preference before making the right choice of career. The following report carries an in-depth analysis of your responses. Scores for each test have been calculated and presented along with an explanation. Individual strengths along with areas of improvement have been clearly mentioned. Customized career recommendations have been made to steer you in the direction of suitable career path.
+            </p>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac; text-align: center">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    <b><%= user.first_name %> <%= user.last_name %></b>
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>01</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

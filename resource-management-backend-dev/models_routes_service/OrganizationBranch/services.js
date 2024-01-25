@@ -232,6 +232,10 @@ class ORGBranches {
         sDescription
       })
 
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: branch._id, eModule: 'ORGBranches', sService: 'addOrganizationBranchDetails', eAction: 'Create', oNewFields: branch, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
+
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].create_success.replace('##', messages[req.userLanguage].organization_branch))
     } catch (error) {
       return catchError('ORGBranches.addOrganizationBranchDetails', error, req, res)
@@ -303,6 +307,10 @@ class ORGBranches {
         sDescription
       })
 
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: branch._id, eModule: 'ORGBranches', sService: 'updateOrganizationBranchDetails', eAction: 'Create', oNewFields: branch, oOldFields: branchExist, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
+
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].organization_branch))
     } catch (error) {
       return catchError('ORGBranches.updateOrganizationBranchDetails', error, req, res)
@@ -313,7 +321,7 @@ class ORGBranches {
     try {
       let { page, limit, sorting, search = '' } = paginationValue(req.query)
       search = searchValidate(search)
-      console.log(search)
+      // console.log(search)
       const query = search && search.length
         ? {
           $or: [{ sKey: { $regex: new RegExp('^.*' + search + '.*', 'i') } },
@@ -521,6 +529,10 @@ class ORGBranches {
         dUpdatedAt: Date.now()
       })
 
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: branch._id, eModule: 'ORGBranches', sService: 'deleteOrganizationBranchDetailsById', eAction: 'Delete', oNewFields: branch, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+
+      await queuePush('logs', logs)
+
       return SuccessResponseSender(res, status.OK, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].organization_branch))
     } catch (error) {
       return catchError('ORGBranches.deleteOrganizationBranchDetailsById', error, req, res)
@@ -567,7 +579,7 @@ class ORGBranches {
       if (req.query.iCountryId) {
         query.iCountryId = req.query.iCountryId
       }
-      console.log(query)
+      // console.log(query)
 
       const [state, total] = await Promise.all([StateModel.find(query).skip(Number(page)).limit(Number(limit)).lean(), StateModel.countDocuments({ ...query }).lean()])
       if (req.path === '/DownloadExcel') {

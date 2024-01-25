@@ -1,0 +1,74 @@
+@import 'Assets/Style/variables';
+
+
+.description-input-container {
+
+  .description-input-label {
+    font-weight: 400;
+    font-size: 14px;
+    padding-bottom: 5px;
+    margin: 0;
+    line-height: 22px;
+    color: $input-color !important;
+    display: inline-block !important;
+    cursor: pointer;
+    width: fit-content;
+    font-size: 14px;
+
+    .description-input-important {
+      color: $red-color !important;
+      display: inline-block !important;
+    }
+  }
+
+  .description-input-info {
+    float: right;
+    margin-right: 5px;
+    color: $base-color
+  }
+
+  .description-textarea {
+    width: 100%;
+    height: 132px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    color: $base-color;
+    resize: none;
+
+    &::placeholder {
+      padding: 0 5px;
+      font-size: 16px;
+      color: #b2bfd2;
+    }
+
+    &:hover {
+      border: 1px solid #000;
+      outline: 0;
+    }
+
+    &:focus {
+      z-index: 10;
+      border: 1px solid #2684ff;
+      outline: 0;
+    }
+  }
+
+  .description-errorInput {
+    border: 1px solid red !important;
+
+    &:focus {
+      border: 1px solid red;
+    }
+  }
+
+  .description-errorMessage {
+    height: 20px;
+    width: fit-content;
+    font-size: 12px !important;
+    color: red;
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,37 @@
+.restriction {
+    &_check {
+        overflow: hidden;
+
+        >div {
+            margin-bottom: 0 !important;
+        }
+
+        [class="style_input_icon__BlMbO"] {
+            display: none;
+        }
+
+        label {
+            padding: 15px 22px 30px 45px;
+            z-index: 1;
+
+            &::before {
+                left: 0;
+                width: 100%;
+                opacity: 0;
+                background: var(--neutrals-white-color);
+            }
+        }
+
+        input,
+        label::after {
+            left: 15px;
+            right: initial;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+    }
+
+    &_footer {
+        margin-top: 24px;
+    }
+}

@@ -1,0 +1,97 @@
+@import "@/assets/scss/helper/mixin";
+
+.avatar {
+  @include flex(center, space-between, null);
+
+  &_icon {
+    background: var(--neutrals-white-color);
+    border-radius: 64px;
+    @include flex(center, center, null);
+
+    // **size Avatar
+    &_size_l {
+      width: 64px;
+      height: 64px;
+
+      img {
+        width: 26px;
+        height: auto;
+      }
+    }
+
+    &_size_m {
+      width: 40px;
+      height: 40px;
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+
+  h6 {
+    color: var(--white-color);
+    @include font-size(18, 22, 600);
+    text-transform: capitalize;
+  }
+
+  &_icon,
+  h6,
+  button {
+    z-index: 1;
+  }
+}
+
+.vertical {
+  flex-direction: column;
+
+  h6 {
+    margin-top: 16px;
+  }
+}
+
+.horizontal {
+  flex-direction: row;
+
+  h6 {
+    margin-left: 16px;
+  }
+
+}
+
+.avatar_bg {
+  background-color: var(--neutrals-20-color);
+  border-radius: 8px;
+  padding: 24px;
+  width: 166px;
+  position: relative;
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    filter: blur(90px);
+  }
+
+  &::before {
+    top: 0;
+    right: 0;
+    background: #FBD0B7;
+    width: 80px;
+    height: 40px;
+  }
+
+  &::after {
+    bottom: 0;
+    left: -6%;
+    background: #D4560C;
+    width: 80px;
+    height: 40px;
+  }
+
+  button {
+    margin-top: 32px;
+  }
+}

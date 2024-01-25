@@ -5,7 +5,7 @@ const { validate, setLanguage, isAuthenticated, isAuthorized } = require('../../
 
 router
   .use(setLanguage, isAuthenticated)
-  .get('/projectTags/v1', isAuthorized('VIEW_PROJECT_TAG'), ProjectTagService.getProjectTags)
+  .get('/projectTags/v1', ProjectTagService.getProjectTags)
   .post('/projectTags/v1', isAuthorized('CREATE_PROJECT_TAG'), validators.projectTagCheckV1, validate, ProjectTagService.addProjectTag)
   .delete('/projectTags/:id/v1', isAuthorized('DELETE_PROJECT_TAG'), validators.projectTagCheckIdV1, validate, ProjectTagService.deleteProjectTags)
   .patch('/projectTags/:id/v1', isAuthorized('UPDATE_PROJECT_TAG'), validators.updateProjectTagsCheckV1, validate, ProjectTagService.updateProjectTags)

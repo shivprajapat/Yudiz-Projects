@@ -1,0 +1,25 @@
+@import "@/assets/scss/helper/mixin";
+
+.banner {
+  position: relative;&_inner_img{
+  &::before{background: radial-gradient(65% 204.27% at 65% 41.73%, rgba(23, 42, 54, 0) 0.21%, rgba(23, 42, 54, 0.7) 50.07%, rgba(23, 42, 54, 0.95) 99.19%) !important
+  }}&_img {position: relative;
+  &::before {position: absolute;content: "";width: 100%;height: 100%;top: 0;left: 0;background: var(--theme-banner-gradient);}
+  &::after {position: absolute;content: "";width: 100%;height: 100%;bottom: 0;left: 0;background: linear-gradient(180deg, rgba(18, 18, 18, 0) 14.58%, #121212 100%);}
+  >img {width: 100%;height: 100%;}
+  &_slide {width: 100%;background-size: cover;}}
+  .arrows {bottom: 30%;position: absolute;right: 48px;z-index: 1;
+  button {background: rgba(255, 255, 255, 0.3);width: 40px;height: 40px;border-radius: 4px;transition: all 0.3s ease;outline: none;
+  img {width: 24px;height: 24px;}
+  &:first-child {margin-right: 20px;}
+  &:hover {background-color: var(--primary-color);}}}
+  &_item {position: absolute;bottom: 30%;left: 48px;z-index: 1;width: 520px;
+  >* {color: var(--white-color);}
+  h2 {margin: 13px 0;}
+  p {margin-bottom: 24px;color: var(--neutrals-85-color);@include font-size(18, 28, 400);}}
+  &_btns {@include flex(center, flex-start, null);margin-bottom: 13px;
+  h6 {margin-bottom: 0 !important;
+  &:nth-last-of-type(1) {margin-left: 16px;}}
+  &_list {.social_icon {margin-inline: 16px}}}
+  &_btn {@include font-size(14, 18, 400);color: var(--white-color);padding: 4px 8px;background: var(--neutrals-white-color);border-radius: 4px;margin-inline: 16px;}
+}

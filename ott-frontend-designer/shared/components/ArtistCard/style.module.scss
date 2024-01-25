@@ -1,0 +1,7 @@
+@import "@/assets/scss/helper/mixin";
+
+.ArtistCard {
+  text-align: center;width: 127px;
+  img {margin:0 auto;height: 127px;object-fit: cover;border-radius: 8px;}
+  p {margin-top: 8px;color: var(--neutrals-85-color);@include font-size(16, 20, 600);}
+}

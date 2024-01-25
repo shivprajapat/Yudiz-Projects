@@ -1,0 +1,16 @@
+@import "@/assets/scss/helper/mixin";
+
+.wrapper {
+  position: relative;
+  .shape {width: 563.38px;height: 563.38px;position: absolute;border-radius: 100%;opacity:0.03;transform: translate(-50%, -50%);}
+  &::after,&::before {position: absolute;content: '';border-radius: 100%;opacity:0.03;}
+  &::after {width: 1011.69px;height: 1011.69px;top: 3%;transform: translate(-47%, -50%);}
+  &::before {width: 1460px;height: 1460px;top: 10%;transform: translate(-48%, -52%);}
+ &_orange{ 
+  .shape{background-color: var(--primary-color);}
+  &::after {background-color: var(--primary-color);}
+  &::before {background-color: var(--primary-color);}}
+ &_dark{ .shape{background-color: var(--white-color);}
+ &::after {background-color: var(--white-color);}
+ &::before {background-color: var(--white-color);}}
+}

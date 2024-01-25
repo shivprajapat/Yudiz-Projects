@@ -1,0 +1,112 @@
+@import "@/assets/scss/helper/mixin";
+
+.navbar {
+  padding-block: 16px;
+  transition: 0.3s ease-in-out;
+  background: linear-gradient(180deg, var(--black-color) -16.45%, var(--black-00-rgba) 100%);
+  max-width: 1440px;
+  width: 100%;
+  margin-inline: auto;
+  padding: 20px;
+  z-index: 3;
+
+  &_active {
+    background-color: var(--theme-color);
+  }
+
+  .logo {
+    margin-right: 40px;
+  }
+
+  &_nav {
+    a {
+      color: var(--neutrals-60-color);
+      font-weight: 600;
+      position: relative;
+      @include font-size(16, 20, 600);
+      transition: all 0.5s;
+
+      &::before {
+        position: absolute;
+        content: "";
+        width: 4px;
+        height: 4px;
+        background: var(--theme-orange-gradient);
+        transition: all 0.5s;
+        border-radius: 100%;
+        bottom: -3px;
+        left: 50%;
+        transform: translateX(-50%);
+        opacity: 0;
+      }
+
+      &[class="active"],
+      &:hover {
+        color: var(--white-color);
+
+        &::before {
+          opacity: 1;
+        }
+      }
+
+      &:not(:last-child) {
+        margin-right: 40px;
+      }
+    }
+  }
+
+  .nav_right {
+    display: flex;
+
+    a {
+      button {
+        margin: 0 16px;
+      }
+    }
+    &_tooltip{
+      margin-left: 16px;
+    }
+  }
+
+  .user_details {
+    button {
+      margin-right: 0 !important;
+    }
+  }
+
+  @media screen and (max-width: 1680px) {
+    max-width: 1680px;
+    padding: 20px 48px;
+  }
+
+  @media screen and (max-width: 991px) {
+    .logo {
+      margin-right: 20px;
+
+      img {
+        max-width: 150px;
+      }
+    }
+
+    &_nav {
+      a:not(:last-child) {
+        margin-right: 20px;
+      }
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    background-color: var(--theme-color);
+
+    &_nav {
+      a {
+        margin-bottom: 20px;
+        margin-right: 0;
+      }
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+    padding: 20px;
+  }
+}

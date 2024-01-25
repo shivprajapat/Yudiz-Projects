@@ -16,7 +16,6 @@ router
 // .post('/mail/v1', setLanguage, skillService.postmaker)
 // .post('/mailgoogle/v1', setLanguage, skillService.sendMailUsingGmailApi)
 
-router.get('/mail/user/:email', setLanguage, skillService.getUser)
 router.get('/onegetNotifications', setLanguage, skillService.getNotifications)
 // router.get('/mail/send', setLanguage, skillService.sendMail)
 // router.get('/mail/read/:messageId', setLanguage, skillService.readMail)

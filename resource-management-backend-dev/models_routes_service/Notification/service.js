@@ -58,7 +58,7 @@ class Notification {
       const { aNotificationIds } = req.body
 
       if (Array.isArray(aNotificationIds) && aNotificationIds.length) {
-        await Promise.all(aNotificationIds.map(async(notification) => {
+        await Promise.all(aNotificationIds.map(async (notification) => {
           const notificationExist = await NotificationModel.findById({ _id: ObjectId(notification), eStatus: 'Y', aSenderId: { $in: [req.employee._id] } }).lean()
           if (notificationExist) {
             await NotificationModel.updateOne({ _id: ObjectId(notification) }, {
@@ -189,7 +189,7 @@ class Notification {
   async addNotification(req, res) {
     try {
       const { sTitle, sBody, sTopic } = req.body
-      console.log(sTitle, sBody, sTopic)
+      // console.log(sTitle, sBody, sTopic)
 
       const putData = { sTopic: 'All', sTitle: 'Resource Management', sBody, sIcon: 'https://jr-web-developer.s3.ap-south-1.amazonaws.com/Default/90px-CC_some_rights_reserved.jpg', sLink: 'https://jr-web-developer.s3.ap-south-1.amazonaws.com/Default/90px-CC_some_rights_reserved.jpg' }
       await queuePush('Welcome:Notification', putData)

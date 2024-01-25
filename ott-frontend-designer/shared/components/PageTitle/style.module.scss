@@ -1,0 +1,8 @@
+@import "@/assets/scss/helper/mixin";
+
+.page_title {
+    position: relative;@include flex(center, space-between, null);margin-bottom: 16px;margin-inline: 48px;
+    h6{color: var(--white-color);}
+    a{cursor: pointer;display: block;transition: 0.3s;color: var(--white-color);@include font-size(16, 20, 700);
+    img {padding-left: 5px;}&:hover {color: var(--primary-color);}}
+}

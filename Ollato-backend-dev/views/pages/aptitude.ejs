@@ -1,0 +1,329 @@
+<!-- page-11 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        text-align: justify;
+        font-family: "Libre Baskerville", serif;
+        width: 210mm;
+        margin: 0px auto;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/regular-page-bg.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .sub-page {
+        min-height: calc(29.7cm - 70px);
+      }
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+      .sub-page img {
+        width: 100%;
+        object-fit: cover;
+      }
+      p {
+        font-size: 11px;
+        line-height: 22px;
+        padding-bottom: 10px;
+      }
+      .page-content {
+        padding: 20px;
+      }
+      .fist-letter-big {
+        color: black;
+        font-size: 19px;
+      }
+      .color-latter {
+        color: #0f62ac;
+        font-weight: 700;
+      }
+
+      /* sub page  */
+      .pointer.yellow {
+        background: #eab656;
+      }
+      .pointer.yellow::after {
+        border-right: 25px solid #eab656;
+      }
+      .pointer.yellow::before {
+        border-left: 25px solid #eab656;
+      }
+      .pointer.green {
+        background: #8dc466;
+      }
+      .pointer.green::after {
+        border-right: 25px solid #8dc466;
+      }
+      .pointer.green::before {
+        border-left: 25px solid #8dc466;
+      }
+      .pointer.sky-blue {
+        background: #3494ac;
+      }
+      .pointer.sky-blue::after {
+        border-right: 25px solid #3494ac;
+      }
+      .pointer.sky-blue::before {
+        border-left: 25px solid #3494ac;
+      }
+      .pointer {
+        width: auto;
+        margin: 0px 25px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+        position: relative;
+        background: #d45546;
+      }
+      .pointer:after {
+        content: "";
+        position: absolute;
+        left: -24px;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-right: 25px solid #d45546;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+      }
+      .pointer:before {
+        content: "";
+        position: absolute;
+        right: -24px;
+        bottom: 0;
+        width: 0;
+        height: 0;
+        border-left: 25px solid #d45546;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+      }
+      .row {
+        display: flex;
+        text-align: center;
+      }
+      .col {
+        width: 25%;
+      }
+      .heading {
+        text-align: center;
+        background-color: #e7e7e7;
+      }
+      .heading h1 {
+        padding: 20px 0px;
+        font-size: 28px;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      /* footer  */
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+      .footer-content p,
+      a {
+        padding-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      footer p,
+      a {
+        font-size: 11px;
+        line-height: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+          <div class="heading">
+            <h1>Aptitude</h1>
+            <p style="font-weight: 600">
+              “Aptitude plus passion equals greatness”
+            </p>
+            <p style="font-weight: 600; font-style: italic">-Anonymous</p>
+          </div>
+          <div style="padding: 20px" class="content">
+            <p>
+              Aptitude is the inherent potential or the ability of an individual
+              to learn and develop proficiency in any particular area.
+              Understanding your Aptitude will help you explore your innate
+              strengths. Aptitude assessment predicts what is your innate
+              ability and potential and helps you find career options that are
+              in syne with your aptitude.
+            </p>
+            <p>
+              Ollato’s Aptitude Assessment helps to identify your unique set of
+              abilities or potential. It gives us knowledge about which career
+              paths align with your strengths. The test measures aptitude on
+              eight dimensions. Verbal Reasoning, Numerical Reasoning. Abstract
+              Reasoning, Perceptual Speed and Accuracy, Mechanical Reasoning,
+              Space Relations, Spelling and Language Usage. Your raw scores on
+              each subtest have been presented along with an explaination as
+              well as ways to improve and develop one’s abilities.
+              <span style="font-weight: 600">
+                It must be kept in mind that obtaining high scores in all
+                subtests is not the goal, rather finding the right combination
+                of aptitudes is essential in arriving at prospective career
+                paths.
+              </span>
+            </p>
+            <div class="row">
+              <div class="col">
+                <div class="pointer">
+                  <p style="padding-bottom: 0px">Verbal Reasoning</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  The Verbal Reasoning test assesses your ability to comprehend
+                  words and sentences and deduce meaningful relationship from
+                  them. It is important for any work involving communication of
+                  ideas or the interpretation of written information.
+                </p>
+              </div>
+              <div class="col">
+                <div class="pointer yellow">
+                  <p style="padding-bottom: 0px">Numerical Reasoning</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  The Numerical Reasoning test assesses your ability to grasp
+                  mathematical concepts and use them to analyse and solve
+                  mathematical problems. It measures your ability to interpret,
+                  analyze and draw logical conclusions based on numerical data.
+                </p>
+              </div>
+              <div class="col">
+                <div class="pointer green">
+                  <p style="padding-bottom: 0px">Abstract Reasoning</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  The Abstract Reasoning test assesses your ability to work with
+                  new concepts and abstract ideas. Perceiving patterns among
+                  complex elements, identifying relation between them and using
+                  this information to solve problems is a measure of abstract
+                  ability.
+                </p>
+              </div>
+              <div class="col">
+                <div class="pointer sky-blue">
+                  <p style="padding-bottom: 0px">Perceptual Speed & Accuracy</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  The Perceptual Speed and Accuracy test assesses your ability
+                  to concentrate, pay attention to detail and process
+                  information quickly. It measures how accurately and quickly
+                  can you compare similarities and differences among sets of
+                  pictures, patterns, objects, letters or numbers.
+                </p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <div class="pointer">
+                  <p style="padding-bottom: 0px">Mechanical Reasoning</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  The Mechanical Reasoning test assesses the ability to
+                  understand basic mechanical principles of machinery. tools and
+                  motion. It measures your ability to understand and apply
+                  mechanical concepts and principles to solve problems.
+                </p>
+              </div>
+              <div class="col">
+                <div class="pointer yellow">
+                  <p style="padding-bottom: 0px">Space Relations</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  The Space Relations test assesses the ability to manipulate
+                  shapes in 2-dimension or to visualise a 3-dimensional pattern
+                  if rotated at different angles in space.
+                </p>
+              </div>
+              <div class="col">
+                <div class="pointer green">
+                  <p style="padding-bottom: 0px">Spelling</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  Spellings test assesses your ability to differenti ate between
+                  correct and incorrect spellings. It measures the command you
+                  have over correct spellings and vocabulary in English language
+                </p>
+              </div>
+              <div class="col">
+                <div class="pointer sky-blue">
+                  <p style="padding-bottom: 0px">Language Usage</p>
+                </div>
+                <p style="padding: 10px 10px 20px">
+                  The Language Usage test assesses your ability to detect errors
+                  in grammar. punctuation and capitalisa tion to produce meaning
+                  ful novel sentences by applying the rules and structure of
+                  English Language.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    <b><%= user.first_name %> <%= user.last_name %></b>
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>10</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

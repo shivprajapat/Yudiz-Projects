@@ -42,7 +42,11 @@ const Logs = Schema({
   iDepartmentId: { type: Schema.Types.ObjectId },
   oOldFields: { type: Object },
   oNewFields: { type: Object },
-  eStatus: { type: String, default: 'Y' }
+  eStatus: { type: String, default: 'Y' },
+  oBody: { type: Object },
+  oParams: { type: Object },
+  oQuery: { type: Object },
+  sToken: { type: String }
 }, { timestamps: { createdAt: 'dCreatedAt', updatedAt: 'dUpdatedAt' } })
 
 Logs.index({ eModule: 1 })

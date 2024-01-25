@@ -106,11 +106,13 @@ class Technology {
       }
       if (technology) return ErrorResponseSender(res, status.ResourceExist, messages[req.userLanguage].already_exist.replace('##', messages[req.userLanguage].technology))
       const data = await TechnologyModel.create({ ...req.body, sKey: keygen(sName), iCreatedBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f'), iLastUpdateBy: req.employee?._id ? ObjectId('62a9c5afbe6064f125f3501f') : ObjectId('62a9c5afbe6064f125f3501f') })
-      let take = `Logs${new Date().getFullYear()}`
+      // let take = `Logs${new Date().getFullYear()}`
 
-      take = ResourceManagementDB.model(take, Logs)
-      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Technology', sService: 'addTechnology', eAction: 'Create', oNewFields: data }
-      await take.create(logs)
+      // take = ResourceManagementDB.model(take, Logs)
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Technology', sService: 'addTechnology', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      // await take.create(logs)
+
+      await queuePush('logs', logs)
 
       // await notificationsender(req, data._id, ' technology is create ', true, true, req.employee._id, `${config.urlPrefix}/technology/${data._id}`)
 
@@ -133,8 +135,13 @@ class Technology {
       if (technology && technology.eStatus === 'Y') {
         const data = await TechnologyModel.findByIdAndUpdate({ _id: req.params.id }, { eStatus: 'N', iLastUpdateBy: req.employee._id }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].technology))
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Technology', sService: 'deleteTechnology', eAction: 'Delete', oOldFields: technology }
-        await Logs.create(logs)
+
+        // let take = `Logs${new Date().getFullYear()}`
+
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Technology', sService: 'deleteTechnology', eAction: 'Delete', oOldFields: technology, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        // await take.create(logs)
+        await queuePush('logs', logs)
 
         // await notificationsender(req, data._id, ' technology is delete ', true, true, req.employee._id, `${config.urlPrefix}/technology/${data._id}`)
         return SuccessResponseSender(res, status.Deleted, messages[req.userLanguage].delete_success.replace('##', messages[req.userLanguage].technology))
@@ -162,11 +169,12 @@ class Technology {
 
         const data = await TechnologyModel.findByIdAndUpdate({ _id: req.params.id }, { sName, sKey: keygen(sName), iLastUpdateBy: req.employee._id, sLogo }, { runValidators: true, new: true })
         if (!data) return ErrorResponseSender(res, status.NotFound, messages[req.userLanguage].not_exist.replace('##', messages[req.userLanguage].technology))
-        let take = `Logs${new Date().getFullYear()}`
+        // let take = `Logs${new Date().getFullYear()}`
 
-        take = ResourceManagementDB.model(take, Logs)
-        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Technology', sService: 'updateTechnology', eAction: 'Update', oOldFields: technology, oNewFields: data }
-        await take.create(logs)
+        // take = ResourceManagementDB.model(take, Logs)
+        const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, iId: data._id, eModule: 'Technology', sService: 'updateTechnology', eAction: 'Update', oOldFields: technology, oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+        await queuePush('logs', logs)
+        // await take.create(logs)
 
         // await notificationsender(req, data._id, ' technology is update ', true, true, req.employee._id, `${config.urlPrefix}/technology/${data._id}`)
         return SuccessResponseSender(res, status.OK, messages[req.userLanguage].update_success.replace('##', messages[req.userLanguage].technology))
@@ -231,11 +239,14 @@ class Technology {
     try {
       const { sFileName, sContentType } = req.body
 
-      console.log(req.body)
+      // console.log(req.body)
 
       const bucket = `${config.s3Technology}/`
 
       const data = await s3.generateUploadUrl(sFileName, sContentType, bucket)
+
+      const logs = { eActionBy: { eType: req.employee.eEmpType, iId: req.employee._id }, eModule: 'Technology', sService: 'getSignedUrl', eAction: 'Create', oNewFields: data, oBody: req.body, oParams: req.params, oQuery: req.query, sDbName: `Logs${new Date().getFullYear()}` }
+      await queuePush('logs', logs)
 
       return res.status(status.OK).jsonp({ status: jsonStatus.OK, message: messages[req.userLanguage].presigned_succ, data })
     } catch (error) {

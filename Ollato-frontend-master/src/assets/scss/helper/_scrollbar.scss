@@ -1,0 +1,41 @@
+::-webkit-scrollbar {
+    width: 5px;
+    height:5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: $light-blue;
+    border-radius: 4px;
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $dark-blue;
+    border-radius: 4px;
+  }
+  .sidebar-menu { 
+    &::-webkit-scrollbar {  width: 3px; height:3px;}
+    &::-webkit-scrollbar-track { background: $dark-blue; }
+    &::-webkit-scrollbar-thumb { background: $light-blue; }
+  }
+  .common-dashboard-wrapper .main-content-box::-webkit-scrollbar { display: none; }
+  //responsive css
+@media (min-width:1400px) and (max-width:1599px) {
+
+}
+@media (min-width:1200px) and (max-width:1399px) {
+
+}
+@media (min-width:992px) and (max-width:1199px) {
+
+}
+@media (min-width:768px) and (max-width:991px) {
+
+}
+@media (max-width:767px) { 
+    ::-webkit-scrollbar {
+      width: 3px;
+      height:3px;
+    }
+  }

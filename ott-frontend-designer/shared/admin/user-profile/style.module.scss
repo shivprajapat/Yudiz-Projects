@@ -1,0 +1,26 @@
+@import "@/assets/scss/helper/mixin";
+
+.user_profile {
+    &_avatar {
+        display: flex;
+        gap: 32px;
+        flex-wrap: wrap;
+    }
+}
+
+.edit_profile {
+    form {
+        width: 100%;
+        max-width: 496px;
+    }
+
+    &_buttons {
+        width: 48%;
+
+        input,
+        label::after {
+            left: 15px;
+            right: initial;
+        }
+    }
+}

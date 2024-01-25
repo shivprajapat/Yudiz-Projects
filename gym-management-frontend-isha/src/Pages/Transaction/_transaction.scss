@@ -1,0 +1,17 @@
+@import 'Assets/Style/variables';
+
+.start {
+    color: $green-color !important;
+    font-weight: 400 !important;
+}
+
+.end {
+    color: $red-color !important;
+    font-weight: 400 !important;
+}
+
+.deleted-data {
+    color: $red-color;
+    font-size: 12px;
+    font-weight: 400;
+}

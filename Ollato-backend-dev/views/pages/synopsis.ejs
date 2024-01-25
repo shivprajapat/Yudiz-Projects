@@ -1,0 +1,222 @@
+<!-- page-10 -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      /* common style  */
+      @import url("https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&display=swap");
+      body {
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: 0px 10px 0px 20px;
+      }
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      .page {
+        text-align: justify;
+        font-family: "Libre Baskerville", serif;
+        width: 210mm;
+        margin: 0px auto;
+        background-image: url("<%= baseUrl %>/uploads/ollato-images/regular-page-bg.svg");
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+      }
+      .sub-page {
+        min-height: calc(29.7cm - 70px);
+      }
+      footer {
+        width: 210mm;
+        margin: 0px auto;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      @media print {
+        html, body {
+            width: 210mm;
+            height: 297mm;        
+        }
+        .page {
+          margin: 0;
+          width: initial;
+          min-height: initial;
+          page-break-after: always;
+        }
+      }
+      .sub-page img {
+        width: 100%;
+        object-fit: cover;
+      }
+      p {
+        font-size: 13px;
+        line-height: 24px;
+        padding-bottom: 20px;
+      }
+      .page-content {
+        padding: 20px;
+      }
+      .fist-letter-big {
+        color: black;
+        font-size: 19px;
+      }
+      .color-latter {
+        color: #0f62ac;
+        font-weight: 700;
+      }
+
+      /* sub page  */
+      table,
+      td,
+      th {
+        padding: 10px;
+        border: 1px solid black;
+        border-collapse: collapse;
+      }
+      tr td {
+        padding: 10px 8px;
+      }
+      .col-bg {
+        background-color: #4b93d2;
+      }
+      table {
+        margin: 0px auto 0px;
+      }
+      .heading h1 {
+        padding: 20px 0px;
+        font-size: 28px;
+        background-color: rgb(231, 231, 231);
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .bg-text {
+        max-width: 360px;
+        margin: 40px auto 0px;
+        text-align: center;
+      }
+      .bg-text p {
+        font-weight: 600;
+      }
+      .heading p {
+        text-transform: uppercase;
+        font-size: 19px;
+        text-align: center;
+      }
+      ul {
+        padding-left: 20px;
+      }
+      ul li {
+        line-height: 23px;
+        font-size: 18px;
+      }
+      .list-s {
+        padding: 0px;
+        list-style: none;
+      }
+      /* footer  */
+      .footer-content {
+        display: flex;
+        position: relative;
+        justify-content: space-between;
+        text-align: center;
+        padding: 10px;
+      }
+      .footer-content p,
+      a {
+        padding-bottom: 0px;
+        text-decoration: none;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      footer p,
+      a {
+        font-size: 11px;
+        line-height: 18px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <section class="page">
+        <div class="sub-page">
+          <div class="heading">
+            <h1>Synopsis</h1>
+          </div>
+          <div style="padding: 40px 20px" class="content">
+            <p style="padding: 0px">
+              Based on your interest areas namely; Artistic, Social,
+              Enterprising following are some of the corresponding
+              Characteristics and personality traits that are likely to possess
+            </p>
+            <div style="padding: 40px 0px">
+              <table style="width: 90%">
+                <thead style="text-align: center">
+                  <tr>
+                    <th>Category</th>
+                    <th>Core values</th>
+                    <th>Personality Traits</th>
+                    <!-- <th>Job tasks</th>
+                    <th>Occupations</th> -->
+                  </tr>
+                </thead>
+                <tbody>
+                  <% for (var i = 0; i < interestSynopsisData.length; i++) { %>
+                    <tr>
+                      <td>
+                        <%- interestSynopsisData[i].sub_title %>
+                      </td>
+                      <td>
+                        <%- interestSynopsisData[i].core_values %>
+                      </td>
+                      <td>
+                        <%- interestSynopsisData[i].personality_traits %>
+                      </td>
+                      <!-- <td>
+                        <%- interestSynopsisData[i].job_tasks %>
+                      </td>
+                      <td>
+                        <%- interestSynopsisData[i].occupations %>
+                      </td> -->
+                    </tr>
+                  <% } %>
+                </tbody>
+              </table>
+            </div>
+            <p style="text-align: center">
+              Further exploration of your aptitude will give us a clearer
+              picture in regard to the best career options available for you.
+            </p>
+          </div>
+        </div>
+        <div style="padding-bottom: 10px">
+          <footer style="background-color: #0f62ac">
+            <section>
+              <div class="footer-content">
+                <div>
+                  <p class="footer-name">
+                    <b><%= user.first_name %> <%= user.last_name %></b>
+                  </p>
+                </div>
+                <div class="center-footer">
+                  <p>
+                    618, Nirmal Corporate Centre, LBS Road, Moti Nagar, Mulund West, Mumbai – 400080,
+                  </p>
+                  <p>Maharashtra (INDIA) <a href="tel:02235130089">TEL: (022) 35130089 & +91 9967153285</a></p>
+                </div>
+                <div>
+                  <p>09</p>
+                </div>
+              </div>
+            </section>
+          </footer>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

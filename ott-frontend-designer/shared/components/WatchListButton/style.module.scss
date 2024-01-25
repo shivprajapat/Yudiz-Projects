@@ -1,0 +1,6 @@
+.watch_list_btn {
+  margin-inline: 10px;composes: dark_btn from '../../components/Button/style.module.scss';
+  background-color: var(--neutrals-white-color);padding:8px;
+  width: 40px;
+  height: 40px;.svgIcon {svg path {fill: var(--white-color) !important;}}
+}

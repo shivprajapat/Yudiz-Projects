@@ -1,0 +1,31 @@
+.profile_card {
+    section{
+        padding: 24px;
+    }
+    &_avatar {
+        width: fit-content;
+
+        h6 {
+            margin-left: 8px;
+        }
+    }
+
+    p {
+        margin-block: 16px;
+        line-height: 24px;
+        color: var(--white-60-color);
+    }
+
+    button {
+        span {
+            float: right;
+            padding-left: 5px;
+            margin-right: 0;
+
+            img {
+                width: 18px;
+                height: 18px;
+            }
+        }
+    }
+}

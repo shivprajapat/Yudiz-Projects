@@ -1,0 +1,849 @@
+.availaibity-management {
+  .react-bootstrap-table table tr td,
+  .react-bootstrap-table table tr th {
+ 
+    vertical-align: top;
+    white-space: nowrap;
+  }
+  .react-bootstrap-table table thead th:nth-child(2) {
+    width: 150px;
+  }
+  .react-bootstrap-table table thead th:last-child {
+    min-width: 300px;
+  }
+}
+.react-bootstrap-table {
+  p{margin: 0px;}
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  table {
+    margin-bottom: 0;
+    border: none;
+    text-align: left;
+    tr {
+      background-color: $white;
+      border: 2px solid $light-blue;
+      td,
+      th {
+        vertical-align: middle;
+        border: 0;
+        padding: 16px 10px;
+        white-space: nowrap;
+      }
+      td {
+        font-weight: 400;
+        font-size: 15px;
+        line-height: 24px;
+        &:first-child {
+          text-align: center;
+        }
+      }
+    }
+    thead {
+      vertical-align: middle;
+      tr {
+        border: 0;
+        border-bottom: 10px solid $light-blue;
+      }
+      th {
+        font-weight: $fw-600;
+        font-size: 16px;
+        line-height: 20px;
+        color: $black;
+        letter-spacing: 0.2px;
+        &:first-child {
+          text-align: center;
+          border-top-left-radius: 16px;
+          overflow: hidden;
+        }
+        &:last-child {
+          border-top-right-radius: 16px;
+          overflow: hidden;
+        }
+        input[type='checkbox']:checked:before {
+          content: '';
+          display: block;
+          position: absolute;
+          width: 20px;
+          height: 20px;
+          top: 0;
+          left: 0;
+          background-color: $text_blue;
+          border-color: $text_blue;
+        }
+        input[type='checkbox']:checked:after {
+          content: '';
+          display: block;
+          width: 12px;
+          height: 2px;
+          background-color: $white;
+          position: absolute;
+          top: 9px;
+          left: 4px;
+        }
+        &.selection-cell-header {
+          width: 100px;
+        }
+      }
+    }
+  }
+  .table > :not(caption) > * > * {
+    box-shadow: none;
+  }
+  .table > :not(:first-child) {
+    border: 0;
+  }
+  input[type='checkbox'] {
+    position: relative;
+    cursor: pointer;
+  }
+  input[type='checkbox']:before {
+    content: '';
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background-color: $white;
+    border: 1px solid $light-gray-1;
+    border-radius: 2px;
+  }
+  td {
+    input[type='checkbox']:checked:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      top: 0;
+      left: 0;
+      background-color: $text_blue;
+      border-color: $text_blue;
+    }
+    input[type='checkbox']:checked:after {
+      content: '';
+      display: block;
+      width: 6px;
+      height: 12px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
+      position: absolute;
+      top: 3px;
+      left: 7px;
+    }
+  }
+  .button-box {
+    display: flex;
+    align-items: center;
+    & > a {
+      margin-right: 8px;
+      &:last-child {
+        margin-right: 0px;
+      }
+    }
+  }
+}
+
+/* pagination */
+.react-bootstrap-table-pagination {
+  margin: 24px 0 0;
+  .react-bs-table-sizePerPage-dropdown {
+    display: block;
+    text-align: left;
+    #pageDropDown {
+      background-color: $text_blue;
+      &:focus {
+        box-shadow: none;
+      }
+      span {
+        display: none;
+      }
+    }
+    .dropdown-menu {
+      border: 0;
+      margin-top: 10px;
+    }
+    .dropdown-item {
+      color: $text_blue;
+      cursor: pointer;
+      &:hover {
+        background-color: $text_blue;
+        a {
+          color: $white;
+        }
+      }
+    }
+  }
+  .pagination {
+    justify-content: flex-end;
+  }
+  .react-bootstrap-table-pagination-list {
+    padding: 0;
+  }
+  .page-item {
+    .page-link {
+      padding: 8px;
+      margin: 0 7px;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      font-weight: $fw-700;
+      font-size: 16px;
+      line-height: 24px;
+      letter-spacing: 0.01em;
+      color: $light-gray-2;
+      border: 0;
+      background: $white;
+      &:focus {
+        box-shadow: none;
+      }
+      &:hover {
+        z-index: 0;
+        background-color: $text_blue;
+        color: $white;
+        box-shadow: none;
+      }
+    }
+    &.active {
+      .page-link {
+        background-color: $text_blue;
+        color: $white;
+        box-shadow: none;
+      }
+    }
+    &[title='previous page'],
+    &[title='next page'],
+    &[title='first page'],
+    &[title='last page'] {
+      .page-link {
+        font-size: 0;
+        &:hover {
+          background-color: $white;
+        }
+      }
+      position: relative;
+      &:after {
+        content: '';
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        height: 12px;
+        width: 6px;
+        background: url('../../images/left-pagination.svg') no-repeat center
+          center/cover;
+        transform: translate(-50%, -50%);
+      }
+    }
+    &[title='next page'] {
+      &:after {
+        background-image: url('../../images/right-pagination.svg');
+      }
+    }
+    &[title='last page'],
+    &[title='first page'] {
+      &:after {
+        background-image: url('../../images/last-double-pagination.svg');
+        width: 12px;
+        height: 12px;
+      }
+    }
+    &[title='first page'] {
+      &:after {
+        transform: translate(-50%, -50%) rotate(180deg);
+        transform-origin: center;
+      }
+    }
+  }
+}
+/* sorting */
+.sort-box {
+  margin-left: 5px;
+  img {
+    width: 20px;
+  }
+}
+//responsive css
+@media (min-width: 1400px) and (max-width: 1599px) {
+  .react-bootstrap-table {
+    table {
+      min-width: 1000px;
+      tr {
+        td,
+        th {
+          padding: 18px 8px;
+        }
+        td {
+          font-size: 15px;
+          line-height: 22px;
+        }
+      }
+      thead {
+        tr {
+          border-bottom: 8px solid $light-blue;
+        }
+        th {
+          font-size: 16px;
+          line-height: 22px;
+          letter-spacing: 0.2px;
+          &:first-child {
+            border-top-left-radius: 14px;
+          }
+          &:last-child {
+            border-top-right-radius: 14px;
+          }
+          input[type='checkbox']:checked:before {
+            width: 18px;
+            height: 18px;
+          }
+          input[type='checkbox']:checked:after {
+            width: 10px;
+            height: 2px;
+            top: 8px;
+            left: 4px;
+          }
+          &.selection-cell-header {
+            width: 90px;
+          }
+        }
+      }
+    }
+    input[type='checkbox']:before {
+      width: 18px;
+      height: 18px;
+    }
+    td {
+      input[type='checkbox']:checked:before {
+        width: 18px;
+        height: 18px;
+      }
+      input[type='checkbox']:checked:after {
+        width: 6px;
+        height: 12px;
+        border-width: 0 2px 2px 0;
+        top: 2px;
+        left: 6px;
+      }
+    }
+    .button-box {
+      & > a {
+        margin-right: 6px;
+      }
+    }
+  }
+  /* pagination */
+  .react-bootstrap-table-pagination {
+    margin: 20px 0 0;
+    .page-item {
+      .page-link {
+        padding: 6px;
+        margin: 0 6px;
+        width: 35px;
+        height: 35px;
+        border-radius: 8px;
+        font-size: 16px;
+        line-height: 24px;
+        letter-spacing: 0.01em;
+      }
+      &[title='previous page'],
+      &[title='next page'],
+      &[title='first page'],
+      &[title='last page'] {
+        &:after {
+          height: 12px;
+          width: 6px;
+        }
+      }
+      &[title='last page'],
+      &[title='first page'] {
+        &:after {
+          width: 12px;
+          height: 12px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .react-bootstrap-table {
+    table {
+      min-width: 1200px;
+      tr {
+        td,
+        th {
+          padding: 15px 5px;
+        }
+        td {
+          font-size: 15px;
+          line-height: 22px;
+        }
+      }
+      thead {
+        tr {
+          border-bottom: 7px solid $light-blue;
+        }
+        th {
+          font-size: 15px;
+          line-height: 22px;
+          letter-spacing: 0px;
+          &:first-child {
+            border-top-left-radius: 12px;
+          }
+          &:last-child {
+            border-top-right-radius: 12px;
+          }
+          input[type='checkbox']:checked:before {
+            width: 15px;
+            height: 15px;
+          }
+          input[type='checkbox']:checked:after {
+            width: 9px;
+            height: 2px;
+            top: 7px;
+            left: 3px;
+          }
+          &.selection-cell-header {
+            width: 80px;
+          }
+        }
+      }
+    }
+    input[type='checkbox']:before {
+      width: 15px;
+      height: 15px;
+    }
+    td {
+      input[type='checkbox']:checked:before {
+        width: 15px;
+        height: 15px;
+      }
+      input[type='checkbox']:checked:after {
+        width: 5px;
+        height: 9px;
+        border-width: 0 2px 2px 0;
+        top: 2px;
+        left: 5px;
+      }
+    }
+    .button-box {
+      & > a {
+        margin-right: 5px;
+      }
+    }
+  }
+  /* pagination */
+  .react-bootstrap-table-pagination {
+    margin: 16px 0 0;
+    .page-item {
+      .page-link {
+        padding: 5px;
+        margin: 0 6px;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        font-size: 14px;
+        line-height: 22px;
+        letter-spacing: 0.01em;
+      }
+      &[title='previous page'],
+      &[title='next page'],
+      &[title='first page'],
+      &[title='last page'] {
+        &:after {
+          height: 10px;
+          width: 6px;
+        }
+      }
+      &[title='last page'],
+      &[title='first page'] {
+        &:after {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .react-bootstrap-table {
+    table {
+      min-width: 1000px;
+      tr {
+        td,
+        th {
+          padding: 15px 5px;
+        }
+        td {
+          font-size: 15px;
+          line-height: 22px;
+        }
+      }
+      thead {
+        tr {
+          border-bottom: 7px solid $light-blue;
+        }
+        th {
+          font-size: 15px;
+          line-height: 22px;
+          letter-spacing: 0px;
+          &:first-child {
+            border-top-left-radius: 12px;
+          }
+          &:last-child {
+            border-top-right-radius: 12px;
+          }
+          input[type='checkbox']:checked:before {
+            width: 15px;
+            height: 15px;
+          }
+          input[type='checkbox']:checked:after {
+            width: 9px;
+            height: 2px;
+            top: 7px;
+            left: 3px;
+          }
+          &.selection-cell-header {
+            width: 60px;
+          }
+        }
+      }
+    }
+    input[type='checkbox']:before {
+      width: 15px;
+      height: 15px;
+    }
+    td {
+      input[type='checkbox']:checked:before {
+        width: 15px;
+        height: 15px;
+      }
+      input[type='checkbox']:checked:after {
+        width: 5px;
+        height: 9px;
+        border-width: 0 2px 2px 0;
+        top: 2px;
+        left: 5px;
+      }
+    }
+    .button-box {
+      & > a {
+        margin-right: 5px;
+      }
+      button {
+        text-indent: -9999px;
+        font-size: 0;
+        padding: 3px 8px;
+        img {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  /* pagination */
+  .react-bootstrap-table-pagination {
+    margin: 14px 0 0;
+    .page-item {
+      .page-link {
+        padding: 5px;
+        margin: 0 4px;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        font-size: 13px;
+        line-height: 18px;
+        letter-spacing: 0;
+      }
+      &[title='previous page'],
+      &[title='next page'],
+      &[title='first page'],
+      &[title='last page'] {
+        &:after {
+          height: 10px;
+          width: 6px;
+        }
+      }
+      &[title='last page'],
+      &[title='first page'] {
+        &:after {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .react-bootstrap-table {
+    table {
+      min-width: 900px;
+      tr {
+        td,
+        th {
+          padding: 10px 5px;
+        }
+        td {
+          font-size: 13px;
+          line-height: 16px;
+        }
+      }
+      thead {
+        tr {
+          border-bottom: 5px solid $light-blue;
+        }
+        th {
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0px;
+          &:first-child {
+            border-top-left-radius: 12px;
+          }
+          &:last-child {
+            border-top-right-radius: 12px;
+          }
+          input[type='checkbox']:checked:before {
+            width: 13px;
+            height: 13px;
+          }
+          input[type='checkbox']:checked:after {
+            width: 9px;
+            height: 2px;
+            top: 5px;
+            left: 2px;
+          }
+          &.selection-cell-header {
+            width: 40px;
+          }
+        }
+      }
+    }
+    input[type='checkbox']:before {
+      width: 13px;
+      height: 13px;
+    }
+    td {
+      input[type='checkbox']:checked:before {
+        width: 13px;
+        height: 13px;
+      }
+      input[type='checkbox']:checked:after {
+        width: 5px;
+        height: 9px;
+        border-width: 0 2px 2px 0;
+        top: 1px;
+        left: 4px;
+      }
+    }
+    .button-box {
+      & > a {
+        margin-right: 5px;
+      }
+      button {
+        text-indent: -9999px;
+        font-size: 0;
+        padding: 3px 8px;
+        img {
+          margin-right: 0;
+        }
+        width: 32px;
+      }
+    }
+  }
+  /* pagination */
+  .react-bootstrap-table-pagination {
+    margin: 12px 0 0;
+    .page-item {
+      .page-link {
+        padding: 5px;
+        margin: 0 4px;
+        width: 30px;
+        height: 30px;
+        border-radius: 8px;
+        font-size: 13px;
+        line-height: 18px;
+        letter-spacing: 0;
+      }
+      &[title='previous page'],
+      &[title='next page'],
+      &[title='first page'],
+      &[title='last page'] {
+        &:after {
+          height: 10px;
+          width: 6px;
+        }
+      }
+      &[title='last page'],
+      &[title='first page'] {
+        &:after {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+}
+@media (max-width: 767px) {
+  .react-bootstrap-table {
+    table {
+      min-width: 1000px;
+      tr {
+        td,
+        th {
+          padding: 10px 5px;
+        }
+        td {
+          font-size: 13px;
+          line-height: 16px;
+        }
+      }
+      thead {
+        tr {
+          border-bottom: 5px solid $light-blue;
+        }
+        th {
+          font-size: 14px;
+          line-height: 20px;
+          letter-spacing: 0px;
+          &:first-child {
+            border-top-left-radius: 12px;
+          }
+          &:last-child {
+            border-top-right-radius: 12px;
+          }
+          input[type='checkbox']:checked:before {
+            width: 13px;
+            height: 13px;
+          }
+          input[type='checkbox']:checked:after {
+            width: 9px;
+            height: 2px;
+            top: 7px;
+            left: 3px;
+          }
+          &.selection-cell-header {
+            width: 40px;
+          }
+        }
+      }
+    }
+    input[type='checkbox']:before {
+      width: 13px;
+      height: 13px;
+    }
+    td {
+      input[type='checkbox']:checked:before {
+        width: 13px;
+        height: 13px;
+      }
+      input[type='checkbox']:checked:after {
+        width: 5px;
+        height: 9px;
+        border-width: 0 2px 2px 0;
+        top: 1px;
+        left: 4px;
+      }
+    }
+    .button-box {
+      & > a {
+        margin-right: 5px;
+      }
+      button {
+        text-indent: -9999px;
+        font-size: 0;
+        padding: 3px 8px;
+        img {
+          margin-right: 0;
+        }
+        width: 32px;
+      }
+    }
+  }
+  /* pagination */
+  .react-bootstrap-table-pagination {
+    margin: 8px 0 0;
+    .page-item {
+      .page-link {
+        padding: 4px;
+        margin: 0 2px;
+        width: 25px;
+        height: 25px;
+        border-radius: 4px;
+        font-size: 12px;
+        line-height: 15px;
+      }
+      &[title='previous page'],
+      &[title='next page'],
+      &[title='first page'],
+      &[title='last page'] {
+        &:after {
+          height: 10px;
+          width: 6px;
+        }
+      }
+      &[title='last page'],
+      &[title='first page'] {
+        &:after {
+          width: 10px;
+          height: 10px;
+        }
+      }
+    }
+  }
+}
+/* Switch */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 26px;
+  margin: 5px;
+}
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: 0.4s;
+  transition: 0.4s cubic-bezier(0, 1, 0.5, 1);
+  border-radius: 4px;
+}
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s cubic-bezier(0, 1, 0.5, 1);
+  border-radius: 3px;
+}
+input:checked + .slider:before {
+  -webkit-transform: translateX(24px);
+  -ms-transform: translateX(24px);
+  transform: translateX(24px);
+}
+.slider.round {
+  border-radius: 34px;
+}
+.slider.round:before {
+  border-radius: 50%;
+}
+#round {
+  border-radius: 34px;
+}
+#round:before {
+  border-radius: 50%;
+}
+input:checked + .slider.blue {
+  background-color: $text_blue;
+}

@@ -1,0 +1,6 @@
+.accordion-content {
+  @apply hidden;
+}
+.accordion-content.active {
+  @apply block overflow-y-auto;
+}

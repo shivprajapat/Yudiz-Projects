@@ -1,0 +1,78 @@
+@import "@/assets/scss/helper/mixin";
+
+.movie_preview {
+    background-color: var(--neutrals-25-color);
+    width: 346px;
+    padding: 10px;
+    box-shadow: 0px 8px 40px var(--black-025-rgba);
+    border-radius: 8px;
+    position: absolute;
+    top: -7vh;
+    left: -8px;
+    transform: scale(0);
+    transition: 0.8s;
+    z-index: 999;
+    opacity: 0;
+
+    &_show {
+        opacity: 1;
+        transform: scale(1);
+        transition: all .25s cubic-bezier(.33, .04, .63, .93);
+        transition-delay: .2s;
+    }
+
+    &_content {
+        margin-top: 10px;
+
+        h6 {
+            @include font-size(20, 26, 600);
+            margin: 8px 0 16px;
+        }
+    }
+
+    figure {
+        height: 186px !important;
+
+        video {
+            height: 100% !important;
+            border-radius: 8px;
+        }
+    }
+
+    &_inner {
+        border-radius: 8px;
+        position: relative;
+        overflow: hidden;
+
+        &_btn {
+            position: relative;
+            top: 10px;
+            transition: 0.3s;
+            z-index: 9;
+            width: 100%;
+
+            button {
+                position: absolute;
+                top: 0;
+                right: 10px;
+            }
+        }
+
+        span {
+            position: absolute;
+            top: 0;
+            left: 10px;
+            background: var(--movies-card-gradient);
+            border-radius: 0px 4px 4px 0px;
+            padding: 2px 8px;
+        }
+    }
+
+    .movie_btn {
+        @include font-size(14, 18, 400);
+        color: var(--white-color);
+        padding: 4px 8px;
+        background: var(--neutrals-white-color);
+        border-radius: 4px;
+    }
+}

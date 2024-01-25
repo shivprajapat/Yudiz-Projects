@@ -8,6 +8,7 @@ router.use(setLanguage, isAuthenticated)
   .delete('/role/:id/v1', isAuthorized('DELETE_ROLE'), validators.roleCheckIdV1, validate, roleService.deleteRole)
   .put('/role/:id/v1', isAuthorized('UPDATE_ROLE'), validators.updateRolesCheckV1, validate, roleService.updateRole)
   .get('/role/v1', isAuthorized('VIEW_ROLE'), roleService.getRoles)
-  // .post('/updateRoles', setLanguage, isAuthenticated, roleService.updateRoles)
+  .get('/role/:id/v1', isAuthorized('VIEW_ROLE'), validators.roleCheckIdV1, validate, roleService.getRole)
+// .post('/updateRoles', setLanguage, isAuthenticated, roleService.updateRoles)
 
 module.exports = router

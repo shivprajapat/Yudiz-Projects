@@ -1,0 +1,19 @@
+.main-layout {
+  height: 100vh;
+  padding-left: 56px;
+  .main-container {
+    // height: calc(100% - 66px);
+    // overflow-y: auto;
+    padding: 95px 30px;
+    transition: padding 0.5s;
+    &.active{
+      padding-inline-start: 240px;
+    }
+  }
+  @include media-max(md) {
+    .main-container {
+      // height: calc(100% - 55px);
+      padding: 70px 15px;
+    }
+  }
+}
