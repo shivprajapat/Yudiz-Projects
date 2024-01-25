@@ -1,0 +1,275 @@
+input oSeriesIdInput {
+    iSeriesId: ID!
+}
+
+type oFetchSeriesData {
+    iSeriesId: ID
+    aVenues: [oVenues]
+    aTeams: [oTeams]
+}
+
+type oFetchSeriesTeam {
+  iSeriesId: ID
+  aTeams: [oTeams]
+}
+
+type oFetchSeriesRounds {
+  _id: ID
+  iSeriesId: ID
+  sKey: String
+  nOrder: Int
+  sName: String
+  sType: String
+  dStartDate: Date
+  dEndDate: Date
+  sMatchFormat: String
+  eProvider: String
+}
+
+enum StandingsEnum {
+  "Al"
+  all
+  "completed"
+  completed
+  "per_round"
+  perround
+}
+
+input oSeriesStandingsInput {
+    iSeriesId: ID!
+    iRoundId: ID
+    nLimit: Int
+}
+
+type oFetchSeriesStandings {
+  _id: ID
+  iSeriesId: ID
+  iRoundId: oFetchSeriesRounds @deprecated(reason: "Use oRound field")
+  oRound: oFetchSeriesRounds
+  oTeam: oTeams
+  nPlayed: Int
+  nWin: Int
+  nDraw: Int
+  nLoss: Int
+  nNR: Int
+  nOverFor: String
+  nRunFor: Int
+  nOverAgainst: String
+  nRunAgainst: Int
+  nNetrr: String
+  nPoints: Int
+  eType: StandingsEnum
+  eProvider: String
+  dCreated: Date
+  dUpdated: Date
+  oSeries: oFetchSeriesFront
+  bIsQualified: Boolean
+}
+
+input listSeriesInput {
+  nSkip: Int
+  nLimit: Int
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+type listSeriesResponse {
+  aResults: [oFetchSeries]
+  nTotal: Int
+}
+
+enum TopPlayerType {
+  "Highest Run Scorer"
+  hrs
+  "Highest Wicket Taker"
+  hwt
+  "Highest Score"
+  hs
+  "Best Bowling Figures"
+  bbf
+}
+
+type oSeriesTopPlayers {
+  _id: ID
+  iSeriesId: ID
+  oPlayer: oPlayerDetails
+  oTeam: oTeams
+  sBestInning: String
+  nWickets: Float
+  nRuns: Float
+  nHighest: Float
+  eType: TopPlayerType
+  eFullType: String
+  dCreated: String
+  dUpdated: String
+  oSeries: oFetchSeriesFront
+  oSeriesStatsTypes:oSeriesStatsTypes
+}
+
+input oPaginationInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+type oGetSeriesData {
+  nTotal: Int
+  aResults: [oFetchSeries]
+}
+
+type oGetSeriesSearchResult {
+  nTotal: Int
+  aResults: [oFetchSeries]
+}
+
+type oListAllCurrentSeriesResponse {
+  aResults: [oFixtureSeriesType]
+}
+
+type oListFixtureSeries {
+  aSeries: [oFixtureSeriesType]
+  sMonth: String
+}
+
+type oFixtureSeriesType {
+  _id: ID
+  sTitle: String
+  sAbbr: String
+  sSeason: String
+  dStartDate: Date
+  dEndDate: Date
+  sSeriesType: String
+  sCategory: String
+  sStatus: String
+  sGameFormat: String
+  bIsLeague: Boolean
+  oSeo: Seo
+  iCategoryId: ID
+  oCategory: oSeriesCategory
+}
+
+input oListFixtureSeriesInput {
+  eCategory: SERIESCATEGORY
+  sSearch: String
+}
+
+input oListAllCurrentSeriesInput {
+  nSkip: Int
+  nLimit: Int
+  sSearch: String
+  sSortBy: String
+  nOrder: Int
+  eCategory: SERIESCATEGORY
+}
+
+enum SERIESCATEGORY {
+  "International"
+  i
+  "domestic"
+  d
+  "league"
+  l
+  "women"
+  w
+}
+
+input oListSeriesArchiveInput {
+  eCategory: SERIESCATEGORY
+  sSearch: String
+  dYear: String
+  sTimezone: String
+  nSkip: Int
+  nLimit: Int
+}
+
+input oListCurrentOngoingSeriesInput {
+  nSkip: Int
+  nLimit: Int
+  sSearch: String
+}
+
+type oListCurrentOngoingSeriesResponse {
+  nTotal: Int
+  aResults: [oOngoingSeriesType]
+}
+
+type oOngoingSeriesType {
+  _id: ID
+  sTitle: String
+  sAbbr: String
+  sSeason: String
+  dStartDate: Date
+  dEndDate: Date
+  sStatus: String
+  oSeo: Seo
+}
+
+input oGetSeriesByIdFrontInput {
+  _id: ID!
+}
+
+type oFetchSeriesFront {
+  _id: ID
+  sTitle: String
+  sAbbr: String
+  sSeason: String
+  dStartDate: String
+  dEndDate: String
+  nTotalTeams: Int
+  sSeriesType: String
+  sCategory: String
+  sGameFormat: String
+  sStatus: String
+  sCountry: String
+  eProvider: String
+  dCreated: String
+  dUpdated: String
+  oSeo: Seo
+  iCategoryId: ID
+  oCategory: oSeriesCategory
+}
+
+input oListSeriesStatsFormatInput {
+  iSeriesId: ID!
+}
+
+input oListSeriesScorecardInput {
+  _id: ID!
+}
+
+input oListSeriesFantasyTipsInput {
+  nSkip: Int
+  nLimit: Int
+  nOrder: Int
+  sSortBy: String
+  iSeriesId: ID!
+}
+
+
+input listCurrentSeriesDropdownInput {
+  nLimit: Int
+  eSubType: ESEOSUBTYPE
+}
+
+extend type Query {
+  fetchSeriesData(input: oSeriesIdInput): oFetchSeriesData
+  fetchSeriesRounds(input: oSeriesIdInput): [oFetchSeriesRounds]
+  fetchSeriesStandings(input: oSeriesStandingsInput): [oFetchSeriesStandings]
+  listSeries(input:listSeriesInput):listSeriesResponse
+  listSeriesTeams(input: oSeriesIdInput): oFetchSeriesTeam
+  listSeriesTopPlayers(input: oSeriesIdInput): [oSeriesTopPlayers]
+  getSeriesSearch(input: oPaginationInput): oGetSeriesSearchResult
+  listFixtureSeries(input:oListFixtureSeriesInput):[oListFixtureSeries]
+  listAllCurrentSeries(input:oListAllCurrentSeriesInput):oListAllCurrentSeriesResponse
+  listSeriesArchive(input:oListSeriesArchiveInput):[oFixtureSeriesType]
+  listSeriesYear:[String]
+  listCurrentOngoingSeries(input: oListCurrentOngoingSeriesInput): oListCurrentOngoingSeriesResponse
+  getSeriesByIdFront(input: oGetSeriesByIdFrontInput!): oFetchSeriesFront
+  listSeriesStatsFormat(input: oListSeriesStatsFormatInput!): [String]
+  listSeriesScorecard(input:oListSeriesScorecardInput!): [MiniScorecard] 
+  listSeriesFantasyTipsFront(input: oListSeriesFantasyTipsInput!): [oListMatchFantasyTips]
+  listCurrentSeriesDropdown(input: listCurrentSeriesDropdownInput!): [oFetchSeriesFront]
+}

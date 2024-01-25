@@ -1,0 +1,49 @@
+$black:#000000;
+$black50:#0C1014;
+$black100:#1C2430;
+$text-color:#495159;
+$base-color: #b2bfd2;
+$base-color100:#F7F9FD;
+$primary: #369fff;
+$secondary-color: #f2f4f7;
+$blue-500: #0487ff;
+$heading-color:#7189ac;
+$input-color:#445774;
+$border-color: #dfe4ec;
+$white:#ffffff;
+$red100: #FCE6E4;
+$ola100:#F3EBF4;
+$blue100: #e6f2fa;
+$blue50: #EBF5FF;
+$green100: #E3FDF8;
+$yellow100: #fdf2e2;
+$ola-color:#AC7AB4;
+$red-color: #E64C3B;
+$blue-color: #2780ba;
+$green-color: #0EA085;
+$yellow-color: #f29b20;
+
+$primary: #369fff;
+$blue-100: #b1daff;
+$blue-200: #8cc8ff;
+$blue-300: #57afff;
+$blue-400: #369fff;
+$blue-600: #047be8;
+$blue-700: #0360b5;
+$blue-800: #024a8c;
+$blue-900: #02396b;
+$secondary: #f2f4f7;
+
+@mixin flex($items, $justify, $direction) {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    align-items: $items;
+    justify-content: $justify;
+    flex-direction: $direction;
+  }
+  
+  // @include flex(center, center, null);
+  

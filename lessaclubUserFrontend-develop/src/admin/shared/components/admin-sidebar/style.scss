@@ -1,0 +1,105 @@
+@import 'assets/scss/helper/variables';
+.sidebar {
+  position: fixed;
+  width: 256px;
+  height: 100%;
+  background-color: $secondary-black;
+  z-index: 2;
+  transition: all 0.3s ease;
+  &.active {
+    width: 70px;
+    svg {
+      margin: 0 !important;
+    }
+    .admin-slide img {
+      transform: rotate(180deg);
+    }
+    .nav {
+      display: flex;
+      justify-content: center;
+      margin-right: 15px;
+
+      a {
+        width: fit-content;
+        padding: 6px 8px;
+        border-radius: 4px;
+        svg {
+          width: 25px;
+          height: 25px;
+        }
+        span {
+          display: none;
+        }
+      }
+    }
+  }
+  .admin-logo {
+    background-color: $white;
+    padding: 20px 10px;
+    text-align: center;
+    img {
+      max-width: 100%;
+    }
+  }
+  .nav {
+    padding: 20px 10px;
+    a {
+      margin-bottom: 15px;
+      transition: all 0.3s ease;
+      padding: 13px 10px 9px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      color: $white;
+      line-height: normal;
+      font-size: 18px;
+      width: 100%;
+      font-weight: 400;
+      text-transform: capitalize;
+
+      svg {
+        width: 22px;
+        height: 22px;
+        margin-right: 10px;
+        fill: $white;
+        margin-right: 10px;
+      }
+      &:last-child {
+        margin-bottom: 0;
+      }
+      &.active,
+      &:hover {
+        background-color: $green-color;
+        color: $theme-color;
+        svg {
+          fill: $theme-color;
+        }
+      }
+    }
+  }
+  .admin-slide {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    background-color: $green-color;
+    width: 21px;
+    height: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    img {
+      filter: brightness(0);
+      transition: all 1s ease;
+    }
+    &:hover {
+      background-color: $theme-color;
+      img {
+        filter: brightness(0) invert(1);
+      }
+    }
+  }
+}

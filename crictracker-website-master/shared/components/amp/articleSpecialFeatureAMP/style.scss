@@ -1,0 +1,45 @@
+@import '../../../../assets/scss/_variables.scss';
+@import '../../../../assets/scss/_mixins.scss';
+
+.shareList { position: absolute; display: flex; display: -webkit-flex; @include justify-content(center); @include align-items(start); top: 0; left: -36px;  @include transform(translateX(-100%));
+  button { margin-bottom: 28px; border: none; background: none;
+    &:hover span { background-color: #fff; }
+    span { margin-bottom: 4px; display: block; width: 48px; height: 48px; display: flex; display: -webkit-flex; @include justify-content(center); @include align-items(center); border: 1px solid $border-dark2; border-radius: 50%; }
+    amp-img { display: block; width: calc(100% + 2px); height: calc(100% + 2px); @include filter(brightness(0) invert(0)); opacity: 0.5; }
+    &.share amp-img { width: 32px; }
+  }
+}
+
+@media (max-width: 1399px) {
+  .shareList { left: -28px;
+    button { 
+      span { width: 44px; height: 44px; }
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .shareList { left: -16px;
+    button { 
+      span { width: 40px; height: 40px; }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .shareList { @include flex-direction(column) }
+}
+
+@media (max-width: 767px) {
+  .shareList { margin: 0 0 24px; position: static; @include transform(translate(0));
+    button { margin: 0px 8px;
+      span { width: 40px; height: 40px; }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .shareList { margin-bottom: 12px;
+    button { margin-bottom: 0px; }
+  }
+}

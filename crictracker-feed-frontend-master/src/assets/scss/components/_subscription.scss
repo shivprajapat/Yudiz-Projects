@@ -1,0 +1,107 @@
+.common-container {
+  margin: 20px 0px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  background-color: $black-800;
+  @include media-min(xs) {
+    margin: 20px 0px;
+    padding: 14px;
+  }
+  @include media-min(md) {
+    margin: 20px 0px;
+    padding: 14px;
+  }
+  @include media-min(xl) {
+    margin: 20px 0px;
+    padding: 20px;
+  }
+}
+
+thead {
+  border-bottom: 2px solid var(--secondary-700);
+  text-transform: uppercase;
+  th {
+    font-size: $fs-14;
+    line-height: 1.14;
+    color: var(--secondary-400);
+    font-weight: $fw-700;
+    padding: 10px 16px;
+    vertical-align: middle;
+    height: 48px;
+    span {
+      cursor: pointer;
+    }
+    i {
+      font-size: $fs-20;
+      vertical-align: middle;
+    }
+  }
+  th {
+    text-align: center;
+    &:first-child {
+      text-align: start;
+    }
+  }
+}
+tbody {
+  border-bottom: 2px solid var(--secondary-700);
+  tr {
+    & ~ tr {
+      border-top: 2px solid var(--secondary-700);
+    }
+  }
+  td {
+    font-size: $fs-16;
+    color: var(--secondary-200);
+    line-height: 1.63;
+    font-weight: $fw-500;
+    padding: 16px;
+    vertical-align: middle;
+  }
+  td {
+    text-align: center;
+    &:first-child {
+      text-align: start;
+    }
+  }
+}
+
+@include media-max(md) {
+  thead th {
+    height: 40px;
+    padding: 5px 10px;
+    white-space: nowrap;
+  }
+  tbody td {
+    font-size: $fs-14;
+    padding: 10px;
+  }
+  .data-table-header {
+    .right {
+      margin-top: 15px;
+    }
+  }
+  .data-table-tabs {
+    li {
+      min-width: 100px;
+    }
+  }
+}
+@include media-max(sm) {
+  .data-table-header {
+    .search-box {
+      width: auto;
+    }
+  }
+}
+
+.category-list {
+  .list {
+    font-size: $fs-12;
+    text-align: center;
+    padding: 10px;
+    border: 1px solid var(--secondary-600);
+    border-radius: 5px;
+  }
+}

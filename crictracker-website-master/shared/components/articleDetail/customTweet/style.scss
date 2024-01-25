@@ -1,0 +1,48 @@
+@import '../../../../assets/scss/_variables.scss';
+
+.ctTweet { width: 530px; max-width: 100%; background: var(--light-color-medium); border: 1px solid; border-color: var(--border-light); border-radius: 14px; 
+  > * { font-size: 16px; line-height: 1.5; }
+  .tweetUserImg { width: 42px; height: 42px; object-fit: cover; border-radius: 50%; }
+  .quotedTweet{ border: 1px solid var(--border-light); border-radius: 10px }
+  a { pointer-events: none; }
+  .twitterVerified { width: 15px; }
+  amp-video.tweetImg { width: 100%; height: 100%;}
+  amp-video{aspect-ratio: initial; height: 100%; width: 100%; object-fit: cover;}
+  .twitterLogo { width: 20px; }
+  .tweetUser{gap: 10px}
+  img { margin-bottom: 0px; object-fit: cover;}
+  .tweetBody {
+    .tweetBody-verticle-rule { margin-left: 11px; flex-shrink: 0; }
+    .tweetBody-verticle-rule > .vr { width: 2px; height: 100%; background-color: var(--border-light)}
+    p:not(:last-child) { margin-bottom: 8px; }
+    a { color: $theme-color; }
+    video { aspect-ratio: initial; height: 100%; width: 100%; object-fit: cover; }
+  }
+  .tweetImgList{gap: 2px;}
+  .tweetVideoBlock{ width: 100% }
+  .tweetFooter { color: inherit; }
+  .tweetImg { width: calc(50% - 2px); margin: 1px; border-radius: 6px; object-fit: cover; overflow: hidden; }
+  .imgCount3 { display: block; width: 100%;
+    .tweetImg { float: left; }
+    .tweetImg:nth-child(1) { height: 302px; margin: 0 2px 0 0; }
+    .tweetImg:not(:nth-child(1)) { height: 150px; }
+  }
+  .tweetFooterItem {
+    .tweetFooterIcon { width: 20px; }
+  }
+  & > img { margin-bottom: 0; }
+  .quotedTweetHead > * { font-size: 14px; }
+  .quotedTweetBody > * { font-size: 14px; }
+  .quotedTweetHead > .tweetUser > .tweetUserInfo { display: flex; gap: 8px; align-items: center; }
+  .quotedTweetHead > .tweetUser > .tweetUserImg { width: 32px; height: 32px; }
+  .tweetDivider{width: 100%; height: 1px; border-radius: 50%; background: var(--border-light); }
+  .tweetCreatedTime{ font-size: 16px; opacity: 0.7; }
+}
+.ct-insta-frame { border: 1px solid #d2d5d9}
+@media (max-width: 575px) {
+  .ctTweet {
+    > * { font-size: 14px; }
+  }
+  .quotedTweetHead > .tweetUser > .tweetUserInfo { flex-direction: column; align-items: flex-start; gap: 0px; }
+  .w-100 {width: 100%;}
+}

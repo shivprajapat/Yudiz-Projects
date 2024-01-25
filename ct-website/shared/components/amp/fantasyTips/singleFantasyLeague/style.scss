@@ -1,0 +1,35 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.d-flex{ display:flex; display:-webkit-flex; }
+.flex-column { flex-direction: column; -webkit-flex-direction: column; }
+.flex-wrap { flex-wrap: wrap; -webkit-flex-wrap: wrap; }
+.align-items-center { align-items: center; }
+.text-end { text-align: right; }
+.text-center { text-align: center;}
+.bg-dark { background: $font-color; color: #fff; }
+.bg-light { background: #fff; }
+.point { margin: 4px 4px 0px; padding: 0px 4px; border-radius: 3px; }
+.teamBlock { background: $light; border-radius: 32px; }
+.info { padding: 12px 24px 8px; @include justify-content(space-between);
+    > p { width: 30%; }
+}
+p { margin: 0; }
+.toss { background: var(--theme-bg); border-radius: 8px;
+    .icon { display: block; width: 28px; }
+}
+.team { margin-bottom: 0px; flex-grow: 1; padding: 8px 16px 24px; background: $success url(/static/cricket-ground.svg) no-repeat center center / cover; border-radius: 32px; text-align: center; justify-content: center;}
+.label { margin-top: 16px; letter-spacing: 1px; opacity: 0.56; color: #fff; }
+.playerList { margin-top: 8px; display: flex; display: -webkit-flex; @include justify-content(center); }
+/***** Responsive CSS Start ******/
+@media (min-width: 768px) {
+}
+@media (max-width: 767px) {
+    .team,
+    .teamBlock { border-radius: 16px; }
+    .info { padding-left: 12px; padding-right: 12px;
+        > p { font-size: 12px; }
+    }
+    .label { margin-top: 10px; }
+    .team { margin-bottom: 0px; flex-grow: 1; padding: 8px 8px 24px; }
+}

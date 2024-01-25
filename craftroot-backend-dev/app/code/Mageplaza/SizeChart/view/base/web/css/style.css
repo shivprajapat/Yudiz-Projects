@@ -1,0 +1,70 @@
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license sliderConfig is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_SizeChart
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+.white-popup {
+    position: relative;
+    background: #ffffff;
+    padding: 0;
+    margin: 0 auto;
+    max-width: 50%;
+}
+@media screen and (max-width: 993px) {
+    .white-popup {
+        max-width: 70%;
+    }
+}
+@media screen and (max-width: 680px) {
+    .white-popup {
+        max-width: 100%;
+    }
+}
+.white-popup header {
+    border-bottom: 1px dotted #cccccc;
+    margin-bottom: .4em;
+    font-size: 2rem;
+    padding: 5px 0 7px 15px;
+    font-weight: 600;
+    background: linear-gradient(to bottom, #f7f7f7, #eaeaea);
+}
+#mp-size-chart-wrapper {
+    background-color: #ffffff;
+    padding: 14px 18px;
+    text-align: left;
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 700px;
+}
+.mp-sizechart-popup-link img {
+    width: 16px;
+    height: 16px;
+    margin-left: 5px;
+    vertical-align: text-top;
+}
+.mp-sizechart-popup-link a:hover {
+    text-decoration-line: none;
+}
+.mp-sizechart-popup-link {
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.mp-sizechart-popup-link a {
+    font-size: 1.3rem;
+}

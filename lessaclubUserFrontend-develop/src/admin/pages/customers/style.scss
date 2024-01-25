@@ -1,0 +1,87 @@
+@import 'assets/scss/helper/variables';
+
+.customer-filter-radio {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  accent-color: rgb(70, 67, 67);
+}
+
+.admin-customers-radio .form-check-label {
+  font-size: 16px;
+}
+
+.admin-customers {
+  margin-top: 20px;
+  .customer-list {
+    position: relative;
+    svg {
+      font-size: 1rem;
+      color: $green-200;
+      margin-left: 10px;
+    }
+
+    .title {
+      line-height: 1.35;
+      margin: 5px 0 0 0;
+    }
+    .date {
+      margin: 6px 0 0 0;
+      span {
+        text-transform: uppercase;
+        border-radius: 4px;
+        display: inline-block;
+        padding: 0px 5px;
+        margin-right: 4px;
+        & ~ span {
+          margin-left: 12px;
+        }
+      }
+    }
+    .cat {
+      font-size: 16px;
+      font-weight: normal;
+      margin: 0;
+    }
+    .keyword {
+      font-size: 14px span {
+        width: 6px;
+        height: 6px;
+        border-radius: 100%;
+        display: inline-block;
+        vertical-align: middle;
+        margin-right: 8px;
+      }
+    }
+    .btn-b {
+      opacity: 0;
+      transition: all 0.3s ease-in-out;
+      .btn + .btn {
+        margin-left: 5px;
+      }
+    }
+
+    @media (max-width: 1199px) {
+      table {
+        tbody {
+          td {
+            &:nth-child(2) {
+              min-width: 300px !important;
+            }
+            &:nth-child(4) {
+              min-width: 270px !important;
+            }
+            &:nth-child(6) {
+              min-width: 150px !important;
+            }
+            &:nth-child(7) {
+              min-width: 50px !important;
+              @include flex(center, flex-end, null);
+              padding-right: 0px;
+            }
+          }
+        }
+      }
+    }
+  }
+}

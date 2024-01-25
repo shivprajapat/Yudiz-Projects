@@ -1,0 +1,32 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.teamImg { width: 32px; }
+.title { background: var(--theme-bg); border-radius: 8px 8px 0 0; }
+.item { background: var(--theme-bg); font-weight: 500;
+	.head {
+		button { padding: 8px 12px; background: transparent; font-weight: 600;
+			&:not(.collapsed) { background: transparent;}
+			&::after { margin-left: 0; }
+		}
+		.status { margin-right: 8px; }
+	}
+}
+.status { width: 24px; height: 24px; line-height: 24px; background: $border-dark;
+	&.win { background: $success; color: $light-color; }
+	&.loss { background: $danger; color: $light-color; }
+	&.noResult { background: var(--font-dark); color:#fff; }
+}
+.content { padding: 12px 4px;  }
+.item:first-of-type { border-radius: 0 0 8px 8px; }
+.match { width: calc(100% / 5 - 8px); min-width: 120px; }
+
+@media (max-width: 767px) {
+	.item {
+		.head {
+			button { padding: 6px 4px 6px 8px; }
+			.status { margin-right: 2px; }
+			p { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: calc(100vw - 240px);}
+		}
+	}
+}

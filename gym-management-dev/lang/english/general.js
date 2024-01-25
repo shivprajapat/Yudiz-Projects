@@ -1,0 +1,21 @@
+module.exports = {
+  error: 'Something went wrong.',
+  auth_failed: 'Please enter a valid credentials.',
+  succ_login: 'You have logged in successfully.',
+  err_unauthorized: 'Authentication failed. Please login again!',
+  not_found: '## not found',
+  already_exist: '## Already Exists',
+  add_success: '## Added Successfully',
+  freeze_success: '## Freezed Successfully',
+  unfreeze_success: '## UnFreezed Successfully',
+  fetched: '## Fetch Successfully',
+  update_success: '## updated Successfully',
+  del_success: '## deleted Successfully',
+  date_range_error: 'Start Date should be less than End Date',
+  subscription_end_range_error: 'End date should greater than subscription end date',
+  transaction_price_error: 'Transaction should not be greater than subscription price',
+  subscription_price_error: 'Subscription price should not be less than already completed transaction',
+  transaction_already_completed: 'Subscription payment already Completed',
+  report_success: 'Report Generated Successfully',
+  limit_reached: 'You have reached a limit to sending request'
+}

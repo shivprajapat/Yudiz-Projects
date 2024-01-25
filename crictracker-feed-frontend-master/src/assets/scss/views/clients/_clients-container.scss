@@ -1,0 +1,47 @@
+.clients-container {
+  thead {
+    border-bottom: 1px solid var(--secondary-700);
+    text-transform: uppercase;
+    .checkbox {
+      width: 65px;
+    }
+    th {
+      font-size: $fs-14;
+      line-height: 1.14;
+      color: $white;
+      font-weight: $fw-700;
+      padding: 10px 16px;
+      vertical-align: middle;
+      height: 48px;
+      text-align: start;
+      &:not(:first-child):last-child {
+        text-align: right;
+      }
+    }
+  }
+  tbody {
+    border-bottom: 1px solid var(--secondary-700);
+    tr {
+      & ~ tr {
+        border-top: 1px solid var(--secondary-700);
+      }
+    }
+    td {
+      font-size: $fs-16;
+      color: var(--secondary-200);
+      line-height: 1.63;
+      font-weight: $fw-500;
+      padding: 16px;
+      vertical-align: middle;
+      text-align: start;
+      &:not(:first-child):last-child {
+        text-align: right;
+      }
+    }
+  }
+}
+.add-border {
+  border-top: 1px solid var(--secondary-200);
+  margin-top: 24px;
+  padding-top: 24px;
+}

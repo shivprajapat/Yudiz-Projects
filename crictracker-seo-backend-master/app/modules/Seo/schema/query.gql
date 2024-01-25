@@ -1,0 +1,242 @@
+type oSocial {
+  sTitle: String
+  sDescription: String
+  sUrl: String
+}
+
+enum ETABTYPE {
+  standings
+  stats
+  teams
+  squads
+  fixtures
+}
+
+enum ESEOSUBTYPE {
+  "news"
+  n
+  "videos"
+  v
+  "fixtures"
+  f
+  "standings"
+  s
+  "stats"
+  st
+  "teams"
+  t
+  "squads"
+  sq
+  "archives"
+  ar
+  "fantasy tips"
+  ft
+  "score card"
+  sc
+  "overs"
+  o
+  "fixtures-and-results"
+  far
+  "results"
+  r
+  "commentary"
+  c
+  "upcoming"
+  u
+  "photos"
+  p
+  "batting-highest-strikerate-innings"
+  stBhsi
+  "batting-highest-average"
+  stBha
+  "batting-highest-strikerate"
+  stBhs
+  "batting-most-centuries"
+  stBmc
+  "batting-most-run6-innings"
+  stBmr6i
+  "batting-most-fours"
+  stBm4
+  "batting-most-run4-innings"
+  stBmr4i
+  "batting-most-runs"
+  stBmr
+  "batting-most-runs-innings"
+  stBmri
+  "batting-most-run50"
+  stBmr50
+  "batting-most-sixes"
+  stBms
+  "bowling-top-wicket-takers"
+  stBtwt
+  "bowling-best-economy-rates-innings"
+  stBberi
+  "bowling-best-averages"
+  stBba
+  "bowling-best-economy-rates"
+  stBber
+  "bowling-best-strike-rates"
+  stBbsr
+  "bowling-best-strike-rates-innings"
+  stBbsri
+  "bowling-five-wickets"
+  stBfiw
+  "bowling-best-bowling-figures"
+  stBbbf
+  "bowling-most-runs-conceded-innings"
+  stBmrci
+  "bowling-four-wickets"
+  stBfow
+  "bowling-maidens"
+  stBm
+  "team-total-runs"
+  stTtr
+  "team-total-run100"
+  stTtr100
+  "team-total-wickets"
+  stTtw
+  "batting-most-fifties"
+  stBmf
+}
+
+type Seo @key(fields: "iId eSubType") {
+  _id: ID
+  iId: ID
+  sTitle: String
+  sDescription: String
+  sSlug: String
+  aKeywords: [String]
+  oFB: oSocial
+  oTwitter: oSocial
+  sCUrl: String 
+  sRobots: String
+  eType: SEO_TYPE
+  eSubType: ESEOSUBTYPE
+  eStatus: SeoStatus
+  eSchemaType: String
+  bIsDeletable: Boolean
+  eCode: Int
+  eTabType: ETABTYPE
+  aCustomSeo: [Seo]
+  sContent: String
+  sAmpContent: String
+  sDTitle: String
+}
+
+type Seos @key(fields: "iId") {
+  iId: ID
+  oSeo: [Seo]
+}
+
+type oCustomSeo @key(fields: "iId") {
+  _id: ID
+  iId: ID
+  sTitle: String
+  sDescription: String
+  sSlug: String
+  aKeywords: [String]
+  oFB: oSocial
+  oTwitter: oSocial
+  sCUrl: String 
+  sRobots: String
+  eType: SEO_TYPE
+  eStatus: SeoStatus
+  iUpdatedBy: ID
+  oSubAdmin: subAdmin
+  dCreated: String
+  dUpdated: String
+  eSchemaType: String
+  bIsDeletable: Boolean
+  eTabType: ETABTYPE
+  sContent: String
+  sAmpContent: String
+  sDTitle: String
+}
+
+extend type subAdmin @key(fields: "_id"){
+  _id: ID @external
+}
+
+input generateSlugInput {
+  sSlug: String!
+}
+
+type generateSlugResponse {
+  sMessage: String
+  oData: generateSlugResponseData
+}
+
+
+type generateSlugResponseData {
+  sSlug: String
+  bIsExists: Boolean
+}
+
+input oSlugInput {
+  sSlug: String!
+}
+
+input oListSeoInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+type oListSeoResponse {
+  nTotal: Int
+  aResults: [oCustomSeo]
+}
+
+input oSlugData {
+  sSlug: String!
+}
+
+input oGetSeoByIdInput {
+  _id: ID
+}
+
+type generateTagSlugsResponse {
+  sMessage: String
+  oData: generateSlugResponseData
+}
+
+input generateTagSlugsInput {
+  sSlug: String!
+}
+
+type getCategoryIdBySlugResponse {
+  iId: ID
+}
+
+input oGetSeoByIdAdminInput {
+  iId: ID!
+}
+
+input getSeriesCustomPagesInput {
+  _id: ID!
+}
+
+input oSeoByIdInput {
+  iId: ID!
+}
+
+input oSeosByIdInput{
+ sSlug: String!
+}
+
+extend type Query {
+  generateSlugs(input: generateSlugInput!): generateSlugResponse
+  getSeoBySlug(input: oSlugInput): oCustomSeo
+  getSeosBySlug(input:oSeosByIdInput): [Seo]
+  listSeo(input: oListSeoInput): oListSeoResponse
+  getSeoData(input: oSlugData): Seo
+  getSeoById(input: oGetSeoByIdInput): oCustomSeo
+  oSeoById(input: oSeoByIdInput): Seo
+  getCategoryIdBySlug(input: oSlugInput): getCategoryIdBySlugResponse
+  getSeoByIdAdmin(input:oGetSeoByIdAdminInput!): Seo
+  getSeriesCustomPages(input: getSeriesCustomPagesInput): [Seo]
+  oSeo(iId: ID!): Seo
+  getSeosById(input: oSeoByIdInput!): [Seo]
+}

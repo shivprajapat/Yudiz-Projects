@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    tier: {{ .Values.labels.tier }}
+    app: {{ .Release.Name }}
+    release: {{ .Values.labels.release }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      annotations:
+        configmap.reloader.stakater.com/reload: {{ .Release.Name }}
+        secret.reloader.stakater.com/reload: "apikeys,mysql,jwt,aws-secrets,cashfree,mongodb"
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      # tolerations:
+      # - key: "ip"
+      #   value: "static" 
+      #   operator: "Equal"
+      #   effect: "NoSchedule"
+      # affinity:
+      #   nodeAffinity:
+      #     requiredDuringSchedulingIgnoredDuringExecution:
+      #       nodeSelectorTerms:
+      #       - matchExpressions:
+      #         - key: elasticip
+      #           operator: In
+      #           values:
+      #           - fantasy_node_payments   
+      {{- if .Values.imagePullSecrets.enabled }} 
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+      terminationGracePeriodSeconds: 120      
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.image }}
+        imagePullPolicy: Always
+        lifecycle:
+          preStop:
+            exec:
+              command:
+                - sh
+                - '-c'
+                - sleep 120         
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        - containerPort: {{ .Values.service.grpcport }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        
+        envFrom:
+        - secretRef:
+            name: apikeys
+        - secretRef:
+            name: mysql
+        - secretRef:
+            name: jwt
+        - secretRef:
+            name: aws-secrets
+        - secretRef:
+            name: cashfree
+        - secretRef:
+            name: mongodb
+        - configMapRef:
+            name: {{ .Release.Name }}

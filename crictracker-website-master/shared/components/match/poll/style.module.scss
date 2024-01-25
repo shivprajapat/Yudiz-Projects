@@ -1,0 +1,10 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.widgetTitle {
+    border-radius: 8px 8px 0px 0px;
+}
+
+.widgetVote {
+    border-radius: 0px 0px 8px 8px;
+}

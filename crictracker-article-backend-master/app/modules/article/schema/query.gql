@@ -1,0 +1,502 @@
+
+type FeaturedImage {
+  sText: String @shareable
+  sCaption: String @shareable
+  sAttribute: String @shareable
+  sUrl: String @shareable
+}
+
+type Categories {
+  aCategoryId: [ID]
+  iPrimaryId: ID
+}
+
+type AdvanceFeature {
+  bAllowComments: Boolean
+  bRequireAdminApproval: Boolean
+  bAmp: Boolean
+  bFBEnable: Boolean
+  bBrandedContent: Boolean
+  bExclusiveArticle: Boolean
+  bEditorsPick: Boolean
+  bAllowLike: Boolean
+}
+
+type Comment {
+  _id: ID                        
+  sMessage: String
+  iSenderId: ID
+  iReceiverId: ID
+  dSentDate: Date
+  aPic: [String]
+  oSender: subAdmin
+  oReceiver: subAdmin
+}
+
+type oSticky {
+  bHome: Boolean
+  bCategory: Boolean
+  bHomeCategory: Boolean
+}
+
+
+type Article @key(fields: "_id") {
+  _id:ID
+  sTitle: String
+  sSubtitle: String
+  sSrtTitle: String
+  sContent: String
+  sInsContent: String
+  sAmpContent: String
+  oImg: FeaturedImage
+  oTImg: FeaturedImage
+  iCategoryId: ID
+  oCategory: categoryGetData
+  aSeries: [oSeriesCategory]
+  aSecCategories: [ID]
+  aPlayer: [tagData]
+  aTeam: [tagData]
+  aVenue: [tagData]
+  aTags: [tagData]
+  sEditorNotes: String
+  oAdvanceFeature: AdvanceFeature
+  eState: ARTICLESTATES
+  eVisibility: eVisibilityEnum
+  bPriority: Boolean
+  dPublishDate: Date
+  dPublishDisplayDate: Date
+  nDuration: Int
+  oSeo: Seo
+  iAuthorDId: ID
+  iAuthorId: ID
+  iReviewerId: ID
+  oAuthor: subAdmin
+  oDisplayAuthor: subAdmin
+  oReviewer: subAdmin
+  nCommentCount: Int
+  sDescription: String
+  nClaps: Int
+  bOld: Boolean
+  dCreated: Date
+  dUpdated: Date
+  nViewCount: Int
+  oSticky: oSticky
+  iEventId: String
+  aPollId: [ID]
+  aPoll: [poll]
+}
+
+input oGetArticleInput {
+  _id: ID!
+} 
+
+input getArticleInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aState: [ARTICLESSTATES]!
+  aTagFilters: [ID]!
+  aCategoryFilters: [ID]!
+  aPublishDate: [String]!
+  aTeamTagFilters: [String]
+  aVenueTagFilters: [String]
+  aSeriesFilters: [String]
+  aAuthorsFilters: [String]
+}
+
+input oSearchArticleInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+type oCategoryData {
+  _id: ID
+  sName: String
+}
+
+type oCategoriesData {
+  aCategoryId: [oCategoryData]
+  iPrimaryId: ID
+}
+
+enum ARTICLESSTATES {
+  "all"
+  all
+  "draft"
+  d
+  "pending"
+  p
+  "rejeceted"
+  r
+  "changesRemaining"
+  cr
+  "changesSubmitted"
+  cs
+  "published"
+  pub
+  "trash"
+  t
+  "scheduled"
+  s
+  "mine articles"
+  mine
+}
+
+type oAdvanceDetail {
+  bAllowComments: Boolean
+  bRequireAdminApproval: Boolean
+  bAmp: Boolean
+  bFBEnable: Boolean
+  bBrandedContent: Boolean
+  bExclusiveArticle: Boolean
+  bEditorsPick: Boolean
+  bAllowLike: Boolean
+}
+
+type listArticles @key(fields: "_id") {
+  _id:ID
+  iAuthorDId: ID
+  iAuthorId: ID
+  iReviewerId: ID
+  sTitle: String
+  eState: ARTICLESSTATES
+  iCategoryId: ID
+  oCategory: categoryGetData
+  aSeries: [oSeriesCategory]
+  aPlayer: [tagData]
+  aTeam: [tagData]
+  aVenue: [tagData]
+  aTags: [tagData]
+  bPriority: Boolean
+  sSubtitle: String
+  sSrtTitle: String
+  sContent: String
+  oImg: FeaturedImage
+  oTImg: FeaturedImage
+  oSeo: Seo
+  oAuthorSeo: Seo
+  dCreated: Date
+  dUpdated: Date
+  oAuthor: subAdmin
+  oDisplayAuthor: subAdmin
+  oReviewer: subAdmin
+  dPublishDate: Date
+  dPublishDisplayDate: Date
+  oAdvanceFeature: oAdvanceDetail
+  sDescription: String
+  nViewCount: Int
+  nOViews: Int
+  eType: String
+  nDuration: Int
+  nClaps: Int
+  oListicleArticle: articlePaging
+  bIsListicleArticle: Boolean
+}
+
+type listArticleData {
+  nTotal: Int
+  aResults: [listArticles]
+}
+
+type ArticleCount {
+  nAll: Int
+  nPending: Int
+  nScheduled: Int
+  nChangeRequested: Int
+  nChangeSubmitted: Int
+  nDraft: Int
+  nPublished: Int
+  nRejected: Int
+  nTrash: Int
+  nMine: Int
+}
+
+input  listArticleCommentInput {
+  iArticleId: ID!
+  nSkip: Int!
+  nLimit: Int!
+  nOrder: Int
+}
+
+type listArticleCommentResponse {
+  nTotal: Int
+  aResults: [Comment]
+}
+
+type FrontArticle @key(fields: "_id"){
+  _id:ID
+  sTitle: String
+  sSubtitle: String
+  sSrtTitle: String
+  sContent: String
+  sInsContent: String
+  sAmpContent: String
+  oImg: FeaturedImage
+  oTImg: FeaturedImage
+  oCategory: oCategoryFront
+  aSeries: [oCategoryFront]
+  aPlayer: [oTagDataFront]
+  aTeam: [oTagDataFront]
+  aVenue: [oTagDataFront]
+  aTags: [oTagDataFront]
+  dPublishDate: Date
+  dModifiedDate: Date
+  dPublishDisplayDate: Date
+  nDuration: Int
+  nViewCount: Int
+  nOViews: Int
+  iAuthorDId: ID
+  iEventId: ID
+  oDisplayAuthor: subAdmin
+  nCommentCount: Int
+  sDescription: String
+  oSeo: Seo
+  dCreated: Date
+  dUpdated: Date
+  oAdvanceFeature: oAdvanceDetail
+  nClaps: Int
+  bIsBookmarked: Boolean
+  iBookmarkedId: ID
+  oListicleArticle: articlePaging
+  bIsListicleArticle: Boolean
+  bOld: Boolean
+  aPollId: [ID]
+  aPoll: [poll]
+}
+
+type getTopArticlesResponse {
+  nTotal: Int
+  aResults: [FrontArticle]
+}
+
+type articlePaging {
+  nTotal: Int
+  sMainContent: String
+  oAmpPageContent: [String]
+  oPageContent: [String]
+}
+
+type oTag {
+  _id: ID
+  sName: String
+  sContent: String
+}
+
+type listUserArticle {
+  nTotal: Int
+  aResults: [listArticles]
+}
+
+input oUserPaginationInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+input oListUserArticleInput {
+  iSeriesId: ID!
+  oArticleInput: oUserPaginationInput!
+}
+
+input oListUserTagArticleInput {
+  iPlayerId: ID!
+  oArticleInput: oUserPaginationInput!
+}
+
+type oSlug {
+  sSlug: String
+}
+
+type aArticle {
+  _id:ID
+  sTitle: String
+  sSubtitle: String
+  sSrtTitle: String
+  oImg: FeaturedImage
+  oTImg: FeaturedImage
+  oCategory: oSimpleCategory
+  dPublishDate: Date
+  dPublishDisplayDate: Date
+  nDuration: Int
+  sDescription: String
+  oSeo: oSlug
+  sType: String
+  iEventId: ID
+}
+
+type getHomePageArticleResponse {
+  nTotal: Int
+  aResults: [getHomePage]
+}
+extend type MiniScorecard @key(fields:"iMatchId") {
+  iMatchId: ID @external
+}
+
+type oGetSearchArticleResult {
+  aResults: [FrontArticle]
+}
+
+type getHomePage {
+  iCategoryId: ID
+  sName: String
+  iSeriesId: ID
+  eType: String
+  sSlug: String
+  bScoreCard: Boolean
+  aArticle: [aArticle]
+  oScore: MiniScorecard
+}
+
+input oListSimpleCategoryArticleInput {
+  iId: ID!
+  oArticleInput: oUserPaginationInput!
+}
+
+input getHomePageArticleInput {
+  nSkip: Int!
+  nLimit: Int!
+}
+
+input oGetPreviewArticleFrontInput {
+  _id: ID!
+}
+
+input getRssFeedInput {
+  sSlug: String!
+}
+
+
+input oListSeriesArticlesVideosFront {
+  iSeriesId: ID!
+  eType: CATEGORYCONTENT!
+  nSkip: Int
+  nLimit: Int
+  sSortBy: String
+  nOrder: Int
+}
+
+enum CATEGORYCONTENT {
+  "news"
+  n
+  "video"
+  v
+  "video & news"
+  vn
+}
+
+type oListArticlesVideosFront {
+  oArticles: listArticlesResponseType
+  oVideos: listVideosResponseType
+}
+
+
+type listArticlesResponseType {
+  nTotal: Int
+  aResults: [FrontArticle]
+}
+
+
+type listAuthorArticleResult {
+  nTotal: Int
+  aResults: [FrontArticle]
+}
+
+type listVideosResponseType {
+  nTotal: Int
+  aResults: [oVideoData]
+}
+
+input oListSimpleCategoryArticlesVideosFront {
+  iCategoryId: ID!
+  eType: CATEGORYCONTENT!
+  nSkip: Int
+  nLimit: Int
+  sSortBy: String
+  nOrder: Int
+}
+
+input authorArticleInput {
+  nSkip: Int!
+  nLimit: Int!
+  iAuthorDId: ID!
+}
+
+input oListTeamArticleInput {
+  iTeamId: ID!
+  nSkip: Int
+  nLimit: Int
+  sSortBy: String
+  nOrder: Int
+}
+
+type oListTeamArticleResult {
+  nTotal: Int
+  aResults: [FrontArticle]
+}
+
+input oGetRelatedStoriesIdInput {
+  iCategoryId: ID
+  iArticleId: ID
+  aTags: ID
+  aSeries: ID
+  aTeam: ID
+  aPlayer: ID
+  aVenue: ID
+}
+
+input oGetRealatedStoriesInput {
+  oGetRelatedStoriesIdInput: oGetRelatedStoriesIdInput
+  oPaginationInput: oUserPaginationInput!
+}
+
+type oGetRealatedStoriesResult {
+  aResults: [FrontArticle]
+}
+
+input getTopArticlesInput {
+  nSkip: Int!
+  nLimit: Int!
+}
+
+input randomArticlesInput {
+  nSample: Int!
+}
+
+input getArticleByIdInput {
+  id: Int!
+}
+
+type oGetArticleSearchResult {
+  aResults: [FrontArticle]
+}
+
+extend type Query {
+  getArticle(input:oGetArticleInput): Article
+  listArticle(input: getArticleInput): listArticleData
+  getArticleCounts: ArticleCount
+  listArticleComment(input:listArticleCommentInput): listArticleCommentResponse
+  getArticleFront(input:oGetArticleInput): FrontArticle
+  listUserArticle(input: oListUserArticleInput): listUserArticle
+  listSimpleCategoryArticle(input: oListSimpleCategoryArticleInput): listUserArticle
+  listUserTagArticle(input: oListUserTagArticleInput): listUserArticle
+  getHomePageArticle(input: getHomePageArticleInput): getHomePageArticleResponse
+  getPreviewArticleFront(input:oGetPreviewArticleFrontInput): FrontArticle
+  getArticleSearch(input: oSearchArticleInput): oGetArticleSearchResult
+  getRssFeed(input: getRssFeedInput): String
+  listSeriesArticlesVideosFront(input:oListSeriesArticlesVideosFront):oListArticlesVideosFront
+  listSimpleCategoryArticlesVideosFront(input:oListSimpleCategoryArticlesVideosFront):oListArticlesVideosFront
+  getAuthorArticles(input: authorArticleInput): listAuthorArticleResult
+  getArticleByTeam(input: oListTeamArticleInput): oListTeamArticleResult
+  getRelatedStories(input: oGetRealatedStoriesInput): oGetRealatedStoriesResult
+  getTopArticles(input: getTopArticlesInput): [FrontArticle]
+  randomArticles(input: randomArticlesInput): [FrontArticle]
+  getArticleById(input: getArticleByIdInput): FrontArticle
+  test: String
+}

@@ -1,0 +1,38 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+data:
+  PORT: '1338'
+  NODE_ENV: staging
+  # GRPC_HOST: 'fantasy-node-backend-stag-grpc.staging.svc.cluster.local'
+  # GRPC_PORT: '1339'
+  REDIS_HOST: 'redis-staging-master.staging.svc.cluster.local'
+  REDIS_PORT: '6379'
+  GRPC_SERVER_URI: '0.0.0.0:1339'
+  NODEBACKEND_TARGET_URI: 'fantasy-node-backend-staging-grpc.staging.svc.cluster.local:80'
+  ADMIN_TARGET_URI: 'fantasy-node-admin-staging-grpc.staging.svc.cluster.local:80'
+  STATISTICS_DB_POOLSIZE: ''
+  DB_SQL_NAME: fantasy_stag
+  # DB_SQL_USER: admin
+  DB_SQL_HOST: mysql-staging-headless
+  DB_SQL_PORT: ''
+  DB_SQL_HOST_REPLICA: ''
+  DB_SQL_DIALECT: mysql
+  DB_SQL_MIN_POOLSIZE: ''
+  DB_SQL_MAX_POOLSIZE: ''
+  CASHFREE_URL: https://test.cashfree.com
+  CASHFREE_APPID: 75766f425d7dd6b895948bd2f66757
+  CASHFREE_RETURN_URL: https://appstag.fantasywl.in/profile
+  CASHFREE_STABLE_URL: ''
+  CASHFREE_BASEURL: https://payout-gamma.cashfree.com
+  CASHFREE_CLIENTID: CF75766C494LPKPRI0BTG2EAV4G
+  AMAZONPAY_MERCHANT_ID: ''
+  AMAZONPAY_ACCESS_KEY: ''
+  AMAZONPAY_SECRET_KEY: ''
+  CASHFREE_MAIL_DEFAULT_ACCOUNT: ''
+  SENTRY_DSN: 'https://f9b9cbe448994647b39df3e26c9c1251@o1220141.ingest.sentry.io/6362906'
+  CRON_AUTH_ENABLED: "true"
+  USER_INFO_TARGET_URI: 'fantasy-node-user-informations-staging-grpc.staging.svc.cluster.local:80'
+  DEPLOY_HOST_URL: https://nodebackstag.fantasywl.in

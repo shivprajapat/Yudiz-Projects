@@ -1,0 +1,60 @@
+syntax = "proto3";
+
+message messageResponse {
+    string sMessage = 1;
+    int32 nStatus = 2;
+}
+ 
+message seriesCategoryOperationsInput {
+    string seriesParams = 1;
+}
+
+message assignLiveEventInput {
+    string iEventId = 1;
+    string iMatchId = 2;
+}
+
+message fantasyArticleValidationInput {
+    string iArticleId = 1;
+}
+
+message getPlayerByKeyInput { 
+    string sPlayerKey = 1;
+ }
+
+ message imageObj { 
+    string sText = 1;
+    string sCaption = 2;
+    string sAttribute = 3;
+    string sUrl = 4;
+  }
+
+  message getPlayerByKeyOutput { 
+    string iPlayerId = 1;
+    string sAbout = 2;
+    string sFullName = 3;
+    string sShortName = 4;
+    string sCountry = 5;
+    imageObj oImg = 6;
+    imageObj oJersey = 7;
+  }
+
+    message getTeamByKeyInput { 
+    string sTeamKey = 1;
+ }
+
+ message getTeamByKeyOutput { 
+    string iTeamId = 1;
+    string sTitle = 2;
+    string sAbbr = 3;
+    string sCountry = 4;
+    imageObj oImg = 5;
+}
+
+service MatchManagementService {
+    rpc seriesCategoryOperations(seriesCategoryOperationsInput) returns (messageResponse) {}
+    rpc assignLiveEventId(assignLiveEventInput) returns (messageResponse) {}
+    rpc fantasyArticleValidation(fantasyArticleValidationInput) returns (messageResponse) {}
+    rpc getPlayerByKey(getPlayerByKeyInput) returns (getPlayerByKeyOutput) {}
+    rpc getTeamByKey(getTeamByKeyInput) returns (getTeamByKeyOutput) {}
+}

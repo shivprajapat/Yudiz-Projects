@@ -1,0 +1,15 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item { border-radius: 8px; text-overflow: ellipsis; white-space: nowrap; overflow: hidden; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 767px) {
+}

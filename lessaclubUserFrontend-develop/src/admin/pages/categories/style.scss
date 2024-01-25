@@ -1,0 +1,27 @@
+.category-heading {
+  font-size: 1.5rem;
+  font-weight: 200;
+}
+
+.category-item {
+  padding: 1rem 2rem;
+  font-size: 1.3rem;
+  font-weight: 500;
+  border: 1px solid #c7ffbd;
+  .category-no {
+    display: inline-block;
+    text-align: center;
+    padding-top: 3px;
+    margin-right: 0.5rem;
+    font-size: 1rem;
+    background-color: #c7ffbd;
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    color: #171717;
+  }
+}
+
+.category-input {
+  width: 30rem;
+}

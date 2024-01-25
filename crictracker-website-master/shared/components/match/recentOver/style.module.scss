@@ -1,0 +1,21 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.label { padding-left: 20px; width: 100px; }
+.overSlider { width: calc(100% - 100px);}
+.list { border-left: 1px solid var(--border-light2); }
+.run { min-width: 28px; height: 28px; line-height: 26px; border: 1px solid var(--border-dark2); 
+  &.runPrimary { border-color: var(--theme-color-medium);}
+  &.over { line-height: 16px; }
+}
+
+@media (max-width: 991px) {
+  .label { padding-left: 6px; width: 50px; }
+  .overSlider { width: calc(100% - 54px);}
+  .run { min-width: 26px; height: 26px; line-height: 24px; }
+}
+
+@media (max-width: 575px) {
+  .recentOver { margin: 0 -12px 0px; border-radius: 0px; }
+  .overSlider { padding: 0px 0px 0px 8px; }
+}

@@ -1,0 +1,38 @@
+
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.headerMenu { padding: 8px 0px 6px; border-bottom: 1px solid var(--theme-light); background: var(--light-mode-bg); display: flex; white-space: nowrap;
+  ul { margin: 0px auto; padding: 0; display: flex; list-style: none; }
+  .navMore,
+  .navItem { margin-right: 8px; padding: 5px 8px; font-size: 12px; line-height: 16px; font-weight: 700; display: block; color: var(--theme-dark2); border-radius: 8px; text-transform: uppercase; 
+    &:hover { color: var(--theme-color-light); }
+  }
+  .navDropdDownItem { margin-right: 8px; padding: 0px 8px; font-size: 12px; line-height: 16px; font-weight: 700; display: block; border-radius: 8px; cursor: pointer; color: var(--theme-dark2);; 
+  }
+  .navItem.active { background: var(--theme-light); color: var(--theme-color-light); }
+  li:last-child .navItem,
+  li:last-child .navMore { margin-right: 0; }
+  .liveUpdate {
+    &::before { @extend %after-before; margin-right: 8px; position: relative; width: 7px; height: 7px; display: inline-block; border-radius: 50%; background: $danger; box-shadow: 0 0 0px 4px rgba($danger, 0.2); }
+  }
+  .dropdownMenu{display: none; padding: 10px 16px; position: absolute; top: 100%; left: 0px; background-color: var(--light-mode-bg); z-index: 99; 
+    a { display: block; padding: 10px 0; font-size: 13px; line-height: 18px; border-bottom: 1px solid var(--border-input); font-weight: 600;
+    }
+    li:last-child a { border: none;}
+  } 
+  .menu-item{cursor: pointer; font-size: 12px;
+    &:hover{color: var(--theme-color-light)}
+  } 
+  li { position: relative;}
+  li:hover .dropdownMenu{ display: block; box-shadow: 0px 0px 10px 0px rgba(133,129,129,0.3); -webkit-box-shadow: 0px 0px 10px 0px rgba(133,129,129,0.3);-moz-box-shadow: 0px 0px 10px 0px rgba(133,129,129,0.3); border-radius: 8px;}
+  li > span {cursor: pointer}
+  .arrowDown { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 4px solid var(--theme-dark2); }
+  .dropDownItem{ display: flex; align-items: center; gap: 4px; }
+}
+
+@media (max-width: 991px) {
+  .headerMenu { overflow: auto; overflow-y: hidden;
+    .dropdownMenu { position: fixed; width: 94%; left: 3%; top: auto; }
+  }
+}

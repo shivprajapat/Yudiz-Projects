@@ -1,0 +1,81 @@
+replicaCount: 2
+
+image: 693583001687.dkr.ecr.ap-south-1.amazonaws.com/crictracker-website-dev:latest
+
+labels:
+  tier: frontend
+  release: blue-green
+  environment: development
+
+namespace: dev
+
+service:
+  type: NodePort
+  port: 3000
+  healthcheck: /api/health-check/
+
+resources:
+  requests:
+    cpu: "100m"
+    memory: "100Mi"
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
+
+livenessProbe:
+  httpGet:
+    path: /api/health-check/
+    port: 3000
+    scheme: HTTP
+  initialDelaySeconds: 5
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+
+readinessProbe:
+  httpGet:
+    path: /api/health-check/
+    port: 3000
+    scheme: HTTP
+  initialDelaySeconds: 5
+  timeoutSeconds: 30
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+  
+startupProbe:
+  httpGet:
+    path: /api/health-check/
+    port: 3000
+    scheme: HTTP
+  initialDelaySeconds: 40
+  timeoutSeconds: 30
+  periodSeconds: 5
+  successThreshold: 1
+  failureThreshold: 3
+
+autoscaling:
+  enabled: true
+  minReplicas: "2"
+  maxReplicas: "10"
+  targetCPU: "60"
+
+#Because we are using our private docker registry deployed in Kubernetes if you are using AWS(ECR) than you can disable this.
+imagePullSecrets:
+  enabled: false
+  name: regcred
+
+terminationGracePeriodSeconds: 50
+podprestophook:
+  enabled: true
+
+tolerations:
+  - key: env
+    effect: "NoSchedule"
+    operator: Equal
+    value: spot
+  - key: node.kubernetes.io/not-ready
+    operator: "Exists"
+    effect: NoExecute
+    tolerationSeconds: 0  

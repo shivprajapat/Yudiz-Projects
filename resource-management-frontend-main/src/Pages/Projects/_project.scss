@@ -1,0 +1,41 @@
+@import '../../Assets/Style/_variables';
+.project-section {
+  .project-tabs .nav-item {
+    flex: 0 0 31%;
+  }
+  .datatable_container {
+    padding-bottom: 5px;
+  }
+  // .datatable {
+  //   .table-icons,
+  //   .action-td {
+  //     text-align: center !important;
+  //   }
+  //   .table-icons span {
+  //     cursor: pointer;
+  //   }
+  //   tr:last-child {
+  //     border-bottom: 0;
+  //   }
+  // }
+}
+
+@media (max-width: 576px) {
+  .project-sec {
+    .fs-4 {
+      font-size: 15px !important;
+    }
+    .btn.btn-border {
+      padding: 5px 6px;
+    }
+    .fs-6 {
+      font-size: 14px !important;
+    }
+  }
+}
+.status-dot {
+  height: 10px;
+  width: 10px;
+  padding: 0;
+  border-radius: 50px;
+}

@@ -1,0 +1,61 @@
+.admin-settings__sidebar {
+    flex: 1;
+    height: 78.5vh;
+    background-color: #555;
+    border-radius: 4px;
+    overflow: scroll;
+}
+
+.admin-settings__details {
+    flex: 4;
+}
+
+.admin-settings__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    border-radius: 5px;
+}
+
+
+
+.items-link {
+    color: inherit;
+    display: block;
+    text-align: center;
+    padding: .8rem 0rem;
+    font-size: 1.3rem;
+    font-weight: lighter;
+    letter-spacing: 1px;
+    border-bottom: 1px solid rgb(173, 149, 149);
+}
+
+.admin-settings__list .active {
+    background-color: #555;
+}
+
+.items-link:hover {
+    background-color: #777;
+    color: #fff;
+}
+
+.scrollable {
+    height: 78.5vh;
+    overflow-y: scroll;
+}
+
+.nav-item {
+    font-size: 1.2rem;
+    text-align: center;
+    padding: .3rem 0;
+}
+.nav-pills .nav-link{
+  color: white;
+}
+.nav-pills .nav-link.active,
+.nav-pills .show>.nav-link {
+  background-color: #d2fcc3;
+  color: #000;
+}

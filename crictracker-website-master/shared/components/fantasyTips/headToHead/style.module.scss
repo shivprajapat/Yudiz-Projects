@@ -1,0 +1,20 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.headToHead { background: var(--theme-light2); } 
+.score { padding: 4px 20px; border: 1px solid var(--light); }
+.item { padding: 8px 12px; border-bottom: 1px solid rgba(var(--bs-primary-rgb), 0.2);
+    &.head { border-bottom: 2px solid var(--light-color); }
+    &:last-child { border: none; }
+}
+.flag { width: 42px; }
+.compare { width: 90%; }
+.team { height: 20px; background: var(--theme-medium);
+    &.winner { background: $theme-color; }
+}
+.team1 { border-radius: 2em 0 0 2em; }
+.team2 { border-radius: 0px 2em 2em 0; }
+
+@media (max-width: 767px) {
+    .team { height: 12px; }
+}

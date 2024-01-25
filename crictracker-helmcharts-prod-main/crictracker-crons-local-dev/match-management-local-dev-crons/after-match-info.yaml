@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: after-match-info
+  namespace: local-dev
+spec:
+  schedule: "*/3 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://matchmanage-dev.crictracker.ml/api/after-match-info'
+            image: curlimages/curl
+            name: after-match-info
+          restartPolicy: OnFailure

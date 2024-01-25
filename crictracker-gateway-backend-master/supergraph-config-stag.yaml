@@ -1,0 +1,29 @@
+subgraphs:
+  admins:
+    routing_url: https://auth-stag.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://auth-stag.crictracker.ml/graphql
+  article: 
+    routing_url: https://article-stag.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://article-stag.crictracker.ml/graphql
+  seo: 
+    routing_url: https://seo-stag.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://seo-stag.crictracker.ml/graphql
+  match-management: 
+    routing_url: https://matchmanage-stag.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://matchmanage-stag.crictracker.ml/graphql
+  help: 
+    routing_url: https://help-stag.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://help-stag.crictracker.ml/graphql
+  global-widget: 
+    routing_url: https://globalwidget-stag.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://globalwidget-stag.crictracker.ml/graphql
+  career: 
+    routing_url: https://career-stag.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://career-stag.crictracker.ml/graphql

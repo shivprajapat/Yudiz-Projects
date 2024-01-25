@@ -1,0 +1,114 @@
+@import 'assets/scss/helper/variables';
+
+.profile-banner{padding: 0px 25px;
+    .profile-ban-img{width: 100%; height: 262px; object-fit: cover;}
+    .profile-banner-content{ padding-top: 40px; margin-left: 130px;
+        .banner-left-image{position: relative; width: 200px; height: 200px; border-radius: 50%; margin-top: -145px;
+            .user-img{width: 100%; height: 100%; object-fit: cover;}
+            .tick-img{width: 62px; position: absolute; bottom: 0px; right: 0px; display: none;}
+            &.checkStar{
+                .tick-img{display: block;}
+            }
+        }
+        .banner-right-content{ margin-left: 88px; width: 438px;
+            
+            h4{font-size: 40px; line-height: 48px; margin-bottom: 10px;font-weight: 400;}
+            span{font-size: 20px; line-height: 28px; margin-bottom: 24px; display: block;}
+            p{font-size: 20px; line-height: 28px; margin-bottom: 0px;color: $grey-color;}
+            ul{list-style: none; margin: 24px 0px 0px 0px; padding: 0px;
+                li{ margin: 0px 6px;
+                    &:first-child{margin-left: 0px;}
+                    &:last-child{margin-right: 0px;}
+                    a{width: 44px; height: 44px; border-radius: 50%; background: $bg-primary; @include flexbox; @include justify-content(center); @include align-items(center);
+                        img{width: 18px;}
+                        &:hover{background: $white;
+                            img{-webkit-filter: invert(100%); /* Safari/Chrome */
+                                filter: invert(100%);}
+                        }
+                    }
+                }
+            }
+            .profile-banner-btn{margin-top: 30px;}
+        }
+    } 
+}
+
+@media(min-width: 1400px) and (max-width: 1699px) {
+    .profile-banner{padding: 0px 17px;
+        .profile-banner-content{
+            .banner-left-image{width: 180px; height: 180px; margin-top: -135px;}
+            .banner-right-content{
+                h4{font-size: 38px; line-height: 46px; margin-bottom: 8px;}
+                span{font-size: 18px; line-height: 26px; margin-bottom: 20px;}
+                p{font-size: 18px; line-height: 28px;}
+            }
+            
+        }
+    }
+}
+
+@media(min-width: 1200px) and (max-width: 1399px) {
+    .profile-banner{padding: 0px 12px;
+        .profile-banner-content{
+            .banner-left-image{width: 160px; height: 160px; margin-top: -135px;
+                .tick-img{width: 48px;}
+            }
+            .banner-right-content{ margin-left: 68px;
+                h4{font-size: 36px; line-height: 44px; margin-bottom: 8px;}
+                span{font-size: 18px; line-height: 26px; margin-bottom: 20px;}
+                p{font-size: 18px; line-height: 28px;}
+            }
+        }
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1199px) {
+    .profile-banner{padding: 0px 12px;
+        .profile-banner-content{
+            .banner-left-image{width: 120px; height: 120px; margin-top: -106px;
+                .tick-img{width: 38px;}
+            }
+            .banner-right-content{ margin-left: 68px;
+                h4{font-size: 36px; line-height: 44px; margin-bottom: 8px;}
+                span{font-size: 18px; line-height: 26px; margin-bottom: 20px;}
+                p{font-size: 18px; line-height: 28px;}
+            }
+        }
+    }
+}
+
+@media(min-width: 768px) and (max-width: 991px) {
+    .profile-banner{padding: 0px 12px;
+        .profile-banner-content{
+            .banner-left-image{width: 120px; height: 120px; margin-top: -106px;
+                .tick-img{width: 38px;}
+            }
+            .banner-right-content{ margin-left: 68px; width: 400px;
+                h4{font-size: 36px; line-height: 44px; margin-bottom: 8px;}
+                span{font-size: 18px; line-height: 26px; margin-bottom: 20px;}
+                p{font-size: 18px; line-height: 28px;}
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .profile-banner{padding: 0px;
+        .profile-banner-content{margin: 0px; @include flex-direction(column);
+            .banner-left-image{width: 120px; height: 120px; margin: -106px 0px 0px 20px;
+                .tick-img{width: 38px;}
+            }
+            .banner-right-content{ margin-left: 0px; margin-top: 40px; width: 100%; padding: 0px 20px;
+                ul{
+                    li{ margin: 0px 4px;
+                        a{width: 38px; height: 38px;}
+                    }
+                }
+
+                h4{font-size: 36px; line-height: 44px; margin-bottom: 8px;}
+                span{font-size: 18px; line-height: 26px; margin-bottom: 20px;}
+                p{font-size: 18px; line-height: 28px;}
+            }
+        }
+    }
+}

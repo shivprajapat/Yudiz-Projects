@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package notifications;
+
+service Notifications{
+    rpc findNotificationMessage(messageRequest) returns (messageResponse) {}
+    rpc findNotificationType(topicRequest) returns (dataResponse) {}
+    rpc addNotificationMessage(addNotificationRequest) returns (emptyResponse) {}
+}
+message messageRequest{
+    string eKey =1;
+}
+message topicRequest{
+    string sHeading =1;
+}
+message dataResponse{
+    string data =1;
+}
+message addNotificationRequest{
+    string iUserId=1;
+    string sTitle=2;
+    string sMessage=3;
+    string iType=4;
+}
+message emptyResponse{
+}
+message messageResponse{ 
+    bool bEnableNotifications=1;
+    string sHeading=2;
+    string sDescription=3;
+    string ePlatform=4;
+}

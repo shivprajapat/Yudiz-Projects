@@ -1,0 +1,12 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.matchInfoBlock {
+    section { padding-top: 0; }
+}
+/***** Responsive CSS Start ******/
+@media (min-width: 768px) {
+}
+@media (max-width: 767px) {
+       
+}

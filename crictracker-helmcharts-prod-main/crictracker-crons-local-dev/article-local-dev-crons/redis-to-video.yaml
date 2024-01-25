@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: redis-to-video
+  namespace: local-dev
+spec:
+  schedule: "*/60 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://article-dev.crictracker.ml/api/viewcount/redis-to-video'
+            image: curlimages/curl
+            name: redis-to-video
+          restartPolicy: OnFailure

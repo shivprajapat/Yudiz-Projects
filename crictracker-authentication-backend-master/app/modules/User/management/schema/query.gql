@@ -1,0 +1,36 @@
+enum UserActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "delete"
+  d
+}
+
+input oListUsersInput {
+    eStatus: UserActionStatus
+    sSearch: String
+    nLimit: Int!
+    nSkip: Int!
+    nOrder: Int
+    sSortBy: String
+}
+
+type oListUsersResponse {
+    nTotal: Int
+    aResults: [user]
+}
+
+input oViewUserDetailInput {
+    iId: ID!
+}
+
+type oViewUserDetailResponse {
+    sMessage: String
+    oData: user
+}
+
+extend type Query {
+    listUsers(input: oListUsersInput): oListUsersResponse
+    viewUserDetail(input: oViewUserDetailInput!): oViewUserDetailResponse
+}

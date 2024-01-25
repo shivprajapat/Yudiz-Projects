@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Craftroots_Assistance::manager" title="Get Styling Assistance Grid" module="Craftroots_Assistance" sortOrder="40" resource="Craftroots_Assistance::manager" parent="Craftroots_Base::manager"/>
+        <add id="Craftroots_Assistance::add_row" title="Assistance" module="Craftroots_Assistance" sortOrder="40" parent="Craftroots_Assistance::manager" action="assistance/assistance" resource="Craftroots_Assistance::add_row"/>
+        <add id="Craftroots_Assistance::configuration" title="Configuration" module="Craftroots_Assistance" sortOrder="1000" action="adminhtml/system_config/edit/section/assistance" resource="Craftroots_Assistance::configuration" parent="Craftroots_Assistance::add_row"/>
+    </menu>
+</config>

@@ -1,0 +1,15 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/mixins.scss';
+
+.modalHeader { padding: 20px 16px; border: none; }
+.modalBody { padding: 0px 16px 28px; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+  .logoBlock { max-width: 120px; }
+}
+
+@media (max-width: 575px) {
+
+}

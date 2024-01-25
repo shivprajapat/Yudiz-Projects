@@ -1,0 +1,27 @@
+@import '@assets/scss/variables.scss';
+.banner-wrapper {
+    position: relative;
+    background: $theme-color;
+    color: $light-color;
+    @media (min-width: 768px) {
+        min-height: 250px;
+    }
+    .bg-image-wrapper {
+        > span {
+            width: 200% !important;
+        }
+    }
+    .side-image-wrapper {
+        position: relative;
+        .side-image {
+            > span {
+                position: absolute !important;
+                width: 100% !important;
+                top: 0;
+                @media (min-width: 768px) {
+                    top: -1rem
+                }
+            }
+        }
+    }
+}

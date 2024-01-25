@@ -1,0 +1,21 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.profileSidebar { width: 190px; border-radius: 16px 0 0 0; } 
+.profilePic {
+  img { object-fit: cover;}
+}
+.changeBtn { cursor: pointer;
+  input { z-index: 2; cursor: pointer; }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+  .profileSidebar { width: 180px; }
+}
+
+@media (max-width: 575px) {
+  .profileSidebar { width: 100%; }
+  .profilePic { width: 120px; border-radius: 12px;}
+}

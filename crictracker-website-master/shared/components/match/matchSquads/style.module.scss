@@ -1,0 +1,43 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.squadBody { margin: 8px 0; padding: 0;
+  .item { padding: 10px 12px; width: 50%; background: var(--light-mode-bg); border: 0px solid var(--theme-bg); border-bottom-width: 1px; 
+    &:nth-last-child(1),
+    &:nth-last-child(2) { border-bottom-width: 0;}
+    &:nth-child(odd) { border-right-width: 1px; }
+  }
+  .reserve { margin: 16px 0 8px; color: $border-dark2; }
+}
+.matchSquads {
+  .squadHead {
+    button[aria-expanded="true"],
+    button { background: $secondary; color: #fff; border-color: $secondary; }
+    button { padding: 9px 12px;
+      &::after { @include filter(brightness(0) invert(1)); }
+    }
+  }
+  .captain { width: 20px; height: 20px; line-height: 20px; }
+}
+.icon {
+  path { fill: var(--font-light); }
+}
+@media (max-width: 1199px) {
+ 
+}
+
+@media (max-width: 991px) {
+  .squadBody { 
+    .item { width: 100%;
+      &:nth-last-child(2) { border-bottom-width: 1px;}
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .matchSquads {
+    .squadHead {
+      button { margin: 0px -15px; width: calc(100% + 30px); border-radius: 0 !important; }
+    }
+  }
+}

@@ -1,0 +1,189 @@
+type location {
+  _id: ID!
+  sTitle: String!
+}
+
+extend type subAdmin @key(fields: "_id"){
+  _id: ID @external
+}
+
+type jobLocationData {
+    _id: ID
+    sTitle: String
+}
+
+type jobGetData @key(fields: "_id") {
+  _id: ID!
+  sTitle: String!
+  eDesignation: eDesignation
+  oLocation: jobLocationData
+  eOpeningFor: eOpeningFor
+  fExperienceFrom: Float
+  fExperienceTo: Float
+  fSalaryFrom: Float
+  fSalaryTo: Float
+  nOpenPositions: Int
+  sDescription: String
+  oSubAdmin: subAdmin
+  eStatus: String
+  nEnquiryCount: Int
+  dCreated: String
+  dUpdated: String
+  oSeo: Seo
+}
+
+enum ESEOSUBTYPE {
+  "news"
+  n
+  "videos"
+  v
+  "fixtures"
+  f
+  "standings"
+  s
+  "stats"
+  st
+  "teams"
+  t
+  "squads"
+  sq
+  "archives"
+  ar
+  "fantasy tips"
+  ft
+  "score card"
+  sc
+  "overs"
+  o
+  "fixtures-and-results"
+  far
+  "results"
+  r
+  "commentary"
+  c
+  "upcoming"
+  u
+  "photos"
+  p
+  "batting-highest-strikerate-innings"
+  stBhsi
+  "batting-highest-average"
+  stBha
+  "batting-highest-strikerate"
+  stBhs
+  "batting-most-centuries"
+  stBmc
+  "batting-most-run6-innings"
+  stBmr6i
+  "batting-most-fours"
+  stBm4
+  "batting-most-run4-innings"
+  stBmr4i
+  "batting-most-runs"
+  stBmr
+  "batting-most-runs-innings"
+  stBmri
+  "batting-most-run50"
+  stBmr50
+  "batting-most-sixes"
+  stBms
+  "bowling-top-wicket-takers"
+  stBtwt
+  "bowling-best-economy-rates-innings"
+  stBberi
+  "bowling-best-averages"
+  stBba
+  "bowling-best-economy-rates"
+  stBber
+  "bowling-best-strike-rates"
+  stBbsr
+  "bowling-best-strike-rates-innings"
+  stBbsri
+  "bowling-five-wickets"
+  stBfiw
+  "bowling-best-bowling-figures"
+  stBbbf
+  "bowling-most-runs-conceded-innings"
+  stBmrci
+  "bowling-four-wickets"
+  stBfow
+  "bowling-maidens"
+  stBm
+  "team-total-runs"
+  stTtr
+  "team-total-run100"
+  stTtr100
+  "team-total-wickets"
+  stTtw
+  "batting-most-fifties"
+  stBmf
+}
+
+extend type Seo @key(fields: "iId eSubType") {
+  iId: ID @external
+  eSubType: ESEOSUBTYPE @external
+}
+type jobFrontGetData @key(fields: "_id") {
+  _id: ID 
+  sTitle: String! 
+  eDesignation: eDesignation 
+  oLocation: jobLocationData 
+  eOpeningFor: eOpeningFor 
+  fExperienceFrom: Float 
+  fExperienceTo: Float 
+  fSalaryFrom: Float 
+  fSalaryTo: Float 
+  nOpenPositions: Int 
+  sDescription: String 
+  dCreated: String 
+  dUpdated: String 
+  oSeo: Seo
+}
+
+
+type getJobData {
+  nTotal: Int
+  aResults: [jobGetData]
+}
+
+type getFrontJobData {
+  nTotal: Int
+  aResults: [jobFrontGetData]
+}
+
+type getRelatedJobData {
+  nTotal: Int
+  aResults: [jobFrontGetData]
+}
+
+input getJobInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  eDesignation: [eDesignation]
+}
+
+input getRelatedJobInput {
+  _id: ID!
+  nSkip: Int!
+  nLimit: Int!
+}
+
+input getJobById {
+  _id: ID!
+}
+
+input getJobBySlug {
+  sSlug: String!
+}
+
+extend type Query {
+  getJobs(input: getJobInput!): getJobData
+  getJobById(input:getJobById): jobGetData
+  getLocations: [location!]!
+  getFrontJobs(input: getJobInput!): getFrontJobData
+  getFrontJobById(input:getJobById): jobFrontGetData
+  getRelatedJobs(input: getRelatedJobInput!): getRelatedJobData
+}

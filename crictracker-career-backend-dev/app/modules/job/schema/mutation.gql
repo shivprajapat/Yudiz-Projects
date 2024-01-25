@@ -1,0 +1,113 @@
+
+input jobInput {
+  sTitle: String!
+  eDesignation: eDesignation!
+  iLocationId: ID!
+  eOpeningFor: eOpeningFor!
+  fExperienceFrom: Float!
+  fExperienceTo: Float!
+  fSalaryFrom: Float
+  fSalaryTo: Float
+  "Number of open positions for job"
+  nOpenPositions: Int!
+  sDescription: String!
+}
+
+input addJobInput {
+  jobInput: jobInput
+}
+
+input deleteJob {
+  _id:ID!
+}
+
+input editJobInput {
+  _id: ID!
+  jobInput: jobInput
+}
+
+type addJobResponse {
+  oData: jobGetData
+  sMessage: String!
+}
+
+type deleteJobResponse {
+  sMessage:String!
+}
+
+enum eDesignation {
+  "Content Manager"
+  cm
+  "Content Writer"
+  cw
+  "Editor"
+  ed
+  "Human Resource"
+  hr
+  "SEO"
+  s
+  "Social Media"
+  sm
+  "Video Editor"
+  vd
+  "Graphics"
+  gr
+  "Sales"
+  sl
+  "Digital Marketing"
+  dm
+  "Business Development"
+  bd
+  "Brands Manager"
+  bm
+  "Growth Hack"
+  gh
+  "Revenue Manager"
+  rm
+  "Animator"
+  an
+  "Chief Operating Officer"
+  coo
+  "Staff Writer"
+  sw
+}
+
+enum eOpeningFor {
+  "Work from home"
+  wfh
+  "Work from office"
+  wfo
+  "Anywhere (office/home)"
+  wfa
+}
+
+enum JobActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+type editJobResponse {
+  oData: jobGetData
+  sMessage: String!
+}
+
+input bulkJobActionInput {
+  aId: [ID]
+  eStatus: JobActionStatus
+}
+
+type updateJobStatusResponse {
+  sMessage: String!
+}
+
+
+extend type Mutation {
+  addJob(input: addJobInput): addJobResponse!
+  editJob(input: editJobInput): editJobResponse
+  bulkJobUpdate(input: bulkJobActionInput): updateJobStatusResponse
+  deleteJob(input: deleteJob): deleteJobResponse @deprecated(reason: "Use bulkJobUpdate Mutation")
+}

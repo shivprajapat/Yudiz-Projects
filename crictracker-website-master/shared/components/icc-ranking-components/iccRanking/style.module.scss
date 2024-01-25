@@ -1,0 +1,16 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.icon {
+    width: 32px;
+    margin-right: 12px;
+}
+.rank {
+    width: 40px;
+}
+
+@media (max-width: 1199px) {
+    .rank {
+        width: 32px;
+    }
+}

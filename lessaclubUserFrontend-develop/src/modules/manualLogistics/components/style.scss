@@ -1,0 +1,201 @@
+@import 'assets/scss/helper/variables.scss';
+
+.logistics-button {
+  @include transition(all 0.5s);
+  font-size: 20px;
+  line-height: 28px;
+  width: fit-content;
+  margin: 10px 0px;
+  display: block;
+  padding: 9px 20px 5px;
+  text-transform: capitalize;
+  background: $theme-color;
+  color: $grey-color;
+  border-radius: 6px;
+
+  &:hover {
+    color: $theme-color;
+    background: $white;
+    cursor: pointer;
+  }
+}
+
+.manual-logistics {
+  margin: 0 10px;
+
+  .status-name {
+    font-size: 20px;
+  }
+
+  .file-input-group {
+    position: relative;
+
+    .file-input {
+      opacity: 0;
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      z-index: 3;
+      top: 0;
+      left: 0;
+      cursor: pointer;
+    }
+
+    .upload-button {
+      transition: all 0.5s;
+      font-size: 18px;
+      line-height: 28px;
+      width: -moz-fit-content;
+      width: 90%;
+      max-width: 200px;
+      display: block;
+      margin: 0px auto 22px;
+      padding: 10px;
+      text-transform: capitalize;
+      position: relative;
+      text-align: center;
+      z-index: 1;
+      background: $theme-color;
+      color: $grey-color;
+      border-radius: 6px;
+    }
+
+    .invalidFeedback {
+      text-align: center;
+    }
+
+    &:hover {
+      .upload-button {
+        color: $theme-color;
+        background: $white;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .image-box {
+    height: 200px;
+    width: 100%;
+    text-align: center;
+    border: 1px dashed #dddddd;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    padding: 10px;
+
+    img {
+      object-fit: contain;
+      max-width: 100%;
+      max-height: 100%;
+    }
+  }
+
+  .dropD {
+    z-index: 5;
+  }
+}
+
+.set-logistics {
+  display: inline-block;
+  color: #fff;
+  background: #000;
+  width: 200px;
+  margin-left: 10px;
+  outline: none !important;
+  border: none;
+}
+
+
+.progress-container {
+  padding: 10px 0px;
+
+  .label {
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+
+  .progress-wrapper {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid white;
+    width: 100%;
+    align-items: baseline;
+
+    div {
+      color: #dddddd;
+      padding: 10px;
+      font-size: 12px;
+      position: relative;
+      text-align: center;
+
+      &.active {
+        color: #fff;
+        font-size: 13px;
+        font-weight: 400;
+
+        &:after {
+          background: #fff;
+        }
+      }
+
+      &:after {
+        content: '';
+        height: 10px;
+        width: 10px;
+        border-radius: 100%;
+        border: 1px solid white;
+        position: absolute;
+        top: -5px;
+        margin-left: -5px;
+        left: 50%;
+        background: #171717;
+      }
+    }
+  }
+
+  @media (min-width : 768px) {
+    .progress-wrapper {
+      div {
+        &:first-child {
+          padding-left: 0;
+          text-align: left;
+
+          &:after {
+            left: 0;
+          }
+        }
+
+        &:last-child {
+          padding-right: 0;
+          text-align: right;
+
+          &:after {
+            right: 0;
+            left: auto;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    .progress-wrapper {
+      border: none;
+      display: block;
+
+      div {
+        text-align: left;
+        padding: 0px;
+        opacity: .8;
+
+        &.active {
+          opacity: 1;
+          color: aqua
+        }
+
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+}

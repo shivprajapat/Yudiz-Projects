@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: update-news-sitemap
+  namespace: production
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://migrations.crictracker.com/api/article/update-news-sitemap'
+            image: curlimages/curl
+            name: update-news-sitemap
+          restartPolicy: OnFailure

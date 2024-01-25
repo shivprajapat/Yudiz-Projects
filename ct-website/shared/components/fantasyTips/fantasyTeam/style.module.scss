@@ -1,0 +1,64 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.toss { background: var(--theme-bg); border-radius: 8px;
+    .icon { width: 28px; }
+}
+.teamSlider { margin: 0px 34px; }
+.fantasyTeam {
+    .nav { background: $theme-light; 
+        a { color: $theme-color; }
+        .active {
+            a:hover,
+            a { background: $theme-color; color: #fff;}
+        }  
+    }
+}
+.teamBlock { background: $light; border-radius: 32px; }
+.info { padding: 12px 24px 8px; 
+    > p { width: 30%; }
+}
+.team { margin-bottom: 8px; padding: 8px 16px 24px; background: $success url(../../../../assets/images/icon/cricket-ground.svg) no-repeat center center / cover; border-radius: 32px; }
+.label { letter-spacing: 1px; opacity: 0.56; }
+.player { width: 84px; position: relative;
+    .playerImg { width: 58px; }
+    img { border-radius: 50%; }
+}
+.tag { width: 22px; height: 22px; line-height: 22px; position: absolute; left: -2px; top: -2px;}
+.name { width: 100%; margin-top: -6px; padding: 4px; position: relative; font-size: 11px; line-height: 13px; background: #fff; border-radius: 3px; }
+.predictions { margin-top: -15px; margin-right: 62px;
+    svg { margin-right: 4px;}
+    :hover path { fill: $theme-color; }
+}
+/***** Responsive CSS Start ******/
+@media (min-width: 768px) {
+    .fantasyTeam { padding: 12px; border: 1px solid $light; border-radius: 16px; }
+}
+
+@media (max-width: 767px) {
+    .teamSlider { margin: 0px 10px; }
+    .team,
+    .teamBlock { border-radius: 16px; }
+    .team { padding: 8px 8px 16px; }
+    .info { padding-left: 12px; padding-right: 12px;
+        > p { font-size: 12px; }
+    }
+    .playerList { margin-left: -3px; margin-right: -3px; min-width: calc(100% + 6px); }
+    .player {
+        .playerImg { width: 48px; }
+    }
+    .tag { width: 20px; height: 20px; line-height: 20px; }
+    .predictions { margin-right: 20px; }
+}
+
+@media (max-width: 575px) {
+    .player { width: 64px; }
+    .name { font-size: 10px; line-height: 12px; }
+}
+
+@media (max-width: 374px) {
+    .player { width: 58px; }
+}
+
+
+

@@ -1,0 +1,44 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.fantasySection { color: var(--font-secondary);
+  :last-child { margin-bottom: 0; }
+  table { border-collapse: separate !important; font-size: 14px; line-height: 20px;
+    tbody tr:first-child td { background: $theme-color; color: #fff; font-weight: 600; text-transform: capitalize;}
+    td { background: var(--theme-bg); width: auto; }
+  }
+}
+.itemTitle { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid $light; }
+.sectionNav { margin-left: -4px; margin-right: -4px;
+  a { margin-left: 4px; margin-right: 4px; flex: 1; -webkit-flex: 1; }
+  .icon { width: 24px; }
+}
+.iframeVideo { max-width: 520px; border-radius: 16px; overflow: hidden;}
+.tagList { margin: 0px -4px; 
+  span { margin: 4px; padding: 4px 16px; font-weight: 600; }
+}
+
+@media (max-width: 1399px) {
+  
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+  .tagList {
+    overflow-x: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .sectionNav {
+    button { padding: 7px 12px; }
+  }
+}
+
+@media (max-width: 767px) {
+  .tagList {  margin: 0px -6px; 
+    span { margin: 4px 6px; }
+  }
+}

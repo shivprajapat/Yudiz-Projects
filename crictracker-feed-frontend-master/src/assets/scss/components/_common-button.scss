@@ -1,0 +1,23 @@
+.common-btn, .common-btn-secondary {
+  margin: 20px 10px 20px 0px;
+  color: $primary-100 !important;
+  border: none;
+  border-radius: 8px !important;
+}
+.common-btn{
+  background-color: $primary-400 !important;
+}
+.common-btn-secondary {
+  background-color: $black-600 !important;
+}
+.filter-btn-container {
+  display: flex;
+  justify-content: flex-end;
+  .common-btn {
+    margin: 0px 0px 0px 5px;
+    color: $primary-100 !important;
+    border: none;
+    border-radius: 8px !important;
+    background-color: $primary-400 !important;
+  }
+}

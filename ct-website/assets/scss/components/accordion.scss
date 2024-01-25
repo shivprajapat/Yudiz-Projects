@@ -1,0 +1,22 @@
+/* Accordion CSS */
+.accordion-item { margin-bottom: 16px; background: transparent; border: none; font-size: 14px; line-height: 24px; font-weight: 600;
+  .accordion-header { font-size: inherit; line-height: inherit; font-weight: inherit; }
+  .accordion-button { padding: 8px; font-size: inherit; font-weight: inherit; color: $font-color; border: 1px solid $light-bg; @include box-shadow(none); border-radius: 8px;
+    &:not(.collapsed) { background: $theme-light; color: inherit; 
+        &::after { @include transform(rotate(90deg));}
+    }
+    &.collapsed { border-radius: 8px;}
+    .icon { margin-right: 8px; width: 28px; height: 28px; background: $theme-medium; border-radius: 4px; }
+    &::after { width: 24px; height: 24px; background: url(../../images/icon/right-arrow.svg) no-repeat center center / cover;}
+  }
+  &:last-of-type .accordion-button,
+  &:last-of-type .accordion-button.collapsed,
+  &:first-of-type .accordion-button { border-radius: 8px;}
+}
+.accordion-body { margin-top: -8px; padding: 12px 0 8px; background: $light-bg;
+  button { margin: 4px 0; padding: 8px 8px 8px 10px; width: 100%; font-size: inherit; line-height: inherit; font-weight: inherit; color: inherit; text-align: left; }
+}
+
+@media (max-width: 575px) {
+  .accordion-item { margin-bottom: 12px; font-size: 13px; line-height: 22px; }
+}

@@ -1,0 +1,28 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.articleList {
+  h4 { margin: 0px;
+    a { padding: 16px 0; border-bottom: 1px solid $light; }
+    &:last-child a { border: none; }
+    svg { margin-right: 8px; @include flex-shrink(0); }
+    .badge::before { @extend %after-before; margin: -1px 3px 0px 0px; position: relative; display: inline-block; width: 10px; height: 10px; background: url(../../../../assets/images/icon/play-icon.svg) no-repeat center center / cover; vertical-align: middle; }
+  }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 1199px) {
+  .articleList {
+    h4 {
+      a { padding: 12px 0; }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .articleList {
+    h4 {
+      a { padding: 10px 0; }
+    }
+  }
+}

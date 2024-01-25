@@ -1,0 +1,55 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.shareList { padding: 12px 0; border-bottom: 1px solid var(--border-light);
+  > * { flex: 1; }
+}
+.item { 
+  .icon { padding: 10px; width: 44px; height: 44px; border: 1px solid var(--border-input); box-shadow: 0px 2px 4px rgba(var(--bs-dark-rgb), 0.2); border-radius: 50%;
+    img { @include filter(brightness(0)); 
+      [data-mode="dark"] & {
+        @include filter(brightness(0) invert(1) opacity(0.5));
+      }
+    }
+  }
+  &:hover { color: var(--font-color); }
+  &.liked .icon { @include filter(none);
+    [data-mode="dark"] & {
+      @include filter(brightness(0) invert(1));
+    }
+  }
+  &.active .icon { animation: clapZoom 0.3s ease; }
+  &.share::after { display: none; }
+}
+.currentClap { position: absolute; width: 24px; height: 24px; line-height: 24px; color: $light-color; opacity: 0; top: -16px; left: 50%; @include transform(translateX(-75%));
+  .active & { animation: clapAnimation 0.6s ease-in-out; }
+}
+
+@keyframes clapAnimation {
+  0%    { @include transform(translate(-75%, -16px)); opacity: 0; }
+  10%   { @include transform(translate(-75%, -16px)); opacity: 1; }
+  92%   { @include transform(translate(-75%,-36px)); opacity: 1; }
+  100%  { @include transform(translate(-75%,-36px)); opacity: 0; }
+}
+@keyframes clapZoom {
+  0%    { @include transform(scale(1, 1)); }
+  50%   { @include transform(scale(1.2, 1.2)); }
+  100%  { @include transform(scale(1, 1)); }
+}
+
+.dropdownItem {
+  &::after { display: none; }
+}
+@media (max-width: 1400px) {
+  .item {
+    .icon { margin: 0; padding: 8px; width: 40px; height: 40px; }
+  }
+}
+
+@media (max-width: 575px) {
+  .shareList { padding: 8px 0; }
+  .item {
+    .icon { padding: 6px; width: 32px; height: 32px; }
+  }
+  .socialShareMenu { padding: 6px 8px; }
+}

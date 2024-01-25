@@ -1,0 +1,19 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.d-flex { display: flex; display: -webkit-flex; }
+.imgBlock { width: 64px; margin-right: 8px; position: relative; flex-shrink: 0;
+    .img { border-radius: 50%; overflow: hidden; }
+}
+.point { margin-top: -10px; background-color: $font-color; color: #fff; border-radius: 2em; position: relative; text-align: center;}
+p { margin: 4px 0; }
+
+/***** Responsive CSS Start ******/
+@media (max-width: 575px) {
+  .list {
+      > div { margin-bottom: 24px; 
+        &:last-child { margin-bottom: 0;}
+    }
+  }
+  .item { width: 100%; }
+}

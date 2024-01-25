@@ -1,0 +1,4 @@
+extend type Subscription {
+  fantasyArticleTakeOver(input: oArticleTakeOverInput): subAdmin
+  fantasyArticleTakeOverUpdate(input: oArticleTakeOverInput): String
+}

@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+message messageResponse {
+    string sMessage = 1;
+}
+
+message oMiniScorePriority { 
+    string iSeriesId = 1;
+    int32 nPriority = 2;
+    string sTitle = 3;
+    string sSrtTitle = 4;
+ }
+
+message getMiniScorePriorityRes { 
+    repeated oMiniScorePriority aMiniScorePriority = 1;
+ }
+
+message Empty { }
+
+message oField {
+  string sTitle = 1;
+  int32 nVote = 2;
+}
+
+message oPollFields {
+    string sTitle = 1;
+    repeated oField aField = 2;
+    int32 nTotalVote = 3;
+    string eStatus = 4;
+    string dStartDate = 5;
+    string dEndDate = 6;
+    string sType = 7;
+    string sMatchPollTitle = 8;
+  }
+  
+message createPollRes {
+    string _id =1;
+}
+ 
+service GlobalWidgetService { 
+    rpc getMiniScorePriority(Empty) returns (getMiniScorePriorityRes) {}
+    rpc createPoll(oPollFields) returns (createPollRes) {}
+ }

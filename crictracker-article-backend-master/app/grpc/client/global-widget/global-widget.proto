@@ -1,0 +1,43 @@
+syntax = "proto3";
+
+message messageResponse {
+    string sMessage = 1;
+}
+
+message oImg {
+    string sText = 1;
+    string sCaption = 2;
+    string sAttribute =3;
+    string sUrl =4;
+}
+
+message oCategory  {
+    string _id = 1;
+    string sName = 2;
+    string sContent = 3;
+}
+
+message Article {
+  string _id = 1;
+  string sTitle = 2;
+  string sSrtTitle = 3;
+  string sSubtitle = 4;
+  oImg oImg = 5;
+  oImg oTImg = 6;
+  string dPublishDate = 7;
+  float nDuration = 8;
+  oCategory oCategory = 9;
+}
+
+message GlobalWidgetInput {
+  string type = 1;
+  repeated Article data  = 2;
+}
+
+service GlobalWidgetService {
+  /* 
+    For updating cricSpecials and Trending news
+    Replacing queue HOME_WIDGET_ID_EVENT
+  */
+  rpc updateGlobalWidgetByType(GlobalWidgetInput) returns (messageResponse) {}
+}

@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: redis-to-fantasyarticle
+  namespace: production
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://matchmanage.crictracker.com/api/viewcount/redis-to-fantasyarticle'
+            image: curlimages/curl
+            name: redis-to-fantasyarticle
+          restartPolicy: OnFailure

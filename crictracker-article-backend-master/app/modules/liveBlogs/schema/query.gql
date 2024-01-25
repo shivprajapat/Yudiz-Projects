@@ -1,0 +1,127 @@
+input listLiveBlogContentInput {
+    nSkip: Int
+    nLimit: Int
+    sSortBy: String
+    nOrder: Int
+    aStatus: [BLOGCONTENTSTATES!]!
+    iEventId: String!
+    sSearch: String
+}
+
+input listLiveBlogContentFrontInput {
+    nLimit: Int
+    iEventId: ID!
+    sEventId: String
+    sSearch: String
+}
+
+type listLiveBlogContentResponse {
+    nTotal: Int
+    oEvent: blogEvent
+    aResults: [liveBlogContent]
+}
+
+type field {
+    sTitle: String
+    nCount: Int
+}
+ 
+enum contentTypeStatus {
+   "content"
+    ct
+    "poll"
+    poll
+}
+
+type liveBlogContent {
+    _id: ID
+    iEventId: String
+    sContent: String
+    sTitle: String
+    iPollId: ID
+    oPoll: poll
+    eStatus: BLOGCONTENTSTATES
+    dCreated: Date
+    oAuthor: subAdmin
+    eType: contentTypeStatus
+    dPublishDate: Date
+    sEventId: String
+    sAmpContent: String
+    dEndDate: Date
+    dUpdated: Date
+}
+
+input getLiveBlogContentInput {
+    _id: ID! 
+}
+
+input listLiveBlogEventsInput {
+    nSkip: Int!
+    nLimit: Int!
+    sSortBy: String
+    nOrder: Int
+    sSearch: String
+}
+
+type scoreRes {
+  sRun: String
+  sWicket: String
+}
+
+type oTeamRes {
+  sName: String
+  sLogoUrl: String
+  oFirstInningScore: scoreRes
+  oSecondInningScore: scoreRes
+}
+
+type oTeamsRes {
+  oTeamA: oTeamRes
+  oTeamB: oTeamRes
+  sTeamAovers: String
+  sTeamBovers: String
+  sScoreSummary: String
+}
+
+type blogEvent {
+    _id: ID
+    sEventName: String
+    dCreated: Date
+    oAuthor: subAdmin
+    sEventStatus: eventStatus
+    dEventDate: Date
+    sDescription: String
+    sLocation: String
+    oTeams: oTeamsRes
+    oMatch: MiniScorecard
+    iMatchId: ID
+    aEditors: [subAdmin]
+    dEventEndDate: Date
+}
+
+type listLiveBlogEventsResponse {
+    nTotal: Int
+    aResults: [blogEvent]
+}
+
+input oCommonInput {
+    _id: ID!
+}
+
+type getLiveBlogResponse {
+  oBlogEvent: blogEvent
+  aBlogContent: [liveBlogContent]
+}
+
+extend type poll @key(fields: "_id") {
+  _id: ID @external
+}
+
+extend type Query {
+  listLiveBlogContent(input: listLiveBlogContentInput!): listLiveBlogContentResponse
+  listLiveBlogContentFront(input: listLiveBlogContentFrontInput!): listLiveBlogContentResponse
+  getLiveBlogContent(input: oCommonInput!): liveBlogContent
+  listLiveBlogEvents(input: listLiveBlogEventsInput!): listLiveBlogEventsResponse
+  getLiveBlog(input: oCommonInput!): getLiveBlogResponse
+  getLiveBlogEventById(input: oCommonInput): blogEvent
+}

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>captain-icon</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Crictracker_Fantasy_Article_detail_Video_25Aug2021" transform="translate(-276.000000, -1410.000000)" fill="#045DE9">
+            <g id="Group-57" transform="translate(193.000000, 1398.000000)">
+                <g id="captain-icon" transform="translate(83.000000, 12.000000)">
+                    <path d="M12,0 C18.627417,0 24,5.372583 24,12 C24,18.627417 18.627417,24 12,24 C5.372583,24 0,18.627417 0,12 C0,5.372583 5.372583,0 12,0 Z M12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 Z" id="Oval" opacity="0.304006177"></path>
+                    <path d="M12,2 C6.4771525,2 2,6.4771525 2,12 C2,17.5228475 6.4771525,22 12,22 C17.5228475,22 22,17.5228475 22,12 C22,6.4771525 17.5228475,2 12,2 Z" id="Path" opacity="0.2"></path>
+                    <text id="C" font-family="NotoSansDisplay-Bold, Noto Sans Display" font-size="14" font-weight="bold" line-spacing="20">
+                        <tspan x="7.772" y="17">C</tspan>
+                    </text>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

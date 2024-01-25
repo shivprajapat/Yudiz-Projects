@@ -1,0 +1,152 @@
+:root {
+    --bs-blue: #0d6efd;
+    --bs-indigo: #6832FF;
+    --bs-purple: #7F28FF; }
+/* your styles go here */
+/* common css starts */
+img                     { max-width: 100%; }
+button.btn              { min-width: 120px; }
+textarea                { resize: none; }
+.green-bg               {background: #0FA958;}
+.white                  {color: #fff;}
+
+/* header css starts */
+.brand-big img          { max-width: 60px; }
+.brand-sm img           { max-width: 30px; }
+
+.dropdown-toggle::after { width: 20px; height: 20px; background: url('../img/down-arrow.svg')no-repeat center center; display: inline-block; margin-left: 0.255em; vertical-align: 0.255em; content: ""; border: unset; }
+
+/* customer management page starts */
+.search-box             { border: none; }
+.profile-box img        { height: 30px; width: 30px; border-radius: 50%; object-fit: cover; }
+.action-box button      { background: transparent; color: #8a8d93; box-shadow: unset; border: unset; padding: 0; transition-duration: 0.4s;   }
+.action-box button:hover { transform: scale(1.1); transition-duration: 0.4s; color: #725175 ; } 
+.search-box.border,.search-box.border .form-control      { border-color: #1e1a1f; border-radius: 20px; }
+.search-box.border .form-control { border: none; border-radius: 20px; box-shadow: unset; outline: unset; }
+.search-box button,.search-box button:hover,.search-box button:focus  {  border: none;box-shadow: unset; outline: unset; outline-offset: 0; }
+.search-box button:hover { color: #725175; }
+
+/* customer detail page starts */
+.customer-profile-box,.common-profile-box   { max-width: 100%; text-align: center;  }
+.customer-profile-box img,.common-profile-box img { width: 50%; min-height: 100px; border-radius: 50%; object-fit: cover; object-position: center; } 
+.customer-detail-box h2 { color: #845095; }
+.file-box input         { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; }
+table th, table td      { text-align: center; }
+table th                { vertical-align: top; min-width: 100px; }
+table td                { vertical-align: middle; }
+/* activity page starts */
+.table-wrap             { overflow-x: auto; }
+.activity-image-box img { width: 80%; }
+
+/* profile edit css below */
+.intro-section              {  }
+.profile-image              { display: inline-block;  height: 150px; width: 150px; border-radius: 50%;; background: url('../img/user.png') no-repeat center / cover; position: relative; }
+.profile-image > input      { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;}
+.profile-image a            { display: inline-block; position: absolute; top: 0; right: 0; }
+.profile-image a img        { width: 45px; }
+
+.cms-edit-page-img.profile-image  {  width: 50%; min-height: 100px; border-radius: 0; background: url('../img/template-mac.png') no-repeat center / cover; height: 300px; width: 300px; object-fit: cover; }
+.my-profile-box .profile-image {  background: url('../img/avatar-2.jpg') no-repeat center / cover; height: 200px; width: 200px; object-fit: cover; }
+
+/* 17thApr23 css below */
+.login-page-wrap            { background: #110924 ; } 
+.full-page-form-wrap        { width: 600px; max-width: 100%; text-align: center; margin: 0 auto; }
+.login-page-wrap p          { color: #fff; }
+
+/**validation*/
+.toastmain { position: fixed; top: 25px; right: 25px; width: 320px; padding: 25px; display: flex; align-items: center; justify-content: flex-start; gap: 20px; border-radius: 10px; overflow: hidden; transform: translateX(calc(100% + 25px)); transition: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.35); z-index: 111; }
+.toastmain.active { transform: translateX(0); }
+.toastmain i { color: #fff; font-size: 20px; }
+.toastmain-text { margin: 0; font-size: .8125rem; text-transform: uppercase; }
+.toastmain i:last-child { color: #ccc; cursor: pointer; transition: 350ms; }
+.toastmain i:last-child:hover { color: #333; }
+
+/*drop down*/
+.delete-selcted .form-select {
+    border: 1px solid #3d4148;
+    width: 143px;
+}
+
+.btn:focus { box-shadow: unset; }
+.imageOptionModal .modal-body{ padding: 2rem 3rem; }
+
+.btn-close { color: #fff; opacity: 1; background: transparent url('../img/close-icon.svg') center/1em auto no-repeat; }
+
+
+/* Modal CSS */
+.modal-dialog                   { max-width: 675px;}
+.intro-section.my-profile-box:first-child { margin-bottom: 16px;}
+
+.modal-btn-wrapper              { display: flex; flex-direction: row; justify-content: space-evenly; align-items: center;}
+.upload-btn-wrapper             { position: relative; display: inline-block;}
+.upload-btn-wrapper > input     { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer;}
+
+.choose-img-wrapper             { margin-top: 16px; display: none; transition: all 0.5s ease;}
+.choose-img-wrapper.active-choose-btn { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 16px;}
+.gallery-wrapper                { display: flex; flex-direction: row; flex-wrap: wrap; justify-content: space-between; align-items: center; width: 100%; max-height: 500px; overflow-x: auto; row-gap: 10px;}
+.img-wrapper                    { width: calc((100% / 2) - 16px); padding: 6px; display: flex; flex-direction: row; justify-content: flex-start; align-items: center; background-color: #3d4148; border: 1px solid #fff; transition: all 0.3s ease;}
+.img-wrapper img                { width: 100%; max-width: 50%; aspect-ratio: 1/1; object-fit: cover; }
+
+.img-wrapper p                  { color: #fff; margin: 0 auto; padding: 8px; transition: all 0.3s ease;}
+
+.img-wrapper:hover,
+.img-wrapper:active                    { background-color: #fff; border: 1px solid #3d4148; cursor: pointer;}
+.img-wrapper:hover p,
+.img-wrapper:active p                   { color: #3d4148;}
+
+.search-btn.btn                     { padding: 0.375rem 0.75rem; width: max-content; height: fit-content; min-width: unset;}
+
+.search-wrapper                     { width: 100%;}
+.input-group                        { width: 100%; justify-content: space-between;}
+.input-group .form-outline          { flex-grow: 2;}
+
+
+/* Media Gallery Page */
+.upload-card-body                               { padding-block: 0.75rem !important;}
+.upload-card-body .upload__inputfile            { width: 100%; height: 100%; top: 0; left: 0; opacity: 0; overflow: hidden; position: absolute; cursor: pointer;  }
+/* .upload-card-body .upload__btn                  { display: inline-block; font-weight: 600; color: #fff; text-align: center; min-width: 116px; padding: 5px; transition: all 0.3s ease; cursor: pointer; border: 2px solid; background-color: #4045ba; border-color: #4045ba; border-radius: 10px; line-height: 26px; font-size: 14px;} */
+.upload-card-body .upload__btn-box              { margin-bottom: 16px;}
+.upload-card-body p                             { margin: 0;}
+.upload-card-body .upload__img-wrap             { display: flex; flex-wrap: wrap; row-gap: 12px; margin: 0 -10px; max-height: 500px; overflow-x: auto;}
+.upload-card-body .upload__img-box              { width: calc(100% / 5); padding: 0 10px; margin-bottom: 10px;}
+.upload-card-body .img-bg                       { background-repeat: no-repeat; background-position: center; background-size: cover; position: relative; padding-bottom: 100%;}
+.upload-card-body .upload__img-close            { width: 24px; height: 24px; border-radius: 50%; background-color: rgba(255, 255, 255, 0.75); position: absolute; top: 2px; right: 2px; text-align: center; line-height: 24px; z-index: 1; cursor: pointer;}
+.upload-card-body .upload__img-close:after      { position: absolute; content: "✖"; top: 2px; left: 1.4px; font-size: 15px; color: #fff;}
+/* End of Media Gallery Page */
+
+
+/* media queries starts */
+/* media query for activity table scrollbar are belows */
+@media (max-width: 1900px) { 
+    .table-wrap     { width: 1500px; }
+}
+
+@media (min-width: 1700px) and (max-width: 1799px) { 
+    .table-wrap     { width: 1300px; }
+}
+
+@media (min-width: 1700px) and (max-width: 1799px) { 
+    .table-wrap     { width: 1300px; }
+}
+
+@media (min-width: 1600px) and (max-width: 1699px) { 
+    .table-wrap     { width: 1200px; }
+}
+
+@media (min-width: 1400px) and (max-width: 1599px) { 
+    .table-wrap     { width: 1200px; }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) { 
+    .table-wrap     { width: 992px; }    
+}
+
+@media (max-width: 767px)
+{
+    body                    { font-size: 14px; line-height: 18px; }
+    .action-box .me-3       { margin-right: 5px !important; }
+    button.btn              { min-width: unset; }
+
+}
+
+/* media query for activity table scrollbar are ends */

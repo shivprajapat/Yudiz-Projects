@@ -1,0 +1,730 @@
+@import 'assets/scss/helper/variables';
+
+.create-asset-page {
+  padding: 104px 0px 160px;
+  position: relative;
+  & > img {
+    position: absolute;
+    top: 20px;
+    right: 144px;
+    width: 247px;
+  }
+  .artwork-title {
+    h4 {
+      margin: 0px;
+    }
+  }
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+  .step-one {
+    margin-top: 20px;
+  }
+  .list-nft-que {
+    span {
+      font-size: 24px;
+      line-height: 30px;
+      margin-bottom: 34px;
+    }
+  }
+  .switch-desc {
+    margin-top: 51px;
+    position: relative;
+    &.first-switch-desc {
+      margin-bottom: 10px;
+    }
+    &.second-switch-desc {
+      margin: 25px 0px;
+    }
+    span {
+      width: 290px;
+      display: block;
+      margin-right: 35px;
+      font-size: 24px;
+      line-height: 28px;
+    }
+  }
+
+  .upload-artwork {
+    padding: 0px 0px 20px 57px;
+    & > .invalidFeedback {
+      margin: -60px 0px 20px;
+    }
+    .upload-artwork-title {
+      p {
+        font-size: 20px;
+        line-height: 30px;
+        color: $primary-color;
+        margin: 0px;
+      }
+    }
+    .collapsing {
+      transition: height 0.1s linear;
+    }
+    .font-label {
+      font-size: 1.2rem;
+      font-weight: 100;
+      font-style: italic;
+    }
+    .upload-box {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      overflow: hidden;
+      margin: 28px 0px 68px;
+      padding: 16px;
+      border-radius: 6px;
+      border: 1px dashed $primary-color;
+      background: $bg-primary;
+      .upload-desc {
+        padding: 0px 30px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%, -50%));
+        width: 100%;
+        h6 {
+          font-size: 24px;
+          line-height: 32px;
+          font-weight: 400;
+          margin-bottom: 46px;
+        }
+        .browse-btn {
+          @include transition(all 0.5s);
+          font-size: 20px;
+          line-height: 28px;
+          width: fit-content;
+          margin: 0px auto 22px;
+          display: block;
+          padding: 9px 59px 5px;
+          text-transform: capitalize;
+          background: $theme-color;
+          color: $grey-color;
+          border-radius: 6px;
+          &:hover {
+            color: $theme-color;
+            background: $white;
+            cursor: pointer;
+          }
+        }
+        span {
+          color: $grey-color;
+          font-size: 18px;
+          line-height: 27px;
+        }
+      }
+      .change-img-btn {
+        @include transition(all 0.5s);
+        font-size: 20px;
+        line-height: 28px;
+        width: fit-content;
+        margin: 38px auto 0px;
+        display: block;
+        padding: 9px 39px 5px;
+        text-transform: capitalize;
+        background: $black-300;
+        color: $grey-color;
+        border-radius: 6px;
+        &:hover {
+          color: $black-300;
+          background: $white;
+          cursor: pointer;
+        }
+      }
+
+      .uploaded-file {
+        width: 100%;
+        height: 307px;
+        border-radius: 8px;
+        text-align: center;
+        img {
+          max-width: 100%;
+          max-height: 100%;
+          object-fit: contain;
+          border-radius: 8px;
+          &:focus-visible {
+            outline: none;
+          }
+        }
+        video {
+          border-radius: 8px;
+          width: 100%;
+          height: 100%;
+          &:focus-visible {
+            outline: none;
+          }
+        }
+      }
+      &.resell{
+        .uploaded-file {
+          height: 100%;
+        }
+      }
+    }
+    .upload-end-btns {
+      .btn {
+        width: 48%;
+        font-size: 18px;
+        line-height: 21px;
+        padding: 16px 15px 9px;
+      }
+    }
+  }
+  .step-two {
+    margin-top: 60px;
+    .form-control-margin {
+      margin-bottom: 24px;
+      .form-control {
+        margin-bottom: 16px;
+        &:last-child {
+          margin-bottom: 0px;
+        }
+      }
+      .invalidFeedback {
+        margin: -16px 0px 16px 0px;
+      }
+    }
+    .min-bid {
+      @include justify-content(space-between);
+      .min-bid-inner {
+        width: 48%;
+      }
+      .input-group {
+        border: 1px solid $header-text-color;
+        border-radius: 6px;
+        .input-group-text {
+          padding: 0px 18px 0px 12px;
+          background: $bg-primary;
+          border-radius: 6px !important;
+          border: none;
+          span {
+            font-size: 18px;
+            line-height: 21px;
+            display: inline-block;
+            margin: 6px 0px 0px 12px;
+            color: $white;
+          }
+        }
+        .form-control {
+          border: none;
+          width: 30%;
+          margin: 0px !important;
+        }
+      }
+    }
+    .artwork-price {
+      margin: 39px 0px 33px;
+      .form-text {
+        font-size: 18px;
+        line-height: 24px;
+        color: $white;
+      }
+      .artwork-price-inner {
+        margin-top: 56px;
+        .artwork-price-btn {
+          position: relative;
+          &:first-child {
+            margin-right: 20px;
+          }
+          .btn-check {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            &:checked + .btn-primary {
+              background: $green-color;
+              color: $theme-color;
+              @include box-shadow(none);
+              border: none;
+            }
+            &:disabled:not(:checked) + .btn-primary {
+              background: $bg-primary;
+              color: $grey-color;
+              @include box-shadow(none);
+              border: none;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+@media (min-width: 1400px) and (max-width: 1699px) {
+  .create-asset-page {
+    & > img {
+      width: 200px;
+    }
+    .step-two {
+      margin-top: 50px;
+    }
+    .list-nft-que {
+      span {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 30px;
+      }
+    }
+    .switch-desc {
+      margin-top: 40px;
+      &.first-switch-desc {
+        margin-bottom: 10px;
+      }
+      span {
+        font-size: 20px;
+        line-height: 24px;
+      }
+    }
+    .upload-artwork {
+      .upload-artwork-title p {
+        font-size: 18px;
+        line-height: 28px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .create-asset-page {
+    padding: 80px 0px 140px;
+    & > img {
+      width: 150px;
+      right: 100px;
+    }
+    .step-two {
+      margin-top: 40px;
+    }
+    .list-nft-que {
+      span {
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 25px;
+      }
+    }
+    .switch-desc {
+      margin-top: 40px;
+      &.first-switch-desc {
+        margin-bottom: 10px;
+      }
+      span {
+        font-size: 18px;
+        line-height: 24px;
+        width: 200px;
+      }
+    }
+    .upload-artwork {
+      & > .invalidFeedback {
+        margin: -40px 0px 20px;
+      }
+      .upload-box {
+        margin: 28px 0px 48px;
+      }
+      .upload-artwork-title p {
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+    .react-datepicker__day-name,
+    .react-datepicker__day,
+    .react-datepicker__time-name {
+      width: 18px;
+      line-height: 18px;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .create-asset-page {
+    padding: 80px 0px 140px;
+    & > img {
+      width: 150px;
+      right: 100px;
+    }
+
+    .list-nft-que {
+      span {
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 25px;
+      }
+    }
+    .switch-desc {
+      margin-top: 40px;
+      &.first-switch-desc {
+        margin-bottom: 10px;
+      }
+      span {
+        font-size: 18px;
+        line-height: 24px;
+        width: 200px;
+      }
+    }
+    .upload-artwork {
+      & > .invalidFeedback {
+        margin: -40px 0px 20px;
+      }
+      .upload-box {
+        margin: 28px 0px 48px;
+        height: 380px;
+        .upload-desc {
+          h6 {
+            font-size: 20px;
+            line-height: 28px;
+            margin-bottom: 36px;
+          }
+          .browse-btn {
+            font-size: 18px;
+            line-height: 26px;
+          }
+        }
+        .uploaded-file {
+          height: 240px;
+        }
+        .change-img-btn {
+          font-size: 18px;
+          line-height: 26px;
+        }
+      }
+      .upload-artwork-title p {
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+    .step-two {
+      margin-top: 40px;
+      .min-bid {
+        .input-group {
+          .input-group-text {
+            img {
+              width: 22px;
+            }
+            span {
+              font-size: 16px;
+              line-height: 21px;
+              margin: 6px 0px 0px 8px;
+            }
+          }
+        }
+      }
+      .artwork-price {
+        .artwork-price-inner {
+          margin-top: 36px;
+        }
+      }
+    }
+    .react-datepicker__day-name,
+    .react-datepicker__day,
+    .react-datepicker__time-name {
+      width: 26px;
+      line-height: 26px;
+    }
+    .react-datepicker__month-container {
+      width: 80%;
+    }
+    .react-datepicker__time-container {
+      width: 20%;
+    }
+    .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+      right: 155px;
+    }
+    .react-datepicker__navigation--previous {
+      left: 66px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .create-asset-page {
+    padding: 80px 0px 140px;
+    & > img {
+      width: 100px;
+      right: 80px;
+    }
+    .list-nft-que {
+      span {
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 25px;
+      }
+    }
+    .switch-desc {
+      margin-top: 40px;
+      &.first-switch-desc {
+        margin-bottom: 10px;
+      }
+      span {
+        font-size: 18px;
+        line-height: 24px;
+        width: 200px;
+      }
+    }
+    .upload-artwork {
+      padding: 0px 0px 20px 20px;
+      & > .invalidFeedback {
+        margin: -40px 0px 20px;
+      }
+      .upload-box {
+        margin: 28px 0px 48px;
+        height: 340px;
+        .upload-desc {
+          h6 {
+            font-size: 18px;
+            line-height: 28px;
+            margin-bottom: 26px;
+          }
+          .browse-btn {
+            font-size: 18px;
+            line-height: 26px;
+            padding: 11px 59px 5px;
+          }
+          span {
+            font-size: 16px;
+            line-height: 24px;
+          }
+        }
+        .uploaded-file {
+          height: 200px;
+        }
+        .change-img-btn {
+          font-size: 18px;
+          line-height: 26px;
+          padding: 11px 39px 5px;
+        }
+      }
+      .upload-artwork-title p {
+        font-size: 16px;
+        line-height: 26px;
+      }
+    }
+    .step-two {
+      margin-top: 40px;
+      .min-bid {
+        @include flex-direction(column);
+        .min-bid-inner {
+          width: 100%;
+        }
+        .input-group {
+          margin-bottom: 20px;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+          .input-group-text {
+            img {
+              width: 22px;
+            }
+            span {
+              font-size: 16px;
+              line-height: 21px;
+              margin: 6px 0px 0px 8px;
+            }
+          }
+        }
+        .invalidFeedback {
+          margin: -16px 0px 16px 0px;
+        }
+      }
+      .artwork-price {
+        .artwork-price-inner {
+          margin-top: 36px;
+        }
+      }
+    }
+    .react-datepicker__day-name,
+    .react-datepicker__day,
+    .react-datepicker__time-name {
+      width: 22px;
+      line-height: 22px;
+    }
+    .react-datepicker__month-container {
+      width: 75%;
+    }
+    .react-datepicker__time-container {
+      width: 25%;
+    }
+    .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+      right: 105px;
+    }
+    .react-datepicker__navigation--previous {
+      left: 20px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .create-asset-page {
+    padding: 50px 0px 80px;
+    & > img {
+      width: 130px;
+      right: 12px;
+    }
+    .step-one {
+      margin-top: 10px;
+    }
+    .list-nft-que {
+      span {
+        font-size: 18px;
+        line-height: 26px;
+        margin-bottom: 27px;
+      }
+    }
+    .switch-desc {
+      margin-top: 40px;
+      &.first-switch-desc {
+        margin-bottom: 10px;
+      }
+      span {
+        font-size: 18px;
+        line-height: 24px;
+        width: 200px;
+      }
+    }
+    .upload-artwork {
+      padding: 0px;
+      margin-top: 40px;
+      & > .invalidFeedback {
+        margin: -40px 0px 20px;
+      }
+      .upload-artwork-title {
+        h6 {
+          font-size: 20px;
+          line-height: 28px;
+        }
+        p {
+          font-size: 16px;
+          line-height: 26px;
+        }
+      }
+      .upload-box {
+        margin: 28px 0px 48px;
+        height: 358px;
+        .upload-desc {
+          h6 {
+            font-size: 20px;
+            line-height: 28px;
+            margin-bottom: 28px;
+          }
+          .browse-btn {
+            font-size: 18px;
+            line-height: 26px;
+            margin: 0px auto 16px;
+            padding: 11px 59px 5px;
+          }
+          span {
+            font-size: 18px;
+            line-height: 24px;
+          }
+        }
+        .uploaded-file {
+          height: 240px;
+        }
+        .change-img-btn {
+          font-size: 18px;
+          line-height: 26px;
+          padding: 11px 39px 5px;
+        }
+      }
+      .upload-end-btns {
+        @include flex-direction(column);
+        .btn {
+          width: 100%;
+          &:first-child {
+            margin-bottom: 22px;
+          }
+        }
+      }
+    }
+    .step-two {
+      margin-top: 40px;
+      .min-bid {
+        @include flex-direction(column);
+        .min-bid-inner {
+          width: 100%;
+        }
+        .input-group {
+          margin-bottom: 20px;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+          .input-group-text {
+            padding: 0px 22px;
+            img {
+              width: 22px;
+            }
+            span {
+              font-size: 16px;
+              line-height: 21px;
+              margin: 6px 0px 0px 8px;
+            }
+          }
+        }
+        .invalidFeedback {
+          margin: -16px 0px 16px 0px;
+        }
+      }
+      .artwork-price {
+        margin: 24px 0px;
+        .artwork-price-inner {
+          margin-top: 33px;
+        }
+      }
+    }
+    .react-datepicker__day-name,
+    .react-datepicker__day,
+    .react-datepicker__time-name {
+      width: 22px;
+      line-height: 22px;
+    }
+    .react-datepicker__month-container {
+      width: 75%;
+    }
+    .react-datepicker__time-container {
+      width: 25%;
+    }
+    .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+      right: 28%;
+    }
+    .react-datepicker__navigation--previous {
+      left: 4%;
+    }
+  }
+}
+
+@media (min-width: 420px) and (max-width: 575px) {
+  .create-asset-page {
+    .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+      right: 37%;
+    }
+    .react-datepicker__navigation--previous {
+      left: 12%;
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .create-asset-page {
+    .upload-artwork {
+      .upload-end-btns {
+        @include flex-direction(row);
+        .btn {
+          width: 48%;
+          &:first-child {
+            margin: 0px;
+          }
+        }
+      }
+    }
+    .react-datepicker__month-container {
+      width: 80%;
+    }
+    .react-datepicker__time-container {
+      width: 20%;
+    }
+    .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
+      right: 207px;
+    }
+    .react-datepicker__navigation--previous {
+      left: 103px;
+    }
+  }
+}

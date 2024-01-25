@@ -1,0 +1,64 @@
+.transaction-data {
+  .block {
+    padding: 1rem;
+
+    .title {
+      font-size: 400;
+    }
+  }
+}
+.user-transactions{
+  svg{
+    color: #d2fcc3;
+  }
+}
+
+.transaction-filters {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+  width: 100%;
+  
+  .form-group{
+    margin-right: 1rem;
+    min-width: 14rem;
+    max-width: 12rem;
+  }
+}
+
+.block {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 0.8rem;
+
+  .title {
+    font-weight: 600;
+
+    span {
+      padding: 0 0.5rem;
+    }
+  }
+
+  .user {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: flex-start;
+
+    span {
+      padding: 0 0.5rem;
+    }
+
+    .field {
+      display: flex;
+      justify-content: flex-start;
+    }
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}

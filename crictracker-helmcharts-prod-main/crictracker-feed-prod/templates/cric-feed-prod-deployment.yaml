@@ -1,0 +1,780 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+    environment: {{ .Values.labels.environment }}
+    tier: {{ .Values.labels.tier }}
+    release: {{ .Values.labels.release }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      {{- if .Values.imagePullSecrets.enabled }} 
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.image }}
+        {{- if .Values.podprestophook.enabled }} 
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh","-c","sleep 20"]
+        {{- end }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        env:
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: jwt
+                key: JWT_SECRET
+          - name: FEED_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: FEED_DB_URL                 
+          - name: ARTICLE_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: ARTICLE_DB_URL                
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_PORT
+          - name: JWT_VALIDITY
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: JWT_VALIDITY
+          - name: CONNECTION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: CONNECTION
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_HOST  
+          - name: IS_API_RATE_LIMITER_ENABLED
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: IS_API_RATE_LIMITER_ENABLED
+
+          - name: FEED_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_GRPC_URL
+
+          - name: JWT_VALIDITY
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: JWT_VALIDITY
+          - name: SEO_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SEO_GRPC_URL
+          - name: AUTH_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: AUTH_GRPC_URL
+          - name: FEED_TITLE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_TITLE
+          
+          - name: FEED_DESCRIPTION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_DESCRIPTION
+          - name: FRONTEND_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FRONTEND_URL   
+          - name: S3_CDN_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_CDN_URL                                                                              
+          - name: LOGIN_HARD_LIMIT_CLIENT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: LOGIN_HARD_LIMIT_CLIENT
+          - name: SMTP_PRODUCT_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_PRODUCT_NAME
+
+          - name: SMTP_PRODUCT_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_PRODUCT_URL
+
+          - name: SMTP_FROM
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_FROM
+
+          - name: POSTMARK_SERVER_CLIENT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: POSTMARK_SERVER_CLIENT
+            
+          - name: JWT_VERIFICATION_VALIDITY
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: JWT_VERIFICATION_VALIDITY
+          - name: SMTP_SUPPORT_EMAIL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_SUPPORT_EMAIL              
+          - name: FEED_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_BASE_URL
+          - name: FEED_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_GRPC_URL                
+
+      #     - name: AWS_ACCESSKEYID
+      #       valueFrom:
+      #         secretKeyRef:
+      #           name: aws-secrets
+      #           key: AWS_ACCESSKEYID
+
+      #     - name: AWS_SECRETKEY
+      #       valueFrom:
+      #         secretKeyRef:
+      #           name: aws-secrets
+      #           key: AWS_SECRETKEY
+                
+      #     - name: DB_URL
+      #       valueFrom:
+      #         secretKeyRef:
+      #           name: mongodb
+      #           key: ARTICLE_DB_URL 
+
+      #     - name: SMTP_PASSWORD
+      #       valueFrom:
+      #         secretKeyRef:
+      #           name: smtp
+      #           key: SMTP_PASSWORD 
+
+      #     - name: YOUTUBE_CLIENT_SECRET
+      #       valueFrom:
+      #         secretKeyRef:
+      #           name: apikeys
+      #           key: YOUTUBE_CLIENT_SECRET
+
+      #     - name: YOUTUBE_API_KEY
+      #       valueFrom:
+      #         secretKeyRef:
+      #           name: apikeys
+      #           key: YOUTUBE_API_KEY
+
+      # # configmaps
+
+      #     - name: REDIS_HOST
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: REDIS_HOST      
+
+      #     - name: REDIS_PORT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: REDIS_PORT   
+
+      #     - name: NODE_ENV
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: NODE_ENV      
+
+      #     - name: PORT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: PORT      
+
+      #     - name: SUPPORT_EMAIL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SUPPORT_EMAIL    
+
+      #     - name: AWS_REGION
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: AWS_REGION       
+
+      #     - name: S3_BUCKET_NAME
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: S3_BUCKET_NAME
+
+      #     # - name: S3_BUCKET_URL
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_URL
+
+      #     # - name: S3_BUCKET_PROFILE_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_PROFILE_PATH
+           
+      #     # - name: S3_BUCKET_KYC_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_KYC_PATH
+
+      #     # - name: S3_BUCKET_FB_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_FB_PATH
+
+      #     # - name: S3_BUCKET_TWITTER_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_TWITTER_PATH
+
+      #     # - name: S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH
+
+      #     # - name: S3_BUCKET_ARTICLE_THUMBIMAGE_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_ARTICLE_THUMBIMAGE_PATH
+
+      #     # - name: S3_BUCKET_ARTICLE_EDITOR_MEDIA_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_ARTICLE_EDITOR_MEDIA_PATH
+
+      #     # - name: S3_BUCKET_ARTICLE_CHAT_MEDIA_PATH
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: S3_BUCKET_ARTICLE_CHAT_MEDIA_PATH       
+          
+      #     - name: AUTH_SUBGRAPH_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: AUTH_SUBGRAPH_URL
+
+      #     # - name: SMTP_EMAIL
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: SMTP_EMAIL
+
+      #     - name: YOUTUBE_CLIENT_ID
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: YOUTUBE_CLIENT_ID
+
+      #     - name: YOUTUBE_REDIRECT_URI
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: YOUTUBE_REDIRECT_URI
+
+      #     - name: YOUTUBE_OAUTH_SCOPE
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: YOUTUBE_OAUTH_SCOPE
+
+      #     - name: ADMIN_FRONT_REDIRECT_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: ADMIN_FRONT_REDIRECT_URL
+
+      #     # - name: HOME_PAGE_ID_EVENT
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: HOME_PAGE_ID_EVENT
+
+      #     # - name: HOME_PAGE_SLUG_EVENT
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: HOME_PAGE_SLUG_EVENT
+
+      #     # - name: HOME_PAGE_SLUG_CONSUMER
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: HOME_PAGE_SLUG_CONSUMER
+
+      #     # - name: HOME_PAGE_ID_CONSUMER
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: HOME_PAGE_ID_CONSUMER
+
+      #     # - name: HOME_PAGE_SLUG_GROUP
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: HOME_PAGE_SLUG_GROUP
+
+      #     # - name: HOME_PAGE_ID_GROUP
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: HOME_PAGE_ID_GROUP
+
+      #     - name: SEO_SUBGRAPH_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SEO_SUBGRAPH_URL
+
+      #     - name: BASE_SITEMAP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: BASE_SITEMAP
+
+      #     # - name: POST_SITEMAP
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: POST_SITEMAP
+
+      #     # - name: CATEGORY_SITEMAP
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: CATEGORY_SITEMAP
+
+      #     # - name: POST_TAG_SITEMAP
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: POST_TAG_SITEMAP
+
+      #     # - name: AUTHOR_SITEMAP
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: AUTHOR_SITEMAP
+
+      #     # - name: SITEMAP_REDIS_KEY
+      #     #   valueFrom:
+      #     #     configMapKeyRef:
+      #     #       name: {{ .Release.Name }}
+      #     #       key: SITEMAP_REDIS_KEY
+
+      #     - name: SMTP_PRODUCT_NAME
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SMTP_PRODUCT_NAME
+
+      #     - name: SMTP_PRODUCT_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SMTP_PRODUCT_URL
+
+      #     - name: SMTP_FROM
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SMTP_FROM
+
+      #     - name: POSTMARK_SERVER_CLIENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: POSTMARK_SERVER_CLIENT
+            
+      #     - name: JWT_VERIFICATION_VALIDITY
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: JWT_VERIFICATION_VALIDITY
+
+      #     - name: JWT_LOGIN_VALIDITY
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: JWT_LOGIN_VALIDITY
+
+      #     - name: FRONTEND_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: FRONTEND_URL
+          
+      #     - name: CONNECTION
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CONNECTION
+          
+      #     - name: LOGIN_HARD_LIMIT_CLIENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: LOGIN_HARD_LIMIT_CLIENT
+          
+      #     - name: SENTRY_DSN
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SENTRY_DSN
+          
+      #     - name: S3_CDN_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: S3_CDN_URL
+          
+      #     - name: S3_BUCKET_ARTICLE_ATTACHMENTIMAGE_PATH
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: S3_BUCKET_ARTICLE_ATTACHMENTIMAGE_PATH
+          
+      #     - name: SMTP_SUPPORT_EMAIL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SMTP_SUPPORT_EMAIL
+          
+      #     - name: IP_EXPIRE_SEC
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: IP_EXPIRE_SEC
+          
+      #     - name: CREATE_SEO_CONSUMER_0
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_SEO_CONSUMER_0
+          
+      #     - name: BOOKMARK_COUNT_UPDATE_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: BOOKMARK_COUNT_UPDATE_EVENT
+          
+      #     - name: BOOKMARK_COUNT_UPDATE_CONSUMER
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: BOOKMARK_COUNT_UPDATE_CONSUMER
+          
+      #     - name: BOOKMARK_COUNT_UPDATE_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: BOOKMARK_COUNT_UPDATE_GROUP
+          
+      #     - name: HOME_WIDGET_ID_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: HOME_WIDGET_ID_EVENT
+          
+      #     - name: HOME_WIDGET_ID_CONSUMER
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: HOME_WIDGET_ID_CONSUMER
+          
+      #     - name: HOME_WIDGET_ID_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: HOME_WIDGET_ID_GROUP
+          
+      #     - name: FEED_TITLE
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: FEED_TITLE
+          
+      #     - name: FEED_DESCRIPTION
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: FEED_DESCRIPTION
+          
+      #     - name: CREATE_SEO_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_SEO_EVENT
+          
+      #     - name: ALLOW_DISK_USE
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: ALLOW_DISK_USE
+          
+      #     - name: S3_BUCKET_VIDEO_PATH
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: S3_BUCKET_VIDEO_PATH
+          
+      #     - name: S3_BUCKET_PLAYLIST_PATH
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: S3_BUCKET_PLAYLIST_PATH
+          
+      #     - name: CREATE_SERIES_SEO_SLUG_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_SERIES_SEO_SLUG_GROUP
+          
+      #     - name: CREATE_SERIES_SEO_SLUG_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_SERIES_SEO_SLUG_EVENT
+          
+      #     - name: INSTANT_ARTICLE_FEED_TITLE
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: INSTANT_ARTICLE_FEED_TITLE
+          
+      #     - name: CREATE_BOOKMARK_FANTASY_ARTICLE_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_BOOKMARK_FANTASY_ARTICLE_EVENT
+          
+      #     - name: CREATE_BOOKMARK_FANTASY_ARTICLE_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_BOOKMARK_FANTASY_ARTICLE_GROUP
+          
+      #     - name: UPDATE_BOOKMARK_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: UPDATE_BOOKMARK_GROUP
+          
+      #     - name: UPDATE_BOOKMARK_CONSUMER_0
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: UPDATE_BOOKMARK_CONSUMER_0
+          
+      #     - name: UPDATE_BOOKMARK_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: UPDATE_BOOKMARK_EVENT
+          
+      #     - name: CREATE_CURRENT_SERIES_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_CURRENT_SERIES_EVENT
+          
+      #     - name: CREATE_CURRENT_SERIES_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_CURRENT_SERIES_GROUP
+          
+      #     - name: CREATE_CURRENT_SERIES_CONSUMER
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_CURRENT_SERIES_CONSUMER
+          
+      #     - name: CREATE_FILTER_CATEGORY_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_FILTER_CATEGORY_EVENT
+          
+      #     - name: CREATE_FILTER_CATEGORY_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_FILTER_CATEGORY_GROUP
+          
+      #     - name: TAG_SERVICE_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: TAG_SERVICE_EVENT
+          
+      #     - name: TAG_SERVICE_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: TAG_SERVICE_GROUP
+          
+      #     - name: TAG_SERVICE_CONSUMER_0
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: TAG_SERVICE_CONSUMER_0
+          
+      #     - name: CREATE_TAG_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_TAG_EVENT
+          
+      #     - name: CREATE_TAG_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_TAG_GROUP
+          
+      #     - name: CREATE_TAG_CONSUMER_0
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_TAG_CONSUMER_0
+          
+      #     - name: CREATE_SEO_GROUP
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CREATE_SEO_GROUP
+          
+      #     - name: SERIES_CATEGORY_CONSUMER
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SERIES_CATEGORY_CONSUMER
+          
+      #     - name: SERIES_CATEGORY_EVENT
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SERIES_CATEGORY_EVENT
+          
+      #     - name: AUTH_GRPC_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: AUTH_GRPC_URL
+
+      #     - name: CONNECTION
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: CONNECTION
+
+      #     - name: SEO_GRPC_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: SEO_GRPC_URL                
+
+      #     - name: MATCHMANAGEMENT_GRPC_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: MATCHMANAGEMENT_GRPC_URL      
+
+      #     - name: IS_API_RATE_LIMITER_ENABLED
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: IS_API_RATE_LIMITER_ENABLED
+
+      #     - name: FEED_GRPC_URL
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: FEED_GRPC_URL
+
+      #     - name: JWT_VALIDITY
+      #       valueFrom:
+      #         configMapKeyRef:
+      #           name: {{ .Release.Name }}
+      #           key: JWT_VALIDITY                  

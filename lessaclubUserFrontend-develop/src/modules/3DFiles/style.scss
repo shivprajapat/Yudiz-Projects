@@ -1,0 +1,9 @@
+.thumbnail {
+  transition: all 0.2s ease-in-out;
+}
+
+.thumbnail:hover {
+  background-color: #000;
+  opacity: 0.4;
+  scale: 1.1;
+}

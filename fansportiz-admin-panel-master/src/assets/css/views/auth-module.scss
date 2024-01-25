@@ -1,0 +1,8 @@
+/******* How it works Section CSS ******/
+.login-section { min-height: 100vh; padding: 32px 15px;
+    .login-block    { width: 476px; background: #fff; @include box-shadow(0 0 60px rgba(18, 38, 63, 0.08)); border-radius: 8px; overflow: hidden; }
+    .login-header   { padding: 20px; background: $theme-color; color: #fff;
+        img { flex-shrink: 0; -webkit-flex-shrink: 0; }
+    }
+    .form-section   { padding: 34px 24px; }
+}

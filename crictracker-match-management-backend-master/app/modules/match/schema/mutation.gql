@@ -1,0 +1,12 @@
+input editMatchImpStatusInput{
+ _id: ID!
+ bImp: Boolean!
+}
+
+type editMatchImpStatusResponse{
+   sMessage: String
+}
+
+extend type Mutation {
+ editMatchImpStatus(input:editMatchImpStatusInput!):editMatchImpStatusResponse
+}

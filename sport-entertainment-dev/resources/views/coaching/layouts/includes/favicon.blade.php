@@ -1,0 +1,1 @@
+<link rel="icon" type="image/svg" sizes="64x64" href="{{ asset('assets/media/logos/favicon-posticy.svg') }}">

@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: dump-article
+  namespace: production
+spec:
+  schedule: "0/5 8-23 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://migrations.crictracker.com/api/article/dump-article'       
+            image: curlimages/curl
+            name: dump-article
+          restartPolicy: OnFailure

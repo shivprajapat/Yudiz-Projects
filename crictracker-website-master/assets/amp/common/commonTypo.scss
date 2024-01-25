@@ -1,0 +1,148 @@
+@import "../../scss/variables.scss";
+@import "../../scss/mixins.scss";
+
+.commonTypo {
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--font-secondary);
+
+  // content-visibility: auto;
+  p {
+    margin-bottom: 18px;
+  }
+
+  a {
+    color: var(--theme-color-medium);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--theme-font);
+    }
+  }
+
+  ul,
+  ol {
+    margin-bottom: 18px;
+    padding-left: 18px;
+    font-size: 14px;
+    line-height: 24px;
+    font-weight: 700;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li {
+    padding-left: 8px;
+  }
+
+  blockquote {
+    margin-bottom: 18px;
+    padding: 62px 16px 20px 16px;
+    font-size: 18px;
+    line-height: 30px;
+    background: $theme-light url(../../../assets/images/icon/quote-icon.svg) no-repeat 16px 14px / 40px auto;
+    color: $theme-dark2;
+    font-style: italic;
+    border-radius: 16px;
+  }
+
+  table {
+    margin-bottom: 4px;
+    font-size: 14px;
+    line-height: 20px;
+    height: auto;
+    white-space: nowrap;
+
+    tbody tr:first-child td {
+      background: $theme-color;
+      color: #fff;
+      text-transform: capitalize;
+    }
+
+    td {
+      background: var(--theme-bg);
+      width: auto;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  figure {
+    margin-bottom: 18px;
+    width: 100%;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+
+    img {
+      margin-bottom: 0px;
+      border-radius: 16px;
+    }
+
+    figcaption {
+      font-style: italic;
+      color: #7b7b7b;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      margin-top: 5px;
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  p img {
+    margin: 0;
+  }
+
+  img {
+    margin-bottom: 18px;
+    width: 100%;
+    height: auto;
+  }
+
+  tr:nth-child(2) td:empty {
+    display: none;
+  }
+
+  p:empty {
+    margin: 0;
+  }
+
+  iframe {
+    display: block;
+    max-width: 100%;
+    margin: 0px auto;
+  }
+
+  video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
+  }
+
+  &.typoDark {
+    table {
+      tr:first-child {
+        td {
+          background: $theme-color;
+          color: $light-color;
+        }
+      }
+
+      td {
+        background-color: var(--theme-bg);
+      }
+    }
+  }
+}

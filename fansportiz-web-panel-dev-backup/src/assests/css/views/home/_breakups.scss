@@ -1,0 +1,143 @@
+.btn-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    // padding: 10px;
+    background-color: #fff;
+    p {
+        font-size: 12px;
+        line-height: 20px;
+        margin: 0px 20px;
+        color: #7E8B96;
+    }
+    .teamname { 
+        display: flex;
+        margin-top: 5px;
+        // padding: 10px;
+        // background-color: #fff;
+        input[type = 'text']{
+            width: 75%;
+            border-radius: 50px;
+            margin: 0px 10px;
+            font-size: 12px;
+            line-height: 20px;
+            height: 38px;
+            padding: 0px 15px;
+        }
+        .btn {
+            @media (max-width: 500px) {
+                font-size: 10px;
+            }
+            width: 25%;
+            border-radius: 50px;
+            font-size: 12px;
+            line-height: 20px;
+            padding: 9px 10px;
+        }
+    }
+    &.two-btn{
+        padding: 5px;
+        .btn{
+            width: calc(50% - 5px);
+            @media(max-width: 480px){
+                padding: 10px 0;
+                font-size: 13px;
+            }
+        }
+    }
+}
+.contest-info {
+    padding: 0 15px;
+    position: sticky;
+    top: 0;
+    z-index: 9;
+    background: #fff;
+    .info-b {
+        width: 33.33%;
+        padding: 11px 0;
+        p {
+            font-weight: 500;
+            font-size: 12px;
+            color: $gray;
+            margin: 0 0 -2px 0;
+        }
+        b {
+            font-weight: 600;
+            font-size: 16px;
+            color: $darkGray;
+        }
+    }
+}
+.price-box-main {
+    margin: 15px;
+    input:checked ~ .price-box-inner {
+        border-color: #37c96b;
+        .price-head:before {
+            @include css3-prefix("box-shadow", 0px 0px 0px 2px #37c96b);
+            border-color: #ffffff;
+            background-color: #37c96b;
+            border-width: 3px;
+        }
+    }
+    .price-box-inner {
+        padding: 15px;
+        @include css3-prefix("border-radius", "8px");
+        @include css3-prefix("transition", "all .4s ease-in-out");
+        border: 2px solid $theme-font-color;
+        cursor: pointer;
+        &:hover {
+            border-color: #37c96b;
+        }
+        .price-head {
+            position: relative;
+            &:before {
+                position: absolute;
+                right: 0;
+                content: "";
+                display: inline-block;
+                vertical-align: middle;
+                width: 16px;
+                height: 16px;
+                border: 2px solid $theme-font-color;
+                @include css3-prefix("border-radius", "100%");
+            }
+        }
+        h4 {
+            font-weight: 500;
+            font-size: 16px;
+            color: $darkGray;
+            margin: 0;
+        }
+        .number {
+            margin-top: 10px;
+            span {
+                display: block;
+                width: 33.33%;
+                font-size: 14px;
+                color: $theme-font-color;
+            }
+        }
+    }
+}
+
+.total-winner {
+    text-align: center;
+    border-bottom: 1px solid #e1e7ec;
+    padding: 10px;
+    [dir='rtl'] & {
+        font-weight: 500;
+        font-size: 14px;
+        color: #3C434A;
+        padding: 10px 15px;
+        margin: 0 -15px;
+    }
+    span {
+        font-weight: 500;
+        font-size: 14px;
+        color: #3C434A;
+        padding: 10px 15px;
+        margin: 0 -15px;
+    }
+}

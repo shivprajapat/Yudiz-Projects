@@ -1,0 +1,8 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.downloadApp { padding: 18px 12px; background: $font-color;
+  p { color: #fff; }
+}
+.close { background: transparent; border: none; outline: none; @include filter(brightness(0) invert(1)); }
+.ctIcon { width: 22px; border-radius: 4px; overflow: hidden; @include flex-shrink(0); }

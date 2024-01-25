@@ -1,0 +1,7 @@
+.aws/
+.terraform/
+modules/
+.DS_Store
+temp.tf
+plan.json
+plan.out

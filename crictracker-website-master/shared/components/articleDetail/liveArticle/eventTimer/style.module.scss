@@ -1,0 +1,36 @@
+.matchInfo { 
+    background: var(--light-mode-bg);
+    border:1px solid var(--border-light);
+    p { margin-bottom: 13px; 
+        &:last-child { margin-bottom: 0;}
+    }
+    .countdown {
+        h1 { 
+            margin: 4px 0 2px;
+            span { margin: 0px 8px }
+        }
+        p {
+            span { flex: 1 }
+        }
+    }
+}
+
+
+@media (max-width: 767px) {
+  .matchInfo {
+    p { font-size: 20px; }
+  }
+}
+
+@media (max-width: 575px) {
+    .matchInfo { 
+        // h1 { font-size: 30px; }
+        p { font-size: 16px; } 
+    }
+}
+@media (max-width: 280px) {
+    .matchInfo { 
+        h1 { font-size: 25px; }
+        p { font-size: 16px; } 
+    }
+}

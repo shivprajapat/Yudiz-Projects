@@ -1,0 +1,48 @@
+@import '../../Assets/Style/_variables';
+.project-section {
+  .project-sec {
+    padding: 0;
+    .d-flex.justify-content-between:first-child {
+      padding: 20px;
+    }
+    .d-flex.justify-content-between {
+      padding: 0 20px;
+    }
+  }
+  .project-tabs .nav-item {
+    flex: inherit;
+  }
+  .datatable_container {
+    padding-bottom: 5px;
+  }
+  // .datatable {
+  //   .table-icons,
+  //   .action-td {
+  //     text-align: center !important;
+  //   }
+  //   .table-icons span {
+  //     cursor: pointer;
+  //   }
+  //   tr:last-child {
+  //     border-bottom: 0;
+  //   }
+  // }
+}
+
+@media (max-width: 576px) {
+  .project-sec {
+    .w-100.d-flex.justify-content-between {
+      flex-direction: column;
+      align-items: flex-start !important;
+    }
+    .fs-4 {
+      font-size: 15px !important;
+    }
+    .btn.btn-border {
+      padding: 5px 6px;
+    }
+    .fs-6 {
+      font-size: 14px !important;
+    }
+  }
+}

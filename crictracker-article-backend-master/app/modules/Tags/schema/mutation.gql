@@ -1,0 +1,159 @@
+enum DELETETAGENUMS {
+  "Active"
+  a
+  "Requests"
+  r
+  "Requested"
+  re
+}
+
+
+input updateTagStatus {
+  _id: ID!
+  eStatus: TagActionStatus!
+}
+
+
+type updateTagStatusResponse {
+  sMessage: String!
+  oData: updateTagStatusResponseData
+}
+
+type updateTagStatusResponseData {
+  _id: ID
+}
+
+input tagInput {
+  eType: TagType!
+  sName: String!
+  iId: ID
+  sContent: String
+}
+
+input addTagInput {
+  tagsInput: tagInput
+}
+
+input deleteTag {
+  _id:ID!
+  eType: DELETETAGENUMS!
+}
+
+input editTagInput {
+  _id: ID!
+  tagsInput: tagInput
+}
+
+type addTagResponse {
+  oData: tagData
+  sMessage: String!
+}
+
+type deleteTagResponse {
+  sMessage:String!
+}
+
+enum TagType {
+  "Series"
+  s
+  "Team"
+  t
+  "player"
+  p
+  "league"
+  l
+  "venue"
+  v
+  "general tag"
+  gt
+}
+
+enum TagActionStatus {
+  "approve"
+  ap
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+  "declined"
+  dec
+}
+
+type editTagResponse {
+  oData: oEditTagData
+  sMessage: String!
+}
+
+input bulkTagActionInput {
+  aId: [ID]!
+  eStatus: TagActionStatus!
+  eType: DELETETAGENUMS
+}
+
+type createTagResponse {
+  sMessage: String
+  oData: tagData
+}
+
+input createTagInput {
+  eStatus: String
+  eType: TagType
+  sName: String
+  sContent: String
+  iId: ID
+}
+
+input updateOtherTagsInput {
+  "player,team,venue"
+  iId: ID 
+  eType: String
+  eStatus: String
+  sName: String
+}
+
+type updateOtherTagsResponse {
+  sMessage: String
+}
+
+
+type oEditTagData @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  nCount: Int
+  sContent: String
+  eStatus: String
+  iSubmittedBy: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iId: ID # id of player, tag or venue
+  oTeam: oShortTeam 
+  oPlayer: oShortPlayer
+  oVenue: oShortVenue
+}
+
+extend type oShortTeam @key(fields: "_id"){
+  _id: ID @external
+}
+
+extend type oShortPlayer @key(fields: "_id"){
+  _id: ID @external
+}
+
+extend type oShortVenue @key(fields: "_id"){
+  _id: ID @external
+}
+
+
+extend type Mutation {
+  addTag(input: addTagInput): addTagResponse
+  deleteTag(input: deleteTag): deleteTagResponse
+  editTag(input: editTagInput): editTagResponse
+  updateTagStatus(input: updateTagStatus): updateTagStatusResponse
+  bulkTagUpdate(input: bulkTagActionInput): updateTagStatusResponse
+  updateOtherTags(input:updateOtherTagsInput): updateOtherTagsResponse
+}

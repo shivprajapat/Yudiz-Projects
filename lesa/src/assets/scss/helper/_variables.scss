@@ -1,0 +1,128 @@
+$primary-font: 'founders_grotesk';
+
+
+$white: #ffffff;
+$white-100: #E9E9E9;
+$white-50: #ffffffcc;
+$black: #000000;
+$theme-color: #171717;
+$skin-color: #FFFAF3;
+$primary-color: #999999;
+$green-color: #C7FFBD;
+$green-200:#D2FCC3;
+
+$secondary-black: #2A2A2A;
+$grey-color: #DDDDDD;
+$pink-color: #ED7C70;
+$danger: #ff0000;
+$bg-primary: #333333;
+$grey-border: #545454;
+$header-text-color: #555555;
+$success: #128807;
+$success-bg: #9AD9BE;
+$danger-bg: #ffcccc;
+
+$red-100: #ED7C70;
+
+$green-100: #94D402;
+
+$red-100: #FF5745;
+
+$grey-100: #5A5A5A;
+$grey-200: #bac7d4;
+$grey-300: #666666;
+$grey-400: #484848;
+
+$grey-border-100: #4F4F4F;
+$grey-border-200: #444444;
+$grey-border-300: #AEAEAE;
+$grey-border-400: #656565;
+$grey-border-500: #585858;
+$grey-border-600: #B1B1B1;
+
+$black-100: #2B2B2B;
+$black-200: #272727;
+$black-300: #010101;
+$black-400: #1A1A1A;
+$black-500: #0c121c;
+$black-600: #030303;
+
+
+$skin-100: #FEF7F1;
+$skin-200: #F1E8DC;
+$cycle:#ccc;
+
+@mixin flex($items, $justify, $direction) {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  align-items: $items;
+  justify-content: $justify;
+  flex-direction: $direction;
+}
+
+// @include flex(center, center, null);
+
+@mixin flexbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+
+@mixin transition($property) {
+  -webkit-transition: $property;
+  -ms-transition: $property;
+  transition: $property;
+}
+@mixin transform($property) {
+  -webkit-transform: $property;
+  -ms-transform: $property;
+  transform: $property;
+}
+@mixin box-shadow($property) {
+  -webkit-box-shadow: $property;
+  box-shadow: $property;
+}
+@mixin filter($property) {
+  -webkit-filter: $property;
+  filter: $property;
+}
+@mixin flex-shrink($property) {
+  -webkit-flex-shrink: $property;
+  flex-shrink: $property;
+}
+@mixin flex-grow($property) {
+  -webkit-flex-grow: $property;
+  flex-grow: $property;
+}
+@mixin flex-wrap($property) {
+  -webkit-flex-wrap: $property;
+  flex-wrap: $property;
+}
+@mixin flex-direction($property) {
+  -webkit-flex-direction: $property;
+  flex-direction: $property;
+}
+@mixin justify-content($property) {
+  -webkit-justify-content: $property;
+  justify-content: $property;
+}
+@mixin align-items($property) {
+  -webkit-align-items: $property;
+  align-items: $property;
+}
+
+%after-before{ content: ""; position: absolute; display: block; }
+
+$grid-breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 767px,
+  lg: 992px,
+  xl: 1200px,
+  xxl: 1400px
+) !default;

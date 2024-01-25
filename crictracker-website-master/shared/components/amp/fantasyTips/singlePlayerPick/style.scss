@@ -1,0 +1,12 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.item { padding: 15px; background: var(--theme-light); color: var(--font-color); border-radius: 8px; position: relative; 
+  &:last-child { margin-bottom: 0; }
+}
+.imgBlock { width: 64px; position: relative; text-align: center; 
+    .img { border-radius: 50%; overflow: hidden; }
+}
+.point { margin-top: -10px; background-color: $font-color; color: #fff; border-radius: 2em; position: relative; }
+p { margin: 4px 0; }
+.tag { width: 22px; line-height: 22px; position: absolute; background-color: $theme-color; color: #fff; left: -6px; top: -6px; border-radius: 50%; }

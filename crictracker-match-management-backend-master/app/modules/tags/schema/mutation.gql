@@ -1,0 +1,173 @@
+type updatePlayerTagStatusResponse {
+    sMessage: String
+}
+
+type updateTeamTagStatusResponse {
+    sMessage: String
+}
+
+input updatePlayerTagStatusInput {
+    iPlayerId: ID
+    eStatus: PLAYERTAGSTATUS
+}
+input updateTeamTagStatusInput {
+    _id: ID
+    eStatus: PLAYERTAGSTATUS
+}
+
+enum PLAYERTAGSTATUS {
+    "approved"
+    a
+    "reject"
+    r
+}
+
+type editPlayerResponse {
+    sMessage: String
+    oData: oPlayer
+}
+
+input oCommonImageInput {
+  sText: String
+  sCaption: String
+  sAttribute: String
+  sUrl: String
+}
+
+enum PLATFORM {  
+    "Dream Eleven(11)"
+    de
+    "Eleven(11) Wickets"
+    ew
+}
+
+input oFantasyPlayerRating { 
+    ePlatformType: PLATFORM!
+    nRating: Int!
+ }
+
+ type oFantasyPlayerRatingRes { 
+    ePlatformType: PLATFORM!
+    nRating: Int!
+ }
+
+enum TAGSTATUS {  
+    "reject"
+    r
+    "approved"
+    a
+    "pending"
+    p
+}
+
+input editPlayerInput {
+    _id: ID
+    sCountry: String
+    oImg: oCommonImageInput
+    sFullName: String
+    sPlayingRole: String
+    sContent: String
+    sShortName: String
+    sFirstName: String
+    sLastName: String
+    sMiddleName: String
+    dBirthDate: Date
+    sBirthPlace: String
+    sLogoUrl: String
+    sBattingStyle: String
+    sBowlingStyle: String
+    sFieldingPosition: String
+    iRecentMatchId: ID
+    nRecentAppearance: Int
+    aFantasyPlayerRating: [oFantasyPlayerRating]
+    nPriority: Int
+    nBattingPerformancePoint: Float
+    nBowlingPerformancePoint: Float
+    sNationality: String
+    nMatchesPlayed: Int
+    nRuns: Int
+    nWickets: Int
+    sNickName: String
+    aMajorTeams: [ID!]
+    eTagStatus: TAGSTATUS
+    bTagEnabled: Boolean
+    sCountryFull: String
+    sSex: String
+}
+
+input bulkUpdatePlayerTagInput {
+    aId: [ID]
+   eStatus: PLAYERTAGSTATUS 
+}
+
+type bulkUpdatePlayerTagResponse {
+    sMessage: String
+}
+
+input bulkUpdateTeamTagInput {
+    aId: [ID]
+   eStatus: PLAYERTAGSTATUS 
+}
+
+type bulkUpdateTeamTagResponse {
+    sMessage: String
+}
+
+ type bulkEnableStatusResponse {
+    sMessage: String
+ }
+
+input bulkEnableStatusInput {
+    aId: [ID]
+    bStatus: Boolean
+    eType: MATCHTAGS 
+}
+
+enum MATCHTAGS {
+    "player"
+    p
+    "team"
+    t
+    "venue"
+    v
+}
+
+input bulkUpdateOtherTagInput {
+    aId: [ID]
+    eStatus: String
+    eType: MATCHTAGS
+}
+
+type bulkUpdateOtherTagResponse {
+    sMessage: String
+}
+
+type oEditTeamResponse {
+    sMessage: String
+    oData: oTeams
+}
+
+input oEditTeamInput {
+    _id: ID
+    sTitle: String
+    oImg: oCommonImageInput
+    eTeamType: TEAMTYPE
+    sCountry: String
+    oJersey: oCommonImageInput
+}
+
+enum TEAMTYPE {
+    club
+    country
+}
+
+extend type Mutation {
+   updatePlayerTagStatus(input:updatePlayerTagStatusInput):updatePlayerTagStatusResponse
+   editPlayer(input:editPlayerInput):editPlayerResponse
+   bulkUpdatePlayerTag(input:bulkUpdatePlayerTagInput):bulkUpdatePlayerTagResponse
+   bulkUpdateTeamTag(input:bulkUpdateTeamTagInput):bulkUpdateTeamTagResponse
+   updateTeamTagStatus(input:updateTeamTagStatusInput):updateTeamTagStatusResponse
+   bulkEnableStatus(input:bulkEnableStatusInput):bulkEnableStatusResponse
+   bulkUpdateOtherTag(input:bulkUpdateOtherTagInput):bulkUpdateOtherTagResponse
+   editTeam(input:oEditTeamInput):oEditTeamResponse
+}

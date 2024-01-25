@@ -1,0 +1,153 @@
+.hd-search-ot {
+  min-width: 48px;
+  min-height: 32px;
+}
+
+.navbar-expand .navbar-nav .searchSuggestion .dropdown-menu { position: static;}
+.searchItem {
+  position: relative;
+  z-index: 3;
+
+  .searchBtn {
+    width: 32px;
+  }
+
+  button {
+    position: relative;
+    z-index: 1;
+  }
+
+  .s-overlay {
+    top: 0;
+    background: #000;
+    z-index: 0;
+    opacity: 0;
+  }
+
+  &.s-active .s-overlay {
+    width: 100%;
+    height: 100%;
+    min-height: 150vh;
+    opacity: 0.72;
+  }
+
+  svg {
+    position: relative;
+  }
+}
+
+.searchBox {
+  position: absolute;
+  display: none;
+  @include transform(translateY(-50%));
+  z-index: 2;
+  opacity: 0;
+  .searchBtn {
+    [data-mode="dark"] & {
+      filter: brightness(0) invert(1) opacity(0.4);
+    }
+  }
+
+  .closeBtn {
+    width: 32px;
+    height: 32px;
+    background: #fff url(../../images/icon/close-icon.svg) no-repeat center center / 80% auto;
+
+    &:disabled {
+      opacity: 1;
+    }
+  }
+}
+
+.hd-searchGroup {
+  width: 540px;
+  z-index: 2;
+
+  .hs-searchControl {
+    padding-left: 46px;
+    padding-right: 86px;
+    line-height: 26px;
+    border: none;
+    font-size: 16px;
+    color: var(--font-color);
+  }
+
+  .hs-searchBtn {
+    right: 4px;
+  }
+
+  .hs-searchIcon {
+    left: 12px;
+  }
+}
+
+.searchSuggestion {
+  border-radius: 0 0 16px 16px;
+  width: calc(100% - 40px);
+  top: 16px;
+  z-index: 1;
+  .dropdown-menu {
+    padding: 0;
+    box-shadow: none;
+    position: static;
+  }
+  .itemList {
+    height: 0;
+  }
+  &.active .itemList {
+    margin-top: 8px;
+    height: 204px;
+    border-top: 1px solid var(--border-input);
+  }
+  &:not(.active) {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+  .searchItem {
+    background: transparent;
+    cursor: pointer;
+    color: var(--font-color);
+    border-bottom: 1px solid var(--border-input);
+    &:last-child { border: none;}
+    &:hover, &:focus, &:focus-within, &:active { 
+      color: var(--theme-color-light);
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .hd-searchGroup {
+    width: 100%;
+    .hs-searchControl {
+      border: 1px solid var(--border-input);
+    }
+  }
+
+  .hd-search-ot {
+    min-width: 37px;
+    min-height: 32px;
+    min-height: initial;
+  }
+  .searchItem {
+    .searchBtn {
+      width: 28px;
+    }
+    > .searchBtn { display: none; }
+    &.s-active .s-overlay { display: none; }
+  }
+  .searchSuggestion {
+    width: 100%;
+    border: 1px solid var(--border-input);
+    &.active .itemList {
+      margin-top: 10px;
+      border-top: none;
+    }
+  }
+  .searchBox {
+    position: relative;
+    width: 100%;
+    @include transform(none);
+    form { width: 90%; margin: 0px auto 24px; position: relative; }
+  }
+  
+}

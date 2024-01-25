@@ -1,0 +1,154 @@
+@import '../../../../assets/scss/helper/_variables';
+
+.create-items {
+  background-color: transparent;
+  margin-bottom: 32px;
+  transition: all 0.5s;
+  position: relative;
+
+  &:hover {
+    box-shadow: 5px 6px 6px 2px #030d161f;
+    transform: scale(1.05);
+  }
+
+  .card-header {
+    padding: 0;
+    .card-img-top {
+      height: 314px;
+      object-fit: cover;
+    }
+    .btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      img {
+        margin-left: -9px;
+        padding-right: 8px;
+      }
+    }
+  }
+
+  .card-body {
+    z-index: 999;
+    padding: 43px 0 32px 0;
+    border-bottom: 1px solid $grey-border-200;
+    @include flex(null, space-between, null);
+    min-height: 12rem;
+    align-items: center;
+  }
+
+  .card-text {
+    flex: 0 0 33%;
+    max-width: 33%;
+    min-height: 7rem;
+    .card-title {
+      font-weight: 400;
+      font-size: 18px;
+      letter-spacing: 0.1rem;
+      margin-bottom: 5px;
+    }
+
+    .card-link {
+      border: 1px solid $grey-border-200;
+      border-radius: 29px;
+      @include flex(center, null, null);
+      // max-width: 205px;
+      // height: 54px;
+
+      img {
+          width: 54px;
+          height: 54px;
+          border-radius: 50%;
+          background: white;
+          padding: 5px;
+        }
+
+      p {
+        margin: 0;
+        font-weight: 400;
+        padding: 5px 5px 5px 10px;
+        font-size: 14px;
+        color: $white;
+      }
+    }
+  }
+
+  .card-footer {
+    text-align: center;
+    .btn {
+      min-width: 280px;
+    }
+  }
+
+  .loot-box-icn{
+    border-radius: 50% !important;
+  }
+
+  @media (max-width: 1199px) {
+    .card-body {
+      flex-wrap: wrap;
+      min-height: 13rem;
+      align-items: center;
+      .card-text {
+        max-width: 50%;
+      }
+    }
+  }
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    .card-body {
+      min-height: 12rem;
+      align-items: center;
+      .card-text {
+        .card-link {
+          margin: 5px;
+
+          img {
+            width: 30px !important;
+            height: 30px !important;
+          }
+
+          p {
+            font-size: 16px !important;
+          }
+        }
+      }
+    }
+  }
+
+  @media (max-width: 680px) {
+    .card-header .btn {
+      left: 16px !important;
+    }
+
+    .card-body {
+      min-height: 12rem;
+      align-items: center;
+      padding: 17px 0 28px 0;
+
+      .card-text {
+        img {
+          width: 30px !important ;
+          height: 30px !important;
+        }
+
+        .card-title {
+          font-size: 20px;
+          margin-bottom: 8px;
+        }
+
+        .card-link {
+          height: 38px;
+          max-width: 155px;
+          p {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+
+    .card-footer {
+      margin-top: 24px !important;
+    }
+  }
+}

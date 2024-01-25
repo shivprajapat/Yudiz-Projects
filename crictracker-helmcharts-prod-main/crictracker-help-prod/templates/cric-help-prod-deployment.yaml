@@ -1,0 +1,191 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Values.labels.release }}
+    app: {{ .Release.Name }}
+    environment: {{ .Values.labels.environment }}
+    tier: {{ .Values.labels.tier }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      {{- if .Values.imagePullSecrets.enabled }} 
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.image }}
+        {{- if .Values.podprestophook.enabled }} 
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh","-c","sleep 20"]
+        {{- end }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        env:
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: jwt
+                key: JWT_SECRET     
+
+          - name: AWS_ACCESSKEYID
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: AWS_ACCESSKEYID
+
+          - name: AWS_SECRETKEY
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: AWS_SECRETKEY
+                
+          - name: DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: HELP_DB_URL     
+
+          #configmap
+
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_HOST      
+
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_PORT   
+
+          - name: NODE_ENV
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: NODE_ENV      
+
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: PORT      
+
+          - name: SUPPORT_EMAIL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SUPPORT_EMAIL    
+
+          - name: AWS_REGION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: AWS_REGION       
+
+          - name: S3_BUCKET_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_NAME
+
+          - name: S3_BUCKET_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_URL
+
+          - name: S3_BUCKET_PROFILE_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_PROFILE_PATH
+           
+          - name: S3_BUCKET_KYC_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_KYC_PATH
+
+          - name: S3_BUCKET_FB_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_FB_PATH
+
+          - name: S3_BUCKET_TWITTER_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_TWITTER_PATH
+
+          - name: S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH
+
+          - name: S3_BUCKET_ARTICLE_THUMBIMAGE_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_ARTICLE_THUMBIMAGE_PATH            
+          
+          - name: AUTH_SUBGRAPH_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: AUTH_SUBGRAPH_URL
+
+          - name: SENTRY_DSN
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SENTRY_DSN
+
+          - name: CONNECTION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: CONNECTION              

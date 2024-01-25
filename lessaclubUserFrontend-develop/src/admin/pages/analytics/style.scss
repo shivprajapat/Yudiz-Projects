@@ -1,0 +1,96 @@
+.analytics {
+  .analytics-actions {
+      display: flex;
+      align-content: flex-start;
+      flex-wrap: wrap;
+  
+      .action {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        justify-content: center;
+        padding: 1rem;
+        .react-select {
+          width: 200px;
+          .select__menu {
+            z-index: 2;
+            margin: 0px;
+            border-radius: 0px;
+          }
+        }
+      }
+  
+      .form-actions {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+  
+        .btn {
+          border-radius: 5px;
+          min-width: 90px;
+          padding: 13px 10px 9px;
+          font-weight: 500;
+          font-size: 16px;
+        }
+      }
+    }
+
+  .catagories {
+    display: flex;
+    justify-content: flex-start;
+    padding: 1rem 0;
+    max-width: 500px;
+
+    .single-detail {
+      p {
+        font-weight: 500;
+      }
+      font-size: 1.3rem;
+      padding: 1rem;
+      border: 1px solid rgb(204, 204, 204);
+    }
+  }
+
+  .chart-container {
+    display: flex;
+    flex-wrap: wrap;
+    height: auto;
+    align-items: center;
+    justify-content: flex-start;
+    .single-chart {
+      width: 50%;
+      padding: 2rem 3rem;
+    }
+  }
+
+  .card {
+    padding: 0;
+    background-color: transparent;
+    border: none;
+
+    &-header {
+      border: none;
+      padding: 0;
+    }
+
+    &-body {
+      padding: 0;
+    }
+
+    .chart-container {
+      margin-top: 20px;
+      width: 100%;
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 1199px) {
+    .chart-container {
+      width: 100%;
+      flex-direction: column;
+      .single-chart {
+        width: 90%;
+      }
+    }
+  }
+  
+}

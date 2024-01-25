@@ -1,0 +1,825 @@
+[{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed4"
+  },
+  "eType": "content",
+  "sTitle": "Create Article",
+  "eKey": "CREATE_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed2"
+  },
+  "eType": "content",
+  "sTitle": "Edit Article",
+  "eKey": "EDIT_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed3"
+  },
+  "eType": "admin",
+  "sTitle": "Create Role",
+  "eKey": "CREATE_ROLE",
+  "ePerType": "role"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6edb"
+  },
+  "eType": "content",
+  "sTitle": "List Category",
+  "eKey": "LIST_CATEGORY",
+  "ePerType": "category"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee8"
+  },
+  "eType": "admin",
+  "sTitle": "Edit Subadmin",
+  "eKey": "EDIT_SUBADMIN",
+  "ePerType": "admin"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6eea"
+  },
+  "eType": "content",
+  "sTitle": "Change Status Category",
+  "eKey": "CHANGE_STATUS_CATEGORY",
+  "ePerType": "category"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6eeb"
+  },
+  "eType": "content",
+  "sTitle": "Delete Active Tag",
+  "eKey": "DELETE_ACTIVE_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6eef"
+  },
+  "eType": "content",
+  "sTitle": "Delete Requested Tag",
+  "eKey": "DELETE_REQUESTED_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ef1"
+  },
+  "eType": "content",
+  "sTitle": "Publish Article",
+  "eKey": "PUBLISH_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed0"
+  },
+  "eType": "admin",
+  "sTitle": "Add Subadmin",
+  "eKey": "ADD_SUBADMIN",
+  "ePerType": "admin"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed7"
+  },
+  "eType": "content",
+  "sTitle": "Create Tag",
+  "eKey": "CREATE_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6edd"
+  },
+  "eType": "admin",
+  "sTitle": "View Subadmin",
+  "eKey": "VIEW_SUBADMIN",
+  "ePerType": "admin"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee1"
+  },
+  "eType": "content",
+  "sTitle": "Pick Article",
+  "eKey": "PICK_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee4"
+  },
+  "eType": "content",
+  "sTitle": "List Comment",
+  "eKey": "LIST_COMMENT",
+  "ePerType": "comment"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee5"
+  },
+  "eType": "admin",
+  "sTitle": "List Role",
+  "eKey": "LIST_ROLE",
+  "ePerType": "role"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee7"
+  },
+  "eType": "admin",
+  "sTitle": "Delete Subadmin",
+  "eKey": "DELETE_SUBADMIN",
+  "ePerType": "admin"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6eee"
+  },
+  "eType": "content",
+  "sTitle": "Approve Reject Requests Tag",
+  "eKey": "APPROVE_REJECT_REQUESTS_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ecf"
+  },
+  "eType": "admin",
+  "sTitle": "Delete Role",
+  "eKey": "DELETE_ROLE",
+  "ePerType": "role"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed1"
+  },
+  "eType": "admin",
+  "sTitle": "Edit Role",
+  "eKey": "EDIT_ROLE",
+  "ePerType": "role"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed6"
+  },
+  "eType": "content",
+  "sTitle": "Edit Active Tag",
+  "eKey": "EDIT_ACTIVE_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed8"
+  },
+  "eType": "content",
+  "sTitle": "Edit Category",
+  "eKey": "EDIT_CATEGORY",
+  "ePerType": "category"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6edc"
+  },
+  "eType": "content",
+  "sTitle": "Delete Category",
+  "eKey": "DELETE_CATEGORY",
+  "ePerType": "category"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ede"
+  },
+  "eType": "content",
+  "sTitle": "List Requests Tag",
+  "eKey": "LIST_REQUESTS_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee0"
+  },
+  "eType": "content",
+  "sTitle": "List Article",
+  "eKey": "LIST_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee2"
+  },
+  "eType": "content",
+  "sTitle": "Publish Date Change Article",
+  "eKey": "PUBLISH_DATE_CHANGE_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6eed"
+  },
+  "eType": "content",
+  "sTitle": "Delete Requests Tag",
+  "eKey": "DELETE_REQUESTS_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed5"
+  },
+  "eType": "admin",
+  "sTitle": "List Subadmin",
+  "eKey": "LIST_SUBADMIN",
+  "ePerType": "admin"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ed9"
+  },
+  "eType": "content",
+  "sTitle": "List Active Tag",
+  "eKey": "LIST_ACTIVE_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6eda"
+  },
+  "eType": "content",
+  "sTitle": "Create Category",
+  "eKey": "CREATE_CATEGORY",
+  "ePerType": "category"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee3"
+  },
+  "eType": "content",
+  "sTitle": "Display Author Change Article",
+  "eKey": "DISPLAY_AUTHOR_CHANGE_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee6"
+  },
+  "eType": "admin",
+  "sTitle": "Change Status Subadmin",
+  "eKey": "CHANGE_STATUS_SUBADMIN",
+  "ePerType": "admin"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ee9"
+  },
+  "eType": "admin",
+  "sTitle": "Verify Subadmin",
+  "eKey": "VERIFY_SUBADMIN",
+  "ePerType": "admin"
+},{
+  "_id": {
+    "$oid": "61989ee606816b82ec1b6ef0"
+  },
+  "eType": "content",
+  "sTitle": "Change Status Active Tag",
+  "eKey": "CHANGE_STATUS_ACTIVE_TAG",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "619c7ed40ca5c236777eeeec"
+  },
+  "eType": "content",
+  "sTitle": "Overtake Article",
+  "eKey": "OVERTAKE_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "619c88780ca5c236777eef00"
+  },
+  "eType": "content",
+  "sTitle": "Delete Article",
+  "eKey": "DELETE_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "619debdd62c611197260e924"
+  },
+  "eType": "content",
+  "sTitle": "Publish Save Changes",
+  "eKey": "PUBLISH_SAVE_CHANGES",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "619dec0f62c611197260e925"
+  },
+  "eType": "content",
+  "sTitle": "Publish Delete Article",
+  "eKey": "PUBLISH_DELETE_ARTICLE",
+  "ePerType": "article"
+},{
+  "_id": {
+    "$oid": "619e3a1562c611197260e938"
+  },
+  "eType": "content",
+  "sTitle": "Approve Comment",
+  "eKey": "APPROVE_COMMENT",
+  "ePerType": "comment"
+},{
+  "_id": {
+    "$oid": "619e3a3662c611197260e939"
+  },
+  "eType": "content",
+  "sTitle": "Pending Comment",
+  "eKey": "PENDING_COMMENT",
+  "ePerType": "comment"
+},{
+  "_id": {
+    "$oid": "619e3a4b62c611197260e93a"
+  },
+  "eType": "content",
+  "sTitle": "Reject Comment",
+  "eKey": "REJECT_COMMENT",
+  "ePerType": "comment"
+},{
+  "_id": {
+    "$oid": "619e3a7b62c611197260e93b"
+  },
+  "eType": "content",
+  "sTitle": "Trash Comment",
+  "eKey": "TRASH_COMMENT",
+  "ePerType": "comment"
+},{
+  "_id": {
+    "$oid": "619e3a8a62c611197260e93c"
+  },
+  "eType": "content",
+  "sTitle": "Spam Comment",
+  "eKey": "SPAM_COMMENT",
+  "ePerType": "comment"
+},{
+  "_id": {
+    "$oid": "61b6dd92ad8a39d5748dc28a"
+  },
+  "eType": "content",
+  "sTitle": "Get Contact",
+  "eKey": "GET_CONTACT",
+  "ePerType": "contact"
+},{
+  "_id": {
+    "$oid": "61b6ddaaad8a39d5748dc28b"
+  },
+  "eType": "content",
+  "sTitle": "List Contact",
+  "eKey": "LIST_CONTACT",
+  "ePerType": "contact"
+},{
+  "_id": {
+    "$oid": "61b6ddbead8a39d5748dc28c"
+  },
+  "eType": "content",
+  "sTitle": "Delete Contact",
+  "eKey": "DELETE_CONTACT",
+  "ePerType": "contact"
+},{
+  "_id": {
+    "$oid": "61b6de06ad8a39d5748dc28d"
+  },
+  "eType": "content",
+  "sTitle": "Get Feedback",
+  "eKey": "GET_FEEDBACK",
+  "ePerType": "feedback"
+},{
+  "_id": {
+    "$oid": "61b6de19ad8a39d5748dc28e"
+  },
+  "eType": "content",
+  "sTitle": "List Feedback",
+  "eKey": "LIST_FEEDBACK",
+  "ePerType": "feedback"
+},{
+  "_id": {
+    "$oid": "61b6de2bad8a39d5748dc28f"
+  },
+  "eType": "content",
+  "sTitle": "delete Feedback",
+  "eKey": "DELETE_FEEDBACK",
+  "ePerType": "feedback"
+},{
+  "_id": {
+    "$oid": "61b9f309c0c3a226b2cb453b"
+  },
+  "eType": "content",
+  "sTitle": "Edit Slug",
+  "eKey": "EDIT_SLUG",
+  "ePerType": "slug"
+},{
+  "_id": {
+    "$oid": "61c198c50c57d489aa952a76"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Edit Article",
+  "eKey": "FANTASY_EDIT_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c198d20c57d489aa952a77"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Create Article",
+  "eKey": "FANTASY_CREATE_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c199100c57d489aa952a78"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy List Article",
+  "eKey": "FANTASY_LIST_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c199270c57d489aa952a79"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Pick Article",
+  "eKey": "FANTASY_PICK_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c199760c57d489aa952a7a"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Display Author Change Article",
+  "eKey": "FANTASY_DISPLAY_AUTHOR_CHANGE_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c1999d0c57d489aa952a7b"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Publish Article",
+  "eKey": "FANTASY_PUBLISH_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c199bb0c57d489aa952a7c"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Overtake Article",
+  "eKey": "FANTASY_OVERTAKE_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c199d90c57d489aa952a7d"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Delete Article",
+  "eKey": "FANTASY_DELETE_ARTICLE",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c19a0f0c57d489aa952a7f"
+  },
+  "eType": "content",
+  "sTitle": "Fantasy Publish Save Changes",
+  "eKey": "FANTASY_PUBLISH_SAVE_CHANGES",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61c2e8175ce7ae5587eb2f1f"
+  },
+  "eType": "content",
+  "eKey": "LIST_PLAYLIST",
+  "sTitle": "List Playlist",
+  "ePerType": "playlist"
+},{
+  "_id": {
+    "$oid": "61c2e8175ce7ae5587eb2f21"
+  },
+  "eType": "content",
+  "eKey": "FETCH_PLAYLIST",
+  "sTitle": "Fetch Playlist",
+  "ePerType": "playlist"
+},{
+  "_id": {
+    "$oid": "61c2e8175ce7ae5587eb2f20"
+  },
+  "eType": "content",
+  "eKey": "UPDATE_PLAYLIST",
+  "sTitle": "Update Playlist",
+  "ePerType": "playlist"
+},{
+  "_id": {
+    "$oid": "61c55286ebadd59fba0a189a"
+  },
+  "eType": "content",
+  "eKey": "LIST_PLAYER_TAGS",
+  "sTitle": "List Player Tags",
+  "ePerType": "tags"
+},{
+  "_id": {
+    "$oid": "61c5529debadd59fba0a189b"
+  },
+  "eType": "content",
+  "eKey": "EDIT_PLAYER",
+  "sTitle": "Edit Player",
+  "ePerType": "player"
+},{
+  "_id": {
+    "$oid": "61c55357ebadd59fba0a189c"
+  },
+  "eType": "content",
+  "eKey": "UPDATE_PLAYER_TAG_STATUS",
+  "sTitle": "Update Player Tag Status",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61cb057e50da7025515ce3eb"
+  },
+  "eType": "content",
+  "eKey": "LIST_TEAM_TAGS",
+  "sTitle": "List Team Tags",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61cb059350da7025515ce3ec"
+  },
+  "eType": "content",
+  "eKey": "EDIT_TEAM",
+  "sTitle": "Edit Team",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61cb05b150da7025515ce3ed"
+  },
+  "eType": "content",
+  "eKey": "UPDATE_TEAM_TAG_STATUS",
+  "sTitle": "Update Team Tag Status",
+  "ePerType": "tag"
+},{
+  "_id": {
+    "$oid": "61cd84c4f8ab16f109bbcf28"
+  },
+  "eType": "content",
+  "eKey": "FANTASY_PUBLISH_DELETE_ARTICLE",
+  "sTitle": "Fantasy Publish Delete Article",
+  "ePerType": "fantasyArticle"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b1513b"
+  },
+  "eType": "analytics",
+  "eKey": "DELETE_SEO",
+  "sTitle": "Delete Seo",
+  "ePerType": "seo"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b1513c"
+  },
+  "eType": "analytics",
+  "eKey": "UPDATE_SEO_STATUS",
+  "sTitle": "Update Seo Status",
+  "ePerType": "seo"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b1513e"
+  },
+  "eType": "analytics",
+  "eKey": "EDIT_SEO",
+  "sTitle": "Edit Seo",
+  "ePerType": "seo"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b1513f"
+  },
+  "eType": "analytics",
+  "eKey": "VIEW_SEO",
+  "sTitle": "View Seo",
+  "ePerType": "seo"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b1513d"
+  },
+  "eType": "analytics",
+  "eKey": "ADD_SEO",
+  "sTitle": "Add Seo",
+  "ePerType": "seo"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b15140"
+  },
+  "eType": "analytics",
+  "eKey": "LIST_SEO",
+  "sTitle": "List Seo",
+  "ePerType": "seo"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b15142"
+  },
+  "eType": "analytics",
+  "eKey": "UPDATE_SEO_REDIRECT_STATUS",
+  "sTitle": "Update Seo Redirect Status",
+  "ePerType": "seoRedirect"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b15145"
+  },
+  "eType": "analytics",
+  "eKey": "VIEW_SEO_REDIRECT",
+  "sTitle": "View Seo Redirect",
+  "ePerType": "seoRedirect"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b15143"
+  },
+  "eType": "analytics",
+  "eKey": "ADD_SEO_REDIRECT",
+  "sTitle": "Add Seo Redirect",
+  "ePerType": "seoRedirect"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b15146"
+  },
+  "eType": "analytics",
+  "eKey": "LIST_SEO_REDIRECT",
+  "sTitle": "List Seo Redirect",
+  "ePerType": "seoRedirect"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b15144"
+  },
+  "eType": "analytics",
+  "eKey": "EDIT_SEO_REDIRECT",
+  "sTitle": "Edit Seo Redirect",
+  "ePerType": "seoRedirect"
+},{
+  "_id": {
+    "$oid": "61d0003017b91d90d3b15141"
+  },
+  "eType": "analytics",
+  "eKey": "DELETE_SEO_REDIRECT",
+  "sTitle": "Delete Seo Redirect",
+  "ePerType": "seoRedirect"
+},{
+  "_id": {
+    "$oid": "61d4399c2eb5c7aa57623887"
+  },
+  "eType": "content",
+  "sTitle": "Create Job",
+  "eKey": "CREATE_JOB",
+  "ePerType": "job"
+},{
+  "_id": {
+    "$oid": "61d439af2eb5c7aa57623888"
+  },
+  "eType": "content",
+  "sTitle": "Edit Job",
+  "eKey": "EDIT_JOB",
+  "ePerType": "job"
+},{
+  "_id": {
+    "$oid": "61d439c12eb5c7aa57623889"
+  },
+  "eType": "content",
+  "sTitle": "Get Job",
+  "eKey": "GET_JOB",
+  "ePerType": "job"
+},{
+  "_id": {
+    "$oid": "61d439d42eb5c7aa5762388a"
+  },
+  "eType": "content",
+  "sTitle": "List Job",
+  "eKey": "LIST_JOB",
+  "ePerType": "job"
+},{
+  "_id": {
+    "$oid": "61d439ee2eb5c7aa5762388b"
+  },
+  "eType": "content",
+  "sTitle": "Delete Job",
+  "eKey": "DELETE_JOB",
+  "ePerType": "job"
+},{
+  "_id": {
+    "$oid": "6200f1b85f1a6a6f0fefee59"
+  },
+  "eType": "content",
+  "eKey": "CREATE_CMS_PAGE",
+  "sTitle": "Create CMS Page",
+  "ePerType": "cms"
+},{
+  "_id": {
+    "$oid": "6200f1b85f1a6a6f0fefee58"
+  },
+  "eType": "content",
+  "eKey": "LIST_MIGRATION_TAG",
+  "sTitle": "List Migration Tag",
+  "ePerType": "cms"
+},{
+  "_id": {
+    "$oid": "6200f1b85f1a6a6f0fefee5a"
+  },
+  "eType": "content",
+  "eKey": "DELETE_CMS_PAGE",
+  "sTitle": "Delete CMS Page",
+  "ePerType": "cms"
+},{
+  "_id": {
+    "$oid": "6200f1b85f1a6a6f0fefee5b"
+  },
+  "eType": "content",
+  "eKey": "UPDATE_CMS_PAGE_STATUS",
+  "sTitle": "Update CMS Page Status",
+  "ePerType": "cms"
+},{
+  "_id": {
+    "$oid": "6200f1b85f1a6a6f0fefee5c"
+  },
+  "eType": "content",
+  "eKey": "EDIT_CMS_PAGE",
+  "sTitle": "Edit CMS Page",
+  "ePerType": "cms"
+},{
+  "_id": {
+    "$oid": "6200f1b85f1a6a6f0fefee5e"
+  },
+  "eType": "content",
+  "eKey": "LIST_CMS_PAGE",
+  "sTitle": "List CMS Page",
+  "ePerType": "cms"
+},{
+  "_id": {
+    "$oid": "6200f1b85f1a6a6f0fefee5d"
+  },
+  "eType": "content",
+  "eKey": "VIEW_CMS_PAGE",
+  "sTitle": "View CMS Page",
+  "ePerType": "cms"
+},{
+  "_id": {
+    "$oid": "620f6b4e305b74cb2d7c39ea"
+  },
+  "eType": "content",
+  "eKey": "CREATE_CURRENT_SERIES",
+  "sTitle": "Create Current Series",
+  "ePerType": "series"
+},{
+  "_id": {
+    "$oid": "620f6b4e305b74cb2d7c39ee"
+  },
+  "eType": "content",
+  "eKey": "VIEW_CURRENT_SERIES",
+  "sTitle": "View Current Series",
+  "ePerType": "series"
+},{
+  "_id": {
+    "$oid": "620f6b4e305b74cb2d7c39ec"
+  },
+  "eType": "content",
+  "eKey": "EDIT_CURRENT_SERIES",
+  "sTitle": "Edit Current Series",
+  "ePerType": "series"
+},{
+  "_id": {
+    "$oid": "620f6b4e305b74cb2d7c39ed"
+  },
+  "eType": "content",
+  "eKey": "UPDATE_CURRENT_SERIES_STATUS",
+  "sTitle": "Update Current Series Status",
+  "ePerType": "series"
+},{
+  "_id": {
+    "$oid": "620f6b4e305b74cb2d7c39eb"
+  },
+  "eType": "content",
+  "eKey": "DELETE_CURRENT_SERIES",
+  "sTitle": "Delete Current Series",
+  "ePerType": "series"
+},{
+  "_id": {
+    "$oid": "620f6b4e305b74cb2d7c39ef"
+  },
+  "eType": "content",
+  "eKey": "LIST_CURRENT_SERIES",
+  "sTitle": "List Current Series",
+  "ePerType": "series"
+},{
+  "_id": {
+    "$oid": "620f90e3cc379b953e1836da"
+  },
+  "eType": "admin",
+  "eKey": "LIST_USER",
+  "sTitle": "List User",
+  "ePerType": "user"
+},{
+  "_id": {
+    "$oid": "620f90e3cc379b953e1836db"
+  },
+  "eType": "admin",
+  "eKey": "VIEW_USER",
+  "sTitle": "View User",
+  "ePerType": "user"
+},{
+  "_id": {
+    "$oid": "620f90e3cc379b953e1836dc"
+  },
+  "eType": "admin",
+  "eKey": "DELETE_USER",
+  "sTitle": "Delete User",
+  "ePerType": "user"
+},{
+  "_id": {
+    "$oid": "620f90e3cc379b953e1836dd"
+  },
+  "eType": "admin",
+  "eKey": "UPDATE_USER_STATUS",
+  "sTitle": "Update User Status",
+  "ePerType": "user"
+},{
+  "_id": {
+    "$oid": "623ab3357fe719c9ccfa88a9"
+  },
+  "eType": "content",
+  "sTitle": "Match Overview Fantasy Article",
+  "eKey": "MATCH_OVERVIEW_FANTASY_ARTICLE",
+  "ePerType": "fantasyArticle"
+}]

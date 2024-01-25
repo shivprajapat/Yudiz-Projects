@@ -1,0 +1,17 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item { width: calc(50% - 8px);
+  &::after { @extend %after-before; left: 0; top: 0; width: 100%; height: 100%; z-index: 0; 
+    background-image: linear-gradient(90deg, rgba(23, 74, 156,1) 0%, rgba(23, 74, 156,1) 55%, rgba(23, 74, 156,0.2) 100%);
+    [data-mode=dark] & { 
+      background-image: linear-gradient(90deg, rgba(35, 39, 46,1) 0%, rgba(35, 39, 46,1) 55%, rgba(35, 39, 46,0.2) 100%);
+    }
+  }
+}
+.itemLink { cursor: pointer; }
+.name { z-index: 2; color: $light-color; }
+.flag { width: 45%; }
+
+
+/***** Responsive CSS Start ******/

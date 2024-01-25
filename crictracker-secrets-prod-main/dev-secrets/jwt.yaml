@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: dev
+  name: jwt
+data:
+  JWT_SECRET: Y3JpY3RyYWNrZXI=

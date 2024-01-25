@@ -1,0 +1,15 @@
+<svg width="104" height="272" viewBox="0 0 104 272" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g opacity="0.8">
+<rect opacity="0.799177" width="104" height="272" rx="2" fill="#C4A783"/>
+<g opacity="0.3">
+<rect opacity="0.518624" y="48" width="104" height="4" fill="white"/>
+<path opacity="0.518624" fill-rule="evenodd" clip-rule="evenodd" d="M13 8H9V26V30V48H13V30H31V26H13V8Z" fill="white"/>
+<path opacity="0.518624" fill-rule="evenodd" clip-rule="evenodd" d="M91 8H95V26V30V48H91V30H73V26H91V8Z" fill="white"/>
+</g>
+<g opacity="0.3">
+<rect opacity="0.518624" width="104" height="4" transform="matrix(1 0 0 -1 0 224)" fill="white"/>
+<path opacity="0.518624" fill-rule="evenodd" clip-rule="evenodd" d="M13 264H9V246V242V224H13V242H31V246H13V264Z" fill="white"/>
+<path opacity="0.518624" fill-rule="evenodd" clip-rule="evenodd" d="M91 264H95V246V242V224H91V242H73V246H91V264Z" fill="white"/>
+</g>
+</g>
+</svg>

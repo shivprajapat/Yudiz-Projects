@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_SizeChart
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <head>
+        <css src="Mageplaza_Core::css/magnific-popup.css"/>
+        <css src="Mageplaza_Core::css/mp.css"/>
+        <css src="Mageplaza_SizeChart::css/style.css"/>
+    </head>
+    <body>
+        <referenceBlock name="product.info.details">
+            <block class="Mageplaza\SizeChart\Block\Product\SizeChart" name="mpsizechart.tab" as="mp-sizechart-tab"
+                   template="Mageplaza_SizeChart::product/display/tab.phtml" group="detailed_info" ifconfig="sizechart/general/enabled"/>
+        </referenceBlock>
+    </body>
+    <referenceContainer name="product.info.main">
+        <block class="Mageplaza\SizeChart\Block\Product\SizeChart" name="mpsizechart.product.sizechart" as="sizechart"
+               before="product.info.social" template="Mageplaza_SizeChart::product/sizechart.phtml" ifconfig="sizechart/general/enabled">
+            <block class="Mageplaza\SizeChart\Block\Product\SizeChart" name="mpsizechart.product.inline" as="inline"
+                   template="Mageplaza_SizeChart::product/display/inline.phtml"/>
+        </block>
+    </referenceContainer>
+</page>

@@ -1,0 +1,25 @@
+.form-label {
+    font-weight: 400;
+    font-size: 14px;
+    padding-bottom: 3px;
+    line-height: 22px;
+    color: #445774;
+    display: block;
+}
+
+.description {
+    width: 100%;
+    height: 132px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    border: 1px solid #dfe4ec;
+    border-radius: 8px;
+    color: #b2bfd2;
+    resize: none;
+
+    &:focus {
+        border: 1px solid #2684ff;
+        outline: 0;
+    }
+}

@@ -1,0 +1,41 @@
+name: Otp
+description: ''
+endpoints:
+  -
+    httpMethods:
+      - POST
+    uri: api/v1/send-otp
+    metadata:
+      groupName: Otp
+      groupDescription: ''
+      subgroup: ''
+      subgroupDescription: ''
+      title: 'send otp'
+      description: ''
+      authenticated: false
+      custom: []
+    headers:
+      Content-Type: application/json
+      Accept: application/json
+    urlParameters: []
+    cleanUrlParameters: []
+    queryParameters: []
+    cleanQueryParameters: []
+    bodyParameters:
+      mobile_number:
+        name: mobile_number
+        description: 'Must be 10 digits. Must match the regex /^[0-9]+$/.'
+        required: true
+        example: '5675'
+        type: string
+        custom: []
+    cleanBodyParameters:
+      mobile_number: '5675'
+    fileParameters: []
+    responses: []
+    responseFields: []
+    auth: []
+    controller: null
+    method: null
+    route: null
+    custom: []

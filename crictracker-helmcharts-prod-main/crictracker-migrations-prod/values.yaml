@@ -1,0 +1,54 @@
+replicaCount: 1
+image: 693583001687.dkr.ecr.ap-south-1.amazonaws.com/crictracker-migrations:latest
+pullPolicy: Always
+
+labels:
+  tier: backend
+  release: blue-green
+  environment: production
+
+namespace: production
+
+service:
+  internaltype: ClusterIP
+  internalport: 80
+  type: NodePort
+  port: 5001
+  healthcheck: /api/ping
+  pm2: 9209
+
+resources: 
+  requests:
+    memory: "200Mi"
+    cpu: "200m"
+  limits:
+    memory: "400Mi"
+    cpu: "400m"
+
+livenessProbe:
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+  initialDelaySeconds: 25
+  timeoutSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 25
+  timeoutSeconds: 30
+  failureThreshold: 3
+  periodSeconds: 10
+  successThreshold: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: "3"
+  maxReplicas: "15"
+  targetCPU: "60"
+
+#Because we are using our private docker registry deployed in Kubernetes if you are using AWS(ECR) than you can disable this.
+imagePullSecrets:
+  enabled: false
+  name: regcred
+
+terminationGracePeriodSeconds: 50
+podprestophook:
+  enabled: true

@@ -1,0 +1,20 @@
+input addAdsTxtInput {
+  sAds: String!
+}
+
+type addAdsTxtResponse {
+  sMessage: String
+}
+
+input deleteArticleAttachmentInput {
+  sUrl: String!
+}
+
+type deleteArticleAttachmentResponse {
+  sMessage: String
+}
+
+extend type Mutation {
+  addAdsTxt(input: addAdsTxtInput): addAdsTxtResponse
+  deleteArticleAttachment(input: deleteArticleAttachmentInput): deleteArticleAttachmentResponse
+}

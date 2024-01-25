@@ -1,0 +1,18 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.articleGrid { padding-bottom: 12px; }
+
+/***** Responsive CSS Start ******/
+@media (max-width: 1399px) {
+  .articleInfo { font-size: 10px;
+    span { margin-right: 4px; }
+    .icon { width: 12px; }
+  } 
+  
+}
+@media (max-width: 575px) {
+  .mobileSmall {
+    .postimg { width: 41%; flex-shrink: 0; margin-right: 8px; }
+  }
+}

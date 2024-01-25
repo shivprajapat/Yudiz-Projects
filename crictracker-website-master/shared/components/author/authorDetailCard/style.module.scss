@@ -1,0 +1,50 @@
+@import "@assets/scss/variables.scss";
+
+.postimg {
+    height: 116px;
+    width: 116px;
+}
+
+.verfied {
+    margin-left: 5px;
+    width: 18px;
+    height: 18px;
+    background: url(../../../../assets/images/icon/verified_badge.svg) no-repeat center center / cover;
+}
+
+.authorInfo h3 {
+    -webkit-line-clamp: 2;
+}
+
+.icon svg {
+    width: 44px;
+    height: 44px;
+}
+
+@media (max-width: 767px) {
+    .postimg {
+        height: 100px;
+        width: 100px;
+    }
+
+    .view,
+    .authorInfo {
+        position: absolute;
+        width: calc(100% - 134px);
+        right: 12px;
+        top: 12px;
+    }
+
+    .view {
+        top: 80px;
+    }
+
+    .icon svg {
+        width: 24px;
+        height: 24px;
+    }
+}
+
+@media (max-width: 350px) {
+    .authorInfo .designation { flex-direction: row !important; line-height: 16px; }
+}

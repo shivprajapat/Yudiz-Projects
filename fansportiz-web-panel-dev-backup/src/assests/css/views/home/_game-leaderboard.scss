@@ -1,0 +1,148 @@
+.series-top {
+  background-color: #3C434A;
+  padding: 5px 15px;
+  color: #fff;
+  font-size: 14px;
+  display: grid;
+  grid-template-columns: 110px calc(100% - 110px);
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 9;
+  span {
+    border-right: 1px solid rgba(255, 255, 255, 0.2);
+  }
+  .btn {
+    font-size: 14px;
+    font-weight: 500;
+    background-color: transparent;
+    padding: 9px 10px 9px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+// leaderboard-card
+.leaderboard-card {
+  position: relative;
+  border-radius: 8px 8px 0 0;
+  overflow: hidden;
+  &.round {
+    .lbc-inner {
+      border-radius: 8px;
+      overflow: hidden;
+    }
+  }
+  .info-link {
+    font-size: 12px;
+    padding: 3px;
+    color: #5f6b7a;
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    [dir='rtl'] & {
+      left: 25px;
+      right: 0;
+    }
+  }
+  .lbc-inner {
+    background-color: #fff;
+    display: grid;
+    grid-template-columns: 100px calc(100% - 100px);
+    align-items: center;
+    border-bottom: 1px solid #E4E7E9;
+  }
+  .lbc-right {
+    padding: 12px;
+    h3 {
+      margin: 0;
+      font-weight: 600;
+      font-size: 16px;
+      color: #212a34;
+      padding-right: 20px;
+    }
+    p {
+      color: #212a34;
+      margin: 10px 0 0 0;
+      img {
+        margin-right: 5px;
+      }
+      span {
+        color: #8895a7;
+        font-weight: 500;
+      }
+    }
+    [dir='rtl'] & {
+      text-align: right;
+      h3 {
+        padding-right: 0;
+      }
+      p {
+        img {
+          margin-left: 5px;
+          margin-right: 0;
+        }
+      }
+    }
+  }
+  @media (max-width: 479px) {
+    .info-link {
+      right: 22px;
+      top: 14px;
+      font-size: 10px;
+    }
+    .lbc-inner {
+      grid-template-columns: 90px calc(100% - 90px);
+    }
+    .img {
+      height: 100%;
+      img {
+        object-fit: cover;
+        height: 100%;
+        width: 100%;
+      }
+    }
+    .lbc-right {
+      padding: 10px;
+      h3 {
+        font-size: 14px;
+      }
+      p {
+        margin: 5px 0 0 0;
+      }
+    }
+  }
+}
+
+.leaderboard-card2 {
+  padding: 8px 15px;
+}
+
+.fullHeightHalfMargin {
+  margin-top: 50%;
+  height: 100%;
+}
+
+.backWhite{
+  background-color: #fff;
+  h1{
+    color: #189ee1;
+    margin-bottom: 20px;
+    font-weight: 600;
+    text-align: center;
+    font-size: 17px;
+  }
+}
+
+.noLeagueShaw {
+  text-align: center;
+  height: calc(100% - 200px);
+}
+
+.leaderboard-table {
+  // border-bottom: 1px solid gray;
+  padding: 20px;
+  background: #f2f2f2;
+  height: calc(100vh - 69px);
+}

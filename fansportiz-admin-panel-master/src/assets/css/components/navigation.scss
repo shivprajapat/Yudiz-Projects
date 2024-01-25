@@ -1,0 +1,123 @@
+/******* Header CSS Start ******/
+.navbar 	{ padding: 0; background: $theme-color;  flex-direction: column; -webkit-flex-direction: column;
+	.logobar 	{ padding: 4px 15px; width: 100%; color: #fff; font-size: x-large; 
+		.nav-link 		{ margin-left: 20px; padding: 0; 
+			&:hover 		{ color: #fff;}
+		}
+		.notification { position: relative; margin: 10px;
+			.count 			{ position: absolute; padding: 2px 4px; background: $danger; font-size: 10px; line-height: 12px; border-radius: 2em; top: 0; right: 0; @include transform(translate(60%, -30%));}
+		}
+		.user-dropdown {
+			.dropdown-toggle { font-weight: 500;
+				img { margin-right: 10px; width: 36px; height: 36px; border: 2px solid #D8E0FD; object-fit: cover; border-radius: 50%; }
+			}
+			.dropdown-item{
+				&:hover,
+				&.active { background: transparent; color: $danger; }
+				img { margin-right: 8px; @include filter(brightness(0) invert(0)); @include transition($common-transition);}
+				&.active img,
+				&:hover img { @include filter(none);  }
+			}
+		}
+		.dropdown-menu { margin-top: 18px;}
+
+		@media only screen and (max-width: 480px) {
+			font-size: large;
+		}
+	}
+	.menubar 	{ padding: 0 24px 15px 24px; width: 100%; background: #fff; @include box-shadow(0 4px 20px rgba(0,0,0,0.08));
+		.nav-link { margin-right: 20px; padding: 0; color: $mute-color; margin-top: 15px;
+			img 	{ margin-right: 10px; @include filter(brightness(0) invert(0)); opacity: 0.5; @include transition($common-transition); }
+			span 	{ display: inline-block; vertical-align: middle;}
+			&.active { color: $theme-color;
+				img 			{ @include filter(none); opacity: 1;}
+			}
+		}
+		.dropdown-menu { margin-top: 18px;
+			&.active { color: $theme-color;
+				img { @include filter(none); opacity: 1;}
+			}
+		}
+		.dropdown-item {
+			img 	{ margin-right: 10px; @include filter(brightness(0) invert(0)); opacity: 0.5; @include transition($common-transition); }
+			&.active {
+				img { @include filter(none); opacity: 1;}
+			}
+		}
+	}
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+	.navbar {
+		.menubar 	{
+			padding-top: 15px;
+			.nav-link {
+				margin-top: 5px;
+			}
+			.navbar-nav {
+				margin-top: 10px;
+				display: flex;
+				flex-direction: column;
+				padding-left: 0;
+				margin-bottom: 0;
+				list-style: none;
+			}
+			.custom-dropdown {
+				 padding-top: 10px;
+			}
+			.main-class{
+				padding-top: 10px;
+			}
+		}
+	}
+}
+
+@media (min-width: 600px) and (max-width: 767px) {
+	.navbar {
+		.menubar 	{
+			padding-top: 15px;
+			.nav-link {
+				margin-top: 5px;
+			}
+			.navbar-nav {
+				margin-top: 10px;
+				display: flex;
+				flex-direction: column;
+				padding-left: 0;
+				margin-bottom: 0;
+				list-style: none;
+			  }
+			.custom-dropdown {
+				 padding-top: 10px;
+			}
+			.main-class{
+				padding-top: 10px;
+			}
+		}
+	}
+}
+
+@media (min-width: 200px) and (max-width: 600px) {
+	.navbar {
+		.menubar 	{
+			padding-top: 15px;
+			.nav-link {
+				margin-top: 5px;
+			}
+			.navbar-nav {
+				margin-top: 10px;
+				display: flex;
+				flex-direction: column;
+				padding-left: 0;
+				margin-bottom: 0;
+				list-style: none;
+			  }
+			.custom-dropdown {
+				 padding-top: 10px;
+			}
+			.main-class{
+				padding-top: 10px;
+			}
+		}
+	}
+}

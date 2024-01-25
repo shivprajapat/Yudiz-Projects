@@ -1,0 +1,15 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.tipsNote { padding: 12px; background: var(--theme-bg); border-radius: 16px;
+    .icon { width: 28px; }
+    .itemTitle { margin: 24px 0 12px; padding-bottom: 12px; border-bottom: 1px solid $light; text-transform: uppercase; color: $theme-color; }
+    &.note { color: $theme-dark2; 
+        .itemTitle { border-bottom-color: $theme-medium; }
+    }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  
+}

@@ -1,0 +1,11 @@
+type getMiniScoreCardPriorityRes { 
+    _id: ID
+    iSeriesId: ID
+    sTitle: String
+    nPriority: Int
+    sSrtTitle: String
+ }
+
+extend type Query { 
+    getMiniScoreCardPriority: [getMiniScoreCardPriorityRes]
+ }

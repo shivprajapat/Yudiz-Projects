@@ -1,0 +1,17 @@
+
+type pollFieldsRes {
+  _id: ID
+  sTitle: String
+}
+
+type widgetPrio {
+  _id:ID
+  eType: String
+  nPriority: Int
+  sPosition: ePositions
+  mValue: pollFieldsRes
+}
+
+type Query {
+  getHomeWidgets: [widgetPrio]
+}

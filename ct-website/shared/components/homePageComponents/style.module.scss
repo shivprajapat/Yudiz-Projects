@@ -1,0 +1,39 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.homeArticles { margin-bottom: 30px;
+  &:last-child { margin-bottom: 0; }
+  .seriesInfo { 
+    p { color: $font-light; font-size: 13px; line-height: 17px; }
+  }
+  .btnList { margin-bottom: 16px; 
+      a { margin: 4px; padding: 5px 16px; font-size: 12px; line-height: 17px; color: $border-color; border: 1px solid $border-light; border-radius: 2em;
+        &:hover { color: $theme-color; border-color: $theme-color; }
+      }
+   }
+}
+.articleGridList { 
+  article { min-height: calc(100% - 8px); }
+}
+.articleGroup { padding: 11px 3px;
+  :nth-last-child(1),
+  :nth-last-child(2) {
+    article {  margin-bottom: 0; }
+   }
+}
+
+@media (max-width: 1199px) {
+  .homeArticles {
+    .btnList {  
+        a { margin: 3px; padding: 4px 12px; }
+     }
+  }
+}
+
+@media (max-width: 575px) {
+  .articleGroup { padding: 11px 12px;
+    :nth-last-child(2) {
+      article {  margin-bottom: 8px; }
+     }
+  }
+}

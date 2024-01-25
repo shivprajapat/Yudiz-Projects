@@ -1,0 +1,117 @@
+/*================================================================================
+	Item Name: Vuexy - Vuejs, HTML & Laravel Admin Dashboard Template
+	Version: 2.0
+	Author: PIXINVENT
+	Author URL: http://www.themeforest.net/user/pixinvent
+================================================================================
+
+NOTE:
+------
+PLACE HERE YOUR OWN SCSS CODES AND IF NEEDED, OVERRIDE THE STYLES FROM THE OTHER STYLESHEETS.
+WE WILL RELEASE FUTURE UPDATES SO IN ORDER TO NOT OVERWRITE YOUR STYLES IT'S BETTER LIKE THIS.  */
+
+.main-menu.menu-light .navigation > li.active > a {
+  box-shadow: none;
+}
+.card {
+  .card-header {
+    background-color: #f3f3f3;
+    padding: 1rem 1.5rem;
+    align-items: center !important;
+  }
+}
+.view-user {
+  .badge {
+    padding: 0;
+    background-color: transparent;
+  }
+}
+.sUserName {
+  text-transform: capitalize;
+}
+
+.f-image {
+  border-radius: 8px;
+  background-color: #f4f4f4;
+  height: 230px;
+  text-align: center;
+  margin-bottom: 22px;
+  overflow: hidden;
+  img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  label {
+    cursor: pointer;
+    &.disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    i {
+      margin-right: 8px;
+      vertical-align: -3px;
+    }
+  }
+  .or {
+    text-transform: uppercase;
+    color: #7c7e82;
+    margin: 5px 0;
+  }
+}
+
+.rental-img {
+  display: flex;
+  grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+  grid-gap: 10px;
+  height: 300px;
+}
+.rental-img .img-box {
+  background-color: #f5f5f5;
+  position: relative;
+}
+.rental-img .img-box button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.rental-img .img-box label {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rental-img .img-left,
+.rental-img .img-right {
+  width: calc(50% - 5px);
+}
+.rental-img .img-left .img-box {
+  height: 100%;
+}
+.rental-img .img-right {
+  display: flex;
+  grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+  grid-gap: 10px;
+  flex-wrap: wrap;
+}
+.img-right .img-box {
+  width: calc(50% - 5px);
+  height: calc(50% - 5px);
+}
+
+.rental-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+
+.banner-images {
+  max-height: 100px;
+  width: 100px;
+}
+.thumbnail-image {
+  width: 200px;
+  max-height: 200px;
+}

@@ -1,0 +1,183 @@
+input createSubAdmin {
+    sFullName: String!
+    eGender: String!
+    sDisplayName: String!
+    sEmail: String!
+    sUserName: String!
+    sNumber: String!
+    sPassword: String!
+    sConfirmPassword: String!
+    eDesignation: String!
+    sProfilePicture: String
+    sBio: String
+    sAddress: String
+    sCity: String
+    bIsVerified: Boolean
+    sPanName: String
+    sPanNumber: String
+    sPanPicture: String
+    sBankDetailPic: String
+    sIfsc: String
+    sAccountNumber: String
+    sAccountName: String
+    sBankName: String
+    sBranchName: String
+    oRole: Role
+    aSocialProfiles:[SocialProfile]
+    bIsCustom: Boolean
+}
+
+input SocialProfile {
+    eSocialNetworkType: String
+    sDisplayName: String
+    sLink: String
+}
+
+input Social {
+    sTitle: String,
+    sDescription: String
+    sPicture: String
+}
+
+input aPermissionsInput {
+    aRoles: [ID]
+    iPermissionId: ID
+}
+
+input Role {
+    aRoleId: [ID]
+    aPermissions: [aPermissionsInput]
+}
+
+type createSubAdminResponse {
+    sMessage: String
+    oData: subAdmin
+}
+
+type deleteSubAdminResponse {
+    sMessage: String
+}
+type editSubAdminResponse {
+    sMessage: String
+    oData: subAdmin
+}
+
+input aIdsBulkActionInput {
+    _id: ID!
+}
+
+enum bulkActionEnumType {
+  i
+  d
+  a
+  v
+  dv
+}
+
+input bulkActionInput {
+    aIds: [aIdsBulkActionInput]!
+    eType: bulkActionEnumType
+}
+
+input editSubAdminInput {
+    _id: ID!
+    sFullName: String
+    sUserName: String
+    sEmail: String
+    sNumber: String
+    bIsVerified: Boolean
+    sDisplayName: String
+    eGender: String
+    eDesignation: String
+    sCity: String
+    sAddress: String
+    sBio: String
+    eType: String
+    sProfilePicture: String
+    aSocialProfiles: [SocialProfile]
+    sPanName: String
+    sPanPicture: String
+    sIfsc: String
+    sAccountNumber: String
+    sAccountName: String
+    bIsCustom: Boolean
+    oRole: Role
+    sPanNumber: String
+    sBankDetailPic: String
+    sBankName: String
+    sBranchName: String
+
+}
+
+input editProfileInput {
+    sFullName: String
+    eGender: String
+    sDisplayName: String
+    sNumber: String
+    sProfilePicture: String
+    sBio: String
+    sAddress: String
+    sCity: String
+    sPanName: String
+    sPanPicture: String
+    sIfsc: String
+    sAccountNumber: String
+    sAccountName: String
+    aSocialProfiles:[SocialProfile]
+    sPanNumber: String
+    sBankDetailPic: String
+    sBankName: String
+    sBranchName: String
+}
+
+input editSubAdminProfilePictureInput {
+    _id: ID
+    sUrl: String!
+}
+
+input changePasswordInput {
+   sCurrentPassword: String!
+   sNewPassword: String!
+   sConfirmPassword: String!
+}
+
+type changePasswordResponse {
+    sMessage: String
+}
+
+type editProfileResponse {
+    oData: myProfileResponse
+    sMessage: String
+}
+
+"This is an enum for change picture."
+enum CHANGEUSERPICTURE {
+  "Profile Picture"
+  pp
+  "Admin Profile Picture"
+  ap
+  "Pancard picture"
+  pn
+  "Admin pancard picture"
+  apn
+}
+
+input changeAdminPictureInput {
+    eType: CHANGEUSERPICTURE!
+    sUrl: String!
+    _id: ID
+}
+
+type changeAdminPictureResponse {
+    sMessage: String
+}
+
+extend type Mutation {
+    createSubAdmin(input:createSubAdmin):createSubAdminResponse!
+    bulkAction(input: bulkActionInput): createSubAdminResponse!
+    editSubAdmin(input:editSubAdminInput): editSubAdminResponse
+    editSubAdminProfilePicture(input:editSubAdminProfilePictureInput): editSubAdminResponse
+    editProfile(input:editProfileInput): editProfileResponse
+    changePassword(input: changePasswordInput): changePasswordResponse
+    changeAdminPicture(input: changeAdminPictureInput): changeAdminPictureResponse
+}

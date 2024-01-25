@@ -1,0 +1,347 @@
+@import 'assets/scss/helper/variables';
+
+.asset-share-modal {
+  .modal-dialog {
+    max-width: 618px;
+    display: flex;
+    align-items: flex-end;
+    margin: auto;
+
+    .modal-content {
+      padding: 0px 44px 53px;
+      position: relative;
+      border-radius: 14px;
+
+      .modal-header {
+        padding: 0px;
+        margin: 0px;
+        border: none;
+      }
+
+      .btn-close {
+        position: absolute;
+        z-index: 1;
+        top: 24px;
+        right: 24px;
+        padding: 0px;
+        margin: 0px;
+        background: url('../../../assets/images/icons/close-btn.svg') no-repeat center center / 20px;
+        width: 20px;
+        height: 20px;
+
+        &:focus {
+          @include box-shadow(none);
+        }
+      }
+
+      .modal-body {
+        padding: 0px;
+
+        .thumb-row {
+          height: 200px;
+          text-align: center;
+          margin: -100px auto 0px;
+
+          .detail-img {
+            object-fit: contain;
+            height: 100%;
+          }
+        }
+
+        .share-desc {
+          margin: 23px 23px 17px;
+          font-size: 32px;
+          line-height: 36px;
+        }
+
+        .social-links {
+          list-style: none;
+
+          li {
+            margin: 0px 9px;
+
+            &:first-child {
+              margin-left: 0px;
+            }
+
+            &:last-child {
+              margin-right: 0px;
+            }
+          }
+        }
+
+        .link-copy {
+          margin: 29px 0px 0px 0px;
+
+          .copy-txt {
+            font-size: 22px;
+            line-height: 28px;
+            margin-bottom: 12px;
+          }
+
+          .link-copy-inner {
+            background: $theme-color;
+            padding: 16px 125px 11px 25px;
+            border-radius: 9px;
+            position: relative;
+            font-size: 18px;
+            line-height: 25px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+
+            .copy-btn {
+              position: absolute;
+              top: 16px;
+              right: 27px;
+              font-size: 22px;
+              line-height: 26px;
+              background: none;
+              padding: 0px;
+              margin: 0px;
+              border: none;
+
+              &:hover {
+                color: $green-color;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .asset-share-modal {
+    .modal-dialog {
+      max-width: 590px;
+
+      .modal-content {
+        padding: 0px 38px 48px;
+
+        .btn-close {
+          top: 24px;
+          right: 24px;
+          background-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+
+        .modal-body {
+          .detail-img {
+            width: 243px;
+            height: 220px;
+            margin: -180px auto 0px;
+            object-fit: contain;
+          }
+
+          .share-desc {
+            margin: 23px 23px 17px;
+            font-size: 28px;
+            line-height: 34px;
+          }
+
+          .link-copy {
+            margin: 24px 0px 0px 0px;
+
+            .copy-txt {
+              font-size: 18px;
+              line-height: 25px;
+              margin-bottom: 8px;
+            }
+
+            .link-copy-inner {
+              padding: 16px 125px 11px 25px;
+              font-size: 16px;
+              line-height: 23px;
+
+              .copy-btn {
+                top: 16px;
+                right: 27px;
+                font-size: 18px;
+                line-height: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .asset-share-modal {
+    .modal-dialog {
+      max-width: 550px;
+
+      .modal-content {
+        padding: 0px 34px 48px;
+
+        .btn-close {
+          top: 24px;
+          right: 24px;
+          background-size: 18px;
+          width: 18px;
+          height: 18px;
+        }
+
+        .modal-body {
+          .detail-img {
+            width: 280px;
+            height: 300px;
+            margin: -180px auto 0px;
+          }
+
+          .share-desc {
+            margin: 23px 23px 17px;
+            font-size: 24px;
+            line-height: 32px;
+          }
+
+          .link-copy {
+            margin: 24px 0px 0px 0px;
+
+            .copy-txt {
+              font-size: 18px;
+              line-height: 25px;
+              margin-bottom: 8px;
+            }
+
+            .link-copy-inner {
+              padding: 16px 100px 11px 20px;
+              font-size: 16px;
+              line-height: 23px;
+
+              .copy-btn {
+                top: 16px;
+                right: 27px;
+                font-size: 18px;
+                line-height: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .asset-share-modal {
+    .modal-dialog {
+      max-width: 90%;
+
+      .modal-content {
+        padding: 0px 15px 28px;
+        border-radius: 10px;
+
+        .btn-close {
+          top: 16px;
+          right: 12px;
+          background-size: 16px;
+          width: 16px;
+          height: 16px;
+        }
+
+        .modal-body {
+          .detail-img {
+            width: 220px;
+            height: 240px;
+            margin: -150px auto 0px;
+          }
+
+          .share-desc {
+            margin: 23px 0px 17px;
+            font-size: 22px;
+            line-height: 30px;
+          }
+
+          .link-copy {
+            margin: 24px 0px 0px 0px;
+
+            .copy-txt {
+              font-size: 18px;
+              line-height: 25px;
+              margin-bottom: 8px;
+            }
+
+            .link-copy-inner {
+              padding: 16px 90px 11px 20px;
+              font-size: 16px;
+              line-height: 23px;
+
+              .copy-btn {
+                top: 16px;
+                right: 20px;
+                font-size: 18px;
+                line-height: 24px;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .asset-share-modal {
+    .modal-dialog {
+      max-width: 500px;
+      min-height: 100%;
+
+      .modal-content {
+        height: 280px;
+
+        .modal-body {
+          .share-desc {
+            margin: 20px;
+          }
+
+          .detail-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-top: -68px;
+          }
+
+          ul {
+            margin-bottom: 0;
+            padding: 0;
+          }
+
+          .link-copy {
+            margin-top: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 360px) and (max-width: 576px) {
+  .asset-share-modal {
+    .modal-dialog {
+      max-width: 500px;
+      min-height: 100%;
+
+      .modal-content {
+        height: 330px;
+
+        .modal-body {
+          .share-desc {
+            margin: 20px;
+          }
+
+          .detail-img {
+            width: 100px;
+            height: 100px;
+            object-fit: cover;
+            margin-top: -68px;
+          }
+        }
+      }
+    }
+  }
+}

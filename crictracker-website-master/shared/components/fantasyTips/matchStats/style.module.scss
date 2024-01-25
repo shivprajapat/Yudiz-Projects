@@ -1,0 +1,12 @@
+@media (min-width: 768px) {
+  .statItem {
+    @for $i from 1 through 3 {
+      &:nth-child(#{$i}) {
+        order: ($i * 2 - 1);
+      }
+      &:nth-child(#{($i + 3)}) {
+        order: ($i * 2);
+      }
+    }
+  }
+}

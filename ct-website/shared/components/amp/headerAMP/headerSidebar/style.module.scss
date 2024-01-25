@@ -1,0 +1,60 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.sidemenu { width: 720px; padding: 16px 0; position: fixed; background: #fff; font-weight: 600;
+  .closeMenu { padding: 0px; width: 24px; height: 24px; position: absolute; right: 20px; top: 20px; border: 1px solid $border-color; border-radius: 50%; z-index: 1; 
+    > div { width: 80%; }
+  }
+  .menuBody { padding: 0; }
+  .tabSection { width: 304px; padding: 0 24px; }
+  .infoSection { width: calc(100% - 304px); padding: 56px 20px 0px 40px; 
+    .item { margin-bottom: 60px; 
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+  .navTab { margin: 0px -8px 24px;
+    a { margin: 0px 8px;}
+  }
+  h4 { margin-bottom: 16px; font-size: 12px; line-height: 17px; color: $font-light; }
+  .moreLink { 
+    ul { padding-top: 8px; }
+    li { margin-bottom: 16px; 
+      &:last-child { margin-bottom: 0; }
+    }
+    a { padding-left: 8px; font-size: 14px; line-height: 21px; }
+  }
+  .favBtn { padding-right: 8px;
+    svg { display: block;}
+  }
+  .socialMenu { 
+    li { margin-right: 12px;
+      &:last-child { margin-right: 0; }
+    }
+    g,path { fill: $border-color; }
+    a:hover {
+      g,path { fill: $theme-color; }
+    } 
+  }
+  .formGroup { position: relative; font-size: 12px; line-height: 18px;
+    input { padding: 12px 108px 12px 14px; background: $light-bg; border-radius: 6px; border: none; font-size: inherit; line-height: inherit;
+      &:focus { box-shadow: none;}
+    }
+    button { padding: 7px 20px; background: $border-color; position: absolute; right: 4px; top: 50%; @include transform(translateY(-50%)); font-size: inherit; line-height: inherit; font-weight: 700; border-radius: 2em; border: none;
+      &:hover, &:hover { background: $theme-color; }
+    }
+  }
+  .otherLogo { width: 116px; max-width: 60%; }
+} 
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+  .sidemenu { width: 100vw;
+    .closeMenu { right: 10px; top: 10px; }
+    .tabSection { margin-bottom: 32px; width: 100%; }
+    .infoSection { width: 100%; padding: 0 24px; 
+      .item { margin-bottom: 32px; }
+    }
+    .navTab { margin: 0px 8px 16px; }
+  }
+}

@@ -1,0 +1,17 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.dateSlider { background: $theme-light; border-radius: 8px;
+  > div { padding: 4px 40px; }
+  .item { margin: 0 4px; padding: 6px 19px; width: 64px; border-radius: 8px; @include transition($common-transition); cursor: pointer;
+    &:hover,
+    &.active { background: var(--light-mode-bg);}
+  }
+}
+
+@media (max-width: 767px) {
+  .dateSlider {
+    > div { padding: 4px 32px; }
+    .item { margin: 0 6px; width: 54px; }
+  }
+}

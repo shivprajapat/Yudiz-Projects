@@ -1,0 +1,18 @@
+.customer-support {
+  padding: 3rem;
+  .customer-support-form {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-direction: column;
+  }
+
+  .heading {
+    h3 {
+      font-size: 3rem;
+    }
+  }
+  .form-label{
+    text-transform: none;
+  }
+}

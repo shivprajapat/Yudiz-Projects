@@ -1,0 +1,22 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.playerPicks {
+    .nav { background: var(--theme-bg); 
+        .active a:hover,
+        .active a { background: var(--theme-color); color: #fff; }
+    }
+}
+.item { min-height: calc(100% - 8px); background: var(--theme-light);
+    &:last-child { margin-bottom: 8px; }
+    .info { color: var(--border-color);}
+}
+.imgBlock { width: 64px;
+    img { border-radius: 50%; }
+}
+.tag { width: 22px; height: 22px; line-height: 22px; background: $theme-color; color: $light-color; left: -6px; top: -6px;}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  
+}

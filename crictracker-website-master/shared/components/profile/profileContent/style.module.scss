@@ -1,0 +1,16 @@
+@import '../../../../assets/scss/_variables.scss';
+@import '../../../../assets/scss/_mixins.scss';
+
+.fullname { margin-bottom: 20px; }
+.label { margin-bottom: 6px; }
+.edit { 
+    svg { margin: 0 4px 0 -4px; }
+    path { stroke: $theme-color; }
+    &:hover {
+        path { stroke: #fff; }
+    }
+}
+
+@media (max-width: 767px) {
+    .label { margin-bottom: 4px; }
+}

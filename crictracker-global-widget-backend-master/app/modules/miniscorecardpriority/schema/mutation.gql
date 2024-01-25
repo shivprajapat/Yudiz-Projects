@@ -1,0 +1,10 @@
+input updateMiniScoreCardPriorityInput { 
+    iSeriesId: ID!
+    nPriority: Int!
+    sTitle: String!
+    sSrtTitle: String!
+ }
+
+extend type Mutation { 
+    updateMiniScoreCardPriority(input: [updateMiniScoreCardPriorityInput]): String
+ }

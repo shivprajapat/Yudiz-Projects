@@ -1,0 +1,47 @@
+input oUpdateMigrationTagInput {
+  _id: ID!
+  iId: ID!
+}
+
+type oUpdateMigrationTagResponse {
+  oData: oMigrationData
+  sMessage: String
+}
+
+type oUpdateMigrationTagTypeResponse {
+  oTeamTag: [oTeamMigrateData]
+  oPlayerTag: [oMigratePlayerData]
+  oVenueTag: [oVenueMigrateData]
+  oSimpleTag: [oTagData]
+  oData: oMigrationData
+  sMessage: String
+}
+
+input oUpdateMigrationTagType {
+  eType: MigrationType
+  iTermId: Int
+}
+
+input oBulkUpdateMigrationTag {
+  aId: [ID!]!
+}
+
+type oBulkUpdateResponse {
+  sMessage: String
+}
+
+type oClearListResponse {
+  sMessage: String
+}
+
+input oClearListInput {
+  _id: ID!
+}
+
+
+extend type Mutation {
+  updateMigrationTag(input: oUpdateMigrationTagInput): oUpdateMigrationTagResponse
+  updateMigrationTagType(input: oUpdateMigrationTagType): oUpdateMigrationTagTypeResponse
+  bulkMigrationTagUpdate(input: oBulkUpdateMigrationTag): oBulkUpdateResponse
+  clearList(input:oClearListInput!): oClearListResponse
+}

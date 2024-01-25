@@ -1,0 +1,92 @@
+type articleImageData{
+    sText: String
+    sCaption: String
+    sAttribute: String
+    sUrl: String
+}
+type bookmarkArticleData{
+    _id: ID
+    sTitle: String
+    sSubtitle: String
+    oImg: articleImageData
+    sContent: String
+    sSrtTitle: String
+    sDescription: String
+    nDuration: Int
+    oSeo: Seo
+    dPublishDate: Date
+    dCreated: String
+    dUpdated: String
+}
+
+type videoThumbnailData {
+  sKey: String
+  sWidth: String
+  sHeight: String
+  sUrl: String
+}
+
+type bookmarkVideoData{
+    _id: ID
+    sTitle: String
+    sDescription: String
+    aThumbnails: [videoThumbnailData]
+    sThumbnailUrl: String
+    sThumbnailWidth: String
+    sThumbnailHeight: String
+    bHasCustomThumbnail: Boolean
+    bIsLicensedContent: Boolean
+    sCaption: String
+    sDefinition: String
+    sDimension: String
+    sDuration: String
+    nDurationSeconds: Int
+    dPublishDate: Date
+    dCreated: String
+    dUpdated: String
+}
+
+type bookmarkCategoryData{
+    _id: ID
+    sName: String
+}
+
+
+extend type frontFantasyArticle @key(fields: "_id") {
+  _id: ID @external
+}
+
+type bookmark {
+    _id:ID
+    eStatus: String
+    eBookmarkType: BookmarkType
+    iArticleId: ID
+    oArticle: FrontArticle
+    oFantasyArticle: frontFantasyArticle
+    oVideo: oVideoData
+}
+
+input bookmarkPaginationInput {
+    nSkip: Int!
+    nLimit: Int!
+}
+
+type listBookmarks {
+    nTotal: Int
+    aResults: [bookmark]
+}
+
+input oGetBookmarkInput {
+    iId: ID!
+    eType: BookmarkType!
+}
+
+type oGetBookmarksResponse {
+    bIsBookmarked: Boolean
+    _id: ID
+}
+
+extend type Query {
+    listBookmarks(input: bookmarkPaginationInput): listBookmarks
+    getBookmarks(input: oGetBookmarkInput): oGetBookmarksResponse
+}

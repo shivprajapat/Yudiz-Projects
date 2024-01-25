@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: dev
+  name: smtp
+data:
+  SMTP_PASSWORD: WXVkaXpAMzIx

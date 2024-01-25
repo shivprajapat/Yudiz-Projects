@@ -1,0 +1,27 @@
+syntax = "proto3";
+
+message messageResponse {
+    string sMessage = 1;
+}
+
+message isTagExistResponse{
+   bool bIsExist = 1;
+}
+
+message createTagInput {
+   string eStatus = 1;
+   string eType = 2;
+   string iId = 3;
+   string sName = 4;
+   string iAdminId = 5;
+}
+
+message isTagExistInput{
+  string sName = 1;
+  string iId = 2;
+}
+
+service ArticleService {
+    rpc createTag(createTagInput) returns (messageResponse) {}
+    rpc isTagExist(isTagExistInput) returns (isTagExistResponse) {}
+}

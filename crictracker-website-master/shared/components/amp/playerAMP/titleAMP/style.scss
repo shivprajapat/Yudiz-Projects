@@ -1,0 +1,7 @@
+@import '../../../../../assets/scss/variables.scss';
+.rounded-pill{
+    border-radius: 2em;
+}
+.title { background: var(--theme-light);
+    span { padding: 4px 12px; background: var(--theme-color); color: $light-color; }
+}

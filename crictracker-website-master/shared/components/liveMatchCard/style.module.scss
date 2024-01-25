@@ -1,0 +1,31 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.teamImg { width: 44px; }
+.liveMatchCard {
+  p { margin: 0; }
+}
+.team { width: 160px; }
+.scoreCardLink{ z-index: 9; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .team { width: 120px; }
+}
+
+@media (max-width: 575px) {
+  .teamImg { width: 24px; }
+  .liveMatchCard { padding: 32px 12px 10px 12px; }    
+  .info { order: 3; 
+    p:last-child:not(:nth-child(2)) { margin-left: 4px; 
+      &::before { content: " - ";}
+    }
+  }
+
+  .team { width: 100%;
+    .name { font-size: 14px; line-height: 20px; }
+    .upcoming & { width: 50%; }
+  }
+  .badge { position: absolute; left: 50%; transform: translateX(-50%); top: -22px; }
+}

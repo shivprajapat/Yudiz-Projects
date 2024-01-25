@@ -1,0 +1,13 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.fallWickets { border-radius: 8px;
+   > * { padding: 12px; }
+   .head { border-bottom: 1px solid var(--theme-bg);}
+   .content span { margin-left: 3px; 
+        &:first-child { margin-left: 0; }
+    }
+}
+
+@media (max-width: 575px) {
+}

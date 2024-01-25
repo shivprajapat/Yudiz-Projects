@@ -1,0 +1,13 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.infoBlock {
+    a {
+        color: var(--theme-color-medium);
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--theme-font);
+        }
+    }
+}

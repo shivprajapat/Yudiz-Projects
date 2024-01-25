@@ -1,0 +1,78 @@
+enum eGender {
+  "male"
+  m
+  "female"
+  f
+  "other"
+  o
+}
+
+input profileInput {
+    sFullName: String!
+    sProPic: String
+    "Date formt: DD/MM/YYYY or YYYY-MM-DD"
+    dDOB: Date
+    eGender: eGender
+    "sId from listFrontCountry data"
+    sCountryId: String
+    sCity: String
+    sBio: String
+}
+
+type CountyData {
+    sId: String
+    sName: String
+    sSortName: String
+}
+
+type getUserData {
+    sFullName: String
+    sProPic: String
+    sEmail: String
+    sUsername: String
+    sMobNum: String
+    bIsEmailVerified: String
+    bIsMobVerified: String
+    bIsSocialUser: String
+    dDOB: Date
+    eGender: String
+    sBio: String
+    sCity: String
+    oCountry: CountyData
+    nBookmarkCount: Int
+}
+
+type updateProfileResponse {
+    sMessage: String
+    oData: getUserData
+}
+
+input generateProfilePreSignedUrl {
+    "File name to upload"
+    sFileName: String!
+    "file extension type, like: image/jpeg"
+    sContentType: String!
+    "profile"
+    sType: String!
+}
+
+type generateProfilePreSignedUrlResponse {
+  sType: String!
+  sUploadUrl: String!
+  sS3Url: String!
+}
+
+input oUpdateProfileImageInput {
+    sProPic: String!
+}
+
+type oUpdateProfileImageResponse {
+    sMessage: String
+    sProPic: String
+}
+
+extend type Mutation {
+    updateProfile(input: profileInput): updateProfileResponse
+    generateProfilePreSignedUrl(input: [generateProfilePreSignedUrl]): [generateProfilePreSignedUrlResponse]!
+    updateProfileImage(input: oUpdateProfileImageInput!): oUpdateProfileImageResponse
+}

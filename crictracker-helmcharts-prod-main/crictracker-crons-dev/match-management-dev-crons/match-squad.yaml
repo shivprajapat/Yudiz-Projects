@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: match-squad
+  namespace: dev
+spec:
+  schedule: "*/10 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://matchmanage-dev.beta.crictracker.com/api/match-squad'
+            image: curlimages/curl
+            name: match-squad
+          restartPolicy: OnFailure

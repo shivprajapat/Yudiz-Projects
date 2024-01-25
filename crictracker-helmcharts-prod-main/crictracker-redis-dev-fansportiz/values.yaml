@@ -1,0 +1,15 @@
+replicaCount: 1
+
+image: redis
+pullPolicy: Always
+
+namespace: crictracker-dev
+
+service:
+  type: NodePort
+  port: 6379
+  healthcheck: /health-check/
+
+persistance:
+  storageClassName: ''
+  size: 5Gi

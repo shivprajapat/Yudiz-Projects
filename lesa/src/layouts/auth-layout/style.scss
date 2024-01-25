@@ -1,0 +1,288 @@
+@import 'assets/scss/helper/variables';
+
+.credentials-page{min-height: 100vh;
+    & > div{width: 50%;}
+    .credentials-left{
+         padding: 120px 0px;
+        .cred-left-inner{
+            & > .logo-image{ width: 117px; margin-bottom: 16px; -webkit-filter: invert(100%); /* Safari/Chrome */ filter: invert(100%);}
+            .col-md-6{width: 378px;
+                .single-grid-list{background: $black; padding: 26px;
+                    .user-details{ margin-bottom: 17px; position: relative;
+                        .grid-user-img { position: relative;
+                            .check-img{display: none; position: absolute; bottom: -2px; right: -2px; width: 15px; height: auto; border-radius: 0px;}
+                            img{ width: 34px; height: 34px; border-radius: 50%; }
+                            &.checkStar{
+                                .check-img{display: block;}
+                            }
+                        }
+                        .user-id{font-size: 18px; line-height: 28px; font-weight: 500; display: inline-block; margin-left: 13px;}
+                    }
+                    figure{margin: 0px;
+                        img{width: 100%; height: 294px; object-fit: cover;}
+                        .img-title{font-size: 29px; line-height: 38px; display: block; margin: 25px 0px 18px;}
+                    }
+                    .auction{padding: 14px 0px 22px; border: 1px solid  rgba(255, 255, 255, 0.44); border-left: none; border-right: none;
+                        .wishlist-btn{@include transition(all 0.5s); background: #2A2A2A url('../../assets/images/css-img/white-heart.svg') no-repeat center center / 20px; border: none; width: 44px; height: 44px; border-radius: 50%;
+                            &:hover{background: #fff url('../../assets/images/css-img/pink-heart.svg') no-repeat center center / 20px; }
+                            &.active{background: #fff url('../../assets/images/css-img/pink-heart.svg') no-repeat center center / 20px; }
+                        }
+                        .auc-end{
+                            span{margin-right: 11px; font-size: 16px; line-height: 26px; color: $primary-color; font-weight: 500;}
+                            h6{margin-bottom: 0px;}
+                        }
+                        .price-bid{margin-top: 18px;
+                            .price-sec{
+                            h5{margin-bottom: 0px;}
+                            span{font-size: 18px; line-height: 26px;}
+                            }
+                        }
+                
+                    }
+                }
+            }
+            .cred-left-desc{margin-top: 70px;
+                h5{font-size: 36px; line-height: 46px;  margin-bottom: 5px;
+                    span{font-weight: 100;}
+                }
+                p{font-size: 20px; line-height: 28px; margin: 0px;
+                    span{font-weight: 700;}
+                }
+            }
+        }
+    }
+    .credentials-right{ padding: 81px 257px 81px 104px; background: $bg-primary;
+        .cred-right-inner{
+            .logo-image{  -webkit-filter: invert(100%); /* Safari/Chrome */ filter: invert(100%);}
+            .cred-form{margin-top: 156px;
+                h5{font-size: 36px; line-height: 43px; margin-bottom: 14px;}
+                p{font-size: 20px; line-height: 28px; color: $grey-color; margin: 0px;}
+                form{margin-top: 40px;
+                    .form-group{ margin-bottom: 28px;
+                        &:focus-visible{outline: none;}
+                        label{font-size: 20px; line-height: 28px; color: $grey-color; margin-bottom: 12px;}
+                        .form-control{height: auto; padding: 18px 25px 14px; color: $white; font-size: 20px; line-height: 28px; background: transparent; border: 1px solid $white;
+                            &:focus{@include box-shadow(none);}
+                            &::placeholder{color: $white;}
+                        }
+                        .eye-icons{position: relative;
+                            .eye-btn{position: absolute; width: 20px; top: 50%; @include transform(translateY(-50%)); right: 19px; padding: 0px; border: none; background: none;
+                                &:focus{@include box-shadow(none);}
+                            }
+                            .show-eye{display: none;}
+                            &.show-pass{
+                                .show-eye{display: block;}
+                                .hide-eye{display: none;}
+                            }
+                        }
+                    }
+                    
+                    .forgot-pass-link{display: block; color: $grey-color; font-size: 20px; line-height: 28px; width: fit-content; text-decoration: none; margin: 0px 0px 0px auto;
+                        &:hover{color: $green-color;}
+                    }
+                    .white-btn{width: 100%; margin: 34px 0px 48px; font-size: 20px; line-height: 24px; padding: 15px 30px 9px;}
+                }
+                .end-text{color: $primary-color; font-size: 24px; line-height: 34px;margin-left:5px;
+                    a{color: $white; text-decoration: none;
+                        &:hover{color: $green-color;}
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 1400px) and (max-width: 1699px){
+    .credentials-page{
+        .credentials-left{padding: 100px 0px;}
+        .credentials-right{
+            padding: 81px 100px;
+            .cred-right-inner{
+                .cred-form{
+                    margin-top: 120px;
+                    form{
+                        .form-group{
+                            .form-control{padding: 16px 25px 12px;}
+                        }
+                    }
+                    .end-text{font-size: 20px; line-height: 30px;}
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 1200px) and (max-width: 1399px){
+    .credentials-page{
+        .credentials-left{padding: 100px 0px;
+            .cred-left-inner{
+                .cred-left-desc{ margin-top: 50px;
+                    h5{font-size: 32px; line-height: 42px;}
+                    p{font-size: 18px; line-height: 28px;}
+                }
+            }
+        }
+        .credentials-right{
+            padding: 81px 100px;
+            .cred-right-inner{
+                .cred-form{
+                    margin-top: 120px;
+                    form{
+                        .form-group{
+                            .form-control{padding: 16px 25px 12px;}
+                        }
+                    }
+                    .end-text{font-size: 20px; line-height: 30px;}
+                }
+            }
+        }
+    }
+}
+
+
+@media(min-width: 992px) and (max-width: 1199px){
+    .credentials-page{
+        .credentials-left{padding: 100px 0px;
+            .cred-left-inner{
+                .col-md-6{width: 320px;
+                    .single-grid-list{
+                        padding: 20px;
+                        .user-details{margin-bottom: 15px;}
+                        figure{
+                            img{height: 260px;}
+                            .img-title{font-size: 26px; line-height: 36px; margin: 20px 0px 14px;}
+                        }
+                        .auction{
+                            .wishlist-btn{width: 40px; height: 40px;}
+                        }
+                    }
+                }
+                .cred-left-desc{ margin-top: 50px;
+                    h5{font-size: 32px; line-height: 42px;}
+                    p{font-size: 18px; line-height: 28px;}
+                }
+            }
+        }
+        .credentials-right{
+            padding: 81px 50px;
+            .cred-right-inner{
+                .cred-form{
+                    margin-top: 70px;
+                    h5{font-size: 32px; line-height: 42px; margin-bottom: 12px;}
+                    p{font-size: 18px; line-height: 28px;}
+                    form{
+                        .form-group{ margin-bottom: 26px;
+                            label{font-size: 18px; line-height: 28px; margin-bottom: 9px;}
+                            .form-control{padding: 16px 20px 12px; font-size: 18px; line-height: 28px;}
+                        }
+                        .forgot-pass-link{font-size: 18px; line-height: 28px;}
+                        .white-btn{font-size: 18px; line-height: 28px; padding: 13px 30px 7px; margin: 30px 0px 40px;}
+                    }
+                    .end-text{font-size: 18px; line-height: 28px;}
+                }
+            }
+        }
+    }
+}
+
+
+@media(min-width: 768px) and (max-width: 991px){
+    .credentials-page{
+        .credentials-left{padding: 100px 0px;
+            .cred-left-inner{
+                .col-md-6{width: 320px;
+                    .single-grid-list{
+                        padding: 20px;
+                        .user-details{margin-bottom: 15px;}
+                        figure{
+                            img{height: 260px;}
+                            .img-title{font-size: 26px; line-height: 36px; margin: 20px 0px 14px;}
+                        }
+                        .auction{
+                            .wishlist-btn{width: 40px; height: 40px;}
+                        }
+                    }
+                }
+                .cred-left-desc{ margin-top: 40px; padding: 0px 15px;
+                    h5{font-size: 28px; line-height: 38px;}
+                    p{font-size: 16px; line-height: 26px;}
+                }
+            }
+        }
+        .credentials-right{
+            padding: 81px 40px;
+            .cred-right-inner{
+                .logo-image{width: 160px;}
+                .cred-form{
+                    margin-top: 40px;
+                    h5{font-size: 26px; line-height: 36px; margin-bottom: 6px;}
+                    p{font-size: 16px; line-height: 26px;}
+                    form{
+                        .form-group{ margin-bottom: 22px;
+                            label{font-size: 16px; line-height: 26px; margin-bottom: 9px;}
+                            .form-control{padding: 12px 20px 8px; font-size: 16px; line-height: 26px;}
+                            .eye-icons{
+                                .eye-btn{width: 18px; top: 54%;}
+                            }
+                            
+                        }
+                        .forgot-pass-link{font-size: 16px; line-height: 26px;}
+                        .white-btn{font-size: 16px; line-height: 26px; padding: 13px 20px 7px; margin: 26px 0px 36px;}
+                    }
+                    .end-text{font-size: 16px; line-height: 26px;}
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px){
+    .credentials-page{ @include flex-direction(column);
+        & > div{width: 100%;}
+        .credentials-left{padding: 40px 15px;
+            .cred-left-inner{
+                .col-md-6{width: 300px;
+                    .single-grid-list{
+                        padding: 20px;
+                        .user-details{margin-bottom: 15px;}
+                        figure{
+                            img{height: 260px;}
+                            .img-title{font-size: 26px; line-height: 36px; margin: 20px 0px 14px;}
+                        }
+                        .auction{
+                            .wishlist-btn{width: 40px; height: 40px;}
+                        }
+                    }
+                }
+                .cred-left-desc{ margin-top: 40px; padding: 0px;
+                    h5{font-size: 26px; line-height: 36px;}
+                    p{font-size: 16px; line-height: 26px;}
+                }
+            }
+        }
+        .credentials-right{
+            padding: 40px 15px;
+            .cred-right-inner{
+                .logo-image{width: 160px; display: none;}
+                .cred-form{
+                    margin-top: 0px;
+                    h5{font-size: 26px; line-height: 36px; margin-bottom: 6px;}
+                    p{font-size: 16px; line-height: 26px;}
+                    form{ margin-top: 30px;
+                        .form-group{ margin-bottom: 22px;
+                            label{font-size: 16px; line-height: 26px; margin-bottom: 9px;}
+                            .form-control{padding: 12px 20px 8px; font-size: 16px; line-height: 26px;}
+                            .eye-icons{
+                                .eye-btn{width: 18px;}
+                            }
+                           
+                        }
+                        .forgot-pass-link{font-size: 16px; line-height: 26px;}
+                        .white-btn{font-size: 16px; line-height: 26px; padding: 13px 20px 8px; margin: 26px 0px 36px;}
+                    }
+                    .end-text{font-size: 16px; line-height: 26px;}
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Values.labels.release}}
+    app: {{ .Release.Name }}
+    environment: {{ .Values.labels.environment }}
+    tier: {{ .Values.labels.tier }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      {{- if .Values.imagePullSecrets.enabled }} 
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+
+      tolerations: {{ .Values.tolerations | toYaml | nindent 8 }}      
+
+      containers:
+      - name: {{ .Release.Name }}
+        imagePullPolicy: Always
+        image: {{ .Values.image }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        env:
+          - name: NODE_ENV
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: NODE_ENV
+
+          - name: REACT_APP_API_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REACT_APP_API_URL
+
+          - name: REACT_APP_S3_PREFIX
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REACT_APP_S3_PREFIX
+
+          - name: ARTICLE_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: ARTICLE_BASE_URL                   

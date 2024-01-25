@@ -1,0 +1,358 @@
+.scorecard-cricket {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e1e1e1;
+    .scorecard-item {
+        display: flex;
+
+        .t-img {
+            width: 20px;
+            margin-right: 10px;
+
+            img {
+                @include css3-prefix("border-radius", "100%");
+                object-fit: cover;
+            }
+        }
+    }
+    p {
+        font-size: 14px;
+        color: $darkGray;
+        font-weight: 500;
+        margin-bottom: 5px;
+        .t-name {
+            display: inline-block;
+            min-width: 50px;
+            text-transform: uppercase;
+            [dir='rtl'] & {
+                text-align: right
+            }
+        }
+    }
+    .w-txt {
+        font-weight: 500;
+        font-size: 12px;
+        color: #7E8B96;
+        [dir='rtl'] & {
+            text-align: right;
+        }
+    }
+}
+.scorecard {
+    padding: 10px 15px;
+    border-bottom: 1px solid #e1e1e1;
+    display: flex;
+    flex-direction: column;
+    .scorecard-item {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+
+        .first, .third {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            p {
+                text-align: center;
+            }
+            img {
+                @include css3-prefix("border-radius", "100%");
+                object-fit: cover;
+                width: 50px;
+            }
+        }
+        .second {
+            display: flex;
+            p {
+                font-size: 20px;
+                font-weight: 600;
+            }
+            .dash {
+                margin: 0 5px;
+            }
+        }
+    }
+    p {
+        font-size: 14px;
+        color: $darkGray;
+        font-weight: 500;
+        margin-bottom: 5px;
+        .t-name {
+            display: inline-block;
+            min-width: 50px;
+            text-transform: uppercase;
+        }
+    }
+    .w-txt {
+        font-weight: 500;
+        font-size: 12px;
+        color: #7E8B96;
+        text-align: center;
+    }
+}
+.scorecard-title {
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: #F3B72B;
+    padding-top: 10px;
+    cursor: pointer;
+    img {
+        padding-left: 5px;
+        [dir='rtl'] & {
+            transform: rotate(180deg);
+        }
+    }
+}
+.score-card-title {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    padding-top: 10px;
+}
+.player-stats-table {
+    thead {
+        position: sticky;
+        z-index: 1;
+        top: 0;
+        th {
+            text-transform: uppercase;
+            font-size: 12px;
+            text-align: center;
+            padding: 7px 8px;
+            position: sticky;
+            top: 0;
+            background-color: #fff;
+            z-index: 1;
+            @include css3-prefix("box-shadow", "inset 0px -1px 0px #E1E7EC");
+            &:first-child {
+                text-align: left;
+                padding-left: 10px;
+                [dir='rtl'] & {
+                    padding-right: 10px;
+                    padding-left: 0px;
+                }
+                border-right: 1px solid #e1e7ec;
+                [dir='rtl'] & {
+                    border-left: 1px solid #e1e7ec;
+                    border-right: 0;
+                }
+            }
+            &:last-child {
+                text-align: right;
+                padding-right: 10px;
+                [dir='rtl'] & {
+                    text-align: left;
+                    padding-left: 10px;
+                    padding-right: 0px;
+                }
+            }
+        }
+    }
+    tbody {
+        tr:hover {
+            td {
+                background: linear-gradient(0deg, rgba(24, 158, 225, 0.0399366), rgba(24, 158, 225, 0.0399366)), #ffffff !important;
+            }
+        }
+        td {
+            text-align: center;
+            font-weight: 400;
+            padding: 0 8px;
+            &:first-child {
+                text-align: left;
+                padding-left: 10px;
+                border-right: 1px solid #e1e7ec;
+                [dir='rtl'] & {
+                    border-left: 1px solid #e1e7ec;
+                    border-right: 0;
+                }
+            }
+            &:last-child {
+                text-align: right;
+                padding-right: 10px;
+                [dir='rtl'] & {
+                    text-align: left;
+                    padding-left: 10px;
+                    padding-right: 0px;
+                }
+            }
+            .p-img, .l-img {
+                margin-right: 5px;
+                height: 40px;
+                width: 40px;
+            }
+            .p-name {
+                white-space: nowrap;
+                font-weight: 400;
+                width: 110px;
+                text-overflow: ellipsis;
+                overflow: hidden;
+                [dir='rtl'] & {
+                    text-align: right;
+                }
+            }
+            .c-name {
+                color: $theme-font-color;
+                font-weight: 400;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                position: relative;
+                padding-right: 35px;
+                width: 90px;
+                [dir='rtl'] & {
+                    text-align: right;
+                    padding-left: 35px;
+                    padding-right: 0px;
+                }
+                .role {
+                    color: $gray;
+                    text-transform: uppercase;
+                    font-weight: 500;
+                    position: absolute;
+                    top: 0;
+                    right: 0;
+                    [dir='rtl'] & {
+                        left: 0;
+                        right: auto;
+                    }
+                }
+            }
+        }
+    }
+}
+.participated-playerlist {
+    td {
+        text-align: center;
+        &:first-child {
+            text-align: left;
+        }
+        &:last-child {
+            text-align: right;
+        }
+        [dir='rtl'] & {
+            &:first-child {
+                text-align: right;
+            }
+            &:last-child {
+                text-align: left;
+            }
+        }
+    }
+    .hash-black {
+        color: #3C434A;
+        span {
+            color: #7E8B96 !important;
+        }
+    }
+    tbody {
+        td {
+            font-weight: normal;
+            &:last-child {
+                font-weight: 500;
+            }
+        }
+        .l-img {
+            margin: 9px 7px 9px 0;
+            position: relative;
+            overflow: visible;
+            img {
+                @include css3-prefix("border-radius", "100%");
+            }
+            [dir='rtl'] & {
+                margin: 9px 0 9px 7px
+            }
+        }
+        .p-img {
+            margin: 9px 7px 9px 0;
+            position: relative;
+            overflow: visible;
+            // img {
+            //     @include css3-prefix("border-radius", "100%");
+            // }
+            .i-check {
+                @include css3-prefix("border-radius", "100%");
+                font-size: 17px;
+                position: absolute;
+                bottom: 0;
+                left: -5px;
+                background-color: #fff;
+            }
+            [dir='rtl'] & {
+                margin: 9px 0 9px 7px
+            }
+        }
+        .p-name {
+            font-size: 13px;
+            font-weight: normal;
+            color: #5f6b7a;
+        }
+        .won-txt {
+            font-weight: normal;
+            font-size: 13px;
+            color: #feb31c;
+            margin: -1px 0 0 0;
+            i {
+                margin-right: 5px;
+            }
+        }
+    }
+}
+.league-completed {
+    .no-team {
+        height: calc(100vh - 215px);
+    }
+}
+@media (max-width : 767px) {
+    .playerStates {
+        overflow-x: auto;
+        table {
+            width: 500px;
+            th {
+                &:first-child {
+                    position: sticky;
+                    background-color: #fff;
+                    left: 0;
+                    z-index: 2;
+                }
+                &:last-child {
+                    text-align: center;
+                }
+            }
+            td {
+                &:first-child {
+                    position: sticky;
+                    background-color: #fff;
+                    left: 0;
+                }
+                &:last-child {
+                    text-align: center;
+                }
+            }
+        }
+    }
+}
+@media (min-width : 576px)and(max-width : 767px) {
+    .playerStates {
+        overflow-x: auto;
+        table {
+            width: 100%;
+        }
+    }
+}
+@media (min-width : 200px)and(max-width : 575px) {
+    .player-stats-table {
+        tbody {
+            td {
+                font-size: 12px;
+                line-height: 22px;
+            }
+        }
+        thead {
+            th {
+                font-size: 12px;
+                line-height: 22px;
+            }
+        }
+    }
+}

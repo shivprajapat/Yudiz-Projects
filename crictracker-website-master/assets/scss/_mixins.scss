@@ -1,0 +1,53 @@
+@mixin transition($property) {
+    -webkit-transition: $property;
+    -ms-transition: $property;
+    transition: $property;
+}
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+@mixin box-shadow($property) {
+    -webkit-box-shadow: $property;
+    box-shadow: $property;
+}
+@mixin filter($property) {
+    -webkit-filter: $property;
+    filter: $property;
+}
+@mixin backdrop-filter($property) {
+    -webkit-backdrop-filter: $property;
+    backdrop-filter: $property;
+}
+@mixin flex-direction($property) {
+    -webkit-flex-direction: $property;
+    flex-direction: $property;
+}
+@mixin flex-shrink($property) {
+    -webkit-flex-shrink: $property;
+    flex-shrink: $property;
+}
+@mixin flex-wrap($property) {
+    -webkit-flex-wrap: $property;
+    flex-wrap: $property;
+}
+@mixin justify-content($property) {
+    -webkit-justify-content: $property;
+    justify-content: $property;
+}
+@mixin align-items($property) {
+    -webkit-align-items: $property;
+    align-items: $property;
+}
+@mixin flex-grow($property) {
+    -webkit-flex-grow: $property;
+    flex-grow: $property;
+}
+@mixin animation($property) {
+    -webkit-animation: $property;
+    animation: $property;
+}
+
+%after-before       { content: ""; position: absolute; display: block; }
+%theme-gradient     { background-image: linear-gradient(90deg, #AB38E8 0%, #7B37FE 100%); }

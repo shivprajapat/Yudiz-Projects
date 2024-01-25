@@ -1,0 +1,86 @@
+.teamXShawing {
+    overflow-x: auto;
+}
+
+.videoStream{
+    padding-bottom: 0px;
+    .videoShowing {
+        height: calc(100vh - 57px);
+        iframe{
+            height: 100%;
+            width: 100%;
+        }
+    }
+}
+.lineupsCard {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 100px);
+    .filter-box {
+        padding: 0px;
+        height: 602px;
+        overflow-y: auto;
+        .compare-player {
+            .p-c-box{
+                padding: 0px;
+                .active {
+                    background-color: #EBFBFF;
+                }
+            }
+            .p-box {
+                padding: 18px;
+                width: 100%;
+                &:first-child {
+                    position: relative;
+                    // content: '';
+                    // background-color: #808080;
+                    // right: 0;
+                    // top: 0;
+                    // height: 100%;
+                    // width: 2px;
+                    &::after{
+                        content: '';
+                        position: absolute;
+                        background-color: #808080;
+                        right: 0;
+                        height: 70%;
+                        width: 2px;
+                        top: 50%;
+                        transform: translateY(-50%);
+                    }
+                }
+            }
+        }
+    }
+
+    .icon-close {
+        background: #cdd7e0 !important;
+        color: #fff !important;
+        font-size: 10px;
+        @include css3-prefix("border-radius", "100%");
+        padding: 7px;
+    }
+        
+    .grayLine {
+        background-color: #808080;
+        width: 15%;
+        height: 1px;
+        transform: rotate(90deg);
+    }
+    .card-footer {
+        padding: 15px;
+        p {
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+        .spanColor {
+            display: inline-block;
+            color: black;
+            padding: 5px;
+            border-radius: 5px;
+            background-color:  #EBFBFF;
+        }
+    }
+}

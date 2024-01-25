@@ -1,0 +1,86 @@
+.leaderboard{
+    .live-tabs{
+        position: sticky;
+        top: 0;
+        z-index: 9;
+        border-bottom: 1px solid #e1e7ec;
+    }
+    .player-cat{
+        .player-header{
+            padding: 5px 15px;
+            color: $theme-font-color;
+        }
+        h1 {
+            text-align: center;
+            padding-top: 10px;
+            color: #1F70FF;
+        }
+        .border1{
+            border: 1px;
+            .tableHead {
+                text-align: center;
+                // height: 50px;
+                // background-color: #beedff;
+                // color: #702bb7;
+                td span {
+                    color: #A5AEB5;
+                }
+            }
+            .tableBody {
+                padding: 15px;
+                .align-left {
+                    text-align: left;
+                }
+            }
+        }
+    }
+    .player-list{
+        tbody{
+            tr td:last-child{
+                width: 50px;
+            }
+            tr td:first-child{
+                padding-top: 10px;
+            }
+            td{
+                .p-name{
+                    font-weight: normal;
+                }
+                .c-name{
+                    color: $theme-font-color;
+                }
+            }
+        }
+    }
+}
+
+@media (min-width : 200px)and(max-width : 575px) {
+    .player-list{
+        tbody{
+            td{
+                padding: 5px;
+                .p-name{
+                    font-size: 12px;
+                    line-height: 16px;
+                    // font-weight: normal;
+                }
+                .c-name{
+                    font-size: 10px;
+                    line-height: 16px;
+                    margin-bottom: 2px;
+                    // color: $theme-font-color;
+                }
+            }
+            .line {
+                background-color: #e3ccea;
+                font-size: 10px;
+                font-weight: 400;
+                color: #fff;
+                text-align: center;
+                position: relative;
+                z-index: 1;
+                border-radius: 50px;
+            }
+        }
+    }
+}

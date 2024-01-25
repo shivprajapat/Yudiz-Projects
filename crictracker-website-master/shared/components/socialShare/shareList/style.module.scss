@@ -1,0 +1,18 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.socialShareList {
+  a.item { width: 32px;
+    button { margin: 0; }
+  }
+  .copy:hover,
+  .copy:focus,
+  .copy { background: $theme-color; }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  .socialShareList {
+    a.item { width: 30px; }
+  }
+}

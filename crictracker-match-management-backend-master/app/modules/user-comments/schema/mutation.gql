@@ -1,0 +1,66 @@
+input addFantasyUserCommentInput {
+    iArticleId: ID!
+    sContent: String!
+    iParentId: ID
+}
+
+type oFantasyUserCommentResponse {
+    sMessage: String!
+}
+
+input reportFantasyCommentInput {
+    iArticleId: ID!
+    _id: ID!
+    iReportReasonId: ID!
+}
+
+enum likeFantasyCommentType {
+    "Like comment"
+    like
+    "Dislike comment"
+    dislike
+}
+
+input likeDislikeFantasyCommentInput {
+    iArticleId: ID!
+    iCommentId: ID!
+    likeType: likeFantasyCommentType
+}
+
+type likeDislikeFantasyCommentResponse {
+    sMessage: String!
+}
+
+input updateFantasyCommentInput {
+    _id: ID!
+    eStatus: UpdateFantasyCommentType
+}
+
+enum UpdateFantasyCommentType { a r sp t d p }
+
+input bulkFantasyCommentInput {
+    aId: [ID!]!
+    eStatus: UpdateFantasyCommentType
+}
+
+input deleteFantasyCommentInput {
+    _id: ID!
+}
+
+input deleteFantasyFrontCommentInput {
+    _id: ID!
+}
+
+type oAddFantasyUserCommentResponse {
+    oData: oFantasyComment
+    sMessage: String!
+}
+extend type Mutation {
+    addFantasyUserComment(input: addFantasyUserCommentInput): oAddFantasyUserCommentResponse
+    reportFantasyComment(input: reportFantasyCommentInput): oFantasyUserCommentResponse
+    updateFantasyCommentStatus(input: updateFantasyCommentInput): oFantasyUserCommentResponse
+    bulkFantasyCommentUpdate(input: bulkFantasyCommentInput): oFantasyUserCommentResponse
+    deleteFantasyComment(input:deleteFantasyCommentInput): oFantasyUserCommentResponse
+    deleteFantasyFrontComment(input:deleteFantasyFrontCommentInput): oFantasyUserCommentResponse
+    likeDislikeFantasyComment(input: likeDislikeFantasyCommentInput): likeDislikeFantasyCommentResponse
+}

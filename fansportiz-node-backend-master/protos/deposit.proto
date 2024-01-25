@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package deposit;
+
+service Deposit {
+    rpc findDeposit(Request) returns (Response) {}
+    rpc findAllDeposit(Request) returns (Response) {}
+    rpc countDeposit(Request) returns (Response) {}
+    rpc findTotalCashDeposit(Request) returns (Response) {} // get total of nCash
+    rpc getDepositOfDateRange(RequestDateRange) returns (Response) {} // total deposit between two date
+    rpc getDepositOfPG(Request) returns (Response) {} // payment gateway wise total deposit cash
+    rpc getDepositOfPgInDateRange(RequestDateRange) returns (Response) {} // payment gateway wise total deposit cash with date range
+    rpc countDepositPromo(Request) returns (Response) {} // get total count of deposit where perticuler promo applied and count of user deposit with perticuler promo
+}
+
+ message Empty {
+
+ }
+
+message Request {
+    string query = 1;
+}
+
+message Response {
+    string data = 1;
+}
+
+message RequestDateRange {
+    string query = 1;
+    string dateRange = 2;
+}
+
+

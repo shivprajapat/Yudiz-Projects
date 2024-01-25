@@ -1,0 +1,275 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    release: {{ .Values.labels.release }}
+    app: {{ .Release.Name }}
+    environment: {{ .Values.labels.environment }}
+    tier: {{ .Values.labels.tier }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      {{- if .Values.imagePullSecrets.enabled }} 
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+      tolerations: {{ .Values.tolerations | toYaml | nindent 8 }}
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.image }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        env:
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: jwt
+                key: JWT_SECRET
+
+          - name: AWS_ACCESSKEYID
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: AWS_ACCESSKEYID
+
+          - name: AWS_SECRETKEY
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: AWS_SECRETKEY
+
+          - name: DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: SUBSCRIPTION_DB_URL
+                
+          - name: ENTITY_SPORT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: apikeys
+                key: ENTITY_SPORT_TOKEN
+
+          # configmaps
+
+          - name: NODE_ENV
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: NODE_ENV       
+
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: PORT
+
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_HOST      
+
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_PORT    
+
+          - name: SUPPORT_EMAIL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SUPPORT_EMAIL       
+
+          - name: AWS_REGION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: AWS_REGION
+
+          - name: S3_BUCKET_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_NAME
+
+          - name: S3_BUCKET_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_URL
+           
+          - name: S3_BUCKET_PROFILE_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_PROFILE_PATH
+
+          - name: S3_BUCKET_KYC_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_KYC_PATH
+
+          - name: S3_BUCKET_FB_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_FB_PATH
+
+          - name: S3_BUCKET_TWITTER_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_TWITTER_PATH
+
+          - name: ENTITY_SPORT_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: ENTITY_SPORT_BASE_URL
+
+          - name: SENTRY_DSN
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SENTRY_DSN
+
+          - name: KAFKA_CLIENT_ID
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: KAFKA_CLIENT_ID
+
+          - name: KAFKA_BROKERS
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: KAFKA_BROKERS
+              
+          - name: SEO_DATA_TRIGGER_TOPIC
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SEO_DATA_TRIGGER_TOPIC
+
+          - name: SEO_DATA_TRIGGER_TOPIC
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SEO_DATA_TRIGGER_TOPIC
+
+          - name: SEO_DATA_SENDER_TOPIC
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SEO_DATA_SENDER_TOPIC
+
+          - name: CONSUMER_GROUP_ID
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: CONSUMER_GROUP_ID
+
+          - name: ADMINS_SUB_GRAPH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: ADMINS_SUB_GRAPH
+
+          - name: ARTICLE_SUB_GRAPH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: ARTICLE_SUB_GRAPH
+
+          - name: SEO_SUB_GRAPH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SEO_SUB_GRAPH
+
+          - name: MATCH_MANAGEMENT_SUB_GRAPH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: MATCH_MANAGEMENT_SUB_GRAPH
+
+          - name: HELP_SUB_GRAPH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: HELP_SUB_GRAPH
+
+          - name: GLOBAL_WIDGET_SUB_GRAPH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: GLOBAL_WIDGET_SUB_GRAPH
+
+          - name: CARRER_SUB_GRAPH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: CARRER_SUB_GRAPH
+
+          - name: APOLLO_GATEWAY_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: APOLLO_GATEWAY_URL
+
+          - name: AUTH_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: AUTH_GRPC_URL
+
+          - name: GLOBAL_WIDGET_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: GLOBAL_WIDGET_GRPC_URL
+
+          - name: SUBSCRIPTION_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SUBSCRIPTION_GRPC_URL                

@@ -1,0 +1,47 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.scorecardNav { margin: 2px -6px 8px; padding-bottom: 6px;
+  button { margin: 0 6px; padding: 5px 8px; background: transparent; font-size: 12px; line-height: 16px; font-weight: 700; display: block; color: var(--font-secondary); border-radius: 8px; text-transform: uppercase; border: 1px solid transparent;
+    &:hover { color: var(--theme-color); }
+    &.active { background: #fff; color: var(--theme-color); border-color: var(--theme-medium); }
+  }
+}
+
+.scorecardSlider { padding: 16px 0; border-bottom: 1px solid var(--light); overflow: hidden;
+  // a { pointer-events: none; }
+  .item { cursor: pointer; cursor: default; margin: 0px 4px; width: 300px; background: var(--light-mode-bg);  border-radius: 6px; font-size: 11px; line-height: 16px; color: var(--border-color); font-weight: 600; position: relative;}  
+  p { margin: 0; }
+  .dark { color: var(--font-color); }
+  .scoreCardLink{ height: 100%; width: 100%; position: absolute; top: 0; left: 0; overflow: hidden; z-index: 1; background: transparent; text-indent: -2000px; }
+  .head { color: $font-light;}
+  .live::before { @extend %after-before; margin-right: 4px; position: relative; top: -4px; width: 6px; height: 6px; display: inline-block; border-radius: 50%; background: $danger;}
+  .switch label { color: var(--font-color); font-weight: 500; }
+  .series,.result { margin: 8px 0; font-weight: 500; text-overflow: ellipsis; }
+  .team { margin-bottom: 6px; font-size: 12px; line-height: 19px; position: relative; }
+  .teamName { color: var(--font-color); 
+    span { margin-left: 6px; }
+    > div { vertical-align: middle;}
+  }
+  .winner { width: 18px; }
+  .btnList { margin: 0px -4px;
+    a { margin: 0px 4px; padding: 4px; color: var(--font-secondary); border: 1px solid $border-light; border-radius: 2em; flex-grow: 1; 
+      &:hover { border-color: var(--theme-color); color: var(--theme-color); }
+    }
+  }
+  .teamFlag { width: 20px; }
+}
+div[class*="carousel-button"]{ margin: 0px; width: 26px; height: 50px; background: var(--light-mode-bg) no-repeat center center; border-radius: 13px; border: 2px solid $theme-color; cursor: pointer;
+  &:focus { border: 2px solid $theme-color; }
+  [class*="arrow-backdrop"],
+  [class*="arrow-icon"],
+  [class*="arrow-frosting"] { display: none; }
+  &[class*="carousel-button-next"] { right: 0; }
+  &[class*="carousel-button-prev"] { left: 0; }
+  &[class*="carousel-button-next"]:before { box-shadow: none; background: url(/static/right-theme-arrow.svg) no-repeat center center / 20px auto;  }
+  &[class*="carousel-button-prev"]:before { box-shadow: none; background: url(/static/left-theme-arrow.svg) no-repeat center center / 20px auto;  }
+  
+  &::before               { content: ""; margin: auto; width: 100%; height: 100%; display: block;}
+  &.prev::before    { @include transform(rotate(180deg)); }
+  .slider { margin: 0px -10px; }
+}

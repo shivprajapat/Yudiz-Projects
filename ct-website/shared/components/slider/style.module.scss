@@ -1,0 +1,41 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.slider {
+  .inner { display: flex; overflow-y: auto; overflow-x: hidden; scroll-behavior: smooth; }
+  .single > div { flex: 1 0 100%; }
+  &.destroy {
+    .inner {
+      overflow-x: auto;
+    }
+  }
+}
+.arrow { position: absolute; width: 26px; height: 50px; top: 50%; transform: translateY(-50%); font-size: 0; z-index: 5; background: var(--light-mode-bg); border-radius: 13px; border: 2px solid $theme-color; cursor: pointer;
+  &.prev            { left: 0px; }
+  &.next            { right: 0px; }
+  &::before               { content: ""; margin: auto; width: 100%; height: 100%; display: block; background: url(../../../assets/images/icon/right-theme-arrow.svg) no-repeat center center / 20px auto; }
+  &.prev::before    { @include transform(rotate(180deg)); }
+  &:hover { background: $theme-color; 
+      &::before { @include filter(brightness(0) invert(1)); }
+  }
+  &.disabled { display: none !important;}
+  .navTransparent & { background-color: #fff; border: none; 
+    &:hover::before { @include filter(none); }
+  }
+}
+.dots { margin: 0px -1.5px; bottom: 0px; display: flex !important; display: -webkit-flex !important;
+  button { margin: 0px 1.5px; width: 100%; height: 4px; font-size: 0; padding: 0; background: $font-light; position: relative; border: none;
+      &::before { content: ""; position: absolute; left: 0; top: 0; width: 100%; height: 100%; background: $theme-medium; opacity: 0; }
+      &.active::before  { opacity: 1; animation: process 4s linear; }
+  }
+}
+
+@keyframes process {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}

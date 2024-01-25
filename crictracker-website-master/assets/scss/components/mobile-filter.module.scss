@@ -1,0 +1,50 @@
+@import "../../../assets/scss/variables.scss";
+@import "../../../assets/scss/mixins.scss";
+
+.filterToggle {
+    bottom: 130px;
+    background: $theme-medium2 url(../../images/icon/filter-solid-icon.svg) no-repeat 8px center / 24px auto;
+    @include box-shadow(0 8px 12px rgba($theme-dark2, 0.28));
+    z-index: 5;
+    padding: 10px 10px 10px 36px;
+    color: $light-color;
+    [class="downStickyAds"] & { bottom: 74px; }
+    [class="stickyAdRemoved"] & { bottom: 70px; }
+    [class="downStickyAds stickyAdRemoved"] & { bottom: 30px; }
+    [class="stickyAdRemoved downStickyAds"] & { bottom: 30px; }
+}
+.mobFixtureFilter {
+    max-height: 75%;
+    bottom: 0;
+    left: 0;
+    z-index: 9999;
+    overflow-y: auto;
+    border-radius: 8px 8px 0 0;
+    @include transition(transform 0.3s cubic-bezier(0.2, -0.1, 0.9, 1.2));
+    @include transform(translateY(100%));
+    &.active {
+        box-shadow: 0px 0px 0px 100vh rgba(0,0,0,0.5);
+        @include transform(translateY(0));
+    }
+    .head {
+        padding: 10px 20px;
+        border-bottom: 1px solid var(--light);
+    }
+    .innerBlock {
+        padding: 12px 12px 16px;
+    }
+    .formGroup {
+        width: 100%;
+    }
+    .nameFilter {
+        .icon {
+            display: none;
+        }
+        button {
+            margin: 0px 8px;
+        }
+    }
+    .searchFilter input {
+        border-radius: 2em;
+    }
+}

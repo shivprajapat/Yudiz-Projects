@@ -1,0 +1,5 @@
+.liveMain{border-left:1px solid var(--border-light);padding-bottom:10px}
+div[role='list']{padding:0px 8px} 
+.live-update-btn { position: fixed; bottom: 70px; z-index:999999999; left:50%;transform:translateX(-50%); cursor:pointer;}
+button[load-more-clickable=""] {height:28px;padding: 0 10px;background-color:#5090f6;font-size:12px}
+.noLiveArticles{ margin: 8px 0; padding: 16px; text-align: center; }

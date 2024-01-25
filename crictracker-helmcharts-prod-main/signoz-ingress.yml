@@ -1,0 +1,49 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: crictracker-signoz
+  namespace: monitoring
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
+      { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:693583001687:certificate/a98e8d06-f891-4338-9143-1220fa55592c
+    alb.ingress.kubernetes.io/group.name: crictracker-devstag-new
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "14"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "8"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "3"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: subnet-077b67cb6983824ae, subnet-079a2bebf229cbae2
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=70
+    alb.ingress.kubernetes.io/target-type: ip
+    external-dns.alpha.kubernetes.io/hostname: signoz.beta.crictracker.com
+spec:
+  rules:
+  - http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        pathType: ImplementationSpecific
+  - host: signoz.beta.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: signoz-frontend
+            port:
+              number: 3301
+        path: /*
+        pathType: ImplementationSpecific

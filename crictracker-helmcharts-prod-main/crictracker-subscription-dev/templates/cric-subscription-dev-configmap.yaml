@@ -1,0 +1,36 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  NODE_ENV: dev-prod
+  PORT: '5000'
+  REDIS_HOST: "crictracker-redis-dev-headless.dev.svc.cluster.local"
+  REDIS_PORT: "6379"
+  SUPPORT_EMAIL: 'Crictracker@yudizproject.tk'
+  AWS_REGION: "ap-south-1"
+  S3_BUCKET_NAME: 'admin-media-cdn.crictracker.com'
+  S3_BUCKET_URL: 'https://admin-media-cdn.crictracker.com.s3.ap-south-1.amazonaws.com/'
+  S3_BUCKET_PROFILE_PATH: 'profile-pic/'
+  S3_BUCKET_KYC_PATH: 'kyc/pan'
+  S3_BUCKET_FB_PATH: 'seo/fb/'
+  S3_BUCKET_TWITTER_PATH: 'seo/twitter/'
+  ENTITY_SPORT_BASE_URL: 'https://rest.entitysport.com/v2/'
+  SENTRY_DSN: 'https://66ecc6572c134e1d9ec724c991dea023@o992135.ingest.sentry.io/6073525'
+  KAFKA_CLIENT_ID: 'crictracker-dev'
+  KAFKA_BROKERS: "localhost:9092"
+  SEO_DATA_TRIGGER_TOPIC: 'seo-triggerer'
+  SEO_DATA_SENDER_TOPIC: 'seo-sender'
+  CONSUMER_GROUP_ID: 'crictrackerGroupId'
+  ADMINS_SUB_GRAPH: 'http://crictracker-authentication-dev-internal.dev.svc.cluster.local/graphql'
+  ARTICLE_SUB_GRAPH: 'http://crictracker-article-dev-internal.dev.svc.cluster.local/graphql'
+  SEO_SUB_GRAPH: 'http://crictracker-seo-dev-internal.dev.svc.cluster.local/graphql'
+  MATCH_MANAGEMENT_SUB_GRAPH: 'http://crictracker-matchmanagement-dev-internal.dev.svc.cluster.local/graphql'
+  HELP_SUB_GRAPH: 'http://crictracker-help-dev-internal.dev.svc.cluster.local/graphql'
+  GLOBAL_WIDGET_SUB_GRAPH: 'http://crictracker-global-widget-dev-internal.dev.svc.cluster.local/graphql'
+  CARRER_SUB_GRAPH: 'http://crictracker-career-dev-internal.dev.svc.cluster.local/graphql'
+  APOLLO_GATEWAY_URL: 'https://gateway-dev.beta.crictracker.com'
+  AUTH_GRPC_URL: 'crictracker-authentication-dev-grpc.dev.svc.cluster.local:80'
+  GLOBAL_WIDGET_GRPC_URL: 'crictracker-global-widget-dev-grpc.dev.svc.cluster.local:80'
+  SUBSCRIPTION_GRPC_URL: '0.0.0.0:3007'  

@@ -1,0 +1,54 @@
+type enquiryPreferredLocationData {
+    _id: ID
+    sTitle: String
+}
+
+type enquiryJobData {
+    _id: ID
+    sTitle: String
+    eDesignation: String
+}
+
+type enquiryGetData {
+  _id: ID
+  oJobData: enquiryJobData
+  sFullName: String!
+  sEmail: String
+  sPhone: String
+  sCurrentEmployer: String
+  sCurrentCTC: String
+  sExpectedCTC: String
+  sCurrentLocation: String
+  oPreferredLocation: enquiryPreferredLocationData
+  sTotalExperience: String
+  sUploadCV: String
+  sMessage: String
+  dCreated: String
+  sUploadSample: String
+  eStatus: EnquiryActionStatus
+  sReference: String
+}
+
+type getEnquiryData {
+  nTotal: Int
+  aResults: [enquiryGetData]
+}
+
+input getEnquiryInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  eDesignation: [eDesignation]
+  aState: [EnquiryActionStatus]
+}
+
+input getEnquiryById {
+  _id: ID!
+}
+
+extend type Query {
+  getEnquiries(input: getEnquiryInput!): getEnquiryData
+  getEnquiryById(input:getEnquiryById): enquiryGetData
+}

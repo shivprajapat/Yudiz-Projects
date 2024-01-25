@@ -1,0 +1,53 @@
+type Mutation {
+    createCustomer(input: CustomerInput!): CustomerOutput
+        @resolver(
+            class: "\\Craftroots\\Mobile\\Model\\Resolver\\CreateCustomer"
+        )
+        @doc(description: "Create customer account")
+    accountConfirmationLink(email: String!): AccountConfirmationLink
+        @resolver(
+            class: "Craftroots\\Mobile\\Model\\Resolver\\AccountConfirmationLink"
+        )
+        @doc(description: "Account Confirmation Graphql")
+     accountConfirmation(id: Int!, key: String!): AccountConfirmation @resolver(class: "Craftroots\\Mobile\\Model\\Resolver\\AccountConfirmation") @doc(description: "Account Confirmation Graphql")
+     requestPasswordResetEmail(email: String!): RequestPasswordResetEmailOutput @resolver(class: "\\Craftroots\\Mobile\\Model\\Resolver\\RequestPasswordResetEmail") @doc(description: "Request an email with a reset password token for the registered customer identified by the specified email.")       
+     resetPassword(email: String!, resetPasswordToken: String!, newPassword: String!): ResetEmailOutput  @resolver(class: "\\Craftroots\\Mobile\\Model\\Resolver\\ResetPassword") @doc(description: "Reset a customer's password using the reset password token that the customer received in an email after requesting it using requestPasswordResetEmail.")   
+}
+
+input CustomerInput {
+    assistance_allowed: Int
+    mobilenumber: String @doc(description: "The customer's mobile number")
+}
+
+type CustomerOutput {
+    assistance_allowed: Int
+    confirmation_required: Boolean
+    customer: Customer!
+    message: String
+}
+
+type Customer
+    @doc(
+        description: "Customer defines the customer name and address and other details"
+    ) {
+    mobilenumber: String @doc(description: "The customer's mobile number")
+}
+type AccountConfirmationLink {
+    success: Boolean
+    message: String
+}
+type AccountConfirmation {
+  success: Boolean
+  token: String
+  message: String
+}
+
+type RequestPasswordResetEmailOutput {
+  success: Boolean
+  message: String
+}
+
+type ResetEmailOutput {
+  success: Boolean
+  message: String
+}

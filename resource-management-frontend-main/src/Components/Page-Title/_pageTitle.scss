@@ -1,0 +1,37 @@
+@import '../../Assets/Style/variables';
+
+.page-title {
+  user-select: none;
+  user-zoom: inherit;
+  font-style: normal;
+  margin: 0 !important;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+
+  .text-muted {
+    font-size: 13px;
+    color: $base-color;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .responsive {}
+}
+
+@media screen and (max-width: 767px) {
+  body .mainPageTitle {
+    display: block !important;
+    margin-bottom: 15px !important;
+
+    .page-title {
+      margin-bottom: 15px !important;
+      margin-left: 0 !important;
+    }
+  }
+}
+
+.btn-cancel .fs-6 {
+  text-transform: capitalize;
+  color: $base-color !important;
+}

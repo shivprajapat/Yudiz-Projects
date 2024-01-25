@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package payment;
+
+service Payment{
+rpc removeBeneficiaryFunction(benRequest) returns (benResponse) {}
+rpc getBenficiaryDetailsFunction(benRequest) returns (benResponse) {}
+
+}
+// Ben = beneficiary
+message benRequest{
+    string iUserId=1;
+   }
+   
+message benResponse{
+       bool success=1;
+       string message=2;
+}
+   

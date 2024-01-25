@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: icc-ranking
+  namespace: local-dev
+spec:
+  schedule: "0 8,16 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://globalwidget-dev.crictracker.ml/api/icc-ranking'
+            image: curlimages/curl
+            name: icc-ranking
+          restartPolicy: OnFailure

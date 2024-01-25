@@ -1,0 +1,12 @@
+.subscription-information {
+    text-align: center;
+    width: 60%;
+    font-size: $fs-16;
+    font-weight: $fw-500;
+    color: var(--secondary-100);
+    margin: auto;
+    margin-top: 60px;
+    p {
+      font-weight: $fw-400;
+    }
+  }

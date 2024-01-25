@@ -1,0 +1,15 @@
+type oFooterMenu {
+  _id: ID
+  sTitle: String
+  sUrl: String
+}
+
+type getFrontFooterData {
+  _id: ID
+  eType: String
+  aResults: [oFooterMenu]
+}
+
+extend type Query {
+  getFrontFooter: [getFrontFooterData]
+}

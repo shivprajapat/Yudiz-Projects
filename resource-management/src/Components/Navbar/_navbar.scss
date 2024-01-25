@@ -1,0 +1,144 @@
+@import '../../Assets/Style/variables';
+.navbar_section {
+  background-color: $white;
+  height: 60px;
+  z-index: 100;
+
+  .hamburger {
+    display: none;
+  }
+
+  .logo {
+    background-image: url(../../Assets/Images/Logo.svg);
+    margin-left: 30px;
+    height: 40px;
+    width: 162px;
+    background-repeat: no-repeat;
+  }
+  .user_actions {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .user-name {
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 24px;
+      color: $text-color;
+    }
+    .btn:focus {
+      outline: none;
+      box-shadow: none;
+    }
+
+    .dropdown {
+      cursor: pointer;
+      .down-arrow {
+        transition: transform 0.5s ease;
+      }
+      &.show {
+        .down-arrow {
+          transform: rotate(180deg);
+        }
+      }
+    }
+    .profile_picture {
+      margin: 10px;
+      height: 30px;
+      width: 30px;
+      border-radius: 50%;
+      overflow: hidden;
+      img {
+        height: 30px;
+        width: 30px;
+      }
+    }
+  }
+  .notification {
+    .profile-btn {
+      .dropdown-toggle {
+        background: none;
+        transform: rotate(0deg) !important;
+      }
+      .dropdown-menu {
+        background-color: $white;
+        min-width: 100%;
+        padding: 16px 8px 16px 16px;
+        width: 342px;
+
+        ul {
+          overflow-y: auto;
+          max-height: 304px;
+
+          &::-webkit-scrollbar {
+            width: 8px;
+          }
+
+          &::-webkit-scrollbar-thumb {
+            background: #7189ac82;
+            border-radius: 10px;
+          }
+        }
+
+        li {
+          border: none;
+          border-radius: 0;
+          border-bottom: 1px solid $base-color100;
+          padding: 13px 0;
+          padding-left: 14px;
+
+          .badge {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            display: block;
+            padding: 0;
+            left: -5px;
+            margin-top: 6px;
+          }
+
+          &::before {
+            display: none;
+          }
+
+          h5 {
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 3px;
+            color: $input-color;
+          }
+
+          p {
+            font-weight: 400;
+            font-size: 14px;
+            color: $heading-color;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+.test {
+  height: 20px;
+  z-index: 100;
+  width: 100%;
+  background: #f6f7f9;
+  position: fixed;
+  top: 60;
+}
+
+@media screen and (max-width: 920px) {
+  .navbar_section {
+    .hamburger {
+      display: block;
+      cursor: pointer;
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .navbar_section .user_actions .notification .profile-btn .dropdown-menu {
+    width: 320px;
+  }
+}

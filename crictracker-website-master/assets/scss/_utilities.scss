@@ -1,0 +1,26 @@
+// Spacing
+.mb-01 { margin-bottom: 2px; }
+.mt-01 { margin-top: 2px; }
+
+// Text
+.t-ellipsis { text-overflow: ellipsis; }
+.line-clamp-3 { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; }
+
+// Border Radius
+.br-xs { border-radius: 4px; }
+.br-sm { border-radius: 8px; }
+.br-md { border-radius: 12px; }
+.br-lg { border-radius: 16px; }
+
+// Background
+.light-bg { background: var(--light-mode-bg); }
+
+.a-transition::after,
+.b-transition::before,
+.c-transition { @include transition($common-transition); }
+
+@media (max-width: 767px) {
+    .br-md { border-radius: 8px; }
+    .br-lg { border-radius: 12px; }
+}
+

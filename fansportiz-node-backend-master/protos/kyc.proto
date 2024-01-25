@@ -1,0 +1,32 @@
+syntax = "proto3";
+
+package kyc;
+
+service KYC{
+    rpc findKyc(KycRequest) returns (KycResponse) {}
+    rpc findKycs(KycRequest) returns (KycResponse) {}
+    rpc createKyc(createKycRequest) returns (emptyResponse) {}
+    rpc deleteKyc(request) returns (emptyResponse) {}
+    rpc deleteUserKyc(request) returns (emptyResponse) {}
+    
+}
+
+// findKyc
+message KycRequest {
+    string query = 1;
+    string projection = 2;
+}
+
+message KycResponse {
+    string data = 1;
+}
+
+// createKyc
+message createKycRequest{
+    string iUserId =1;
+}
+message emptyResponse{
+}
+message request{
+    string iUserId =1;
+}

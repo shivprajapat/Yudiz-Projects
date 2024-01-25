@@ -1,0 +1,19 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item { padding: 0 12px; border-radius: 12px; }
+.month { width: 140px;  padding: 12px 0;}
+.duration { width: 160px; }
+.seriesItem { padding: 12px 0;
+  &:not(:last-child) { border-bottom: 1px solid $light; }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 1199px) {
+  .duration { width: 140px; }
+}
+@media (max-width: 767px) {
+  .month { width: 80px; }
+  .month,
+  .seriesItem { padding: 8px 0; }
+}

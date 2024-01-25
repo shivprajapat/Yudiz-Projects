@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <form action="<%= url %>" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <input type="input" name="success_action_status" value="<%= success_action_status %>" />
+            <input type="input" name="Content-Type" value="<%= ContentType %>" />
+            <input type="text" name="X-Amz-Algorithm" value="<%= algorithm %>">
+            <input type="text" name="X-Amz-Credential" value="<%= credential %>">
+            <input type="text" name="X-Amz-Date" value="<%= date %>">
+            <input type="text" name="X-Amz-Signature" value="<%= signature %>">
+            <input type="text" name="Policy" value="<%= policy %>" />
+            <input type="text" name="key" value="<%= key %>">
+
+            <input type="file" name="file">
+            <button type="submit">Upload</button>
+        </fieldset>
+    </form>
+    <script src="" async defer></script>
+</body>
+
+</html>

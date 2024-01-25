@@ -1,0 +1,9 @@
+type Query {
+    pincodecheck(deliveryPostCode: Int!): PincodeCheck
+        @resolver(class: "Craftroots\\PincodeCheck\\Model\\Resolver\\PincodeCheck")
+        @doc(description: "pincode Check")   
+}
+type PincodeCheck @doc(description: "pincode Check") {
+   message: String @doc(description: "Message")
+   status: Boolean
+}

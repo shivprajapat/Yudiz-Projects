@@ -1,0 +1,321 @@
+type generateUsernameResponse {
+  sMessage: String
+  oData: generateUsernameResponseData
+  
+}
+
+type generateUsernameResponseData {
+  sUsername: String
+  bIsExists: Boolean
+}
+
+input generateUsernameInput {
+  sUserName: String!
+}
+
+type getAdminRoleData {
+  _id: ID
+  sName: String
+}
+
+
+type aPermissionsGetData {
+  aRoles: [getAdminRoleData]
+  iPermissionId: permissions
+}
+
+type adminRolesData {
+  aRoleId: [getAdminRoleData]
+  aPermissions: [aPermissionsGetData]
+}
+
+type listSubAdmin @key(fields: "_id")  {
+  _id: ID
+  sFName: String
+  sEmail: String
+  sNumber: String
+  bIsVerified: Boolean
+  eStatus: String
+  aRole: adminRolesData
+  dCreated: String
+  bIsCustom: Boolean
+}
+
+type accountUser {
+  sPName: String
+  sUrl: String
+  sIfsc: String
+  sANumber: String
+  sAName: String
+  sPanNumber: String
+  sBankDetailPic: String
+  sBankName: String
+  sBranchName: String
+}
+
+type aPermissions {
+    aRoles: [ID]
+    iPermissionId: ID
+}
+
+type oRole {
+    aRoleId: [ID]
+    aPermissions: [aPermissions]
+}
+
+type oSocialProfile {
+    eSocialNetworkType: String
+    sDisplayName: String
+    sLink: String
+}
+
+enum ESEOSUBTYPE {
+  "news"
+  n
+  "videos"
+  v
+  "fixtures"
+  f
+  "standings"
+  s
+  "stats"
+  st
+  "teams"
+  t
+  "squads"
+  sq
+  "archives"
+  ar
+  "fantasy tips"
+  ft
+  "score card"
+  sc
+  "overs"
+  o
+  "fixtures-and-results"
+  far
+  "results"
+  r
+  "commentary"
+  c
+  "upcoming"
+  u
+  "photos"
+  p
+  "batting-highest-strikerate-innings"
+  stBhsi
+  "batting-highest-average"
+  stBha
+  "batting-highest-strikerate"
+  stBhs
+  "batting-most-centuries"
+  stBmc
+  "batting-most-run6-innings"
+  stBmr6i
+  "batting-most-fours"
+  stBm4
+  "batting-most-run4-innings"
+  stBmr4i
+  "batting-most-runs"
+  stBmr
+  "batting-most-runs-innings"
+  stBmri
+  "batting-most-run50"
+  stBmr50
+  "batting-most-sixes"
+  stBms
+  "bowling-top-wicket-takers"
+  stBtwt
+  "bowling-best-economy-rates-innings"
+  stBberi
+  "bowling-best-averages"
+  stBba
+  "bowling-best-economy-rates"
+  stBber
+  "bowling-best-strike-rates"
+  stBbsr
+  "bowling-best-strike-rates-innings"
+  stBbsri
+  "bowling-five-wickets"
+  stBfiw
+  "bowling-best-bowling-figures"
+  stBbbf
+  "bowling-most-runs-conceded-innings"
+  stBmrci
+  "bowling-four-wickets"
+  stBfow
+  "bowling-maidens"
+  stBm
+  "team-total-runs"
+  stTtr
+  "team-total-run100"
+  stTtr100
+  "team-total-wickets"
+  stTtw
+  "batting-most-fifties"
+  stBmf
+}
+
+extend type Seo @key(fields: "iId eSubType") {
+  iId: ID @external
+  eSubType: ESEOSUBTYPE @external
+}
+
+type subAdmin @key(fields: "_id")  {
+  _id: ID
+  sFName: String
+  sEmail: String
+  sNumber: String
+  eStatus: String
+  oRole: adminRolesData
+  dCreated: String
+  eGender: String
+  sDisplayName: String
+  sUName: String
+  eDesignation: String
+  sUrl: String
+  sBio: String
+  sAddress: String
+  sCity: String
+  bIsVerified: Boolean
+  oKyc: accountUser
+  bIsCustom: Boolean
+  aSLinks: [oSocialProfile]
+  eType: String
+  oSeo: Seo
+}
+
+
+type oSocialType {
+  sTitle: String,
+  sDescription: String
+  sUrl: String
+}
+
+type oSeoType {
+  sTitle: String
+  sDescription: String
+  sSlug: String
+  aKeywords: [String]
+  oFB: oSocialType
+  sUrl: String
+  oTwitter: oSocialType
+  sCUrl: String 
+  sRobots: String
+}
+
+type listSubAdminResponse {
+  aResults: [listSubAdmin]
+  nTotal: Int
+}
+
+input subAdminInput {
+  sSearch: String
+  nLimit: Int
+  nSkip: Int
+  nOrder: Int
+  sSortBy: String
+  aFilters: [String]
+}
+
+type mySocialLink {
+  eSocialNetworkType: String
+  sDisplayName: String
+  sLink: String
+  eStatus: String
+}
+
+type myProfileResponse {
+  _id: ID
+  sFName: String
+  sEmail: String
+  sUName: String
+  sDisplayName: String
+  sNumber: String
+  eStatus: String
+  eGender: String
+  eDesignation: String
+  sCity: String
+  sAddress: String
+  sBio: String
+  eType: String
+  aSLinks: [mySocialLink]
+  oKyc: accountUser
+  dCreated: String
+  sUrl: String
+  bSuperAdmin: Boolean
+}
+
+type DisplayAuthor {
+  _id: ID
+  sFName: String
+  sUName: String
+  eType: String
+  sUrl: String
+}
+
+input getDisplayAuthorInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  eType: ARTICLETYPE
+}
+
+enum ARTICLETYPE {
+  "article"
+  a
+  "fantasy article"
+  fa
+  "Live blog content"
+  lbc
+}
+
+type getDisplayAuthorResponse {
+  aResults: [DisplayAuthor]
+  nTotal: Int
+}
+
+input getSubAdminInput {
+  _id: ID!
+}
+
+input authenticateAdminInput {
+  _id: ID!
+}
+
+type oGenerateTokenFrontResponse {
+  sMessage: String
+  oData: TokenDataType
+}
+
+type TokenDataType {
+  sToken: String
+}
+
+input oGenerateTokenFrontInput {
+  eType: TOKENTYPE
+}
+
+enum TOKENTYPE {
+  "guest article"
+  ga
+  "guest fantasy article"
+  gfa
+}
+
+input subAdminSubscriptionInput {
+  _id: ID
+}
+
+extend type Query {
+  generateUsername(input:generateUsernameInput):generateUsernameResponse!
+  listSubAdmins(input:subAdminInput): listSubAdminResponse
+  getSubAdmin(input:getSubAdminInput): subAdmin
+  authenticateAdmin(input:authenticateAdminInput): subAdmin
+  getProfile: myProfileResponse
+  getDisplayAuthor(input:getDisplayAuthorInput): getDisplayAuthorResponse
+  generateTokenFront(input:oGenerateTokenFrontInput): oGenerateTokenFrontResponse
+  subAdminSubscription(input: subAdminSubscriptionInput): subAdmin
+}

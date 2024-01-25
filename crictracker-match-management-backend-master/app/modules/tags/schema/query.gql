@@ -1,0 +1,174 @@
+
+ input listPlayerTagsInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aCountryFilter:[String]
+  aRoleFilter: [String]
+  aStatus: [PlayerTagEnum]
+  eType: ListType
+ }
+
+enum ListType {
+    "general"
+    g
+    "tag"
+    t
+
+}
+
+ enum PlayerTagEnum {
+        "rejected"
+        r
+        "approved"
+        a 
+        "pending"
+        p
+}
+
+type listPlayerTagsResponse {
+    nTotal: Int
+    aResults: [oPlayer]
+}
+
+input getPlayerByIdInput {
+    _id: ID
+}
+
+type oCountry {
+    sAbbr: String
+    sTitle: String
+    sISO: String
+}
+
+input listTeamTagsInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aCountryFilter:[String]
+  aStatus: [PlayerTagEnum]
+  eType: ListType
+}
+
+
+
+type listTeamTagsResponse {
+    nTotal: Int
+    aResults: [oTeams]
+}
+
+type listCountryResponse {
+    aResults: [oCountry]
+    nTotal: Int
+}
+
+input listCountryInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+input oGetTeamByIdInput {
+    _id: ID
+}
+
+input oGetCount {
+    eType: COUNTTYPE!
+}
+
+enum COUNTTYPE {
+    "player"
+    p
+    "team"
+    t
+    "fantasy article"
+    fa
+}
+
+type oCounts {
+ eType: String
+ nAll: Int
+ nP: Int
+ nAp: Int
+ nR: Int
+ nUM: Int
+ nCM: Int
+ nT: Int
+}
+
+input getPopularPlayerInput {
+    nLimit: Int
+    iPlayerId: ID
+}
+
+enum TEAMTYPEFILTER {
+    "International"
+    i
+    "Leagues"
+    l
+    "Domestic"
+    d
+    "Women"
+    w
+}
+
+input listGlobalTeamsInput {
+    nLimit: Int
+    nSkip: Int
+    eTeamType: TEAMTYPEFILTER
+}
+
+input listScheduleByTeamIdInput {
+    iTeamId: ID!
+    nLimit: Int
+    nSkip: Int
+}
+
+type fantasyArticleList @key(fields:"_id"){
+  _id: ID
+  iMatchId: ID
+  ePlatformType: FANTASYPLATFORM
+  sTitle: String
+  sSubtitle: String
+  sSrtTitle: String
+  sMatchPreview: String
+  oImg: Img
+  oTImg: Img
+  sEditorNotes: String
+  oAdvanceFeature: oAdvanceFeatureType
+  eState: FANTASYARTICLE
+  dPublishDate: Date
+  dPublishDisplayDate: Date
+  bPriority: Boolean
+  iAuthorDId: ID
+  iCategoryId: ID
+  sVideoUrl: String
+  oSeo: Seo
+  oCategory: oSimpleCategory
+  nCommentCount: Int
+  nViewCount: Int
+  nDuration: Int
+  dUpdated: String
+  nClaps: Int
+  dModifiedDate: Date
+}
+
+extend type Query {
+    listPlayerTags(input:listPlayerTagsInput):listPlayerTagsResponse
+    getPlayerById(input:getPlayerByIdInput):oPlayer
+    listCountry(input:listCountryInput):listCountryResponse 
+    listTeamTags(input:listTeamTagsInput):listTeamTagsResponse
+    getTeamById(input:oGetTeamByIdInput): oTeams
+    getCount(input:oGetCount!):oCounts
+    getPopularPlayers(input: getPopularPlayerInput): [oPlayerFront]
+    listGlobalTeams(input: listGlobalTeamsInput): [oTeams]
+    listScheduleByTeamId(input: listScheduleByTeamIdInput): [oMatchDetailsFront]
+    listResultByTeamId(input: listScheduleByTeamIdInput): [oMatchDetailsFront]
+    listFantasyArticlesByTeamId(input:listScheduleByTeamIdInput): [fantasyArticleList]
+} 

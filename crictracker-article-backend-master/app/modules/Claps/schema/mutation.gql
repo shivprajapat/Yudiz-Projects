@@ -1,0 +1,12 @@
+input updateArticleClapInput {
+    iArticleId: ID
+}
+
+type updateArticleClapResponse {
+    nTotalClap: Int
+    sMessage: String
+}
+
+extend type Mutation {
+    updateArticleClap(input: updateArticleClapInput): updateArticleClapResponse
+}

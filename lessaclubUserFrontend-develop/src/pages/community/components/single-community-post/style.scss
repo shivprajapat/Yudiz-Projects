@@ -1,0 +1,267 @@
+@import 'assets/scss/helper/variables';
+
+.single-item {
+  position: relative;
+  .card {
+    background-color: transparent;
+    overflow: hidden;
+    position: relative;
+
+    .card-images {
+      margin-bottom: 36px;
+      overflow: hidden;
+      width: 100%;
+      height: 258px;
+    }
+    .card-img-top {
+      height: 100%;
+      width: 100%;
+      transition: all 0.3s ease;
+      object-fit: cover;
+    }
+    .share-btn {
+      position: absolute;
+      top: 16px;
+      right: 17px;
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+      background-color: $white;
+      border: none;
+      @include flex(center, center, null);
+      transition: all 0.3s ease;
+      z-index: 1;
+      &:hover {
+        background-color: $green-color;
+      }
+    }
+
+    .card-body {
+      padding: 0;
+      margin-bottom: 19px;
+
+      .card-title a {
+        margin-bottom: 8px;
+        font-weight: 400;
+        font-size: 24px;
+        color: $white;
+
+        &:hover {
+          color: $green-color;
+        }
+      }
+
+      .user-txt {
+        @include flex(center, null, null);
+        a {
+          font-size: 16px !important;
+
+          &.user-creator-box {
+            @include flex(center, null, null);
+          }
+          .user-creator {
+            @include textEllipsis();
+            margin-top: 5px;
+            width: 60px;
+            &:hover {
+              color: $green-color;
+            }
+          }
+        }
+
+        span {
+          margin: 0 5px;
+        }
+        img {
+          margin-right: 5px;
+          width: 30px;
+          height: 30px;
+          border-radius: 50%;
+        }
+      }
+
+      .post-description {
+        height: 80px;
+        p {
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 3;
+          -webkit-box-orient: vertical;
+          margin: 0;
+        }
+      }
+
+      .card-text a {
+        margin-left: 8px;
+        font-size: 18px;
+      }
+
+      .user-txt,
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        color: $primary-color;
+
+        a {
+          color: $white;
+          font-size: 20px;
+        }
+      }
+
+      .d-community {
+        margin-top: 5px;
+        margin-left: 3px;
+        @include textEllipsis();
+        width: 140px;
+        > div {
+          margin: 0 5px;
+          display: inline-block;
+        }
+        > div,
+        a {
+          font-size: 16px;
+        }
+      }
+    }
+
+    .user-link {
+      p {
+        font-weight: 400;
+
+        img {
+          border-radius: 100%;
+          width: 24px;
+          height: 24px;
+          margin-right: 8px;
+        }
+      }
+
+      p,
+      span {
+        margin: 0;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 300;
+      }
+
+      .days {
+        color: $primary-color;
+        margin-top: 7px;
+      }
+    }
+
+    .user-link,
+    .social-link {
+      @include flex(center, space-between, null);
+      z-index: 1;
+      cursor: pointer;
+      p {
+        color: $white !important;
+      }
+    }
+
+    .social-link {
+      padding-right: 15px !important;
+      a {
+        color: $grey-color;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        @include flex(center, null, null);
+        transition: all 0.3s ease;
+        &.active svg {
+          fill: $green-color;
+        }
+        &[disabled] {
+          svg {
+            &:hover {
+              fill: $white;
+            }
+          }
+        }
+        &:last-child svg {
+          user-select: none;
+          &:hover {
+            fill: $white;
+          }
+        }
+        .active,
+        svg:hover {
+          fill: $green-color;
+        }
+        svg {
+          fill: $white;
+          width: 20px;
+          &:not(:last-child) {
+            margin-right: 11px;
+          }
+        }
+
+        p {
+          margin-bottom: 0;
+          margin-top: 8px;
+        }
+      }
+    }
+
+    @media (min-width: 1400px) and (max-width: 1620px) {
+      .user-link {
+        img {
+          width: 25px !important;
+          height: 25px !important;
+        }
+        .d-community {
+          width: 60px;
+        }
+
+        p {
+          font-size: 15px;
+        }
+      }
+    }
+
+    @media (max-width: 1400px) {
+      .user-link {
+        img {
+          width: 25px !important;
+          height: 25px !important;
+        }
+        .d-community {
+          width: 90px;
+        }
+
+        p {
+          font-size: 15px;
+        }
+      }
+    }
+    @media (min-width: 1280px) and (max-width: 1366px) {
+      .card-images {
+        height: 240px !important;
+      }
+    }
+
+    @media (max-width: 1600px) {
+      .card-images {
+        height: 210px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .card-images {
+        height: 260px;
+      }
+    }
+    @media (max-width: 768px) {
+      .card-images {
+        height: 280px;
+      }
+    }
+  }
+  @media (max-width: 680px) {
+    .social-link {
+      margin-bottom: 0 !important;
+    }
+  }
+}

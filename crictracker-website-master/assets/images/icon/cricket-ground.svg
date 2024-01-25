@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="588px" height="548px" viewBox="0 0 588 548" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Group 78</title>
+    <defs>
+        <path d="M32,0 L556,0 C573.673112,-3.24649801e-15 588,14.326888 588,32 L588,516 C588,533.673112 573.673112,548 556,548 L32,548 C14.326888,548 2.164332e-15,533.673112 0,516 L0,32 C-2.164332e-15,14.326888 14.326888,-3.85892935e-15 32,0 Z" id="path-1"></path>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="100%" gradientTransform="translate(0.500000,0.000000),scale(0.931973,1.000000),rotate(90.000000),translate(-0.500000,-0.000000)" id="radialGradient-3">
+            <stop stop-color="#000000" stop-opacity="0.1" offset="0%"></stop>
+            <stop stop-color="#000000" stop-opacity="0.56" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Crictracker_Fantasy_Article_detail_Video_25Aug2021" transform="translate(-261.000000, -4853.000000)">
+            <g id="Group-73" transform="translate(215.000000, 4675.000000)">
+                <g id="Group-41" transform="translate(12.000000, 12.000000)">
+                    <g id="Group-78" transform="translate(34.000000, 166.000000)">
+                        <g id="Group-4">
+                            <g id="Group">
+                                <mask id="mask-2" fill="white">
+                                    <use xlink:href="#path-1"></use>
+                                </mask>
+                                <use id="Rectangle" fill="#34A450" xlink:href="#path-1"></use>
+                                <g id="Group-8" mask="url(#mask-2)" fill="#319B4C">
+                                    <g transform="translate(-1.000000, -39.000000)">
+                                        <rect id="Rectangle" x="124" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle-Copy-13" x="62" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle-Copy-14" x="0" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle" x="186" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle" x="248" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle" x="311" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle" x="373" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle" x="435" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle-Copy-11" x="497" y="0" width="32" height="667"></rect>
+                                        <rect id="Rectangle-Copy-12" x="559" y="0" width="32" height="667"></rect>
+                                    </g>
+                                </g>
+                            </g>
+                            <g id="Group-3" opacity="0.800000012" transform="translate(243.000000, 159.000000)">
+                                <rect id="Rectangle" fill="#CDB494" opacity="0.75" x="0" y="0" width="104" height="272" rx="2"></rect>
+                                <g id="Group-2" opacity="0.300000012" transform="translate(0.000000, 8.000000)" fill="#FFFFFF">
+                                    <rect id="Rectangle" opacity="0.518624442" x="0" y="40" width="104" height="4"></rect>
+                                    <path d="M13,0 L13,18 L31,18 L31,22 L13,22 L13,40 L9,40 L9,0 L13,0 Z" id="Combined-Shape" opacity="0.518624442"></path>
+                                    <path d="M95,40 L91,40 L91,22 L73,22 L73,18 L91,18 L91,0 L95,0 L95,40 Z" id="Combined-Shape" opacity="0.518624442"></path>
+                                </g>
+                                <g id="Group-2" opacity="0.300000012" transform="translate(52.000000, 242.000000) scale(1, -1) translate(-52.000000, -242.000000) translate(0.000000, 220.000000)" fill="#FFFFFF">
+                                    <rect id="Rectangle" opacity="0.518624442" x="0" y="40" width="104" height="4"></rect>
+                                    <path d="M13,0 L13,18 L31,18 L31,22 L13,22 L13,40 L9,40 L9,0 L13,0 Z" id="Combined-Shape" opacity="0.518624442"></path>
+                                    <path d="M95,40 L91,40 L91,22 L73,22 L73,18 L91,18 L91,0 L95,0 L95,40 Z" id="Combined-Shape" opacity="0.518624442"></path>
+                                </g>
+                            </g>
+                        </g>
+                        <path d="M32,0 L556,0 C573.673112,-3.24649801e-15 588,14.326888 588,32 L588,516 C588,533.673112 573.673112,548 556,548 L32,548 C14.326888,548 2.164332e-15,533.673112 0,516 L0,32 C-2.164332e-15,14.326888 14.326888,-3.85892935e-15 32,0 Z" id="Rectangle" fill="url(#radialGradient-3)"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,788 @@
+openapi: 3.0.3
+info:
+  title: 'Sport Entertainment'
+  description: ''
+  version: 1.0.0
+servers:
+  -
+    url: 'http://127.0.0.1:8000'
+paths:
+  /api/v1/verify-otp:
+    post:
+      summary: ''
+      operationId: postApiV1VerifyOtp
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Authenticated
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mobile_number:
+                  type: string
+                  description: 'Must match the regex /^[0-9]+$/. Must be 10 digits.'
+                  example: '6553419385'
+                otp:
+                  type: number
+                  description: ''
+                  example: 539942.383
+              required:
+                - mobile_number
+                - otp
+      security: []
+  /api/v1/slug:
+    get:
+      summary: ''
+      operationId: getApiV1Slug
+      description: ''
+      parameters: []
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: null
+                  message: 'No query results for model [App\Models\CmsPage].'
+                properties:
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'No query results for model [App\Models\CmsPage].'
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                slug_type:
+                  type: string
+                  description: ''
+                  example: ut
+              required:
+                - slug_type
+      security: []
+  /api/v1/faqs:
+    get:
+      summary: ''
+      operationId: getApiV1Faqs
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: []
+                  message: 'Faqs data fetched successfully.'
+                properties:
+                  data:
+                    type: array
+                    example: []
+                  message:
+                    type: string
+                    example: 'Faqs data fetched successfully.'
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/contact-us:
+    post:
+      summary: ''
+      operationId: postApiV1ContactUs
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/banner-detail:
+    get:
+      summary: ''
+      operationId: getApiV1BannerDetail
+      description: ''
+      parameters: []
+      responses:
+        422:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: null
+                  message: 'Banner is not found'
+                properties:
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'Banner is not found'
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/get-state:
+    post:
+      summary: ''
+      operationId: postApiV1GetState
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/get-cities:
+    post:
+      summary: ''
+      operationId: postApiV1GetCities
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/age-groups:
+    get:
+      summary: ''
+      operationId: getApiV1AgeGroups
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: null
+                  message: 'Please login to continue.'
+                properties:
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'Please login to continue.'
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/user:
+    get:
+      summary: ''
+      operationId: getApiV1User
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: null
+                  message: 'Please login to continue.'
+                properties:
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'Please login to continue.'
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/user/popular-sports:
+    post:
+      summary: ''
+      operationId: postApiV1UserPopularSports
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/user/favourite-sports:
+    post:
+      summary: ''
+      operationId: postApiV1UserFavouriteSports
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sport_ids:
+                  type: string
+                  description: ''
+                  example: dolorem
+              required:
+                - sport_ids
+      security: []
+  /api/v1/user/logout:
+    post:
+      summary: ''
+      operationId: postApiV1UserLogout
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/booking/add:
+    post:
+      summary: ''
+      operationId: postApiV1BookingAdd
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                batch_id:
+                  type: string
+                  description: ''
+                  example: blanditiis
+                coaching_centre_id:
+                  type: string
+                  description: ''
+                  example: eius
+                participants_custom_ids:
+                  type: string
+                  description: ''
+                  example: aspernatur
+              required:
+                - batch_id
+                - coaching_centre_id
+                - participants_custom_ids
+      security: []
+  /api/v1/booking/summary:
+    post:
+      summary: ''
+      operationId: postApiV1BookingSummary
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                batch_id:
+                  type: string
+                  description: ''
+                  example: ut
+              required:
+                - batch_id
+      security: []
+  /api/v1/booking/get-all:
+    post:
+      summary: ''
+      operationId: postApiV1BookingGetAll
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/booking/get-single:
+    post:
+      summary: ''
+      operationId: postApiV1BookingGetSingle
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                custom_booking_id:
+                  type: string
+                  description: ''
+                  example: corporis
+              required:
+                - custom_booking_id
+      security: []
+  /api/v1/participant/get-all:
+    get:
+      summary: ''
+      operationId: getApiV1ParticipantGetAll
+      description: ''
+      parameters: []
+      responses:
+        401:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data: null
+                  message: 'Please login to continue.'
+                properties:
+                  data:
+                    type: string
+                    example: null
+                  message:
+                    type: string
+                    example: 'Please login to continue.'
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/participant/add:
+    post:
+      summary: ''
+      operationId: postApiV1ParticipantAdd
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: ''
+                  example: consequuntur
+                last_name:
+                  type: string
+                  description: ''
+                  example: consequatur
+                gender:
+                  type: string
+                  description: 'Must be one of <code>0</code> or <code>1</code>.'
+                  example: '1'
+                dob:
+                  type: string
+                  description: ''
+                  example: fugiat
+                school_name:
+                  type: string
+                  description: ''
+                  example: impedit
+                state_id:
+                  type: string
+                  description: ''
+                  example: repellat
+                city_id:
+                  type: string
+                  description: ''
+                  example: sunt
+                address_line_1:
+                  type: string
+                  description: ''
+                  example: aut
+                address_line_2:
+                  type: string
+                  description: ''
+                  example: in
+                pin_code:
+                  type: string
+                  description: ''
+                  example: autem
+              required:
+                - first_name
+                - last_name
+                - gender
+                - dob
+                - school_name
+                - state_id
+                - city_id
+                - address_line_1
+                - address_line_2
+                - pin_code
+      security: []
+  /api/v1/participant/get-single:
+    post:
+      summary: ''
+      operationId: postApiV1ParticipantGetSingle
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/participant/update-participant:
+    post:
+      summary: ''
+      operationId: postApiV1ParticipantUpdateParticipant
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                first_name:
+                  type: string
+                  description: ''
+                  example: et
+                last_name:
+                  type: string
+                  description: ''
+                  example: recusandae
+                gender:
+                  type: string
+                  description: 'Must be one of <code>0</code> or <code>1</code>.'
+                  example: '1'
+                dob:
+                  type: string
+                  description: ''
+                  example: pariatur
+                school_name:
+                  type: string
+                  description: ''
+                  example: voluptatem
+                state_id:
+                  type: string
+                  description: ''
+                  example: atque
+                city_id:
+                  type: string
+                  description: ''
+                  example: suscipit
+                address_line_1:
+                  type: string
+                  description: ''
+                  example: laboriosam
+                address_line_2:
+                  type: string
+                  description: ''
+                  example: libero
+                pin_code:
+                  type: string
+                  description: ''
+                  example: dolore
+              required:
+                - first_name
+                - last_name
+                - gender
+                - dob
+                - school_name
+                - state_id
+                - city_id
+                - address_line_1
+                - address_line_2
+                - pin_code
+      security: []
+  /api/v1/participant/delete-participant:
+    post:
+      summary: ''
+      operationId: postApiV1ParticipantDeleteParticipant
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/review/add-review:
+    post:
+      summary: ''
+      operationId: postApiV1ReviewAddReview
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coaching_centre_id:
+                  type: string
+                  description: ''
+                  example: eum
+                batch_id:
+                  type: string
+                  description: ''
+                  example: vel
+                booking_id:
+                  type: string
+                  description: ''
+                  example: fugit
+                review:
+                  type: integer
+                  description: 'Must be at least 0. Must not be greater than 5.'
+                  example: 3
+                description:
+                  type: string
+                  description: ''
+                  example: sapiente
+              required:
+                - coaching_centre_id
+                - batch_id
+                - booking_id
+                - review
+                - description
+      security: []
+  /api/v1/coaching/details:
+    post:
+      summary: ''
+      operationId: postApiV1CoachingDetails
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/coaching/images:
+    post:
+      summary: ''
+      operationId: postApiV1CoachingImages
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/coaching/banner-images:
+    post:
+      summary: ''
+      operationId: postApiV1CoachingBannerImages
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coaching_centre_id:
+                  type: string
+                  description: ''
+                  example: quos
+              required:
+                - coaching_centre_id
+      security: []
+  /api/v1/sports:
+    get:
+      summary: ''
+      operationId: getApiV1Sports
+      description: ''
+      parameters: []
+      responses:
+        200:
+          description: ''
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                  data:
+                    -
+                      id: 06457810-a9cc-4e6a-bd46-4ee91c000345
+                      name: Pool
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    -
+                      id: 1f15564b-7df0-4a58-aa03-ad12fd08327e
+                      name: 'Table Tennis'
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    -
+                      id: 7244a6ff-5f24-43ee-8ce7-5baf7da5c005
+                      name: Carrom
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    -
+                      id: a66d1c24-9ffe-4d03-b6d2-0c1627b7d018
+                      name: Football
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    -
+                      id: c6e50f06-099a-4f8a-bb86-5a83aa86c4a7
+                      name: Volleball
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    -
+                      id: c7913c63-bca5-4e4e-9bfe-5a9e0f8803b1
+                      name: Cricket
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    -
+                      id: d8ccb51d-9842-43c3-9ed9-eeeef2c2880f
+                      name: Hockey
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    -
+                      id: ef71e5a0-5090-41c4-8a4f-27d09756fdaf
+                      name: Badminton
+                      logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                  message: 'Sports data feched successfully.'
+                properties:
+                  data:
+                    type: array
+                    example:
+                      -
+                        id: 06457810-a9cc-4e6a-bd46-4ee91c000345
+                        name: Pool
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                      -
+                        id: 1f15564b-7df0-4a58-aa03-ad12fd08327e
+                        name: 'Table Tennis'
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                      -
+                        id: 7244a6ff-5f24-43ee-8ce7-5baf7da5c005
+                        name: Carrom
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                      -
+                        id: a66d1c24-9ffe-4d03-b6d2-0c1627b7d018
+                        name: Football
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                      -
+                        id: c6e50f06-099a-4f8a-bb86-5a83aa86c4a7
+                        name: Volleball
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                      -
+                        id: c7913c63-bca5-4e4e-9bfe-5a9e0f8803b1
+                        name: Cricket
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                      -
+                        id: d8ccb51d-9842-43c3-9ed9-eeeef2c2880f
+                        name: Hockey
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                      -
+                        id: ef71e5a0-5090-41c4-8a4f-27d09756fdaf
+                        name: Badminton
+                        logo: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                          example: 06457810-a9cc-4e6a-bd46-4ee91c000345
+                        name:
+                          type: string
+                          example: Pool
+                        logo:
+                          type: string
+                          example: 'https://via.placeholder.com/75/EBF4FF/7F9CF5?text=no%20image'
+                  message:
+                    type: string
+                    example: 'Sports data feched successfully.'
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/dashboard:
+    post:
+      summary: ''
+      operationId: postApiV1Dashboard
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/batch/get-single:
+    post:
+      summary: ''
+      operationId: postApiV1BatchGetSingle
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      security: []
+  /api/v1/batch/get-all:
+    post:
+      summary: ''
+      operationId: postApiV1BatchGetAll
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Endpoints
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                coaching_centre_id:
+                  type: string
+                  description: ''
+                  example: et
+              required:
+                - coaching_centre_id
+      security: []
+  /api/v1/send-otp:
+    post:
+      summary: 'send otp'
+      operationId: sendOtp
+      description: ''
+      parameters: []
+      responses: {  }
+      tags:
+        - Otp
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                mobile_number:
+                  type: string
+                  description: 'Must be 10 digits. Must match the regex /^[0-9]+$/.'
+                  example: '5675'
+              required:
+                - mobile_number
+      security: []
+tags:
+  -
+    name: Authenticated
+    description: ''
+  -
+    name: Endpoints
+    description: ''
+  -
+    name: Otp
+    description: ''

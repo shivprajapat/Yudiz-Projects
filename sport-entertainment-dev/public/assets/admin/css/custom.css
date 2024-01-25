@@ -1,0 +1,126 @@
+/* Mendatory Asterisk (*) */
+.mendatory {
+    color: #f64e60;
+}
+
+/*toggle swtich overwrite the switch-sucees class*/
+.switch.switch-outline.switch-success input:empty~span:before {
+    border: 2px solid #F64E60;
+    background-color: transparent;
+}
+
+.switch.switch-outline.switch-success input:empty~span:after {
+    background-color: #F64E60;
+}
+
+.switch.switch-outline.switch-success input:checked~span:before {
+    border: 2px solid #1BC5BD;
+    background-color: transparent;
+}
+
+.switch.switch-outline.switch-success input:checked~span:after {
+    color: #ffffff;
+    background-color: #1BC5BD;
+}
+
+.switch input:empty~span:after {
+    opacity: 1;
+}
+
+.table-hover tbody tr:hover {
+    color: #3f4254;
+    background-color: #e7e7e7 !important;
+}
+
+.switch.switch-icon input:not(checked)~span:after {
+    content: "\2716";
+    color: #fff;
+    font-size: 9px !important;
+}
+
+.switch.switch-sm input:empty~span:before {
+    width: 58px !important;
+    border-radius: 4px;
+}
+
+.switch.switch-sm input:checked~span:after {
+    margin-left: 33px;
+}
+
+.switch.switch-sm input:empty~span:after {
+    border-radius: 0px;
+    width: 24px;
+}
+
+.switch.switch-sm input:empty~span::after {
+    height: 24px;
+    width: 24px;
+    top: 0px;
+    border-radius: 4px;
+}
+
+/* .switch input:empty ~ span::before {
+    left: 2px;
+} */
+.switch.switch-sm input:checked~span::after {
+    margin-left: 34px;
+}
+
+/* Flash Message */
+.alert {
+    position: absolute;
+    margin-bottom: 0;
+    bottom: 40px;
+    right: 40px;
+}
+
+form>.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    flex-wrap: wrap;
+    min-height: 70px;
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: transparent;
+}
+
+form>.card-header .card-toolbar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0.5rem 0;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+
+/*Close button*/
+.symbol div a {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 18px;
+    height: 18px;
+}
+
+/* custom css apply start */
+.participant_border {
+    border: 2px solid #f8d2c8;
+    margin: 10px 0px 10px 0px;
+    padding: 10px 10px 5px 10px;
+    border-radius: 15px;
+}
+
+.img_center_show {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.kt_image_user {
+    border: 1px solid black;
+}

@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package cms;
+
+service CMS{
+    rpc countCMS(cmsRequest) returns (cmsResponse) {}
+}
+
+//find users for BankDetails 
+message cmsRequest{
+    string query=1;
+}
+
+message cmsResponse{
+    int32 count = 1;
+}

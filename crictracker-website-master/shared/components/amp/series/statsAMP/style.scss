@@ -1,0 +1,45 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.form-select{ width: 200px;
+  select { width: 100%; background-repeat: no-repeat; background-image: url(/static/down-arrow.svg); background-position: right 8px center; background-size: auto 60%; border-radius: 8px; height: 100%; background-color: var(--light-mode-bg); border: 1px solid var(--border-color); color: var(--font-color); padding: 10px 32px 10px 12px; font-size: 16px; font-weight: 500; overflow: hidden; appearance: none; -webkit-appearance: none;
+    @media (prefers-color-scheme: dark) {
+      background-image: url(/static/down-caret.svg);
+    }
+  }
+}
+
+.stats {
+  th, td { width: 5.6%; text-align: center; }
+  th:nth-child(2),
+  td:nth-child(2) { text-align: left; width: inherit; position: sticky; left: 0; }
+
+}
+
+.align-top{
+  vertical-align: top;
+}
+
+button.active { color: $theme-color; }
+.filters { width: 160px; }
+.filterStats { width: 200px; }
+.highLight { background-color: var(--theme-light); }
+/***** Responsive CSS Start ******/
+
+
+@media (max-width: 991px) {
+  .form-select{ padding-right: 12px; width: 180px;
+    select { padding: 10px 12px; font-size: 14px;}
+  }
+}
+
+@media (max-width: 575px) {
+  .d-sm-none { display: block; }
+  .d-sm-block { display: none; }
+  .filters { width: 120px; }
+  .filterStats { width: 180px; }
+  .form-select{ padding-right: 10px; width: 180px;
+    select { padding: 6px 10px; font-size: 12px;}
+  }
+}
+

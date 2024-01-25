@@ -1,0 +1,22 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: makehomepagearticle
+  namespace: production
+spec:
+  schedule: "*/10 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - "curl --request POST \
+              -H 'Content-Type: application/json' \
+              --data '{\"query\":\"query Query { makeHomePageArticle }\",\"variables\":{},\"operationName\":\"Query\"}' 
+              https://gateway.crictracker.com/graphql"
+            image: curlimages/curl
+            name: makehomepagearticle
+          restartPolicy: OnFailure

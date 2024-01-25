@@ -1,0 +1,16 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.bannerSection { background: $theme-color; color: $light-color;
+  .content { height: 240px; }
+}
+.person { width: 160px; }
+.socialMenu { 
+  li { margin-right: 8px;
+    &:last-child { margin-right: 0; }
+  }
+  g,path { fill: var(--border-color); }
+  a:hover {
+    g,path { fill: var(--theme-color-medium); }
+  } 
+}

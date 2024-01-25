@@ -1,0 +1,338 @@
+extend type Seo @key(fields: "iId eSubType") {
+  iId: ID @external
+  eSubType: ESEOSUBTYPE @external 
+}
+
+type oThumbnail {
+  sKey: String
+  sUrl: String
+  sWidth: String
+  sHeight: String
+}
+
+type categoryGetData @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  iSeriesId: ID 
+  oSeries: oFetchSeries
+  sContent: String
+  oImg: FeaturedImage
+  nCount: Int
+  eStatus: String
+  iSubmittedBy: ID
+  oParentCategory: ParentCategory
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iParentId: ID
+  ePlatformType: String
+  bIsLeague: Boolean
+}
+
+type ParentCategory @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  iSeriesId: ID 
+  oSeries: oFetchSeries
+  sContent: String
+  oImg: FeaturedImage
+  nCount: Int
+  eStatus: String
+  iSubmittedBy: ID
+  oParentCategory: ParentCategory
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iParentId: ID
+  ePlatformType: String
+}
+
+extend type oFetchSeries @key(fields: "_id"){
+  _id: ID @external
+}
+
+type categorySocialType {
+  sTitle: String
+  sDescription: String
+  sPicture: String
+}
+
+type getCategoryData {
+  nTotal: Int
+  aResults: [categoryGetData]
+}
+
+input getCategoryInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aType: [CategoryType!]!
+  eStatus: CategoryActionStatus
+  bForArticle: Boolean
+}
+
+input getCategoryById {
+  _id: ID!
+}
+
+type oSimpleCategory @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  sContent: String
+  oImg: FeaturedImage
+  nCount: Int
+  eStatus: String
+  iSubmittedBy: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  ePlatformType: String
+}
+
+type oSeriesCategory @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  sContent: String
+  oImg: FeaturedImage
+  nCount: Int
+  eStatus: String
+  iSubmittedBy: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iParentId: ID
+  oParentCategory: oTournamentCategory
+  iSeriesId: ID
+  ePlatformType: String
+}
+
+type oTournamentCategory @key(fields: "_id"){
+  _id: ID
+  eType: String
+  sName: String
+  sContent: String
+  oImg: FeaturedImage
+  nCount: Int
+  eStatus: String
+  iSubmittedBy: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iParentId: ID
+  oParentCategory: oTourParentCategory
+  iSeriesId: ID
+  ePlatformType: String
+}
+
+type oTourParentCategory {
+  _id: ID
+  eType: String
+  sName: String
+  sContent: String
+  oImg: FeaturedImage
+  nCount: Int
+  eStatus: String
+  iSubmittedBy: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iSeriesId: ID
+  ePlatformType: String
+}
+
+
+type oCategoryDetail @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  iSeriesId: ID 
+  oSeries: oFetchSeries
+  sContent: String
+  oImg: FeaturedImage
+  nCount: Int
+  eStatus: String
+  iSubmittedBy: ID
+  oParentCategory: [categoryGetData]
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iParentId: ID
+  ePlatformType: String
+  bIsLeague: Boolean
+}
+
+input oGetCategoryByIdFrontInput {
+  _id: ID!
+}
+
+type oCategoryFront @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  iSeriesId: ID
+  oSeries: oFetchSeries
+  sContent: String
+  sAmpContent: String
+  nCount: Int
+  oParentCategory: oParentCategoryFront
+  iParentId: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  bIsLeague: Boolean
+  bIsFav: Boolean
+  eStatus: String
+  ePlatformType: String
+  oImg: FeaturedImage
+}
+
+type oParentCategoryFront @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  iSeriesId: ID 
+  oSeries: oFetchSeries
+  sContent: String
+  nCount: Int
+  eStatus: String
+  oParentCategory: oParentCategoryFront
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  iParentId: ID
+  oImg: FeaturedImage
+}
+
+input oListSeriesCategoryMiniScorecard {
+  iSeriesCategoryId: ID!
+}
+
+type oLiveInningSeriesType {
+  _id: ID,
+  sTitle: String
+  sAbbr: String
+  sSeason: String
+}
+
+type oLiveInningVenueType {
+  sName: String
+  sLocation: String
+}
+
+type oScorecardTossType {
+  sText: String
+  iWinnerId: ID
+  oWinnerTeam: oLiveInningTeamType
+  sDecision: String
+}
+
+type oLiveInningTeamType {
+  _id: ID
+  sTitle: String
+  sAbbr: String
+  sThumbUrl: String
+}
+
+type oScorecardTeamScoreType {
+  iTeamId: ID,
+  oTeam: oLiveInningTeamType
+  sScoresFull: String
+  sScores: String
+  sOvers: String
+}
+
+type oSeriesMiniScorecard @key(fields:"iMatchId") {
+  iMatchId: ID
+  iSeriesId: ID
+  oSeries: oLiveInningSeriesType
+  oVenue: oLiveInningVenueType
+  nPriority: Int
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+  sStatusStr: String
+  sStatusNote: String
+  sLiveGameStatusStr: String
+  bIsDomestic: Boolean
+  dStartDate: Date
+  dEndDate: Date
+  dStartTimestamp:String
+  dEndTimestamp:String
+  iVenueId: ID
+  sEquation: String
+  nLatestInningNumber: Int
+  oToss: oScorecardTossType
+  oTeamScoreA: oScorecardTeamScoreType
+  oTeamScoreB: oScorecardTeamScoreType
+  sLiveMatchNote: String
+  sResult: String
+  eProvider: String
+  dCreated: String
+  dUpdated: String
+  oSeo: Seo
+}
+
+type oGetCategoryCount {
+  nS: Int
+  nAS: Int
+  nP: Int
+}
+
+input oListSeriesCTArchiveInput {
+  iSeriesId: ID!
+  bIsParent: Boolean
+  eSubType: ESEOSUBTYPE
+}
+
+type oSeriesCategoryArchive {
+  _id: ID
+  sName: String
+  iSeriesId: ID 
+  oSeries: oFetchSeries
+  sContent: String
+  oImg: FeaturedImage
+  oParentCategory: ParentCategory
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  iParentId: ID
+}
+
+
+input listCategoryFrontInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSearch: String
+}
+
+input getApiSeriesCategoryInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+extend type Query {
+  getCategory(input: getCategoryInput!): getCategoryData
+  getCategoryById(input:getCategoryById): categoryGetData
+  getCategoryByIdFront(input:oGetCategoryByIdFrontInput): oCategoryFront
+  listSeriesCategoryMiniScorecard(input:oListSeriesCategoryMiniScorecard!):[oSeriesMiniScorecard]
+  getCategoryCount: oGetCategoryCount
+  listSeriesCTArchive(input:oListSeriesCTArchiveInput!):[categoryGetData] # series category archive for front
+  listCategoryFront(input: listCategoryFrontInput): [categoryGetData]
+  getApiSeriesCategory(input: getApiSeriesCategoryInput): [categoryGetData]
+}

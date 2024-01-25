@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: fantasy-article-feed
+  namespace: production
+spec:
+  schedule: "*/15 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://matchmanage.crictracker.com/api/fantasy-article-feed'
+            image: curlimages/curl
+            name: fantasy-article-feed
+          restartPolicy: OnFailure

@@ -1,0 +1,21 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.d-flex { display: flex; display: -webkit-flex; }
+.img { width: 24px; margin-right: 8px; }
+.itemTitle { margin: 0 0 12px; padding-bottom: 12px; border-bottom: 1px solid $light; font-weight: 600; text-transform: uppercase; color: $theme-color; @include align-items(center); }
+.tipsNote { padding: 12px; background: $light-bg; border-radius: 16px;
+    .icon { width: 28px; }
+    &.note { color: $theme-dark2; background: $theme-light;
+        .itemTitle { border-bottom-color: $theme-medium;}
+    }
+}
+.noteInfo { @include align-items(center); }
+.follow { margin: 0 6px; padding: 6px 16px 6px 48px; display: inline-block; font-size: 12px; line-height: 18px; font-weight: 700; color: $theme-color; border: 1px solid $theme-medium; border-radius: 2em; position: relative; @include align-items(center); text-decoration: none; 
+    .icon { position: absolute; width: 40px; left: -2px; top: 50%; transform: translateY(-50%); }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  
+}

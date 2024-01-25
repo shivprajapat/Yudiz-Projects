@@ -1,0 +1,26 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.cricPrediction { padding: 16px 30px 14px; background: $light; border-radius: 16px;
+  .predictionBtn { margin-bottom: 16px; padding: 5px 14px; color: #fff; border-radius: 8px;
+    &.dream11 { background: $brand-dream11; }
+    &.eleWickets { background: $brand-11Wickets; }
+    &.gamezy { background: $brand-gamezy; }
+    &.my11circle { background: $brand-my11cir; }
+  }
+  .icon { width: 38px; }
+  .arrow { width: 26px; @include filter(brightness(0) invert(1)) }
+}
+
+@media (max-width: 991px) {
+  .cricPrediction { padding: 16px 24px 12px;
+    .icon { width: 30px; }
+    .arrow { width: 24px; }
+  }
+}
+
+@media (max-width: 575px) {
+  .cricPrediction { padding: 16px 16px 6px;
+    .predictionBtn { margin-bottom: 10px; }
+  }
+}

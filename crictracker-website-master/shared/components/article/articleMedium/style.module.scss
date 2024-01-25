@@ -1,0 +1,9 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.desc { color: var(--border-color); }
+
+@media (max-width: 576px) {
+  h3.title { font-size: 13px; line-height: 18px; }
+  .desc { display: none; }
+}

@@ -1,0 +1,54 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  REDIS_HOST: "crictracker-redis-dev-headless.dev.svc.cluster.local"
+  REDIS_PORT: "6379"
+  NODE_ENV: dev-prod
+  PORT: "4001"
+  SUPPORT_EMAIL: 'crictracker@yudizproject.tk'
+  AWS_REGION: "ap-south-1"
+  S3_BUCKET_NAME: 'admin-media-cdn.crictracker.com'
+  # S3_BUCKET_URL: 'https://admin-media-cdn.crictracker.com.s3.ap-south-1.amazonaws.com/'
+  S3_BUCKET_PROFILE_PATH: profile-pic/
+  S3_BUCKET_KYC_PATH: kyc/pan/
+  S3_BUCKET_FB_PATH: fb/
+  S3_BUCKET_TWITTER_PATH: twitter/
+  S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH: media/featureimage/
+  S3_BUCKET_ARTICLE_THUMBIMAGE_PATH: media/thumbnailimage/
+  S3_BUCKET_ARTICLE_CHAT_MEDIA_PATH: media/chatmedia/
+  # S3_BUCKET_ARTICLE_EDITOR_MEDIA_PATH: media/editorimage
+  S3_BUCKET_TEAM_PATH: 'team/'
+  S3_BUCKET_PLAYER_PATH: 'player/'
+  S3_BUCKET_CATEGORY_PATH: 'category/' 
+  # SEO_STATUS_CHANGE_EVENT: 'seo-status-change-event'
+  # SEO_STATUS_CHANGE_CONSUMER: 'seo-status-change-consumer'
+  SEO_STATUS_CHANGE_GROUP: 'seo-status-change-group'
+  SMTP_EMAIL: 'yudizmean@gmail.com'
+  SENTRY_DSN: 'https://f80326950ae04f23be6fa308406b6d3a@o992135.ingest.sentry.io/6725499'
+
+  # BASE_SITEMAP: 'sitemap'
+  # POST_SITEMAP: 'post-sitemap'
+  # CATEGORY_SITEMAP: 'category-sitemap'
+  # POST_TAG_SITEMAP: 'post_tag-sitemap'
+  # AUTHOR_SITEMAP: 'author-sitemap'
+  # SITEMAP_REDIS_KEY: 'sitemap'
+
+  # SITEMAP_SLUG_EVENT: 'sitemap-slug-event'
+  # SITEMAP_SLUG_CONSUMER: 'sitemap-slug-consumer'
+  # SITEMAP_SLUG_GROUP: 'sitemap-slug-group'
+  # SITEMAP_ID_EVENT: 'sitemap-id-event'
+  # SITEMAP_ID_CONSUMER: 'sitemap-id-consumer'
+
+  CONNECTION: '25'
+  S3_BUCKET_BANK_PATH: kyc/bank/
+  S3_BUCKET_ARTICLE_ATTACHMENTIMAGE_PATH: media/attachments/
+  BOOKMARK_COUNT_UPDATE_EVENT: bookmark-count-update-event
+  BOOKMARK_COUNT_UPDATE_CONSUMER: bookmark-count-update-consumer
+  BOOKMARK_COUNT_UPDATE_GROUP: bookmark-count-update-group
+  
+  POSTMARK_SERVER_CLIENT: '6bb99394-914b-4f7d-a289-71c2849b45c7'
+
+  SEO_GRPC_URL: 'crictracker-seo-dev-grpc.dev.svc.cluster.local:80'

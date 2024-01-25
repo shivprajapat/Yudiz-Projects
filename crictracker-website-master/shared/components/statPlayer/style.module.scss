@@ -1,0 +1,39 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.searchCard { 
+  // background: var(--theme-light);
+  border: 1px solid;
+  box-sizing: border-box;
+  border-color: var(--theme-light);
+  color: var(--font-color);
+  .icon { width: 60px; }
+}
+
+.playerImage{
+  position: relative;
+
+  .serialNo{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--theme-color-medium);
+  }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+
+}
+
+@media (max-width: 1199px) {
+
+}

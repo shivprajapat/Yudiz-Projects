@@ -1,0 +1,233 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.commonContent {
+  font-size: 18px;
+  line-height: 1.444em;
+  color: var(--font-secondary);
+
+  &.smallContent {
+    font-size: 16px;
+    line-height: 24px;
+  }
+
+  p { margin-bottom: 1.111em; }
+  h1        				{ margin: 0 0 0.88em; font-size: 2em; line-height: 1.222; }
+  h2        				{ margin: 0 0 0.88em; font-size: 1.777em; line-height: 1.25; }
+  h3        				{ margin: 0 0 0.88em; font-size: 1.333em; line-height: 1.44; }
+  h4        				{ margin: 0 0 0.88em; font-size: 1.166em; line-height: 1.5; }
+  h5        				{ margin: 0 0 0.88em; font-size: 1em; line-height: 1.5; }
+  h6        				{ margin: 0 0 0.88em; font-size: 1em; line-height: 1.5; }
+
+  a {
+    color: var(--theme-color-medium);
+    text-decoration: underline;
+
+    &:hover {
+      color: var(--theme-font);
+    }
+  }
+
+  ul,
+  ol {
+    margin-bottom: 1.333em;
+    padding-left: 20px;
+    font-size: 0.88888em;
+    line-height: 1.6875em;
+  }
+
+  ul {
+    list-style: disc;
+  }
+
+  ol {
+    list-style: decimal;
+  }
+
+  li {
+    padding-left: 10px;
+  }
+
+  blockquote {
+    margin-bottom: 1.3333em;
+    padding: 16px 16px 20px 66px;
+    background: $theme-light url(../../../assets/images/icon/quote-icon.svg) no-repeat 16px 14px / 40px auto;
+    font-size: 1.1666em;
+    line-height: 1.5238em;
+    color: $theme-dark2;
+    font-style: italic;
+    border-radius: 16px;
+  }
+
+  table {
+    margin-bottom: 8px;
+    font-size: 0.7777em;
+    line-height: 1.4285em;
+    height: auto;
+    white-space: nowrap;
+
+    tbody tr:first-child td {
+      background: $theme-color;
+      color: #fff;
+      text-transform: capitalize;
+    }
+
+    td {
+      background: var(--theme-bg);
+      width: auto;
+    }
+
+    p {
+      margin: 0;
+    }
+  }
+
+  figure {
+    margin-bottom: 1.3333em;
+    width: 100% !important;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+
+    img {
+      margin-bottom: 0px;
+      border-radius: 16px;
+    }
+
+    // figcaption { position: absolute; bottom: 12px; left: 12px; font-size: 12px; line-height: 18px; padding: 3px 9px 3px 30px; max-width: calc(100% - 24px); background: #fff url(../../../../assets/images/icon/info-icon.svg) no-repeat 6px 2px / 20px auto; border-radius: 12px;
+    figcaption {
+      font-style: italic;
+      color: #7b7b7b;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      margin-top: 5px;
+
+      &:empty {
+        display: none;
+      }
+    }
+  }
+
+  p img {
+    margin: 0;
+  }
+
+  img {
+    margin-bottom: 24px;
+    width: 100%;
+    height: auto;
+  }
+
+  tr:nth-child(2) td:empty {
+    display: none;
+  }
+
+  p:empty {
+    margin: 0;
+  }
+
+  iframe {
+    display: block;
+    max-width: 100%;
+    margin: 0px auto;
+  }
+
+  video {
+    width: 100%;
+    aspect-ratio: 16/9;
+    height: auto;
+  }
+
+  &.darkContent {
+    table {
+      tr:first-child {
+        td {
+          background: $theme-color;
+          color: $light-color;
+        }
+      }
+
+      td {
+        background-color: var(--theme-bg);
+      }
+    }
+  }
+}
+
+@media (max-width: 1399px) {
+  .commonContent {
+    font-size: 17px;
+    line-height: 1.5294em;
+
+    p {
+      margin-bottom: 1.0588em;
+    }
+
+    blockquote {
+      font-size: 1.1176em;
+      line-height: 1.4736em;
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .commonContent {
+    font-size: 16px;
+    line-height: 1.5em;
+    &.smallContent {
+      font-size: 15px;
+      line-height: 23px;
+    }
+
+    table {
+      margin-bottom: 4px;
+    }
+
+    p,
+    img,
+    blockquote,
+    ul,
+    ol {
+      margin-bottom: 14px;
+    }
+
+    blockquote {
+      font-size: 1.0625em;
+      line-height: 1.64705em;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .commonContent {
+    font-size: 16px;
+    line-height: 1.4666;
+    &.smallContent {
+      font-size: 14px;
+      line-height: 20px;
+    }
+
+    h1        				{ margin: 0 0 0.8em; font-size: 1.6em; line-height: 1.25; }
+    h2        				{ margin: 0 0 0.8em; font-size: 1.466em; line-height: 1.272; }
+    h3        				{ margin: 0 0 0.8em; font-size: 1.333em; line-height: 1.35; }
+    h4        				{ margin: 0 0 0.54em; font-size: 1.066em; line-height: 1.375; }
+    h5        				{ margin: 0 0 0.54em; }
+    h6        				{ margin: 0 0 0.54em; }
+
+    blockquote {
+      padding: 62px 16px 20px 16px;
+    }
+
+    ul,
+    ol {
+      padding-left: 18px;
+      font-size: 0.93333em;
+      line-height: 1.7142em;
+    }
+
+    li {
+      padding-left: 8px;
+    }
+  }
+}

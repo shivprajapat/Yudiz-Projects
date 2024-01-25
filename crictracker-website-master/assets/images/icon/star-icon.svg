@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>start-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="start-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-22">
+            <rect id="Rectangle" fill-opacity="0" fill="#D8D8D8" x="0" y="0" width="24" height="24"></rect>
+            <path d="M16.2743957,17.8832009 L14.8859506,12.9377022 L18.9161175,9.7528172 L13.7836156,9.5450638 L12,4.72796372 L10.2163844,9.5450638 L5.08388251,9.7528172 L9.11404941,12.9377022 L7.72560432,17.8832009 L12,15.034468 L16.2743957,17.8832009 Z" id="Star" stroke="#323842" stroke-width="1.2"></path>
+        </g>
+    </g>
+</svg>

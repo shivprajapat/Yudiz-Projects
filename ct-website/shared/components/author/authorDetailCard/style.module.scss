@@ -1,0 +1,13 @@
+@import "@assets/scss/variables.scss";
+
+.postimg {
+    height: 85px;
+    width: 120px;
+}
+
+.verfied {
+    margin-left: 5px;
+    width: 18px;
+    height: 18px;
+    background: $theme-medium2 url(../../../../assets/images/icon/checked-icon.svg) no-repeat center center / cover;
+}

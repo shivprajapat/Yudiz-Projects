@@ -1,0 +1,20 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.b-circle { border-radius: 50%; }
+.mx-auto     { margin: auto; }
+.player { margin: 0 20px; width: 68px; position: relative; font-size: 12px; 
+    .playerImg { width: 58px; }
+}
+.tag { width: 22px; line-height: 22px; background: $theme-color; color: #fff; position: absolute; left: -2px; top: -2px;}
+.name { margin-top: -6px; padding: 4px 4px; position: relative; font-size: 11px; line-height: 13px; background: #fff;  border-radius: 3px; 
+    &.bg-dark { background: $font-color; color: #fff; }
+}
+p { margin: 0; color: #fff; }
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+    .player { margin: 0 8px; width: 60px; 
+        .playerImg { width: 54px; }
+    }
+}

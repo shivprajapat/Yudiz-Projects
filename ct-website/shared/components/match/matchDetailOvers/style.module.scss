@@ -1,0 +1,13 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.navTab { margin: 0px -3px 16px; padding:6px; background: var(--light-mode-bg); border-radius: 2em;
+  > * { width: 25%; }
+  a { margin: 0px 3px;}
+}
+
+@media (max-width: 576px) {
+  .navTab { overflow: auto;
+    > * { width: 50%; }
+  }
+}

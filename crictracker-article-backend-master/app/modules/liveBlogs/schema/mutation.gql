@@ -1,0 +1,137 @@
+enum direction {
+ "before sEventId"
+   up
+  "after sEventId" 
+   dw
+}
+
+input contentPos {
+  sDir: direction!
+  sEventId: ID!
+}
+
+input addLiveBlogContentInput {
+  iEventId: ID!
+  sContent: String
+  sTitle: String
+  iDisplayAuthorId: ID!
+  dPublishDate: Date
+  eStatus: BLOGCONTENTSTATES
+  iPollId: ID
+  eType: contentTypeStatus!
+  oPos: contentPos
+}
+
+enum BLOGCONTENTSTATES{
+  "published"
+   pb
+  "draft"
+   dr
+  "sheduled"
+   s
+  "deleted"
+   d
+}
+
+input editLiveBlogContentInput {
+  _id: ID!
+  sContent: String
+  sTitle: String
+  eStatus: BLOGCONTENTSTATES
+  iDisplayAuthorId: ID!
+  iPollId: ID
+  eType: contentTypeStatus!
+  dPublishDate: Date
+}
+
+input editLiveBlogEventInput {
+  _id: ID!
+  sEventName: String!
+  sEventStatus: eventStatus!
+  dEventDate: Date!
+  sDescription: String!
+  sLocation: String!
+  aEditorsId: [ID]
+  oTeams: oTeamsInput
+  iMatchId: String
+  dEventEndDate: Date
+}
+
+input bulkDeleteLiveBlogEventInput {
+  aId: [ID!]!
+}
+
+enum eventStatus {
+  "upcomming"
+    u
+  "live"
+    l
+  "done"
+   d
+}
+
+input score {
+  sRun: String
+  sWicket: String
+}
+
+input oTeamInput {
+  sName: String
+  sLogoUrl: String
+  oFirstInningScore: score
+  oSecondInningScore: score
+}
+
+input oTeamsInput {
+  oTeamA: oTeamInput
+  oTeamB: oTeamInput
+  sTeamAovers: String
+  sTeamBovers: String
+  sScoreSummary: String
+}
+
+input addLiveBlogEventInput {
+  sEventName: String!
+  sEventStatus: eventStatus!
+  dEventDate: Date!
+  sDescription: String!
+  sLocation: String!
+  aEditorsId: [ID]
+  oTeams: oTeamsInput
+  iMatchId: ID
+  dEventEndDate: Date!
+}
+
+type addLiveBlogEventResponse {
+  sMessage: String
+  aResults: [blogEvent]
+}
+
+type commonResWithContent {
+  sMessage: String
+  oData: liveBlogContent
+}
+
+type commonResWithLiveEvent {
+  sMessage: String
+  oData: blogEvent
+}
+
+type commonResponse {
+ sMessage: String
+}
+
+input updateMatchScoresInput {
+  iEventId: ID!
+  oTeams: oTeamsInput!
+}
+
+extend type Mutation {
+  addLiveBlogEvent(input: addLiveBlogEventInput!): commonResWithLiveEvent
+  addLiveBlogContent(input: addLiveBlogContentInput!): commonResWithContent
+  editLiveBlogEvent(input: editLiveBlogEventInput!): commonResWithLiveEvent
+  editLiveBlogContent(input: editLiveBlogContentInput!): commonResWithContent
+  deleteLiveBlogContent(input: getLiveBlogContentInput!): commonResponse
+  bulkDeleteLiveBlogEvent(input: bulkDeleteLiveBlogEventInput!): addLiveBlogEventResponse
+  updateMatchScores(input:updateMatchScoresInput!): commonResWithLiveEvent
+}

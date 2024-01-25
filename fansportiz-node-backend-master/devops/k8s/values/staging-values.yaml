@@ -1,0 +1,57 @@
+replicaCount: 2
+
+image: 352650027354.dkr.ecr.ap-south-1.amazonaws.com/fantasy-node-backend-staging:latest
+
+namespace: staging
+
+labels:
+  tier: backend
+  release: blue-green
+
+service:
+  type: NodePort
+  port: 1338
+  healthcheck: /health-check
+  pm2: 9209
+  internaltype: ClusterIP
+  internalport: 80
+  grpcport: 1339
+  
+resources:
+  requests:
+    memory: "200Mi"
+    cpu: "80m"
+  limits:
+    memory: "600Mi"
+    cpu: "400m"
+
+livenessProbe:
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+  initialDelaySeconds: 5
+  timeoutSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 5
+  timeoutSeconds: 30
+  failureThreshold: 3
+  periodSeconds: 10
+  successThreshold: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: "1"
+  maxReplicas: "5"
+  targetCPU: "60"
+    # targetMemory: ""
+
+#Because we are using our private docker registry deployed in Kubernetes if you are using AWS(ECR) than you can disable this.
+imagePullSecrets:
+  enabled: true
+  name: regcred
+
+podprestophook:
+  enabled: true
+
+job:
+  enabled: true  

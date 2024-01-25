@@ -1,0 +1,59 @@
+{
+  "name": "crictracker-website",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "analyze": "ANALYZE=true next build",
+    "start": "next start --keepAliveTimeout 60000",
+    "start-parca": "NODE_OPTIONS='--perf-basic-prof' next start",
+    "start-sharp": "NEXT_SHARP_PATH=/Users/yudizsolutions/.nvm/versions/node/v16.15.1/lib/node_modules/sharp next start",
+    "pm2-monit": "pm2 start npm --name 'my-next-app' -- start && pm2 monit 'my-next-app'",
+    "lint": "eslint . --ext .js",
+    "format:fix": "prettier --write \"**/*.+(js|jsx|json|md)\""
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint && git add"
+    }
+  },
+  "prettier": {
+    "semi": false,
+    "printWidth": 140,
+    "singleQuote": true,
+    "trailingComma": "none"
+  },
+  "dependencies": {
+    "@apollo/client": "3.5.10",
+    "@sentry/nextjs": "7.12.1",
+    "bootstrap": "5.1.3",
+    "critters": "0.0.7",
+    "graphql": "15.7.2",
+    "graphql-ws": "5.9.0",
+    "hybrid-crypto-js": "0.2.4",
+    "next": "12.2.0",
+    "next-share": "0.13.0",
+    "next-translate": "1.1.1",
+    "nprogress": "0.2.0",
+    "react": "17.0.2",
+    "react-bootstrap": "2.0.0-rc.1",
+    "react-cropper": "2.1.8",
+    "react-dom": "17.0.2",
+    "react-hook-form": "7.19.5"
+  },
+  "devDependencies": {
+    "@next/bundle-analyzer": "^12.3.0",
+    "eslint": "^7.32.0",
+    "eslint-config-next": "11.1.2",
+    "eslint-config-standard": "^16.0.3",
+    "eslint-plugin-import": "^2.25.2",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^5.1.0",
+    "eslint-plugin-react": "^7.26.1",
+    "husky": "^7.0.4",
+    "prettier": "^2.5.1",
+    "sass": "^1.50.1"
+  }
+}

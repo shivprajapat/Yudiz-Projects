@@ -1,0 +1,77 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.mCanvasAd { background-color: transparent !important; }
+.articleBlock { padding: 24px 30px; position: relative; }
+.title { border-bottom: 1px solid $border-light;}
+.advFeature { padding: 2px 12px; background: $theme-light !important; color: $font-color; font-weight: 500; 
+  svg { margin-right: 2px; }
+}
+.subTitle { margin-bottom: 24px; font-weight: 500; }
+.authorBlock {
+  .views{
+    svg { margin-right: 6px; width: 20px; height: 20px; }
+    &.duration svg { width: 20px; height: 16px; }
+  } 
+  .dates {  width: 100%; }
+}
+
+.author {
+  .verfied { width: 18px; height: 18px; background: $theme-medium2 url(../../../assets/images/icon/checked-icon.svg) no-repeat center center / cover;}
+  .authorImg { width: 44px; height: 44px; }
+  .authorDesc { padding: 0 12px; }
+}
+.followUs { margin: 24px 0; padding: 16px 8px; background: $theme-light; border-radius: 12px; 
+  p { margin: 0px 8px; color: $theme-dark2; }
+}
+.articlePage .follow { margin: 0 6px; padding-left: 48px; position: relative; 
+  > span { position: absolute; width: 40px; left: -2px; top: 50%; @include transform(translateY(-50%)); }
+}
+.postImg { margin-bottom: 24px; border-radius: 16px; overflow: hidden;
+  .captionBlock { position: absolute; left: 12px; bottom: 12px; width: calc(100% - 24px); }
+  .icon { position: absolute; bottom: 0; left: 0; width: 24px; height: 24px; background: var(--light-mode-bg); overflow: hidden; cursor: pointer; z-index: 2;}
+  .icon:hover ~ .caption { opacity: 1; }
+  .caption { opacity: 0; max-width: 100%; padding: 4px 10px 4px 26px; background: var(--light-mode-bg); line-height: 16px; border-radius: 12px; @include transition($common-transition); 
+    * { margin: 0;}
+  }
+}
+.iframeVideo { max-width: 520px; border-radius: 16px; overflow: hidden;}
+.articleActionsMob { margin: 0px -30px; position: sticky; position: -webkit-sticky; top: 57px; background: var(--light-mode-bg); z-index: 5;  }
+.mobileArticle {
+  .articleActionsMob { top: -1px; }
+  .authorDesc a { pointer-events: none; }
+}
+
+@media (max-width: 1199px) {
+  .articleActionsMob { margin: 0px -24px; }
+}
+@media (max-width: 1199px) {
+  .articleBlock { padding: 20px 24px; }
+  .followUs { margin: 20px 0;
+    p { color: $theme-dark2; }
+    .follow { padding-left: 42px; 
+      > span { width: 36px; }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .articleActionsMob { top: 56px }
+}
+
+@media (max-width: 767px) {
+  .articleActionsMob { top: 52px }
+  .followUs { padding: 16px 6px;
+    p { margin-bottom: 16px; }
+  }
+}
+
+@media (max-width: 575px) {
+  .articleBlock { margin: 0px -12px; padding: 16px 12px; border-radius: 0; }
+  .subTitle { margin-bottom: 12px; }
+  .postImg { margin: 0 -12px 12px; border-radius: 0px; }
+  .articleActionsMob { margin: 0px -12px; }
+  .authorBlock {
+    .dates { font-size: 10px; width: 100%; }
+  }
+}

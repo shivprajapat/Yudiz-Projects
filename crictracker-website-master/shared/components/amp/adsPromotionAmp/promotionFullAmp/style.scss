@@ -1,0 +1,27 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.promotion { padding: 12px; background-image: linear-gradient(136deg, #30A8EF 0%, #2C3697 100%); color: #fff; border-radius: 16px; position: relative;
+    &::before { @extend %after-before; width: 100%; height: 100%; opacity: 0.1; z-index: 1; left: 0; top: 0; 
+        background-image: repeating-linear-gradient(135deg, #fff 0%, #fff 5%, transparent 5.1%, transparent 10%);
+    }
+    .badge { background: $light-color; color: $theme-color; padding: 2px 8px; border-radius: 2em;
+        &.badge-danger { color: $danger; }
+    }
+    h3 { font-weight: 500; }
+    a { color: #fff}
+    .promoInfo { width: 68%; }
+    .series { width: 100%; }
+    .branding { width: 32%; font-size: 10px; line-height: 14px; gap: 6px; padding-left: 16px; flex-shrink: 0; border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    .centerContent {  width: 100%; border: 0; }
+    .text-uppercase{ text-transform: uppercase; }
+    .timer { font-size: 10px; line-height: 14px; font-weight: 400; letter-spacing: 0.2px;
+        .time { margin: 0px 6px; width: 44px; }
+    }
+    .product { margin: 0px 8px 0px 6px; width: 52px; }
+    .logo { width: 100px; }
+    .team { padding: 0px 24px; }
+    .matchInfo { gap: 8px;}
+    .teamScore{ min-width: 74px;}
+}
+.fullLink { position: absolute; left: 0; top: 0; width: 100%; height: 100%; z-index: 2; }

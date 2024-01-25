@@ -1,0 +1,35 @@
+@import 'assets/scss/helper/variables';
+
+.delete-modal {
+  .modal-content {
+    padding: 35px !important;
+  }
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    border: none !important;
+    padding: 10px 0;
+    text-align: center;
+  }
+  .modal-body {
+    color: $primary-color;
+    font-size: 20px;
+  }
+  .modal-header {
+    justify-content: center;
+    padding-top: 0;
+  }
+  .modal-footer {
+    justify-content: center;
+    padding-bottom: 0;
+    .btn {
+      min-width: 100px;
+    }
+  }
+  @media (max-width: 767px) {
+    .modal-content {
+      width: 95%;
+      margin: 0 auto;
+    }
+  }
+}

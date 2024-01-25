@@ -1,0 +1,40 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.promotion { padding: 12px; background-image: linear-gradient(136deg, #0030A4 0%, #FF3D92 100%); color: #fff; border-radius: 16px;
+    h3 { font-weight: 500; }
+    .promoInfo { width: 72%; }
+    .series { width: 42%; }
+    .branding { width: 34%; font-size: 10px; line-height: 14px; }
+    .centerContent { border: 1px solid rgba(255, 255, 255, 0.18); border-top: 0; border-bottom: 0; }
+    .timer { font-size: 10px; line-height: 14px; font-weight: 400; letter-spacing: 0.2px;
+        .time { margin: 0px 8px; width: 52px; }
+    }
+    .product { margin: 0px 12px 0px 8px; width: 56px; }
+    .logo { width: 74px; }
+    .team { padding: 0px 32px; }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 1199px) {
+    .promotion { 
+        .timer {
+            .time { margin: 0px 6px; width: 44px; }
+        }
+        .product { margin: 0px 8px 0px 6px; width: 52px; }
+        .logo { width: 70px; }
+    }
+}
+
+@media (max-width: 767px) {
+    .promotion { 
+        .promoInfo { width: 74%; }
+        .series { width: 100%; }
+        .centerContent { width: 100%; border: 0; }
+        .timer {
+            .time { margin: 0px 6px; width: 44px; }
+        }
+        .branding { padding: 0px 8px 0px 16px; margin-left: 10px; width: calc(36% - 10px); flex-shrink: 0; border-left: 1px solid rgba(255, 255, 255, 0.18); }
+        .team { padding: 0px 24px; }
+    }
+}

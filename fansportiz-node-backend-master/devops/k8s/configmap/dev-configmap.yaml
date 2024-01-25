@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+data:
+  NODE_ENV: dev
+  HOST_URL: http://localhost
+  DEPLOY_HOST_URL: https://nodeback-dev.fantasywl.in
+  DEPLOY_HOST_PORT: '1338'
+  CASHFREE_RETURN_URL: https://app-dev.fantasywl.in/profile
+  CASHFREE_URL: https://test.cashfree.com
+  DB_SQL_NAME: fantasy_development
+  DB_SQL_DIALECT: mysql
+  # DB_SQL_HOST: fantasy.cyaoqdrfnsw7.ap-south-1.rds.amazonaws.com #
+  DB_SQL_HOST: mysqls-dev-headless
+  # DB_SQL_USER: admin
+  REDIS_HOST: 'redis-dev-master.dev.svc.cluster.local'
+  REDIS_PORT: '6379'
+  CASHFREE_BASEURL: https://payout-gamma.cashfree.com
+  CASHFREE_URL: https://test.cashfree.com
+  CASHFREE_APPID: 75766f425d7dd6b895948bd2f66757
+  CASHFREE_CLIENTID: CF75766C494LPKPRI0BTG2EAV4G
+
+  SMTP_HOST: smtp.gmail.com
+  SMTP_PORT: '587'
+  SMTP_FROM: fwl47576@gmail.com
+
+  FRONTEND_HOST_URL: https://app-dev.fantasywl.in
+
+  OTP_PROVIDER: TEST
+
+  REDIS_2_HOST: 'redis-dev-master.dev.svc.cluster.local'
+  REDIS_2_PORT: '6379'
+
+  FANTASY_NODE_URL: https://node-dev.fantasywl.in
+
+  AWS_REGION: "ap-south-1"
+
+  CRON_AUTH_ENABLED: "true"
+
+  SENTRY_DSN: 'https://f9b9cbe448994647b39df3e26c9c1251@o1220141.ingest.sentry.io/6362906'
+
+  GRPC_SERVER_URI: '0.0.0.0:1339'
+  NOTIFICATIONS_TARGET_URI: 'fantasy-node-notifications-dev-grpc.dev.svc.cluster.local:80'
+  USER_INFO_TARGET_URI: 'fantasy-node-user-informations-dev-grpc.dev.svc.cluster.local:80'
+  STATICS_TARGET_URI: 'fantasy-node-statics-dev-grpc.dev.svc.cluster.local:80'
+  ADMIN_TARGET_URI: 'fantasy-node-admin-dev-grpc.dev.svc.cluster.local:80'
+  PAYMENT_TARGET_URI: 'fantasy-node-payments-dev-grpc.dev.svc.cluster.local:80'
+
+  IOS_APP_STORE_ID: '6443831473'
+  IOS_CUSTOM_SCHEME: 'fantasyapp.firebase.scheme'
+  IOS_BUNDLE_ID: 'com.app.FantasyApp'
+  DYNAMIC_LINK_ANDROID_PACKAGE_NAME: 'com.fantasy.wl'
+  DYNAMIC_LINK_DOMAIN_URI_PREFIX: 'https://wlfantasy.page.link'

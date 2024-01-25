@@ -1,0 +1,158 @@
+@import 'assets/scss/helper/variables.scss';
+
+.order-placed-modal{
+    .modal-dialog{max-width: 980px;
+        .modal-content{background: $black-300;
+            .modal-body{padding: 92px; 
+                .order-placed-modal-content{ position: relative; z-index: 1;
+                    .top-title{ margin-bottom: 34px;
+                        h5{font-size: 36px; line-height: 43px; text-transform: capitalize; margin-bottom: 14px;}
+                        span{display: block; font-size: 20px; line-height: 28px;}
+                    }
+                    .check-img{display: inline-block; margin-bottom: 64px;}
+                    h4{margin-bottom: 10px;}
+                    p{font-size: 24px; line-height: 32px; color: $grey-color; margin-bottom: 40px;} 
+                    .normal-btn{min-width: 424px; border-radius: 50px; padding: 13px 20px 7px;background:$grey-border-200;
+                    &:active,&:focus,&:hover{background: $white;}
+                    }
+                    .white-btn{min-width: 424px;}
+                    .change-id-link{ display: block; font-size: 24px; line-height: 30px; margin-top: 48px;  
+                        a{color: $white; text-decoration: underline; margin-left: 3px;
+                            &:hover{color: $green-color;}
+                        }
+                    }
+                }
+                .stackone{position: absolute; top: 40%; left: 74%; @include transform(translate(-50%, -50%));}
+                .stacktwo{position: absolute; top: 52%; left: 30%; @include transform(translate(-50%, -50%));}
+                .stackthree{position: absolute; top: 0%; left: 46%; @include transform(translateX(-50%));}
+
+            }
+        }
+    }
+}
+
+@media(min-width: 1400px) and (max-width: 1699px){
+    .order-placed-modal{
+        .modal-dialog { max-width: 900px;
+          .modal-content{
+            .modal-body{padding: 72px;
+                .order-placed-modal-content{
+                    .top-title{ margin-bottom: 32px;
+                        h5{font-size: 32px; line-height: 40px; margin-bottom: 12px;}
+                        span{font-size: 18px; line-height: 26px;}
+                    }
+                    .check-img{width: 170px;}
+                    p{font-size: 22px; line-height: 30px;}
+                    .normal-btn,  .white-btn{min-width: 370px;}
+                    .change-id-link{ font-size: 22px; line-height: 30px; margin-top: 44px;}
+                }
+                .stackone,.stacktwo,.stackthree{width: 60px;}
+            }
+          }
+        }
+    }
+}
+
+@media(min-width: 1200px) and (max-width: 1399px){
+    .order-placed-modal{
+        .modal-dialog { max-width: 800px;
+          .modal-content{
+            .modal-body{padding: 62px;
+                .order-placed-modal-content{
+                    .top-title{ margin-bottom: 32px;
+                        h5{font-size: 32px; line-height: 40px; margin-bottom: 12px;}
+                        span{font-size: 18px; line-height: 26px;}
+                    }
+                    .check-img{width: 140px;}
+                    h4{margin-bottom: 5px;}
+                    p{font-size: 20px; line-height: 28px; margin-bottom: 30px;}
+                    .normal-btn,  .white-btn{min-width: 300px;}
+                    .change-id-link{ font-size: 20px; line-height: 28px; margin-top: 42px;}
+
+                }
+                .stackone,.stacktwo,.stackthree{width: 60px;}
+            }
+          }
+        }
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1199px){
+    .order-placed-modal{
+        .modal-dialog { max-width: 700px;
+          .modal-content{
+            .modal-body{padding: 62px;
+                .order-placed-modal-content{
+                    .top-title{ margin-bottom: 30px;
+                        h5{font-size: 30px; line-height: 38px; margin-bottom: 12px;}
+                        span{font-size: 16px; line-height: 24px;}
+                    }
+                    .check-img{width: 140px;}
+                    h4{margin-bottom: 5px;}
+                    p{font-size: 18px; line-height: 26px; margin-bottom: 30px;}
+                    .normal-btn{min-width: 300px;}
+                    .change-id-link{ font-size: 18px; line-height: 26px; margin-top: 32px;}
+
+                }
+                .stackone,.stacktwo,.stackthree{width: 50px;}
+            }
+          }
+        }
+    }
+}
+
+@media(min-width: 768px) and (max-width: 991px){
+    .order-placed-modal{
+        .modal-dialog { max-width: 600px;
+          .modal-content{
+            .modal-body{padding: 42px;
+                .order-placed-modal-content{
+                    .top-title{ margin-bottom: 30px;
+                        h5{font-size: 28px; line-height: 36px; margin-bottom: 12px;}
+                        span{font-size: 16px; line-height: 24px;}
+                    }
+                    .check-img{width: 100px; margin-bottom: 44px;}
+                    h4{margin-bottom: 5px;}
+                    p{font-size: 18px; line-height: 26px; margin-bottom: 30px;}
+                    .normal-btn,  .white-btn{min-width: 250px;}
+                    .change-id-link{ font-size: 18px; line-height: 26px; margin-top: 32px;}
+
+                }
+                .stackone,.stacktwo,.stackthree{width: 50px;}
+            }
+          }
+        }
+    }
+}
+
+@media (max-width: 767px){
+    .order-placed-modal{
+        .modal-dialog { max-width: 95%; margin: 0px auto;
+          .modal-content{
+            .modal-body{padding: 30px 0px;
+                .order-placed-modal-content{
+                    .top-title{ margin-bottom: 30px;
+                        h5{font-size: 26px; line-height: 32px; margin-bottom: 12px;}
+                        span{font-size: 16px; line-height: 24px;}
+                    }
+                    .check-img{width: 100px; margin-bottom: 44px;}
+                    h4{margin-bottom: 5px;}
+                    p{font-size: 18px; line-height: 26px; margin-bottom: 30px;}
+                    .normal-btn,  .white-btn{min-width: 250px;}
+                    .change-id-link{ font-size: 18px; line-height: 26px; margin-top: 30px;}
+
+                }
+                .stackone,.stacktwo,.stackthree{width: 50px;}
+                .stacktwo{left: 22%; top: 38%;}
+                .stackone{top: 35%; left: 80%;}
+            }
+          }
+        }
+    }
+}
+
+@media(min-width: 576px) and (max-width: 767px){
+    .order-placed-modal{
+        .modal-dialog{max-width: 500px;}
+    }
+}

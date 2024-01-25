@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+message admin {
+    string _id = 1;
+    string sFName = 2;
+    string sEmail = 3;
+    string sDisplayName = 4;
+    string sUName = 5;
+    string sUrl = 6;
+    string sBio = 7;
+    string sAddress = 8;
+    string sCity = 9;
+    bool bIsVerified = 10;
+  }
+  
+  message getAdminInput {
+    string iAdminId = 1;
+  }
+  
+  service AuthService {
+    rpc getAdmin(getAdminInput) returns (admin) {}
+  }

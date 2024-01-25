@@ -1,0 +1,194 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+    environment: {{ .Values.labels.environment }}
+    tier: {{ .Values.labels.tier }}
+    release: {{ .Values.labels.release }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      {{- if .Values.imagePullSecrets.enabled }} 
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+
+      tolerations: {{ .Values.tolerations | toYaml | nindent 8 }}  
+
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.image }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        env:
+          - name: JWT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: jwt
+                key: JWT_SECRET
+          - name: FEED_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: FEED_DB_URL                 
+          - name: ARTICLE_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: ARTICLE_DB_URL                
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_PORT
+          - name: JWT_VALIDITY
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: JWT_VALIDITY
+          - name: CONNECTION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: CONNECTION
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_HOST  
+          - name: IS_API_RATE_LIMITER_ENABLED
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: IS_API_RATE_LIMITER_ENABLED
+
+          - name: FEED_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_GRPC_URL
+
+          - name: JWT_VALIDITY
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: JWT_VALIDITY
+          - name: SEO_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SEO_GRPC_URL
+          - name: AUTH_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: AUTH_GRPC_URL
+          - name: FEED_TITLE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_TITLE
+          
+          - name: FEED_DESCRIPTION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_DESCRIPTION
+          - name: FRONTEND_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FRONTEND_URL   
+          - name: S3_CDN_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_CDN_URL                                                                              
+          - name: LOGIN_HARD_LIMIT_CLIENT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: LOGIN_HARD_LIMIT_CLIENT
+          - name: SMTP_PRODUCT_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_PRODUCT_NAME
+
+          - name: SMTP_PRODUCT_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_PRODUCT_URL
+
+          - name: SMTP_FROM
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_FROM
+
+          - name: POSTMARK_SERVER_CLIENT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: POSTMARK_SERVER_CLIENT
+            
+          - name: JWT_VERIFICATION_VALIDITY
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: JWT_VERIFICATION_VALIDITY
+          - name: SMTP_SUPPORT_EMAIL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SMTP_SUPPORT_EMAIL              
+          - name: FEED_BASE_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_BASE_URL
+          - name: FEED_GRPC_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FEED_GRPC_URL
+
+               

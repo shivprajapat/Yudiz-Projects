@@ -1,0 +1,47 @@
+input oFilter {
+  dDate: String
+}
+input oGetImagesInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSearch: String
+  oFilter: oFilter
+}
+
+input oGetImageInput {
+  _id: ID!
+}
+
+type oImageMeta {
+  nWidth: Int
+  nHeight: Int
+  nSize: Int
+}
+
+type oImageData {
+  _id: ID
+  sUrl: String
+  sText: String
+  sCaption: String
+  sAttribute: String
+  oAuthor: subAdmin
+  oMeta: oImageMeta
+  dCreated: String
+  dUpdated: String
+}
+
+type oDateRange {
+  dMin: Date
+  dMax: Date
+}
+
+type oGetImagesResult {
+  nTotal: Int
+  aResults: [oImageData]
+  oRange: oDateRange
+}
+
+extend type Query {
+  getImages(input: oGetImagesInput): oGetImagesResult
+  getImage(input: oGetImageInput): oImageData
+}

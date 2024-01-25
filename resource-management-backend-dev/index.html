@@ -1,0 +1,45 @@
+<h1>ok</h1>
+
+<script>
+    function handleEvent(event) {
+        const randomNumber = event.data;
+        console.log('Received:', randomNumber);
+    }
+
+    // Function to handle SSE stream end
+    function handleEndEvent() {
+        console.log('End of the stream.');
+        // Close the SSE connection when the stream ends
+        eventSource.close();
+    }
+
+    // Create a new EventSource object with the SSE route on your server
+    const eventSource = new EventSource('http://localhost:4000/api/animation');
+
+    // Listen for SSE events and call the handleEvent function
+    eventSource.onmessage = handleEvent;
+
+    // Listen for the 'end' event and call the handleEndEvent function
+    eventSource.addEventListener('end', handleEndEvent);
+
+    eventSource.addEventListener('onreadystatechanged', function (e) {
+        console.log('ready', e);
+    }, false);
+
+    // listen for readyState changes
+    eventSource.onopen = function (e) {
+        console.log('readyState', eventSource.readyState);
+    };
+
+    // Handle errors in the SSE stream
+    eventSource.onerror = (error) => {
+        console.log(EventSource.CLOSED, eventSource.readyState)
+        if (eventSource.readyState) {
+            console.log('Connection closed.');
+        } else {
+            console.error('Error occurred in SSE stream:', error);
+            // Close the SSE connection to avoid errors on the client-side
+            eventSource.close();
+        }
+    };
+</script>

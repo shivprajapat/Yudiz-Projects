@@ -1,0 +1,39 @@
+enum CurrentSeriesActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+}
+
+extend type oFetchSeries @key(fields: "_id"){
+  _id: ID @external
+}
+
+type oCurrentSeriesData {
+  _id: ID
+  nPriority: Int
+  iSeriesId: ID
+  oSeries: oFetchSeries
+  eStatus: String
+  dUpdated: String
+  dCreated: String
+}
+
+input oListCurrentSeriesInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  eStatus: CurrentSeriesActionStatus
+}
+
+type oListCurrentSeriesResponse {
+  nTotal: Int
+  aResults: [oCurrentSeriesData]
+}
+
+extend type Query {
+  listCurrentSeries(input: oListCurrentSeriesInput): oListCurrentSeriesResponse
+  getCurrentPopularSeries: oListCurrentSeriesResponse
+}

@@ -1,0 +1,17 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.standings {
+  th, td { width: 5.6%; }
+  th:nth-child(2),
+  td:nth-child(2) { text-align: left; width: inherit; }
+}
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  
+}

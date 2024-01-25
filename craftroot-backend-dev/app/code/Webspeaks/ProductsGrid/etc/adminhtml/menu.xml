@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Webspeaks_ProductsGrid::productsgrid" title="Harmonious Combinations" module="Webspeaks_ProductsGrid" sortOrder="100" resource="Webspeaks_ProductsGrid::productsgrid"  parent="Craftroots_Base::manager"/>
+        <add id="Webspeaks_ProductsGrid::manager" title="Harmonious Combinations Grid" module="Webspeaks_ProductsGrid" sortOrder="20" parent="Webspeaks_ProductsGrid::productsgrid" action="wsproductsgrid/contacts" resource="Webspeaks_ProductsGrid::manager"/>
+        <add id="Webspeaks_ProductsGrid::configuration" title="Configuration" module="Webspeaks_ProductsGrid" sortOrder="1000" action="adminhtml/system_config/edit/section/harmonious" resource="Webspeaks_ProductsGrid::configuration" parent="Webspeaks_ProductsGrid::productsgrid"/>
+    </menu>
+</config>

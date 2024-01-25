@@ -1,0 +1,20 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.keyStats {
+   .head { padding: 12px; border-bottom: 1px solid var(--theme-bg);}
+   .item { border-top: 1px solid var(--border-light);
+        span:first-child { width: 100px; }
+        &:first-child { border-top: none; }
+    } 
+}
+
+@media (max-width: 1199px) {
+    .keyStats {
+        .item {
+            &.halfItem { border: none;
+                &:nth-child(odd) {  border-right: 1px solid var(--border-light); }
+            }
+         }
+     }
+}

@@ -1,0 +1,232 @@
+@import 'assets/scss/helper/variables';
+
+.connect-magic-link-icon {
+  height: 3rem;
+}
+
+.connect-wallet-connect-icon {
+  height: 3.4rem;
+  margin-right: -1rem;
+}
+
+.connect-wallet-modal {
+  .modal-dialog {
+    max-width: 555px;
+    .modal-header {
+      padding: 0px;
+      @include flex-direction(column);
+      border: none;
+      .modal-title {
+        font-size: 32px;
+        line-height: 38px;
+        font-weight: 500;
+        margin-bottom: 11px;
+      }
+      p {
+        font-size: 20px;
+        line-height: 28px;
+        margin-bottom: 0px;
+      }
+      .btn-close {
+        position: absolute;
+        top: -5px;
+        right: -5px;
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background: #ef7b70 url('../../../assets/images/css-img/white-close-btn.svg') no-repeat center center / 24px;
+        padding: 0px;
+        opacity: 1;
+        &:focus {
+          @include box-shadow(none);
+        }
+      }
+    }
+    .modal-body {
+      padding: 0px;
+      .wallet-links {
+        padding: 0px;
+        margin: 30px 0px 0px;
+        li {
+          display: block;
+          margin-bottom: 24px;
+          button {
+            padding: 12px 25px;
+            background: $black-300;
+            border-radius: 11px;
+            color: $white;
+            border: none;
+            width: 100%;
+            span {
+              font-size: 32px;
+              line-height: 38px;
+              font-weight: 500;
+              @include transform(translateY(5px));
+            }
+            &:hover {
+              background: $white;
+              color: $black-300;
+            }
+            .traced-img {
+              @include transform(translateX(-8px));
+            }
+          }
+          &:last-child {
+            margin-bottom: 0px;
+          }
+          .wallet-msg {
+            padding: 5px;
+            span {
+              font-size: 16px;
+              line-height: 22px;
+              margin-bottom: 5px;
+              &.success-msg {
+                color: #36dd36;
+              }
+              &:last-child {
+                margin-bottom: 0px;
+              }
+            }
+          }
+        }
+      }
+      .new-etherum {
+        margin-top: 24px;
+        font-size: 24px;
+        line-height: 30px;
+        color: $grey-color;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .connect-wallet-modal {
+    .modal-dialog {
+      .modal-header {
+        .modal-title {
+          font-size: 28px;
+          line-height: 38px;
+        }
+        p {
+          font-size: 18px;
+          line-height: 28px;
+        }
+        .btn-close {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .modal-body {
+        .wallet-links {
+          li {
+            button {
+              span {
+                font-size: 28px;
+                line-height: 38px;
+              }
+            }
+          }
+        }
+        .new-etherum {
+          font-size: 20px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .connect-wallet-modal {
+    .modal-dialog {
+      .modal-header {
+        .modal-title {
+          font-size: 28px;
+          line-height: 38px;
+        }
+        p {
+          font-size: 18px;
+          line-height: 28px;
+        }
+        .btn-close {
+          width: 40px;
+          height: 40px;
+        }
+      }
+      .modal-body {
+        .wallet-links {
+          li {
+            button {
+              span {
+                font-size: 26px;
+                line-height: 36px;
+              }
+            }
+          }
+        }
+        .new-etherum {
+          font-size: 20px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .connect-wallet-modal {
+    .modal-dialog {
+      max-width: 90%;
+      margin: 16px auto;
+      .modal-content {
+        padding: 36px 15px !important;
+      }
+      .modal-header {
+        .modal-title {
+          font-size: 28px;
+          line-height: 38px;
+        }
+        p {
+          font-size: 16px;
+          line-height: 26px;
+        }
+        .btn-close {
+          width: 35px;
+          height: 35px;
+        }
+      }
+      .modal-body {
+        .wallet-links {
+          li {
+            button {
+              padding: 6px 7px 6px 20px;
+              span {
+                font-size: 22px;
+                line-height: 32px;
+              }
+              img {
+                transform: scale(0.7);
+              }
+              .traced-img {
+                @include transform(translateX(-8px) scale(0.7));
+              }
+            }
+          }
+        }
+        .new-etherum {
+          font-size: 18px;
+          line-height: 28px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .connect-wallet-modal {
+    .modal-dialog {
+      max-width: 500px;
+    }
+  }
+}

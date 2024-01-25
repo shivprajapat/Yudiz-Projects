@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package payment;
+
+service Payment {
+  rpc removeCashfreeBeneficiary(benRequest) returns (benResponse) {}
+  rpc getCashfreeBenficiary(benRequest) returns (benResponse) {}
+}
+
+message benRequest { string iUserId = 1; }
+
+message benResponse {
+  bool success = 1;
+  string message = 2;
+}

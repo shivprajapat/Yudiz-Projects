@@ -1,0 +1,66 @@
+.react-tel-input.error {
+  .form-control {
+    border-color: $danger !important;
+  }
+}
+.phone-input {
+  .form-control {
+    width: 100%;
+    padding: 16px 25px 10px 75px;
+    border-radius: 8px !important;
+    background: $theme-color;
+    border: 1px solid $header-text-color;
+    color: $primary-color;
+    font-size: 20px;
+    line-height: 28px;
+    &:focus {
+      background: $theme-color;
+      border: 1px solid $header-text-color;
+    }
+    &::placeholder {
+      color: $primary-color;
+    }
+  }
+  .selected-flag::before {
+    box-shadow: none !important;
+    border-color: transparent !important;
+  }
+  .flag-dropdown {
+    border-right: 1px solid $header-text-color;
+  }
+  .country-list {
+    background-color: $bg-primary;
+    width: max-content;
+    margin-bottom: 0;
+    max-height: 210px;
+    .search {
+      background-color: $bg-primary;
+      padding: 0;
+      margin-bottom: 10px;
+      .search-box {
+        margin: 7px;
+        width: 95%;
+        background: transparent;
+        padding: 10px;
+        font-size: 14px;
+        color: $green-color;
+        text-transform: capitalize;
+      }
+    }
+    .country {
+      &.highlight,
+      &:hover {
+        background-color: $green-color;
+        span {
+          color: $bg-primary;
+        }
+      }
+      background-color: $bg-primary;
+    }
+  }
+  @media (max-width: 320px) {
+    .country-list {
+      width: 290px;
+    }
+  }
+}

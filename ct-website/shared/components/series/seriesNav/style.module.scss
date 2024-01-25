@@ -1,0 +1,27 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.seriesNav { margin: 0px 0px 16px; padding: 6px 8px; background: var(--light-mode-bg); border-radius: 2em; 
+  .item { margin: 0px 7px; @include flex-grow(0);
+    a { padding: 5px 8px; background: transparent;
+      &:hover { color: $theme-color; }
+      &.active { background: $theme-light; color: $font-color; }
+    }
+  }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1199px) {
+  .seriesNav { 
+    .item { margin: 0px 5px; }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  
+}

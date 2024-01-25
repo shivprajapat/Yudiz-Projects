@@ -1,0 +1,10 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.icon {
+  width: 30px;
+}
+
+.text{
+    color: var(--font-light);
+}

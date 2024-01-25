@@ -1,0 +1,41 @@
+input contactInput {
+  sName: String!
+  sEmail: String!
+  sPhone: String!
+  sCompany: String
+  sCity: String
+  eQueryType: QUERYTYPE!
+  sSubject: String!
+  sMessage: String!
+}
+
+input addContactInput {
+  contactInput: contactInput
+}
+
+type deleteContactsResponse {
+  sMessage: String!
+}
+
+input deleteContact {
+  _id:ID!
+}
+
+type addContactResponse {
+  oData: ContactData
+  sMessage: String!
+}
+
+type deleteContactResponse {
+  sMessage:String!
+}
+
+input bulkContactActionInput {
+  aId: [ID]
+}
+
+extend type Mutation {
+  insertContact(input: addContactInput): addContactResponse!
+  deleteContact(input: deleteContact): deleteContactResponse
+  bulkContactDelete(input: bulkContactActionInput): deleteContactsResponse
+}

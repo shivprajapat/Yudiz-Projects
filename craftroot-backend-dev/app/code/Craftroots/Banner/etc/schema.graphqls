@@ -1,0 +1,27 @@
+type Query {
+    banner: bannerData
+        @resolver(class: "Craftroots\\Banner\\Model\\Resolver\\Banner")
+        @doc(description: "Get all homepage active banner")
+    exhibitionBanner: exhibitionBannerData
+        @resolver(class: "Craftroots\\Banner\\Model\\Resolver\\Exhibition")
+        @doc(description: "Get exhibition banner")    
+}
+
+type bannerData @doc(description: "Get all homepage banner") {
+    data: [bannerDataCollection] @doc(description: "Get all homepage Data")
+}
+
+type bannerDataCollection @doc(description: "Get all homepages Data") {
+    bannerImage: String @doc(description: "Get banner image")
+    bannerMobileImage: String @doc(description: "Get banner mobile image")
+    bannerTitle: String @doc(description: "Get banner title")
+    bannerUrlKey: String @doc(description: "Get banner url")
+    bannerButtonText: String @doc(description: "Get banner button text")
+}
+type exhibitionBannerData @doc(description: "Get all exhibition banner") {
+    data: [exhibitionBannerDataCollection] @doc(description: "Get all exhibition Data")
+}
+
+type exhibitionBannerDataCollection @doc(description: "Get all exhibition Data") {
+    exhibitionBannerImage: String @doc(description: "Get exhibition image")
+}

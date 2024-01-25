@@ -1,0 +1,16 @@
+input userArticleClapInput {
+    iArticleId: ID!
+}
+
+input userArticleTotalClapInput{
+   _id: ID!
+}
+
+type responseUserArticleClap {
+    nTotalClap: Int
+}
+
+extend type Query {
+    getUserArticleClap(input: userArticleClapInput): responseUserArticleClap
+    getNewsArticleTotalClaps(input: userArticleTotalClapInput): responseUserArticleClap
+}

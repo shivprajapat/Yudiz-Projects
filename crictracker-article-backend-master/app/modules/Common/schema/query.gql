@@ -1,0 +1,27 @@
+input getSiteMapInput {
+  sKey: String
+}
+
+input getFrontUrlDataInput {
+  sUrl: String
+}
+
+type getFrontUrlDataResponse {
+  sMessage: String
+  oData: String
+}
+
+input isFavouriteInput {
+  _id: ID!
+}
+
+type isFavouriteResponse {
+  bIsFav: Boolean
+}
+
+extend type Query {
+  getSiteMap(input: getSiteMapInput): String
+  getFrontUrlData(input: getFrontUrlDataInput): getFrontUrlDataResponse
+  getAdsTxt: String
+  isFavourite(input: isFavouriteInput): isFavouriteResponse
+}

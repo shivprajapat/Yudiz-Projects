@@ -1,0 +1,137 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.matchPage {
+  h4 {
+    margin-bottom: 12px;
+  }
+}
+.personTbl {
+  table {
+    margin: 0px 0px 8px;
+    th,
+    td {
+      width: 8%;
+    }
+    th:first-child,
+    td:first-child {
+      text-align: left;
+      width: inherit;
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .personTbl {
+    table {
+      font-size: 12px;
+      font-weight: 500;
+    }
+  }
+}
+
+.liveArticleContainer {
+  width: 100%;
+  margin: 0px 0px 0 0px;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+  padding: 10px 10px 0 25px;
+}
+.timelineContainer {
+  position: sticky;
+  height: fit-content;
+  top: 65px;
+  min-width: 210px;
+  width: 210px;
+  border-radius: 12px;
+}
+.timelineMain {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  margin: 0px 0 0 10px;
+}
+.timelineSidebar {
+  overflow: visible;
+  display: none;
+}
+.timelineHeader {
+  display: none;
+  position: fixed;
+  bottom: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  > button {
+    display: flex;
+    display: -webkit-flex;
+    @include align-items(center);
+    font-size: 12px;
+    line-height: 18px;
+    color: #fff;
+    margin-left: 10px;
+    &::after {
+      margin-left: 2px;
+      width: 18px;
+      height: 18px;
+      background: url(../../../assets/images/icon/down-caret.svg) no-repeat center center / cover;
+      border: none;
+      @include transition($common-transition);
+    }
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+  .timelineHeaderToggle {
+    outline: none;
+    box-shadow: 0;
+  }
+  .timelineHeaderMenu {
+    padding: 0;
+    background-color: unset;
+    color: unset;
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1400px) {
+  .liveArticleContainer {
+    width: 563px;
+  }
+}
+@media (min-width: 992px) and (max-width: 1200px) {
+  .timelineMain {
+    display: none;
+  }
+  .timelineSidebar {
+    display: block;
+  }
+  .liveArticleContainer {
+    border-radius: 12px;
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .liveArticleContainer {
+    width: 475px;
+  }
+}
+@media (max-width: 768px) {
+  .timelineMain {
+    display: none;
+  }
+  .liveArticleContainer {
+    width: 100%;
+    border-radius: 12px;
+    padding: 0px 14px 0 14px;
+  }
+  .timelineHeader {
+    display: flex;
+  }
+}
+
+@media (max-width: 575px) {
+  div.matchNav { 
+    &.navBottom { top: 149px; 
+      &.noBottomInfoNav { top: 131px; }
+    }
+  }
+}

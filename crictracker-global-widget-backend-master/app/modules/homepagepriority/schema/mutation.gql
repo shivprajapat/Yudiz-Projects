@@ -1,0 +1,12 @@
+
+input updateHomePagePriorityInput{
+   iId: ID!
+   eType: String!
+   sName: String!
+   nSort: Int!
+   bFutureSeries: Boolean
+}
+
+extend type Mutation {
+  updateHomePagePriority(input: [updateHomePagePriorityInput!]!): String
+}

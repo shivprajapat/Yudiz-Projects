@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: cricspecial-article
+  namespace: dev
+spec:
+  schedule: "0 8,16 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://article-dev.beta.crictracker.com/api/cricspecial-article'
+            image: curlimages/curl
+            name: cricspecial-article
+          restartPolicy: OnFailure

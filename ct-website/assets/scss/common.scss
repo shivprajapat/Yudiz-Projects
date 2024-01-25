@@ -1,0 +1,333 @@
+/******* Common Element CSS Start ******/
+.light-mode {
+--font-color: #23272e;
+--font-secondary: #323842;
+--theme-bg: #f2f4f7;
+--light-mode-bg: #fff;
+}
+
+.dark-mode {
+--font-color: #fff;
+--font-secondary: #fff;
+--theme-bg: #23272e;
+--light-mode-bg: #323842;
+--bs-white-rgb: 50, 56, 66;
+}
+:root { scroll-behavior: initial; }
+* 						{ margin: 0px; padding: 0px; outline: none;}
+body 					{ background: var(--theme-bg); font-size: 14px; line-height: 20px; font-family: $theme-font; color: var(--font-color); font-weight: 500; -webkit-text-size-adjust: none; font-display: swap; }
+ul,ol 					{ padding: 0; list-style: none; }
+a 						{ color: inherit; text-decoration: none; outline: none; cursor: pointer;}
+a:focus, a:active, a:visited, a:HOVER	{ text-decoration: none; outline: none; }
+a:HOVER					{ color: $theme-color; }
+h1        				{ margin: 0 0 16px; font-size: 36px; line-height: 44px; font-weight: 800; }
+h2        				{ margin: 0 0 16px; font-size: 32px; line-height: 40px; font-weight: 700; }
+h3        				{ margin: 0 0 16px; font-size: 24px; line-height: 35px; font-weight: 700; 
+    &.small-head    { font-size: 18px; line-height: 24px; }
+}
+h4        				{ margin: 0 0 16px; font-size: 21px; line-height: 32px; font-weight: 700; 
+    &.small-head    { font-size: 14px; line-height: 20px; }
+}
+h5        				{ margin: 0 0 16px; font-size: 18px; line-height: 27px; font-weight: 700; 
+    &.small-head    { font-size: 13px; line-height: 18px; }
+}
+h6        				{ margin: 0 0 16px; font-size: 18px; line-height: 27px; font-weight: 600; }
+.line-title             { margin-bottom: 16px; text-align: center; text-transform: uppercase; overflow: hidden;
+    > *                 { margin: 0; padding: 0px 20px; max-width: 88%; display: inline-block; border: 3px solid $font-dark; border-radius: 2em; position: relative; 
+        &::after,
+        &::before       { @extend %after-before; top: 50%; width: 100vw; height: 2px; background: $light; }
+        &::after { left: calc(100% + 20px); }
+        &::before { right: calc(100% + 20px); }
+    }
+    button { margin-left: 6px; width: 24px; height: 24px; border: 1px solid $border-dark2; border-radius: 50%;
+        path { fill: $border-color; }
+        &.active { background: $theme-color; border-color: $theme-color;
+            path { fill: #fff; }
+        }
+    }
+    span { text-overflow: ellipsis; }
+    a:hover { color: var(--font-color); }
+}
+.big-text    		    { font-size: 16px; line-height: 24px; }
+small,
+.small-text  		    { font-size: 13px; line-height: 18px; }
+.xsmall-text  		    { font-size: 12px; line-height: 18px; }
+.font-semi              { font-weight: 600; }
+.font-bold,
+b                       { font-weight: 700; }
+img                     { max-width: 100%; border: 0px; }
+.block-img > span       { display: block !important; }
+.btn-link,
+.btn-check:focus+.btn,
+.form-check-input,
+button, .btn, button[type="button"] { text-decoration: none;
+    &:focus { outline: none; @include box-shadow(none); }
+}
+.btn-link { padding: 0; color: inherit; font-size: inherit; line-height: inherit; font-weight: inherit; }
+hr { background-color: $light; opacity: 1; }
+.offcanvas-backdrop     { background: $theme-font;
+    .show { opacity: .39; }
+}
+.vh-50{ height: 50vh; }
+.mb-01 { margin-bottom: 2px; }
+.mt-01 { margin-top: 2px; }
+.theme-text             { color: $theme-color; }
+.medium-text            { color: $border-color; }
+.light-text             { color: $font-light; }
+.success-text           { color: $success; }
+.danger-text            { color: $danger; }
+
+/* Button CSS */
+.theme-btn { padding: 9px 16px; display: inline-block; background: $theme-color; font-size: 12px; line-height: 18px; color: #fff; text-align: center; font-weight: 700; border: 1px solid $theme-color; border-radius: 2em;
+    &:hover,
+    &:focus { background: $theme-dark; color: #fff; border-color: $theme-dark; @include box-shadow(none); }
+    &.full-btn { width: 100%; }
+    &.outline-btn { background: transparent; color: $theme-color; border-color: $theme-medium; 
+        &:hover { background: $theme-color; color: #fff; border-color: $theme-color; }
+        &.outline-light { border-color: $border-light; color: $font-color;
+           &:hover { background: $border-light; color: $font-color; border-color: $border-light; }
+        }
+     }
+    &.small-btn { padding: 6px 16px; }
+    &.xsmall-btn { padding: 4px 16px; }
+    &.light-btn { background: #fff; border-color: #fff; color: $theme-color;
+        &:hover, 
+        &:focus { color: $theme-color; }
+    }
+    &.secondary-btn { background: $light-bg; border-color: $light-bg; color: $font-color;
+        &:hover, 
+        &:focus { background: $light; border-color: $light; color: $font-color; }
+    }
+    &.dark-btn { background: $secondary; border-color: $secondary; color: #fff;
+        &:hover, 
+        &:focus { background: $theme-color; border-color: $theme-color; color: #fff; }
+    }
+}
+.icon-btn { padding: 8px 24px 8px 8px; width: 100%; font-size: 14px; line-height: 28px; font-weight: 600; color: $font-color; background: no-repeat right 8px center / 24px auto; border: 1px solid $light-bg; border-radius: 8px; text-align: left; 
+    &.arrow-btn { background-image: url(../images/icon/right-arrow.svg); }
+    &.star-btn { background-image: url(../images/icon/star-icon.svg); }
+    &.close-btn { background-image: url(../images/icon/close-icon.svg); }
+    &.light-theme-btn { background-color: $theme-light; border-color: $theme-light; }
+    .btn-list & { margin-bottom: 16px; 
+        &:last-child { margin-bottom: 0; }
+    }
+}
+
+/* Dropdown CSS */
+.dropdown-menu { padding: 10px; background: var(--light-mode-bg); font-size: 12px; line-height: 17px; font-weight: 600; border: none; @include box-shadow(0 12px 24px rgba(0,0,0,0.16)); border-radius: 16px; overflow: hidden;
+    button { width: 100%; background: transparent; border: none; display: flex; display: -webkit-flex; @include justify-content(space-between);
+        &:hover,
+        &:focus { color: inherit; }
+    }
+    .dropdown-item { padding: 6px 0px; font-weight: inherit; color: $font-color;
+        &.active-item,
+        &:hover { background: transparent; color: $theme-color; }
+     }
+     &.user-dropdown { min-width: 216px; }
+}
+
+/* Common Box CSS */
+.common-section { padding: 30px 0; }
+.common-md-section { padding: 20px 0; }
+.common-sm-section { padding: 16px 0; }
+.common-box { margin-bottom: 24px; padding: 16px; background: var(--light-mode-bg); border-radius: 16px;
+    > :last-child { margin-bottom: 0; }
+}
+.common-height { min-height: 400px; }
+
+/* Widget CSS */
+.widget { margin-bottom: 30px; 
+    &:last-child { margin-bottom: 0; }
+}
+.card-footer-note { margin: 15px 0px 4px; font-size: 12px; line-height: 17px; }
+.table-footer-note { margin: -5px 0 0; font-size: 12px; line-height: 17px; }
+.sticky-ads { margin-bottom: 8px; position: sticky; position: -webkit-sticky; top: 70px; }
+
+/* Grid CSS */
+.row-8 { margin: 0px -8px;
+    > [class*="col"] { padding: 0px 8px; }
+}
+.row-4 { margin: 0px -4px;
+    > [class*="col"] { padding: 0px 4px; }
+}
+
+.equal-height-article article { height: calc(100% - 30px); }
+.twitter-tweet { margin: 0px auto !important; }
+.instagram-media { margin: 0px auto 24px !important; }
+.article-details-page {
+    iframe { min-height: 360px; }
+    .videoWrapper iframe,
+    .instagram-media,
+    .twitter-tweet iframe,
+    [id*="video-ads"],
+    [id*="div-ad"] iframe { min-height: initial; }
+}
+
+.also-read-title { margin-bottom: 16px; color: $theme-color; text-transform: uppercase; font-weight: 600; } 
+.similar-posts { margin: 0px -8px 16px; display: flex; display: -webkit-flex;
+    .post-img { margin: 0 8px 0 0; width: 120px; @include flex-shrink(0); 
+        img { margin: 0; border-radius: 8px; }
+    }
+    .col { margin: 0 8px 8px; width: calc(50% - 16px); padding: 8px; border: 1px solid $light; display: flex; display: -webkit-flex; border-radius: 12px; @include align-items (flex-start); flex: 0px 1 1;
+        p { margin: 0; font-size: 13px; line-height: 18px; }
+    }
+    h6 { margin-bottom: 6px; font-size: 14px; line-height: 18px; font-weight: 700; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
+
+::-webkit-scrollbar { display: none; }
+/* Track */
+::-webkit-scrollbar-track { border-radius: 3px; background: var(--light-mode-bg); }
+/* Handle */ 
+::-webkit-scrollbar-thumb { background: $font-light2; border-radius: 3px; }
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover { background: $secondary; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 992px) and (max-width: 1400px) {
+    .home-container { width: 1330px; max-width: 100%; 
+        .center-content { width: calc(100% - 640px); }
+        .common-sidebar { width: 320px; }
+    }
+    .common-sidebar:not(.bt-width) { width: calc(310px + calc(var(--bs-gutter-x) * 1)) }
+    .left-content { width: calc(100% - (310px + var(--bs-gutter-x) * 1))}
+}
+
+@media (min-width: 1280px) and (max-width: 1400px) {
+    .home-container {
+        .center-content { width: calc(100% - 668px); }
+        .common-sidebar { width: 334px; }
+    }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+    h1        				{ font-size: 34px; line-height: 40px; }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    h1        				{ margin: 0 0 12px; font-size: 30px; line-height: 38px; }
+    h2        				{ margin: 0 0 12px; font-size: 28px; line-height: 36px; }
+    h3        				{ margin: 0 0 12px; font-size: 22px; line-height: 32px; 
+        &.small-head    { font-size: 17px; line-height: 23px; }
+    }
+    h4        				{ margin: 0 0 12px; font-size: 19px; line-height: 28px; 
+        &.small-head    { font-size: 13px; line-height: 19px; }
+    }
+    h5        				{ margin: 0 0 12px; font-size: 17px; line-height: 26px; 
+        &.small-head    { font-size: 13px; line-height: 18px; }
+    }
+    h6        				{ margin: 0 0 12px; font-size: 17px; line-height: 26px; }
+    .big-text    		    { font-size: 15px; line-height: 23px; }
+    .instagram-media        { margin-bottom: 18px !important; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    body 					{ font-size: 13px; line-height: 18px; }
+    h1        				{ margin: 0 0 10px; font-size: 32px; line-height: 40px; }
+    h2        				{ margin: 0 0 10px; font-size: 26px; line-height: 34px; }
+    h3        				{ margin: 0 0 10px; font-size: 21px; line-height: 30px; 
+        &.small-head    { font-size: 16px; line-height: 22px; }
+    }
+    h4        				{ margin: 0 0 10px; font-size: 18px; line-height: 27px; 
+        &.small-head    { font-size: 13px; line-height: 19px; }
+    }
+    h5        				{ margin: 0 0 10px; font-size: 16px; line-height: 24px; 
+        &.small-head    { font-size: 13px; line-height: 18px; }
+    }
+    h6        				{ margin: 0 0 10px; font-size: 16px; line-height: 24px; }
+    .common-sidebar { margin-top: 24px; }
+}
+
+@media (max-width: 767px) {
+    h1        				{ margin: 0 0 12px; font-size: 28px; line-height: 36px; }
+    h2        				{ margin: 0 0 12px; font-size: 24px; line-height: 30px; }
+    h3        				{ margin: 0 0 12px; font-size: 22px; line-height: 32px; 
+        &.small-head    { font-size: 17px; line-height: 23px; }
+    }
+    h4        				{ margin: 0 0 12px; font-size: 19px; line-height: 28px; 
+        &.small-head    { font-size: 13px; line-height: 19px; }
+    }
+    h5        				{ margin: 0 0 12px; font-size: 17px; line-height: 26px; 
+        &.small-head    { font-size: 13px; line-height: 18px; }
+    }
+    h6        				{ margin: 0 0 12px; font-size: 17px; line-height: 26px; }
+    .big-text    		    { font-size: 15px; line-height: 23px; }
+/* Common Box CSS */
+    .common-section { padding: 30px 0; }
+    .common-box { margin-bottom: 20px; padding: 12px; border-radius: 12px; }
+    .common-sidebar { margin-top: 24px; }
+    .widget { margin-bottom: 24px; }
+/* Grid CSS */
+    .row { margin: 0px -8px;
+        > [class*="col"] { padding: 0px 8px; }
+    }
+/* Article CSS */
+    .article-grid-list article { width: 220px; }
+}
+
+@media (max-width: 575px) {
+    body 					{ font-size: 13px; line-height: 18px; }
+    h1        				{ margin: 0 0 12px; font-size: 24px; line-height: 30px; }
+    h2        				{ margin: 0 0 12px; font-size: 22px; line-height: 28px; }
+    h3        				{ margin: 0 0 12px; font-size: 20px; line-height: 28px; 
+        &.small-head    { font-size: 16px; line-height: 21px; }
+    }
+    h4        				{ margin: 0 0 12px; font-size: 16px; line-height: 22px; }
+    h5,
+    h6        				{ margin: 0 0 12px; font-size: 15px; line-height: 22px; }
+    .big-text    		    { font-size: 14px; line-height: 22px; }
+    .line-title             { margin-bottom: 12px;
+        > *                 { padding: 0px 16px;
+            &::after { left: calc(100% + 16px); }
+            &::before { right: calc(100% + 16px); }
+        }        
+    }
+
+/* Button CSS */
+    .theme-btn { padding: 8px 14px; }
+/* Widget CSS */
+    .card-footer-note { font-size: 11px; line-height: 14px; }
+/* Grid CSS */
+    .row-8 { margin: 0px -4px;
+        > [class*="col"] { padding: 0px 4px; }
+    }
+    .row-4 { margin: 0px -4px;
+        > [class*="col"] { padding: 0px 4px; }
+    }
+/* Common Box CSS */
+    .common-section { padding: 24px 0; }
+}
+// Twitter iframe
+.twitter_frame { overflow: hidden; }
+.twitter_frame iframe{ margin-top: -18px }
+.article-details-page {
+    iframe { min-height: 300px; }
+}
+
+// Video iframe
+.videoWrapper iframe { width: 500px; height: auto; aspect-ratio: 1/0.56; }
+
+// progress bar
+#nprogress{ position: fixed; top: 0; left: 0; z-index: 99; width: 100%; height: 8px; padding: 2px 0; background-color: $theme-color;
+    .bar { background: white; height: 100%; }
+}
+.disabled { opacity: 0.6; pointer-events: none; }
+
+// Custom slider
+.slider.active { cursor: grabbing; cursor: -webkit-grabbing; scroll-behavior: auto !important; }
+.slider-track.active { cursor: grabbing; cursor: -webkit-grabbing; scroll-behavior: auto !important; }
+
+// Popup ads
+#div-gpt-ad-1662037240348-0 { display: none; }
+
+// Sticky ads
+#stickyunit { z-index: 5; }
+@media (max-width: 767px) {
+    #stickyunit { bottom: 53px !important; }
+    #stickyunit > span { bottom: auto !important; }
+    #stickyunit > div { bottom: 53px !important; }
+    .mobileWebView {
+        #stickyunit { bottom: 0 !important; }
+        #stickyunit > div { bottom: 0 !important; } 
+    }
+}

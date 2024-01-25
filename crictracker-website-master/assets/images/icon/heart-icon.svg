@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>heart-icon</title>
+    <g id="heart-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M10,7.375 C10,4.959 8.041,3 5.625,3 C3.209,3 1.25,4.959 1.25,7.375 C1.25,8.502 1.409,10.159 3,11.75 C4.591,13.341 10,17 10,17 C10,17 15.409,13.341 17,11.75 C18.591,10.159 18.75,8.502 18.75,7.375 C18.75,4.959 16.791,3 14.375,3 C11.959,3 10,4.959 10,7.375" id="Path" fill="#045DE9" fill-rule="nonzero"></path>
+    </g>
+</svg>

@@ -1,0 +1,184 @@
+enum SEO_TYPE {
+  "Article"
+  ar
+  "Admin"
+  ad
+  "Category"
+  ct
+  "General Tag"
+  gt
+  "Match Overview"
+  mo
+  "player"
+  p
+  "team"
+  t
+  "venue"
+  v
+  "Fantasy Article"
+  fa
+  "Custom Seo"
+  cu
+  "Match"
+  ma
+  "Series"
+  se
+  "CMS Page"
+  cms
+  "video"
+  vi
+  "playlist"
+  pl
+  "job"
+  jo
+  "static pages"
+  st
+}
+
+input oSocialInput {
+  sTitle: String
+  sDescription: String
+  sUrl: String
+}
+
+input oSeo {
+  iId: ID!
+  sTitle: String
+  sDescription: String
+  sSlug: String
+  aKeywords: [String]
+  oFB: oSocialInput
+  oTwitter: oSocialInput
+  sCUrl: String 
+  sRobots: String
+  eType: SEO_TYPE!
+  eSubType: ESEOSUBTYPE
+  eStatus: SeoStatus
+  eSchemaType: SCHEMATYPE
+  bIsDeletable: Boolean
+  sContent: String
+  sDTitle: String
+}
+
+enum SCHEMATYPE {
+  "article"
+  ar
+  "news article"
+  nar
+}
+
+
+type createSeoResponse {
+  sMessage: String
+  oData: Seo
+}
+
+enum CHANGESEOPICTURETYPE {
+  "Facebook"
+  fb
+  "Twitter"
+  t
+}
+
+enum CHANGESEOPICTURESEOTYPE {
+  "Article"
+  ar
+  "Admin"
+  ad
+  "Categories"
+  ct
+  "General Tags"
+  gt
+  "News Article"
+  nar
+  "Match Overview"
+  mo
+}
+
+input changeSeoPictureInput {
+  eType: CHANGESEOPICTURETYPE!
+  eSeoType: CHANGESEOPICTURESEOTYPE!
+  sUrl: String!
+  _id: ID!
+}
+
+type changeSeoPictureResponse {
+    sMessage: String
+}
+
+enum SeoStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+input oBulkUpdateInput {
+  aId: [ID]!
+  eStatus: SeoStatus!
+}
+
+type oUpdateResponse {
+  sMessage: String
+  oData: Seo
+}
+
+type oMessageOnlyResponse {
+  sMessage: String
+}
+
+input oUpdateSeoInput {
+  iId: ID!
+  eStatus: SeoStatus!
+  sMessage: String
+}
+
+input oSeoInput {
+  sTitle: String
+  sDescription: String
+  sSlug: String!
+  aKeywords: [String]
+  oFB: oSocialInput
+  oTwitter: oSocialInput
+  sCUrl: String 
+  sRobots: String
+  eType: SEO_TYPE
+  eSchemaType: SCHEMATYPE
+  bIsDeletable: Boolean
+}
+
+type oCustomSeoResponse {
+  sMessage: String
+  oData: oCustomSeo
+}
+
+type addTagSeoResponse {
+  sMessage: String
+  oData: Seo
+}
+
+enum SOCIALTYPE {
+  oFB
+  oTwitter
+}
+
+input deleteSocialImageInput {
+  iId: ID!
+  eType: SOCIALTYPE
+}
+
+type deleteSocialImageResponse {
+  sMessage: String
+}
+
+extend type Mutation {
+  editSeo(input: oSeo): createSeoResponse
+  insertSeo(input: oSeo): createSeoResponse
+  addSeo(input: oSeoInput): oCustomSeoResponse
+  updateSeo(input: oSeoInput): oCustomSeoResponse
+  changeSeoPicture(input: changeSeoPictureInput): changeSeoPictureResponse
+  bulkSeoUpdate(input: oBulkUpdateInput): oMessageOnlyResponse
+  deleteSocialImage(input: deleteSocialImageInput): deleteSocialImageResponse
+}

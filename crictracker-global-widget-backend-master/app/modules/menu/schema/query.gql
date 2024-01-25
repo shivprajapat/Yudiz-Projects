@@ -1,0 +1,48 @@
+type SubMenuRes{
+  _id: ID
+  sTitle: String
+  sSlug: String
+  sUrl: String
+  eUrlTarget: UrlTargetTypes
+  eMenuType: MenuType
+}
+
+type menuTreeData {
+  _id: ID
+  sTitle: String
+  sSlug: String
+  bIsMulti:Boolean
+  sUrl: String
+  nSort: Int
+  eUrlTarget: String
+  eMenuType: String
+  oChildren: [SubMenuRes]
+  eStatus: String
+}
+
+type menuGetData {
+  _id: ID
+  sTitle: String!
+  sSlug: String
+  sUrl: String
+  nSort: Int!
+  eUrlTarget: String!
+  eMenuType: String!
+  eStatus: String
+  dCreated: String
+  dUpdated: String
+}
+
+type getMenuTreeData {
+  aResults: [menuTreeData]
+}
+
+type getMenuData {
+  aResults: [menuGetData]
+}
+
+
+extend type Query {
+  getMenuTree: getMenuTreeData 
+  getFrontMenu: getMenuData
+}

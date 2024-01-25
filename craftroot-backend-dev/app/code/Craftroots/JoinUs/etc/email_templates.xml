@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../Email/etc/email_templates.xsd">
+    <template id="craftroots_email_template_admin" label="Craft Enthusiast Join us" file="craftroots_admin_template.html" type="html" module="Craftroots_JoinUs" area="frontend"/>
+    <template id="craftroots_email_template_front" label="Craft Enthusiast Join us" file="craftroots_front_email_template.html" type="html" module="Craftroots_JoinUs" area="frontend"/>
+</config>

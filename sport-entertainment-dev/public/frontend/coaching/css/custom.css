@@ -1,0 +1,102 @@
+.batch_detail {
+    margin-top: 15px;
+    margin-left: 20px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+.batch_status {
+    margin-top: 15px;
+    margin-left: 6px;
+    font-weight: 400;
+    font-size: 18px;
+}
+
+
+#logo_background {
+    /* background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: center left;
+    background-image: url('../../../frontend/images/logo2.png');
+    border-right: 2px solid black; */
+    background-color: white;
+}
+
+.register-login .login-aside {
+    width: 100% !important;
+}
+
+.login.login-4 .login-aside {
+    background: transparent;
+    max-width: 600px;
+    background-size: 630px;
+    background-repeat: no-repeat;
+    min-height: 550px !important;
+
+}
+
+.login.login-4 .login-container .login-content.login-content-signup {
+    background: transparent;
+    width: 1000px;
+}
+
+
+
+.login.login-4 .login-form {
+    max-width: 600px;
+    width: 100% !important;
+    margin: auto;
+}
+
+.login-custom-password .form-control {
+    border-radius: 0.85rem 0 0 0.85rem !important;
+}
+
+.login-custom-password .input-group-text {
+    border-radius: 0 0.85rem 0.85rem 0;
+}
+
+.login.login-3 .login-aside .aside-img {
+
+    background-size: 110%;
+}
+
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered,
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    padding: 16px 19.5px;
+}
+
+.select2-container--default .select2-selection--single,
+.select2-container--default .select2-selection--multiple {
+    border: none;
+}
+
+.custom-select-single .select2-container .select2-selection--single {
+    height: 68px !important;
+}
+
+@media (max-width: 991.98px) {
+    .login.login-3 .login-aside .aside-img {
+        min-height: 180px !important;
+        background-size: 400px;
+    }
+
+    .login.login-4 .login-aside {
+        min-height: 180px !important;
+        background-size: 400px;
+        max-width: 100% !important;
+        width: 100% !important;
+    }
+}
+
+@media (max-width: 1399px) {
+    .login.login-4 .login-aside {
+        max-width: 380px;
+        background-size: 400px;
+    }
+}
+
+.select2-container--default .select2-search--inline .select2-search__field {
+    width: 100% !important;
+}

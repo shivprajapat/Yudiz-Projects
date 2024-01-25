@@ -1,0 +1,68 @@
+@import "../../../../../assets/scss/variables.scss";
+@import "../../../../../assets/scss/mixins.scss";
+
+.ampSelectorContent {
+  amp-selector {
+    outline: none;
+    .viewOptions {
+      display: none;
+      outline: none;
+      &[selected] {
+        display: block;
+      }
+    }
+    margin-bottom: 0px;
+    border-radius: 16px;
+  }
+}
+
+.commonNav {
+  margin: 0px -12px 12px;
+  padding: 6px 8px;
+  background: var(--light-mode-bg);
+  white-space: nowrap;
+  overflow: auto;
+  &.stickyNav {
+    position: sticky;
+    top: 0px;
+    z-index: 5;
+    @include box-shadow(0 2px 4px 0 rgba(var(--bs-dark-rgb), 0.2));
+  }
+  amp-selector {
+    display: flex;
+    & [option][selected] {
+      outline: 0;
+      background: var(--light-color);
+      color: var(--font-color-light);
+      border-radius: 2em;
+    }
+    .item {
+      @include flex-grow(0);
+      text-transform: uppercase;
+      display: block;
+      padding: 5px 12px;
+      font-size: 12px;
+      line-height: 18px;
+      color: var(--font-color-light);
+      font-weight: 700;
+      background: transparent;
+      border-radius: 2em;
+      &:hover {
+        color: var(--theme-color-light);
+      }
+      &:first-child {
+        margin-left: 0;
+      }
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+  &.themeLightNav {
+    background: var(--theme-light);
+    a.active {
+      background: var(--light-mode-bg);
+    }
+  }
+}
+

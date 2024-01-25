@@ -1,0 +1,41 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.statPlayer {
+    cursor: pointer;
+    border-bottom: 1px solid var(--border-medium);
+    &:last-child {
+        border: none;
+    }
+    .playerImage {
+        position: relative;
+        .icon {
+            width: 44px;
+        }
+        .serialNo {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 22px;
+            height: 22px;
+            text-align: center;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--theme-color-medium);
+        }
+    }
+    h4 { margin-bottom: -4px; }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+}
+
+@media (max-width: 1199px) {
+}

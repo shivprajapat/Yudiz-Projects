@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: commentaries
+  namespace: dev
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://matchmanage-dev.beta.crictracker.com/api/commentaries'
+            image: curlimages/curl
+            name: commentaries
+          restartPolicy: OnFailure

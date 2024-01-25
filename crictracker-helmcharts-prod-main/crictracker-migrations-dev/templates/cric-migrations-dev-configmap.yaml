@@ -1,0 +1,15 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  REDIS_HOST: "crictracker-redis-dev-headless.dev.svc.cluster.local"
+  REDIS_PORT: "6379"
+  PORT: "5001"
+  SQL_HOST: db.crictracker.com
+  SQL_DATABASE: crictracker_db
+  SQL_USER: crictracker_db
+  S3_BUCKET_NAME: 'admin-media-cdn.crictracker.com'
+  S3_BUCKET_URL: 'https://admin-media-cdn.crictracker.com.s3.ap-south-1.amazonaws.com/'
+  CREATE_TAG_ARTICLE: "1"

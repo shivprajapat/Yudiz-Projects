@@ -1,0 +1,19 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.matchPage {
+  h4 { margin-bottom: 12px; }
+}
+.personTbl {
+  table { margin: 0px 0px 8px; 
+    th, td { width: 8%; }
+    th:first-child,
+    td:first-child { text-align: left; width: inherit; }
+  }
+}
+
+@media (max-width: 575px) {
+  .personTbl {
+    table { font-size: 12px; font-weight: 500; }
+  }
+}

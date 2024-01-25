@@ -1,0 +1,81 @@
+enum OVER_EVENT {
+  b
+  oe
+  w
+  c
+}
+
+type oBallFront {
+  sEventId: String
+  eEvent: OVER_EVENT
+  iBatterId: ID
+  oBatter: oPlayer
+  iBowlerId: ID
+  oBowler: oPlayer
+  iWicketBatterId: ID
+  oWicketBatter: oPlayer
+  sOver: String
+  sBall: String
+  sScore: String
+  nRuns: Int
+  nTimestamp: Int
+  sHowOut: String
+  bIsNoBallDismissal: Boolean
+  nBatterRuns: Int
+  nBatterBalls: Int
+}
+
+type oBattersFront {
+  iBatterId: ID
+  oBatter: oPlayer
+  nRuns: Int
+  nBallFaced: Int
+  nFours: Int
+  nSixes: Int
+}
+
+type oBowlersFront {
+  iBowlerId: ID
+  oBowler: oPlayer
+  sOvers: String
+  nRunsConceded: Int
+  nWickets: Int
+  nMaidens: Int
+}
+
+type oOverFront {
+  sEventId: String
+  eEvent: OVER_EVENT
+  sOver: String
+  sScore: String
+  aBatters: [oBattersFront]
+  aBowlers: [oBowlersFront]
+}
+
+type MatchOvers {
+  iMatchId: ID
+  nInningNumber: Int
+  sOver: String
+  aBall: [oBallFront]
+  oOver: oOverFront
+  nOverTotal: Int
+  dUpdated: String
+}
+
+input oListMatchOverFrontInput {
+  iMatchId: ID!
+  nInningNumber: Int
+  nSkip: Int
+  sOver: String
+  nLimit: Int
+  isFront: Boolean
+}
+
+type listOversResponse {
+    nTotal: Int
+    aResults: [MatchOvers]
+}
+
+extend type Query {
+  listMatchOvers(input:oListMatchOverFrontInput): listOversResponse
+}

@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: duplicate-commentaries
+  namespace: dev
+spec:
+  schedule: "*/5 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X DELETE https://matchmanage-dev.beta.crictracker.com/api/duplicate-commentaries'
+            image: curlimages/curl
+            name: duplicate-commentaries
+          restartPolicy: OnFailure

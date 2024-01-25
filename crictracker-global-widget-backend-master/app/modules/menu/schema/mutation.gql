@@ -1,0 +1,48 @@
+enum UrlTargetTypes {
+  "_blank(opens new window or tab)"
+   _blank
+
+  "_self(opens in same document)"
+   _self
+
+  "_parent(opens in parent frame)"
+   _parent
+
+  "_top(opens in full body of the window)"
+   _top
+
+  "framename(in the named iframe)"
+   framename
+}
+
+enum MenuType {
+   "self(item withing website)"
+    self
+
+   "outside(tem outside website)"
+    outside
+}
+
+input SubMenu{
+  sTitle: String
+  sSlug: String
+  sUrl: String
+  eUrlTarget: UrlTargetTypes
+  eMenuType: MenuType
+}
+
+input headerMenuIpnut{
+  sTitle: String!
+  sSlug: String
+  sUrl: String
+  bIsMulti:Boolean,
+  oChildren:[SubMenu]
+  eUrlTarget: UrlTargetTypes
+  eMenuType: MenuType
+  nSort: Int!
+}
+
+
+extend type Mutation {
+  addHeaderMenu(input: [headerMenuIpnut!]!): String
+}

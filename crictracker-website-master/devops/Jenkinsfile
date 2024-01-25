@@ -1,0 +1,189 @@
+def buildNumber = BUILD_NUMBER as int; if (buildNumber > 1) milestone(buildNumber - 1); milestone(buildNumber)
+
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          nodeSelector:
+            pv: jenkins        
+          tolerations:
+          - effect: NoSchedule
+            key: pv
+            operator: Equal
+            value: jenkins
+          containers:
+          - name: docker
+            image: public.ecr.aws/d7h0j7s7/gitlab-ci:latestv4
+            tty: true
+            volumeMounts:
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock
+        '''
+    }
+  }
+  environment {
+    BUILD_NAME = "$PROJECT_NAME" + "-website"
+    CI_COMMIT_SHA = "$GIT_BRANCH" + "_$GIT_COMMIT"
+    GIT_COMMIT_EMAIL = sh (script: 'git --no-pager show -s --format=\'%ae\'',returnStdout: true).trim()
+  }
+  
+  stages {
+    stage('Crictracker Website Local Dev Build') {
+      when {
+        beforeInput true
+        branch 'dev'
+      }
+      environment{
+        BUILD = "$BUILD_NAME" + "-local-dev"
+        ECR = "$CRIC_ECR_URL" + "$BUILD"
+        REACT_APP_ENV = "development"
+        REACT_APP_API_URL = "https://gateway-dev.crictracker.ml/graphql"
+        REACT_APP_INTERNAL_API_URL = "http://crictracker-gateway-local-dev-internal.local-dev.svc.cluster.local/graphql"
+        REACT_APP_DOMAIN = "https://cricweb-dev.crictracker.ml/"
+        REACT_APP_SUBSCRIPTION_URL = "wss://subscription-dev.crictracker.ml/graphql"
+        REACT_APP_S3_PREFIX = "https://crictracker-admin-panel-local-dev-08032022.s3.ap-south-1.amazonaws.com/"
+        SENTRY_AUTH_TOKEN = "fc9d8d68e98749d6a71923da9c7e51daa2cee4adcf554c7b89d64bb12924572b"
+        REACT_APP_ARTICLE_REST_URL = "https://article-dev.crictracker.ml"
+      }
+
+      steps {
+        container('docker') {
+          withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${env.CRIC_AWS_CREDS}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'], usernamePassword(credentialsId: "${env.CRIC_HELM_CREDS}", usernameVariable: 'HELMUNAME', passwordVariable: 'HELMPW'),usernamePassword(credentialsId: "${env.GIT_CREDS}", usernameVariable: 'gitUser', passwordVariable: 'gitPass')]) {
+
+          cache(path: ".npm", key: "$BUILD-${hashFiles('package-lock.json')}" , restoreKeys: ["$BUILD-${hashFiles('package-lock.json')}","$BUILD-"]) {
+          sh ''' 
+          mkdir .npm || true 
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID; aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY; aws configure set default.region $CRIC_REGION
+          aws eks --region $CRIC_REGION update-kubeconfig --name crictracker
+          helm repo add --username $gitUser --password $gitPass crictracker-helmrepo $CRIC_HELM_GIT_URL
+          helm repo update
+
+          docker build --network=host --build-arg REACT_APP_ARTICLE_REST_URL=$REACT_APP_ARTICLE_REST_URL --build-arg NODE_ENV=development --build-arg REACT_APP_API_URL=$REACT_APP_API_URL --build-arg REACT_APP_INTERNAL_API_URL=$REACT_APP_INTERNAL_API_URL --build-arg REACT_APP_DOMAIN=$REACT_APP_DOMAIN --build-arg REACT_APP_SUBSCRIPTION_URL=$REACT_APP_SUBSCRIPTION_URL --build-arg REACT_APP_S3_PREFIX=$REACT_APP_S3_PREFIX --build-arg REACT_APP_ENV=$REACT_APP_ENV --build-arg SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN -t $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA -f devops/Dockerfile.dev .
+          aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 693583001687.dkr.ecr.ap-south-1.amazonaws.com
+          docker push 693583001687.dkr.ecr.ap-south-1.amazonaws.com/$BUILD_NAME:$CI_COMMIT_SHA
+          helm upgrade -n local-dev $BUILD crictracker-helmrepo/$BUILD --set=image=693583001687.dkr.ecr.ap-south-1.amazonaws.com/$BUILD_NAME:$CI_COMMIT_SHA
+          helm upgrade -n local-dev crictracker-image-website-local-dev crictracker-helmrepo/crictracker-image-website-local-dev --set=image=693583001687.dkr.ecr.ap-south-1.amazonaws.com/$BUILD_NAME:$CI_COMMIT_SHA
+          kubectl rollout status -w deployment/$BUILD -n local-dev
+          docker rm $BUILD-npm || true
+          docker create --name $BUILD-npm 693583001687.dkr.ecr.ap-south-1.amazonaws.com/$BUILD_NAME:$CI_COMMIT_SHA
+          rm -rf .npm
+          docker cp $BUILD-npm:/root/.npm .npm
+          '''
+          }
+        }
+      }
+    }
+  }
+    stage('Crictracker Website Dev Build') {
+      when {
+        beforeInput true
+        branch 'staging'
+      }
+      environment{
+        BUILD = "$BUILD_NAME" + "-dev"
+        ECR = "$CRIC_ECR_URL" + "$BUILD"
+        HELM_BUILD = "$BUILD_NAME" + "-prod-dev"
+        REACT_APP_ENV = "staging"
+        REACT_APP_API_URL = "https://gateway-dev.beta.crictracker.com/graphql"
+        REACT_APP_INTERNAL_API_URL = "http://crictracker-gateway-dev-internal.dev.svc.cluster.local/graphql"
+        REACT_APP_DOMAIN = "https://cricweb-dev.beta.crictracker.com/"
+        REACT_APP_SUBSCRIPTION_URL = "wss://subscription-dev.beta.crictracker.com/graphql"
+        REACT_APP_S3_PREFIX = "https://admin-media-cdn.crictracker.com/"
+        SENTRY_AUTH_TOKEN = "fc9d8d68e98749d6a71923da9c7e51daa2cee4adcf554c7b89d64bb12924572b"
+        REACT_APP_ARTICLE_REST_URL = "https://article-dev.beta.crictracker.com/"
+      }
+
+      steps {
+        container('docker') {
+          withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${env.CRIC_AWS_CREDS}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'], usernamePassword(credentialsId: "${env.CRIC_HELM_CREDS}", usernameVariable: 'HELMUNAME', passwordVariable: 'HELMPW'),usernamePassword(credentialsId: "${env.GIT_CREDS}", usernameVariable: 'gitUser', passwordVariable: 'gitPass')]) {
+
+          cache(path: ".npm", key: "$BUILD-${hashFiles('package-lock.json')}" , restoreKeys: ["$BUILD-${hashFiles('package-lock.json')}","$BUILD-"]) {
+          sh ''' 
+          mkdir .npm || true 
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID; aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY; aws configure set default.region $CRIC_REGION
+          aws eks --region $CRIC_REGION update-kubeconfig --name crictracker
+          helm repo add --username $gitUser --password $gitPass crictracker-helmrepo $CRIC_HELM_GIT_URL
+          helm repo update
+
+          docker build --network=host --build-arg REACT_APP_ARTICLE_REST_URL=$REACT_APP_ARTICLE_REST_URL --build-arg NODE_ENV=development --build-arg REACT_APP_API_URL=$REACT_APP_API_URL --build-arg REACT_APP_INTERNAL_API_URL=$REACT_APP_INTERNAL_API_URL --build-arg REACT_APP_DOMAIN=$REACT_APP_DOMAIN --build-arg REACT_APP_SUBSCRIPTION_URL=$REACT_APP_SUBSCRIPTION_URL --build-arg REACT_APP_S3_PREFIX=$REACT_APP_S3_PREFIX --build-arg REACT_APP_ENV=$REACT_APP_ENV --build-arg SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN -t $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA -f devops/Dockerfile.dev .
+          aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $CRIC_ECR_URL
+          docker push $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          helm upgrade -n dev $BUILD crictracker-helmrepo/$HELM_BUILD --set=image=693583001687.dkr.ecr.ap-south-1.amazonaws.com/$BUILD_NAME:$CI_COMMIT_SHA
+          helm upgrade -n dev crictracker-image-website-dev crictracker-helmrepo/crictracker-image-website-dev --set=image=$CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          kubectl rollout status -w deployment/$BUILD -n dev
+          docker rm $BUILD-npm || true
+          docker create --name $BUILD-npm $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          rm -rf .npm
+          docker cp $BUILD-npm:/root/.npm .npm
+          '''
+          }
+        }
+      }
+    }
+  }
+    stage('Crictracker Website Master Build') {
+      when {
+        beforeInput true
+        branch 'master'
+      }
+      options {
+        timeout(time: 2, unit: 'DAYS') 
+      }
+      input {
+        message "Should we continue for Production?"
+        ok "Yes, we should."
+      }
+      environment{
+        BUILD = "$BUILD_NAME" + "-prod"
+        ECR = "$CRIC_ECR_URL" + "$BUILD"
+        REACT_APP_ENV = "production"
+        REACT_APP_API_URL = "https://gateway.crictracker.com/graphql"
+        REACT_APP_INTERNAL_API_URL = "http://crictracker-gateway-prod-internal.production.svc.cluster.local/graphql"
+        REACT_APP_DOMAIN = "https://www.crictracker.com/"
+        REACT_APP_SUBSCRIPTION_URL = "wss://subscription.crictracker.com/graphql"
+        REACT_APP_S3_PREFIX = "https://media.crictracker.com/"
+        SENTRY_AUTH_TOKEN = "fc9d8d68e98749d6a71923da9c7e51daa2cee4adcf554c7b89d64bb12924572b"
+        REACT_APP_ARTICLE_REST_URL = "https://article.crictracker.com"
+      }
+
+      steps {
+        container('docker') {
+          withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${env.CRIC_AWS_CREDS}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'], usernamePassword(credentialsId: "${env.CRIC_HELM_CREDS}", usernameVariable: 'HELMUNAME', passwordVariable: 'HELMPW'), string(credentialsId: 'cloudflare-token', variable: 'CF_TOKEN'),usernamePassword(credentialsId: "${env.GIT_CREDS}", usernameVariable: 'gitUser', passwordVariable: 'gitPass')]) {
+
+        sh ''' 
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID; aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY; aws configure set default.region $CRIC_REGION
+          aws eks --region $CRIC_REGION update-kubeconfig --name crictracker
+          helm repo add --username $gitUser --password $gitPass crictracker-helmrepo $CRIC_HELM_GIT_URL
+          helm repo update
+
+          time docker build --network=host --build-arg REACT_APP_ARTICLE_REST_URL=$REACT_APP_ARTICLE_REST_URL --build-arg REACT_APP_API_URL=$REACT_APP_API_URL --build-arg REACT_APP_INTERNAL_API_URL=$REACT_APP_INTERNAL_API_URL --build-arg REACT_APP_DOMAIN=$REACT_APP_DOMAIN --build-arg REACT_APP_SUBSCRIPTION_URL=$REACT_APP_SUBSCRIPTION_URL --build-arg REACT_APP_S3_PREFIX=$REACT_APP_S3_PREFIX --build-arg REACT_APP_ENV=$REACT_APP_ENV --build-arg SENTRY_AUTH_TOKEN=$SENTRY_AUTH_TOKEN -t $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA -f devops/Dockerfile.prod .
+          aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin $CRIC_ECR_URL
+          docker push $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          time helm upgrade -n production $BUILD crictracker-helmrepo/$BUILD --set=image=$CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          time helm upgrade -n production crictracker-image-website-prod crictracker-helmrepo/crictracker-image-website-prod --set=image=$CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          time kubectl rollout status -w deployment/$BUILD -n production
+          curl -X POST "https://api.cloudflare.com/client/v4/zones/76c6bee164b59ebaa0ad0d6bdc0d50ec/purge_cache" -H "X-Auth-Email: server@crictracker.com" -H "X-Auth-Key: $CF_TOKEN" -H "Content-Type: application/json" --data '{"purge_everything":true}'
+          '''
+        }
+      }
+    }
+  }
+}
+    post{
+      always{
+          mail to: "${GIT_COMMIT_EMAIL}",cc: "ravi.kyada@yudiz.com",
+          subject: "Your Pipeline Status For ${JOB_NAME}",
+          body: "Jenkins Build For Job ${env.JOB_NAME} is ${currentBuild.currentResult}:, You can Find More Info. at ${env.BUILD_URL}"
+      }
+    }
+ }

@@ -1,0 +1,52 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.article { margin-bottom: 8px; padding: 16px; background: var(--light-mode-bg); border-radius: 16px; @include transition($common-transition);
+  &:hover { @include box-shadow(0px 6px 16px rgba($theme-medium , 0.48)); }
+  .postimg { border-radius: 12px; overflow: hidden; position: relative;
+    &::after { @extend %after-before; width: 100%; height: 100%; left: 0; top: 0; opacity: 0; @include transition($common-transition);
+      background-image: linear-gradient(0deg, #045DE9 0%, rgba(4,93,233,0.00) 50%);
+    }
+    &:hover::after { opacity: 1; }
+    // span { width: 100% !important; }
+  }
+  img { object-fit: cover; }
+  .badge { margin-bottom: 8px; }
+  .articleInfo { color: $font-light; font-size: 11px; line-height: 14px; 
+    > span { margin-right: 8px; 
+      &:last-child { margin-right: 0; }
+    }
+    .icon { margin-right: 2px; width: 14px; }
+  }
+  &.video { 
+    .postimg { 
+      &::after { display: none; }
+    }
+    .postimg .badge { position: absolute; bottom: 0px; left: 8px; }
+  }
+  > :last-child { margin-bottom: 0; }
+  h3,h4 {
+    a { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+  }
+  .desc { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+  .article { padding: 12px; border-radius: 12px; }
+}
+
+@media (max-width: 1199px) {
+  .article { 
+    .articleInfo { 
+      > span { margin-right: 6px; }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .article { padding: 12px;
+    .postimg { border-radius: 6px; }
+  }
+}

@@ -1,0 +1,48 @@
+.welcome {
+    background-color: green;
+    background-image: url("../../../images/SplashScreen.svg");
+    background-size: cover;
+    position: relative;
+    overflow-y: auto;
+    padding: 0 15px;
+    @media(max-width: 767px){
+        padding-bottom: 40px;
+    }
+}
+.welcome-inner {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 0 20px;
+    .welcome-footer {
+        margin: 0 -20px;
+        font-size: 18px;
+        font-weight: 400;
+        background-color: #FFFFFF;
+        color: #002058;
+        text-align: center;
+        padding: 4px;
+        .endless-text {
+            font-weight: 600;
+        }
+    }
+}
+
+.welcome-login-block {
+    position: relative;
+    margin: 25px 0;
+    p.small-text {
+        color: white;
+        text-align: center;
+        text-indent: initial;
+        font-size: 12px;
+        margin-bottom: 6px;
+    }
+    a {
+        color: $light-blue;
+        text-align: center;
+        font-weight: 600;
+        font-size: 14px;
+    }
+}

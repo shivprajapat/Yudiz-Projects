@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="page-content">
+      <section>
+        <div class="container-fluid">
+          <div class="row gy-4">
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-end justify-content-between mb-2">
+                    <div class="me-2">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
+                        <use xlink:href="#survey-1"> </use>
+                      </svg>
+                      <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">TOTAL NO. OF ACTIVITIES</p>
+                    </div>
+                    <p class="text-xxl lh-1 mb-0 text-dash-color-3">{{dashboard.activities_count}}</p>
+                  </div>
+                  <div class="progress" style="height: 3px">
+                    <div class="progress-bar bg-dash-color-3" role="progressbar" style="width: 100%" aria-valuenow="55"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-end justify-content-between mb-2">
+                    <div class="me-2">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
+                        <use xlink:href="#user-1"> </use>
+                      </svg>
+                      <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">TOTAL NO. OF REGISTERED USERS</p>
+                    </div>
+                    <p class="text-xxl lh-1 mb-0 text-dash-color-1">{{dashboard.registerd_users}}</p>
+                  </div>
+                  <div class="progress" style="height: 3px">
+                    <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: 100%" aria-valuenow="30"
+                      aria-valuemin="0" aria-valuemax="10000"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-end justify-content-between mb-2">
+                    <div class="me-2">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
+                        <use xlink:href="#survey-1"> </use>
+                      </svg>
+                      <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">ACTIVE ACTIVITIES</p>
+                    </div>
+                    <p class="text-xxl lh-1 mb-0 text-dash-color-1">{{dashboard.active_activities}}</p>
+                  </div>
+                  <div class="progress" style="height: 3px">
+                    <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: {{dashboard.active_activities_per}}%" aria-valuenow="30"
+                      aria-valuemin="0" aria-valuemax="10000"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-end justify-content-between mb-2">
+                    <div class="me-2">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
+                        <use xlink:href="#user-1"> </use>
+                      </svg>
+                      <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">ACTIVE USERS</p>
+                    </div>
+                    <p class="text-xxl lh-1 mb-0 text-dash-color-2">{{dashboard.active_users}}</p>
+                  </div>
+                  <div class="progress" style="height: 3px">
+                    <div class="progress-bar bg-dash-color-2" role="progressbar" style="width: {{dashboard.active_users_per}}%" aria-valuenow="70"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-end justify-content-between mb-2">
+                    <div class="me-2">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
+                        <use xlink:href="#survey-1"> </use>
+                      </svg>
+                      <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">INACTIVE ACTIVITIES</p>
+                    </div>
+                    <p class="text-xxl lh-1 mb-0 text-dash-color-1">{{dashboard.inactive_activities}}</p>
+                  </div>
+                  <div class="progress" style="height: 3px">
+                    <div class="progress-bar bg-dash-color-1" role="progressbar" style="width: {{dashboard.inactive_activities_per}}%" aria-valuenow="30"
+                      aria-valuemin="0" aria-valuemax="10000"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+              <div class="card mb-0">
+                <div class="card-body">
+                  <div class="d-flex align-items-end justify-content-between mb-2">
+                    <div class="me-2">
+                      <svg class="svg-icon svg-icon-sm svg-icon-heavy text-gray-600 mb-2">
+                        <use xlink:href="#user-1"> </use>
+                      </svg>
+                      <p class="text-sm text-uppercase text-gray-600 lh-1 mb-0">INACTIVE USERS</p>
+                    </div>
+                    <p class="text-xxl lh-1 mb-0 text-dash-color-4">{{dashboard.inactive_users}}</p>
+                  </div>
+                  <div class="progress" style="height: 3px">
+                    <div class="progress-bar bg-dash-color-4" role="progressbar" style="width: {{dashboard.inactive_users_per}}%" aria-valuenow="35"
+                      aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+  <!-- JavaScript files-->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/just-validate/js/just-validate.min.js' %}"></script>
+  <script src="{% static 'vendor/chart.js/Chart.min.js' %}""></script>
+  <script src="{% static 'vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+  <script src="{% static 'js/charts-home.js' %}"></script>
+  <!-- Main File-->
+  <script src="{% static 'js/front.js' %}"></script>
+  <script>
+    // ------------------------------------------------------- //
+    //   Inject SVG Sprite - 
+    //   see more here 
+    //   https://css-tricks.com/ajaxing-svg-sprite/
+    // ------------------------------------------------------ //
+    function injectSvgSprite (path) {
+
+      var ajax = new XMLHttpRequest();
+      ajax.open("GET", path, true);
+      ajax.send();
+      ajax.onload = function (e) {
+        var div = document.createElement("div");
+        div.className = 'd-none';
+        div.innerHTML = ajax.responseText;
+        document.body.insertBefore(div, document.body.childNodes[0]);
+      }
+    }
+    // this is set to BootstrapTemple website as you cannot 
+    // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+    // while using file:// protocol
+    // pls don't forget to change to your domain :)
+    injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
+
+
+  </script>
+  <script>
+    $('.text-xxl').each(function () {
+        $(this).prop('Counter',0).animate({
+            Counter: $(this).text()
+        }, {
+          
+          //chnage count up speed here
+            duration: 1000,
+            easing: 'swing',
+            step: function (now) {
+                $(this).text(Math.ceil(now));
+            }
+        });
+    });
+  </script>
+  <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}

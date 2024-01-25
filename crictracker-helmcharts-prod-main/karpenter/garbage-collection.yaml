@@ -1,0 +1,64 @@
+apiVersion: karpenter.sh/v1alpha5
+kind: Provisioner
+metadata:
+  name: crictracker
+spec:
+  consolidation:
+    enabled: true
+  requirements:
+    - key: karpenter.sh/capacity-type         # optional, set to on-demand by default, spot if both are listed
+      operator: In
+      values: ["on-demand"]
+    - key: "kubernetes.io/arch" # If not included, the webhook for the AWS Cloud Provider will default to amd64
+      operator: In
+      values: ["amd64"]
+    - key: "node.kubernetes.io/instance-type"
+      operator: In
+      values: ["m6a.large", "r6a.xlarge", "r6a.2xlarge"]
+  limits:
+    resources:
+      cpu: 500                               # optional, recommended to limit total provisioned CPUs
+      memory: 500Gi
+  providerRef:
+    name: garbage-collection
+    blockDeviceMappings:
+    - deviceName: /dev/xvda
+      ebs:
+        volumeSize: 50Gi
+        volumeType: gp3                                    # optional, recommended to use instead of `provider`
+    securityGroupSelector:
+      aws-ids: "sg-01dab676c50ef46f2"
+    subnetSelector:
+      aws-ids: "subnet-09e12eb496c2fad91,subnet-0542e89a8e4d3a2ad"
+  ttlSecondsUntilExpired: 2592000    
+---
+apiVersion: karpenter.k8s.aws/v1alpha1
+kind: AWSNodeTemplate
+metadata:
+  name: garbage-collection
+spec:
+  amiFamily: AL2
+  # instanceProfile: eks-52c3bfa5-f5ca-8df7-cb95-91b66727dfa3
+  subnetSelector:
+    aws-ids: "subnet-09e12eb496c2fad91,subnet-0542e89a8e4d3a2ad"
+  securityGroupSelector:
+    aws-ids: "sg-01dab676c50ef46f2"
+  userData: |
+    MIME-Version: 1.0
+    Content-Type: multipart/mixed; boundary="BOUNDARY"
+
+    --BOUNDARY
+    Content-Type: text/x-shellscript; charset="us-ascii"
+
+    #!/bin/bash
+    set -o xtrace
+    if ! grep -q imageGCHighThresholdPercent /etc/kubernetes/kubelet/kubelet-config.json; 
+    then 
+    sed -i '/"apiVersion*/a \ \ "imageGCHighThresholdPercent": 50,' /etc/kubernetes/kubelet/kubelet-config.json
+    fi
+    if ! grep -q imageGCLowThresholdPercent /etc/kubernetes/kubelet/kubelet-config.json; 
+    then 
+    sed -i '/"imageGCHigh*/a \ \ "imageGCLowThresholdPercent": 40,' /etc/kubernetes/kubelet/kubelet-config.json
+    fi 
+
+    --BOUNDARY--

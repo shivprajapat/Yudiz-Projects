@@ -1,0 +1,162 @@
+.full-screens {
+    background-color: #ffffff !important;
+}
+.score-cards {
+    // padding: 10px;
+    // background-color: #f2f2f2;
+    height: calc(100% - 68px);
+    overflow-y: auto;
+    button {
+        width: 100%;
+        background-color: #EBEDEF;
+        color: #3C434A;
+        border-radius: 8px;
+        padding: 10px 20px;
+        border: none;
+        img {
+            margin-left: 4px;
+            [dir='rtl'] & {
+                margin-right: 4px;
+                margin-left: auto;
+            }
+            display: inline-block;
+            @include transition (all 0.5s);
+        }
+        &:hover {
+            color: #3C434A;
+        }
+        .rotate {
+            @include transform(rotate(-180deg))
+        }
+        .main-btn-right span:first-child {
+            margin-right: 8px;
+            [dir='rtl'] & {
+                 margin-left: 8px;
+                 margin-right: auto;
+             }
+        }
+    }
+    
+    .card-body {
+        padding: 0px;
+        border: none;
+    }
+    table {
+        min-width: 320px; width: 100%; margin: 0px auto; border-collapse: collapse;
+        border-spacing: 0; background: #fff; border-radius: 6px;
+        thead {
+            // background: #235de9; color: #fff;
+            tr {
+                th {
+                    font-size: 13px;
+                    line-height: 14px;
+                    padding: 10px 2px;
+                    &:first-child {
+                        border-top-left-radius: 6px;
+                        [dir='rtl'] & {
+                            border-top-left-radius: 0px;
+                            border-top-right-radius: 6px;
+                        }
+                        width: 40%;
+                        padding-left: 5px;
+                        [dir='rtl'] & {
+                            text-align: right;
+                            padding-right: 5px;
+                            padding-left: 0px;
+                        }
+                    }
+                    &:last-child {
+                        border-top-right-radius: 6px;
+                        [dir='rtl'] & {
+                            border-top-right-radius: 0px;
+                            border-top-left-radius: 6px;
+                        }
+                    }
+                    &:not(th:first-child) {
+                        &:not(th:nth-child(1)) {
+                            text-align: center;
+                            width: 7%;
+                        }
+                    }
+                }
+            }
+        }
+        tr {
+            border-bottom: 1px solid #e1e7ec;
+            &.backgroundBlue {
+                background-color: #e7f0ff;
+            }
+            td {
+                font-size: 12px;
+                line-height: 14px;
+                border-bottom: 1px solid #e1e7ec;
+                div {
+                    margin: 1px;
+                    font-weight: 500;
+                    color: #3C434A;
+                    font-size: 14px;
+                    line-height: 20px;
+                    .custom-span {
+                        font-weight: 500;
+                        color: #3C434A;
+                        font-size: 14px;
+                        line-height: 20px;
+                    }
+                }
+                span {
+                    font-size: 10px;
+                    line-height: 14px;
+                    color: #7E8B96;    
+                }
+                &.blueText {
+                    color: #235de9;
+                }
+                padding: 10px 2px;
+                color: #42454b;
+                font-weight: 500;
+                &:not(td:first-child) {
+                    &:not(td:nth-child(1)) {
+                        text-align: center;
+                        width: 7%;
+                    }
+                }
+                &:first-child {
+                    width: 40%;
+                    padding-left: 5px;
+                    [dir='rtl'] & {
+                        text-align: right;
+                        padding-right: 5px;
+                        padding-left: 0px;
+                    }
+                }
+            }
+        }
+    }
+    .card {
+        background-color: transparent;
+        border: none;
+    }
+    .fow {
+        padding: 10px;
+        background: #fff;
+        border-radius: 10px;
+        margin: 10px 0px;
+        [dir='rtl'] & {
+            text-align: right;
+        }
+        span {
+            &:last-child {
+                font-weight: 700;
+            }
+            &:first-child {
+                padding: 0px 0px 20px;
+                font-weight: 700;
+            }
+        }
+    }
+}
+.blueText {
+    color: #235de9;
+    font-size: 15px;
+    font-weight: 600;
+}

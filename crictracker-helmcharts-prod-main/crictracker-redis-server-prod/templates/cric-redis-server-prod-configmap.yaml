@@ -1,0 +1,11 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  NODE_ENV: dev-prod
+  PORT: '4008'
+  REDIS_HOST: "redis-cache.crictracker.com.private"
+  REDIS_PORT: "6379"
+  SENTRY_DSN: 'https://c7afbdb451d74161b1929f2af68253ba@o992135.ingest.sentry.io/6073494'

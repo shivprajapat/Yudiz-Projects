@@ -1,0 +1,35 @@
+federation_version: =2.3.2
+subgraphs:
+  admins:
+    routing_url: http://localhost:4001/graphql
+    schema:
+      subgraph_url: http://localhost:4001/graphql
+  article: 
+    routing_url: http://localhost:4002/graphql
+    schema:
+      subgraph_url: http://localhost:4002/graphql
+  seo: 
+    routing_url: http://localhost:4003/graphql
+    schema:
+      subgraph_url: http://localhost:4003/graphql
+  match-management: 
+    routing_url: http://localhost:4004/graphql
+    schema:
+      subgraph_url: http://localhost:4004/graphql
+  help: 
+    routing_url: http://localhost:4005/graphql
+    schema:
+      subgraph_url: http://localhost:4005/graphql
+  global-widget: 
+    routing_url: http://localhost:4006/graphql
+    schema:
+      subgraph_url: http://localhost:4006/graphql
+  career: 
+    routing_url: http://localhost:4007/graphql
+    schema:
+      subgraph_url: http://localhost:4007/graphql
+  migrations: 
+    routing_url: http://localhost:5001/graphql
+    schema:
+      subgraph_url: http://localhost:5001/graphql
+  

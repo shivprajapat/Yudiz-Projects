@@ -1,0 +1,197 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans',
+    'Helvetica Neue', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+.text-right {
+  text-align: right;
+}
+.data-table tbody tr {
+  cursor: pointer;
+}
+.file-input {
+  height: 56px;
+  padding: 15px 14px;
+  display: block;
+  width: 100%;
+  font-size: 1rem;
+  border: 1px solid rgba(145, 158, 171, 0.32);
+  border-radius: 8px;
+  margin-top: 13px;
+  margin-bottom: 8px;
+}
+.file-input:hover {
+  border-color: #212b36;
+}
+.file-input.input-color.error,
+.file-input.error:hover {
+  border-color: #ff4842;
+  color: #ff4842;
+}
+.file-input + .err {
+  margin-top: -3px;
+}
+.err {
+  color: #ff4842;
+  margin-left: 14px;
+  margin-right: 14px;
+  font-size: 0.75rem;
+}
+.MuiBreadcrumbs-root li {
+  text-transform: capitalize;
+}
+.MuiBreadcrumbs-root li a {
+  cursor: pointer;
+}
+
+/* User add edit */
+.user-img {
+  width: 100%;
+  max-width: 280px;
+  min-height: 280px;
+  cursor: pointer;
+}
+.user-img.no-image {
+  background-color: #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.user-img img,
+.user-img svg {
+  width: 100%;
+  object-fit: cover;
+  font-size: 100px;
+}
+
+.filterDrawer .MuiPaper-root {
+  justify-content: center;
+}
+.filterDrawer .drawer-inner {
+  padding: 15px;
+  width: 300px;
+}
+
+.rental-img {
+  display: flex;
+  grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+  grid-gap: 10px;
+  height: 300px;
+  /* height: 100%; */
+}
+.rental-img .img-box {
+  background-color: #f5f5f5;
+  position: relative;
+}
+.rental-img .img-box button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+}
+.rental-img .img-box label {
+  height: 100%;
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.rental-img .img-left,
+.rental-img .img-right {
+  width: calc(50% - 5px);
+}
+.rental-img .img-left .img-box {
+  height: 100%;
+}
+.rental-img .img-right {
+  display: flex;
+  grid-template-columns: calc(50% - 5px) calc(50% - 5px);
+  grid-gap: 10px;
+  flex-wrap: wrap;
+}
+.img-right .img-box {
+  width: calc(50% - 5px);
+  height: calc(50% - 5px);
+}
+
+.rental-img img {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+}
+.rental-item {
+  margin-top: 25px;
+}
+.rental-item .MuiGrid-item {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+.transaction-detail a {
+  color: #000;
+  text-decoration: none;
+}
+
+.lazy-menu .menu-search {
+  position: sticky;
+  top: 0;
+  background: #fff;
+  padding: 10px 6px;
+  z-index: 1;
+}
+
+.input-color:not(.selected) {
+  color: #647482;
+}
+
+.file-input.icon {
+  display: flex;
+  justify-content: space-between;
+}
+.file-input.small {
+  height: 40px;
+  padding: 8px 6px 8px 14px;
+  margin-top: 16px;
+}
+
+.rental-switch {
+  margin-left: 0 !important;
+  margin-top: -8px;
+  margin-bottom: 5px;
+}
+.rental-switch.is-look {
+  margin-top: 16px;
+  margin-bottom: 0;
+}
+.drag-icon {
+  vertical-align: middle;
+  margin-right: 10px;
+  cursor: grab;
+}
+.notification-list .MuiCardContent-root {
+  padding-top: 0;
+}
+
+.transaction-list .MuiCardContent-root {
+  padding-top: 0;
+}
+.transaction-list .MuiCardContent-root li {
+  cursor: pointer;
+}
+.loader {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 11;
+  background: rgba(255, 255, 255, 0.5);
+}

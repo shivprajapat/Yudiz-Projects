@@ -1,0 +1,364 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: crictracker-prod
+  namespace: production
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/actions.redirect-to-media: '{"Type": "redirect", "RedirectConfig":
+      { "host": "media.crictracker.com", "Port": "443", "Protocol":"HTTPS", "StatusCode":
+      "HTTP_302"}}'
+    alb.ingress.kubernetes.io/actions.redirect-to-www: '{"Type":"redirect","RedirectConfig":{"Host":"www.crictracker.com","Path":"/#{path}","Port":"443","Protocol":"HTTPS","Query":"#{query}","StatusCode":"HTTP_301"}}'
+    alb.ingress.kubernetes.io/actions.response-401: |
+      {"type":"fixed-response","fixedResponseConfig":{"Port":"443","Protocol":"HTTPS","ContentType":"text/html","StatusCode":"401","MessageBody":"<!DOCTYPE html><html> <head> <title>Unauthorized Access</title> </head> <body> <h1>Oops!</h1> <p> Hold it right there, buddy! You're not authorized to access this page. Did you forget to bring your permission slip?</p> </body></html>"}}
+    alb.ingress.kubernetes.io/actions.robot-txt-200: |
+      {"type":"fixed-response","fixedResponseConfig":{"contentType":"text/plain","statusCode":"200","messageBody":"# https://www.robotstxt.org/robotstxt.html\n User-agent: *\n Disallow: /"}}
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
+      { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:693583001687:certificate/d7a51439-41b0-4495-be36-cd65b6a4ea5c
+    alb.ingress.kubernetes.io/group.name: crictracker-prod
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "14"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "8"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "3"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=58
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: subnet-077b67cb6983824ae, subnet-079a2bebf229cbae2
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=70
+    alb.ingress.kubernetes.io/target-type: ip
+    external-dns.alpha.kubernetes.io/hostname: help.beta.crictracker.com, globalwidget.beta.crictracker.com,
+      gateway.beta.crictracker.com, admin.beta.crictracker.com, cricweb.beta.crictracker.com,
+      article.beta.crictracker.com, auth.beta.crictracker.com, matchmanage.beta.crictracker.com,
+      seo.beta.crictracker.com, career.beta.crictracker.com, migrations.beta.crictracker.com,
+      subscription.beta.crictracker.com, redis-server.beta.crictracker.com, help.crictracker.com,
+      globalwidget.crictracker.com, gateway.crictracker.com, admin.crictracker.com,
+      cricweb.crictracker.com, article.crictracker.com, auth.crictracker.com, matchmanage.crictracker.com,
+      seo.crictracker.com, migrations.crictracker.com, career.crictracker.com, subscription.crictracker.com,
+      redis-server.crictracker.com, amp.crictracker.com
+spec:
+  rules:
+  - host: help.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-help-prod
+            port:
+              number: 4005
+        path: /*
+        pathType: ImplementationSpecific
+  - host: globalwidget.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: crictracker-global-widget-prod
+            port:
+              number: 4006
+        path: /*
+        pathType: ImplementationSpecific
+  - host: gateway.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-gateway-prod
+            port:
+              number: 4000
+        path: /*
+        pathType: ImplementationSpecific
+  - host: admin.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-admin-frontend-prod
+            port:
+              number: 80
+        path: /*
+        pathType: ImplementationSpecific
+  - host: cricweb-cf.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: robot-txt-200
+            port:
+              name: use-annotation
+        path: /robots.txt
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-image-website-prod
+            port:
+              number: 3000
+        path: /_next/image*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-website-prod
+            port:
+              number: 3000
+        path: /*
+        pathType: ImplementationSpecific
+  - host: article.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: crictracker-article-prod
+            port:
+              number: 4002
+        path: /*
+        pathType: ImplementationSpecific
+  - host: auth.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-authentication-prod
+            port:
+              number: 4001
+        path: /*
+        pathType: ImplementationSpecific
+  - host: matchmanage.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-matchmanagement-prod
+            port:
+              number: 4004
+        path: /*
+        pathType: ImplementationSpecific
+  - host: seo.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: crictracker-seo-prod
+            port:
+              number: 4003
+        path: /*
+        pathType: ImplementationSpecific
+  - host: career.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-career-prod
+            port:
+              number: 4007
+        path: /*
+        pathType: ImplementationSpecific
+  - host: migrations.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-migrations-prod
+            port:
+              number: 5001
+        path: /*
+        pathType: ImplementationSpecific
+  - host: subscription.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-subscription-prod
+            port:
+              number: 5000
+        path: /*
+        pathType: ImplementationSpecific
+  - host: redis-server.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-redis-server-prod
+            port:
+              number: 4008
+        path: /*
+        pathType: ImplementationSpecific
+  - host: crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: redirect-to-www
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+  - host: www.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-image-website-prod
+            port:
+              number: 3000
+        path: /_next/image*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: redirect-to-media
+            port:
+              name: use-annotation
+        path: /wp-content/*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-website-prod
+            port:
+              number: 3000
+        path: /*
+        pathType: ImplementationSpecific
+  - host: amp.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-ampconverter-prod
+            port:
+              number: 80
+        path: /*
+        pathType: ImplementationSpecific
+  - host: feed.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-feed-frontend-prod
+            port:
+              number: 80
+        path: /*
+        pathType: ImplementationSpecific
+  - host: feed-api.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-feed-prod
+            port:
+              number: 4009
+        path: /*
+        pathType: ImplementationSpecific
+  - host: feed.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-feed-frontend-prod
+            port:
+              number: 80
+        path: /*
+        pathType: ImplementationSpecific

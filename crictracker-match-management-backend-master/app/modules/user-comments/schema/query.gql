@@ -1,0 +1,106 @@
+enum FantasyCommentStatus {
+    p
+    a
+    r
+    sp
+    t
+    d
+    all
+}
+
+# type articleData {
+#     _id: ID
+#     sTitle: String
+# }
+
+type oFantasyComment @key(fields: "_id"){
+    _id:ID
+    sContent: String
+    oArticle: frontFantasyArticle
+    nReportCount: Int
+    eStatus: String
+    iSubmittedBy: ID
+    dCreated: String
+    dUpdated: String
+    oCreatedBy: user
+    nLikeCount: Int
+    nDislikeCount: Int
+    nReplies: Int
+}
+
+type frontFantasyComment @key(fields: "_id"){
+    _id:ID
+    sContent: String
+    oArticle: frontFantasyArticle
+    nReportCount: Int
+    eStatus: String
+    iSubmittedBy: ID
+    dCreated: String
+    dUpdated: String
+    oCreatedBy: user
+    nLikeCount: Int
+    nDislikeCount: Int
+    nReplies: Int
+}
+
+extend type user @key(fields:"_id"){
+    _id:ID @external
+}
+
+input oCommentFantasyInput {
+    iArticleId: ID
+    nSkip: Int!
+    nLimit: Int!
+    sSortBy: String
+    nOrder: Int
+    sSearch: String
+    eStatus: FantasyCommentStatus
+}
+
+input frontFantasyCommentInput {
+    iArticleId: ID
+    nSkip: Int!
+    nLimit: Int!
+    sSortBy: String
+    nOrder: Int
+}
+
+input frontFantasyChildCommentInput {
+    iCommentId: ID
+    nSkip: Int!
+    nLimit: Int!
+    sSortBy: String
+    nOrder: Int
+}
+
+type oListFantasyComments {
+  nTotal: Int
+  aResults: [oFantasyComment]
+}
+
+type listFantasyFrontComments {
+  nTotal: Int
+  aResults: [frontFantasyComment]
+}
+
+type oFantasyCommentCount {
+    nAll: Int
+    nPending: Int
+    nApproved: Int
+    nSpam: Int
+    nRejected: Int
+    nTrash: Int
+}
+
+type listFantasyFrontCommentReportReason {
+    _id: ID
+    sTitle: String
+}
+
+extend type Query {
+    listFantasyComments(input: oCommentFantasyInput): oListFantasyComments
+    listFantasyFrontComments(input: frontFantasyCommentInput): listFantasyFrontComments
+    listFantasyFrontChildComments(input: frontFantasyChildCommentInput): listFantasyFrontComments
+    getFantasyCommentCounts: oFantasyCommentCount
+    listFantasyFrontCommentReportReason: [listFantasyFrontCommentReportReason]
+}

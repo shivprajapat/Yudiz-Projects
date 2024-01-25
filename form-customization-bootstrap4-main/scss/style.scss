@@ -1,0 +1,26 @@
+$success: #2bbbad;
+$theme-colors: (
+  "primary": #2bbbad,
+  "secondary": #333333,
+  "danger": #a80000
+);
+@import "../node_modules/bootstrap/scss/bootstrap";
+.custom-checkbox .custom-control-label::before,
+.custom-select,
+.custom-file-input,
+.form-control,
+.modal-content,
+.btn { 
+    border-radius: 0px;
+    -webkit-appearance: none;
+}
+.modal-footer{
+    justify-content: center;
+}
+.half-part {
+    font-size: 0.9rem;
+    line-height: 1.5rem;
+    .custom-control {
+        flex-basis: 50%;
+    }
+}

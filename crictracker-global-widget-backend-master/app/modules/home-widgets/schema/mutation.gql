@@ -1,0 +1,33 @@
+
+enum ePositions {
+  "lett"
+  l
+  "right"
+  r
+}
+
+input pollFieldsInput {
+  _id: ID
+  sTitle: String
+}
+
+# mValue is field which is required for showing widget like polls. 
+# here we stored poll _id and name in mValue for showing poll.
+# same if we need other datastucture for showing other polls then we store is same field mValue
+# in GraphQl use union and mongoose Mixed datatype
+
+input updateHomeWidgetsInput {
+  eType: String!
+  nPriority: Int!
+  sPosition: ePositions!
+  mValue: pollFieldsInput                         
+}
+
+type Mutation {
+  updateHomeWidgets(input: [updateHomeWidgetsInput!]!): String
+}
+
+ 
+
+ 
+ 

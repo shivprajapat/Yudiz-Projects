@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: jenkins-efs-pv
+spec:
+  capacity:
+    storage: 5Gi
+  volumeMode: Filesystem
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: jenkins-sc
+  csi:
+    driver: efs.csi.aws.com
+    volumeHandle: fs-016d2a0e4d499b3a5::fsap-0e6251c7e89b2b762

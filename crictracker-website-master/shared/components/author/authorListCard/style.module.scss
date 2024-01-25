@@ -1,0 +1,19 @@
+@import "@assets/scss/variables.scss";
+
+.postimg { height: 116px; width: 116px; }
+.descBlock { width: calc(100% - 128px);}
+.authorTitle {
+    a {
+        max-width: calc(100% - 22px);
+    }
+}
+.verfied {
+    width: 18px;
+    height: 18px;
+    background: url(../../../../assets/images/icon/verified_badge.svg) no-repeat center center / cover;
+}
+
+@media (max-width: 767px) {
+    .postimg { height: 80px; width: 80px; }
+    .descBlock { width: calc(100% - 92px);}
+}

@@ -1,0 +1,26 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.bannerSection { padding: 50px 0px 60px; color: $light-color; background: $theme-color url('../../assets/images/common-banner.jpg') center center / cover;
+}
+.formBlock { margin-top: -40px;
+}
+.contactInfo {
+  &:not(:last-child) { border-bottom: 1px solid var(--border-medium); }
+  span { min-width: 24px; }
+  svg { width: 24px; height: 24px; }
+}
+.socialMenu { 
+  li { margin-right: 8px;
+    &:last-child { margin-right: 0; }
+  }
+  g,path { fill: var(--border-color); }
+  a:hover {
+    g,path { fill: var(--theme-color-medium); }
+  } 
+}
+
+@media (max-width: 575px) {
+  
+  
+}

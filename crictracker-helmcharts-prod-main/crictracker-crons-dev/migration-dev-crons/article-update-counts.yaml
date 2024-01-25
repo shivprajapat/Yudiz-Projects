@@ -1,0 +1,20 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: article-update-counts
+  namespace: dev
+spec:
+  schedule: "0 */3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://migrations-dev.beta.crictracker.com/api/article/update-count'       
+            image: curlimages/curl
+            name: article-update-counts
+          restartPolicy: OnFailure
+          

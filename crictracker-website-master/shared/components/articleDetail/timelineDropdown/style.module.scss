@@ -1,0 +1,51 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.timelineHeader {
+  display: none;
+  position: fixed;
+  bottom: 130px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  @include transition($common-transition);
+  [class="downStickyAds"] & { bottom: 74px; }
+  [class="stickyAdRemoved"] & { bottom: 70px; }
+  [class="downStickyAds stickyAdRemoved"] & { bottom: 30px; }
+  [class="stickyAdRemoved downStickyAds"] & { bottom: 30px; }
+
+  > button {
+    display: flex;
+    display: -webkit-flex;
+    @include align-items(center);
+    font-size: 12px;
+    line-height: 18px;
+    color: #fff;
+    &::after {
+      content: '';
+      visibility: hidden;
+    }
+    &:hover,
+    &:focus {
+      color: #fff;
+    }
+  }
+  .timelineHeaderToggle {
+    outline: none;
+    box-shadow: 0;
+  }
+  .timelineHeaderMenu {
+    padding: 0;
+    position: fixed;
+    bottom: 95px;
+    left: 50%;
+    background-color: unset;
+    color: unset;
+  }
+}
+
+@media (max-width: 768px) {
+  .timelineHeader {
+    display: flex;
+  }
+}

@@ -1,0 +1,12 @@
+@import '../../../../assets/scss/variables';
+.tab-wrapper {
+  :global {
+    .nav-pills .nav-link {
+      background-color: var(--light-mode-bg);
+      color: var(--font-color);
+      &.active {
+        background-color: var(--theme-light);
+      }
+    }
+  }
+}

@@ -1,0 +1,41 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.bannerSection {
+  .content { min-height: 40vh; }
+}
+.person { width: 160px; }
+.item { min-height: calc(100% - 8px); }
+.list { 
+  li { padding-left: 30px; margin-bottom: 12px; position: relative; 
+    &::after { @extend %after-before; width: 12px; height: 12px; background: $theme-color; border-radius: 50%; top: 50%; left: 0; @include transform(translateY(-50%)); box-shadow: 0 0 0 6px $theme-medium; }
+  }
+  h4 { font-weight: 500; }
+}
+.slideBlock { min-height: 100%; }
+.slide { width: calc(1290px / 5 - 16px); min-height: calc(100% - 16px);
+  > div { width: 70%; }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .slide { width: calc(1116px / 5 - 16px); min-height: calc(100% - 16px); }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .slide { width: calc(940px / 5 - 16px); min-height: calc(100% - 16px); }
+}
+
+@media (max-width: 991px) {
+  .slide { width: calc(740px / 5 - 16px); min-height: calc(100% - 16px); 
+    > div { width: 85%; }
+  }
+}
+
+@media (max-width: 767px) {
+  
+}
+
+@media (max-width: 575px) {
+  
+  
+}

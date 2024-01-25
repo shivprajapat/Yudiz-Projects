@@ -1,0 +1,45 @@
+@import '../../assets/scss/helper/_variables';
+
+.crates-page {
+  .page-header-title {
+    margin: 0;
+    border: none;
+  }
+  .heading {
+    font-size: 48px;
+    margin-bottom: 40px;
+  }
+  .mastery-section {
+    padding: 39px 0;
+  }
+  .lootbox-section {
+    padding: 50px 0;
+  }
+  @media (max-width: 1399px) {
+    padding: 41px 0 0 0;
+  }
+  @media (max-width: 991px) {
+    .lootbox-section {
+      padding: 30px 0;
+    }
+    .heading {
+      font-size: 40px;
+      margin-bottom: 0px;
+    }
+  }
+  @media (max-width: 680px) {
+    .mastery-section {
+      padding-top: 30px;
+    }
+    .lootbox-section {
+      padding-top: 0;
+    }
+    .page-header-title {
+      border-bottom: 1px solid $grey-border-100;
+    }
+    .heading {
+      font-size: 24px;
+      margin-bottom: 30px;
+    }
+  }
+}

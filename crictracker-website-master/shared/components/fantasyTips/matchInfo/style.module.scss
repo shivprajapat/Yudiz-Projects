@@ -1,0 +1,17 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item { background: var(--theme-light2);
+    a { color: var(--theme-color-medium); }
+}
+.time { margin: 0px 2px 2px; background: var(--theme-light); }
+.broadcastIcon { width: 24px; }
+.broadcast {
+    + .broadcast { border-top: 1px solid var(--light);}
+}
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+    .broadcast {
+        + .broadcast { border: none; border-left: 1px solid var(--light);}
+    }
+}

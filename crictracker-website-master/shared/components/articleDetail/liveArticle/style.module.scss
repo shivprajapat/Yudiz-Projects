@@ -1,0 +1,10 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.liveMain {
+    border-left: 1px solid var(--border-light);
+}
+
+.noLiveArticles{
+    border: 1px solid var(--border-light);
+}

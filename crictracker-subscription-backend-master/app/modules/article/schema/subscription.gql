@@ -1,0 +1,29 @@
+input oArticleTakeOverInput {
+  iAdminId: ID
+  _id: ID
+}
+
+input eventCommonInput {
+  iEventId: ID!
+}
+
+enum operationType {
+  "add"
+  add
+  "update"
+  update
+  "delete"
+  delete
+}
+
+type listLiveBlogContentSubResponse {
+ eOpType: operationType
+ liveBlogContent: liveBlogContent
+}
+
+extend type Subscription {
+  articleTakeOver(input: oArticleTakeOverInput): subAdmin
+  articleTakeOverUpdate(input: oArticleTakeOverInput): String
+  listLiveBlogContent(input: eventCommonInput): listLiveBlogContentSubResponse
+  getLiveMatchScore(input: eventCommonInput): blogEvent
+}

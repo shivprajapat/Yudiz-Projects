@@ -1,0 +1,12 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.flag { width: 24px; }
+.desc {  
+  &.shortDesc { -webkit-line-clamp: 5; min-height: 11em;
+    &::after { @extend %after-before; width: 100%; height: 100%; left: 0; bottom: 0;
+      background-image: linear-gradient(0deg, rgba(var(--bs-white-rgb), 1) 4%, rgba(var(--bs-white-rgb), 0) 100%);
+    }
+  }
+  p:last-child { margin: 0; }
+}

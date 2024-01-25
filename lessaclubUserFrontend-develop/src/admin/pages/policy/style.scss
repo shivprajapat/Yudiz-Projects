@@ -1,0 +1,145 @@
+@import 'assets/scss/helper/variables';
+
+.h-s {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.gap-l {
+  margin-bottom: 8rem;
+}
+
+.policy-container {
+  width: 100rem;
+  margin: 0 auto;
+}
+
+.view-policy {
+  .select__menu {
+    background-color: rgb(24, 7, 7);
+  }
+}
+
+.upload-policy {
+  position: relative;
+
+  .select__menu {
+    background-color: rgb(24, 7, 7);
+  }
+
+  & > img {
+    position: absolute;
+    top: 120px;
+    right: 120px;
+    width: 230px;
+    height: 230px;
+  }
+
+  .upload-artwork .upload-end-btns .btn {
+    width: 48%;
+    font-size: 18px;
+    line-height: 21px;
+    padding: 16px 15px 9px;
+  }
+  .upload-box-container {
+    margin: 28px 0px 68px;
+  }
+  .upload-box {
+    position: relative;
+    width: 100%;
+    height: 440px;
+    overflow: hidden;
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    border: 1px dashed $primary-color;
+    background: $bg-primary;
+    .upload-desc {
+      padding: 0px 30px;
+      text-align: center;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%, -50%));
+      width: 100%;
+      h6 {
+        font-size: 24px;
+        line-height: 32px;
+        font-weight: 400;
+        margin-bottom: 46px;
+      }
+      .browse-btn {
+        @include transition(all 0.5s);
+        font-size: 20px;
+        line-height: 28px;
+        width: fit-content;
+        margin: 0px auto 22px;
+        display: block;
+        padding: 9px 59px 5px;
+        text-transform: capitalize;
+        background: $theme-color;
+        color: $grey-color;
+        border-radius: 6px;
+        &:hover {
+          color: $theme-color;
+          background: $white;
+          cursor: pointer;
+        }
+      }
+      span {
+        color: $grey-color;
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+    .change-img-btn {
+      @include transition(all 0.5s);
+      font-size: 20px;
+      line-height: 28px;
+      width: fit-content;
+      margin: 58px auto 0px;
+      display: block;
+      padding: 9px 39px 5px;
+      text-transform: capitalize;
+      background: $black-300;
+      color: $grey-color;
+      border-radius: 6px;
+      &:hover {
+        color: $black-300;
+        background: $white;
+        cursor: pointer;
+      }
+    }
+    .uploaded-file {
+      width: 100%;
+      height: 307px;
+      border-radius: 8px;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 8px;
+        &:focus-visible {
+          outline: none;
+        }
+      }
+      video {
+        border-radius: 8px;
+        width: 100%;
+        height: 100%;
+        &:focus-visible {
+          outline: none;
+        }
+      }
+    }
+  }
+
+  .upload-end-btns {
+    .btn {
+      width: 48%;
+      font-size: 18px;
+      line-height: 21px;
+      padding: 16px 15px 9px;
+    }
+  }
+}

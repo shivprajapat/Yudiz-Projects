@@ -1,0 +1,6 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.item { width: 100%; flex-shrink: 0; 
+    article { margin-bottom: 0; }
+}

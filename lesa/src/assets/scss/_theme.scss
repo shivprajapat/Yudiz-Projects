@@ -1,0 +1,143 @@
+:root{
+  --fs32:32px;
+}
+*{margin: 0px; padding: 0px; box-sizing: border-box;}
+
+html {scroll-behavior: smooth;}
+body { font-family: $primary-font; font-weight: 400; background: $theme-color; color: $white; overflow-x: hidden;}
+h1{font-size: 163px; line-height: 173px;}
+h2{font-size: 100px; line-height: 110px; font-weight: 500;}
+h3{font-size: 70px; line-height: 80px; font-weight: 600;}
+h4{font-size: 48px; line-height: 58px; font-weight: 600;}
+h5{font-size: 34px; line-height: 44px; font-weight: 500;}
+h6{font-size: 28px; line-height: 38px; font-weight: 500;}
+
+.common-desc-padding{padding: 195px 0px}
+
+// Global Padding Class
+.section-padding{padding:70px 0}
+
+a{ @include transition(all 0.5s); text-decoration: none;
+  &:focus-visible{outline: none;}
+}
+.white-btn{@include transition(all 0.5s); text-transform: capitalize; border: none; min-width: 153px; background: $white; color: $theme-color; font-size: 16px; line-height: 20px; font-weight: 600; display: inline-block; padding: 16px 15px 10px; border-radius: 50px;
+  &:hover, &.active{background: $green-color !important; color: $theme-color !important; border: none;}
+  &:focus{background: $white; color: $theme-color;}
+}
+
+.white-border-btn{@include transition(all 0.5s); font-size: 16px; line-height: 20px; font-weight: 600; min-width: 152px; border: 1px solid $white; background: $theme-color; border-radius: 50px; color: $white; padding: 17px 20px 11px; display: inline-block;
+  &:hover, &.active{color: $theme-color !important; background: $white !important; border: 1px solid transparent;}
+   &:focus{background: $theme-color; border: 1px solid $white; color: $white;}
+}
+
+.black-btn{@include transition(all 0.5s); border: none; text-transform: capitalize; min-width: 160px; background: $theme-color; color: $white; font-size: 16px; line-height: 20px; font-weight: 600; display: inline-block; padding: 16px 16px 10px;  border-radius: 50px;
+  &:hover, &.active{background: $green-color !important; color: $theme-color !important;}
+  &:focus{background: $theme-color; color: $white;}
+}
+.black-border-btn{@include transition(all 0.5s); background: transparent; border: 1px solid $theme-color; min-width: 160px; color: $theme-color; font-size: 16px; line-height: 20px; font-weight: 600; display: inline-block; padding: 15px 16px 11px;  border-radius: 50px;
+  &:hover, &.active{background: $white !important; color: $theme-color !important; border: 1px solid $theme-color;}
+  &:focus{background: transparent; border: 1px solid $theme-color; color: $theme-color;}
+}
+.black-border-btn{
+  @extend %btn; min-width: 160px;padding: 15px 16px 11px;
+  background: transparent; color: $theme-color;border: 1px solid $theme-color;
+  &:hover, &.active{background: $green-color !important; color: $theme-color !important; border: 1px solid  $green-color;}
+  &:focus{background: $theme-color; color: $white;border: 1px solid $theme-color;}
+}
+.normal-btn{@include transition(all 0.5s); background: $bg-primary; color: $grey-color; font-size: 20px; line-height: 28px;  padding: 11px 20px 7px; border: none; border-radius: 6px; text-transform: capitalize; display: inline-block; 
+  &:hover, &.active{background: $white !important; color: $theme-color !important; }
+  &:focus{background: $bg-primary; color: $grey-color;}
+}
+
+button{
+  &:focus{@include box-shadow(none);}
+  &:focus-visible{outline: none;}
+}
+.btn-primary:focus{
+  &:focus{@include box-shadow(none);}
+  &:focus-visible{outline: none;}
+}
+
+.theme-btn{@include transition(all 0.5s); border: none; min-width: 153px; background: $bg-primary; color: $white; font-size: 16px; line-height: 20px; font-weight: 600; display: inline-block; padding: 17px 16px 12px; height: 48px; border-radius: 50px;
+  &:hover, &.active{background: $white; color: $bg-primary; border: none;}
+   &:focus-visible{background: $bg-primary; color: $white;}
+}
+
+.disable-btn{background: $skin-200 !important; color: $black-400 !important; border: none; min-width: 145px; font-weight: 500; padding: 14px 18px 8px; font-size: 16px; line-height: 20px; border-radius: 50px;}
+ 
+.wishlist-btn{width: 44px; height: 44px; border-radius: 50%; @include transition(all 0.5s); border: none; background: $secondary-black url('../images/css-img/white-heart.svg') no-repeat center center / 20px;
+  &:hover, &.active,  &:focus{background: $white url('../images/css-img/pink-heart.svg') no-repeat center center / 20px;}
+}
+
+.modal{.modal-dialog{.modal-content{background: $bg-primary; border-radius: 15px; padding: 42px 46px;}}}
+.loading {z-index: 9999;background-color: rgba($color: $black, $alpha: 0.27);left: 0;}
+
+@media(min-width: 1400px) and (max-width: 1699px) {
+  // Global Padding Class
+.section-padding{padding:50px 0}
+
+  h1{font-size: 142px; line-height: 152px;}
+  h2{font-size: 90px; line-height: 100px;}
+  h3{font-size: 60px; line-height: 70px;}
+  h4{font-size: 38px; line-height: 48px;}
+  h5{font-size: 24px; line-height: 34px;}
+  h6{font-size: 22px; line-height: 32px;}
+
+  .common-desc-padding{padding: 125px 0px}
+  .white-btn, .white-border-btn{min-width: 140px;}
+  .normal-btn{font-size: 18px; line-height: 22px;}
+}
+
+@media(min-width: 1200px) and (max-width: 1399px) {
+  h1{font-size: 102px; line-height: 112px;}
+  h2{font-size: 70px; line-height: 80px;}
+  h4{font-size: 50px; line-height: 60px;}
+  h4{font-size: 32px; line-height: 42px;}
+  h5{font-size: 22px; line-height: 32px;}
+  h6{font-size: 18px; line-height: 28px;}
+
+  .common-desc-padding{padding: 95px 0px}
+  .white-btn, .white-border-btn{min-width: 140px;}
+  .normal-btn{font-size: 16px; line-height: 20px;}
+}
+
+@media(min-width: 992px) and (max-width: 1199px) {
+  h1{font-size: 80px; line-height: 90px;}
+  h2{font-size: 60px; line-height: 70px;}
+  h3{font-size: 42px; line-height: 52px;}
+  h4{font-size: 32px; line-height: 42px;}
+  h5{font-size: 20px; line-height: 30px;}
+  h6{font-size: 18px; line-height: 28px;}
+
+  .common-desc-padding{padding: 75px 0px}
+  .white-btn, .white-border-btn{min-width: 135px;}
+  .normal-btn{font-size: 16px; line-height: 20px;}
+}
+
+@media(min-width: 768px) and (max-width: 991px) {
+  h1{font-size: 70px; line-height: 80px;}
+  h2{font-size: 55px; line-height: 65px;}
+  h3{font-size: 42px; line-height: 52px;}
+  h4{font-size: 32px; line-height: 42px;}
+  h5{font-size: 18px; line-height: 28px;}
+  h6{font-size: 16px; line-height: 26px;}
+  .common-desc-padding{padding: 65px 0px}
+  .white-btn, .white-border-btn{min-width: 135px;}
+  .normal-btn{font-size: 16px; line-height: 20px;}
+}
+
+@media(max-width: 767px) {
+ h1{font-size: 42px; line-height: 52px;}
+  h2{font-size: 54px; line-height: 64px;}
+  h3{font-size: 42px; line-height: 52px;}
+  h4{font-size: 28px; line-height: 38px;}
+  h5{font-size: 18px; line-height: 28px;}
+  h6{font-size: 16px; line-height: 26px;}
+  .section-padding{padding:50px 0}
+  .common-desc-padding{padding: 65px 0px}
+  .white-btn, .white-border-btn{min-width: 135px;}
+  .white-border-btn{padding: 12px 15px;}
+  .normal-btn{font-size: 16px; line-height: 20px;}
+  .modal{.modal-dialog{.modal-content{ padding: 20px 16px;}}}
+
+}

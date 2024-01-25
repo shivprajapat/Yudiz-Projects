@@ -1,0 +1,28 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.common-section { padding-top: 12px; }
+.icon { width: 32px; }
+.pitchReport {
+    a {
+        color: var(--theme-color-medium);
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--theme-font);
+        }
+    }
+}
+.arrow { width: 54px; bottom: 80%; left: 80%; }
+.arrowLeft { left: auto; right: 80%; }
+.condition { width: 40%; height: 8px; background: var(--theme-medium); }
+.value { background: $theme-color; height: 100%; }
+.rounded-pill { border-radius: 2em; }
+.overflow-hidden { overflow: hidden;}
+.text-end { text-align: end;}
+.noPitchData { top: 50%; left: 50%; transform: translate(-50%, -50%); flex-direction: row-reverse; }
+
+@media (prefers-color-scheme: dark) {
+    .arrow { @include filter(brightness(0) invert(1)); }
+    .pitch { @include filter(brightness(0.6)); }
+}

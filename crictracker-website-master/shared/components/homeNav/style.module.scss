@@ -1,0 +1,21 @@
+@import '@assets/scss/variables';
+@import '@assets/scss/mixins.scss';
+
+.articleTab {
+  .navLink { background: transparent;
+    &::after { @extend %after-before; width: 1px; height: 66%; background: var(--light); right: -1px; top: 17%; }
+  }
+  .active { background: $theme-color; color: $light-color; }
+}
+.icon { width: 24px; @include filter(brightness(0)); 
+  [data-mode="dark"] & { @include filter(brightness(0) invert(1)); }
+  .active & { @include filter(brightness(0) invert(1)); }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+  .articleTab {
+    .icon { width: 22px; }
+  }
+}

@@ -1,0 +1,43 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.standings { font-size: 14px; line-height: 20px; 
+  th, td { width: 5.6%; 
+    &:nth-child(1) { position: sticky; left: 0; text-align: center; }
+    &:nth-child(2) { position: sticky; left: 33px; }
+  }
+  .highLight td { background: var(--theme-light); }
+  th:nth-child(2),
+  td:nth-child(2) { text-align: left; width: inherit; }
+  .infoTable { padding: 2px 8px 8px; text-align: left; background: var(--border-medium);
+    table { border-spacing: 0 2px;}
+    thead td { font-weight: 700; color: var(--font-color-light); }
+    td { padding: 2px 8px; width: auto; background: transparent; font-weight: 400;
+      &:first-child { width: 60%; }
+    }
+    tbody td { font-size: 12px; line-height: 16px; height: 32px; border-bottom: 1px solid var(--border-light); border-radius: 0; position: static;
+      &:first-child {
+        a { padding-bottom: 2px; }
+        :nth-last-child(2) { padding-top: 2px;}
+      }
+    }
+    td,th {
+      &:nth-child(1),
+      &:nth-child(2) { position: static; text-align: left; }
+    }
+  }
+}
+.winBadge { margin: 0px 2px;text-align: center; width: 16px; height: 16px; background: $success; color: $light-color; font-size: 10px; line-height: 16px; border-radius: 50%;
+  &.loss { background: var(--danger); line-height: 14px; }
+  &.dash { background: transparent;color:var(--font-color);font-size: 16px}
+  &.noResult { background: var(--font-dark);color:#fff;font-size: 9px; line-height: 16px;}
+}
+
+.infoToggle { width: 20px; height: 20px; cursor:pointer;
+  @media (prefers-color-scheme: dark) {
+    filter: brightness(0) invert(1) opacity(0.5);
+  }
+  &.active { @include transform(rotate(180deg)); }
+}
+
+

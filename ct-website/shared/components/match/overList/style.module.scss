@@ -1,0 +1,42 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.overList {
+    .item { padding: 24px; }
+    .over { width: 140px;}
+    .details { width: calc(100% - 164px); margin-left: 24px; padding-left: 24px; border-left: 1px solid $border-input; }
+    .overRun { padding: 7px 9px; background: $secondary; color: #fff; border-radius: 8px; }
+    .ball { margin-right: 24px;
+        &:last-child { margin-right: 0; }
+    }
+    .run { padding: 0px 3px; min-width: 32px; height: 32px; line-height: 30px; border: 1px solid $border-dark2; }
+}
+
+@media (max-width: 1199px) {
+    .overList {
+        .item { padding: 20px; }
+        .over { width: 120px;}
+        .details { width: calc(100% - 140px); margin-left: 20px; padding-left: 20px; }
+        .ball { margin-right: 20px; }
+    }
+}
+
+@media (max-width: 992px) {
+    .overList {
+        .item { padding: 16px; }
+        .over { width: 80px;}
+        .details { width: calc(100% - 96px); margin-left: 16px; padding-left: 16px; }
+        .ball { margin-right: 16px; }
+    }
+}
+
+@media (max-width: 575px) {
+    .overList {
+        .item { padding: 12px 6px; }
+        .over { width: 64px;}
+        .details { width: calc(100% - 78px); margin-left: 8px; padding-left: 8px; }
+        .ball { margin-right: 12px; }
+        .overRun { padding: 6px 8px; }
+        .run { min-width: 28px; height: 28px; line-height: 26px; }
+    }
+}

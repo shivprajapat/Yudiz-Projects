@@ -1,0 +1,89 @@
+@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/mixins.scss';
+
+.info {
+  p {
+    margin-right: 50px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.careersInfo {
+  padding: 30px;
+  font-size: 18px;
+  line-height: 27px;
+}
+.filedrop {
+  padding: 22px 20px;
+  border: 2px dashed $border-input;
+  border-radius: 8px;
+  cursor: pointer;
+  input {
+    cursor: pointer;
+    left: 0;
+    top: 0;
+  }
+  .icon svg {
+    width: 32px;
+    height: 32px;
+    path {
+      fill: $font-color;
+    }
+  }
+}
+.formTextarea {
+  height: 200px;
+}
+.socialMenu {
+  a {
+    margin-left: 8px;
+  }
+  path,
+  g {
+    fill: $secondary;
+  }
+}
+.socialbox {
+  padding: 6px 8px 6px 16px;
+}
+@media (max-width: 1399px) {
+  .careersInfo {
+    padding: 24px;
+    font-size: 16px;
+    line-height: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .careersInfo {
+    padding: 16px;
+    font-size: 14px;
+    line-height: 22px;
+  }
+  .info p {
+    margin-right: 16px;
+  }
+  .filedrop {
+    padding: 12px 14px;
+    .icon svg {
+      width: 24px;
+      height: 24px;
+    }
+  }
+  .formTextarea {
+    height: 140px;
+  }
+}
+@media (max-width: 575px) {
+  .socialbox {
+    padding: 6px 8px;
+    a {
+      margin: 0px 6px;
+    }
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

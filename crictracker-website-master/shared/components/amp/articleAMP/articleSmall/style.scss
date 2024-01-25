@@ -1,0 +1,19 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.articleSmall { 
+  .title { margin-bottom: 8px; }
+  span.badge { margin-bottom: 4px; }
+}
+.postimg { display: block; margin-right: 16px; width: 200px; @include flex-shrink(0); align-self: flex-start; }
+.descBlock { @include justify-content(space-between); @include flex-direction(column);
+  h3,
+  p { margin: 4px 0 8px;}
+}
+
+@media (max-width: 575px) {
+  .postimg { margin-right: 8px; width: 120px; }
+  .descBlock { @include justify-content(space-between); @include flex-direction(column);
+    p { display: none; }
+  }
+}

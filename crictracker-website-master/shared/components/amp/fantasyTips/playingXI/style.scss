@@ -1,0 +1,8 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.bench { background: var(--theme-bg); padding: 8px; border-radius: 8px; }    
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  
+}

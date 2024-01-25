@@ -1,0 +1,19 @@
+/******* User Module CSS ******/
+.common-form-block      { margin: 0px auto; padding: 34px 24px; width: 476px; background: #fff; @include box-shadow(0 0 60px rgba(18, 38, 63, 0.08)); border-radius: 8px; overflow: hidden; 
+    h2 { margin-bottom: 34px; }
+    .theme-btn { margin-top: 10px; }
+    &.profile-form { padding: 0;
+        .profile-head       { margin-bottom: 70px; padding: 60px; background: $theme-color; position: relative; }
+        .profile-block      { position: absolute; left: 50%; bottom: 0; @include transform(translate(-50%,50%));
+            .profile-pic    { height: 120px; width: 120px; border-radius: 50%; border: 5px solid #fff;}
+            .file-btn       { position: absolute; right: 0; bottom: 0; height: 26px; width: 26px; background: $theme-color url(../../images/camera-icon.svg) no-repeat center center / 55% auto; @include transform(translate(0%,-50%)); border-radius: 50%; border: 2px solid #fff; cursor: pointer; z-index: 2;
+                input { position: absolute; height: 100%; width: 100%; opacity: 0; cursor: pointer;}
+            }
+        }
+        .form-inner     { padding: 10px 24px 34px; }
+    }
+
+    @media only screen and (max-width: 480px) {
+        width: 100%
+    }
+}

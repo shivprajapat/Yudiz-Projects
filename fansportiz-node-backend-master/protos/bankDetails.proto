@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+package bankDetails;
+
+service BankDetails{
+    rpc getBankDetails(bankRequest) returns (bankResponse) {}
+}
+
+// Bank 
+message bankRequest{
+    string iUserId =1;
+}
+
+message bankResponse{
+    string _id =1;
+    string iUserId =2;
+    string sAccountNo =3;
+    string sIFSC =4;
+    string sBranchName=5;
+    string sBankName=6;
+    string sAccountHolderName=7;    
+}
+

@@ -1,0 +1,135 @@
+@import 'assets/scss/helper/variables';
+
+.coin-wallet {
+  padding: 110px 0px;
+  .coin-wallet-content {
+    background: $black-300 url('.././../../../assets/images/css-img/signupnow.png') no-repeat left center / auto 100%;
+    padding: 108px 140px 108px 676px;
+    width: 83.4%;
+    margin: 0px auto;
+    p {
+      font-size: 24px;
+      line-height: 32px;
+      padding-right: 200px;
+      margin: 24px 0px 48px;
+    }
+    .white-border-btn {
+      text-decoration: none;
+      padding: 13px 20px 9px;
+      text-transform: capitalize;
+      text-align: center;
+      font-size: 20px;
+      line-height: 28px;
+      min-width: 233px;
+      font-weight: 400;
+    }
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1699px) {
+  .coin-wallet {
+    padding: 100px 0px;
+    .coin-wallet-content {
+      width: 90%;
+      padding: 70px 70px 70px 450px;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .coin-wallet {
+    padding: 95px 0px;
+    .coin-wallet-content {
+      width: 95%;
+      padding: 70px 70px 70px 450px;
+      h3 {
+        font-size: 50px;
+        line-height: 60px;
+      }
+      p {
+        font-size: 22px;
+        line-height: 32px;
+        padding-right: 100px;
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .coin-wallet {
+    padding: 75px 0px;
+    .coin-wallet-content {
+      width: 100%;
+      padding: 70px 70px 70px 400px;
+      h3 {
+        font-size: 40px;
+        line-height: 50px;
+      }
+      p {
+        font-size: 18px;
+        line-height: 28px;
+        padding-right: 50px;
+      }
+      .white-border-btn {
+        min-width: 200px;
+        font-size: 18px;
+        line-height: 24px;
+        padding: 14px 14px 8px;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .coin-wallet {
+    padding: 65px 0px;
+    .coin-wallet-content {
+      width: 100%;
+      padding: 50px 30px 50px 350px;
+      h3 {
+        font-size: 30px;
+        line-height: 40px;
+      }
+      p {
+        font-size: 16px;
+        line-height: 26px;
+        padding-right: 30px;
+        margin: 20px 0px 40px;
+      }
+      .white-border-btn {
+        min-width: 170px;
+        font-size: 18px;
+        line-height: 24px;
+        padding: 14px 14px 8px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .coin-wallet {
+    padding: 65px 0px;
+    .coin-wallet-content {
+      width: 100%;
+      padding: 370px 21px 50px;
+      background-position: top center;
+      background-size: 335px;
+      h3 {
+        font-size: 40px;
+        line-height: 50px;
+      }
+      p {
+        font-size: 18px;
+        line-height: 28px;
+        padding-right: 0px;
+        margin: 20px 0px 40px;
+      }
+      .white-border-btn {
+        min-width: 170px;
+        font-size: 18px;
+        line-height: 24px;
+        padding: 14px 14px 8px;
+      }
+    }
+  }
+}

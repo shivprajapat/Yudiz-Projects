@@ -1,0 +1,36 @@
+input oMeta {
+  nWidth: Int
+  nHeight: Int
+  nSize: Int
+}
+
+input editImageInput {
+  _id: ID!
+  sUrl: String!
+  sText: String
+  sCaption: String
+  sAttribute: String
+  oMeta: oMeta
+}
+
+input insertImageInput {
+  sUrl: String!
+  sText: String
+  sCaption: String
+  sAttribute: String
+  oMeta: oMeta
+}
+
+input deleteImageInput {
+  aId: [ID!]!
+}
+
+type imageGalleryResponse {
+  sMessage: String
+}
+
+extend type Mutation {
+  insertImage(input: [insertImageInput]!): imageGalleryResponse
+  editImage(input: editImageInput!): imageGalleryResponse
+  deleteImage(input: deleteImageInput!): imageGalleryResponse
+}

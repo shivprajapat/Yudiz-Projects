@@ -1,0 +1,12 @@
+
+input removeWeatherCacheInput{
+ _id: ID!
+}
+
+type oResponse{
+   sMessage: String
+}
+
+extend type Mutation {
+ removeWeatherCache(input:removeWeatherCacheInput):oResponse
+}

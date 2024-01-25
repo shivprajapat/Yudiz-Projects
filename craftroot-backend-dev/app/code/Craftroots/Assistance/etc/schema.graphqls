@@ -1,0 +1,18 @@
+type Mutation {
+    assistanceForm(input: AssistanceFormInput!): AssistanceFormOutput
+        @resolver(
+            class: "\\Craftroots\\Assistance\\Model\\Resolver\\AssistanceForm"
+        )
+        @doc(description: "Assistance Form")
+}
+
+input AssistanceFormInput {
+    name: String @doc(description: "user Name")
+    email: String @doc(description: "user Email")
+    telephone: String @doc(description: "user phone number")
+    message: String @doc(description: "user message")
+}
+type AssistanceFormOutput {
+    success: Boolean
+    message: String
+}

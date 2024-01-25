@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="18px" height="18px" viewBox="0 0 18 18" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>lock-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="lock-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Icon/lock">
+            <g id="lock-24px">
+                <polygon id="Path" points="0 0 18 0 18 18 0 18"></polygon>
+                <path d="M13.5,6 L12.75,6 L12.75,4.5 C12.75,2.43 11.07,0.75 9,0.75 C6.93,0.75 5.25,2.43 5.25,4.5 L5.25,6 L4.5,6 C3.675,6 3,6.675 3,7.5 L3,15 C3,15.825 3.675,16.5 4.5,16.5 L13.5,16.5 C14.325,16.5 15,15.825 15,15 L15,7.5 C15,6.675 14.325,6 13.5,6 Z M9,12.75 C8.175,12.75 7.5,12.075 7.5,11.25 C7.5,10.425 8.175,9.75 9,9.75 C9.825,9.75 10.5,10.425 10.5,11.25 C10.5,12.075 9.825,12.75 9,12.75 Z M11.325,6 L6.675,6 L6.675,4.5 C6.675,3.2175 7.7175,2.175 9,2.175 C10.2825,2.175 11.325,3.2175 11.325,4.5 L11.325,6 Z" id="Shape" fill="#000000" fill-rule="nonzero"></path>
+            </g>
+        </g>
+    </g>
+</svg>

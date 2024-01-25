@@ -1,0 +1,6 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item { padding: 12px; }
+.head { border-bottom: 1px solid var(--theme-bg);}
+.content span:not(:first-child) { margin-left: 3px; }

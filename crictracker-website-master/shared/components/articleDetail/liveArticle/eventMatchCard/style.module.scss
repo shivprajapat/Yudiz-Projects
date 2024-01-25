@@ -1,0 +1,52 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.teamImg { width: 50px; }
+.eventMatchCard { 
+    padding: 16px; border: 1px solid var(--border-light);
+    p { margin: 0; }
+}
+.info{width: 300px; }
+.MatchStartsAt{font-size: 14px;}
+.statusNote{font-size: 14px;}
+.alterStatusNote{display: none;}
+.team { width: 196px; color:var(--font-color) }
+.nameContent { margin:0 10px}
+.score { color:var(--font-light)}
+.scoreCardLink{ z-index: 9999; }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .team { width: 170px; }
+  .nameContent { margin:0 10px}
+}
+
+@media (max-width: 575px) {
+  .teamImg { width: 30px; }
+  .eventMatchCard { padding: 10px 12px; 
+    .statusNote, .MatchStartsAt{font-size: 12px;line-height: 14px;}
+  }    
+  .statusNote{font-size: 10px;}
+  .team { width: 120px; 
+    .name { font-size: 14px; line-height: 20px; } 
+  }
+}
+
+@media (max-width: 380px) {
+  .team { width: 90px; 
+    .name { font-size: 14px; line-height: 20px; }
+  }
+}
+
+@media (max-width: 768px) {
+  .alterStatusNote{display: block;color:var(--font-color)}
+ .eventMatchCard { padding: 10px 0px; 
+    .statusNote{font-size: 10px;}
+  } 
+  .statusNote{display: none}
+  .name{ display: flex; flex-direction: column; 
+    .nameContent{ text-align: center; margin-top: 12px; align-items: center}
+  }
+  .teamB{flex-direction: column-reverse} 
+}

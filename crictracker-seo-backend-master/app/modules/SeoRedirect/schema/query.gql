@@ -1,0 +1,22 @@
+input oGetSeoRedirectInput {
+  aCode: [Int]!
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+input oGetSeoRedirectByIdInput {
+  _id: ID
+}
+
+type oListSeoRedirectData {
+  nTotal: Int
+  aResults: [oSeoRedirectData]
+}
+
+extend type Query {
+  getSeoRedirect(input: oGetSeoRedirectInput): oListSeoRedirectData
+  getSeoRedirectById(input: oGetSeoRedirectByIdInput): oSeoRedirectData
+}

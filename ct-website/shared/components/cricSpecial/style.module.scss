@@ -1,0 +1,14 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.cricSpecial { padding: 16px; background: $font-color; color: #fff; border-radius: 16px;
+  .item { padding-bottom: 12px; }
+  .icon { width: 24px; }
+  h4 {
+    a { display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;}
+  }
+  a:hover { color: $theme-medium; }
+  .postimg { border-radius: 12px; cursor: pointer; }
+  .badge { margin: 8px 0; display: inline-block; }
+  img { object-fit: cover; }
+}

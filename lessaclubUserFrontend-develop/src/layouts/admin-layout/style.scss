@@ -1,0 +1,51 @@
+@import 'assets/scss/helper/variables';
+
+.admin-container {
+  overflow-x: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  left: 280px;
+  right: 20px;
+  top: 100px;
+  height: 100%;
+  border-radius: 5px;
+  transition: all 0.3s;
+  background-color: $bg-primary;
+  padding: 20px 20px 100px 20px;
+  border-radius: 5px;
+  &.active {
+    left: 80px;
+  }
+  .content-headers{
+    display: flex;
+    padding: 10px 0 0;
+    button{
+      margin-left: auto;
+      font-size: 15px;
+      display: block;
+      padding: 0px 10px;
+      text-transform: capitalize;
+      background: $white;
+      color: $theme-color;
+      border-radius: 6px;
+      line-height: 1;
+      height: 30px;
+      border:none;
+      &:hover,
+      &.active {
+        background: $green-color !important;
+        color: $theme-color !important;
+        border: none;
+      }
+      &:focus {
+        background: $white;
+        color: $theme-color;
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    top: 73px;
+    left: 70px !important;
+    right: 10px;
+  }
+}

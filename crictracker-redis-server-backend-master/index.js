@@ -1,0 +1,5 @@
+require('dotenv').config()
+require('./global')
+require('./app/utils/lib/redis')
+const server = require('./app')
+server.initialize()

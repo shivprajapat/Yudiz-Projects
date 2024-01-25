@@ -1,0 +1,25 @@
+{
+    "env" : {
+        "commonjs": true,
+        "es2021": true,
+        "node": true
+    },
+    "extends": [
+        "standard"
+    ],
+    "parserOptions": {
+        "ecmaVersion": "latest"
+    },
+    "rules": {
+        "no-async-promise-executor": "off",
+        "space-before-function-paren": [
+            "error",
+            {
+                "anonymous": "ignore",
+                "named": "ignore",
+                "asyncArrow": "ignore"
+            }
+        ],
+        "indent": "off"
+    }
+}

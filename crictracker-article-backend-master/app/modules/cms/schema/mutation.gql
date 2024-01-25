@@ -1,0 +1,38 @@
+enum CmsActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+input oCmsCommonInput {
+  sTitle: String
+  sContent: String
+}
+
+input oCmsInput {
+  oInput: oCmsCommonInput!
+}
+
+type oCommonCmsResponse {
+  sMessage: String
+  oData: oCmsData
+}
+
+input oEditCmsInput {
+  _id: ID!
+  oInput: oCmsCommonInput
+}
+
+input oBulkUpdateCMSInput {
+  aId: [ID!]!
+  eStatus: CmsActionStatus!
+}
+
+extend type Mutation {
+  addCMSPage(input: oCmsInput): oCommonCmsResponse
+  editCMSPage(input: oEditCmsInput): oCommonCmsResponse
+  bulkUpdateCMSPage(input: oBulkUpdateCMSInput): oCommonCmsResponse
+}

@@ -1,0 +1,128 @@
+@import 'assets/scss/helper/variables';
+
+.back-arrow-box {
+  align-content: baseline;
+}
+
+.gift-assets {
+  .gits-assets {
+    &-content {
+      h3 {
+        font-size: 24px;
+        color: $primary-color;
+        margin-bottom: 25px;
+        line-height: 24px;
+      }
+
+      p {
+        font-size: 20px;
+        font-weight: 400;
+      }
+    }
+
+    &-email {
+      margin-top: 30px;
+      background-color: $black-300;
+      border-radius: 16px;
+      padding: 30px;
+
+      .form-group {
+        .form-label {
+          font-size: 16px;
+          color: $grey-color;
+          margin-bottom: 15px;
+          display: block;
+        }
+      }
+    }
+  }
+
+  .gift-assets-img {
+    max-width: 75%;
+    margin-left: auto;
+
+    .upload-box {
+      height: 500px;
+      position: relative;
+      overflow: hidden;
+      padding: 16px;
+      border-radius: 6px;
+      margin-bottom: 10px;
+      border: 1px dashed $primary-color;
+      background: $bg-primary;
+
+      .upload-desc {
+        padding: 0px 30px;
+        text-align: center;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        @include transform(translate(-50%, -50%));
+        width: 100%;
+      }
+
+      .uploaded-file {
+        width: 100%;
+        height: 100%;
+
+        img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+      }
+    }
+
+    .thumb-row {
+      height: 150px;
+      text-align: center;
+
+      img {
+        object-fit: contain;
+        max-height: 100%;
+      }
+    }
+
+    .upload-buttons {
+      margin-top: 25px;
+      @include flex(center, space-between, null);
+
+      button {
+        min-width: 47%;
+
+        &:first-child {
+          margin-right: 10px;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 1199px) {
+    &-img {
+      max-width: 85% !important;
+    }
+
+    @media (max-width: 991px) {
+      &-img {
+        max-width: 100% !important;
+      }
+    }
+
+    @media (max-width: 767px) {
+      &-img {
+        margin-top: 30px;
+
+        .upload-box {
+          height: 370px !important;
+        }
+
+        .upload-buttons {
+          button {
+            min-width: 48% !important;
+          }
+        }
+      }
+    }
+  }
+}

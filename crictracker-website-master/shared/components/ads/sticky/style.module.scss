@@ -1,0 +1,22 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.sticky {
+    bottom: 55px;
+    z-index: 999;
+    background-color: rgba($color: #FFF, $alpha: 0.5);
+    padding: 3px 0;
+    min-height: 50px;
+    // >div:not(:empty) {
+    //     background-color: rgba($color: #FFF, $alpha: 1.0);
+    // }
+    [class="downStickyAds"] & { bottom: 0px; }
+}
+.closebtn{
+    height: 16px;
+    width: 16px;
+    background-color: $theme-color;
+    img {
+        filter: brightness(0) invert(1);
+    }
+}

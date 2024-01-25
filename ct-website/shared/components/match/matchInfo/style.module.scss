@@ -1,0 +1,33 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.list{ border-radius: 8px;
+    .item { margin-bottom: 1px; padding: 12px; background: var(--light-mode-bg);
+        &:last-child { margin-bottom: 0; }
+    }
+    .label { width: 230px;}
+    .info { margin-bottom: 24px;
+        .icon { width: 32px; margin-right: 12px; }
+    }
+}
+
+@media (max-width: 1199px) {
+    .list{
+        .label { width: 160px;}
+    }
+}
+
+@media (max-width: 991px) {
+    .list{
+        .label { width: 116px; }
+        .infoItem { margin-top: 24px; padding: 0; background: transparent;
+            > div { margin-bottom: 1px; padding: 6px; background: var(--light-mode-bg); }
+        }
+        .info { margin-bottom: 0px; }
+    }
+}
+
+@media (max-width: 575px) {
+  
+  
+}

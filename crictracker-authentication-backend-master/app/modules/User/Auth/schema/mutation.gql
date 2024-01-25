@@ -1,0 +1,138 @@
+enum AuthType { 
+    "Register"
+    r 
+    "Forgot-Password"
+    f 
+    "Forgot-resend Otp"
+    fr
+    "Verify-email/mobile"
+    v 
+}
+
+enum VerificationType {
+    "Email"
+     e 
+    "MobileNo"
+     m 
+}
+
+enum SocialType {
+    "Google"
+     G 
+    "Facebook"
+     F 
+}
+
+input userLogin {
+    sLogin: String!
+    sPassword: String!
+    sPushToken: String
+}
+
+input sendOTPInput {
+    sLogin: String!
+    eType: VerificationType!
+    eAuth: AuthType!
+}
+
+type otpResponse {
+    sMessage: String!
+    oData: otpResponseData
+   
+}
+
+type otpResponseData {
+    sCode: String!
+    sToken: String
+}
+
+input verifyUserOTPInput {
+    sOtp: String!
+    eAuth: AuthType!
+    eType: VerificationType!
+    sLogin: String!
+}
+
+input signUpInput {
+    sFullName: String!
+    sUserName: String!
+    sEmail: String
+    sNumber: String
+    sPassword: String!
+    sConfirmPassword: String!
+    sSocialType: SocialType
+    sSocialToken: String
+    sCode: String!
+    sPushToken: String
+}
+
+type tokenResponse {
+    sMessage: String!
+    oData: tokenResponseData
+}
+
+type tokenResponseData {
+    sToken: String
+}
+
+input socialLogin {
+    sSocialType: SocialType
+    sSocialToken: String
+    sPushToken: String
+}
+
+input resetPasswordInput {
+    sNewPassword: String
+    sConfirmNewPassword: String
+    sToken: String
+}
+
+type userLogoutResponse {
+    sMessage: String!
+}
+type signUpResponse {
+    sMessage: String
+    oData: user
+}
+
+input resetUserPasswordInput {
+  sCode: String!
+  sNewPassword: String!
+  sConfirmNewPassword: String!
+  sLogin: String!
+}
+
+input userExistsInput {
+  sUserName: String!
+  sLogin: String!
+}
+
+type userExistsresponse {
+  sMessage: String!
+}
+
+input socialSignupInput {
+    sSocialType: SocialType!
+    sSocialToken: String!
+    sPushToken: String
+}
+
+# Need to be change after frontend live 
+input userChangePasswordInput{
+   sCurrentPassword: String
+   sNewPassword: String!
+   sConfirmPassword: String!
+}
+
+extend type Mutation {
+    signUp(input: signUpInput): signUpResponse
+    socialSignUp(input: socialSignupInput!): tokenResponse
+    userLogin(input: userLogin): tokenResponse
+    socialSignIn(input: socialLogin): tokenResponse
+    sendOTP(input: sendOTPInput): otpResponse
+    verifyUserOTP(input: verifyUserOTPInput): otpResponse
+    resetUserPassword(input: resetUserPasswordInput): resetPasswordResponse
+    userLogout: userLogoutResponse
+    userChangePassword(input: changePasswordInput): changePasswordResponse
+    userExists(input: userExistsInput): userExistsresponse
+}

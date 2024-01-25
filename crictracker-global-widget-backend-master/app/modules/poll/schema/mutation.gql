@@ -1,0 +1,59 @@
+
+input pollFieldInput { 
+  sTitle: String!
+  nVote: Int
+}
+ 
+input addPollInput {
+  sTitle: String!
+  aField: [pollFieldInput]!
+  dStartDate: Date
+  dEndDate: Date
+  eStatus: pollStatus
+}
+
+enum pollStatus {
+  "publish"
+   pub
+  "scheduled"
+   s
+  "expired"
+  ex
+  "deleted"
+   d
+}
+
+
+input editPollInput {
+  _id: ID
+  sTitle: String!
+  aField: [pollFieldInput]!
+  dStartDate: Date
+  dEndDate: Date
+  eStatus: pollStatus
+}
+
+input updatePollCountInput {
+  _id: ID!
+  iOptionId: ID!
+}
+
+type commonResWithPoll {
+  sMessage: String
+  oData: poll
+}
+
+type commonMessage {
+  sMessage: String
+}
+
+input bulkDeletePollInput {
+ aPollIds: [ID!]!  
+}
+
+extend type Mutation {
+  addPoll(input: addPollInput!): commonResWithPoll
+  editPoll(input: editPollInput!): commonResWithPoll
+  updatePollCount(input: updatePollCountInput): commonMessage
+  bulkDeletePoll(input: bulkDeletePollInput): commonMessage
+}

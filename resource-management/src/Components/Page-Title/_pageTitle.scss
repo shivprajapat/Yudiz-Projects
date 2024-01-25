@@ -1,0 +1,20 @@
+.page-title {
+  user-select: none;
+  user-zoom: inherit;
+  font-style: normal;
+  margin: 0 !important;
+  font-weight: 600;
+  font-size: 18px;
+  line-height: 28px;
+}
+
+@import '../../Assets/Style/variables';
+@media screen and (max-width: 1024px) {
+  .responsive {
+  }
+}
+
+.btn-cancel .fs-6 {
+  text-transform: capitalize;
+  color: $base-color !important;
+}

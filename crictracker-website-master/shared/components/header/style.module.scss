@@ -1,0 +1,88 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.siteHeader { background: $theme-color; top: 0; height: 56px; padding: 12px 0; font-size: 12px; line-height: 20px; z-index: 10; @include transition(0.2s all linear 0.1s);}
+.userDropdown > button,
+.navLink { margin-left: 16px; color: #fff; font-weight: 700; border: none; background-color: transparent;
+  &:hover { color: #fff; }
+  &.fillBtn { padding: 6px 12px; background: #fff; color: $theme-color; }
+  &.outlineBtn { padding: 4px 12px; color: #fff; border: 2px solid #fff;
+    svg { margin: 0 4px 0 -2px; }
+  }
+}
+.logo { width: 150px; }
+.separator { width: 1px; height: 32px; background: rgba(255, 255, 255, 0.2); }
+.langMenu {
+  > button { color: #fff;
+    &::after { margin-left: 2px; width: 18px; height: 18px; background: url(../../../assets/images/icon/down-caret.svg) no-repeat center center / cover; border: none; }
+    &:hover,
+    &:focus { color: #fff; }
+  }
+}
+.iconItem {
+  svg { width: 32px; height: 32px; }
+}
+.modeSwitch {
+  label { margin-right: 8px; }
+}
+.profileInfo { border-bottom: 1px solid $border-light2; cursor: pointer; }
+.profilePic { width: 32px;
+  img { object-fit: cover; }
+}
+.userDropdown {
+  > button { width: 32px; height: 32px;
+    img { object-fit: cover; }
+    &::after { display: none; }
+  }
+  .dropdownMenu { min-width: 190px; }
+  .active { color: $theme-color; }
+  // Phase 2
+  // .dropdownVerify {
+  //   button { width: auto; border: 1px solid; }
+  // }
+}
+
+/***** Responsive CSS Start ******/
+@media (min-width: 1400px) {
+  .userDropdown .dropdownMenu { right: 50% !important; @include transform(translate(calc(50% + 8px)) !important); }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .searchGroup { width: 440px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .navLink { margin-left: 9px; }
+  .logo { width: 140px; }
+  .separator { height: 26px; }
+  .iconItem {
+    svg { width: 26px; height: 26px; }
+  }
+}
+
+@media (max-width: 767px) {
+  .siteHeader { height: 52px; position: sticky; padding: 10px 0;
+    &.fixedAnimation { top: -52px; 
+      &.fixed { position: sticky; top: 0; width: 100%; background: $theme-color; }
+    }
+  }
+  .navLink { margin-left: 9px;
+    &.fillBtn { padding: 4px 10px; }
+  }
+  .logo { width: 138px; }
+  .separator { height: 26px; }
+  .iconItem {
+    svg { width: 28px; height: 28px; }
+  }
+}
+
+@media (max-width: 575px) {
+  .siteHeader { height: 52px;
+  }
+  .userDropdown > button,
+  .navLink { margin-left: 4px; }
+}
+
+@media (max-width: 340px) {
+  .logo { width: 130px; }
+}

@@ -1,0 +1,18 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.team { height: calc(100% - 24px); padding: 20px 16px; background: var(--light-mode-bg); border-radius: 9px; @include transition($common-transition); 
+    &:hover { @include box-shadow(0px 6px 16px rgba($theme-medium , 0.48)); }
+}
+.teamLogo { width: 112px; height: 112px; overflow: hidden;
+    > span { border-radius: 50%; overflow: hidden;}
+}
+.name { margin: 12px 0; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 575px) {
+    .team { height: inherit; padding: 16px; }
+    .teamLogo { width: 88px; height: 88px; }
+    .name { margin-top: 0; padding-left: 12px; font-size: 18px; line-height: 24px; }
+}

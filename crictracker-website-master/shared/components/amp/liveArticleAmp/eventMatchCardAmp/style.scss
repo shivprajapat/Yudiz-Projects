@@ -1,0 +1,29 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.teamImg { width:50px}
+.eventMatchCard { 
+   position: relative; padding: 10px 0px; background: var(--light-mode-bg); border-radius: 16px; border: 1px solid var(--border-light);p {margin: 0}
+}
+.MatchStartsAt{font-size: 14px;}
+.name{ display: flex; flex-direction: column}
+.teamB {flex-direction: column-reverse; } 
+.alterStatusNote{display: block;color:var(--font-color)}
+.statusNote{display: none; font-size: 10px;}
+.info{ text-align: center;span{color:$light-color}}
+.bg-success{background: $success}
+.bg-danger{background: $danger}
+.bg-primary{background: $theme-color}
+.team { width: 196px; color:var(--font-color)}
+.nameContent{ margin-top: 12px; align-items: center;text-align: center;}
+.score { margin-top: 4px;color:var(--font-light)}
+.scoreCardLink{ height: 100%; width: 100%; position: absolute; top: 0; left: 0; overflow: hidden; z-index: 9999; background: transparent;}
+.teamB {flex-direction: column-reverse; } 
+/***** Responsive CSS Start ******/
+
+
+@media (max-width: 575px) {
+.team { width: 90px; }
+.name { font-size: 14px; line-height: 20px; }
+.MatchStartsAt{font-size: 12px;line-height: 14px;}
+}

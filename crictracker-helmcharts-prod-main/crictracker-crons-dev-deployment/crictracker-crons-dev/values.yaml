@@ -1,0 +1,6 @@
+namespace: dev
+
+replicas: 1
+
+image:
+  name: 693583001687.dkr.ecr.ap-south-1.amazonaws.com/crictracker-crons-dev:latest

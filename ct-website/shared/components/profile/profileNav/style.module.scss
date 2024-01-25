@@ -1,0 +1,17 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.desc { padding: 0px 12px 8px 12px; }
+.navList {
+  a { margin-bottom: 12px; padding: 4px 8px; border-radius: 8px; 
+    :last-child { margin-bottom: 0; }
+  }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 575px) {
+  .navList {
+    a { margin-bottom: 0px;}
+  }
+}

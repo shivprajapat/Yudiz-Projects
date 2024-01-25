@@ -1,0 +1,44 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.commentary { border-radius: 12px; overflow: hidden;
+    .item { margin-bottom: 1px; padding: 12px; border-radius: 0px; }
+    .ballNo { width: 50px; }
+    .run { margin: 0px 12px; padding: 0px 3px; min-width: 32px; height: 32px; line-height: 30px; border: 1px solid $border-dark2; }
+}
+.over { margin-bottom: 1px; padding: 12px 0; border-radius: 0;
+    .info { padding: 0px 12px; border-right: 1px solid $border-light;
+        &:first-child { width: 18%; }
+        &:last-child { border: none;}
+    }
+    .partners { width: 24%; 
+        b { margin-left: 4px; }
+    }
+}
+.announcement { padding: 12px;
+    svg { @include flex-shrink(0); margin-right: 12px; }
+}
+
+@media (max-width: 1199px) {
+    .over {
+        .info { width: 50%; border: none;
+            &:first-child { margin-bottom: 8px; width: 100%; }
+            &.partners,
+            &.baller { margin-top: 8px; padding-top: 8px; border-top: 1px solid $border-light; }
+        }
+    }
+}
+
+@media (max-width: 992px) {
+    .commentary { border-radius: 10px;
+        .item { padding: 10px;  }
+        .run { margin: 0px 10px; min-width: 28px; height: 28px; line-height: 26px; }
+    }
+}
+
+@media (max-width: 767px) {
+    .commentary {
+        .run { margin-bottom: 4px; }
+        .ball { margin-right: 8px; }
+    }
+}

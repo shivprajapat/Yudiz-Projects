@@ -1,0 +1,271 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.siteFooter {
+  background: $secondary;
+  border-radius: 24px 24px 0 0;
+  color: $light-color;
+
+  // content-visibility: auto;
+  // contain-intrinsic-size: 426px;
+  h4 {
+    min-width: 118px;
+    font-size: 14px;
+    line-height: 19px;
+    letter-spacing: 0.5px;
+    background: $secondary;
+  }
+
+  .active {
+    color: $theme-medium;
+  }
+
+  a {
+    color: $light-color;
+
+    &:hover,
+    &:focus {
+      color: $theme-medium;
+    }
+  }
+}
+
+.footerInner {
+  li {
+    margin-bottom: 11px;
+
+    &:last-child {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+.widgetTitle {
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: $border-color;
+  }
+}
+
+.footerLogo {
+  width: 175px;
+}
+
+.footerBottom {
+  margin-top: 30px;
+  padding-top: 30px;
+  font-size: 12px;
+  line-height: 17px;
+  border-top: 1px solid $border-color;
+}
+
+.quickLink {
+  min-height: 24px;
+
+  li {
+    margin-right: 20px;
+    letter-spacing: 0.2px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.downloadApp {
+  a {
+    margin-right: 20px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.downloadApp,
+.socialMenu {
+  margin: 24px 0 20px;
+}
+
+.socialMenu {
+  li {
+    margin-right: 12px;
+
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+
+  a {
+    width: 32px;
+
+    &:hover,
+    &:focus {
+
+      g,
+      path {
+        fill: $theme-medium;
+      }
+    }
+  }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .siteFooter {
+    h4 {
+      min-width: 90px;
+      font-size: 13px;
+      line-height: 18px;
+    }
+  }
+
+  .footerInner {
+    li {
+      margin-bottom: 8px;
+    }
+  }
+
+  .footerLogo {
+    width: 150px;
+  }
+
+  .quickLink {
+    li {
+      margin-right: 8px;
+      font-size: 11.5px;
+    }
+  }
+
+  .downloadApp {
+    a {
+      margin-right: 10px;
+    }
+  }
+}
+
+.scrollTop {
+  width: 44px;
+  height: 44px;
+  z-index: 15;
+  bottom: 24px;
+  right: 36px;
+  box-shadow: 0 0 12px 4px rgba(var(--bs-dark-rgb), 0.1);
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  path {
+    fill: var(--theme-color-light);
+  }
+}
+
+@media (max-width: 767px) {
+  .siteFooter {
+    a {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  .footerInner [class*="col"]:first-child {
+    width: 60%;
+  }
+
+  .footerInner [class*="col"]:nth-child(2) {
+    width: 40%;
+  }
+
+  .footerInner [class*="col"]:nth-child(even) {
+
+    .widgetTitle,
+    ul {
+      text-align: right;
+    }
+  }
+
+  .footerInner ul {
+    text-align: left;
+  }
+
+  .widgetTitle {
+    max-width: inherit;
+    text-align: left;
+
+    &::before {
+      display: none;
+    }
+  }
+
+  .footerBottom {
+    margin-top: 24px;
+    padding-top: 24px;
+  }
+
+  .logoBlock {
+    li {
+      margin: 10px 10px 5px;
+    }
+  }
+
+  .shareBlock {
+    padding: 24px 0 20px;
+  }
+
+  .downloadApp {
+    margin: 18px 0px;
+    width: 100%;
+  }
+
+  .socialMenu {
+    li {
+      margin-right: 12px;
+
+      &:last-child {
+        margin-right: 0;
+      }
+    }
+  }
+
+  .copyright {
+    border-top: 1px solid $border-color;
+
+    >* {
+      width: 100%;
+    }
+
+    p {
+      font-size: 14px;
+      line-height: 20px;
+    }
+  }
+
+  .scrollTop {
+    bottom: 130px;
+    right: 10px;
+
+    [class="downStickyAds"] & {
+      bottom: 74px;
+    }
+
+    [class="stickyAdRemoved"] & {
+      bottom: 70px;
+    }
+
+    [class="downStickyAds stickyAdRemoved"] & {
+      bottom: 30px;
+    }
+
+    [class="stickyAdRemoved downStickyAds"] & {
+      bottom: 30px;
+    }
+  }
+}

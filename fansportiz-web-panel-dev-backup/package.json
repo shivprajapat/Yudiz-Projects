@@ -1,0 +1,149 @@
+{
+  "name": "web",
+  "version": "1.5.3",
+  "private": true,
+  "dependencies": {
+    "@fingerprintjs/fingerprintjs": "^3.0.4",
+    "@tanstack/react-query": "^4.26.1",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "axios": "^0.21.0",
+    "babel-jest": "^24.9.0",
+    "bootstrap": "^5.3.0",
+    "classnames": "^2.3.1",
+    "crypto-js": "^4.0.0",
+    "eslint-plugin-react": "^7.24.0",
+    "firebase": "^8.9.1",
+    "history": "^5.0.0",
+    "husky": "^4.3.6",
+    "hybrid-crypto-js": "^0.2.4",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "24.9.0",
+    "jest-environment-jsdom-fourteen": "1.0.1",
+    "jest-watch-typeahead": "0.4.2",
+    "lodash": "^4.17.21",
+    "moment": "^2.29.1",
+    "node-sass": "npm:sass@1.53.0",
+    "prop-types": "^15.7.2",
+    "query-string": "^8.1.0",
+    "react": "18.2.0",
+    "react-app-polyfill": "^1.0.6",
+    "react-dom": "18.2.0",
+    "react-ga": "^3.3.0",
+    "react-intl": "6.4.3",
+    "react-loading-skeleton": "^3.3.1",
+    "react-redux": "^8.0.5",
+    "react-router-dom": "^6.12.0",
+    "react-router-use-location-state": "^3.0.2",
+    "react-scripts": "^5.0.1",
+    "react-share": "^4.4.0",
+    "react-simple-pull-to-refresh": "^1.3.0",
+    "react-social-login": "^3.4.13",
+    "reactstrap": "^9.2.0",
+    "redux": "^4.2.0",
+    "redux-thunk": "^2.4.2",
+    "resolve": "1.15.0",
+    "resolve-url-loader": "3.1.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint --fix --ext .js,.jsx",
+    "analyze-build-bundle": "node scripts/analyze_build_bundle.js",
+    "start:stag": "env-cmd -f .env.staging npm run-script start",
+    "start:prod": "env-cmd -f .env.prod npm run-script start"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint"
+    }
+  },
+  "resolutions": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "env-cmd": "^10.1.0",
+    "eslint": "^7.16.0",
+    "eslint-config-standard": "^16.0.2",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^4.2.1",
+    "progress-bar-webpack-plugin": "^2.1.0",
+    "react-app-rewire-yarn-workspaces": "^1.0.3",
+    "react-app-rewired": "^2.1.6",
+    "webpack-bundle-analyzer": "^4.9.0"
+  },
+  "jest": {
+    "roots": [
+      "<rootDir>/src"
+    ],
+    "collectCoverageFrom": [
+      "src/**/*.{js,jsx,ts,tsx}",
+      "!src/**/*.d.ts"
+    ],
+    "setupFiles": [
+      "react-app-polyfill/jsdom"
+    ],
+    "setupFilesAfterEnv": [
+      "<rootDir>/src/setupTests.js"
+    ],
+    "testMatch": [
+      "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
+      "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"
+    ],
+    "testEnvironment": "jest-environment-jsdom-fourteen",
+    "transform": {
+      "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
+      "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+      "^(?!.*\\.(js|jsx|ts|tsx|css|json)$)": "<rootDir>/config/jest/fileTransform.js"
+    },
+    "transformIgnorePatterns": [
+      "[/\\\\]node_modules[/\\\\].+\\.(js|jsx|ts|tsx)$",
+      "^.+\\.module\\.(css|sass|scss)$"
+    ],
+    "modulePaths": [],
+    "moduleNameMapper": {
+      "^react-native$": "react-native-web",
+      "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy"
+    },
+    "moduleFileExtensions": [
+      "web.js",
+      "js",
+      "web.ts",
+      "ts",
+      "web.tsx",
+      "tsx",
+      "json",
+      "web.jsx",
+      "jsx",
+      "node"
+    ],
+    "watchPlugins": [
+      "jest-watch-typeahead/filename",
+      "jest-watch-typeahead/testname"
+    ]
+  },
+  "babel": {
+    "presets": [
+      "react-app"
+    ]
+  }
+}

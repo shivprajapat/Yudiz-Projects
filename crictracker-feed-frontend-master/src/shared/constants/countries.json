@@ -1,0 +1,1232 @@
+[
+  {
+    "id": "1",
+    "sortname": "AF",
+    "label": "Afghanistan"
+  },
+  {
+    "id": "2",
+    "sortname": "AL",
+    "label": "Albania"
+  },
+  {
+    "id": "3",
+    "sortname": "DZ",
+    "label": "Algeria"
+  },
+  {
+    "id": "4",
+    "sortname": "AS",
+    "label": "American Samoa"
+  },
+  {
+    "id": "5",
+    "sortname": "AD",
+    "label": "Andorra"
+  },
+  {
+    "id": "6",
+    "sortname": "AO",
+    "label": "Angola"
+  },
+  {
+    "id": "7",
+    "sortname": "AI",
+    "label": "Anguilla"
+  },
+  {
+    "id": "8",
+    "sortname": "AQ",
+    "label": "Antarctica"
+  },
+  {
+    "id": "9",
+    "sortname": "AG",
+    "label": "Antigua And Barbuda"
+  },
+  {
+    "id": "10",
+    "sortname": "AR",
+    "label": "Argentina"
+  },
+  {
+    "id": "11",
+    "sortname": "AM",
+    "label": "Armenia"
+  },
+  {
+    "id": "12",
+    "sortname": "AW",
+    "label": "Aruba"
+  },
+  {
+    "id": "13",
+    "sortname": "AU",
+    "label": "Australia"
+  },
+  {
+    "id": "14",
+    "sortname": "AT",
+    "label": "Austria"
+  },
+  {
+    "id": "15",
+    "sortname": "AZ",
+    "label": "Azerbaijan"
+  },
+  {
+    "id": "16",
+    "sortname": "BS",
+    "label": "Bahamas The"
+  },
+  {
+    "id": "17",
+    "sortname": "BH",
+    "label": "Bahrain"
+  },
+  {
+    "id": "18",
+    "sortname": "BD",
+    "label": "Bangladesh"
+  },
+  {
+    "id": "19",
+    "sortname": "BB",
+    "label": "Barbados"
+  },
+  {
+    "id": "20",
+    "sortname": "BY",
+    "label": "Belarus"
+  },
+  {
+    "id": "21",
+    "sortname": "BE",
+    "label": "Belgium"
+  },
+  {
+    "id": "22",
+    "sortname": "BZ",
+    "label": "Belize"
+  },
+  {
+    "id": "23",
+    "sortname": "BJ",
+    "label": "Benin"
+  },
+  {
+    "id": "24",
+    "sortname": "BM",
+    "label": "Bermuda"
+  },
+  {
+    "id": "25",
+    "sortname": "BT",
+    "label": "Bhutan"
+  },
+  {
+    "id": "26",
+    "sortname": "BO",
+    "label": "Bolivia"
+  },
+  {
+    "id": "27",
+    "sortname": "BA",
+    "label": "Bosnia and Herzegovina"
+  },
+  {
+    "id": "28",
+    "sortname": "BW",
+    "label": "Botswana"
+  },
+  {
+    "id": "29",
+    "sortname": "BV",
+    "label": "Bouvet Island"
+  },
+  {
+    "id": "30",
+    "sortname": "BR",
+    "label": "Brazil"
+  },
+  {
+    "id": "31",
+    "sortname": "IO",
+    "label": "British Indian Ocean Territory"
+  },
+  {
+    "id": "32",
+    "sortname": "BN",
+    "label": "Brunei"
+  },
+  {
+    "id": "33",
+    "sortname": "BG",
+    "label": "Bulgaria"
+  },
+  {
+    "id": "34",
+    "sortname": "BF",
+    "label": "Burkina Faso"
+  },
+  {
+    "id": "35",
+    "sortname": "BI",
+    "label": "Burundi"
+  },
+  {
+    "id": "36",
+    "sortname": "KH",
+    "label": "Cambodia"
+  },
+  {
+    "id": "37",
+    "sortname": "CM",
+    "label": "Cameroon"
+  },
+  {
+    "id": "38",
+    "sortname": "CA",
+    "label": "Canada"
+  },
+  {
+    "id": "39",
+    "sortname": "CV",
+    "label": "Cape Verde"
+  },
+  {
+    "id": "40",
+    "sortname": "KY",
+    "label": "Cayman Islands"
+  },
+  {
+    "id": "41",
+    "sortname": "CF",
+    "label": "Central African Republic"
+  },
+  {
+    "id": "42",
+    "sortname": "TD",
+    "label": "Chad"
+  },
+  {
+    "id": "43",
+    "sortname": "CL",
+    "label": "Chile"
+  },
+  {
+    "id": "44",
+    "sortname": "CN",
+    "label": "China"
+  },
+  {
+    "id": "45",
+    "sortname": "CX",
+    "label": "Christmas Island"
+  },
+  {
+    "id": "46",
+    "sortname": "CC",
+    "label": "Cocos (Keeling) Islands"
+  },
+  {
+    "id": "47",
+    "sortname": "CO",
+    "label": "Colombia"
+  },
+  {
+    "id": "48",
+    "sortname": "KM",
+    "label": "Comoros"
+  },
+  {
+    "id": "49",
+    "sortname": "CG",
+    "label": "Congo"
+  },
+  {
+    "id": "50",
+    "sortname": "CD",
+    "label": "Congo The Democratic Republic Of The"
+  },
+  {
+    "id": "51",
+    "sortname": "CK",
+    "label": "Cook Islands"
+  },
+  {
+    "id": "52",
+    "sortname": "CR",
+    "label": "Costa Rica"
+  },
+  {
+    "id": "53",
+    "sortname": "CI",
+    "label": "Cote D''Ivoire (Ivory Coast)"
+  },
+  {
+    "id": "54",
+    "sortname": "HR",
+    "label": "Croatia (Hrvatska)"
+  },
+  {
+    "id": "55",
+    "sortname": "CU",
+    "label": "Cuba"
+  },
+  {
+    "id": "56",
+    "sortname": "CY",
+    "label": "Cyprus"
+  },
+  {
+    "id": "57",
+    "sortname": "CZ",
+    "label": "Czech Republic"
+  },
+  {
+    "id": "58",
+    "sortname": "DK",
+    "label": "Denmark"
+  },
+  {
+    "id": "59",
+    "sortname": "DJ",
+    "label": "Djibouti"
+  },
+  {
+    "id": "60",
+    "sortname": "DM",
+    "label": "Dominica"
+  },
+  {
+    "id": "61",
+    "sortname": "DO",
+    "label": "Dominican Republic"
+  },
+  {
+    "id": "62",
+    "sortname": "TP",
+    "label": "East Timor"
+  },
+  {
+    "id": "63",
+    "sortname": "EC",
+    "label": "Ecuador"
+  },
+  {
+    "id": "64",
+    "sortname": "EG",
+    "label": "Egypt"
+  },
+  {
+    "id": "65",
+    "sortname": "SV",
+    "label": "El Salvador"
+  },
+  {
+    "id": "66",
+    "sortname": "GQ",
+    "label": "Equatorial Guinea"
+  },
+  {
+    "id": "67",
+    "sortname": "ER",
+    "label": "Eritrea"
+  },
+  {
+    "id": "68",
+    "sortname": "EE",
+    "label": "Estonia"
+  },
+  {
+    "id": "69",
+    "sortname": "ET",
+    "label": "Ethiopia"
+  },
+  {
+    "id": "70",
+    "sortname": "XA",
+    "label": "External Territories of Australia"
+  },
+  {
+    "id": "71",
+    "sortname": "FK",
+    "label": "Falkland Islands"
+  },
+  {
+    "id": "72",
+    "sortname": "FO",
+    "label": "Faroe Islands"
+  },
+  {
+    "id": "73",
+    "sortname": "FJ",
+    "label": "Fiji Islands"
+  },
+  {
+    "id": "74",
+    "sortname": "FI",
+    "label": "Finland"
+  },
+  {
+    "id": "75",
+    "sortname": "FR",
+    "label": "France"
+  },
+  {
+    "id": "76",
+    "sortname": "GF",
+    "label": "French Guiana"
+  },
+  {
+    "id": "77",
+    "sortname": "PF",
+    "label": "French Polynesia"
+  },
+  {
+    "id": "78",
+    "sortname": "TF",
+    "label": "French Southern Territories"
+  },
+  {
+    "id": "79",
+    "sortname": "GA",
+    "label": "Gabon"
+  },
+  {
+    "id": "80",
+    "sortname": "GM",
+    "label": "Gambia The"
+  },
+  {
+    "id": "81",
+    "sortname": "GE",
+    "label": "Georgia"
+  },
+  {
+    "id": "82",
+    "sortname": "DE",
+    "label": "Germany"
+  },
+  {
+    "id": "83",
+    "sortname": "GH",
+    "label": "Ghana"
+  },
+  {
+    "id": "84",
+    "sortname": "GI",
+    "label": "Gibraltar"
+  },
+  {
+    "id": "85",
+    "sortname": "GR",
+    "label": "Greece"
+  },
+  {
+    "id": "86",
+    "sortname": "GL",
+    "label": "Greenland"
+  },
+  {
+    "id": "87",
+    "sortname": "GD",
+    "label": "Grenada"
+  },
+  {
+    "id": "88",
+    "sortname": "GP",
+    "label": "Guadeloupe"
+  },
+  {
+    "id": "89",
+    "sortname": "GU",
+    "label": "Guam"
+  },
+  {
+    "id": "90",
+    "sortname": "GT",
+    "label": "Guatemala"
+  },
+  {
+    "id": "91",
+    "sortname": "XU",
+    "label": "Guernsey and Alderney"
+  },
+  {
+    "id": "92",
+    "sortname": "GN",
+    "label": "Guinea"
+  },
+  {
+    "id": "93",
+    "sortname": "GW",
+    "label": "Guinea-Bissau"
+  },
+  {
+    "id": "94",
+    "sortname": "GY",
+    "label": "Guyana"
+  },
+  {
+    "id": "95",
+    "sortname": "HT",
+    "label": "Haiti"
+  },
+  {
+    "id": "96",
+    "sortname": "HM",
+    "label": "Heard and McDonald Islands"
+  },
+  {
+    "id": "97",
+    "sortname": "HN",
+    "label": "Honduras"
+  },
+  {
+    "id": "98",
+    "sortname": "HK",
+    "label": "Hong Kong S.A.R."
+  },
+  {
+    "id": "99",
+    "sortname": "HU",
+    "label": "Hungary"
+  },
+  {
+    "id": "100",
+    "sortname": "IS",
+    "label": "Iceland"
+  },
+  {
+    "id": "101",
+    "sortname": "IN",
+    "label": "India"
+  },
+  {
+    "id": "102",
+    "sortname": "ID",
+    "label": "Indonesia"
+  },
+  {
+    "id": "103",
+    "sortname": "IR",
+    "label": "Iran"
+  },
+  {
+    "id": "104",
+    "sortname": "IQ",
+    "label": "Iraq"
+  },
+  {
+    "id": "105",
+    "sortname": "IE",
+    "label": "Ireland"
+  },
+  {
+    "id": "106",
+    "sortname": "IL",
+    "label": "Israel"
+  },
+  {
+    "id": "107",
+    "sortname": "IT",
+    "label": "Italy"
+  },
+  {
+    "id": "108",
+    "sortname": "JM",
+    "label": "Jamaica"
+  },
+  {
+    "id": "109",
+    "sortname": "JP",
+    "label": "Japan"
+  },
+  {
+    "id": "110",
+    "sortname": "XJ",
+    "label": "Jersey"
+  },
+  {
+    "id": "111",
+    "sortname": "JO",
+    "label": "Jordan"
+  },
+  {
+    "id": "112",
+    "sortname": "KZ",
+    "label": "Kazakhstan"
+  },
+  {
+    "id": "113",
+    "sortname": "KE",
+    "label": "Kenya"
+  },
+  {
+    "id": "114",
+    "sortname": "KI",
+    "label": "Kiribati"
+  },
+  {
+    "id": "115",
+    "sortname": "KP",
+    "label": "Korea North"
+  },
+  {
+    "id": "116",
+    "sortname": "KR",
+    "label": "Korea South"
+  },
+  {
+    "id": "117",
+    "sortname": "KW",
+    "label": "Kuwait"
+  },
+  {
+    "id": "118",
+    "sortname": "KG",
+    "label": "Kyrgyzstan"
+  },
+  {
+    "id": "119",
+    "sortname": "LA",
+    "label": "Laos"
+  },
+  {
+    "id": "120",
+    "sortname": "LV",
+    "label": "Latvia"
+  },
+  {
+    "id": "121",
+    "sortname": "LB",
+    "label": "Lebanon"
+  },
+  {
+    "id": "122",
+    "sortname": "LS",
+    "label": "Lesotho"
+  },
+  {
+    "id": "123",
+    "sortname": "LR",
+    "label": "Liberia"
+  },
+  {
+    "id": "124",
+    "sortname": "LY",
+    "label": "Libya"
+  },
+  {
+    "id": "125",
+    "sortname": "LI",
+    "label": "Liechtenstein"
+  },
+  {
+    "id": "126",
+    "sortname": "LT",
+    "label": "Lithuania"
+  },
+  {
+    "id": "127",
+    "sortname": "LU",
+    "label": "Luxembourg"
+  },
+  {
+    "id": "128",
+    "sortname": "MO",
+    "label": "Macau S.A.R."
+  },
+  {
+    "id": "129",
+    "sortname": "MK",
+    "label": "Macedonia"
+  },
+  {
+    "id": "130",
+    "sortname": "MG",
+    "label": "Madagascar"
+  },
+  {
+    "id": "131",
+    "sortname": "MW",
+    "label": "Malawi"
+  },
+  {
+    "id": "132",
+    "sortname": "MY",
+    "label": "Malaysia"
+  },
+  {
+    "id": "133",
+    "sortname": "MV",
+    "label": "Maldives"
+  },
+  {
+    "id": "134",
+    "sortname": "ML",
+    "label": "Mali"
+  },
+  {
+    "id": "135",
+    "sortname": "MT",
+    "label": "Malta"
+  },
+  {
+    "id": "136",
+    "sortname": "XM",
+    "label": "Man (Isle of)"
+  },
+  {
+    "id": "137",
+    "sortname": "MH",
+    "label": "Marshall Islands"
+  },
+  {
+    "id": "138",
+    "sortname": "MQ",
+    "label": "Martinique"
+  },
+  {
+    "id": "139",
+    "sortname": "MR",
+    "label": "Mauritania"
+  },
+  {
+    "id": "140",
+    "sortname": "MU",
+    "label": "Mauritius"
+  },
+  {
+    "id": "141",
+    "sortname": "YT",
+    "label": "Mayotte"
+  },
+  {
+    "id": "142",
+    "sortname": "MX",
+    "label": "Mexico"
+  },
+  {
+    "id": "143",
+    "sortname": "FM",
+    "label": "Micronesia"
+  },
+  {
+    "id": "144",
+    "sortname": "MD",
+    "label": "Moldova"
+  },
+  {
+    "id": "145",
+    "sortname": "MC",
+    "label": "Monaco"
+  },
+  {
+    "id": "146",
+    "sortname": "MN",
+    "label": "Mongolia"
+  },
+  {
+    "id": "147",
+    "sortname": "MS",
+    "label": "Montserrat"
+  },
+  {
+    "id": "148",
+    "sortname": "MA",
+    "label": "Morocco"
+  },
+  {
+    "id": "149",
+    "sortname": "MZ",
+    "label": "Mozambique"
+  },
+  {
+    "id": "150",
+    "sortname": "MM",
+    "label": "Myanmar"
+  },
+  {
+    "id": "151",
+    "sortname": "NA",
+    "label": "Namibia"
+  },
+  {
+    "id": "152",
+    "sortname": "NR",
+    "label": "Nauru"
+  },
+  {
+    "id": "153",
+    "sortname": "NP",
+    "label": "Nepal"
+  },
+  {
+    "id": "154",
+    "sortname": "AN",
+    "label": "Netherlands Antilles"
+  },
+  {
+    "id": "155",
+    "sortname": "NL",
+    "label": "Netherlands The"
+  },
+  {
+    "id": "156",
+    "sortname": "NC",
+    "label": "New Caledonia"
+  },
+  {
+    "id": "157",
+    "sortname": "NZ",
+    "label": "New Zealand"
+  },
+  {
+    "id": "158",
+    "sortname": "NI",
+    "label": "Nicaragua"
+  },
+  {
+    "id": "159",
+    "sortname": "NE",
+    "label": "Niger"
+  },
+  {
+    "id": "160",
+    "sortname": "NG",
+    "label": "Nigeria"
+  },
+  {
+    "id": "161",
+    "sortname": "NU",
+    "label": "Niue"
+  },
+  {
+    "id": "162",
+    "sortname": "NF",
+    "label": "Norfolk Island"
+  },
+  {
+    "id": "163",
+    "sortname": "MP",
+    "label": "Northern Mariana Islands"
+  },
+  {
+    "id": "164",
+    "sortname": "NO",
+    "label": "Norway"
+  },
+  {
+    "id": "165",
+    "sortname": "OM",
+    "label": "Oman"
+  },
+  {
+    "id": "166",
+    "sortname": "PK",
+    "label": "Pakistan"
+  },
+  {
+    "id": "167",
+    "sortname": "PW",
+    "label": "Palau"
+  },
+  {
+    "id": "168",
+    "sortname": "PS",
+    "label": "Palestinian Territory Occupied"
+  },
+  {
+    "id": "169",
+    "sortname": "PA",
+    "label": "Panama"
+  },
+  {
+    "id": "170",
+    "sortname": "PG",
+    "label": "Papua new Guinea"
+  },
+  {
+    "id": "171",
+    "sortname": "PY",
+    "label": "Paraguay"
+  },
+  {
+    "id": "172",
+    "sortname": "PE",
+    "label": "Peru"
+  },
+  {
+    "id": "173",
+    "sortname": "PH",
+    "label": "Philippines"
+  },
+  {
+    "id": "174",
+    "sortname": "PN",
+    "label": "Pitcairn Island"
+  },
+  {
+    "id": "175",
+    "sortname": "PL",
+    "label": "Poland"
+  },
+  {
+    "id": "176",
+    "sortname": "PT",
+    "label": "Portugal"
+  },
+  {
+    "id": "177",
+    "sortname": "PR",
+    "label": "Puerto Rico"
+  },
+  {
+    "id": "178",
+    "sortname": "QA",
+    "label": "Qatar"
+  },
+  {
+    "id": "179",
+    "sortname": "RE",
+    "label": "Reunion"
+  },
+  {
+    "id": "180",
+    "sortname": "RO",
+    "label": "Romania"
+  },
+  {
+    "id": "181",
+    "sortname": "RU",
+    "label": "Russia"
+  },
+  {
+    "id": "182",
+    "sortname": "RW",
+    "label": "Rwanda"
+  },
+  {
+    "id": "183",
+    "sortname": "SH",
+    "label": "Saint Helena"
+  },
+  {
+    "id": "184",
+    "sortname": "KN",
+    "label": "Saint Kitts And Nevis"
+  },
+  {
+    "id": "185",
+    "sortname": "LC",
+    "label": "Saint Lucia"
+  },
+  {
+    "id": "186",
+    "sortname": "PM",
+    "label": "Saint Pierre and Miquelon"
+  },
+  {
+    "id": "187",
+    "sortname": "VC",
+    "label": "Saint Vincent And The Grenadines"
+  },
+  {
+    "id": "188",
+    "sortname": "WS",
+    "label": "Samoa"
+  },
+  {
+    "id": "189",
+    "sortname": "SM",
+    "label": "San Marino"
+  },
+  {
+    "id": "190",
+    "sortname": "ST",
+    "label": "Sao Tome and Principe"
+  },
+  {
+    "id": "191",
+    "sortname": "SA",
+    "label": "Saudi Arabia"
+  },
+  {
+    "id": "192",
+    "sortname": "SN",
+    "label": "Senegal"
+  },
+  {
+    "id": "193",
+    "sortname": "RS",
+    "label": "Serbia"
+  },
+  {
+    "id": "194",
+    "sortname": "SC",
+    "label": "Seychelles"
+  },
+  {
+    "id": "195",
+    "sortname": "SL",
+    "label": "Sierra Leone"
+  },
+  {
+    "id": "196",
+    "sortname": "SG",
+    "label": "Singapore"
+  },
+  {
+    "id": "197",
+    "sortname": "SK",
+    "label": "Slovakia"
+  },
+  {
+    "id": "198",
+    "sortname": "SI",
+    "label": "Slovenia"
+  },
+  {
+    "id": "199",
+    "sortname": "XG",
+    "label": "Smaller Territories of the UK"
+  },
+  {
+    "id": "200",
+    "sortname": "SB",
+    "label": "Solomon Islands"
+  },
+  {
+    "id": "201",
+    "sortname": "SO",
+    "label": "Somalia"
+  },
+  {
+    "id": "202",
+    "sortname": "ZA",
+    "label": "South Africa"
+  },
+  {
+    "id": "203",
+    "sortname": "GS",
+    "label": "South Georgia"
+  },
+  {
+    "id": "204",
+    "sortname": "SS",
+    "label": "South Sudan"
+  },
+  {
+    "id": "205",
+    "sortname": "ES",
+    "label": "Spain"
+  },
+  {
+    "id": "206",
+    "sortname": "LK",
+    "label": "Sri Lanka"
+  },
+  {
+    "id": "207",
+    "sortname": "SD",
+    "label": "Sudan"
+  },
+  {
+    "id": "208",
+    "sortname": "SR",
+    "label": "Suriname"
+  },
+  {
+    "id": "209",
+    "sortname": "SJ",
+    "label": "Svalbard And Jan Mayen Islands"
+  },
+  {
+    "id": "210",
+    "sortname": "SZ",
+    "label": "Swaziland"
+  },
+  {
+    "id": "211",
+    "sortname": "SE",
+    "label": "Sweden"
+  },
+  {
+    "id": "212",
+    "sortname": "CH",
+    "label": "Switzerland"
+  },
+  {
+    "id": "213",
+    "sortname": "SY",
+    "label": "Syria"
+  },
+  {
+    "id": "214",
+    "sortname": "TW",
+    "label": "Taiwan"
+  },
+  {
+    "id": "215",
+    "sortname": "TJ",
+    "label": "Tajikistan"
+  },
+  {
+    "id": "216",
+    "sortname": "TZ",
+    "label": "Tanzania"
+  },
+  {
+    "id": "217",
+    "sortname": "TH",
+    "label": "Thailand"
+  },
+  {
+    "id": "218",
+    "sortname": "TG",
+    "label": "Togo"
+  },
+  {
+    "id": "219",
+    "sortname": "TK",
+    "label": "Tokelau"
+  },
+  {
+    "id": "220",
+    "sortname": "TO",
+    "label": "Tonga"
+  },
+  {
+    "id": "221",
+    "sortname": "TT",
+    "label": "Trinidad And Tobago"
+  },
+  {
+    "id": "222",
+    "sortname": "TN",
+    "label": "Tunisia"
+  },
+  {
+    "id": "223",
+    "sortname": "TR",
+    "label": "Turkey"
+  },
+  {
+    "id": "224",
+    "sortname": "TM",
+    "label": "Turkmenistan"
+  },
+  {
+    "id": "225",
+    "sortname": "TC",
+    "label": "Turks And Caicos Islands"
+  },
+  {
+    "id": "226",
+    "sortname": "TV",
+    "label": "Tuvalu"
+  },
+  {
+    "id": "227",
+    "sortname": "UG",
+    "label": "Uganda"
+  },
+  {
+    "id": "228",
+    "sortname": "UA",
+    "label": "Ukraine"
+  },
+  {
+    "id": "229",
+    "sortname": "AE",
+    "label": "United Arab Emirates"
+  },
+  {
+    "id": "230",
+    "sortname": "GB",
+    "label": "United Kingdom"
+  },
+  {
+    "id": "231",
+    "sortname": "US",
+    "label": "United States"
+  },
+  {
+    "id": "232",
+    "sortname": "UM",
+    "label": "United States Minor Outlying Islands"
+  },
+  {
+    "id": "233",
+    "sortname": "UY",
+    "label": "Uruguay"
+  },
+  {
+    "id": "234",
+    "sortname": "UZ",
+    "label": "Uzbekistan"
+  },
+  {
+    "id": "235",
+    "sortname": "VU",
+    "label": "Vanuatu"
+  },
+  {
+    "id": "236",
+    "sortname": "VA",
+    "label": "Vatican City State (Holy See)"
+  },
+  {
+    "id": "237",
+    "sortname": "VE",
+    "label": "Venezuela"
+  },
+  {
+    "id": "238",
+    "sortname": "VN",
+    "label": "Vietnam"
+  },
+  {
+    "id": "239",
+    "sortname": "VG",
+    "label": "Virgin Islands (British)"
+  },
+  {
+    "id": "240",
+    "sortname": "VI",
+    "label": "Virgin Islands (US)"
+  },
+  {
+    "id": "241",
+    "sortname": "WF",
+    "label": "Wallis And Futuna Islands"
+  },
+  {
+    "id": "242",
+    "sortname": "EH",
+    "label": "Western Sahara"
+  },
+  {
+    "id": "243",
+    "sortname": "YE",
+    "label": "Yemen"
+  },
+  {
+    "id": "244",
+    "sortname": "YU",
+    "label": "Yugoslavia"
+  },
+  {
+    "id": "245",
+    "sortname": "ZM",
+    "label": "Zambia"
+  },
+  {
+    "id": "246",
+    "sortname": "ZW",
+    "label": "Zimbabwe"
+  }
+]

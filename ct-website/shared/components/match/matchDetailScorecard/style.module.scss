@@ -1,0 +1,23 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.scorecards {
+  .scoreHead {
+    button[aria-expanded="true"],
+    button { background: $secondary; color: #fff; border-color: $secondary; }
+    button { padding: 9px 12px;
+      &::after { @include filter(brightness(0) invert(1)); }
+    }
+  }
+  .scoreBody { margin: 8px 0; padding: 0; }
+  .title { padding-right: 8px; }
+}
+
+
+@media (max-width: 767px) {
+  .matchSquads {
+    .scoreHead {
+      button { margin: 0px -15px; width: calc(100% + 30px); border-radius: 0 !important; }
+    }
+  }
+}

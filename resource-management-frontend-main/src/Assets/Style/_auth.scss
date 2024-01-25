@@ -1,0 +1,28 @@
+.auth_section {
+  height: 100vh;
+  display: flex;
+
+  .back_to_signIn {
+    margin: 22px 0 16px;
+    position: relative;
+    width: 100%;
+    transform: translateY(0);
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      transform: translateY(-50%);
+      width: 100%;
+      height: 1px;
+      left: 0;
+      top: 50%;
+      background: linear-gradient(270deg, #a7acb4 0, hsla(217, 8%, 68%, 0) 36%, hsla(217, 8%, 68%, 0) 64%, #a7acb4);
+    }
+
+    p {
+      text-align: center;
+      margin-bottom: 0;
+    }
+  }
+}

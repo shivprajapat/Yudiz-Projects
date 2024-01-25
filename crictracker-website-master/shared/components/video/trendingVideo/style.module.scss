@@ -1,0 +1,4 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+   
+.articleSideList article { margin-bottom: 24px; min-height: calc(100% - 24px); }

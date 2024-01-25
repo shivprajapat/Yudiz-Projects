@@ -1,0 +1,55 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+data:
+  NODE_ENV: production
+  DB_SQL_NAME: fantasy_prod
+  DB_SQL_DIALECT: mysql
+  DB_SQL_HOST: fantasy-prod.cyaoqdrfnsw7.ap-south-1.rds.amazonaws.com
+  DB_SQL_USER: admin
+  # DB_SQL_HOST: fantasy-prod.cyaoqdrfnsw7.ap-south-1.rds.amazonaws.com
+  # REDIS_HOST: 'fn-redis-production-service.production.svc.cluster.local'
+  REDIS_HOST: 'redis-master.production.svc.cluster.local'
+  # REDIS_HOST: 'fansportiz-redis.j4j4np.ng.0001.aps1.cache.amazonaws.com'
+  REDIS_PORT: '6379'
+  CASHFREE_APPID: '75766f425d7dd6b895948bd2f66757'
+  CASHFREE_CLIENTID: 'Q0Y3NTc2NkM0OTRMUEtQUkkwQlRHMkVBVjRH'
+  CASHFREE_URL: https://test.cashfree.com
+  CASHFREE_RETURN_URL: https://app.fantasywl.in/profile
+  FRONTEND_HOST_URL: https://app.fantasywl.in
+  DEPLOY_HOST_URL: https://nodeback.fantasywl.in
+  FANTASY_NODE_URL: https://node.fantasywl.in
+  CASHFREE_BASEURL: https://payout-gamma.cashfree.com
+  SMTP_HOST: smtp.gmail.com
+  SMTP_PORT: '587'
+  SMTP_FROM: fwl47576@gmail.com
+
+  DEPLOY_HOST_PORT: '1338'
+  GOOGLE_CLIENT_ID_W: 218538323308-p1bf5od94pbdfna1rstq3s1kea8gpgfr.apps.googleusercontent.com
+
+  OTP_PROVIDER: TEST
+
+  REDIS_2_HOST: 'redis-master.production.svc.cluster.local'
+  REDIS_2_PORT: '6379'
+
+  FANTASY_NODE_URL: https://node.fantasywl.in
+
+  AWS_REGION: "ap-south-1"
+  CRON_AUTH_ENABLED: "true"
+
+  SENTRY_DSN: 'https://f9b9cbe448994647b39df3e26c9c1251@o1220141.ingest.sentry.io/6362906'
+
+  GRPC_SERVER_URI: '0.0.0.0:1339'
+  NOTIFICATIONS_TARGET_URI: 'fantasy-node-notifications-master-grpc.production.svc.cluster.local:80'
+  USER_INFO_TARGET_URI: 'fantasy-node-user-informations-master-grpc.production.svc.cluster.local:80'
+  STATICS_TARGET_URI: 'fantasy-node-statics-master-grpc.production.svc.cluster.local:80'
+  ADMIN_TARGET_URI: 'fantasy-node-admin-master-grpc.production.svc.cluster.local:80'
+  PAYMENT_TARGET_URI: 'fantasy-node-payments-master-grpc.production.svc.cluster.local:80'
+  
+  IOS_APP_STORE_ID: '6443831473'
+  IOS_CUSTOM_SCHEME: 'fantasyapp.firebase.scheme'
+  IOS_BUNDLE_ID: 'com.app.FantasyApp'
+  DYNAMIC_LINK_ANDROID_PACKAGE_NAME: 'com.fantasy.wl'
+  DYNAMIC_LINK_DOMAIN_URI_PREFIX: 'https://wlfantasy.page.link'

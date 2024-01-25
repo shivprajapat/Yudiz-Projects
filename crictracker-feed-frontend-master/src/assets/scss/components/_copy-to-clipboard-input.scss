@@ -1,0 +1,32 @@
+.input-label {
+  font-size: $fs-16;
+  font-weight: $fw-500;
+  margin: 5px 0;
+}
+.copy-input {
+  height: auto;
+  font-size: $fs-14;
+  border-radius: 8px 0 0 8px !important;
+  border: none;
+  color: var(--secondary-600);
+  background: var(--secondary-200) !important;
+}
+.dark-copy-input{
+  height: auto;
+  font-size: $fs-14;
+  border-radius: 8px 0 0 8px !important;
+  border: 1px solid var(--secondary-600) !important;
+  color: var(--secondary-400);
+  background: none !important;
+}
+.copy-button {
+  border: none;
+  border-radius: 0 8px 8px 0 !important;
+  background: var(--secondary-600) !important;
+}
+.date-input {
+  height: auto;
+  font-size: $fs-14;
+  border-radius: 8px !important;
+  color: var(--secondary-400);
+}

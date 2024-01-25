@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: full-scorecard
+  namespace: dev
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://matchmanage-dev.beta.crictracker.com/api/full-scorecard'
+            image: curlimages/curl
+            name: full-scorecard
+          restartPolicy: OnFailure

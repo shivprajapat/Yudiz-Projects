@@ -1,0 +1,21 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.scorecards {
+  .scoreHead {
+    button[aria-expanded="true"],
+    button { background: $secondary; color: #fff; border-color: $secondary; }
+    button { padding: 9px 12px;
+      &::after { @include filter(brightness(0) invert(1)); }
+    }
+  }
+}
+
+
+@media (max-width: 767px) {
+  .scorecards {
+    .scoreHead {
+      button { margin: 0px -12px; padding: 6px 12px; width: calc(100% + 24px); border-radius: 0 !important; }
+    }
+  }
+}

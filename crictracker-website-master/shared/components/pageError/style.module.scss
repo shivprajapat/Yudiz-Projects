@@ -1,0 +1,14 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.pageError { min-height: calc(100vh - 100px);
+  h5 { font-weight: 500; }
+}
+.artwork { width: 300px; }
+.btn { min-width: 160px; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+  .artwork { width: 200px; }
+}

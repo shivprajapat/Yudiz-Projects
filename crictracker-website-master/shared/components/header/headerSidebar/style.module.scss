@@ -1,0 +1,52 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.sidemenu { width: 720px;
+  h4 { font-size: 12px; line-height: 17px; color: $font-light; }
+  .icon > span:first-of-type { width: 24px !important; height: 24px !important; }
+  .icon > span:first-of-type + a { margin-left: 8px; }
+  .icon > span:nth-child(2) { margin-left: 8px; }
+}
+.closeMenu { padding: 0px; width: 24px; height: 24px; right: 20px; top: 20px; border-color: $border-color; z-index: 1; 
+  > div { width: 80%; }
+  [data-mode="dark"] & {
+    @include filter(brightness(0) invert(1) opacity(0.4));
+  }
+}
+.tabSection { width: 304px; }
+.infoSection { width: calc(100% - 304px); padding: 56px 20px 0px 40px; }
+[data-mode="dark"] .accordionHeader {
+  button:after { @include filter(brightness(0) invert(1) opacity(0.4)); }
+}
+.socialMenu { 
+  g,path { fill: $border-color; }
+  a:hover {
+    g,path { fill: $theme-color; }
+  } 
+}
+.favBtn {
+  svg { display: block;}
+}
+.crictrackerLogo { width: 164px; max-width: 60%;}
+.otherLogo { width: 116px; max-width: 60%; }
+.menuHead { padding-bottom: 14px; border-bottom: 1px solid var(--light);}
+
+// Phase 2 
+// .formGroup { position: relative; font-size: 12px; line-height: 18px;
+//   input { padding: 12px 108px 12px 14px; background: $light-bg; border-radius: 6px; border: none; font-size: inherit; line-height: inherit;
+//     &:focus { box-shadow: none;}
+//   }
+//   button { padding: 7px 20px; background: $border-color; position: absolute; right: 4px; top: 50%; @include transform(translateY(-50%)); font-size: inherit; line-height: inherit; font-weight: 700; border-radius: 2em; border: none;
+//     &:hover, &:hover { background: $theme-color; }
+//   }
+// }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+  .sidemenu { width: 100vw;
+    .closeMenu { right: 16px; top: 10px; }
+  }
+  .tabSection { margin-bottom: 32px; width: 100%; }
+  .infoSection { width: 100%; padding: 0 24px; }
+}

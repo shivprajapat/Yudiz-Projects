@@ -1,0 +1,21 @@
+
+# For fetching version Setting
+type oVersionsData{
+    minVersion: String
+    latestVersion: String
+}
+
+type oPlatformVersionData{
+  ios: oVersionsData
+  android: oVersionsData
+}
+
+type fetchVersionSettingRes{
+   oResult: oPlatformVersionData
+}
+
+
+# For fetching version Setting
+extend type Query {
+  fetchAppVersions: fetchVersionSettingRes
+}

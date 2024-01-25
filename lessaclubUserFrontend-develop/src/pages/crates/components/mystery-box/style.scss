@@ -1,0 +1,51 @@
+.create-items-mystery {
+  background-color: transparent;
+  position: relative;
+  transition: all 0.5s;
+
+  &:hover {
+    box-shadow: 5px 6px 6px 2px #030d161f;
+    transform: scale(1.05);
+  }
+
+  .card-header {
+    padding: 0;
+    .card-img-top {
+      height: 314px;
+      object-fit: cover;
+    }
+    .btn {
+      position: absolute;
+      top: 30px;
+      left: 30px;
+      img {
+        margin-left: -9px;
+        padding-right: 8px;
+      }
+    }
+  }
+  .card-footer {
+    margin-top: 32px;
+    padding: 0;
+    text-align: center;
+    .btn {
+      min-width: 280px;
+    }
+  }
+
+  @media (max-width: 1399px) {
+    .card-body {
+      .card-text {
+        .card-link {
+          height: 40px;
+        }
+        img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+  @media (min-width: 768px) and (max-width: 991px) {
+  }
+}

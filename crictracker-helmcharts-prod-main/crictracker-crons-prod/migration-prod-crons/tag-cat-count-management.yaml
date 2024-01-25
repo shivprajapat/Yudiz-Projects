@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: tag-cat-count-management
+  namespace: production
+spec:
+  schedule: "0 */3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://migrations.crictracker.com/api/article/countManagement'       
+            image: curlimages/curl
+            name: tag-cat-count-management
+          restartPolicy: OnFailure

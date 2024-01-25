@@ -1,0 +1,25 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.likeComment {
+    background: var(--theme-light);
+}
+.item {
+    flex: 1;
+    + .item {
+        border-left: 1px solid rgba(var(--bs-primary-rgb), 0.2);
+    }
+}
+.icon {
+    width: 32px;
+    filter: brightness(0);
+    [data-mode="dark"] & {
+        @include filter(brightness(0) invert(1));
+    }
+}
+
+@media (max-width: 575px) {
+    .icon {
+        width: 24px;
+    }
+}

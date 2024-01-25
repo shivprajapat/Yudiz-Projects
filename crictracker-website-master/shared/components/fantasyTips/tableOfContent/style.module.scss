@@ -1,0 +1,10 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.icon { width: 24px; 
+    [data-mode="dark"] & { @include filter(brightness(0) invert(1) opacity(0.7)); }
+}
+@media (max-width: 767px) {
+    .sectionNav { overflow: auto; }
+    .icon { width: 20px; }
+}

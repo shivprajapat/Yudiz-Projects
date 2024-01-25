@@ -1,0 +1,29 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  PORT: '4009'
+  CONNECTION: '20'
+  REDIS_HOST: "redis-cache.crictracker.com.private"
+  REDIS_PORT: '6379'
+  JWT_VALIDITY: '1800d'
+  IS_API_RATE_LIMITER_ENABLED: 'true'
+  SEO_GRPC_URL: 'crictracker-seo-dev-grpc.dev.svc.cluster.local:80'
+  AUTH_GRPC_URL: 'crictracker-authentication-dev-grpc.dev.svc.cluster.local:80'
+  FEED_TITLE: 'CricTracker'
+  FEED_DESCRIPTION: 'Latest Cricket News, Updates, Articles, Stats, Records, Etc'
+  FRONTEND_URL: 'https://www.crictracker.com/'
+  S3_CDN_URL: 'https://admin-media-cdn.crictracker.com/'
+  LOGIN_HARD_LIMIT_CLIENT: '5'
+  JWT_LOGIN_VALIDITY: '1800d'
+  JWT_VERIFICATION_VALIDITY: '600s'
+  POSTMARK_SERVER_CLIENT: '6bb99394-914b-4f7d-a289-71c2849b45c7'
+  SMTP_FROM: 'CricTracker support@crictracker.com'
+  SMTP_PRODUCT_URL: 'https://www.crictracker.com/'
+  SMTP_PRODUCT_NAME: 'CricTracker'
+  SMTP_SUPPORT_EMAIL: 'support@crictracker.com'
+  FEED_BASE_URL: 'https://feed-dev.beta.crictracker.com'
+  FEED_GRPC_URL: '0.0.0.0:4009'
+  

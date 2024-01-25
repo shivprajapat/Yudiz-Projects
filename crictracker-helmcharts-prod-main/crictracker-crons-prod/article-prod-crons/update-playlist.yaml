@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: update-playlist
+  namespace: production
+spec:
+  schedule: "*/30 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://article.crictracker.com/api/update-playlist'
+            image: curlimages/curl
+            name: update-playlist
+          restartPolicy: OnFailure

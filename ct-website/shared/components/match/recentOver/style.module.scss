@@ -1,0 +1,35 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.recentOver { padding: 4px 0px; background: var(--light-mode-bg); border-radius: 12px;
+  .label { padding-left: 20px; width: 100px; }
+  .overSlider { width: calc(100% - 100px);}
+  .list { padding: 0px 7px; border-left: 1px solid $border-light2;
+    .run { margin: 0px 7px; padding: 0 4px; min-width: 28px; height: 28px; line-height: 26px; display: block; border: 1px solid $border-dark2; border-radius: 2em; 
+      &.over { height: inherit; line-height: 16px; border: none; }
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 991px) {
+  .recentOver { 
+    .label { padding-left: 6px; width: 50px; }
+    .overSlider { width: calc(100% - 54px);}
+    .list { padding: 0px 3px; 
+      .run { margin: 0px 3px; min-width: 26px; height: 26px; line-height: 24px; }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .recentOver { margin: 3px -12px 0px; border-radius: 0px;
+    .overSlider { padding: 0px 0px 0px 8px;
+      .list { padding: 0px 3px; 
+        .run { margin: 0px 3px; }
+      }
+    }
+  }
+}

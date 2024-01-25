@@ -1,0 +1,19 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.weatherReport { background: var(--theme-light); border-radius: 0 0 8px 8px; }
+.title { padding: 8px 12px; background: var(--theme-light); border-radius: 8px 8px 0 0; }
+.icon { width: 24px;
+    [data-mode="dark"] & { @include filter(brightness(0) invert(1) opacity(0.4)); }
+}
+.weather { width: 56px;
+    filter: drop-shadow(-8px 5px 12px rgba(2, 0, 26, 0.12));
+    h3 { margin-bottom: -2px; }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+    .weather { width: 42px; 
+        svg { width: 42px; height: 30px; }
+    }
+}

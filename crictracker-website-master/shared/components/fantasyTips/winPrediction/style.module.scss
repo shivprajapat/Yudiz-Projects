@@ -1,0 +1,14 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.winPrediction { background: var(--theme-light);}
+.flag { width: 42px; }
+.icon { width: 32px;
+    [data-mode="dark"] & { @include filter(brightness(0) invert(1) opacity(0.4)); }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 575px) {
+    .flag { width: 32px; }
+    .icon { width: 24px; }
+}

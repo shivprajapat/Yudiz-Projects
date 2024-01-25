@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+message messageResponse {
+    string sMessage = 1;
+    int32 nStatus = 2;
+}
+ 
+message seriesCategoryOperationsInput {
+    string seriesParams = 1;
+}
+
+message assignLiveEventInput {
+    string iEventId = 1;
+    string iMatchId = 2;
+}
+
+message fantasyArticleValidationInput {
+    string iArticleId = 1;
+}
+
+
+service MatchManagementService {
+    rpc seriesCategoryOperations(seriesCategoryOperationsInput) returns (messageResponse) {}
+    rpc assignLiveEventId(assignLiveEventInput) returns (messageResponse) {}
+    rpc fantasyArticleValidation(fantasyArticleValidationInput) returns (messageResponse) {}
+}

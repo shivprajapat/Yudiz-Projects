@@ -1,0 +1,25 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  REDIS_HOST: "redis-cache.crictracker.com.private"
+  REDIS_PORT: "6379"
+  PORT: "5001"
+  SQL_HOST: db.crictracker.com
+  SQL_DATABASE: crictracker_db
+  SQL_USER: crictracker_db
+  S3_BUCKET_NAME: 'media.crictracker.com'
+  S3_BUCKET_URL: 'https://media.crictracker.com.s3.ap-south-1.amazonaws.com/'
+  CREATE_TAG_ARTICLE: "1"
+  FRONTEND_URL: 'https://www.crictracker.com'
+  TEAM_SITEMAP: 'cricket-teams'
+  VENUE_SITEMAP: 'cricket-venues'
+  S3_BUCKET_TEAM_THUMB_URL_PATH: 'teams'
+  S3_BUCKET_ARTICLE_ATTACHMENTIMAGE_PATH: 'media/attachments'
+  PLAYER_SITEMAP: 'cricket-players'
+  NEWS_SITEMAP: 'news-sitemap'
+  S3_CDN_URL: 'https://media.crictracker.com/'
+
+  CONNECTION: '10'

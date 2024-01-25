@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: mini-scorecard
+  namespace: local-dev
+spec:
+  schedule: "0/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https://matchmanage-dev.crictracker.ml/api/mini-scorecard'
+            image: curlimages/curl
+            name: bonus-expire
+          restartPolicy: OnFailure

@@ -1,0 +1,88 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.fixturesList { cursor: pointer;
+  &:last-child { margin-bottom: 0px; }
+}
+.fixturesTitle { margin-bottom: 8px; padding: 12px; background: $border-light; border-radius: 12px; }
+.fixturesItem { padding: 16px; border-radius: 12px;
+  p { margin-bottom: 0; }
+  .head { padding-bottom: 8px; margin-bottom: 7px; border-bottom: 1px solid $light; }
+  .head, .content {
+    > :nth-child(1) { width: 270px; }
+    > :nth-child(2) { margin: 0 30px; padding: 0 30px;  }
+    > :nth-child(3) { width: 110px; }
+  }
+  .head {
+    > div:nth-child(2) { margin-right: 0; padding-right: 0;  }
+  }
+  .infoList { color: $border-color;
+    a,p { margin-bottom: 8px;
+      &:last-child { margin-bottom: 0px; }
+    }
+  }
+  .teams { border: 0px solid $light; border-right-width: 1px; border-left-width: 1px; position: relative; }
+  .team {
+    .icon { width: 40px; }
+    .name p { margin: 0 10px;}
+  }
+  .winner svg { width: 18px; height: 18px; 
+    path { fill: #FFBD00; }
+  }
+  .upcoming { position: absolute; padding: 14px; max-width: 98px; border-color: $light; border-radius: 6px; top: 50%; @include transform(translateY(-50%)); right: 30px; }
+  .matchStatus { 
+    span {
+      &::before { margin-right: 4px; @extend %after-before; position: relative; width: 6px; height: 6px; background: $theme-color; display: inline-block; border-radius: 50%; }
+      &.completed::before { background: $success; }
+      &.live::before { background: $danger; }
+      
+    }
+  }
+}
+.liveStatus { width: 0; overflow: hidden; margin-left: -2px;}
+.badge { margin-right: 8px; padding-left: 12px; padding-right: 12px; text-transform: capitalize; border-radius: 4px;}
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .fixturesItem {
+    .head, .content {
+      > :nth-child(1) { width: 230px; }
+      > :nth-child(2) { margin: 0 24px; padding: 0 24px;  }
+    }
+    .upcoming { padding: 12px; right: 24px; }
+  }
+}
+
+@media (max-width: 1199px) {
+  .fixturesItem {
+    .head, .content {
+      > :nth-child(1) { width: 180px; }
+      > :nth-child(2) { margin: 0 16px; padding: 0 16px; }
+      > :nth-child(3) { width: 106px; }
+    }
+    .team {
+      .icon { width: 32px; }
+    }
+    .upcoming { padding: 10px; max-width: 92px; right: 16px; }
+  }
+}
+
+@media (max-width: 767px) {
+  .fixturesTitle { margin: 0px -12px 12px; border-radius: 0; }
+  .fixturesItem { padding: 12px; border-radius: 8px;
+    .head { padding-bottom: 0px; margin-bottom: 0px; border-bottom: none; }
+    .matchTime { padding-bottom: 8px; margin-bottom: 7px; border-bottom: 1px solid $light; }
+    .head, .content {
+      > :nth-child(1),
+      > :nth-child(2),
+      > :nth-child(3) { width: 100%; }
+      > :nth-child(2) { margin: 0; padding: 0; border: none; }
+    }
+    .team {
+      .icon { width: 32px; }
+    }
+    .infoList p { margin-right: 4px; margin-bottom: 0px; }
+    .upcoming { padding: 10px; max-width: 90px; right: 0px; }
+  }
+}

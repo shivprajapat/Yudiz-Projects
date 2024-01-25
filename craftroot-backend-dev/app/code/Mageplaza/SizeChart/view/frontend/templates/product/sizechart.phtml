@@ -1,0 +1,47 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_SizeChart
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+
+/** @var \Mageplaza\SizeChart\Block\Product\SizeChart $block */
+if ($block->validateProductInRule()):
+    /** @var \Mageplaza\SizeChart\Model\Rule $rule */
+    $rule = $block->validateProductInRule();
+    $ruleTypes = $block->getDisplayTypes();
+
+    foreach ($ruleTypes as $ruleType) {
+        echo $this->getChildHtml($ruleType);
+    }
+    ?>
+    <style type="text/css">
+        <?php echo $block->getSizeChartCss($rule)?>
+    </style>
+    <script type="text/javascript">
+        var sizeChartData = {
+            ruleContentHtml: <?php echo $block->getSizeChartHtml($rule); ?>,
+            displayType: '<?php echo $rule->getDisplayType() ?>',
+            attributeCode: '<?php echo $block->getNextAttributeCode($rule); ?>',
+            attributeId: '<?php echo $block->getNextAttributeId($rule); ?>',
+            iconUrl: '<?php echo $block->getIconUrl(); ?>',
+            label: '<?php echo $block->getTitle() ?>'
+        };
+
+        require(['initpopup']);
+    </script>
+<?php endif; ?>

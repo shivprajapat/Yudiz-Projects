@@ -1,0 +1,55 @@
+enum SliderActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+input oSliderCommonImageInput {
+  sText: String
+  sCaption: String
+  sAttribute: String
+  sUrl: String
+}
+
+input oSlider {
+  sName: String
+  sSlug: String
+}
+
+input oSliderDataInput {
+  sName: String!
+  sSlug: String
+  nPriority: Int
+  oImg: oSliderCommonImageInput
+  bIsMulti: Boolean
+  aSlide: [oSlider]
+}
+
+
+input oEditSliderInput {
+  _id: ID!
+  oSliderInput: oSliderDataInput
+}
+
+type oSliderCommonDataResponse {
+  oData: oSliderMenu
+  sMessage: String
+}
+
+input oBulkSliderActionInput {
+  aId: [ID!]!
+  eStatus: SliderActionStatus!
+}
+
+type oSliderCommonStatusResponse {
+  sMessage: String
+}
+
+extend type Mutation {
+  addSlider(input: [oSliderDataInput!]!): String
+  editSlider(input: oEditSliderInput): oSliderCommonDataResponse
+  bulkSliderUpdate(input: oBulkSliderActionInput!): oSliderCommonStatusResponse
+}

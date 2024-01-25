@@ -1,0 +1,41 @@
+@import '../variables.scss';
+@import '../mixins.scss';
+
+.itemCard { 
+  .item { padding: 6px 0; text-align: center; border-bottom: 1px solid $border-medium;
+    > :first-child { width: 44px; }
+    > :nth-child(2) { padding: 0px 18px; font-size: 13px; line-height: 17px; text-align: left; }
+    > :last-child { width: 44px; }
+    .itemImg { width: 44px; margin-right: 6px;
+      img { object-fit: cover; border-radius: 50%; }
+    }
+    &.head { padding: 12px 0; border-bottom: none; color: $font-light2;
+      > :nth-child(2) { font-size: inherit; line-height: inherit; }
+    }
+    .subText { margin: 2px 0px 0px; color: $font-light2;}
+  }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .itemCard { 
+    .item {
+      > :first-child { width: 36px; }
+      > :nth-child(2) { padding: 0px 12px; }
+      > :last-child { width: 40px; }
+      .itemImg { width: 32px; }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .itemCard { 
+    .item {
+      > :first-child { width: 36px; }
+      > :nth-child(2) { padding: 0px 6px; font-size: 12px; line-height: 16px; }
+      > :last-child { width: 40px; }
+      .itemImg { width: 32px; margin-right: 4px; }
+    }
+  }
+}

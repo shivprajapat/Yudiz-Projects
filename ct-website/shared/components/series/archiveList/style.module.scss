@@ -1,0 +1,8 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.archiveList {
+  .item { padding: 12px 0;
+    &:not(:last-child) { border-bottom: 1px solid $light; }
+  }
+}

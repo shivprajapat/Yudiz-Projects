@@ -1,0 +1,66 @@
+input addUserCommentInput {
+    iArticleId: ID!
+    sContent: String!
+    iParentId: ID
+}
+
+type addUserCommentResponse {
+    sMessage: String!
+}
+
+input reportCommentInput {
+    iArticleId: ID!
+    _id: ID!
+    iReportReasonId: ID!
+}
+
+enum likeCommentType {
+    "Like comment"
+    like
+    "Dislike comment"
+    dislike
+}
+
+input likeDislikeCommentInput {
+    iArticleId: ID!
+    iCommentId: ID!
+    likeType: likeCommentType
+}
+
+type likeDislikeCommentResponse {
+    sMessage: String!
+}
+
+input updateCommentInput {
+    _id: ID!
+    eStatus: UpdateCommentType
+}
+
+enum UpdateCommentType { a r sp t d p }
+
+input bulkCommentInput {
+    aId: [ID!]!
+    eStatus: UpdateCommentType
+}
+
+input deleteCommentInput {
+    _id: ID!
+}
+
+input deleteFrontCommentInput {
+    _id: ID!
+}
+
+type oAddUserCommentResponse {
+    oData: comment
+    sMessage: String!
+}
+extend type Mutation {
+    addUserComment(input: addUserCommentInput): oAddUserCommentResponse
+    reportComment(input: reportCommentInput): addUserCommentResponse
+    updateCommentStatus(input: updateCommentInput): addUserCommentResponse
+    bulkCommentUpdate(input: bulkCommentInput): addUserCommentResponse
+    deleteComment(input:deleteCommentInput): addUserCommentResponse
+    deleteFrontComment(input:deleteFrontCommentInput): addUserCommentResponse
+    likeDislikeComment(input: likeDislikeCommentInput): likeDislikeCommentResponse
+}

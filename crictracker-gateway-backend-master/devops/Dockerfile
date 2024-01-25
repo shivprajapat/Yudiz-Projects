@@ -1,0 +1,13 @@
+FROM public.ecr.aws/d7h0j7s7/cric-node:16-alpine
+
+WORKDIR /app
+
+COPY . /app
+
+RUN npm ci --production --legacy-peer-deps
+RUN apk add curl
+RUN curl -sSL https://rover.apollo.dev/nix/latest | sh
+#RUN npm i --save-dev @apollo/rover && npm run compose:development
+
+EXPOSE 4000
+CMD ["pm2-runtime", "start", "index.js"]

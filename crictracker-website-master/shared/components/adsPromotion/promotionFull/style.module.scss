@@ -1,0 +1,112 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.promotion { cursor: pointer; padding: 12px; background-image: linear-gradient(136deg, #30A8EF 0%, #2C3697 100%); color: $light-color;
+    &::before { @extend %after-before; width: 100%; height: 100%; opacity: 0.1; z-index: 1; left: 0; top: 0; 
+        background-image: repeating-linear-gradient(135deg, #fff 0%, #fff 2%, transparent 2.01%, transparent 4%);
+    }
+    .badge { background: $light-color; color: $theme-color;
+        &.danger { color: $danger; }
+    }
+    h3 { font-weight: 500; }
+    h6 { font-weight: 500; }
+    .promoInfo { width: 72%; }
+    .series { width: 42%; }
+    .branding { width: 34%; font-size: 10px; line-height: 14px; gap: 6px; }
+    .centerContent { border: 1px solid rgba(255, 255, 255, 0.18); border-top: 0; border-bottom: 0; }
+    .timer { font-size: 10px; line-height: 14px; font-weight: 400; letter-spacing: 0.2px;
+        .time { margin: 0px 8px; width: 52px; }
+    }
+    .timerSmall { font-size: 8px; line-height: 10px; font-weight: 400; letter-spacing: 0.1px;
+        .time { margin: 0px 8px; width: 46px; }
+    }
+    .product { margin: 0px 12px 0px 8px; width: 56px; }
+    .logo { width: 160px; }
+    .logoSmall { width: 90px; }
+    .team { padding: 0px 32px; }
+    .paragraph { font-size: 10px  !important; }
+    .matchInfo{ gap: 6px;}
+    .teamScore{ min-width: 86px;}
+}
+.promotionPlaceholder{
+    height: 73px
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 1199px) {
+    .promotion { 
+        .timer {
+            .time { margin: 0px 6px; width: 44px; }
+        }
+        .timerSmall {
+            .time { margin: 0px 6px; width: 44px; }
+        }
+        .product { margin: 0px 8px 0px 6px; width: 52px; }
+        .logo { width: 100px; }
+        .logoSmall { width: 60px; }
+    }
+}
+
+@media (max-width: 1190px) {
+    .promotion { 
+        .promoInfo { width: 74%; }
+        .series { width: 100%; }
+        .centerContent { width: 100%; border: 0; }
+        .timer {
+            .time { margin: 0px 6px; width: 44px; }
+        }
+        .brand-link{ display: flex; flex-direction: column; align-items: center; }
+        .logo { width: 100px; }
+        .logoSmall { width: 30px; }
+        .branding { width: calc(36% - 10px); flex-shrink: 0; border-left: 1px solid rgba(255, 255, 255, 0.18); }
+        .team { padding: 0px 24px; }
+    }
+}
+
+@media (max-width: 991px) {
+    .promotion { 
+        .promoInfo { width: 72%; }
+        .series { width: 42%; }
+        .branding { width: 34%; font-size: 10px; line-height: 14px; gap: 6px; }
+        .centerContent { border: 1px solid rgba(255, 255, 255, 0.18); border-top: 0; border-bottom: 0; }
+        .timer { font-size: 10px; line-height: 14px; font-weight: 400; letter-spacing: 0.2px;
+            .time { margin: 0px 8px; width: 52px; }
+        }
+        .timerSmall { font-size: 8px; line-height: 10px; font-weight: 400; letter-spacing: 0.1px;
+            .time { margin: 0px 8px; width: 46px; }
+        }
+        .product { margin: 0px 12px 0px 8px; width: 56px; }
+        .logo { width: 160px; }
+        .logoSmall { width: 90px; }
+        .team { padding: 0px 32px; }
+        .paragraph{
+            font-size: 2px;
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .promotion { 
+        &::before { @extend %after-before; width: 100%; height: 100%; opacity: 0.1; z-index: 1; left: 0; top: 0; 
+            background-image: repeating-linear-gradient(135deg, #fff 0%, #fff 5%, transparent 5.1%, transparent 10%);
+        }
+        .promoInfo { width: 74%; }
+        .series { width: 100%; }
+        .centerContent { width: 100%; border: 0; }
+        .timer {
+            .time { margin: 0px 6px; width: 44px; }
+        }
+        .brand-link{ display: flex; flex-direction: column; align-items: center; }
+        .logo { width: 30px; }
+        .logoSmall { width: 30px; }
+        .branding { width: calc(36% - 10px); flex-shrink: 0; border-left: 1px solid rgba(255, 255, 255, 0.18); }
+        .paragraph{
+            font-size: 2px;
+        }
+        .team { padding: 0px 24px; }
+        .teamScore{ min-width: 74px;}
+    }
+    .promotionPlaceholder{
+        height: 110px
+    }
+}

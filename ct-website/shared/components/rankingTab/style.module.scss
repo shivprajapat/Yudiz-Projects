@@ -1,0 +1,14 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.rankingTab {
+  h3 .icon { width: 24px; }
+  .title { margin-bottom: 14px; }
+  .navTab { margin: 0px -6px 16px;
+    a { margin: 0px 6px;}
+  }
+  .tabContainer { padding: 12px; background: var(--light-mode-bg); border-radius: 12px; }
+}
+.simpleTab {
+  margin: 0px -12px;
+}

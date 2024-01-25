@@ -1,0 +1,279 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <div class="page-content form-page">
+
+      <!-- Breadcrumb-->
+      <div class="container-fluid py-2">
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb mb-0 py-3 px-0">
+            <li class="breadcrumb-item"><a href="{% url 'activity-management' %}"> Activity Management</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Activity Detail</li>
+          </ol>
+        </nav>
+      </div>
+      <section class="tables py-0">
+        <div class="container-fluid">
+          <div class="row gy-4 ">
+            <div class="col">
+              <div class="card mb-0">
+                <div class="card-header">
+                  <h3 class="h4 mb-0">Activity Detail</h3>
+                </div>
+                <div class="card-body  py-4 ">
+                  <div class="row align-items-center">
+                    <div class="col-sm-3 col-md-4 mb-md-0 mb-3">
+                      <!-- <div class="activity-image-box ">
+                        <img src="img/mockup7.jpg" alt="Restaurant">
+                      </div> -->
+                      <form method="post" action="{% url 'upload-activity-image' %}" id="image-upload-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="activity_id" value="{{activity.id}}">
+                        <input type="file" name="image" id="image" hidden>
+                        <input type="hidden" name="image_no" id="image-no">
+                      </form>
+                      <form method="post" action="{% url 'link-activity-image' %}" id="image-link-form" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="activity_id" value="{{activity.id}}">
+                        <input type="hidden" name="media_id" id="media-id">
+                        <input type="hidden" name="image_no" id="link-image-no">
+                      </form>
+                      <div class="section intro-section my-profile-box text-center">
+                        <div id="activityProfileImage1" class="profile-image activity-image" style="background: url('{{activity.thumbnail_image}}') no-repeat center / cover; height: 200px; width: 200px; object-fit: cover;">
+                          <!-- <input type="file"> -->
+                          <a href="#" id="pencil-1" class="btn first-profile profile-comman" data-bs-toggle="modal" data-bs-target="#imageOptionModal1"><img src="{% static 'img/pencil.svg' %}" alt="edit"></a>
+                        </div>
+                      </div>
+                      <div class="section intro-section my-profile-box text-center">
+                        <div id="activityProfileImage2" class="profile-image activity-image" style="background: url('{{activity.thumbnail_image_2}}') no-repeat center / cover; height: 200px; width: 200px; object-fit: cover;">
+                          <a href="#" id="pencil-2" class="btn second-profile profile-comman" data-bs-toggle="modal" data-bs-target="#imageOptionModal1"><img src="{% static 'img/pencil.svg' %}" alt="edit"></a>
+                        </div>
+                      </div>                     
+
+                    </div>
+                    <div class="col-sm-9 col-md-8">
+                      <div class="customer-detail-box">
+                        <div class="row align-items-center">
+                          <div class="col-sm-6">
+                            <h5 class="text-capitalize">Place Title</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{{activity.activity_name}}</h5>
+                            <h5 class="text-capitalize">Company Name</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{%if activity.company_name %} {{activity.company_name|title}} {% else %} - {% endif %}</h5>
+                            <h5 class="text-capitalize mt-4">Type</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{{activity.activity_type|title}}</h5>
+
+                            <h5 class="text-capitalize mt-4">Time</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{{activity.activity_time}}</h5>
+
+                            <h5 class="text-capitalize">Website Reference</h5>
+                            {% if activity.activity_type == "restaurant" %}
+                            <a style="color: #845095;" {% if activity.restaurant_menu %} href="{{activity.restaurant_menu}}" {% else %} href="#" {% endif %} target=”_blank”>Restaurant Menu</a><br>
+                            {% endif %}
+                            <a style="color: #845095;" {% if activity.instagram %} href="{{activity.instagram}}" {% else %} href="#" {% endif %} target=”_blank”>Instagram</a><br>
+                            <!-- <a style="color: #845095;" {% if activity.google_map %} href="{{activity.google_map}}" {% else %} href="#" {% endif %} target=”_blank”>Google Map</a><br> -->
+                            <h5 class="text-capitalize mt-4">Booking Reference</h5>
+                            <p class="fw-bold pb-2" style="color: #845095;">{%if activity.booking_reference %} {{activity.booking_reference}} {% else %} - {% endif %}</p>
+                          </div>
+                          <div class="col-sm-6">
+                            <h5 class="text-capitalize mt-md-0 mt-4">People Group Limit</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{% if activity.group_amount == 0 %} Any {% else %} {{activity.group_amount}} {% endif %}</h5>
+                            <h5 class="text-capitalize mt-md-0 mt-4">Amount</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{% if activity.activity_amount == 0 %} Free {% else %} {{activity.activity_amount}} AED {% endif %}</h5>
+                            <h5 class="text-capitalize mt-md-0 mt-4">Feeling</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">FR</h5>
+                            <h5 class="text-capitalize mt-4">Latitude</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{{activity.latitude}}</h5>
+                            <h5 class="text-capitalize mt-4">Longitude</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{{activity.longitude}}</h5>
+                            <h5 class="text-capitalize mt-4">{% if activity.activity_type == "activity" %} Description {% else %} Restaurant Type {% endif %}</h5>
+                            <h5 class="fw-bold pb-2 purple-txt ">{% if activity.activity_type == "activity" %} {%if activity.activity_description %} {{activity.activity_description}} {% else %} - {% endif %} {% else %} {%if activity.restaurant_type %} {{activity.restaurant_type}} {% else %} - {% endif %} {% endif %}</h5>
+                            <!-- <h5 class="fw-bold pb-2 purple-txt ">Adventurous</h5> -->
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Modal (edit image popup) -->
+          <div class="modal fade modal-wrap imageOptionModal1 " id="imageOptionModal1" tabindex="-1" aria-labelledby="imageOptionModalLabel1" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body"> 
+                  <div class="modal-btn-wrapper">
+                    <div id="uploadImageBtnWrapper1" class="upload-btn-wrapper">
+                      <input type="file">
+                      <a id="uploadImageBtn1" class="btn btn-primary" href="#">Upload new image</a>
+                    </div>
+                    <button id="chooseImagebtn1" type="button" class="choose-image-btn btn btn-primary">Choose from gallary</button>
+                  </div>   
+                  <div id="chooseImgWrapper1" class="choose-img-wrapper">   
+                    <div class="search-wrapper">
+                      <div class="input-group">
+                        <div class="form-outline">
+                          <input type="text" id="media-search-bar" class="form-control" onkeyup="filterMediaSearch()" placeholder="What you are looking for..."/>
+                        </div>
+                        <!-- <button type="button" class="search-btn btn btn-primary">
+                          <i class="fas fa-search"></i>
+                        </button> -->
+                      </div>
+                    </div>       
+                    <div class="gallery-wrapper" id="gallary-wrapper-div">
+                      {% for media in media_gallary %}
+                      <div class="img-wrapper" onclick="linkImageToProfile(mediaID='{{media.id}}')">
+                        <img src="{{media.img_url}}" alt=""><p>{{media.name}}</p>
+                      </div>
+                      {% endfor %}
+                    </div>
+                  </div>   
+                </div>
+              </div>
+            </div>
+          </div>
+<!-- modal ends -->
+      </section>
+
+    </div>
+  </div>
+  <!-- JavaScript files-->
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/just-validate/js/just-validate.min.js' %}"></script>
+  <script src="{% static 'vendor/chart.js/Chart.min.js' %}"></script>
+  <script src="{% static 'vendor/choices.js/public/assets/scripts/choices.min.js' %}"></script>
+  
+  <!-- Jquery CDN -->
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js" integrity="sha256-2Pmvv0kuTBOenSvLm6bvfBSSHrUJ+3A7x6P5Ebd07/g=" crossorigin="anonymous"></script>
+
+  <!-- Main File-->
+  <script src="{% static 'js/front.js' %}"></script>
+  <script>
+    // ------------------------------------------------------- //
+    //   Inject SVG Sprite - 
+    //   see more here 
+    //   https://css-tricks.com/ajaxing-svg-sprite/
+    // ------------------------------------------------------ //
+    function injectSvgSprite (path) {
+
+      var ajax = new XMLHttpRequest();
+      ajax.open("GET", path, true);
+      ajax.send();
+      ajax.onload = function (e) {
+        var div = document.createElement("div");
+        div.className = 'd-none';
+        div.innerHTML = ajax.responseText;
+        document.body.insertBefore(div, document.body.childNodes[0]);
+      }
+    }
+    // this is set to BootstrapTemple website as you cannot 
+    // inject local SVG sprite (using only 'icons/orion-svg-sprite.svg' path)
+    // while using file:// protocol
+    // pls don't forget to change to your domain :)
+    injectSvgSprite('https://bootstraptemple.com/files/icons/orion-svg-sprite.svg');
+  </script>
+
+
+  <!-- Preview Image -->
+  <!-- 1st Image -->
+  <script>
+    function linkImageToProfile(mediaID){
+      var btn_ = document.getElementById("chooseImagebtn1");
+      document.getElementById("link-image-no").value = btn_.value;
+      document.getElementById("media-id").value = mediaID;
+      document.getElementById("image-link-form").submit()
+    }
+
+    function filterMediaSearch(){
+      var val = document.getElementById("media-search-bar").value;
+      mediaGallary = JSON.parse("{{json_media_gallary|escapejs}}");
+      
+      innerBody = "";
+      for (var i = 0; i < mediaGallary.length; i++) {
+        if (mediaGallary[i].name.includes(val)) {
+          innerBody += `<div class='img-wrapper' onclick='linkImageToProfile(mediaID=${mediaGallary[i].id})'><img src=${mediaGallary[i].img_url} alt=''><p>${mediaGallary[i].name}</p></div>`
+        }
+      }
+      document.getElementById("gallary-wrapper-div").innerHTML = innerBody;
+    }
+
+    function readURLOne (input,name) {
+      var image_selecter = $('.my-profile-box  .second-profile ').parent();
+      if( name == 'first'){
+        image_selecter = $('.my-profile-box  .first-profile').parent();
+      }
+      
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+          image_selecter.css('background-image', 'url(' + e.target.result + ')');
+          $('#imageOptionModal1').modal('toggle');
+          
+          // setting value of empty form
+          document.getElementById("image").files = input.files;
+          if(name == 'first'){
+            document.getElementById("image-no").value = 1;
+          }
+          else{
+            document.getElementById("image-no").value = 2;
+          }
+          if (name == "first"){
+            document.getElementById("pencil-1").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+          }
+          else{
+            document.getElementById("pencil-2").innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>';
+          }
+          document.getElementById("image-upload-form").submit()
+        }
+        reader.readAsDataURL(input.files[0]);
+      } else {
+        $('.modal-backdrop').css('display', 'unset');
+      }
+    }
+
+    // Onclick Gallery Button Display Function
+    $('.choose-image-btn').click(function (e) {
+      if ( $('#chooseImgWrapper1').hasClass('choose-img-wrapper')){
+        $('#chooseImgWrapper1').addClass('active-choose-btn');
+      } else { 
+        $('#chooseImgWrapper1').removeClass('active-choose-btn'); 
+      }
+    });
+
+    $(document).on('click','.profile-comman',function(){
+      $(".upload-btn-wrapper").removeClass('first-profile');
+      $(".upload-btn-wrapper").removeClass('second-profile');     
+
+      $("#chooseImgWrapper1").removeClass('active-choose-btn');
+
+      if($(this).hasClass('first-profile')){
+        $(".upload-btn-wrapper ").addClass('first-profile');
+      }else{
+        $(".upload-btn-wrapper ").addClass('second-profile');
+      }
+
+      var img_no = 1;
+      if( $('.upload-btn-wrapper').hasClass('second-profile') ){img_no = 2;}
+      document.getElementById("chooseImagebtn1").value = img_no; // sets img either it is first image or second
+    });
+
+      $('.upload-btn-wrapper  a').click(function () {       
+        $(".upload-btn-wrapper input").trigger('click');
+      });
+      $(".upload-btn-wrapper input").change(function () {
+
+        var name = 'first';
+        if( $('.upload-btn-wrapper').hasClass('second-profile') ){
+          name = 'secound';
+        }
+        readURLOne(this,name);
+      });
+  </script>
+  <!-- FontAwesome CSS - loading as last, so it doesn't block rendering-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+    integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+{% endblock %}

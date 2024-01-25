@@ -1,0 +1,22 @@
+.btn {
+    fill: white;
+    background-color: #25d366;
+    color: white;
+    margin-right: 10px;
+    padding: 6px;
+    border-radius: 6px;
+    
+    
+    @media (max-width: 767px) {
+        z-index: 11;
+        position: fixed;
+        right: 10px;
+        bottom: 120px;
+        border-radius: 100%;
+        padding: 12px;
+        margin: 0;
+    }
+
+    // padding: 10px;
+
+}

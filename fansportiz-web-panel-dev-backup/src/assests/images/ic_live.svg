@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="40px" height="32px" viewBox="0 0 40 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>Rectangle</title>
+    <g id="3-Feb-2020" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Group-73-Copy-2">
+            <polygon id="Rectangle" points="-2.50275607e-13 0 40 0 40 32 -2.50275607e-13 32"></polygon>
+            <g id="Group-10" transform="translate(4.000000, 4.000000)">
+                <path d="M2.60780985,0 L29.3921902,0 C30.8324438,2.29383405e-15 32,1.16755624 32,2.60780985 L32,21.3921902 C32,22.8324438 30.8324438,24 29.3921902,24 L2.60780985,24 C1.16755624,24 1.65109425e-15,22.8324438 0,21.3921902 L0,2.60780985 C-1.76380197e-16,1.16755624 1.16755624,-1.79518914e-16 2.60780985,0 Z" id="Rectangle" fill="#E71F1E"></path>
+                <g id="Group-2" transform="translate(8.000000, 4.000000)">
+                    <g id="Group" transform="translate(0.000000, -0.000000)">
+                        <g id="Group-69" stroke="#FFFFFF">
+                            <path d="M0.904027764,3.8620708 C3.26935184,3.6340236 5.63467592,3.52 8,3.52 C10.3653248,3.52 12.7306496,3.63402367 15.0959743,3.862071 C15.6087049,3.9115114 16,4.34234677 16,4.85745545 L16,12.52 C16,13.0722847 15.5522847,13.52 15,13.52 L8,13.52 L8,13.52 L1,13.52 C0.44771525,13.52 2.8967998e-16,13.0722847 0,12.52 L0,4.85750262 C-4.7587891e-05,4.342366 0.391268784,3.91150726 0.904027764,3.8620708 Z" id="Rectangle" stroke-width="1.5"></path>
+                            <g id="Group-68" transform="translate(4.480000, 0.000000)" stroke-linecap="round">
+                                <line x1="0.52" y1="0.52" x2="3.52" y2="3.52" id="Line-2"></line>
+                                <line x1="3.52" y1="1.27" x2="6.27" y2="3.52" id="Line-2" transform="translate(4.895000, 2.395000) scale(-1, 1) translate(-4.895000, -2.395000) "></line>
+                            </g>
+                        </g>
+                        <polygon id="Path" fill="#FFFFFF" fill-rule="nonzero" points="6 5.52 6 11.52 11 8.51998242"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

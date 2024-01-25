@@ -1,0 +1,10 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.closeBtn { width: 32px; height: 32px;
+  svg { width: 20px; height: 20px; }
+  polygon { fill: var(--font-color);}
+}
+.slider { width: calc(100% - 40px); }
+
+/***** Responsive CSS Start ******/

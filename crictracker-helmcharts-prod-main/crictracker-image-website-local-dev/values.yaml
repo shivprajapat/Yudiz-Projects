@@ -1,0 +1,58 @@
+replicaCount: 2
+
+image: 693583001687.dkr.ecr.ap-south-1.amazonaws.com/crictracker-website:c7bb910f4809ed6548af083111fbdabf0205c97b
+
+labels:
+  tier: frontend
+  release: blue-green
+  environment: development
+
+namespace: local-dev
+
+service:
+  type: NodePort
+  port: 3000
+  healthcheck: /api/health-check/
+  pm2: 9209
+
+resources:
+  requests:
+    memory: "100Mi"
+    cpu: "100m"
+  limits:
+    memory: "500Mi"
+    cpu: "200m"
+
+livenessProbe:
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+  initialDelaySeconds: 40
+  timeoutSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 80
+  timeoutSeconds: 30
+  failureThreshold: 3
+  periodSeconds: 10
+  successThreshold: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: "2"
+  maxReplicas: "20"
+  targetCPU: "60"
+
+#Because we are using our private docker registry deployed in Kubernetes if you are using AWS(ECR) than you can disable this.
+imagePullSecrets:
+  enabled: false
+  name: regcred
+
+tolerations:
+  - key: env
+    effect: "NoSchedule"
+    operator: Equal
+    value: spot
+  - key: node.kubernetes.io/not-ready
+    operator: "Exists"
+    effect: NoExecute
+    tolerationSeconds: 0  

@@ -1,0 +1,28 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.homeArticles {
+  &:last-child { margin-bottom: 0 !important; }
+}
+.btnList { 
+    a { color: var(--border-color); border: 1px solid var(--border-light);
+      &:hover { color: var(--theme-color-light); border-color: var(--theme-color-light); }
+    }
+ }
+.articleGridList { 
+  article { min-height: calc(100% - 8px); }
+}
+.articleGroup { padding: 11px 3px;
+  :nth-last-child(1),
+  :nth-last-child(2) {
+    article {  margin-bottom: 0; }
+   }
+}
+
+@media (max-width: 575px) {
+  .articleGroup { padding: 11px 12px;
+    :nth-last-child(2) {
+      article {  margin-bottom: 8px; }
+     }
+  }
+}

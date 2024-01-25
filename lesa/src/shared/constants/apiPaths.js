@@ -1,0 +1,23 @@
+export const apiPaths = {
+  userLogin: '/user/password-authenticate',
+  userProfileDetails: 'userModule/users',
+  assetListing: 'assetModule/assets',
+  categoryListing: 'categoryModule/categories',
+  updateKyc: '/truliooModule/updateKyc',
+  asset: '/assetOnSaleModule/assetOnSale',
+  assetUpload: '/assetFileUpload/getPreSignedUrl',
+  assetOnSaleListing: 'assetOnSaleModule/assetOnSale',
+  connectWallet: '/walletModule/connectWallet',
+  userRegister: 'signUpModule/signUpRequest',
+  userSetPassword: '/signUpModule/signUpRegister',
+  forgotPasswordRequest: 'forgotPasswordModule/forgotPasswordRequest',
+  forgotPassword: 'forgotPasswordModule/forgotPassword',
+  ownedAssets: '/ownedAssetModule/ownedAssets',
+  order: '/orderModule/orders',
+  orderPayment: 'orderModule/orderPayment',
+  bids: 'biddingModule/index',
+  exchangeRate: 'exchangeRateModule/exchangeRates',
+  assetOnSaleCreatorShow: 'assetOnSaleModule/assetOnSaleCreatorShow',
+  nuuCoinModule: 'nuuCoinModule/index',
+  internalWalletModule: 'internalWalletModule/index'
+}

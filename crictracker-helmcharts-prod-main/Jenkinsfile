@@ -1,0 +1,88 @@
+def getFilesChanged() {
+    def filesList = []
+    def changeLogSets = currentBuild.changeSets
+                    for (int i = 0; i < changeLogSets.size(); i++) {
+                        def entries = changeLogSets[i].items
+                        for (int j = 0; j < entries.length; j++) {
+                            def entry = entries[j]
+                            def files = new ArrayList(entry.affectedFiles)
+                                for (int k = 0; k < files.size(); k++) {
+                                def file = files[k]
+                                filesList.add(file.path.split("/")[0])
+                }
+            }
+        }
+    HashSet<String> charts = new HashSet<String>(filesList);
+    charts.remove("Jenkinsfile");
+    charts.remove("index.yaml");
+    return charts
+}
+
+
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          tolerations:
+          - effect: NoSchedule
+            key: pv
+            operator: Equal
+            value: jenkins
+          containers:
+          - name: docker
+            image: public.ecr.aws/d7h0j7s7/gitlab-ci:latestv2argocd
+            tty: true   
+        '''
+    }
+  }
+
+    environment {
+    CHANGES = getFilesChanged()
+    REPO_NAME = "crictracker-helmrepo"
+  }
+  stages { 
+    stage('Package') {
+              steps {
+                container('docker') {
+                  withCredentials([[
+                 $class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${env.CRIC_AWS_CREDS}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'], usernamePassword(credentialsId: "${env.CRIC_HELM_CREDS}", usernameVariable: 'HELMUNAME', passwordVariable: 'HELMPW'), usernamePassword(credentialsId: "${env.GIT_CREDS}", usernameVariable: 'gitUser', passwordVariable: 'gitPass')]) {
+
+                sh '''#!/bin/bash
+                aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID; aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY; aws configure set default.region $CRIC_REGION
+                aws eks --region $CRIC_REGION update-kubeconfig --name crictracker
+                helm repo add --username $HELMUNAME --password $HELMPW crictracker-helmrepo $CRIC_HELM_URL
+                helm repo update
+
+                apk add yq
+                echo $CHANGES
+                helm plugin install https://github.com/chartmuseum/helm-push
+                helm_charts=$(echo $CHANGES| tr -d ","| tr -d "[" | tr -d "]")
+                echo "CHANGED HELM CHARTS: $helm_charts"
+                eval "arr=($helm_charts)"
+                for chart_name in "${arr[@]}"; do
+                    export chart_version=$(yq r $chart_name/Chart.yaml version)
+                    echo $chart_version
+                    echo new_chart_version=$(echo ${chart_version} | awk -F. -v OFS=. '{$NF += 1 ; print}')
+                    sed -i'' -e 's/$chart_version/$new_chart_version/g' $chart_name/Chart.yaml
+                    echo $new_chart_version
+                    helm package "$chart_name"
+                done
+                mv *.tgz helm-registry/
+                git config --global --add safe.directory /home/jenkins/agent/workspace/ities_Crictracker-Helm-CICD_main
+                helm repo index .
+                git config --global user.email "prasanth.kumar@yudiz.com"
+                git config --global user.name "Prasanth-Yudiz"
+                git add .
+                git commit -m "Updated chart index"
+                git push https://$gitUser:$gitPass@github.com/yudiz-solutions/crictracker-helmcharts-prod.git HEAD:main
+                '''
+                }
+              }
+            }
+          }
+        }
+      }
+

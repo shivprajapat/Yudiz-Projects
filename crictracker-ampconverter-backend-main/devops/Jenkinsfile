@@ -1,0 +1,126 @@
+def buildNumber = BUILD_NUMBER as int; if (buildNumber > 1) milestone(buildNumber - 1); milestone(buildNumber)
+
+pipeline {
+  agent {
+    kubernetes {
+      yaml '''
+        apiVersion: v1
+        kind: Pod
+        spec:
+          nodeSelector:
+            pv: jenkins        
+          tolerations:
+          - effect: NoSchedule
+            key: pv
+            operator: Equal
+            value: jenkins
+          containers:
+          - name: docker
+            image: public.ecr.aws/d7h0j7s7/gitlab-ci:latestv4
+            tty: true
+            volumeMounts:
+             - mountPath: /var/run/docker.sock
+               name: docker-sock
+          volumes:
+          - name: docker-sock
+            hostPath:
+              path: /var/run/docker.sock
+        '''
+    }
+  }
+  environment {
+    CRIC_MAIL_TO = "$CRIC_MAIL_TO"
+    BUILD_NAME = "$PROJECT_NAME" + "-ampconverter"
+    CI_COMMIT_SHA = "$GIT_BRANCH" + "_$GIT_COMMIT"
+    GIT_COMMIT_EMAIL = sh (script: 'git --no-pager show -s --format=\'%ae\'',returnStdout: true).trim()
+  }
+  
+  stages {
+    stage('Crictracker AMP Backend Production Build') {
+      when {
+        beforeInput true
+        branch 'main'
+      }
+      environment{
+        BUILD = "$BUILD_NAME" + "-prod"
+        ECR = "$CRIC_ECR_URL" + "$BUILD"
+      }
+      options {
+        timeout(time: 1, unit: 'DAYS') 
+      }
+      input {
+        message "Should we continue for Production?"
+        ok "Yes, we should."
+      }
+
+      steps {
+        container('docker') {
+          withCredentials([[
+            $class: 'AmazonWebServicesCredentialsBinding', credentialsId: "${env.CRIC_AWS_CREDS}", accessKeyVariable: 'AWS_ACCESS_KEY_ID', secretKeyVariable: 'AWS_SECRET_ACCESS_KEY'], usernamePassword(credentialsId: "${env.CRIC_HELM_CREDS}", usernameVariable: 'HELMUNAME', passwordVariable: 'HELMPW'),usernamePassword(credentialsId: "${env.GIT_CREDS}", usernameVariable: 'gitUser', passwordVariable: 'gitPass')]) {
+
+        sh ''' 
+          aws configure set aws_access_key_id $AWS_ACCESS_KEY_ID; aws configure set aws_secret_access_key $AWS_SECRET_ACCESS_KEY; aws configure set default.region $CRIC_REGION
+          aws eks --region $CRIC_REGION update-kubeconfig --name crictracker
+          helm repo add --username $gitUser --password $gitPass crictracker-helmrepo $CRIC_HELM_GIT_URL
+          helm repo update
+
+          docker build --network=host -t $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA -f devops/Dockerfile .
+          aws ecr get-login-password --region $CRIC_REGION | docker login --username AWS --password-stdin $CRIC_ECR_URL
+          docker push $CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          helm upgrade -n production $BUILD crictracker-helmrepo/$BUILD --set=image=$CRIC_ECR_URL$BUILD_NAME:$CI_COMMIT_SHA
+          kubectl rollout status -w deployment/$BUILD -n production
+          '''
+        } 
+      }
+    }
+  }
+
+  /*
+    stage('Crictracker AMP Production Reload') {
+      agent {
+        kubernetes {
+          yaml '''
+            apiVersion: v1
+            kind: Pod
+            spec:
+              containers:
+              - name: reload
+                image: public.ecr.aws/d7h0j7s7/node:16.14
+                tty: true  
+            '''
+        }
+      }
+      when {
+        beforeInput true
+        branch 'master'
+      }
+      steps {
+        container('reload') {
+        sh '''
+        curl https://crictracker-gateway-configfile.s3.ap-south-1.amazonaws.com/supergraph-config-dev.yaml --output supergraph-config-dev.yaml
+        npm install -g @apollo/rover
+        curl https://crictracker-gateway-configfile.s3.ap-south-1.amazonaws.com/article-gateway-dev-reload.sh --output article-gateway-dev-reload.sh
+        chmod +x article-gateway-dev-reload.sh
+        ./article-gateway-dev-reload.sh
+
+        curl https://crictracker-gateway-configfile.s3.ap-south-1.amazonaws.com/supergraph-config-prod.yaml --output supergraph-config-prod.yaml
+        npm install -g @apollo/rover
+        curl https://crictracker-gateway-configfile.s3.ap-south-1.amazonaws.com/article-gateway-prod-reload.sh --output article-gateway-prod-reload.sh
+        chmod +x article-gateway-prod-reload.sh
+        ./article-gateway-prod-reload.sh
+        '''
+      }
+    }
+  }
+
+*/
+}
+
+    post{
+      always{
+          mail to: "${GIT_COMMIT_EMAIL}",cc: env.CRIC_MAIL_TO,
+          subject: "Your Pipeline Status For ${JOB_NAME}",
+          body: "Jenkins Build For Job ${env.JOB_NAME} is ${currentBuild.currentResult}:, You can Find More Info. at ${env.BUILD_URL}"
+      }
+    }
+  }

@@ -1,0 +1,121 @@
+[
+  {
+    "sSlug": "authors",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "careers",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "about-us",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st",
+    "sTitle": "about us page",
+    "oFB": {
+      "sTitle": "",
+      "sDescription": "",
+      "sUrl": ""
+    },
+    "oTwitter": {
+      "sTitle": "",
+      "sDescription": "",
+      "sUrl": ""
+    },
+    "sCUrl": "about-us",
+    "sDescription": null,
+    "sRobots": "Follow, Index"
+  },
+  {
+    "sSlug": "contact-us",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "cricket-schedule",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "cricket-series",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "cricket-series-archive",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "cricket-videos",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "fantasy-cricket-tips",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "icc-rankings",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "live-scores",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "live-scores/recent",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "live-scores/upcoming",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "playlist",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  },
+  {
+    "sSlug": "feedback",
+    "aKeywords": [],
+    "aSeoRIds": [],
+    "eStatus": "a",
+    "eType": "st"
+  }
+]

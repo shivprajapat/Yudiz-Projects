@@ -1,0 +1,74 @@
+
+.slick-slider {
+  .slick-arrow { width: 26px; height: 50px; z-index: 5; background: var(--light-mode-bg); border-radius: 13px; border: 2px solid $theme-color;
+      &.slick-prev            { left: 0px; }
+      &.slick-next            { right: 0px; }
+      &::before               { content: ""; margin: auto; width: 100%; height: 100%; display: block; background: url(../../images/icon/right-theme-arrow.svg) no-repeat center center / 20px auto; }
+      &.slick-prev::before    { @include transform(rotate(180deg)); }
+      &:hover { background: $theme-color; 
+          &::before { @include filter(brightness(0) invert(1)); }
+      }
+      &.slick-disabled { display: none !important;}
+  }
+  &.process-arrow {
+      .slick-dots { margin: 0px -1.5px; bottom: 0px; display: flex !important; display: -webkit-flex !important;
+          li { margin: 0px 1.5px; width: inherit; height: inherit;
+              button { width: 100%; height: 4px; padding: 0; background: $font-light; position: relative;
+                  &::before { content: ""; position: absolute; width: 100%; height: 100%; background: $theme-medium; opacity: 0; }
+              }
+              &.slick-active button::before  { opacity: 1; animation: process 4s linear; }
+          }
+      }
+  }
+  &.over-slider { 
+    .slick-arrow { background-color: transparent; border: none; 
+      &:hover::before { @include filter(none); }
+    }
+    .slick-track { display: flex; display: -webkit-flex; }
+  }
+  &.simple-arrow {
+    .slick-dots { margin: 0px -2px; bottom: 0px; display: flex !important; display: -webkit-flex !important; @include justify-content(start);
+      li { margin: 0px 2px; width: auto; height: auto;
+          button { width: 24px; height: 4px; padding: 0; background: $theme-medium; position: relative; border-radius: 3px; 
+            &::before { display: none; }
+          }
+          &.slick-active button { background: $theme-medium2; }
+      }
+    }
+  }
+  &.fantasy-team-slider {
+    .slick-arrow { margin-top: 30px; border: none; @include box-shadow(0 0 10px rgba(0,0,0,0.42));
+      &.slick-prev            { left: -13px; }
+      &.slick-next            { right: -13px; }    
+    }
+    .slick-dots { margin-left: 22px; }
+  }
+}
+
+@keyframes process {
+  from {
+    width: 0%;
+  }
+
+  to {
+    width: 100%;
+  }
+}
+.scorecard-slider {
+  .slick-arrow { opacity: 0; visibility: hidden; }
+  &:hover .slick-arrow:not(.slick-disabled) { opacity: 1; visibility: visible; }
+}
+
+@media (max-width: 991px) {
+  .date-slider{
+    .slick-track { overflow-x: auto; display: flex; width: initial !important; }
+  }
+}
+
+@media (max-width: 767px) {
+  .over-slider,
+  .scorecard-slider{
+    .slick-list { overflow-x: auto; }
+    .slick-track { display: flex; width: initial !important; }
+  }
+}

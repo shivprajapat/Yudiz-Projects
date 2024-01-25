@@ -1,0 +1,108 @@
+enum CommentStatusType {
+    p
+    a
+    r
+    sp
+    t
+    d
+    all
+}
+
+type articleData {
+    _id: ID
+    sTitle: String
+}
+
+type comment @key(fields: "_id"){
+    _id:ID
+    sContent: String
+    oArticle: articleData
+    oArticleSeo: Seo
+    nReportCount: Int
+    eStatus: String
+    iSubmittedBy: ID
+    dCreated: String
+    dUpdated: String
+    oCreatedBy: user
+    nLikeCount: Int
+    nDislikeCount: Int
+    nReplies: Int
+}
+
+type frontComment @key(fields: "_id"){
+    _id:ID
+    sContent: String
+    oArticle: articleData
+    nReportCount: Int
+    eStatus: String
+    iSubmittedBy: ID
+    dCreated: String
+    dUpdated: String
+    oCreatedBy: user
+    nLikeCount: Int
+    nDislikeCount: Int
+    nReplies: Int
+}
+
+extend type user @key(fields:"_id"){
+    _id:ID @external
+}
+
+input commentPaginationInput {
+    iArticleId: ID
+    nSkip: Int!
+    nLimit: Int!
+    sSortBy: String
+    nOrder: Int
+    sSearch: String
+    eStatus: CommentStatusType
+}
+
+input frontCommentInput {
+    iArticleId: ID
+    nSkip: Int!
+    nLimit: Int!
+    sSortBy: String
+    nOrder: Int
+}
+
+input frontChildCommentInput {
+    iCommentId: ID
+    nSkip: Int!
+    nLimit: Int!
+    sSortBy: String
+    nOrder: Int
+}
+
+type listComments {
+  nTotal: Int
+  aResults: [comment]
+}
+
+type listFrontComments {
+  nTotal: Int
+  aResults: [frontComment]
+}
+
+type CommentCount {
+    nAll: Int
+    nPending: Int
+    nApproved: Int
+    nSpam: Int
+    nRejected: Int
+    nTrash: Int
+}
+
+type listFrontCommentReportReason {
+    _id: ID
+    sTitle: String
+}
+
+extend type Query {
+    listComments(input: commentPaginationInput): listComments
+    listFrontComments(input: frontCommentInput): listFrontComments
+    listFrontChildComments(input: frontChildCommentInput): listFrontComments
+    getCommentCounts: CommentCount
+    listFrontCommentReportReason: [listFrontCommentReportReason]
+    listFrontDeleteAccountReasons: [listFrontCommentReportReason]
+}

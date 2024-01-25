@@ -1,0 +1,14 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.scroll-list { margin: 0 -12px 12px; overflow: auto;}
+.scroll-list > div { width: 25%; padding: 0 12px; min-width: 240px; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+  
+}
+
+@media (max-width: 1199px) {
+}

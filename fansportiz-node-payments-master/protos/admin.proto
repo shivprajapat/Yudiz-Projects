@@ -1,0 +1,63 @@
+syntax = "proto3";
+
+package admin;
+
+service Admin {
+  rpc createAdminLog(adminLogRequest) returns (emptyRes) {}
+  rpc findAdmin(AdminReq) returns (AdminRes) {}
+  rpc findAdmins(AdminReq) returns (AdminRes) {}
+  rpc findByToken(AdminToken) returns (AdminResponse) {}
+  rpc findByDepositToken(AdminToken) returns (AdminResponse) {}
+  rpc findRole(aRole) returns (RoleResponse) {}
+  rpc updateAdmin(updateReq) returns (emptyRes) {}
+  rpc findCredential(credentialReq) returns (credentialRes) {}
+}
+message adminLogRequest { string logData = 1; }
+
+message emptyRes {}
+
+message AdminReq {
+  string query = 1;
+  string projection = 2;
+  string sorting = 3;
+}
+message AdminRes { string adminData = 1; }
+
+// Admin findByToken Request
+message AdminToken { string token = 1; }
+
+// Admin findByToken Response
+message AdminResponse {
+  string _id = 1;
+  string sName = 2;
+  string sUsername = 3;
+  string sEmail = 4;
+  string sMobNum = 5;
+  string eType = 6;
+  string eStatus = 7;
+  repeated string aRole = 8;
+}
+
+// Role findRole request
+message aRole { repeated string aRole = 1; }
+
+message Permission {
+  string sKey = 1;
+  string eType = 2;
+}
+
+// Role findRole response
+message RoleResponse { repeated Permission aPermissions = 1; }
+
+message updateReq {
+  string _id = 1;
+  string token = 2;
+}
+
+// findCredential
+message credentialReq {
+  string query = 1;
+  string projection = 2;
+}
+
+message credentialRes { string data = 1; }

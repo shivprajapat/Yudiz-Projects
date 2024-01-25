@@ -1,0 +1,15 @@
+@import './variables.scss';
+@import './fantasy.scss';
+// Component SCSS
+@import './components/navigation.scss';
+@import './components/alert.scss';
+
+// Views SCSS
+@import './views/auth-module.scss';
+@import './views/user-module.scss';
+@import './views/contest-module.scss';
+@import './views/theme-module.scss';
+@import './views/profile-module.scss';
+@import 'react-datepicker/dist/react-datepicker.css';
+@import '../css/views/score-card.scss';
+@import 'components/Pagination.scss';

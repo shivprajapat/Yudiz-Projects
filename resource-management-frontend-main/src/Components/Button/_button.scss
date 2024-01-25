@@ -1,0 +1,57 @@
+.primary {
+  height: 48px;
+}
+
+.btn-border {
+  border-radius: 8px !important;
+}
+
+.fontWeight {
+  font-weight: 500;
+  font-size: 14px !important;
+  margin: 0 5px;
+}
+
+.startIcon {
+  margin: 0 0.25rem;
+}
+
+.main-btn {
+  transition: 0.1s all ease-in;
+
+  &:focus {
+    outline: none !important;
+    box-shadow: 0 !important;
+    outline: 1px solid rgb(195, 195, 196) !important;
+    transform: translateY(-3px);
+  }
+}
+
+.active-btn {
+  transition: 0.1s all ease-in;
+
+  &:active {
+    transform: translateY(3px);
+    // background-color: #0486ff45;
+  }
+}
+
+@media (max-width: 767px) {
+  .main-Button {
+    height: 30px;
+    padding: 0 !important;
+  }
+
+  .btn-border {
+    border-radius: 5px !important;
+  }
+
+  .fontWeight {
+    font-size: 11px !important;
+    margin: 1px 7px 0 6px !important;
+  }
+
+  .startIcon {
+    margin: 0 0 0 0.25rem !important;
+  }
+}

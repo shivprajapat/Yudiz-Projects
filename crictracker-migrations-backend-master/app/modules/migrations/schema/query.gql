@@ -1,0 +1,166 @@
+enum MigrationType {
+  "player"
+  player
+  "team"
+  team
+  "venue"
+  venue
+  "simple"
+  simple
+}
+
+enum MigrationStatus {
+  "active"
+  a
+  "deleted"
+  d
+}
+
+input oGetMigrationPaginationInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  bIsAssigned: Boolean
+  eType: MigrationType
+}
+
+type oMigrationData {
+  _id: ID
+  iTermId: Int
+  sName: String
+  sSlug: String
+  iTermTaxonomyId: Int
+  sTaxonomy: String
+  sDescription: String
+  nCount: String
+  eStatus: MigrationStatus
+  sAssignedName: String
+  iId: ID
+  eType: MigrationType
+  dCreated: String
+  dUpdated: String
+}
+
+type oListMigrationData {
+  nTotal: Int
+  aResults: [oMigrationData]
+  eType: [String]
+}
+
+type oMigratePlayerData {
+  _id: ID
+  sAbout: String
+  sShortName: String
+  sFirstName: String
+  sLastName: String
+  sMiddleName: String
+  sFullName: String
+  dBirthDate: Date
+  sBirthPlace: String
+  sCountry: String
+  sThumbUrl: String
+  sLogoUrl: String
+  sPlayingRole: String
+  sBattingStyle: String
+  sBowlingStyle: String
+  sFieldingPosition: String
+  sRecentMatchKey: String
+  dRecentAppearance: String
+  sNationality: String
+  eProvider: String
+  eTagStatus: String
+  bTagEnabled: Boolean
+  sCountryFull: String
+}
+
+type oTeamMigrateData {
+  _id: ID
+  sTeamKey: String
+  sTitle: String
+  sAbbr: String
+  sThumbUrl: String
+  sLogoUrl: String
+  sTeamType: String
+  sCountry: String
+  sAltName: String
+  eProvider: String
+  eTagStatus: String
+  bTagEnabled: Boolean
+  sCountryFull: String
+}
+
+type oVenueMigrateData {
+  _id: ID
+  sVenueKey: String
+  sName: String
+  sLocation: String
+  sTimezone: String,
+  sKnownAs: String
+  sCountry: String
+  sCity: String
+  nOpenedYear: Int
+  sEnds: String
+  sHomeTo: String
+  bFloodLights: Boolean
+  eProvider: String
+  sDescription: String
+  sUrl: String
+}
+
+type oTagData {
+  _id: ID
+  eType: String
+  sName: String
+  nCount: Int
+  sContent: String
+  eStatus: String
+  dUpdated: String
+  dCreated: String
+}
+
+type oGetMigrationTagDocsResponse {
+  nCount: Int
+  oTeamTag: [oTeamMigrateData]
+  oPlayerTag: [oMigratePlayerData]
+  oVenueTag: [oVenueMigrateData]
+  oSimpleTag: [oTagData]
+  sMessage: String
+}
+
+type oMigrationTagType {
+  sMessage: String
+  oData: [String]
+}
+
+input oGetMigrationTagDocsInput {
+  _id: ID!
+  nSkip: Int
+  nLimit: Int
+  sSearch: String
+}
+
+input oGetMigrationCountsInput {
+  eType: MIGRATIONCOUNT
+}
+
+enum MIGRATIONCOUNT {
+  "migration"
+  m
+}
+
+type oMigrationCounts {
+  nA: Int
+  nP: Int
+  nT: Int
+  nV: Int
+  nS: Int
+}
+
+extend type Query {
+  getMigrationTags(input: oGetMigrationPaginationInput): oListMigrationData
+  getMigrationTagType: oMigrationTagType
+  getMigrationTagDocs(input: oGetMigrationTagDocsInput!): oGetMigrationTagDocsResponse
+  getMigrationCounts(input:oGetMigrationCountsInput): oMigrationCounts
+}

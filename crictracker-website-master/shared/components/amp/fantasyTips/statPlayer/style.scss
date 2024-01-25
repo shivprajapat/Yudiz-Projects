@@ -1,0 +1,32 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.searchCard {
+  border: 1px solid;
+  border-color: var(--theme-light);
+  color: var(--font-color);
+  margin-bottom: 8px;
+}
+.icon {
+  border-radius: 50%;
+  overflow: hidden;
+}
+.text-uppercase {
+  text-transform: uppercase;
+}
+
+.playerImage {
+  position: relative;
+
+  .serialNo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 22px;
+    height: 22px;
+    text-align: center;
+    border-radius: 50%;
+    background-color: var(--theme-color-medium);
+    color: var(--light-mode-bg);
+  }
+}

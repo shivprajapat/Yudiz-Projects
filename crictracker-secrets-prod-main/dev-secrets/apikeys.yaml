@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  namespace: dev
+  name: apikeys
+data:  
+  ENTITY_SPORT_TOKEN: ZDYzZjJmMDFjMTE2MTM2ZDQwNGYwYzJkM2E2OWE1M2M=
+  YOUTUBE_CLIENT_SECRET: R09DU1BYLWRZTmNyUFRrLXR1MVlScXRTOUt4NXlXYUFWOWQ=

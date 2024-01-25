@@ -1,0 +1,224 @@
+@import 'assets/scss/helper/variables';
+
+.connect-wallet {
+  background: $skin-color;
+  padding: 110px 50px;
+  .wallet-title {
+    h2 {
+      color: $theme-color;
+      margin-bottom: 0px;
+      font-size: 80px;
+    }
+    .black-btn {
+      margin-top: 60px;
+    }
+  }
+  .wallet-content {
+    position: relative;
+    height: 100%;
+    p {
+      font-family: 'Philosopher', sans-serif;
+      font-size: 22px;
+      line-height: 30px;
+      padding: 28px 195px 0px 0px;
+      margin: 0px;
+      color: $theme-color;
+      width: 552px;
+    }
+    .wallet-images {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+      text-align: right;
+      img {
+        width: 315px;
+        height: 453px;
+        object-fit: cover;
+      }
+      .wall-img-1 {
+        position: absolute;
+        right: 0px;
+        bottom: 12%;
+      }
+      .wall-img-2 {
+        position: absolute;
+        bottom: 0px;
+        right: 230px;
+      }
+      h3 {
+        position: absolute;
+        right: 320px;
+        bottom: -30px;
+        color: $black-400;
+        text-transform: uppercase;
+        margin: 0px;
+        span {
+          color: $grey-200;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1699px) {
+  .connect-wallet {
+    padding: 100px 15px;
+    .wallet-content {
+      .wallet-images {
+        h3 {
+          bottom: -27px;
+        }
+        img {
+          width: 275px;
+          height: 375px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .connect-wallet {
+    padding: 95px 10px;
+    .wallet-title {
+      .black-btn {
+        margin-top: 50px;
+      }
+    }
+    .wallet-content {
+      p {
+        font-size: 20px;
+        line-height: 30px;
+      }
+      .wallet-images {
+        h3 {
+          bottom: -24px;
+          font-size: 50px;
+          line-height: 60px;
+          right: 235px;
+        }
+        img {
+          width: 225px;
+          height: 325px;
+        }
+        .wall-img-2 {
+          right: 170px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .connect-wallet {
+    padding: 75px 7px;
+    .wallet-title {
+      .black-btn {
+        margin-top: 50px;
+      }
+    }
+    .wallet-content {
+      p {
+        font-size: 18px;
+        line-height: 28px;
+        padding: 18px 148px 0px 0px;
+        width: 442px;
+      }
+      .wallet-images {
+        h3 {
+          bottom: -18px;
+          font-size: 35px;
+          line-height: 45px;
+          right: 180px;
+        }
+        img {
+          width: 165px;
+          height: 265px;
+        }
+        .wall-img-2 {
+          right: 127px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .connect-wallet {
+    padding: 65px 7px;
+    .wallet-title {
+      .black-btn {
+        margin-top: 40px;
+      }
+    }
+    .wallet-content {
+      p {
+        font-size: 16px;
+        line-height: 26px;
+        padding: 16px 90px 0px 0px;
+        width: 342px;
+      }
+      .wallet-images {
+        h3 {
+          bottom: -18px;
+          font-size: 35px;
+          line-height: 45px;
+          right: 180px;
+        }
+        img {
+          width: 165px;
+          height: 250px;
+        }
+        .wall-img-2 {
+          right: 127px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .connect-wallet {
+    padding: 65px 7px;
+    .wallet-title {
+      .black-btn {
+        margin-top: 20px;
+      }
+    }
+    .wallet-content {
+      margin-top: 50px;
+      position: unset;
+      p {
+        font-size: 16px;
+        line-height: 26px;
+        padding: 16px 90px 0px 0px;
+        width: 100%;
+      }
+      .wallet-images {
+        position: relative;
+        margin-top: 60px;
+        height: auto;
+        h3 {
+          bottom: -14px;
+          font-size: 25px;
+          line-height: 35px;
+          right: 150px;
+          width: fit-content;
+        }
+        img {
+          width: 132px;
+          height: 190px;
+        }
+        .wall-img-1 {
+          position: absolute;
+        }
+        .wall-img-2 {
+          right: 98px;
+          position: relative;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="36px" height="36px" viewBox="0 0 36 36" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>telegram-color-iocn</title>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="telegram-color-iocn" fill-rule="nonzero">
+            <circle id="Oval" fill="#1F9BDA" cx="18" cy="18" r="18"></circle>
+            <path d="M14.6003586,21.26608 L22.3362886,26.9812186 C23.2194314,27.4685529 23.8560971,27.2164557 24.07608,26.1619029 L27.2248857,11.3234971 C27.5472329,10.0308971 26.7323329,9.44441 25.8877271,9.82777429 L7.39752571,16.9571457 C6.13543429,17.4633471 6.14306143,18.1678543 7.16750714,18.48137 L11.9127943,19.96224 L22.8974857,13.0319771 C23.4161314,12.7176586 23.8922257,12.88666 23.5016357,13.2334943 L14.6003586,21.26608 Z" id="Path-8" fill="#FCFDFF"></path>
+        </g>
+    </g>
+</svg>

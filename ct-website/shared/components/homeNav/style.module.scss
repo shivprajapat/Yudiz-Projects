@@ -1,0 +1,20 @@
+@import '@assets/scss/variables';
+@import '@assets/scss/mixins.scss';
+
+.articleTab { margin-bottom: 30px; background: var(--light-mode-bg); border-radius: 16px; overflow: hidden;
+  .navLink { background: transparent; border-radius: 0; position: relative;
+    &.active { background: $theme-color; color: #fff;
+      .icon { @include filter(brightness(0) invert(1)); }
+    }
+    &::after { @extend %after-before; width: 1px; height: 66%; background: $light; right: -1px; top: 17%; }
+  }
+  .icon { margin: 5px 8px 5px 0px; width: 24px; @include filter(brightness(0)); }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 767px) {
+  .articleTab { margin-bottom: 18px; border-radius: 12px;
+    .icon { margin: 3px 6px 3px 0px; width: 22px; }
+  }
+}

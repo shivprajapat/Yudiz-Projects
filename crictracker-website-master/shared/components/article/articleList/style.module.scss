@@ -1,0 +1,12 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.articleList {
+  a { border-bottom: 1px solid var(--light); }
+  :last-child a { border: none !important; }
+}
+.badge::before { @extend %after-before; margin-right: 3px; position: relative; width: 10px; height: 10px; background: url(../../../../assets/images/icon/play-icon.svg) center center / cover;
+  [data-mode=dark] & {
+    filter: brightness(0) invert(1) opacity(0.9);
+  }
+}

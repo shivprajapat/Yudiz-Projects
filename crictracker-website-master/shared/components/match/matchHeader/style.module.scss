@@ -1,0 +1,46 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.head { padding: 12px 16px; color: var(--font-color);
+  h1 { margin-bottom: 8px; font-size: 21px; line-height: 32px;}
+}
+.matchInfo {
+  p { margin-bottom: 13px; 
+    &:last-child { margin-bottom: 0;}
+  }
+}
+.name { min-width: 140px; }
+.flag { margin-right: 12px; width: 48px;}
+.badge { padding: 2px 6px; border-radius: 4px; }
+.countdown {
+  p {
+    span { flex: 1 }
+  }
+}
+.winner {
+  path { fill: #FFBD00; }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .matchInfo { 
+    .info { max-width: 30%; }
+  }
+  .head h1 { font-size: 19px; line-height: 28px;}
+}
+
+@media (max-width: 767px) {
+  .head h1 { font-size: 19px; line-height: 28px;}
+  .matchInfo {
+    .info { margin-top: 12px; }
+    p { margin-bottom: 4px; }
+  }
+  .btns { margin-top: 0px; padding-top: 0px; position: absolute; top: 12px; right: 4px; } 
+  .name { min-width: inherit; }
+  .flag { width: 24px;}
+}
+@media (max-width: 575px) {
+  .matchInfo { margin: 0 -12px 0px; border-bottom: 2px solid var(--theme-bg); padding: 8px 10px; position: sticky; z-index: 6; border-radius: 0; }
+  .head { margin: 0 -12px 2px; padding: 8px 12px; border-radius: 0;
+    h1 { font-size: 16px; line-height: 22px; }
+  }
+}

@@ -1,0 +1,23 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.tipsNote { padding: 12px; background: var(--theme-bg);
+    &.note { color: var(--theme-dark2); 
+        .itemTitle { border-bottom-color: var(--theme-medium);}
+    }
+    
+    .follow { margin: 0 5px; padding-left: 48px; position: relative; 
+        > span { position: absolute; width: 40px; left: -2px; }
+    }
+    
+}
+.itemTitle { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--light); }
+
+
+/***** Responsive CSS Start ******/
+@media (max-width: 1199px) {
+    .itemTitle { margin-bottom: 8px; padding-bottom: 8px; }
+    .follow { padding-left: 40px; 
+        > span { width: 36px; }
+    }
+}

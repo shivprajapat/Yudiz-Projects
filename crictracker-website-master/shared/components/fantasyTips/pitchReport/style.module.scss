@@ -1,0 +1,31 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.pitchReport {
+    a {
+        color: var(--theme-color-medium);
+        text-decoration: underline;
+
+        &:hover {
+            color: var(--theme-font);
+        }
+    }
+}
+.arrow { width: 76px; bottom: 25%; left: 110%; 
+    [data-mode="dark"] & {
+        @include filter(brightness(0) invert(1));
+    }
+}
+.arrowLeft { left: auto; right: 110%; }
+.condition { width: 40%; height: 8px; background: var(--theme-medium); }
+.value { background: $theme-color; }
+.pitch {
+    [data-mode="dark"] & {
+        @include filter(brightness(0.6));
+    }
+}
+
+@media (max-width: 767px) {
+    .arrow { width: 54px; bottom: 80%; left: 80%; }
+    .arrowLeft { left: auto; right: 80%; }
+}

@@ -1,0 +1,8 @@
+require('./app/db')
+require('./global')
+require('dotenv').config()
+require('./app/utils/lib/redis')
+require('./app/grpc/client')
+require('./app/grpc/server/server')
+const server = require('./app')
+server.initialize()

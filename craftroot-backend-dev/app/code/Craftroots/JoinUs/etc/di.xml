@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:ObjectManager/etc/config.xsd">
+    <preference for="Craftroots\JoinUs\Api\Data\JoinUsInterface" type="Craftroots\JoinUs\Model" />
+    <preference for="\Magento\Framework\Mail\Template\TransportBuilder" type="Craftroots\JoinUs\Model\Mail\Template\TransportBuilder" />
+    <virtualType name="Craftroots\JoinUs\Model\ResourceModel\JoinUs\Grid\Collection" type="Magento\Framework\View\Element\UiComponent\DataProvider\SearchResult">
+        <arguments>
+            <argument name="mainTable" xsi:type="string">craftroots_joinus</argument>
+            <argument name="resourceModel" xsi:type="string">Craftroots\JoinUs\Model\ResourceModel\JoinUs</argument>
+        </arguments>
+    </virtualType>
+    <type name="Magento\Framework\View\Element\UiComponent\DataProvider\CollectionFactory">
+        <arguments>
+            <argument name="collections" xsi:type="array">
+                <item name="craftroots_join_list_data_source" xsi:type="string">Craftroots\JoinUs\Model\ResourceModel\JoinUs\Grid\Collection</item>
+            </argument>
+        </arguments>
+    </type>
+    
+</config>

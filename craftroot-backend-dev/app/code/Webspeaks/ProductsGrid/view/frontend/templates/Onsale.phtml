@@ -1,0 +1,28 @@
+<?php
+
+$result = $block->testJoinRight();
+print_r($result->getData());
+
+
+ foreach ($result  as $course){
+    echo '<pre>';
+    print_r($course->getData());
+    die("dd");
+    $product_id = $course->getData('product_id');
+    $thumnail = $block->getProductImageUrl($product_id);
+
+    echo $thumnail;
+    $product = $block->getLoadProduct($product_id);
+
+    echo '<pre>';
+    print_r($product->getData('id'));
+    print_r($product->getData('price'));
+    print_r($product->getData('sku'));
+    print_r($product->getData('urlKey'));
+   
+
+    // foreach($product as $products){
+    //     print_r($products->getData());
+    // }
+ }
+ die();

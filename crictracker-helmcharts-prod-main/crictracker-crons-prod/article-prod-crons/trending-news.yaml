@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: trending-news
+  namespace: production
+spec:
+  schedule: "*/120 7,23 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X GET https://article.crictracker.com/api/trending-news'
+            image: curlimages/curl
+            name: trending-news
+          restartPolicy: OnFailure

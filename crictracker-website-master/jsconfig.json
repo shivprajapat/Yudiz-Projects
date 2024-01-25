@@ -1,0 +1,33 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@shared/*": ["shared/*"],
+      "@shared-components/*": ["shared/components/*"],
+      "@shared-libs/*": ["shared/libs/*"],
+      "@assets/*": ["assets/*"],
+      "@graphql/*": ["graphql/*"],
+      "@locales": ["locales/*"],
+      "@utils": ["shared/utils.js"],
+      "@noData": ["shared/components/noData"],
+      "@pages/*": ["pages/*"]
+    },
+    "outDir": "./dist/out-tsc",
+    "forceConsistentCasingInFileNames": true,
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "es2020",
+    "lib": ["es2018", "dom"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true
+  }
+}

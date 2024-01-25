@@ -1,0 +1,23 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.tooltipText {
+  z-index: 1112;
+  color: var(--light-mode-bg);
+  background-color: var(--font-color);
+  &::before {
+    @extend %after-before;
+    top: 0;
+    left: 50%;
+    width: 10px;
+    height: 10px;
+    @include transform(rotate(45deg) translateX(-50%));
+    background-color: var(--font-color);
+    z-index: 10;
+  }
+}
+@media (max-width: 1199px) {
+  .tooltipText {
+	  display: none;
+  }
+}

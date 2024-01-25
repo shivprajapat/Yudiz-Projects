@@ -1,0 +1,30 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.matchInfo { border-right: 1px solid $light; }
+.item { margin-bottom: 2px; }
+.teams { margin: 12px 0; }
+.flag { width: 28px; }
+.tipsBtn { margin-right: 32px; 
+    &.dream11 { color: $brand-dream11; }
+    &.eleWickets { color: $brand-11Wickets; }
+    &.gamezy { color: $brand-gamezy; }
+    &.my11circle { color: $brand-my11cir; }
+    .icon { width: 28px; overflow: hidden; }
+    &:last-child { margin-right: 0; }
+}
+.dropdownToggle { width: 28px; height: 28px;
+  &::after { display: none;}
+}
+    
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  .matchInfo { width: 100%; margin-bottom: 12px; padding-bottom: 16px; border-right: none; border-bottom: 1px solid $light; }
+  .tipsBtn { margin-right: 12px; padding: 4px 8px; border-radius: 2em;
+    &.dream11 { background: rgba($brand-dream11, 0.08); }
+    &.eleWickets { background: rgba($brand-11Wickets, 0.08); }
+    &.gamezy { background: rgba($brand-gamezy, 0.08); }
+    &.my11circle { background: rgba($brand-my11cir, 0.08); }
+    .icon { display: none; }
+  }
+}

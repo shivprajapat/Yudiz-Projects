@@ -1,0 +1,58 @@
+type ContactData {
+  _id: ID
+  sName: String
+  sEmail: String
+  sPhone: String
+  sCompany: String
+  sCity: String
+  eQueryType: String
+  sSubject: String
+  sMessage: String
+  eStatus: String
+  dCreated: Date
+  dUpdated: Date
+}
+
+type getContactData {
+  nTotal: Int
+  aResults: [ContactData]
+}
+
+enum QUERYTYPE {
+  "General Issue"
+  g
+  "Technical Issue"
+  t
+  "advertise"
+  ad
+  "content"
+  ct
+}
+
+input getContactInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  "g: 'General Issue', t: 'Technical Issue'"
+  eQueryType: [QUERYTYPE]
+  aState:[commonHelpfeedbackState]!
+}
+
+input getContactById {
+  _id: ID!
+}
+
+type queryType{
+  "g: 'General Issue', t: 'Technical Issue' , ad:'advertise' , ct:'content'"
+  sValue: String!
+  sLabel: String!
+}
+
+
+extend type Query {
+  getContacts(input: getContactInput!): getContactData
+  getContactById(input:getContactById): ContactData
+  getContactQueryType: [queryType]
+}

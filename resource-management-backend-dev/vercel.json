@@ -1,0 +1,11 @@
+{
+   "version": 2,
+   "name": "resource-management",
+   "builds": [
+      { "src": "app.js", "use": "@vercel/node" }
+   ],
+   "routes": [
+      { "src": "/(.*)", "dest": "/app.js" }
+   ],
+   "regions": ["bom1"]
+}

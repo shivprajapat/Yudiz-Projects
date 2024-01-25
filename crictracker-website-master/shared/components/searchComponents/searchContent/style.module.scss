@@ -1,0 +1,32 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.searchGroup {
+    .searchControl { padding-left: 44px; padding-right: 106px; line-height: 26px; border-radius: 2em; font-weight: 600; }
+}
+.icon { position: absolute; top: 50%; @include transform(translateY(-50%)); }
+.searchBtn { right: 4px; }
+.closeBtn { right: 80px; }
+.searchIcon { left: 12px; 
+    svg { width: 28px; height: 28px; }
+    path { fill: $theme-color; }
+}
+
+@media (max-width: 1199px) {
+  
+}
+
+@media (max-width: 991px) {
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    
+}
+
+@media (max-width: 767px) {
+   
+}
+
+@media (max-width: 575px) {
+
+}

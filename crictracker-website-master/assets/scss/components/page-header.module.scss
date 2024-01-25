@@ -1,0 +1,49 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.pageHeader {
+  margin-bottom: 16px;
+  .title:not(:last-child) {
+    margin-bottom: 16px;
+  }
+  p {
+    margin-bottom: 12px;
+    &:last-child {
+      margin: 0;
+    }
+  }
+  .clamp {
+    overflow-wrap: break-word;
+    -webkit-line-clamp: 2;
+    &::after { @extend %after-before; width: 100%; height: 100%; left: 0; bottom: 0;
+      background-image: linear-gradient(0deg, $light-color 4%, rgba($light-color, 0) 100%);
+      [data-mode="dark"] & {
+        background-image: linear-gradient(0deg, $font-color 4%, rgba($font-color, 0) 100%);
+      }
+    }
+  }
+}
+.favBtn { width: 36px; height: 36px; border: 1px solid var(--theme-light); background: var(--theme-light);
+  path { fill: transparent; stroke-width: 2px; stroke: var(--theme-color-medium); }
+  &.favorite {
+    path { fill: var(--theme-color-medium); }
+  }
+}
+/***** Responsive CSS Start ******/
+
+@media (max-width: 575px) {
+  .pageHeader {
+    margin-bottom: 12px;
+    .readMore {
+      padding: 3px 10px;
+      font-size: 11px;
+    }
+  }
+  .favBtn { width: 32px; height: 32px; position: absolute; top: 16px; right: 54px;
+    svg { width: 16px; height: 16px; }
+  }
+  .breadcrumbNav {
+    nav { flex-grow: 1; }
+    ol { max-width: calc(100% - 38px);}  
+  }
+}

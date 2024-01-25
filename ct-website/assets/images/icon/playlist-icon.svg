@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>playlist-icon</title>
+    <g id="playlist-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M16,13 L22,17 L16,21 L16,13 Z M10,14 L10,16 L3,16 L3,14 L10,14 Z M14,10 L14,12 L3,12 L3,10 L14,10 Z M14,6 L14,8 L3,8 L3,6 L14,6 Z" id="Combined-Shape" fill="#F2F4F7" fill-rule="nonzero"></path>
+    </g>
+</svg>

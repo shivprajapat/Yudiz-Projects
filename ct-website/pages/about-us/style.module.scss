@@ -1,0 +1,29 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.bannerSection { background: $theme-color;
+  .content { height: 240px; }
+}
+.person { width: 160px; }
+.socialMenu { 
+  li { margin-right: 8px;
+    &:last-child { margin-right: 0; }
+  }
+  g,path { fill: $border-color; }
+  a:hover {
+    g,path { fill: $theme-color; }
+  } 
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  
+}
+
+@media (max-width: 767px) {
+  
+}
+
+@media (max-width: 575px) {
+  
+  
+}

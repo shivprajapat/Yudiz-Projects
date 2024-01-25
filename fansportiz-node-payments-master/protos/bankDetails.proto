@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+package bankDetails;
+
+service BankDetails {
+  rpc findBankDetail(bankRequest) returns (bankResponse) {}
+}
+
+// findBankDetail
+message bankRequest {
+  string query = 1;
+  string projection = 2;
+  string options = 3;
+}
+
+message bankResponse { string data = 1; }

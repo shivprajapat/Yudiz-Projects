@@ -1,0 +1,251 @@
+input updateCategoryStatus {
+  _id: ID!
+  eStatus: CategoryActionStatus!
+}
+
+type updateCategoryStatusResponse {
+  sMessage: String!
+}
+
+input oSocialInput {
+  sTitle: String
+  sDescription: String
+  sUrl: String
+}
+
+enum SEO_TYPE {
+  "Article"
+  ar
+  "Admin"
+  ad
+  "Category"
+  ct
+  "General Tag"
+  gt
+  "Match Overview"
+  mo
+  "player"
+  p
+  "team"
+  t
+  "venue"
+  v
+  "Fantasy Article"
+  fa
+  "Custom Seo"
+  cu
+  "Match"
+  ma
+  "Series"
+  se
+  "CMS Page"
+  cms
+  "video"
+  vi
+  "playlist"
+  pl
+  "job"
+  jo
+  "static pages"
+  st
+}
+
+enum ESEOSUBTYPE {
+  "news"
+  n
+  "videos"
+  v
+  "fixtures"
+  f
+  "standings"
+  s
+  "stats"
+  st
+  "teams"
+  t
+  "squads"
+  sq
+  "archives"
+  ar
+  "fantasy tips"
+  ft
+  "score card"
+  sc
+  "overs"
+  o
+  "fixtures-and-results"
+  far
+  "results"
+  r
+  "commentary"
+  c
+  "upcoming"
+  u
+  "photos"
+  p
+  "batting-highest-strikerate-innings"
+  stBhsi
+  "batting-highest-average"
+  stBha
+  "batting-highest-strikerate"
+  stBhs
+  "batting-most-centuries"
+  stBmc
+  "batting-most-run6-innings"
+  stBmr6i
+  "batting-most-fours"
+  stBm4
+  "batting-most-run4-innings"
+  stBmr4i
+  "batting-most-runs"
+  stBmr
+  "batting-most-runs-innings"
+  stBmri
+  "batting-most-run50"
+  stBmr50
+  "batting-most-sixes"
+  stBms
+  "bowling-top-wicket-takers"
+  stBtwt
+  "bowling-best-economy-rates-innings"
+  stBberi
+  "bowling-best-averages"
+  stBba
+  "bowling-best-economy-rates"
+  stBber
+  "bowling-best-strike-rates"
+  stBbsr
+  "bowling-best-strike-rates-innings"
+  stBbsri
+  "bowling-five-wickets"
+  stBfiw
+  "bowling-best-bowling-figures"
+  stBbbf
+  "bowling-most-runs-conceded-innings"
+  stBmrci
+  "bowling-four-wickets"
+  stBfow
+  "bowling-maidens"
+  stBm
+  "team-total-runs"
+  stTtr
+  "team-total-run100"
+  stTtr100
+  "team-total-wickets"
+  stTtw
+  "batting-most-fifties"
+  stBmf
+}
+
+enum SeoStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+enum SCHEMATYPE {
+  "article"
+  ar
+  "news article"
+  nar
+}
+
+input oSeoArticleInput {
+  sTitle: String
+  sDescription: String
+  sSlug: String
+  aKeywords: [String]
+  oFB: oSocialInput
+  oTwitter: oSocialInput
+  sCUrl: String 
+  sRobots: String
+  eType: SEO_TYPE!
+  eSubType: ESEOSUBTYPE
+  eStatus: SeoStatus
+  eSchemaType: SCHEMATYPE
+  bIsDeletable: Boolean
+  sContent: String
+  sDTitle: String
+}
+
+input categoryInput {
+  eType: CategoryType!
+  sName: String!
+  sSrtTitle: String
+  sUrl: String
+  iSeriesId: ID
+  sContent: String
+  oImg: oFeaturedImageInput
+  iParentId: ID
+  ePlatformType: FANTASYPLATFROMTYPE
+  bIsLeague: Boolean,
+  oSeo: oSeoArticleInput!
+  isBlockedMini: Boolean
+}
+
+enum FANTASYPLATFROMTYPE {
+  "dream 11"
+  de
+  "11 wickets"
+  ew
+}
+
+input addCategoryInput {
+  categoryInput: categoryInput
+}
+
+input deleteCategory {
+  _id:ID!
+}
+
+input editCategoryInput {
+  _id: ID!
+  categoryInput: categoryInput
+}
+
+type addCategoryResponse {
+  oData: categoryGetData
+  sMessage: String!
+}
+
+type deleteCategoryResponse {
+  sMessage:String!
+}
+
+enum CategoryType {
+  "simple"
+  s
+  "API Series"
+  as
+  "parent category"
+  pct
+}
+enum CategoryActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+type editCategoryResponse {
+  oData: categoryGetData
+  sMessage: String!
+}
+
+input bulkCategoryActionInput {
+  aId: [ID]
+  eStatus: CategoryActionStatus
+}
+
+extend type Mutation {
+  addCategory(input: addCategoryInput): addCategoryResponse!
+  deleteCategory(input: deleteCategory): deleteCategoryResponse
+  editCategory(input: editCategoryInput): editCategoryResponse
+  updateCategoryStatus(input: updateCategoryStatus): updateCategoryStatusResponse
+  bulkCategoryUpdate(input: bulkCategoryActionInput): updateCategoryStatusResponse
+}

@@ -1,0 +1,25 @@
+
+type oListFavouriteResponse {
+    nTotal: Int
+    aResults: [oFavourite]
+}
+
+type oFavourite @key(fields:"iId"){
+    iId: ID
+    sName: String
+    eType: String
+    iPageId: String
+    dCreated: String
+    dUpdated: String
+    oSeo: Seo
+}
+
+input oListFavouriteInput {
+  nSkip: Int
+  nLimit: Int
+  sSearch: String
+}
+
+extend type Query {
+    listFavourite(input:oListFavouriteInput): oListFavouriteResponse
+}

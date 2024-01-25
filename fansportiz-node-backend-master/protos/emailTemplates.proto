@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package emailTemplates;
+
+service EmailTemplates {
+  rpc findEmailTemplate(Request) returns (Response) {}
+}
+
+message Request { string query = 1; }
+
+message Response { string data = 1; }

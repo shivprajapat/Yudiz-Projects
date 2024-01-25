@@ -1,0 +1,3 @@
+[submodule "terraform-modules"]
+	path = terraform-modules
+	url = git@gitlab.com:yudiz_devops/terraform-modules.git

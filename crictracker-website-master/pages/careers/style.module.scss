@@ -1,0 +1,44 @@
+@import '../../assets/scss/variables.scss';
+@import '../../assets/scss/mixins.scss';
+
+.info {
+  p {
+    margin-right: 50px;
+    &:last-child {
+      margin-right: 0;
+    }
+  }
+}
+.careersInfo {
+  padding: 30px;
+}
+.socialbox {
+  padding: 6px 8px 6px 16px;
+  path,
+  g {
+    fill: var(--font-secondary);
+  }
+}
+@media (max-width: 1399px) {
+  .careersInfo {
+    padding: 24px;
+  }
+}
+
+@media (max-width: 767px) {
+  .careersInfo {
+    padding: 16px;
+  }
+  .info p {
+    margin-right: 16px;
+  }
+}
+@media (max-width: 575px) {
+  .socialbox {
+    padding: 6px 8px;
+    svg {
+      width: 28px;
+      height: 28px;
+    }
+  }
+}

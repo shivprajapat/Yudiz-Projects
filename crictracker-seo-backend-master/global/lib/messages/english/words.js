@@ -1,0 +1,32 @@
+const words = {
+  email: 'Email',
+  subAdmin: 'Sub Admin',
+  resetPassword: 'Reset Password',
+  otp: 'OTP',
+  login: 'Login',
+  permissions: 'Permissions',
+  role: 'Role',
+  roleName: 'Role name',
+  logout: 'Logout',
+  preSignedUrl: 'Pre-signed url',
+  type: 'Type',
+  userName: 'UserName',
+  slug: 'Slug',
+  tag: 'Tag',
+  seo: 'SEO',
+  category: 'Category',
+  title: 'Title',
+  subtitle: 'Subtitle',
+  shortTitle: 'Short title',
+  id: 'Id',
+  eType: 'eType',
+  fb: 'Facebook image',
+  tw: 'Twitter image',
+  redirect: 'SEO Redirect',
+  newUrl: 'New Url',
+  statusCode: 'Status Code',
+  iId: 'iId',
+  image: 'Image'
+}
+
+module.exports = words

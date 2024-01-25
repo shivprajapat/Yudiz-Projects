@@ -1,0 +1,20 @@
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Deny",
+            "NotPrincipal": {
+                "AWS": [
+                    "arn:aws:iam::638977994343:user/s3suser",
+                    "arn:aws:iam::638977994343:root"
+                ]
+            },
+            "Action": "s3:*",
+            "Resource": [
+                "arn:aws:s3:::housieskill-kyc-doc",
+                "arn:aws:s3:::housieskill-kyc-doc/*"
+            ]
+        }
+    ]
+}

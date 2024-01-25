@@ -1,0 +1,16 @@
+@import 'assets/scss/helper/variables';
+.admin-footer {
+  position: fixed;
+  background-color: $secondary-black;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 20px 30px;
+  text-align: center;
+  transition: all 0.5s ease;
+  p {
+    margin: 0;
+    font-size: 18px;
+    text-transform: capitalize;
+  }
+}

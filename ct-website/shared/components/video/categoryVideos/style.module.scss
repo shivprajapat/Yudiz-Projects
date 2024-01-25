@@ -1,0 +1,24 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+   
+.link { letter-spacing: 0.4px; }
+.articleGridList article { min-height: calc(100% - 8px); }
+
+@media (max-width: 1199px) {
+  
+}
+
+@media (max-width: 991px) {
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    
+}
+
+@media (max-width: 767px) {
+   
+}
+
+@media (max-width: 575px) {
+
+}

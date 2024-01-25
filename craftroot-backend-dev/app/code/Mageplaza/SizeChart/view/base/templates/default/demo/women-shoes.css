@@ -1,0 +1,16 @@
+.size-chart-main-table .small-text {
+    font-size: 1.1rem;
+}
+.size-chart-main-table table {
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    width: 100%;
+}
+.size-chart-main-table td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+.size-chart-main-table tr:nth-child(even) {
+    background-color: #dddddd;
+}

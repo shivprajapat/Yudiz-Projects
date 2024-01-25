@@ -1,0 +1,45 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.selectContainer { 
+  .spinner { position: absolute; right: 62px; top: 11px; }
+  .selectContainer { position: absolute; width: 22px; height: 22px; right: 36px; top: 8px;  padding: 0;
+    svg{
+      height: 100%;
+      width: 100%;
+      vertical-align: 0px;
+    }
+  }
+}
+.formControl { font-size: 16px; line-height: 22px; color: var(--font-color); border: 1px solid var(--border-input); background-color: var(--light-mode-bg);
+  &.formSelect { padding-right: 40px; background-image: url(../../../assets/images/icon/down-arrow.svg); background-repeat: no-repeat; background-position: right 12px center; background-size: auto 70%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden !important;
+    [data-mode="dark"] & {
+      background-image: url(../../../assets/images/icon/down-caret.svg);
+    }
+    &.isDark { background-color: $theme-color; color: #fff; border-color: $theme-color; background-image: url(../../../assets/images/icon/down-caret.svg);
+      [data-mode="dark"] & {
+        background-image: url(../../../assets/images/icon/down-arrow.svg);
+      }
+      &::-webkit-input-placeholder { color: #fff; }
+      &::-moz-placeholder { color: #fff; }
+      &:-ms-input-placeholder { color: #fff; }
+      &:-moz-placeholder { color: #fff; }
+    }
+  }
+  &[readonly] { background-color: var(--light-mode-bg); }
+  &.hasError { border-color: $danger; }
+  &.isLoading,
+  &.isClearable { padding-right: 60px;}
+  &.isLoading.isClearable { padding-right: 80px; }
+}
+.dropdownMenu { width: fit-content; max-height: 220px;
+  .dropdownItem { padding: 10px 12px; width: 100%;
+    &:hover { background: $theme-light; color: $font-color; }
+    &.active { background: $theme-color; color: #fff; }
+  }
+  p { color: var(--font-color); }
+}
+.dropdownHeader { padding: 10px 12px; background: var(--border-medium); color: var(--font-color);
+  ~ .dropdownItem { padding-left: 20px; }
+}
+.selectNative { display: block; width: 100%; padding: 0.375rem 0.75rem; appearance: none; }

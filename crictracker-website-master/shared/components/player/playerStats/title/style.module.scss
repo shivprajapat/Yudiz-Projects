@@ -1,0 +1,5 @@
+@import '@assets/scss/variables.scss';
+
+.title { background: var(--theme-light); 
+    span { background: var(--theme-color); color: $light-color; }
+}

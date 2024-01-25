@@ -1,0 +1,20 @@
+type Query {
+    harmonious: Harmonious
+        @resolver(class: "Webspeaks\\ProductsGrid\\Model\\Resolver\\Harmonious")
+        @doc(description: "Get Harmonious products")
+}
+
+type Harmonious @doc(description: "Get Harmonious products") {
+    data: [HarmoniousData] @doc(description: "Get Harmonious products")
+    mainBannner: String @doc(description: "Get Main Bannner")
+}
+
+type HarmoniousData @doc(description: "Get Harmonious products") {
+    title: String @doc(description: "Title of products")
+    id: String @doc(description: "Id of products")
+    name: String @doc(description: "Name of products")
+    price: String @doc(description: "Price of products")
+    sku: String @doc(description: " Sku of products")
+    productUrl: String @doc(description: "products Url")
+    productImage: String @doc(description: " Image of products")
+}

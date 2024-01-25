@@ -1,0 +1,16 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+@media (min-width: 992px) and (max-width: 1400px) {
+    .homeContainer { width: 1330px; max-width: 100%; 
+        .centerContent { width: calc(100% - 640px); }
+        .commonSidebar { width: 320px; }
+    }
+}
+
+@media (min-width: 1280px) and (max-width: 1400px) {
+    .homeContainer {
+        .centerContent { width: calc(100% - 668px); }
+        .commonSidebar { width: 334px; }
+    }
+}

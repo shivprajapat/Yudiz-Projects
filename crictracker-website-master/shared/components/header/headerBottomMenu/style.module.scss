@@ -1,0 +1,34 @@
+
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.headerMenu { padding: 6px 0px; line-height: 16px; border-bottom: 1px solid var(--theme-light); height: 40px;
+  .navMore,
+  .navItem { margin-right: 16px; padding: 5px 8px; color: var(--theme-dark2);
+    &:hover { color: var(--theme-color-light); }
+  }
+  .navItem.active { background: var(--theme-light); color: var(--theme-color-light); }
+  li:last-child .navMore { margin-right: 0; }
+  .liveUpdate {
+    &::before { @extend %after-before; margin-right: 8px; position: relative; width: 7px; height: 7px; display: inline-block; border-radius: 50%; background: $danger; box-shadow: 0 0 0px 4px rgba($danger, 0.2); }
+  }
+  .dropdownMenu { padding: 10px 16px; border-radius: 0 0 8px 8px; min-width: 220px;
+    margin-top: -5px;
+    a { padding: 11px 0; font-size: 13px; border-bottom: 1px solid var(--border-input);
+      &:last-child { border: none;}
+    }
+  }
+}
+@media (max-width: 1199px) {
+  .headerMenu {
+    .navMore,
+    .navItem { margin-right: 6px; }
+  }
+}
+@media (max-width: 991px) {
+  .headerMenu { overflow: auto; overflow-y: hidden; 
+    .dropdownMenu { position: fixed !important; 
+      a { padding: 9px 0; font-size: 12px; }
+    }
+  }
+}

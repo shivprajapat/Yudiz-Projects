@@ -1,0 +1,28 @@
+enum PlaylistActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+input oBulkPlaylistActionInput {
+  aId: [ID]
+  eStatus: PlaylistActionStatus
+}
+
+type oUpdatePlaylistStatusResponse {
+  sMessage: String!
+}
+
+input oUpdatePlaylistInput {
+  _id: ID!
+  eStatus: PlaylistActionStatus
+  iCategoryId: ID
+}
+
+extend type Mutation {
+  bulkPlaylistUpdate(input: oBulkPlaylistActionInput): oUpdatePlaylistStatusResponse
+  updatePlaylist(input: oUpdatePlaylistInput): oUpdatePlaylistStatusResponse
+}

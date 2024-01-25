@@ -1,0 +1,31 @@
+.react-datepicker{
+  border: none; background: $bg-primary; font-family: 'Inter', sans-serif;width: 100%;
+  &-popper{width: 100%;}
+  &__navigation--previous,
+  &__navigation--next{margin-top: 5px;}
+  &__month-container { background: $bg-primary; border: none;}
+  &__day {color: $white; font-size: 12px;
+    &:hover{color: $black-500; background: $white;}
+    &:focus-visible{outline: none;}
+ &--keyboard-selected{
+  background-color: $green-color; color: $black-300;
+  &:hover {background: $green-color; color: $black-300;}
+  &--selected{background-color: $green-color; color: $black-300;&:hover {background: $green-color; color: $black-300;}}
+ } 
+ &--selected{background-color: $green-color; color: $black-300;&:hover {background: $green-color; color: $black-300;}}  
+ &-name {color: $primary-color;}
+ &--disabled {opacity: 0.5;
+  &:hover { color: $white; background: none;}
+}  
+  }
+&__header { background-color: transparent;border: none;}
+&__time { background-color: $bg-primary !important; color: $white;
+  li {&:hover{color:$black !important}
+    &.react-datepicker__time-list-item--selected {font-weight: 400 !important; background-color: $green-color !important;color:$black !important}
+  }
+}
+&-time__header,&__current-month {color: $white; font-size: 14px;font-weight: 400;}
+&__day-name,&__day,&__time-name{width:24px; line-height: 24px;}
+
+}
+

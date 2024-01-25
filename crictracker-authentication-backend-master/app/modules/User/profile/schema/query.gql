@@ -1,0 +1,24 @@
+type oCountryData {
+    _id: ID
+    sId: String
+    sSortName: String
+    sName: String
+}
+
+input listFrontCountryInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+type listFrontCountryResponse {
+    nTotal: Int
+    aResults: [oCountryData]
+}
+
+extend type Query {
+    getUser: user
+    listFrontCountry(input: listFrontCountryInput): listFrontCountryResponse
+}

@@ -1,0 +1,17 @@
+type Query {
+    artisanStory: ArtisanStory
+        @resolver(class: "Craftroots\\Story\\Model\\Resolver\\ArtisanStory")
+        @doc(description: "Artisan Story")
+}
+
+type ArtisanStory @doc(description: "Artisan Story") {
+    data: [ArtisanStoryData] @doc(description: "Artisan Story")
+}
+
+type ArtisanStoryData @doc(description: "Artisan Story Data") {
+    title: String @doc(description: "Get Artisan Story Title")
+    name: String @doc(description: "Get Artisan Name")
+    profile: String @doc(description: "Get Artisan Image/Video")
+    occupation: String @doc(description: "Get Artisan occuptions")
+    description: String @doc(description: "Get Artisan Description")
+}

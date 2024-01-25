@@ -1,0 +1,36 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.d-flex { display: flex; display: -webkit-flex; }
+.align-center { @include align-items(center); }
+.grow-1 { flex-grow: 1; justify-content: space-between; }
+.toss { margin-bottom: 8px; padding: 8px; background: $light-bg; border-radius: 8px;
+    .icon { display: block; width: 28px; margin-right: 4px; }
+    p { margin: 0; }
+}
+.teamSlider { margin: 0px 34px; padding-bottom: 24px; }
+.nav { background: $theme-light; 
+    a { color: $theme-color; }
+    .active {
+        a:hover,
+        a { background: $theme-color; color: #fff;}
+    }  
+}
+.predictions { margin-right: 62px;
+    svg { margin-right: 4px;}
+    :hover path { fill: $theme-color; }
+}
+/***** Responsive CSS Start ******/
+@media (min-width: 768px) {
+    .fantasyTeam { padding: 12px; border: 1px solid $light; border-radius: 16px; }
+}
+@media (max-width: 767px) {
+    .teamSlider { margin: 0px 10px; }
+    .team,
+    .teamBlock { border-radius: 16px; }
+    .info { padding-left: 12px; padding-right: 12px;
+        > p { font-size: 12px; }
+    }
+    .predictions { margin-right: 20px; }
+    
+}

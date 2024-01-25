@@ -1,0 +1,8 @@
+type getHelpCountsResponse {
+    nES: Int
+    nOE: Int
+}
+
+extend type Query {
+    getHelpCounts: getHelpCountsResponse
+}

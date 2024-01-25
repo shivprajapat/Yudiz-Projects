@@ -1,0 +1,32 @@
+.description {
+    padding: 16px 9px;
+    font-size: 15px;
+    font-weight: 400;
+    transition: all 0.3s;
+    background: #f2f4f7;
+    border-radius: 5px;
+    line-height: 2;
+    text-align: justify;
+    margin-right: 40px;
+}
+
+.list-items {
+    list-style: none;
+    padding: 0;
+    display: flex !important;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin: 0;
+
+    li {
+        padding: 5px 9px;
+        font-size: 14px;
+        font-weight: 400;
+        text-transform: capitalize;
+        transition: all 0.3s;
+        background: #f2f4f7;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+}

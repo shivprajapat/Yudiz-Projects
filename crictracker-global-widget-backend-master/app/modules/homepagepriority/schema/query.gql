@@ -1,0 +1,13 @@
+ 
+type getHomePagePriorityData {
+  _id: ID
+  iId: ID
+  sName: String
+  eType: String
+  nSort: Int
+  bFutureSeries: Boolean
+}
+
+extend type Query {
+  getHomePagePriority: [getHomePagePriorityData]
+}

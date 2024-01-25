@@ -1,0 +1,9 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.share { width: 32px; height: 32px; background: var(--theme-light);
+  &::after { display: none; }
+  svg { width: 20px; height: 20px; }
+  path { fill: var(--theme-color-medium); }
+  &:hover path { fill: var(--theme-color-medium); }
+}

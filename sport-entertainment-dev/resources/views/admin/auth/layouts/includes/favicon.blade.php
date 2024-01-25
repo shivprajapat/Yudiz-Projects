@@ -1,0 +1,1 @@
+<link rel="icon" type="image/ico" sizes="64x64" href="{{ asset('assets/media/logos/favicon.ico') }}">

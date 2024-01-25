@@ -1,0 +1,290 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: local-dev
+  namespace: local-dev
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig":
+      { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:693583001687:certificate/c57b3c72-79c2-40b0-aaaf-1f39cf9a89ca
+    alb.ingress.kubernetes.io/group.name: crictracker-devstag-new
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: "14"
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: "8"
+    alb.ingress.kubernetes.io/healthy-threshold-count: "3"
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: "2"
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: subnet-077b67cb6983824ae, subnet-079a2bebf229cbae2
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=60
+
+    external-dns.alpha.kubernetes.io/hostname: redis-server-dev.crictracker.ml, subscription-dev.crictracker.ml,
+      migrations-dev.crictracker.ml, gateway-dev.crictracker.ml, admin-dev.crictracker.ml,
+      cricweb-dev.crictracker.ml, help-dev.crictracker.ml, globalwidget-dev.crictracker.ml,
+      article-dev.crictracker.ml, auth-dev.crictracker.ml, matchmanage-dev.crictracker.ml,
+      seo-dev.crictracker.ml, career-dev.crictracker.ml
+spec:
+  rules:
+  - host: help-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-help-local-dev
+            port:
+              number: 4005
+        path: /*
+        pathType: ImplementationSpecific
+  - host: globalwidget-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-global-widget-local-dev
+            port:
+              number: 4006
+        path: /*
+        pathType: ImplementationSpecific
+  - host: gateway-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-gateway-local-dev
+            port:
+              number: 4000
+        path: /*
+        pathType: ImplementationSpecific
+  - host: admin-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-admin-frontend-local-dev
+            port:
+              number: 80
+        path: /*
+        pathType: ImplementationSpecific
+  - host: cricweb-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-image-website-local-dev
+            port:
+              number: 3000
+        path: /_next/image*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-website-local-dev
+            port:
+              number: 3000
+        path: /*
+        pathType: ImplementationSpecific
+  - host: article-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-article-local-dev
+            port:
+              number: 4002
+        path: /*
+        pathType: ImplementationSpecific
+  - host: auth-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-authentication-local-dev
+            port:
+              number: 4001
+        path: /*
+        pathType: ImplementationSpecific
+  - host: matchmanage-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-matchmanagement-local-dev
+            port:
+              number: 4004
+        path: /*
+        pathType: ImplementationSpecific
+  - host: seo-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-seo-local-dev
+            port:
+              number: 4003
+        path: /*
+        pathType: ImplementationSpecific
+  - host: career-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-career-local-dev
+            port:
+              number: 4007
+        path: /*
+        pathType: ImplementationSpecific
+  - host: migrations-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-migrations-local-dev
+            port:
+              number: 5001
+        path: /*
+        pathType: ImplementationSpecific
+  - host: subscription-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-subscription-local-dev
+            port:
+              number: 5000
+        path: /*
+        pathType: ImplementationSpecific
+  - host: redis-server-dev.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-redis-server-local-dev
+            port:
+              number: 4008
+        path: /*
+        pathType: ImplementationSpecific
+  - host: feed.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-feed-frontend-local-dev
+            port:
+              number: 80
+        path: /*
+        pathType: ImplementationSpecific
+  - host: feed-api.crictracker.ml
+    http:
+      paths:
+      - backend:
+          service:
+            name: ssl-redirect
+            port:
+              name: use-annotation
+        path: /*
+        pathType: ImplementationSpecific
+      - backend:
+          service:
+            name: crictracker-feed-local-dev
+            port:
+              number: 4009
+        path: /*
+        pathType: ImplementationSpecific

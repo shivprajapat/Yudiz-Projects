@@ -1,0 +1,88 @@
+{
+  "data": {
+    "getCategory": {
+      "aResults": [
+        {
+          "sName": "WPL Auction 2023",
+          "dCreated": "1674828539718",
+          "oSeo": {
+            "sSlug": "t20/wpl-auction"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "Cricket Players",
+          "dCreated": "1674218992798",
+          "oSeo": {
+            "sSlug": "cricket-players"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "Brosid T20 Bash 2022",
+          "dCreated": "1671097235098",
+          "oSeo": {
+            "sSlug": "t20/brosid-t20-bash"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "Women's National Cricket League",
+          "dCreated": "1663928028413",
+          "oSeo": {
+            "sSlug": "womens-national-cricket-league-2022"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "Blog",
+          "dCreated": "1663924828910",
+          "oSeo": {
+            "sSlug": "blog"
+          },
+          "nCount": 27
+        },
+        {
+          "sName": "SA20 Auction 2022",
+          "dCreated": "1663580778084",
+          "oSeo": {
+            "sSlug": "t20/sa20-auction"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "Women's National Cricket League 2019",
+          "dCreated": "1663510453893",
+          "oSeo": {
+            "sSlug": "womens-national-cricket-league/archives-womens-national-cricket-league-2019"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "Cricket Association T20",
+          "dCreated": "1662637365258",
+          "oSeo": {
+            "sSlug": "cricket-association-t20"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "Cricket Records",
+          "dCreated": "1661792891259",
+          "oSeo": {
+            "sSlug": "cricket-records"
+          },
+          "nCount": 0
+        },
+        {
+          "sName": "ECS T10 Germany 2022",
+          "dCreated": "1661347130776",
+          "oSeo": {
+            "sSlug": "ecs-t10-germany"
+          },
+          "nCount": 0
+        }
+      ]
+    }
+  }
+}

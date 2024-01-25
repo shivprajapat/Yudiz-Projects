@@ -1,0 +1,151 @@
+syntax = "proto3";
+
+message messageResponse {
+    string sMessage = 1;
+    string sPrefix= 2;
+    int32  nStatus = 3;
+}
+
+message addSeoDataInput {
+    string iId = 1;
+    string eType = 2;
+    string sTitle = 3;
+    string sDescription = 4;
+    string sSlug = 5;
+    string sCUrl = 6;
+    string eSubType = 7;
+    string sDTitle = 8;
+}
+
+message addSeosDataInput {
+    repeated addSeoDataInput arr = 1;
+}
+
+message updateEntitySeoInput {
+    string iId = 1;
+    string eStatus = 2;
+}
+
+message oSocialInput{
+    string sTitle = 1;
+    string sDescription = 2;
+    string sUrl= 3;
+}
+
+message insertSeoInput{
+    optional string iId = 1;
+    optional string sTitle = 2;
+    optional string sDescription = 3;
+    optional string sSlug = 4;
+    repeated string aKeywords = 5;
+    optional oSocialInput oFB= 6;
+    optional oSocialInput oTwitter = 7;
+    optional string sCUrl = 8;
+    optional string sRobots = 9;
+    optional string eType = 10;
+    optional string eStatus = 11;
+}
+
+message editSeoInput{
+    optional string iId = 1;
+    optional string sTitle = 2;
+    optional string sDescription = 3;
+    repeated string aKeywords = 4;
+    optional oSocialInput oFB= 5;
+    optional oSocialInput oTwitter = 6;
+    optional string sCUrl = 7;
+    optional string sRobots = 8;
+    optional string sSlug = 9;
+    optional string eType = 10;
+    optional string eStatus = 11;
+    optional string eSchemaType = 12;
+    optional bool bIsDeletable = 13;
+    optional string eSubType = 14;
+    optional string sContent = 15;
+    optional string sDTitle = 16;   
+}
+
+message aCustomSeo {
+    optional string iId = 1;
+    optional string sTitle = 2;
+    optional string sDescription = 3;
+    repeated string aKeywords = 4;
+    optional oSocialInput oFB= 5;
+    optional oSocialInput oTwitter = 6;
+    optional string sCUrl = 7;
+    optional string sRobots = 8;
+    optional string sSlug = 9;
+    optional string eType = 10;
+    optional string eStatus = 11;
+    optional string eSchemaType = 12;
+    optional bool bIsDeletable = 13;
+    optional string eSubType = 14;
+    optional string sContent = 15;
+    optional string sDTitle = 16;
+    optional string _id = 17;
+    optional int32 eCode = 18;
+    optional string eTabType = 19;
+    optional string sAmpContent = 20;
+}
+
+message oSeoResponse {
+    optional string iId = 1;
+    optional string sTitle = 2;
+    optional string sDescription = 3;
+    repeated string aKeywords = 4;
+    optional oSocialInput oFB= 5;
+    optional oSocialInput oTwitter = 6;
+    optional string sCUrl = 7;
+    optional string sRobots = 8;
+    optional string sSlug = 9;
+    optional string eType = 10;
+    optional string eStatus = 11;
+    optional string eSchemaType = 12;
+    optional bool bIsDeletable = 13;
+    optional string eSubType = 14;
+    optional string sContent = 15;
+    optional string sDTitle = 16;
+    optional string _id = 17;
+    optional int32 eCode = 18;
+    optional string eTabType = 19;
+    repeated oSeoResponse aCustomSeo = 20;
+    optional string sAmpContent = 21;
+}
+
+message getSeoDataInput {
+    string iId = 1;
+}
+
+message getSeoBySlugInput {
+    string sSlug = 1;
+}
+
+message oSeosResponse {
+    repeated oSeoResponse oSeos = 1;
+}
+message getCategoryDataInput {
+    repeated string _id = 1;
+}
+
+message oSlugData {
+    string iId = 1;
+    string sSlug = 2;
+    string eType = 3;
+    string eSubType = 4;
+}
+
+message aSlugData {
+    repeated oSlugData oSlugsData = 1;
+}
+ 
+service SeoService {
+    rpc addSeoData(addSeoDataInput) returns (messageResponse) {}
+    rpc addSeosData(addSeosDataInput) returns (messageResponse) {}
+    rpc updateEntitySeo(updateEntitySeoInput) returns (messageResponse) {}
+    rpc insertSeo(insertSeoInput) returns (messageResponse) {}
+    rpc editSeo(editSeoInput) returns (messageResponse) {}
+    rpc getSeoData(getSeoDataInput) returns (oSeoResponse) {}
+    rpc getSeoBySlug(getSeoBySlugInput) returns (oSeoResponse) {}
+    rpc getSeosData(getSeoDataInput) returns (oSeosResponse) {}
+    rpc getSlugs(getCategoryDataInput) returns (aSlugData) {}
+}

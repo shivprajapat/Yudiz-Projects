@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Craftroots_JoinUs::manager" title="Join Us Request Grid" module="Craftroots_JoinUs" sortOrder="40" resource="Craftroots_JoinUs::manager" parent="Craftroots_Base::manager"/>
+        <add id="Craftroots_JoinUs::add_row" title="Join Us" module="Craftroots_JoinUs" sortOrder="40" parent="Craftroots_JoinUs::manager" action="join/grid" resource="Craftroots_JoinUs::add_row"/>
+        <add id="Craftroots_JoinUs::configuration" title="Configuration" module="Craftroots_JoinUs" sortOrder="1000" action="adminhtml/system_config/edit/section/craftroots" resource="Craftroots_JoinUs::configuration" parent="Craftroots_JoinUs::add_row"/>
+    </menu>
+</config>

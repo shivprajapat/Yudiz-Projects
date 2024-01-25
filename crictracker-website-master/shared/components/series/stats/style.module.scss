@@ -1,0 +1,57 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.stats {
+
+  th,
+  td {
+    width: 5.6%;
+  }
+
+  th:nth-child(2),
+  td:nth-child(2) {
+    text-align: left;
+    width: inherit;
+  }
+}
+
+.highLight {
+  background-color: var(--theme-light);
+}
+
+button.active {
+  color: $theme-color;
+}
+
+.filters {
+  width: 160px;
+}
+
+.filterStats {
+  width: 200px;
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 575px) {
+  .filters {
+    width: 120px;
+  }
+
+  .filterStats {
+    width: 180px;
+  }
+  .stats {
+    th:nth-child(2),
+    td:nth-child(2) { position: sticky; left: 0; }
+  }
+  .stickyCol {
+    position: sticky;
+    top: 40px;
+    z-index: 1;
+
+    table {
+      border-spacing: 0;
+    }
+  }
+}

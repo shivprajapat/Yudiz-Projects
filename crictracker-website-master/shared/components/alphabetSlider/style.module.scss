@@ -1,0 +1,16 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.dateSlider { background: var(--theme-light);
+  > div { padding: 4px 20px; }
+  .item { width: 32px; cursor: pointer;
+    &.active { background: $theme-color; color: $light-color; }
+  }
+}
+
+@media (max-width: 767px) {
+  .dateSlider {
+    > div { padding: 4px 16px; }
+    .item { width: 32px; }
+  }
+}

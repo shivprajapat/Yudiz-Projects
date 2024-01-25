@@ -1,0 +1,5 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+   
+.link { letter-spacing: 0.4px; }
+.articleGridList article { min-height: calc(100% - 8px); }

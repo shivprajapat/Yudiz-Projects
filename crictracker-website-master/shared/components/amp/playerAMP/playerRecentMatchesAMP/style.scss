@@ -1,0 +1,66 @@
+@import "../../../../../assets/scss//variables";
+@import "../../../../../assets/scss/mixins.scss";
+
+.ampSelectorContent {
+  amp-selector {
+    outline: none;
+
+    .viewOptions {
+      display: none;
+      outline: none;
+
+      &[selected] {
+        display: block;
+      }
+    }
+
+    margin-bottom: 0px;
+    border-radius: 16px;
+  }
+}
+
+.commonNav {
+  margin: 0px -6px 8px;
+  white-space: nowrap;
+  overflow: auto;
+
+  amp-selector {
+    display: flex;
+
+    & [option][selected] {
+      outline: 0;
+      color: $light-color;
+      background-color: $theme-color;
+      border-radius: 2em;
+    }
+
+    .item {
+      @include flex-grow(1);
+      display: block;
+      padding: 5px 12px;
+      font-size: 12px;
+      line-height: 18px;
+      color: var(--font-color-light);
+      font-weight: 700;
+      background: var(--theme-bg);
+      border-radius: 2em;
+      margin: 0 6px;
+
+      &:hover {
+        color: $light-color;
+        background-color: $theme-color;
+      }
+    }
+  }
+
+  &.themeLightNav {
+    a.active {
+      background: var(--light-mode-bg);
+    }
+  }
+
+  amp-selector,
+  .nav-link {
+    flex-grow: 1;
+  }
+}

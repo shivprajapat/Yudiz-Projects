@@ -1,0 +1,36 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.matchProbability {
+  .title { margin-bottom: 12px;
+    button { font-weight: 700; }
+  }   
+  .item { margin-bottom: 16px; padding: 0 8px;
+    &:last-child { margin-bottom: 0; }
+  }
+  .name { width: 110px; }
+  .flag { width: 32px; margin-right: 10px; }
+  .probability { height: 34px; background: $theme-medium2; opacity: 0.5; border-radius: 8px;
+    &.active { opacity: 1; }
+  }
+  .value { width: 50px; }
+  .votesOption {
+    button { margin-bottom: 12px; padding: 9px; width: 100%; border: 1px solid $light; border-radius: 8px;
+      &:last-child { margin-bottom: 0; }
+    }
+  }
+}
+
+@media (max-width: 991px) {
+  .matchProbability {
+    .item { padding: 0px; }
+    .name { width: 90px; }
+    .probability { height: 30px; }
+    .value { width: 40px; }
+  }
+}
+
+@media (max-width: 768px) {
+  
+  
+}

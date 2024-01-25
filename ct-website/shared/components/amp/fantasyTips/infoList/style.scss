@@ -1,0 +1,10 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.list { margin: 0px -12px; display: flex; display: -webkit-flex; @include flex-wrap(wrap); }
+.item { margin: 0 12px 24px; width: calc(50% - 24px); }
+.icon { display: block; width: 24px; margin-right: 4px; }
+/***** Responsive CSS Start ******/
+@media (max-width: 575px) {
+  .item { width: 100%; margin-bottom: 16px; }
+}

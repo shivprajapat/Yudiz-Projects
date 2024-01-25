@@ -1,0 +1,68 @@
+replicaCount: 5
+image: nginx:latest
+pullPolicy: Always
+
+labels:
+  tier: backend
+  release: blue-green
+  environment: staging
+
+namespace: dev
+
+nodeSelector: 
+  env: "spot"
+  
+service:
+  internaltype: ClusterIP
+  internalport: 80
+  type: NodePort
+  port: 80
+  healthcheck: /
+  pm2: 9209
+  grpcport: 3009
+
+resources: 
+  requests:
+    memory: "500Mi"
+    cpu: "500m"
+  limits:
+    memory: "800Mi"
+    cpu: "1000m"
+
+livenessProbe:
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+  initialDelaySeconds: 20
+  timeoutSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 20
+  timeoutSeconds: 30
+  failureThreshold: 3
+  periodSeconds: 10
+  successThreshold: 1
+
+autoscaling:
+  enabled: false
+  minReplicas: "5"
+  maxReplicas: "20"
+  targetCPU: "60"
+
+#Because we are using our private docker registry deployed in Kubernetes if you are using AWS(ECR) than you can disable this.
+imagePullSecrets:
+  enabled: false
+  name: regcred
+
+terminationGracePeriodSeconds: 50
+podprestophook:
+  enabled: true
+
+tolerations:
+  - key: env
+    effect: "NoSchedule"
+    operator: Equal
+    value: spot
+  - key: node.kubernetes.io/not-ready
+    operator: "Exists"
+    effect: NoExecute
+    tolerationSeconds: 0  

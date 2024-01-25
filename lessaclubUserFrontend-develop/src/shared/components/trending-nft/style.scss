@@ -1,0 +1,85 @@
+@import 'assets/scss/helper/variables';
+.home-kyc-wrapper{
+  text-align: center;
+  .kyc-btn{
+    position: relative;
+    top:30px
+  }
+}
+.common-grid-section {
+  &.common-desc-padding {
+    padding-left: 50px;
+    padding-right: 50px;
+  }
+  .common-grid-title {
+    padding: 0px 22px;
+    margin-bottom: 45px;
+    h4 {
+      margin-bottom: 0px;
+    }
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1699px) {
+  .common-grid-section {
+    &.common-desc-padding {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .common-grid-title {
+      margin-bottom: 40px;
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .common-grid-section {
+    &.common-desc-padding {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .common-grid-title {
+      margin-bottom: 35px;
+      padding: 0px 12px;
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .common-grid-section {
+    &.common-desc-padding {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .common-grid-title {
+      margin-bottom: 35px;
+      padding: 0px 12px;
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .common-grid-section {
+    &.common-desc-padding {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .common-grid-title {
+      margin-bottom: 35px;
+      padding: 0px 12px;
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .common-grid-section {
+    &.common-desc-padding {
+      padding-left: 0px;
+      padding-right: 0px;
+    }
+    .common-grid-title {
+      margin-bottom: 35px;
+      padding: 0px;
+    }
+  }
+}

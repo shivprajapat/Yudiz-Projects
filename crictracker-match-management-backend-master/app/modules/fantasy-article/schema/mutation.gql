@@ -1,0 +1,442 @@
+
+input editFantasyArticleInput {
+  _id: ID
+  sTitle: String!
+  sSubtitle: String!
+  sSrtTitle: String!
+  sMatchPreview: String!
+  oImg: oImage
+  oTImg: oImage
+  aTags: [ID]!
+  sEditorNotes: String
+  oAdvanceFeature: oAdvanceFeatureInput
+  eState: FANTASYARTICLE!
+  aCVCFan: [oCVCPlayerFanInput] 
+  aTopicPicksFan: [SelectedPlayerFan] 
+  aBudgetPicksFan: [SelectedPlayerFan] 
+  aAvoidPlayerFan: [SelectedPlayerFan] 
+  oOtherInfo: OtherInfoInput
+  sMustPick: String
+  eVisibility: String
+  dPublishDate: String
+  bPriority: Boolean
+  iCategoryId: ID
+  aSeries: [ID]
+  aPlayer: [ID]
+  aTeam: [ID]
+  aVenue: [ID]
+  nViewCount: Int
+  sVideoUrl: String
+  iAuthorDId: ID
+  aLeague: [oFantasyLeagueInput!]!
+  dPublishDisplayDate: String
+  oSeo: oSeoInput!
+  aPollId: [ID!]
+}
+
+enum FANTASYLEAGUE {
+  "head to head"
+  hth
+  "grand league"
+  gl
+  "mega league"
+  ml 
+  "cric special"
+  cs
+}
+
+input oFantasyLeagueInput {
+  eLeague: FANTASYLEAGUE!
+  aTeam: [oFantasyTeamInput]!
+}
+
+input oFantasyTeamInput {
+  aSelectedPlayerFan:[ID] 
+  iCapFanId: ID
+  iVCFanId: ID
+  oTeamA: oTeamCount
+  oTeamB: oTeamCount
+}
+
+input oTeamCount {
+  nCount: Int
+  iTeamId: ID
+}
+
+type editFantasyArticleResponse {
+    sMessage: String
+    oData: FantasyArticle
+}
+
+type updateFantasyTipsStatusResponse {
+  sMessage: String
+}
+
+input updateFantasyTipsStatusInput {
+  iMatchId: ID!
+  bStatus: Boolean! 
+}
+
+enum EROLE {
+  all
+  bat
+  bowl
+  wk
+  wkbat
+}
+
+input editPlayerRatingInput {
+    iPlayerId: ID!
+    iMatchId: ID!
+    ePlatform: FANTASYPLATFORM!
+    nRating: Float
+    eRole: EROLE
+}
+
+type editPlayerRatingResponse {
+    sMessage: String
+}
+
+input SelectedPlayerFan {
+ iPlayerFanId: ID
+ sDescription: String
+}
+
+input oCVCPlayerFanInput {
+ iPlayerFanId: ID
+ sDescription: String
+ eType: CVCEnum
+}
+
+enum CVCEnum {
+  "captain"
+  c
+  "vice captain"
+  v
+}
+
+input OtherInfoInput {
+ sExpertAdvice: String
+}
+
+input oImage {
+  sText: String
+  sCaption: String
+  sAttribute: String
+  sUrl: String
+}
+
+input oCategoriesInput {
+  aCategoryId: [ID]
+  iPrimaryId: ID
+}
+
+input oAdvanceFeatureInput {
+  bAllowComments: Boolean
+  bRequireAdminApproval: Boolean
+  bAmp: Boolean
+  bImp: Boolean
+  bFBEnable: Boolean
+  bBrandedContent: Boolean
+  bExclusiveArticle: Boolean
+  bEditorsPick: Boolean
+  bPlayerStats: Boolean
+  bTeamForm: Boolean
+  bPitchReport: Boolean
+}
+
+enum FANTASYARTICLE {
+  "draft"
+  d
+  "pending"
+  p
+  "rejected"
+  r
+  "changesRemaining"
+  cr
+  "changesSubmitted"
+  cs
+  "published"
+  pub
+  "trash"
+  t
+  "scheduled"
+  s
+}
+
+input Playing11 {
+  iTeamId: ID
+  aPlayers: [ID]
+  iC: ID
+  iVC: ID
+  iWK: ID
+}
+
+input addMatchOverviewInput {
+  iMatchId: ID!
+  sMatchPreview: String
+  sNews: String
+  sPitchCondition: String
+  sWeatherReport: String
+  sWeatherCondition: String
+  iWinnerTeamId: ID
+  sAvgScore: String
+  sPitchReport: String
+  oTeam1: Playing11!
+  oTeam2: Playing11!
+  sOutFieldCondition: String
+  sLiveStreaming: String
+}
+
+type addMatchOverviewResponse {
+    sMessage: String
+    oData: MatchOverview
+}
+
+type editMatchOverviewResponse {
+    sMessage: String
+    oData: oEditMatchOverview
+}
+
+type oEditMatchOverview {
+  oMatch: oShortMatch
+  oOverview: oFantasyMatchOverview
+}
+
+
+input editMatchOverviewInput {
+  iMatchId: ID!
+  sMatchPreview: String
+  sNews: String
+  sPitchCondition: String
+  sAvgScore: String
+  sPitchReport: String
+  sWeatherCondition: String
+  iWinnerTeamId: ID
+  sWeatherReport: String
+  oTeam1: Playing11
+  oTeam2: Playing11
+  sOutFieldCondition: String
+  sBroadCastingPlatform: String
+  nPaceBowling: Int
+  nSpinBowling: Int
+  nBattingPitch: Int
+  nBowlingPitch: Int
+  sLiveStreaming: String
+}
+
+input oCreateFantasyArticleInput {
+  iMatchId: ID!
+  ePlatformType: FANTASYPLATFORM!
+}
+
+input oSocialInput {
+  sTitle: String
+  sDescription: String
+  sUrl: String
+}
+
+enum SEO_TYPE {
+  "Article"
+  ar
+  "Admin"
+  ad
+  "Category"
+  ct
+  "General Tag"
+  gt
+  "Match Overview"
+  mo
+  "player"
+  p
+  "team"
+  t
+  "venue"
+  v
+  "Fantasy Article"
+  fa
+  "Custom Seo"
+  cu
+  "Match"
+  ma
+  "Series"
+  se
+  "CMS Page"
+  cms
+  "video"
+  vi
+  "playlist"
+  pl
+  "job"
+  jo
+  "static pages"
+  st
+}
+
+enum SCHEMATYPE {
+  "article"
+  ar
+  "news article"
+  nar
+}
+
+input oSeoInput {
+  sTitle: String
+  sDescription: String
+  sSlug: String!
+  aKeywords: [String]
+  oFB: oSocialInput
+  oTwitter: oSocialInput
+  sCUrl: String 
+  sRobots: String
+  eType: SEO_TYPE
+  eSchemaType: SCHEMATYPE
+  bIsDeletable: Boolean
+}
+
+enum FANTASYPLATFORM {
+  "Dream 11"
+  de
+  "11 Wickets"
+  ew
+}
+
+type oCreateFantasyArticleResponse {
+  sMessage: String
+  oData: oCreateFantasyArticleData
+}
+
+type oCreateFantasyArticleData {
+  _id: ID
+  iMatchId: ID
+  ePlatformType: String
+}
+
+input pickFantasyArticleInput {
+  eType: FANTASYARTICLEENUM
+  iArticleId: ID
+}
+
+enum FANTASYARTICLEENUM {
+  "pick"
+  p
+  "overtake"
+  o
+}
+
+type pickFantasyArticleResponse {
+  sMessage: String
+}
+
+input editFantasyDisplayAuthorInput {
+  iArticleId: ID
+  iAuthorDId: ID
+}
+
+type editFantasyDisplayAuthorResponse {
+  sMessage: String
+}
+
+input oCreateFantasyArticleCommentInput {
+  iArticleId: ID!
+  iReceiverId: ID!
+  sMessage: String
+  aPic: [String]
+}
+
+type oCreateFantasyArticleCommentResponse {
+  sMessage: String
+  oData: FantasyArticleComment
+}
+
+type FantasyArticleComment {
+  _id: ID                        
+  sMessage: String
+  iSenderId: ID
+  iReceiverId: ID
+  dSentDate: Date
+  aPic: [String]
+  oSender: subAdmin
+  oReceiver: subAdmin
+}
+
+input deleteFantasyArticleInput {
+  _id: ID
+}
+
+type deleteFantasyArticleResponse {
+  sMessage: String
+}
+
+input copyFantasyArticleInput {
+  _id: ID!
+  ePlatformType: FANTASYPLATFORM!
+
+}
+
+type copyFantasyArticleResponse {
+  sMessage: String
+  oData: FantasyArticle
+}
+
+type copyFantasyArticleResponseData {
+  _id: ID
+  ePlatformType: String
+}
+
+input updateFantasyArticleClapInput {
+    iArticleId: ID
+}
+
+type updateFantasyArticleClapResponse {
+    nTotalClap: Int
+    sMessage: String
+}
+
+input oUpdateFantasyArticleStatus {
+  _id: ID!
+  eState: FANTASYARTICLEUPDATESTATE!
+}
+
+enum FANTASYARTICLEUPDATESTATE {
+  "trash"
+  t
+  "draft"
+  d
+}
+
+type oUpdateFantasyArticleResponse {
+  sMessage: String
+}
+
+input editFantasyArticleViewCount{
+  _id: ID!
+}
+
+input oUpdateFantasyPlayersListInput {
+  iMatchId: ID!
+  ePlatformType: FANTASYPLATFORM!
+}
+
+type oUpdateFantasyPlayersResponse {
+  sMessage: String
+}
+
+extend type Mutation {
+ editFantasyArticle(input:editFantasyArticleInput):editFantasyArticleResponse
+ updateFantasyTipsStatus(input:updateFantasyTipsStatusInput):updateFantasyTipsStatusResponse
+ editPlayerRating(input:editPlayerRatingInput):editPlayerRatingResponse
+ addMatchOverview(input:addMatchOverviewInput): addMatchOverviewResponse
+ editMatchOverview(input:editMatchOverviewInput): editMatchOverviewResponse
+ createFantasyArticle(input:oCreateFantasyArticleInput): oCreateFantasyArticleResponse
+ pickFantasyArticle(input:pickFantasyArticleInput): pickFantasyArticleResponse
+ editFantasyDisplayAuthor(input:editFantasyDisplayAuthorInput):editFantasyDisplayAuthorResponse
+ createFantasyArticleComment(input: oCreateFantasyArticleCommentInput):oCreateFantasyArticleCommentResponse
+ deleteFantasyArticle(input:deleteFantasyArticleInput): deleteFantasyArticleResponse
+ copyFantasyArticle(input:copyFantasyArticleInput):copyFantasyArticleResponse
+ updateFantasyArticleClap(input: updateFantasyArticleClapInput): updateFantasyArticleClapResponse
+ updateFantasyArticleStatus(input:oUpdateFantasyArticleStatus!): oUpdateFantasyArticleResponse
+ updatePickFantasyArticleData(input: editFantasyArticleInput): editFantasyArticleResponse
+ updateFantasyArticleViewCount(input: editFantasyArticleViewCount): String
+ updateFantasyPlayersList(input: oUpdateFantasyPlayersListInput): oUpdateFantasyPlayersResponse
+}

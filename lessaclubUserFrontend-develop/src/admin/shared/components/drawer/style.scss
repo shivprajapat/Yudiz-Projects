@@ -1,0 +1,36 @@
+@import 'assets/scss/helper/variables';
+
+.drawer {
+  width: 460px;
+  background-color: $black-100;
+  .offcanvas-header {
+    padding: 15px;
+    button {
+      margin-right: 5px;
+    }
+    svg {
+      color: $white;
+    }
+  }
+  .offcanvas-title {
+    font-size: 20px;
+    font-weight: 700px;
+    text-transform: capitalize;
+  }
+  .offcanvas-body {
+    padding: 15px;
+  }
+  .top-d-button {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 14px 15px;
+    .btn {
+      border-radius: 5px;
+      min-width: 90px;
+      padding: 13px 10px 9px;
+      font-weight: 500;
+      font-size: 16px;
+    }
+  }
+}

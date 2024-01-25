@@ -1,0 +1,18 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.title { margin-bottom: 14px;
+  h3 {
+    .icon { width: 24px; }
+  }
+}
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+}
+
+@media (max-width: 1199px) {
+}
+
+@media (max-width: 767px) {
+}

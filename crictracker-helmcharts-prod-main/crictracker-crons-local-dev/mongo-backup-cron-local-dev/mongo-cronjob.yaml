@@ -1,0 +1,43 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: backup-mongodb
+  namespace: local-dev
+spec:
+  schedule: "0 */8 * * *"
+  concurrencyPolicy: Forbid
+  suspend: false
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: backup-mongodb
+            image: 693583001687.dkr.ecr.ap-south-1.amazonaws.com/crictracker-mongodbdumps-local-dev:latest
+            env:
+            - name: BUCKET_URI
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-cron-secret
+                  key: BUCKET_URI
+
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-cron-secret
+                  key: AWS_ACCESS_KEY_ID
+
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-cron-secret
+                  key: AWS_SECRET_ACCESS_KEY
+
+            - name: AWS_DEFAULT_REGION
+              valueFrom:
+                secretKeyRef:
+                  name: mongo-cron-secret
+                  key: AWS_DEFAULT_REGION

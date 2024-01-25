@@ -1,0 +1,19 @@
+input results{
+  sTitle: String!
+  sUrl: String!
+}
+
+input footerMenuIpnut {
+  eType: String
+  aResults: [results]!
+  nPriority: Int!
+}
+
+extend type Mutation {
+  addFooterMenu(input: [footerMenuIpnut!]!): String
+}
+
+ 
+
+ 
+ 

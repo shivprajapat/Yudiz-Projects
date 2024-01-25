@@ -1,0 +1,21 @@
+input oListCommentariesInput {
+  iMatchId: ID
+}
+
+input oListOversInput {
+  iMatchId: ID!
+  nInningNumber: Int!
+}
+
+type getMatchBySlugResponse {
+  oMatchDetailsFront: oMatchDetailsFront
+  LiveInnings: LiveInnings
+}
+
+extend type Subscription {
+  fetchMiniScorecardData: [MiniScorecard]
+  fetchLiveInningsData(input: liveInningsInput): LiveInnings
+  listMatchOvers(input: oListMatchOverFrontInput): MatchOvers
+  listMatchCommentaries(input: oListCommentariesInput): [MatchCommentaries]
+  getMatchBySlug(input: oListCommentariesInput): getMatchBySlugResponse
+}

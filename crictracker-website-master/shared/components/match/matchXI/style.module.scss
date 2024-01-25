@@ -1,0 +1,26 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.playerImg { width: 48px; border: 1px solid var(--border-input); }
+.teamItem {
+    &:nth-child(1) { border-right: 1px solid var(--border-input); }
+    &:nth-child(2) {
+        .playerinfo,
+        .item { flex-direction: row-reverse; text-align: right; }
+    }
+}
+.captain { width: 16px; height: 16px; line-height: 16px; }
+.item:not(:last-child) { margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px solid var(--border-input); }
+.playerinfo {
+    > * { margin: 0 2px;}
+}
+.reserve { background: var(--theme-bg); }
+.icon path { fill: var(--font-light);}
+
+@media (max-width: 575px) {
+    .playerImg { width: 36px; }
+    .name { width: 100%; white-space: nowrap; text-overflow: ellipsis; overflow: hidden; }
+    .playerinfo { width: calc(100% - 36px);
+        svg { width: 20px; height: 20px; }
+    }
+}

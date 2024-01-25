@@ -1,0 +1,28 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  REDIS_HOST: "crictracker-redis-dev-headless.dev.svc.cluster.local"
+  REDIS_PORT: "6379"
+  NODE_ENV: dev-prod
+  PORT: "4004"
+  SUPPORT_EMAIL: 'Crictracker@yudizproject.tk'
+  AWS_REGION: "ap-south-1"
+  S3_BUCKET_NAME: 'admin-media-cdn.crictracker.com'
+  S3_BUCKET_URL: 'https://admin-media-cdn.crictracker.com.s3.ap-south-1.amazonaws.com/'
+  S3_BUCKET_PROFILE_PATH: profile-pic/
+  S3_BUCKET_KYC_PATH: kyc/pan/
+  S3_BUCKET_FB_PATH: seo/fb/
+  S3_BUCKET_TWITTER_PATH: seo/twitter/
+  S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH: media/featureimage/
+  S3_BUCKET_ARTICLE_THUMBIMAGE_PATH: media/thumbnailimage/
+  S3_BUCKET_ARTICLE_CHAT_MEDIA_PATH:  media/chatmedia/
+  # SEO_SUBGRAPH_URL: 'https://gateway-dev.beta.crictracker.com/'
+  SEO_SUBGRAPH_URL: http://crictracker-seo-dev-internal.dev.svc.cluster.local/graphql
+  # ARTICLE_SUBGRAPH_URL: 'https://article-dev.beta.crictracker.com'
+  ARTICLE_SUBGRAPH_URL: http://crictracker-article-dev-internal.dev.svc.cluster.local
+  SEO_REST_URL: 'https://seo-dev.beta.crictracker.com/'
+  ENTITY_SPORT_BASE_URL: 'https://rest.entitysport.com/v2/'
+  GLOBAL_WIDGET_GRPC_URL: 'crictracker-global-widget-dev-grpc.dev.svc.cluster.local:80'  

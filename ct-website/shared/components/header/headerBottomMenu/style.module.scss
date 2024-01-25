@@ -1,0 +1,35 @@
+
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.headerMenu { padding: 8px 0px 6px; @include box-shadow(0px 1px #E5E7EA); background: var(--light-mode-bg);
+  .navMore,
+  .navItem { margin-right: 16px; padding: 5px 8px; font-size: 12px; line-height: 16px; font-weight: 700; display: block; color: $theme-dark2; border-radius: 8px; text-transform: uppercase; 
+    &:hover { color: $theme-color; }
+  }
+  .navItem.active { background: $theme-light; }
+  li:last-child .navMore { margin-right: 0; }
+  .liveUpdate {
+    &::before { @extend %after-before; margin-right: 8px; position: relative; width: 7px; height: 7px; display: inline-block; border-radius: 50%; background: $danger; box-shadow: 0 0 0px 4px rgba($danger, 0.2); }
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .headerMenu {
+    .navMore,
+    .navItem { margin-right: 8px; }
+  }
+}
+@media (min-width: 768px) and (max-width: 991px) {
+  .headerMenu { overflow: auto; overflow-y: hidden; 
+    .navMore,
+    .navItem { margin-right: 8px; }
+    .dropdownMenu { position: fixed !important; }
+  }
+}
+@media (max-width: 767px) {
+  .headerMenu { padding: 8px 0px 9px; overflow: auto; overflow-y: hidden;
+    .dropdownMenu { position: fixed !important; }
+    .navMore,
+    .navItem { padding: 4px 8px; }
+  }
+}

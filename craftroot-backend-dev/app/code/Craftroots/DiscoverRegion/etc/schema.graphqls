@@ -1,0 +1,16 @@
+type Query {
+    discoverByRegion: DiscoverByRegion
+        @resolver(class: "Craftroots\\DiscoverRegion\\Model\\Resolver\\DiscoverByRegion")
+        @doc(description: "Discover by region")
+}
+
+type DiscoverByRegion @doc(description: "Discover by region") {
+    data: [DiscoverByRegionData] @doc(description: "Discover by region")
+    attributeCode: String @doc(description: "Attribute Code of region")
+}
+
+type DiscoverByRegionData @doc(description: "Discover by region Data") {
+    title: String @doc(description: "Get Discover by region Title")
+    profile: String @doc(description: "Get Discover by region images")
+    attributes: String @doc(description: "Get Discover by region attributes")
+}

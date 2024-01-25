@@ -1,0 +1,16 @@
+input generatePreSignedUrl {
+  sFileName: String!
+  sContentType: String!
+  sType: String!
+  bAdd: Boolean
+}
+
+type generatePreSignedUrlResponse {
+  sType: String!
+  sUploadUrl: String!
+  sS3Url: String!
+}
+
+extend type Mutation {
+    generatePreSignedUrl(input: [generatePreSignedUrl]): [generatePreSignedUrlResponse]!
+}

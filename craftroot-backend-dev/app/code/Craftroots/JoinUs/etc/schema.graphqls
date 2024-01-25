@@ -1,0 +1,49 @@
+type Mutation {
+    joinUsForm(input: JoinUsFormInput!): JoinUsFormOutput
+        @resolver(class: "\\Craftroots\\JoinUs\\Model\\Resolver\\JoinForm")
+        @doc(description: "Join Us Form")
+}
+
+input JoinUsFormInput {
+    name: String @doc(description: "user Name")
+    email: String @doc(description: "user Email")
+    telephone: String @doc(description: "user phone number")
+    city: String @doc(description: "user city")
+    state: String @doc(description: "user state")
+    country: String @doc(description: "user country")
+    images: [ItemsIds!]! @doc(description: "Upload Catalog")
+}
+input ItemsIds @doc(description: "multiple items with images") {
+    base_64_images: String! @doc(description: "base64 images")
+}
+
+type JoinUsFormOutput {
+    success: Boolean
+    message: String
+}
+type Query {
+    getAllCountry: GetAllCountry
+        @resolver(class: "Craftroots\\JoinUs\\Model\\Resolver\\GetCountry")
+        @doc(description: "Get All Country")
+    getRegionData(
+        country_id: String! @doc(description: "Country Id")
+    ): GetRegionData
+        @resolver(class: "Craftroots\\JoinUs\\Model\\Resolver\\GetRegion")
+        @doc(description: "Based on the country get its all region")    
+}
+type GetAllCountry @doc(description: "Get All Country") {
+    data: [GetAllCountryData] @doc(description: "Get All Country Data")
+}
+type GetAllCountryData @doc(description: "Get All Country Data") {
+    country_code: String @doc(description: "Country Code")
+    country_name: String @doc(description: "Country Name")
+
+}
+type GetRegionData @doc(description: "Get Region Data based on country code") {
+    data: [GetRegion] @doc(description: "Get Region Data based on country code")
+}
+type GetRegion @doc(description: "Get Region id and name") {
+    region_code: String @doc(description: "Region Code")
+    region_name: String @doc(description: "Region Name")
+
+}

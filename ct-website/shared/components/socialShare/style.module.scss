@@ -1,0 +1,15 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.share { padding: 2px 8px; background: $theme-light; font-weight: 600; border-radius: 2em;
+  &::after { display: none; }
+  svg { margin: 0 -3px 0px 4px; width: 20px; height: 20px; 
+    path { fill: $theme-color; }
+  }
+  &:hover svg path { fill: $theme-color; }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+
+}

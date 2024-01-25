@@ -1,0 +1,22 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.pageNotFound {
+  h5 { font-weight: 500; }
+}
+.topArticles article { min-height: calc(100% - 8px); }
+.title { margin: 36px 0 28px; font-size: 320px; line-height: 300px; }
+.artwork { width: 300px; }
+.btn { min-width: 160px; }
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1199px) {
+  .title { font-size: 260px; line-height: 240px; }
+  .artwork { width: 240px; }
+}
+
+@media (max-width: 767px) {
+  .title { margin: 24px 0 20px; font-size: 140px; line-height: 140px; }
+  .artwork { width: 140px; }
+}

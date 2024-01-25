@@ -1,0 +1,35 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '14'
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '8'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '3'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+    #alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=58
+    #alb.ingress.kubernetes.io/target-group-attributes: slow_start.duration_seconds=30
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=80
+
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:693583001687:certificate/a98e8d06-f891-4338-9143-1220fa55592c
+    alb.ingress.kubernetes.io/group.name: crictracker-devstag-new
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/subnets: subnet-077b67cb6983824ae, subnet-079a2bebf229cbae2
+    external-dns.alpha.kubernetes.io/hostname: influx.beta.crictracker.com
+    kubernetes.io/ingress.class: alb
+  name: crictracker-monitoring-influx
+  namespace: monitoring
+spec:
+  rules:
+  - host: influx.beta.crictracker.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: influxdb
+            port:
+              number: 8086
+        path: /*
+        pathType: ImplementationSpecific

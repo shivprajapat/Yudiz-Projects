@@ -1,0 +1,63 @@
+enum SeoRedirectActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+type oSeoRedirectData {
+  _id: ID
+  iId: ID
+  sOldUrl: String
+  sNewUrl: String
+  eCode: Int
+  eSeoType: SEO_TYPE
+  eStatus: SeoRedirectActionStatus
+  dCreated: String
+  dUpdated: String
+}
+
+input oRedirectInput {
+  sOldUrl: String!
+  sNewUrl: String!
+  eCode: Int!
+  eSeoType: SEO_TYPE
+  eStatus: SeoRedirectActionStatus
+}
+
+input oAddSeoRedirectInput {
+  oInput: oRedirectInput
+}
+
+type oAddSeoRedirectResponse {
+  oData: oSeoRedirectData
+  sMessage: String
+}
+
+input oEditSeoRedirectInput {
+  _id: ID!
+  oInput: oRedirectInput
+}
+
+type oEditSeoRedirectResponse {
+  oData: oSeoRedirectData
+  sMessage: String
+}
+
+input oBulkSeoRedirectUpdateInput {
+  aId: [ID!]!
+  eStatus: SeoRedirectActionStatus!
+}
+
+type oUpdateSeoRedirectStatusResponse {
+  sMessage: String
+}
+
+extend type Mutation {
+  addSeoRedirect(input: oAddSeoRedirectInput): oAddSeoRedirectResponse
+  editSeoRedirect(input: oEditSeoRedirectInput): oEditSeoRedirectResponse
+  bulkSeoRedirectUpdate(input: oBulkSeoRedirectUpdateInput): oUpdateSeoRedirectStatusResponse
+  bulkSeoRedirectUpdateV2(input: oBulkSeoRedirectUpdateInput): oUpdateSeoRedirectStatusResponse
+}

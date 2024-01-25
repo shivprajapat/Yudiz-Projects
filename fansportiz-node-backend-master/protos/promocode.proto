@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package promocode;
+
+service Promocode {
+    rpc findPromocode (PromoReqeust) returns (PromoResponse) {}
+    rpc createPromocodeStatistics (PromoStatReqeust) returns (Empty) {}
+}
+
+message Empty {
+
+}
+
+message PromoReqeust {
+    string query = 1;
+    string projection = 2;
+}
+
+message PromoResponse {
+    string data = 1;
+    
+}
+
+message PromoStatReqeust {
+    string data = 1;
+}

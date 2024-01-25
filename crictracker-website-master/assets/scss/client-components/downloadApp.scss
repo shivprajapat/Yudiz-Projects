@@ -1,0 +1,21 @@
+.downloadApp { background: #0f0f0f no-repeat center center / auto 100%;
+  position: relative;
+  p { color: $light-color; }
+}
+.dp-ctIcon { width: 28px; }
+.dp-close { width: 21px; height: 21px; border: 1px solid #fff; top: 16px; right: 16px; @include filter(brightness(0) invert(1)); }
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 768px) {
+  .downloadApp { background-image: url(../../../assets/images/download-app.jpg) }
+}
+
+@media (max-width: 767px) {
+  .downloadApp {
+    position: absolute;
+    z-index: 11;
+  }
+  .dp-ctIcon { width: 18px; margin-left: 30px; }
+  .dp-close { padding: 2px; width: 16px; height: 16px; top: 50%; transform: translateY(-50%); left: 4px; }
+}

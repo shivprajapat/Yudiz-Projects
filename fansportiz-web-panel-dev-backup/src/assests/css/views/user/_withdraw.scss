@@ -1,0 +1,38 @@
+.withdraw-box {
+    border-top: 2px solid #f8f9fa;
+    margin-top: 25px;
+    padding: 20px 15px 0 15px;
+    .w-title {
+        font-weight: 500;
+        font-size: 14px;
+        color: $darkGray;
+    }
+    .payment-o{
+        li{
+            &.disable {
+                color: $gray;
+                pointer-events: none;
+                opacity: 0.5;
+            }
+            label{
+                padding:0 15px 0 36px;
+                position: relative;
+                font-weight: 500;
+                color: #212A34;
+                span{
+                    font-size: 12px;
+                    font-weight: normal;
+                    color: $gray;
+                }
+                &:before{
+                    position: absolute;
+                    top: 50%;
+                    left: 10px;
+                }
+                span{
+                    display: block;
+                }
+            }
+        }
+    }
+}

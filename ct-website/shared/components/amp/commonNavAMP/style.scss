@@ -1,0 +1,35 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss'; 
+
+.d-flex { display: flex; -webkit-display: flex; }
+.commonNav { margin: 0 0 16px; padding: 6px 8px; background: #fff; border-radius: 2em; white-space: nowrap; overflow: auto;
+  .item { margin: 0 7px; @include flex-grow(0); text-transform: uppercase;
+    a { display: block; padding: 5px 8px; font-size: 12px; line-height: 18px; color: $font-color; font-weight: 700; background: transparent; border-radius: 2em; text-decoration: none;
+      &:hover { color: $theme-color; }
+      &.active { background: $theme-light; color: $font-color; }
+    }
+    &:first-child { margin-left: 0; }
+    &:last-child { margin-right: 0; }
+  }
+  &.themeLightNav {  background: $theme-light;
+    a.active { background: #fff; }
+  }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1199px) {
+  .commonNav { 
+    .item { margin: 0 4px; }
+  }
+}
+
+@media (max-width: 992px) {
+  .commonNav { 
+    .item { margin: 0px 3px; }
+  }
+}
+
+@media (max-width: 575px) {
+  .commonNav { margin: 0px -12px 12px; border-radius: 0; }
+}

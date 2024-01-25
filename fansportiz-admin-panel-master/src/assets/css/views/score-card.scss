@@ -1,0 +1,115 @@
+.full-screens {
+    background-color: #f2f2f2;
+}
+.score-cards {
+    padding: 20px;
+    background-color: #f2f2f2;
+    button {
+        width: 100%;
+        background-color: #323842;
+        color: #fff;
+        border-radius: 8px;
+        padding: 10px 20px;
+        border: none;
+        img {
+            margin-left: 4px;
+            display: inline-block;
+            @include transition (all 0.5s);
+        }
+        &:hover {
+            color: #fff;
+        }
+        .rotate {
+            @include transform(rotate(-180deg))
+        }
+    }
+    
+    .card-body {
+        padding: 0px;
+        border: none;
+    }
+    table {
+        min-width: 320px; width: 100%; margin: 0px auto;
+        border-spacing: 0; background: #fff; border-radius: 6px;
+        thead {
+            background: #235de9; color: #fff;
+            tr {
+                th {
+                    font-size: 16px;
+                    line-height: 14px;
+                    padding: 10px 2px;
+                    &:first-child {
+                        border-top-left-radius: 6px;
+                        width: 40%;
+                        padding-left: 5px;
+                    }
+                    &:last-child {
+                        border-top-right-radius: 6px;
+                    }
+                    &:not(th:first-child) {
+                        &:not(th:nth-child(1)) {
+                            text-align: center;
+                            width: 7%;
+                        }
+                    }
+                }
+            }
+        }
+        tr {
+            &.backgroundBlue {
+                background-color: #e7f0ff;
+            }
+            td {
+                font-size: 14px;
+                line-height: 14px;
+                h4 {
+                    margin: 1px;
+                }
+                span {
+                    font-size: 13px;
+                    line-height: 14px;
+                }
+                &.blueText {
+                    color: #235de9;
+                }
+                padding: 10px 2px;
+                color: #42454b;
+                font-weight: 500;
+                &:not(td:first-child) {
+                    &:not(td:nth-child(1)) {
+                        text-align: center;
+                        width: 7%;
+                    }
+                }
+                &:first-child {
+                    width: 40%;
+                    padding-left: 5px;
+                }
+            }
+        }
+    }
+    .card {
+        background-color: transparent;
+        border: none;
+    }
+    .fow {
+        padding: 10px;
+        background: #fff;
+        border-radius: 10px;
+        margin: 10px 0px;
+        span {
+            &:last-child {
+                font-weight: 700;
+            }
+            &:first-child {
+                padding: 0px 0px 20px;
+                font-weight: 700;
+            }
+        }
+    }
+}
+.blueText {
+    color: #235de9;
+    font-size: 14px;
+    font-weight: 600;
+}

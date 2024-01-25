@@ -1,0 +1,15 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.articlesList {
+    article { border: 1px solid $light; padding-right: 48px; }
+    .item { position: relative; }
+    .closeMenu { position: absolute; right: 16px; top: 16px; }
+}
+
+@media (max-width: 767px) {
+    .articlesList {
+        article { margin-bottom: 16px; padding-right: 0px; }
+        .closeMenu { height: 20px; width: 20px; right: -8px; top: -8px; }
+    }
+}

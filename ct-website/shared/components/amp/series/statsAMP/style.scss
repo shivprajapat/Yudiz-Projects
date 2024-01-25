@@ -1,0 +1,56 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+*{ box-sizing: border-box; }
+h4        				{ margin: 0 0 8px; font-size: 21px; line-height: 32px; font-weight: 700; text-transform: uppercase; }
+h5        				{ margin: 0 0 16px; font-size: 18px; line-height: 27px; font-weight: 700; }
+th, td { padding: 4px 14px; height: 44px; text-align: center;
+  &:first-child { border-radius: 8px 0 0 8px; }
+  &:last-child { border-radius: 0 8px 8px 0; }
+}
+th { background: $theme-color; color: #fff; text-transform: capitalize; }
+td { background: #fff; }
+.highlight td { background: $theme-light;}
+.icon-img { margin-right: 10px; display: inline-block; width: 36px; height: 36px; background: #fff; border-radius: 10px; overflow: hidden; vertical-align: middle; }
+
+.stats {
+  th, td { width: 5.6%; }
+  th:nth-child(2),
+  td:nth-child(2) { text-align: left; width: inherit; }
+
+}
+button.active { color: $theme-color; }
+.filters { width: 160px; }
+.filterStats { width: 200px; }
+/***** Responsive CSS Start ******/
+
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  h4        				{ margin: 0 0 12px; font-size: 19px; line-height: 28px; }
+  h5        				{ margin: 0 0 12px; font-size: 17px; line-height: 26px; }
+}
+
+@media (max-width: 991px) {
+  h4        				{ margin: 0 0 10px; font-size: 18px; line-height: 27px; }
+  h5        				{ margin: 0 0 10px; font-size: 16px; line-height: 24px; }
+  th, td { padding: 4px 10px; height: 40px;
+    &:first-child { border-radius: 4px 0 0 4px; }
+    &:last-child { border-radius: 0 4px 4px 0; }
+  }
+  .icon-img { width: 24px; height: 24px; border-radius: 4px; }
+}
+
+@media (max-width: 575px) {
+  h4        				{ margin: 0 0 12px; font-size: 16px; line-height: 26px; }
+  h5       				  { margin: 0 0 12px; font-size: 15px; line-height: 22px; }
+  th, td { padding: 2px 5px; height: 30px;
+    &:first-child { border-radius: 3px 0 0 3px; padding-left: 10px; }
+    &:last-child { border-radius: 0 3px 3px 0; padding-right: 10px; }
+  }
+  .icon-img { width: 23px; height: 23px; border-radius: 3px; }
+  .d-sm-none { display: block; }
+  .d-sm-block { display: none; }
+  .filters { width: 120px; }
+  .filterStats { width: 180px; }
+}
+

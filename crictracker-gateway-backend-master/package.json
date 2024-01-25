@@ -1,0 +1,37 @@
+{
+  "name": "crictracker-gateway",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "compose:dev": "rover supergraph compose --config ./supergraph-config-dev.yaml > supergraph.gql",
+    "compose:development": "rover supergraph compose --config ./supergraph-config-development.yaml > supergraph.gql",
+    "compose:stag": "rover supergraph compose --config ./supergraph-config-stag.yaml > supergraph.gql",
+    "compose:prod": "rover supergraph compose --config ./supergraph-config-prod.yaml > supergraph.gql",
+    "lint": "eslint . --ext .js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@apollo/gateway": "2.4.2",
+    "@apollo/server": "4.7.0",
+    "apollo-datasource-rest": "3.2.0",
+    "apollo-server": "3.3.0",
+    "apollo-server-express": "3.10.2",
+    "compression": "1.7.4",
+    "dotenv": "10.0.0",
+    "federation-subscription-tools": "0.2.1",
+    "graphql": "16.6.0",
+    "graphql-import-node": "0.0.4",
+    "graphql-middleware": "6.1.6"
+  },
+  "devDependencies": {
+    "eslint": "7.32.0",
+    "eslint-config-standard": "16.0.3",
+    "eslint-plugin-import": "2.25.4",
+    "eslint-plugin-node": "11.1.0",
+    "eslint-plugin-promise": "5.2.0",
+    "husky": "7.0.4"
+  }
+}

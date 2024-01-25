@@ -1,0 +1,12 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  REDIS_HOST: "crictracker-redis-local-dev-headless.local-dev.svc.cluster.local"
+  REDIS_PORT: "6379"
+  PORT: "5001"
+  SQL_HOST: yudiz-placements.cyaoqdrfnsw7.ap-south-1.rds.amazonaws.com
+  SQL_DATABASE: Crictracker
+  SQL_USER: admin

@@ -1,0 +1,17 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.filedrop { padding: 22px 20px; border: 2px dashed $border-input; cursor: pointer; 
+    input { cursor: pointer; }
+}
+.icon {
+    svg { width: 32px; height: 32px; }
+    path { fill: var(--font-color);}
+} 
+.formTextarea { height: 200px; }
+
+@media (max-width: 991px) {
+    .formTextarea {
+        height: 140px;
+    }
+}

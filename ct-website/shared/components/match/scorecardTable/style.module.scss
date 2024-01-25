@@ -1,0 +1,54 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.scorecardTable {
+	table { margin: 0px 0px 8px;
+		th, td { width: 66px; max-width: 66px;
+			&:first-child { text-align: left; width: inherit; max-width: 100px; 
+				.batterName { min-width: 45%; max-width: 45%;
+					span { overflow: hidden; text-overflow: ellipsis; }
+				}
+				&.YetToBat span { min-width: initial; }
+			}
+			&:last-child { width: 70px; max-width: 70px; }
+		}
+		.subText { font-weight: 500; overflow: hidden; text-overflow: ellipsis; }
+		svg { margin-right: 6px;}
+	}
+}
+  
+@media (max-width: 1199px) {
+	.scorecardTable {
+		table {
+			th, td { width: 54px; max-width: 54px; 
+				&:last-child { width: 70px; max-width: 70px; }
+			}
+		}
+	}
+}
+
+@media (max-width: 767px) {
+	.scorecardTable {
+		table { font-weight: 500;
+			th, td { width: 44px; max-width: 44px; 
+				&:first-child { overflow: visible; }
+				&:last-child { width: 58px; max-width: 58px; }
+			}			
+			td { vertical-align: top; 
+				&:first-child {
+					.batterName { min-width: 100%; max-width: 100%; }
+				}
+			}
+			.subText { min-width: calc(100vw - 32px); font-weight: 400; }
+			svg { margin-right: 4px; width: 20px; height: 20px; }
+		} 
+	}
+}
+@media (max-width: 575px) {
+	.scorecardTable {
+		table { font-size: 13px; line-height: 20px;
+			th, td { padding: 6px 8px; width: 36px; max-width: 36px; }
+			.subText { font-size: 12px; line-height: 17px;  }
+		}
+	}
+}

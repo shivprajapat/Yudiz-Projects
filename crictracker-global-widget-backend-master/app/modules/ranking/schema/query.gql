@@ -1,0 +1,109 @@
+extend type oPlayer @key(fields: "sFullName") {
+  sFullName: String @external
+}
+
+extend type oTeams @key(fields: "sTitle") {
+  sTitle: String @external
+}
+
+type oCommonImage {
+  sText: String @shareable
+  sCaption: String @shareable
+  sAttribute: String @shareable
+  sUrl: String @shareable
+}
+
+type getRankData {
+  _id: ID
+  nRank: Int!
+  sName: String!
+  sTeam: String
+  nRating: Int!
+  nPoints: Int
+  dCreated: String
+  dUpdated: String
+  oPlayer: oPlayer
+  oTeams: oTeams
+  eMatchType: MatchType
+  eRankType: RankType
+  eGender: GenderType
+  oJersey: oCommonImage
+}
+
+type listRankingResponse {
+  nTotal: Int
+  aResults: [getRankData]!
+}
+
+enum RankType{
+  "Batsmen Ranks"
+  Batsmen 
+  "Bowlers Ranks"
+  Bowlers
+  "All Rounders Ranks"
+  AllRounders
+  "Teams Ranks"
+  Teams
+}
+
+enum MatchType{
+  "ODIs Ranks"
+  Odis
+  "Tests Ranks"
+  Tests
+  "League Ranks"
+  League
+  "T20s"
+  T20s
+}
+
+enum GenderType { 
+  "Men"
+  M
+  "Women"
+  W
+ }
+
+input getRankInput {
+  eRankType: RankType!
+  eMatchType: MatchType!
+  nSkip: Int
+  nLimit: Int
+  eGender: GenderType
+}
+
+input getPlayerRankingInput { 
+  iPlayerId: ID!
+ }
+
+ type getRankingOutput { 
+  _id: ID
+  nRank: Int
+  nRating: Int
+  eRankType: String
+  eMatchType: String
+  dUpdated: Date
+  }
+
+input getTeamRankingInput { 
+  iTeamId: ID!
+ }
+
+input getRankingsOverviewInput { 
+  eGender: GenderType
+  nLimit: Int
+  eRankType: RankType
+  eMatchType: MatchType
+ }
+
+type getRankingsOverviewOutput { 
+  eRank: RankType
+  aRanking: [getRankData]
+ }
+
+extend type Query {
+  getRankings(input: getRankInput!): listRankingResponse!
+  getPlayerRanking(input: getPlayerRankingInput): [getRankingOutput]
+  getTeamRanking(input: getTeamRankingInput): [getRankingOutput]
+  getRankingsOverview(input: getRankingsOverviewInput): [getRankingsOverviewOutput]
+}

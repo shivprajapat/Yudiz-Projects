@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package withdraw;
+
+service Withdraw {
+  rpc findWithdraw(Request) returns (Response) {}
+  rpc getWithdrawOfPG(Request) returns (Response) {}
+  rpc getDateRangeWithdrawOfPG(RequestDateRange) returns (Response) {}
+  rpc countWithdraw(Request) returns (Response) {}
+}
+
+message Empty {}
+
+message Request { string query = 1; }
+
+message Response { string data = 1; }
+
+message RequestDateRange {
+  string query = 1;
+  string dateRange = 2;
+}

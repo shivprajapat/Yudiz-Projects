@@ -1,0 +1,49 @@
+type oSubSlider {
+  _id: ID
+  sName: String
+  sSlug: String
+}
+
+type oSliderCommonImage {
+  sText: String
+  sCaption: String
+  sAttribute: String
+  sUrl: String
+}
+
+type oSliderMenu {
+  _id: ID
+  sName: String
+  oImg: oSliderCommonImage
+  sSlug: String
+  nPriority: Int
+  bIsMulti: Boolean
+  aSlide: [oSubSlider]
+  eStatus: String
+  dCreated: String
+  dUpdated: String
+}
+
+input oGetSliderInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  eStatus: SliderActionStatus
+}
+
+type oGetSlideData {
+  nTotal: Int
+  aResults: [oSliderMenu]
+}
+
+input oGetSliderById {
+  _id: ID!
+}
+
+extend type Query {
+  getSlider(input: oGetSliderInput!): oGetSlideData
+  getSliderById(input: oGetSliderById!): oSliderMenu
+  getFrontSlider: [oSliderMenu]
+}

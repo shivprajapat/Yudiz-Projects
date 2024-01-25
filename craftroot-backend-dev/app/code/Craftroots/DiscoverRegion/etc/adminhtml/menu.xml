@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Craftroots_DiscoverRegion::discover" title="Discover by Region" translate="title" module="Craftroots_DiscoverRegion" sortOrder="20" dependsOnModule="Craftroots_DiscoverRegion" resource="Craftroots_DiscoverRegion::discover" parent="Craftroots_Base::manager"/> 
+        <add id="Craftroots_DiscoverRegion::add_row" title="Manage Discover by Region" module="Craftroots_DiscoverRegion" sortOrder="50" parent="Craftroots_DiscoverRegion::discover" action="discoverbyregion/grid" resource="Craftroots_DiscoverRegion::add_row"/>
+    </menu>
+</config>

@@ -1,0 +1,1306 @@
+@import 'assets/scss/helper/variables';
+
+.profile-main-page {
+  .profile-page-tabs {
+    margin: 4rem 0 1rem 0;
+  }
+
+  .profile-tab-links {
+    position: relative;
+    margin: 0px 70px;
+    height: 4.5rem;
+    padding: 1rem 0;
+    max-width: 100rem;
+    width: 100%;
+  }
+
+  .profile-tab-links {
+    background: $bg-primary;
+    border-radius: 14px;
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    &::before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      right: -89px;
+      width: 6%;
+      height: 1px;
+      background-color: transparent;
+    }
+
+    a {
+      padding: 1.3rem 2rem;
+      font-size: 24px;
+      line-height: 24px;
+      font-weight: 400;
+      background: transparent;
+      border-radius: 0px;
+      color: $white;
+      text-transform: capitalize;
+      max-height: 73px;
+      &.active {
+        background: $green-color;
+        color: $theme-color;
+        border-radius: 14px;
+        font-weight: 500;
+        padding: 1.3rem 2rem;
+      }
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .tab-content {
+    margin: 63px 70px 0px;
+
+    .order-top-form {
+      input[type='search'] {
+        color: $grey-color;
+        border: 1px solid $primary-color;
+        font-size: 18px;
+        line-height: 26px;
+        border-radius: 10px;
+        padding: 16px 16px 11px 54px;
+        background: $theme-color url('../../assets/images/css-img/grey-search.svg') no-repeat center left 14px / 24px;
+
+        &::placeholder {
+          color: $grey-color;
+        }
+
+        &:focus {
+          @include box-shadow(none);
+          border-color: $green-color;
+        }
+      }
+
+      .order-filter {
+        @include justify-content(flex-end);
+
+        .react-select {
+          .select__menu {
+            margin-top: 0px;
+          }
+
+          .select__control {
+            padding: 18px 21px 14px;
+            border-radius: 12px;
+
+            .select__value-container {
+              .select__placeholder {
+                text-transform: capitalize;
+              }
+            }
+
+            .select__indicators {
+              margin-top: -4px;
+            }
+          }
+        }
+
+        .time-filter,
+        .order-types {
+          margin-left: 1.7rem;
+
+          & > span {
+            font-size: 18px;
+            line-height: 24px;
+            margin-right: 20px;
+          }
+
+          .react-select {
+            min-width: 180px;
+
+            .select__control {
+              border-color: $primary-color;
+
+              .select__single-value {
+                color: $primary-color;
+              }
+            }
+
+            .select__indicator,
+            .select__placeholder {
+              color: $primary-color;
+            }
+          }
+        }
+
+        .order-type-filter {
+          margin-left: 30px;
+
+          .react-select {
+            min-width: 200px;
+            max-width: 210px;
+
+            .select__control {
+              min-height: 58px;
+              padding: 10px 21px 5px;
+            }
+          }
+        }
+      }
+    }
+
+    .order-main {
+      margin-top: 80px;
+
+      .order-list {
+        background: $bg-primary;
+        margin-bottom: 32px;
+        border-radius: 8px;
+
+        &:last-child {
+          margin-bottom: 0px;
+        }
+
+        .order-top {
+          padding: 20px 0px 14px;
+          border-bottom: 1px solid $grey-border-200;
+          align-items: center;
+          justify-content: space-between;
+
+          .order-top-inner {
+            padding: 0px 48px;
+
+            span {
+              font-size: 18px;
+              line-height: 22px;
+              display: block;
+              word-break: break-all;
+
+              &:first-child {
+                color: $primary-color;
+                margin-right: 24px;
+                text-transform: capitalize;
+              }
+            }
+          }
+        }
+
+        .order-bottom {
+          padding: 24px 0px;
+          @include align-items(center);
+
+          .order-img {
+            width: 35%;
+            padding: 0px 116px 0px 47px;
+
+            img {
+              width: 88px;
+              height: 88px;
+              object-fit: cover;
+              border-radius: 8px;
+            }
+
+            .order-img-content {
+              margin-left: 19px;
+
+              span {
+                font-size: 18px;
+                line-height: 20px;
+                text-transform: capitalize;
+              }
+
+              .order-img-desc {
+                margin-top: 5px;
+                flex-direction: column;
+
+                h5 {
+                  text-transform: capitalize;
+                  font-size: 24px;
+                  line-height: 30px;
+                  margin: 0px 18px 0px 0px;
+                  word-break: break-all;
+                  font-weight: 400;
+                }
+
+                span {
+                  font-size: 18px;
+                  line-height: 20px;
+                  text-align: center;
+                  background: $theme-color;
+                  min-width: 125px;
+                  padding: 9px 10px 5px;
+                  border-radius: 4px;
+                  text-transform: capitalize;
+                  color: $white-50;
+                }
+              }
+            }
+          }
+
+          .bought {
+            width: 18%;
+            padding: 0px 89px;
+            position: relative;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 0;
+              @include transform(translateY(-50%));
+              background: $header-text-color;
+              width: 1px;
+              height: 53px;
+            }
+
+            span {
+              font-size: 16px;
+              line-height: 20px;
+              word-break: break-all;
+              color: $primary-color;
+            }
+
+            h5 {
+              margin: 7px 0px 0px;
+              font-size: 27px;
+              line-height: 30px;
+              word-break: break-all;
+              text-transform: uppercase;
+              font-weight: 400;
+            }
+          }
+
+          .owned-by {
+            width: 23%;
+            position: relative;
+            padding: 0px 73px;
+
+            .user-img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              position: relative;
+
+              &.checkStar {
+                .tick-img {
+                  display: block;
+                }
+              }
+
+              img {
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+              }
+
+              .tick-img {
+                width: 15px;
+                height: auto;
+                position: absolute;
+                bottom: 0px;
+                right: 0px;
+                display: none;
+              }
+            }
+
+            .owned-desc {
+              margin-left: 11px;
+
+              span {
+                font-size: 14px !important;
+                line-height: 20px;
+                word-break: break-all;
+
+                &:first-child {
+                  color: $primary-color;
+                }
+              }
+
+              .user-id {
+                font-size: 22px;
+                line-height: 30px;
+                margin: 2px 0px 0px;
+                word-break: break-all;
+              }
+            }
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 0;
+              @include transform(translateY(-50%));
+              background: $header-text-color;
+              width: 1px;
+              height: 53px;
+            }
+          }
+
+          .result {
+            width: 15%;
+            position: relative;
+            padding: 0 0 0 50px;
+
+            &::before {
+              content: '';
+              position: absolute;
+              top: 50%;
+              left: 0;
+              @include transform(translateY(-50%));
+              background: $header-text-color;
+              width: 1px;
+              height: 53px;
+            }
+
+            h5 {
+              text-transform: capitalize;
+              font-size: 24px;
+              line-height: 28px;
+              position: relative;
+              padding-left: 15px;
+              margin-bottom: 3px;
+
+              &::after {
+                content: '';
+                position: absolute;
+                top: 8px;
+                left: 1px;
+                width: 8px;
+                height: 8px;
+                border-radius: 50%;
+              }
+
+              &.success {
+                &::after {
+                  background: $green-100;
+                }
+              }
+
+              &.failed {
+                &::after {
+                  background: $red-100;
+                }
+              }
+            }
+
+            span {
+              color: $primary-color;
+              word-break: break-all;
+            }
+          }
+          .details {
+            width: 13%;
+            position: relative;
+            padding: 0 0 0 50px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1400px) and (max-width: 1699px) {
+  .profile-main-page {
+    .profile-page-tabs {
+      margin: 70px 0px 76px;
+    }
+
+    .order-top {
+      .order-top-inner:nth-child(1) {
+        padding-left: 20px !important;
+      }
+      .order-top-inner:nth-child(2),
+      .order-top-inner:nth-child(1) {
+        width: 50% !important;
+      }
+
+      .order-top-inner {
+        padding: 0 20px !important;
+      }
+    }
+
+    .order-top-inner.justify-content-md-end {
+      flex: 100%;
+    }
+
+    .order-top-inner.justify-content-md-end {
+      flex: 100%;
+    }
+
+    .profile-tab-links {
+      margin: 0px 17px;
+
+      .tab-content {
+        margin: 58px 17px 0px;
+
+        .order-main {
+          margin-top: 60px;
+
+          .order-list {
+            .order-top {
+              .order-top-inner {
+                padding: 0px 28px;
+
+                span {
+                  &:first-child {
+                    margin-right: 16px;
+                  }
+                }
+              }
+            }
+
+            .order-bottom {
+              padding: 22px 0px;
+
+              .order-img {
+                padding: 0px 38px 0px 26px;
+
+                img {
+                  width: 68px;
+                  height: 68px;
+                }
+
+                .order-img-content {
+                  margin-left: 19px;
+
+                  span {
+                    font-size: 18px;
+                    line-height: 20px;
+                  }
+
+                  .order-img-desc {
+                    margin-top: 5px;
+
+                    h5 {
+                      font-size: 22px;
+                      line-height: 28px;
+                      margin: 0px 18px 0px 0px;
+                    }
+
+                    span {
+                      font-size: 16px;
+                      line-height: 20px;
+                      min-width: 125px;
+                      padding: 9px 10px 5px;
+                    }
+                  }
+                }
+              }
+
+              .bought {
+                padding: 0px 70px;
+
+                span {
+                  font-size: 16px;
+                  line-height: 20px;
+                }
+
+                h5 {
+                  margin: 6px 0px 0px;
+                  font-size: 22px;
+                  line-height: 30px;
+                }
+              }
+
+              .owned-by {
+                padding: 0px 50px;
+
+                .user-img {
+                  width: 40px;
+                  height: 40px;
+
+                  .tick-img {
+                    width: 15px;
+                  }
+                }
+
+                .owned-desc {
+                  margin-left: 11px;
+
+                  .user-id {
+                    font-size: 22px;
+                    line-height: 30px;
+                    margin: 2px 0px 0px;
+                  }
+                }
+              }
+
+              .result {
+                h5 {
+                  font-size: 22px;
+                  line-height: 28px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .order-main .order-list .order-bottom {
+    .order-img,
+    .result,
+    .owned-by,
+    .bought {
+      padding: 0 20px !important;
+    }
+  }
+}
+
+@media (max-width: 1600px) {
+  .tab-content {
+    margin: 0 17px !important;
+  }
+}
+
+@media (max-width: 1440px) {
+  .profile-main-page {
+    .profile-tab-links {
+      &::before {
+        right: -60px;
+      }
+      a {
+        padding: 19px 26px 12px;
+        font-size: 20px;
+      }
+    }
+
+    .order-top {
+      .order-top-inner {
+        padding: 0 10px !important;
+      }
+    }
+
+    .order-bottom {
+      .order-img {
+        padding: 0px 16px 0px 47px !important;
+      }
+
+      .owned-by,
+      .result,
+      .bought {
+        padding: 0px 20px 0px !important;
+
+        h5 {
+          font-size: 19px !important;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .profile-main-page {
+    .profile-page-tabs {
+      margin: 60px 0px 66px;
+
+      .profile-tab-links {
+        margin: 0px 12px;
+
+        .profile-tab-links {
+          a {
+            font-size: 18px;
+            line-height: 26px;
+            padding: 16px 30px 10px;
+          }
+        }
+      }
+
+      .tab-content {
+        margin: 50px 12px 0px;
+
+        .order-top-form {
+          .order-filter {
+            .order-type-filter {
+              .react-select {
+                min-width: 180px;
+                max-width: 180px;
+              }
+            }
+          }
+        }
+
+        .order-main {
+          margin-top: 50px;
+
+          .order-list {
+            .order-top {
+              .order-top-inner {
+                padding: 0px 28px;
+
+                span {
+                  &:first-child {
+                    margin-right: 16px;
+                  }
+                }
+              }
+            }
+
+            .order-bottom {
+              padding: 22px 0px;
+
+              .order-img {
+                padding: 0px 18px;
+
+                img {
+                  width: 68px;
+                  height: 68px;
+                }
+
+                .order-img-content {
+                  margin-left: 15px;
+
+                  span {
+                    font-size: 18px;
+                    line-height: 20px;
+                  }
+
+                  .order-img-desc {
+                    margin-top: 2px;
+
+                    h5 {
+                      font-size: 20px;
+                      line-height: 28px;
+                      margin: 0px 10px 0px 0px;
+                    }
+
+                    span {
+                      font-size: 16px;
+                      line-height: 20px;
+                      min-width: 115px;
+                      padding: 9px 10px 5px;
+                    }
+                  }
+                }
+              }
+
+              .bought {
+                padding: 0px 62px;
+
+                span {
+                  font-size: 16px;
+                  line-height: 20px;
+                }
+
+                h5 {
+                  margin: 6px 0px 0px;
+                  font-size: 20px;
+                  line-height: 28px;
+                }
+              }
+
+              .owned-by {
+                padding: 0px 30px;
+
+                .user-img {
+                  width: 40px;
+                  height: 40px;
+
+                  .tick-img {
+                    width: 15px;
+                  }
+                }
+
+                .owned-desc {
+                  margin-left: 11px;
+
+                  .user-id {
+                    font-size: 20px;
+                    line-height: 28px;
+                    margin: 2px 0px 0px;
+                  }
+                }
+              }
+
+              .result {
+                h5 {
+                  font-size: 20px;
+                  line-height: 28px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1199px) {
+  .profile-tab-links a:last-child span {
+    width: 155px;
+    display: block;
+  }
+}
+@media (min-width: 992px) and (max-width: 1199px) {
+  .profile-main-page {
+    .profile-page-tabs {
+      margin: 70px 0px 76px;
+      .profile-tab-links {
+        margin: 0px 12px;
+        overflow-y: auto;
+        .profile-tab-links {
+          a {
+            font-size: 16px;
+            line-height: 24px;
+            padding: 16px 25px 10px;
+          }
+        }
+      }
+
+      .tab-content {
+        margin: 50px 12px 0px;
+
+        .order-top-form {
+          .order-filter {
+            .time-filter,
+              .order-types {
+              & > span {
+                margin-right: 14px;
+              }
+            }
+
+            .order-type-filter {
+              margin-left: 12px;
+
+              .react-select {
+                min-width: 180px;
+                max-width: 180px;
+              }
+            }
+          }
+        }
+
+        .order-main {
+          margin-top: 50px;
+
+          .order-list {
+            .order-top {
+              .order-top-inner {
+                padding: 0px 14px;
+
+                span {
+                  font-size: 16px;
+                  line-height: 22px;
+
+                  &:first-child {
+                    margin-right: 12px;
+                  }
+                }
+              }
+            }
+
+            .order-bottom {
+              padding: 22px 0px;
+
+              .order-img {
+                padding: 0px 18px;
+
+                img {
+                  width: 48px;
+                  height: 48px;
+                }
+
+                .order-img-content {
+                  margin-left: 15px;
+
+                  span {
+                    font-size: 16px;
+                    line-height: 20px;
+                  }
+
+                  .order-img-desc {
+                    margin-top: 2px;
+
+                    h5 {
+                      font-size: 18px;
+                      line-height: 26px;
+                      margin: 0px 10px 0px 0px;
+                    }
+
+                    span {
+                      font-size: 16px;
+                      line-height: 20px;
+                      min-width: 115px;
+                      padding: 9px 10px 5px;
+                    }
+                  }
+                }
+              }
+
+              .bought {
+                padding: 0px 40px;
+
+                span {
+                  font-size: 16px;
+                  line-height: 20px;
+                }
+
+                h5 {
+                  margin: 6px 0px 0px;
+                  font-size: 18px;
+                  line-height: 26px;
+                }
+              }
+
+              .owned-by {
+                padding: 0px 18px;
+
+                .user-img {
+                  width: 35px;
+                  height: 35px;
+
+                  .tick-img {
+                    width: 15px;
+                    right: -3px;
+                  }
+                }
+
+                .owned-desc {
+                  margin-left: 11px;
+
+                  .user-id {
+                    font-size: 18px;
+                    line-height: 26px;
+                    margin: 2px 0px 0px;
+                  }
+                }
+              }
+
+              .result {
+                h5 {
+                  font-size: 18px !important;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .profile-main-page {
+    .profile-tab-links {
+      a {
+        padding: 12px 20px 11px;
+        font-size: 20px;
+      }
+    }
+    .order-top-form {
+      .order-filter {
+        justify-content: space-between !important;
+        margin-top: 25px;
+
+        .react-select {
+          .select__control {
+            padding: 15px 21px 12px;
+          }
+        }
+
+        .time-filter {
+          & > span {
+            margin-right: 14px;
+          }
+        }
+
+        .order-type-filter {
+          margin-left: 12px;
+
+          .react-select {
+            min-width: 250px;
+            max-width: 250px;
+
+            .select__control {
+              min-height: 51px;
+            }
+          }
+        }
+      }
+    }
+
+    .profile-page-tabs {
+      margin: 70px 0px 76px;
+
+      .profile-tab-links {
+        margin: 0px 12px;
+        width: 98%;
+        overflow-y: auto;
+
+        a {
+          font-size: 16px;
+          line-height: 24px;
+          padding: 13px 16px 8px;
+
+          &.active {
+            border-radius: 12px;
+          }
+        }
+      }
+
+      .tab-content {
+        margin: 45px 12px 0px;
+
+        .order-main {
+          margin-top: 50px;
+
+          .order-list {
+            .order-top {
+              .order-top-inner {
+                padding: 0px 14px;
+                span {
+                  font-size: 16px;
+                  line-height: 22px;
+
+                  &:first-child {
+                    margin-right: 12px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      .order-top {
+        .order-top-inner {
+          span {
+            font-size: 16px !important;
+
+            &:first-child {
+              margin-right: 10px !important;
+            }
+          }
+          &:nth-child(3) {
+            span:nth-child(2) {
+              width: fit-content;
+            }
+          }
+        }
+
+        .order-top-form .order-filter {
+          margin-top: 20px;
+          justify-content: space-between !important;
+        }
+      }
+    }
+
+    .order-main {
+      .order-list {
+        .order-top {
+          flex-wrap: wrap;
+          align-items: flex-start !important;
+          .order-top-inner.justify-content-md-end {
+            justify-content: space-between !important;
+            width: 54%;
+          }
+        }
+        .order-bottom {
+          padding: 22px 0px !important;
+
+          .order-img {
+            padding: 0px 10px !important;
+
+            img {
+              width: 38px !important;
+              height: 38px !important;
+            }
+
+            .order-img-content {
+              margin-left: 15px !important;
+
+              span {
+                font-size: 16px !important;
+              }
+            }
+          }
+
+          .bought {
+            span {
+              font-size: 16px;
+              line-height: 20px;
+            }
+
+            h5 {
+              margin: 6px 0px 0px !important;
+              font-size: 18px !important;
+              line-height: 26px !important;
+            }
+          }
+
+          .owned-by {
+            padding: 0px 10px;
+            width: 25%;
+
+            .user-img {
+              width: 25px;
+              height: 25px;
+
+              .tick-img {
+                width: 10px;
+                right: -3px;
+              }
+            }
+
+            .owned-desc {
+              margin-left: 7px;
+
+              .user-id {
+                font-size: 18px;
+                line-height: 26px;
+                margin: 2px 0px 0px;
+              }
+            }
+          }
+
+          .result {
+            h5 {
+              font-size: 18px !important;
+              line-height: 26px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .profile-main-page {
+    margin-top: 20px;
+
+    .container-fluid {
+      padding: 0px;
+    }
+
+    .profile-page-tabs {
+      margin: 60px 0px 50px;
+
+      .profile-tab-links {
+        margin: 0px 10px;
+        max-width: 95%;
+        overflow-x: auto;
+        border-radius: 12px;
+        @include flex-wrap(nowrap);
+        a {
+          font-size: 18px;
+          // line-height: 24px;
+          // padding: 12px 21px 6px;
+          &.active {
+            border-radius: 12px;
+          }
+          &:last-child span {
+            width: 145px;
+            display: block;
+          }
+        }
+      }
+    }
+
+    .tab-content {
+      margin: 45px 0px 0px;
+      padding: 0px 15px;
+
+      .order-top-form {
+        input[type='search'] {
+          padding-left: 45px;
+          background-size: 20px;
+        }
+
+        .order-filter {
+          @include justify-content(space-between);
+          @include flex-direction(column);
+          margin-top: 25px;
+
+          .react-select {
+            .select__control {
+              padding: 15px 21px 12px;
+              font-size: 16px;
+              line-height: 23px;
+            }
+          }
+
+          .time-filter, .order-types {
+            @include justify-content(space-between);
+            width: 100%;
+
+            .react-select {
+              min-width: 150px;
+
+              .select__control {
+                padding: 14px 10px 9px;
+              }
+            }
+
+            & > span {
+              margin-right: 5px;
+              font-size: 16px;
+              line-height: 23px;
+            }
+          }
+
+          .order-type-filter {
+            margin-left: 0px;
+            width: 100%;
+            margin-top: 20px;
+
+            .react-select {
+              min-width: 100%;
+              max-width: 100%;
+
+              .select__control {
+                min-height: 51px;
+              }
+            }
+          }
+        }
+      }
+
+      .order-main {
+        margin-top: 40px;
+
+        .order-list {
+          .order-top {
+            @include flex-direction(column);
+            padding: 14px;
+
+            .order-top-inner {
+              padding: 0px;
+              width: 100%;
+              margin-bottom: 12px;
+
+              &:last-child {
+                margin-bottom: 0px;
+              }
+
+              span {
+                font-size: 16px;
+                line-height: 22px;
+
+                &:first-child {
+                  margin-right: 12px;
+                }
+              }
+            }
+          }
+
+          .order-bottom {
+            padding: 0px;
+            @include flex-direction(column);
+
+            .order-img {
+              padding: 16px !important;
+              width: 100%;
+              border-bottom: 1px solid $grey-border-200;
+
+              img {
+                width: 60px;
+                height: 60px;
+              }
+
+              .order-img-content {
+                margin-left: 15px;
+
+                span {
+                  font-size: 16px;
+                  line-height: 20px;
+                }
+
+                .order-img-desc {
+                  margin-top: 2px;
+                  @include flex-direction(column);
+                  @include align-items(flex-start);
+
+                  h5 {
+                    font-size: 20px;
+                    line-height: 28px;
+                    margin: 0px 10px 0px 0px;
+                  }
+
+                  span {
+                    font-size: 16px;
+                    line-height: 20px;
+                    min-width: 115px;
+                    padding: 9px 10px 5px;
+                  }
+                }
+              }
+            }
+
+            .bought {
+              padding: 16px !important;
+              width: 100%;
+              border-bottom: 1px solid $grey-border-200;
+
+              &::before {
+                display: none;
+              }
+
+              span {
+                font-size: 16px;
+                line-height: 20px;
+              }
+
+              h5 {
+                margin: 6px 0px 0px;
+                font-size: 20px;
+                line-height: 28px;
+              }
+            }
+
+            .owned-by {
+              padding: 16px !important;
+              width: 100%;
+              border-bottom: 1px solid $grey-border-200;
+
+              &::before {
+                display: none;
+              }
+
+              .user-img {
+                width: 35px;
+                height: 35px;
+
+                .tick-img {
+                  width: 14px;
+                  right: -3px;
+                }
+              }
+
+              .owned-desc {
+                margin-left: 7px;
+
+                .user-id {
+                  font-size: 20px;
+                  line-height: 28px;
+                  margin: 2px 0px 0px;
+                }
+              }
+            }
+
+            .result {
+              padding: 16px !important;
+              width: 100%;
+
+              &::before {
+                display: none;
+              }
+
+              h5 {
+                font-size: 20px;
+                line-height: 28px;
+                padding-left: 12px;
+
+                &::after {
+                  left: 0px;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

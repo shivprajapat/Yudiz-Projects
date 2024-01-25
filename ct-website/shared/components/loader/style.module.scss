@@ -1,0 +1,36 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.loader { width: 100%; height: 100%; position: fixed; left: 0; top: 0; background: rgba(255, 255, 255,0.9); z-index: 11; }
+.icon { width: 160px; height: 160px; background: $theme-medium2; position: relative; }
+.ball { width: 60px; height: 60px; position: absolute; animation: bounce 1s; animation-iteration-count: infinite; z-index: 1; }
+.ball * { height: 100% !important; width: 100% !important; min-width: inherit !important;
+	max-width: inherit !important;
+	min-height: inherit !important;
+	max-height: inherit !important;}
+.shadow { width: 60px; height: 8px; top: 136px; left: calc(50% - 30px); position: absolute; content: ''; background-color: #1E2126;  animation: shadowamin 1s ease-in-out infinite; animation-fill-mode: both; animation-direction: alternate; border-radius: 100%; z-index: 10 }
+
+@keyframes bounce {
+	0% {top: 10px; -webkit-animation-timing-function: ease-in; }
+	40% {}
+	50% {top: 70px; height: 60px; -webkit-animation-timing-function: ease-out; }
+	55% {top: 80px; height: 54px; -webkit-animation-timing-function: ease-in;}
+	65% {top: 60px; height: 60px; -webkit-animation-timing-function: ease-out;}
+	95% { top: 10px; -webkit-animation-timing-function: ease-in; }
+	100% {top: 10px; -webkit-animation-timing-function: ease-in; }
+}
+@keyframes shadowamin {
+	0% { opacity: 0.1; transform: scaleX(40%); -webkit-animation-timing-function: ease-in; }
+	40% {}
+	50% { opacity: .15; transform: scaleX(95%);  -webkit-animation-timing-function: ease-out; }
+	55% { opacity: .13; transform: scaleX(100%);  -webkit-animation-timing-function: ease-in;}
+	65% { opacity: .15; transform: scaleX(95%); -webkit-animation-timing-function: ease-out;}
+	95% { opacity: 0.1; transform: scaleX(40%); -webkit-animation-timing-function: ease-in; }
+	100% {opacity: 0.1; transform: scaleX(40%); -webkit-animation-timing-function: ease-in; }
+}
+  
+/***** Responsive CSS Start ******/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  
+}

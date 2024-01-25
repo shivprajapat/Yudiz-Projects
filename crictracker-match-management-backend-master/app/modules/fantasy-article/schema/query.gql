@@ -1,0 +1,863 @@
+input getFantasyTeamInput {
+  _id:ID
+}
+
+input listFantasyArticleInput {
+  iMatchId: ID
+  eState: String
+}
+
+input listFrontFantasyArticleInput {
+  iId: ID
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+}
+
+
+#admin type
+type FantasyArticle @key(fields: "_id") {
+  _id: ID
+  iMatchId: ID
+  ePlatformType: FANTASYPLATFORM
+  sTitle: String
+  sSubtitle: String
+  sSrtTitle: String
+  sMatchPreview: String
+  oImg: Img
+  oTImg: Img
+  aTags: [ID]
+  sEditorNotes: String
+  oAdvanceFeature: oAdvanceFeatureType
+  eState: FANTASYARTICLE
+  aCVCFan: [oFrontCVCFan]
+  aTopicPicksFan: [oFrontSelectedPlayerFan]
+  aBudgetPicksFan: [oFrontSelectedPlayerFan]
+  aAvoidPlayerFan: [oFrontSelectedPlayerFan]
+  oOtherInfo: oOtherInfo
+  eVisibility: String
+  iAuthorId: ID
+  dPublishDate: Date
+  dPublishDisplayDate: Date
+  dModifiedDate: Date
+  bPriority: Boolean
+  iAuthorDId: ID
+  iReviewerId: ID
+  iCategoryId: ID
+  aSeries: [ID]
+  aPlayer: [ID]
+  aTeam: [ID]
+  aVenue: [ID]
+  sVideoUrl: String
+  oAuthor: subAdmin
+  oDisplayAuthor: subAdmin
+  oReviewer: subAdmin
+  oSeo: Seo
+  sMustPick: String
+  aLeague: [oFrontFantasyLeagueType]
+  oCategory: oSimpleCategory
+  aSeriesCategory: [oSeriesCategory]
+  aPlayerTag: [tagData]
+  aTeamTag: [tagData]
+  aVenueTag: [tagData]
+  aTagsData: [tagData]
+  oMatch: Match
+  nCommentCount: Int
+  nViewCount: Int
+  nOViews: Int
+  nDuration: Int
+  dUpdated: String
+  dCreated: String
+  nClaps: Int
+  aPollId: [ID]
+  aPoll: [poll]
+}
+
+type  oCVC {
+  iPlayerId: ID
+  sDescription: String
+  eType: String
+}
+
+extend type oSimpleCategory @key(fields: "_id") {
+  _id: ID @external
+}
+extend type oSeriesCategory @key(fields: "_id") {
+  _id: ID @external
+}
+extend type tagData @key(fields: "_id") {
+  _id: ID @external
+}
+
+type oFantasyLeagueType {
+  eLeague: String
+  eLeagueFull: String
+  aTeam: [oFrontFantasyTeamType]
+}
+
+enum ESEOSUBTYPE {
+  "news"
+  n
+  "videos"
+  v
+  "fixtures"
+  f
+  "standings"
+  s
+  "stats"
+  st
+  "teams"
+  t
+  "squads"
+  sq
+  "archives"
+  ar
+  "fantasy tips"
+  ft
+  "score card"
+  sc
+  "overs"
+  o
+  "fixtures-and-results"
+  far
+  "results"
+  r
+  "commentary"
+  c
+  "upcoming"
+  u
+  "photos"
+  p
+  "batting-highest-strikerate-innings"
+  stBhsi
+  "batting-highest-average"
+  stBha
+  "batting-highest-strikerate"
+  stBhs
+  "batting-most-centuries"
+  stBmc
+  "batting-most-run6-innings"
+  stBmr6i
+  "batting-most-fours"
+  stBm4
+  "batting-most-run4-innings"
+  stBmr4i
+  "batting-most-runs"
+  stBmr
+  "batting-most-runs-innings"
+  stBmri
+  "batting-most-run50"
+  stBmr50
+  "batting-most-sixes"
+  stBms
+  "bowling-top-wicket-takers"
+  stBtwt
+  "bowling-best-economy-rates-innings"
+  stBberi
+  "bowling-best-averages"
+  stBba
+  "bowling-best-economy-rates"
+  stBber
+  "bowling-best-strike-rates"
+  stBbsr
+  "bowling-best-strike-rates-innings"
+  stBbsri
+  "bowling-five-wickets"
+  stBfiw
+  "bowling-best-bowling-figures"
+  stBbbf
+  "bowling-most-runs-conceded-innings"
+  stBmrci
+  "bowling-four-wickets"
+  stBfow
+  "bowling-maidens"
+  stBm
+  "team-total-runs"
+  stTtr
+  "team-total-run100"
+  stTtr100
+  "team-total-wickets"
+  stTtw
+  "batting-most-fifties"
+  stBmf
+}
+
+extend type Seo @key(fields: "iId eSubType") {
+  iId: ID @external
+  eSubType: ESEOSUBTYPE @external
+}
+
+type Img {
+  sText: String
+  sCaption: String
+  sAttribute: String
+  sUrl: String
+}
+
+type oCategoriesType {
+  aCategoryId: [ID]
+  iPrimaryId: ID
+}
+
+type oAdvanceFeatureType {
+  bAllowComments: Boolean
+  bRequireAdminApproval: Boolean
+  bAmp: Boolean
+  bImp: Boolean
+  bFBEnable: Boolean
+  bBrandedContent: Boolean
+  bExclusiveArticle: Boolean
+  bEditorsPick: Boolean
+  bPlayerStats: Boolean
+  bTeamForm: Boolean
+  bPitchReport: Boolean
+}
+
+type oExclusive {
+  sTitle: String
+  sPromocode: String
+  sUrl: String
+  sShortDescription: String
+  sImage: String
+ }
+
+type oSelectedPlayer {
+ iPlayerId: ID
+ sDescription: String
+}
+
+type oOtherInfo {
+ sExpertAdvice: String
+}
+
+input getFantasyArticleInput {
+  _id: ID
+}
+
+input getMatchOverviewInput {
+  iMatchId: ID!
+}
+
+type MatchOverview {
+  _id: ID
+  oMatch: oMatch
+  sMatchPreview: String
+  sNews: String
+  sPitchCondition: String
+  sWeatherReport: String
+  sWeatherCondition: String
+  sAvgScore: String
+  sPitchReport: String
+  oTeam1: OverviewTeam
+  oTeam2: OverviewTeam
+  oWinnerTeam: oTeams
+  sOutFieldCondition: String
+  sBroadCastingPlatform: String
+  nPaceBowling: Int
+  nSpinBowling: Int
+  nBattingPitch: Int
+  nBowlingPitch: Int
+  sLiveStreaming: String
+}
+
+type GetFantasyMatchOverview {
+  oMatch: oShortMatch
+  oOverview: oFantasyMatchOverview
+}
+
+type oShortMatch {
+    _id: ID
+    sTitle: String
+    sSubtitle: String
+    sFormatStr: String
+    sStatusStr: String
+    bIsDomestic: Boolean
+    dStartDate: Date
+    dEndDate: Date
+    sUmpires: String
+    sReferee: String
+    oTeamA: oShortTeam
+    oTeamB: oShortTeam
+    oVenue: oShortVenue
+    oSeries: oShortSeries
+    dUpdated: String
+    oSeo: Seo
+}
+
+type oFantasyMatchOverview @key(fields:"_id") {
+  _id: ID
+  sMatchPreview: String
+  sNews: String
+  sPitchCondition: String
+  sWeatherReport: String
+  sWeatherCondition: String
+  sOutFieldCondition: String
+  sAvgScore: String
+  sPitchReport: String
+  oTeam1: OverviewTeam
+  oTeam2: OverviewTeam
+  oWinnerTeam: oTeams
+  aCricPrediction: [oCricPrediction]
+  dUpdated: String
+  oSeo: Seo
+  sBroadCastingPlatform: String
+  nPaceBowling: Int
+  nSpinBowling: Int
+  nBattingPitch: Int
+  nBowlingPitch: Int
+  sLiveStreaming: String
+}
+
+type oCricPrediction @key(fields:"_id"){
+  ePlatformType: String
+  _id: ID
+  oSeo: Seo
+}
+
+type oMatch {
+    _id: ID
+    iSeriesId: ID
+    sTitle: String
+    sSubtitle: String
+    sFormatStr: String
+    sStatusStr: String
+    sStatusNote: String
+    sLiveGameStatusStr: String
+    bIsDomestic: Boolean
+    dStartDate: Date
+    dEndDate: Date
+    dStartTimestamp: String
+    dEndTimestamp: String
+    sEquation: String
+    sUmpires: String
+    sReferee: String
+    sWinMargin: String
+    iWinnerId: ID
+    bIsCommentary: Boolean
+    nLatestInningNumber: Int
+    oToss: Toss
+    oTeamScoreA: TeamScore
+    oTeamScoreB: TeamScore
+    sLiveMatchNote: String
+    sResult: String
+    sDescription: String
+    eProvider: String
+    oVenue: oVenues
+    oSeries: oFetchSeries
+    bFantasyTips: Boolean
+    dUpdated: String
+}
+
+type OverviewTeam {
+ iTeamId: ID
+ aPlayers: [oPlayer]
+ aBenchedPlayers: [oPlayer]
+ iC: ID
+ iVC: ID
+ iWK: ID
+ oTeam: oTeams
+}
+
+type oListFantasyArticleCommentResponse {
+  nTotal: Int
+  aResults: [FantasyArticleComment]
+}
+
+input oListFantasyArticleCommentInput {
+  iArticleId: ID!
+  nSkip: Int
+  nLimit: Int
+  nOrder: Int
+}
+
+input oGetFantasyTipsFrontInput {
+  iMatchId: String
+  ePlatformType: FANTASYPLATFORM
+}
+
+type oGetFantasyTipsFrontResponse @key(fields:"_id"){
+  _id: ID
+  oTeamA: oShortTeam
+  oTeamB: oShortTeam
+  aLeague: [oFantasyLeagueType]
+  oSeo: Seo
+  ePlatformType: String
+  dCreated: String
+  dUpdated: String
+}
+
+input oGetMatchInfoFrontInput {
+  iMatchId: ID
+}
+
+type oGetMatchInfoFront {
+  oMatch: oMatchInfoFront
+  sPitchCondition: String
+  sWeatherReport: String
+  sAvgScore: String
+  oWinnerTeam: oShortWinnerTeam
+  oTeam1: oMatchInfoTeam
+  oTeam2: oMatchInfoTeam
+}
+
+type oMatchInfoFront {
+    _id: ID
+    sTitle: String
+    sSubtitle: String
+    sFormatStr: String 
+    sStatusStr: String
+    bIsDomestic: Boolean
+    dStartDate: Date
+    dEndDate: Date
+    sUmpires: String
+    sReferee: String
+    oTeamA: oShortTeam
+    oTeamB: oShortTeam
+    oVenue: oShortVenue
+    oSeries: oShortSeries
+    oToss: oTossFront
+}
+
+type oTossFront {
+  sText: String
+  oWinnerTeam: oShortWinnerTeam
+  eDecision: String
+}
+
+type oMatchInfoTeam {
+ aPlayers: [oMatchSquadFront]
+ oTeam: oShortTeam
+ oJersey: oCommonImage
+}
+
+type oMatchSquadFront {
+  sRoleStr: String
+  bPlaying11: Boolean
+  oPlayer: oFrontPlayer
+  bSubstitute: Boolean
+  bIsOverseas: Boolean
+  sSplRoleStr: String
+}
+
+type oFrontPlayer @key(fields:"_id") {
+  _id: ID
+  sFirstName: String
+  sLastName: String
+  sFullName: String
+  dBirthDate: Date
+  sThumbUrl: String @deprecated(reason: "Use oImg field")
+  oImg: oCommonImage
+  sPlayingRole: String
+  sNationality: String
+  oSeo: Seo
+  sCountryFull: String
+  eTagStatus: String
+}
+
+input oListMatchFantasyTipsFrontInput {
+  dDay: Date
+  eFormat: MATCHFORMATENUM
+  nSkip: Int
+  nLimit: Int
+  nOrder: Int
+  sSortBy: String
+  sTimezone: String
+  sSearch: String
+}
+
+enum MATCHFORMATENUM {
+ odi
+ test
+ t20i
+ lista
+ firstclass
+ t20
+ womenodi
+ woment20
+ youthodi
+ youtht20
+ others
+ t10
+}
+
+type oListMatchFantasyTipsFrontResponse {
+  aResults: [oListMatchFantasyTips]
+}
+
+type oListMatchFantasyTips @key(fields:"_id"){
+    _id: ID
+    sTitle: String
+    sSubtitle: String
+    sFormatStr: String
+    sStatusStr: String
+    bIsDomestic: Boolean
+    dStartDate: Date
+    dEndDate: Date
+    sUmpires: String
+    sReferee: String
+    oTeamA: oShortTeam
+    oTeamB: oShortTeam
+    oVenue: oShortVenue
+    oSeries: oShortSeries
+    aFantasyTips:[oShortFantasyTips]
+    oSeo: Seo
+}
+
+type oShortFantasyTips @key(fields:"_id") {
+  _id: ID
+  ePlatformType: String
+  oSeo: Seo
+}
+
+type fantasyArticleResponse {
+  nTotal: Int
+  aResults: [FantasyArticle]
+}
+
+input oGetPreviewFantasyArticleFrontInput {
+  _id: ID!
+}
+
+#deprecated!!
+type oFantasyArticleFront @key(fields:"_id"){
+  _id: ID
+  iMatchId: ID
+  ePlatformType: String
+  sTitle: String
+  sSubtitle: String
+  sSrtTitle: String
+  sMatchPreview: String
+  oImg: Img
+  oTImg: Img
+  aTags: [ID]
+  sEditorNotes: String
+  oAdvanceFeature: oAdvanceFeatureType
+  eState: FANTASYARTICLE
+  aCVCFan: [oFrontCVCFan] 
+  aTopicPicksFan: [oFrontSelectedPlayerFan] 
+  aBudgetPicksFan: [oFrontSelectedPlayerFan] 
+  aAvoidPlayerFan: [oFrontSelectedPlayerFan] 
+  oOtherInfo: oOtherInfo
+  eVisibility: String
+  dPublishDate: Date
+  bPriority: Boolean
+  iAuthorDId: ID
+  iCategoryId: ID
+  aSeries: [ID]
+  aPlayer: [ID]
+  aTeam: [ID]
+  aVenue: [ID]
+  sVideoUrl: String
+  oDisplayAuthor: subAdmin
+  oSeo: Seo
+  sMustPick: String
+  aLeague: [oFantasyLeagueType]
+  oCategory: oSimpleCategory
+  aSeriesCategory: [oSeriesCategory]
+  aPlayerTag: [tagData]
+  aTeamTag: [tagData]
+  aVenueTag: [tagData]
+  aTagsData: [tagData]
+  oMatch: Match
+  nCommentCount: Int
+  nViewCount: Int
+  nDuration: Int
+  aPollId: [ID]
+  aPoll: [poll]
+}
+
+type frontFantasyMatchOverview @key(fields:"_id") {
+  _id: ID
+  sMatchPreview: String
+  sNews: String
+  sPitchCondition: String
+  sWeatherReport: String
+  sWeatherCondition: String
+  sOutFieldCondition: String
+  sAvgScore: String
+  sPitchReport: String
+  oTeam1: OverviewTeam
+  oTeam2: OverviewTeam
+  oWinnerTeam: oTeams
+  sBroadCastingPlatform: String
+  nPaceBowling: Int
+  nSpinBowling: Int
+  nBattingPitch: Int
+  nBowlingPitch: Int
+  sLiveStreaming: String
+}
+
+type  oFrontCVCFan { 
+  oPlayerFan: playerDetailsFront
+  sDescription: String
+  eType: CVCENUM
+}
+
+enum CVCENUM {
+  "captain"
+  c
+  "vice-captain"
+  v
+}
+
+type oFrontSelectedPlayerFan { #new
+ oPlayerFan: playerDetailsFront
+ sDescription: String
+}
+
+
+
+type oFrontFantasyLeagueType {
+  eLeague: String
+  eLeagueFull: String
+  aTeam: [oFrontFantasyTeamType]
+}
+
+type oFrontFantasyTeamType {
+  aSelectedPlayerFan:[playerDetailsFront]
+  oCapFan: playerDetailsFront
+  oVCFan: playerDetailsFront
+  oTPFan: playerDetailsFront
+  oTeamA: oTeamCountType
+  oTeamB: oTeamCountType
+}
+
+type playerDetailsFront {
+  _id: ID
+  oTeam: oFantasyTeam
+  oPlayer: fantasyPlayerFront
+  nRating: Float
+  eRole: eRoleEnum
+}
+
+
+type fantasyPlayerFront {
+  _id: ID
+  sFullName: String
+  sFirstName: String
+  sPlayingRole: String
+  oImg: oCommonImage
+  sShortName: String
+}
+
+type oTeamCountType {
+ nCount: Int
+ oTeam: oFantasyTeam
+}
+
+#front type
+type frontFantasyArticle @key(fields:"_id"){
+  _id: ID
+  iMatchId: ID
+  ePlatformType: FANTASYPLATFORM
+  sTitle: String
+  sSubtitle: String
+  sSrtTitle: String
+  sMatchPreview: String
+  oImg: Img
+  oTImg: Img
+  aTags: [ID]
+  sEditorNotes: String
+  oAdvanceFeature: oAdvanceFeatureType
+  eState: FANTASYARTICLE
+  aCVCFan: [oFrontCVCFan] 
+  aTopicPicksFan: [oFrontSelectedPlayerFan] 
+  aBudgetPicksFan: [oFrontSelectedPlayerFan] 
+  aAvoidPlayerFan: [oFrontSelectedPlayerFan] 
+  oOtherInfo: oOtherInfo
+  eVisibility: String
+  dPublishDate: Date
+  dPublishDisplayDate: Date
+  bPriority: Boolean
+  iAuthorDId: ID
+  iCategoryId: ID
+  aSeries: [ID]
+  aPlayer: [ID]
+  aTeam: [ID]
+  aVenue: [ID]
+  sVideoUrl: String
+  oDisplayAuthor: subAdmin
+  oSeo: Seo
+  sMustPick: String
+  aLeague: [oFrontFantasyLeagueType]
+  oCategory: oSimpleCategory
+  aSeriesCategory: [oSeriesCategory]
+  aPlayerTag: [tagData]
+  aTeamTag: [tagData]
+  aVenueTag: [tagData]
+  aTagsData: [tagData]
+  oMatch: oShortMatch
+  nCommentCount: Int
+  nViewCount: Int
+  nDuration: Int
+  oOverview: frontFantasyMatchOverview
+  dUpdated: String
+  nClaps: Int
+  sAmpPreview: String
+  sAmpMustPick: String
+  nOViews: Int
+  dModifiedDate: Date
+  aPollId: [ID]
+  aPoll: [poll]
+}
+
+type oFrontOverview {
+  sMatchPreview: String
+  sNews: String
+  sPitchCondition: String
+  sWeatherReport: String
+  sWeatherCondition: String
+  sAvgScore: String
+  sPitchReport: String
+  oTeam1: OverviewTeam
+  oTeam2: OverviewTeam
+  aCricPrediction: [oCricPrediction]
+}
+
+
+input oGetOverviewFrontInput {
+  iMatchId: ID
+}
+
+
+type listAuthorFantasyArticleResult {
+  nTotal: Int
+  aResults: [FantasyArticle]
+}
+
+input authorFantasyArticleInput {
+  nSkip: Int!
+  nLimit: Int!
+  iAuthorDId: ID!
+}
+
+input oGetMatchOverviewFrontInput {
+  iMatchId: ID!
+}
+
+
+type oGetMatchOverviewFrontResponse {
+  sMatchPreview: String
+  oTeam1: oMatchInfoTeam
+  oTeam2: oMatchInfoTeam
+  aCricPrediction: [oCricPrediction]
+  sPitchCondition: String
+  sWeatherReport: String
+  sAvgScore: String
+  oWinnerTeam: oShortWinnerTeam
+  sBroadCastingPlatform: String
+  nPaceBowling: Int
+  nSpinBowling: Int
+  nBattingPitch: Int
+  nBowlingPitch: Int
+  sLiveStreaming: String
+}
+
+input userFantasyArticleClapInput {
+    iArticleId: ID!
+}
+
+type responseUserFantasyArticleClap {
+    nTotalClap: Int
+}
+
+input oListFantasyPlayerInfoInput {
+iMatchId: ID!
+ePlatformType: FANTASYPLATFORM
+iTeamId: ID
+}
+
+type oListFantasyPlayerDetails {
+  _id: ID
+  oTeam: oFantasyTeam
+  oPlayer: oPlayer
+  nRating: Float
+  eRole: eRoleEnum
+}
+
+type oFantasyPlayer {
+  _id: ID
+  sFirstName: String
+  sLastName: String
+  sMiddleName: String
+  sFullName: String
+  sCountry: String
+  sThumbUrl: String @deprecated(reason: "Use oImg field")
+  oImg: oCommonImage
+  sPlayingRole: String
+  aFantasyPlayerRating: [oPlayerRating]
+  sUrl: String
+}
+
+enum eRoleEnum {
+ "batter"
+ bat
+ "bowler"
+ bowl
+ "all rounder"
+ all
+ "wicket keeper"
+ wk
+ "wicket batter"
+ wkbat
+}
+
+type oFantasyTeam {
+ _id: ID
+ sTitle: String 
+ sAbbr: String
+ oJersey: oCommonImage
+}
+
+input oGetRelatedFantasyStoriesIdInput {
+  iCategoryId: ID!
+  iFantasyArticleId: ID!
+  aTags: ID
+  aSeries: ID
+  aTeam: ID
+  aPlayer: ID
+  aVenue: ID
+}
+
+input oRelatedFantasyPaginationInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+input oGetRealatedFantasyStoriesInput {
+  oGetRelatedFantasyStoriesIdInput: oGetRelatedFantasyStoriesIdInput!
+  oPaginationInput: oRelatedFantasyPaginationInput!
+}
+
+input fantasyArticleTotalClapInput{
+   _id: ID!
+}
+
+type oRelatedFantasyStoriesResponse {
+  aResults: [FantasyArticle]
+}
+
+extend type Query {
+  listFantasyArticle(input:listFantasyArticleInput): [FantasyArticle]
+  getFantasyArticle(input:getFantasyArticleInput):FantasyArticle
+  getMatchOverview(input:getMatchOverviewInput): GetFantasyMatchOverview
+  listFantasyArticleComment(input:oListFantasyArticleCommentInput):oListFantasyArticleCommentResponse
+  getFantasyTipsFront(input:oGetFantasyTipsFrontInput): oGetFantasyTipsFrontResponse
+  getMatchInfoFront(input:oGetMatchInfoFrontInput):oGetMatchInfoFront
+  listMatchFantasyTipsFront(input:oListMatchFantasyTipsFrontInput): oListMatchFantasyTipsFrontResponse
+  listFrontFantasyArticle(input:listFrontFantasyArticleInput): fantasyArticleResponse
+  listFrontTagCategoryFantasyArticle(input:listFrontFantasyArticleInput): fantasyArticleResponse
+  getFrontFantasyArticle(input:getFantasyArticleInput):frontFantasyArticle 
+  getPreviewFantasyArticleFront(input:oGetPreviewFantasyArticleFrontInput): frontFantasyArticle
+  getOverviewFront(input:oGetOverviewFrontInput): oFrontOverview
+  getAuthorFantasyArticles(input: authorFantasyArticleInput): listAuthorFantasyArticleResult
+  getMatchOverviewFront(input:oGetMatchOverviewFrontInput!):oGetMatchOverviewFrontResponse
+  getUserFantasyArticleClap(input: userFantasyArticleClapInput): responseUserFantasyArticleClap
+  listFantasyPlayersInfo(input:oListFantasyPlayerInfoInput): [oListFantasyPlayerDetails]
+  getRelatedFantasyStories(input: oGetRealatedFantasyStoriesInput): oRelatedFantasyStoriesResponse
+  getFantasyArticleTotalClaps(input: fantasyArticleTotalClapInput): responseUserFantasyArticleClap
+}

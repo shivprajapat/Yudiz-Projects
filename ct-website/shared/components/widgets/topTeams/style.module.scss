@@ -1,0 +1,14 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item { width: calc(50% - 8px); background: var(--light-mode-bg); border-radius: 8px; @include transition($common-transition);
+  &:nth-child(odd) { margin-right: 16px; }
+  &:hover { background: $theme-medium2; color: #fff;
+    a { color: #fff; }
+  }
+  &.itemLink { cursor: pointer; }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+}

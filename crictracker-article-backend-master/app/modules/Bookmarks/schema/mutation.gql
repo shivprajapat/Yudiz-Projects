@@ -1,0 +1,32 @@
+enum BookmarkType { 
+  "Bookmark as article"
+  ar
+  "Bookmark as video"
+  v
+  "Bookmark as fantasy article"
+  fa
+}
+
+input addUserBookmarkInput {
+    iArticleId: ID
+    iVideoId: ID
+    eBookmarkType: BookmarkType!
+}
+
+type addUserBookmarkResponse {
+    sMessage: String!
+    _id: ID
+}
+
+input deleteBookmark {
+  _id:ID!
+}
+
+type deleteBookmarkResponse {
+  sMessage:String!
+}
+
+extend type Mutation {
+    addUserBookmark(input: addUserBookmarkInput): addUserBookmarkResponse
+    deleteBookmark(input: deleteBookmark): deleteBookmarkResponse
+}

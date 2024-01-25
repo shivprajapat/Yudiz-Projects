@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>edit-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="edit-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="create-24px">
+            <polygon id="Path" points="0 0 20 0 20 20 0 20"></polygon>
+            <path d="M2.5,14.375434 L2.5,17.5 L5.62456603,17.5 L14.8399528,8.28461325 L11.7153868,5.16004722 L2.5,14.375434 Z M17.2562838,5.86828218 C17.5812387,5.54332732 17.5812387,5.01840022 17.2562838,4.69344535 L15.3065546,2.74371615 C14.9815998,2.41876128 14.4566727,2.41876128 14.1317178,2.74371615 L12.6069296,4.26850437 L15.7314956,7.39307041 L17.2562838,5.86828218 Z" id="Shape" fill="#7F7F7F" fill-rule="nonzero"></path>
+        </g>
+    </g>
+</svg>

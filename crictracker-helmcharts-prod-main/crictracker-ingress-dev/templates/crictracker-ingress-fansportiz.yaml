@@ -1,0 +1,183 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: crictracker-dev
+  namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/healthcheck-interval-seconds: '14'
+    alb.ingress.kubernetes.io/load-balancer-attributes: routing.http2.enabled=true
+    alb.ingress.kubernetes.io/healthcheck-timeout-seconds: '8'
+    alb.ingress.kubernetes.io/healthy-threshold-count: '3'
+    alb.ingress.kubernetes.io/unhealthy-threshold-count: '2'
+    alb.ingress.kubernetes.io/load-balancer-attributes: idle_timeout.timeout_seconds=58
+    alb.ingress.kubernetes.io/target-group-attributes: slow_start.duration_seconds=30
+    alb.ingress.kubernetes.io/target-group-attributes: deregistration_delay.timeout_seconds=60
+    
+    alb.ingress.kubernetes.io/group.name: crictracker-devstag
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:693583001687:certificate/ccc86954-2650-41c1-bd31-62822e59076d
+    alb.ingress.kubernetes.io/subnets: subnet-077b67cb6983824ae, subnet-079a2bebf229cbae2
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    external-dns.alpha.kubernetes.io/hostname: help-dev.beta.crictracker.com, globalwidget-dev.beta.crictracker.com, gateway-dev.beta.crictracker.com, admin-dev.beta.crictracker.com, cricweb-dev.beta.crictracker.com, article-dev.beta.crictracker.com, auth-dev.beta.crictracker.com, matchmanage-dev.beta.crictracker.com, seo-dev.beta.crictracker.com, career-dev.beta.crictracker.com, migrations-dev.beta.crictracker.com, subscription-dev.beta.crictracker.com, redis-server-dev.beta.crictracker.com
+    # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:ap-south-1:693583001687:regional/webacl/crictracker/7c9b6d8b-481d-40d0-b000-8074167ccfbb
+    # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:ap-south-1:693583001687:regional/webacl/crictracker/7c9b6d8b-481d-40d0-b000-8074167ccfbb
+    alb.ingress.kubernetes.io/actions.redirect-to-media: '{"Type": "redirect", "RedirectConfig": { "host": "media.crictracker.com", "Port": "443", "Protocol":"HTTPS", "StatusCode": "HTTP_302"}}'
+spec:
+  rules:
+    - host: help-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-help-dev
+              servicePort: 4005
+    - host: globalwidget-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-global-widget-dev
+              servicePort: 4006
+    - host: gateway-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-gateway-dev
+              servicePort: 4000
+    - host: admin-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-admin-frontend-dev
+              servicePort: 80
+    - host: cricweb-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /_next/image/
+            backend:
+              serviceName: crictracker-image-website-dev
+              servicePort: 3000
+          - path: /wp-content/*
+            backend:
+              serviceName: redirect-to-media
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-website-dev
+              servicePort: 3000
+
+
+    - host: article-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-article-dev
+              servicePort: 4002
+    - host: auth-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-authentication-dev
+              servicePort: 4001
+    - host: matchmanage-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-matchmanagement-dev
+              servicePort: 4004
+    - host: seo-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-seo-dev
+              servicePort: 4003
+    - host: career-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-career-dev
+              servicePort: 4007
+    - host: migrations-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-migrations-dev
+              servicePort: 5001
+    - host: subscription-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-subscription-dev
+              servicePort: 5000
+    - host: redis-server-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-redis-server-dev
+              servicePort: 4008

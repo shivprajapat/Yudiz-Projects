@@ -1,0 +1,551 @@
+/* eslint-disable no-useless-escape */
+const crypto = require('crypto')
+const jwt = require('jsonwebtoken')
+const axios = require('axios')
+const https = require('https')
+const mongoose = require('mongoose')
+const queryString = require('querystring')
+const http = require('http')
+const { AuthenticationError } = require('apollo-server-errors')
+const moment = require('moment')
+// const messages = require('./messages')
+// const { Crypt } = require('hybrid-crypto-js')
+// const { redis } = require('../../app/utils')
+// const moment = require('moment')
+// const { tags } = require('../../app/model')
+
+// const crypt = new Crypt()
+
+const _ = {}
+
+const config = require('../../config')
+
+/**
+ * Takes any stringified JSON object and parses
+ * @param {*} data JSON string
+ * @returns parsed JSON object
+ */
+
+_.parse = function (data) {
+  try {
+    return JSON.parse(data)
+  } catch (error) {
+    return data
+  }
+}
+
+/**
+ * This stringifies the JSON object
+ * @param {*} data JSON object
+ * @returns stringify the JSON object
+ */
+
+_.stringify = function (data) {
+  return JSON.stringify(data)
+}
+
+/**
+ * Deep clones an object || array
+ * @param {*} data object || array
+ * @returns deep cloned object or an array
+ */
+
+_.deepClone = function (data) {
+  const originalData = !!data.toObject || !!data._doc ? data._doc : data
+  if (originalData.constructor === Object) return this.cloneObject(originalData)
+  if (originalData.constructor === Array) return this.cloneArray(originalData)
+  return originalData
+}
+
+/**
+ * Convertes normal id to ObjectId
+ * @param {*} id stringId
+ * @returns Object Id
+ */
+
+_.mongify = function (id) {
+  return mongoose.Types.ObjectId(id)
+}
+
+/**
+ * Clones an object
+ * @param {*} object Object
+ * @returns cloned object
+ */
+
+_.cloneObject = function (object) {
+  const newData = {}
+  const keys = Object.keys(object)
+  for (let i = 0; i < keys.length; i += 1) {
+    const eType = object[keys[i]] ? object[keys[i]].constructor : 'normal'
+    switch (eType) {
+      case 'normal':
+        newData[keys[i]] = object[keys[i]]
+        break
+      case Array:
+        newData[keys[i]] = this.cloneArray(object[keys[i]])
+        break
+      case Object:
+        newData[keys[i]] = this.cloneObject(object[keys[i]])
+        break
+      default:
+        newData[keys[i]] = object[keys[i]]
+        break
+    }
+  }
+  return newData
+}
+
+/**
+ * Clones an array
+ * @param {*} array
+ * @returns cloned array
+ */
+
+_.cloneArray = function (array) {
+  const newData = []
+  for (let i = 0; i < array.length; i += 1) {
+    const eType = array[i] ? array[i].constructor : 'normal'
+    switch (eType) {
+      case 'normal':
+        newData.push(array[i])
+        break
+      case Array:
+        newData.push(this.cloneArray(array[i]))
+        break
+      case Object:
+        newData.push(this.cloneObject(array[i]))
+        break
+      default:
+        newData.push(array[i])
+        break
+    }
+  }
+  return newData
+}
+
+_.clone = function (data = {}) {
+  const originalData = data.toObject ? data.toObject() : data // for mongodb result operations
+  const eType = originalData ? originalData.constructor : 'normal'
+  if (eType === Object) return { ...originalData }
+  if (eType === Array) return [...originalData]
+  return data
+  // return JSON.parse(JSON.stringify(data))
+}
+
+/**
+ * helps picking the particular keys-values from an object
+ * @param {*} obj input object
+ * @param {*} array an array of to be picked variables
+ * @returns picked variables stored in an variable
+ */
+
+_.pick = function (obj, array) {
+  const clonedObj = this.clone(obj)
+  return array.reduce((acc, elem) => {
+    if (elem in clonedObj) acc[elem] = clonedObj[elem]
+    return acc
+  }, {})
+}
+
+/**
+ * Gets a formatted recent date
+ * @returns Date in format Oct 26, 2021, 1:12 PM
+ */
+
+_.formattedDate = function () {
+  return new Date().toLocaleString('en-us', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric'
+  })
+}
+
+/**
+ * Makes an hash for the password.
+ * @param {*} password String
+ * @returns encrypted password.
+ */
+
+_.encryptPassword = function (password) {
+  return crypto.createHmac('sha256', config.JWT_SECRET).update(password).digest('hex')
+}
+
+/**
+ * Asymmetric encrypt for an string
+ * @param {*} sValue String
+ * @returns envrypted string
+ */
+
+// _.asymmetricEncrypt = function (sValue) {
+//   return crypt.encrypt(process.env.PUBLIC_KEY, sValue)
+// }
+
+/**
+ * Asymmetric decrypt for an string
+ * @param {*} sValue encrypted string
+ * @returns decrypted string
+ */
+
+// _.asymmetricDecrypt = function (sValue) {
+//   return crypt.decrypt(process.env.PRIVATE_KEY, sValue)
+// }
+
+/**
+ * Api rate limiter for all the apis in redis
+ * @param {*} ip IP of the user
+ * @param {*} path the api path
+ * @param {*} threshold the limit the api is called
+ * @param {*} time the time when the restriction over
+ * @returns Object with status
+ */
+
+// _.apiRateLimiter = async (ip, path, threshold, time) => {
+//   try {
+//     const ipLimit = await redis.incr(`${path}:${ip}`)
+//     if (ipLimit > threshold) {
+//       return { status: 'Limit reached' }
+//     } else {
+//       const ttl = await redis.ttl(`${path}:${ip}`)
+//       if (ttl === -1) {
+//         await redis.expire(`${path}:${ip}`, time)
+//       }
+//       return { status: 'Limit remaining' }
+//     }
+//   } catch (error) {
+//     return error
+//   }
+// }
+
+/**
+ * Makes the salt of the string
+ * @param {*} length the length of the salt
+ * @param {*} type type of the input
+ * @returns salt
+ */
+
+_.salt = function (length, type) {
+  if (process.env.NODE_ENV !== 'prod') return 1234
+  if (type === 'string') {
+    return crypto
+      .randomBytes(Math.ceil(length / 2))
+      .toString('hex')
+      .slice(0, length)
+  }
+
+  let min = 1
+  let max = 9
+  for (let i = 1; i < length; i += 1) {
+    min += '0'
+    max += '9'
+  }
+  min = Math.ceil(min)
+  max = Math.floor(max)
+  return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+/**
+ * Gives a random number of size provieded size means length
+ * @param {*} size Size of the number length
+ * @returns gives the number with the size provieded
+ */
+
+_.randomCode = function (size) {
+  const code = Math.floor(Math.random() * 100000 + 99999).toString()
+  return code.slice(code.length - size)
+}
+
+/**
+ * For signing jwt token
+ * @param {*} body the body you want to encode
+ * @param {*} expTime the expire time of the token
+ * @returns signed jwt token
+ */
+
+_.encodeToken = function (body, expTime) {
+  try {
+    return expTime ? jwt.sign(this.clone(body), config.JWT_SECRET, { expiresIn: expTime }) : jwt.sign(this.clone(body), config.JWT_SECRET)
+  } catch (error) {
+    return undefined
+  }
+}
+
+// _.decodeToken = function (token) {
+//   try {
+//     return jwt.decode(token, config.JWT_SECRET)
+//   } catch (error) {
+//     return undefined
+//   }
+// }
+
+/**
+ * Gives the decoded token with error if expired
+ * @param {*} token signed jwt token
+ * @returns decoded tone or error with expired
+ */
+
+_.decodeToken = function (token) {
+  try {
+    return jwt.verify(token, config.JWT_SECRET, function (err, decoded) {
+      return err ? err.message : decoded // return true if token expired
+    })
+  } catch (error) {
+    return error ? error.message : error
+  }
+}
+
+/**
+ * This is used to send http request.
+ * @param {*} body the body of the request.
+ * @param {*} options options for the request.
+ * @param {*} callback callback to get data.
+ */
+
+_.request = function (body, options, callback) {
+  const httpRequest = options.isSecure ? https : http
+  delete options.isSecure
+  const req = httpRequest.request(options, function (res) {
+    const chunks = []
+
+    res.on('data', (chunk) => chunks.push(chunk))
+    res.on('error', (error) => callback(error))
+    res.on('end', () => callback(null, _.parse(Buffer.concat(chunks))))
+  })
+
+  const requetsBody = options.headers['Content-Type'] === 'application/x-www-form-urlencoded' ? queryString.stringify(body) : _.stringify(body)
+  req.write(requetsBody)
+  req.end()
+}
+
+/**
+ * To send request using axios
+ * @param {*} option Options for axios request
+ * @param {*} callback get data using callback
+ */
+
+_.axios = async function (option) {
+  const axiosRequest = await axios(option)
+  return axiosRequest.data
+}
+
+/**
+ * This checks the validation of the email.
+ * @param {*} email the email string
+ * @returns true or false depending on whether email is right or not.
+ */
+
+_.isEmail = function (email) {
+  const regeX = /^[^@ ]+@[^@ ]+\.[^@ .]{2,}$/
+  return !regeX.test(email)
+}
+
+/**
+ * This checks the validation of the username.
+ * @param {*} name username in string.
+ * @returns true or false depending on whether username is right or not.
+ */
+
+_.isUserName = function (name) {
+  // eslint-disable-next-line no-useless-escape
+  const regeX = /^[a-z0-9\._-]{3,18}$/
+  return !regeX.test(name)
+}
+
+/**
+ * Check whether the password is alpha numeric
+ * @param {*} password the password in string
+ * @returns true or false depending on whether password is alphanumeric or not.
+ */
+
+_.isPassword = function (password) {
+  const regeX = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,20}$/
+  return !regeX.test(password)
+}
+/**
+ * This is to check whether object ids are equal or not.
+ * @param {*} id1 objectId or string
+ * @param {*} id2 objectId or string
+ * @returns true or false depending whether the ids are equal or not.
+ */
+
+_.isEqualId = (id1, id2) => (id1 ? id1.toString() : id1) === (id2 ? id2.toString() : id2)
+
+/**
+ * to make the response and send to the FE
+ * @param {*} message the message that we want to pass to FE
+ * @param {*} data the data that we want to pass to FE
+ * @param {*} prefix prefix if you want to replace anything from the message
+ * @param {*} language language that FE asks
+ * @returns the formatted message.
+ */
+
+_.resolve = (message, data, prefix, context) => {
+  const { userLanguage } = context
+  const response = { sMessage: messages[userLanguage][message]?.message }
+  if (data) Object.assign(response, data)
+  if (prefix) response.sMessage = response.sMessage.replace('##', global.messages[userLanguage][prefix])
+
+  return response
+}
+
+/**
+ * This is used to throw error formattedly.
+ * @param {*} message error message
+ * @param {*} language language of the client.
+ * @param {*} prefix replace anything with prefix if there.
+ */
+
+_.throwError = (message, context, prefix) => {
+  const { userLanguage } = context
+  let response = global.messages[userLanguage][message]
+  const status = response?.status
+
+  if (prefix) response = response?.message.replace('##', messages[userLanguage][prefix])
+  else response = response.message
+  if (message === 'authorizationError' || message === 'accountDeactivated' || message === 'accountDeactivated') throw new AuthenticationError(_.stringify({ message: response, status }))
+
+  throw new Error(_.stringify({ message: response, status }))
+}
+
+/**
+ * Checks the validation of isfc code.
+ * @param {*} isfc the isfc code.
+ * @returns ture or false depending on whether the isfc is valid or not
+ */
+
+_.isIsfc = (isfc) => {
+  const regeX = /^[A-Za-z]{4}0[A-Z0-9a-z]{6}$/
+  return !regeX.test(isfc)
+}
+
+// _.createSlug = async (input) => {
+//   input = input.toString().toLowerCase()
+//     .replace(/\s+/g, '-')
+//     .replace(/[^\w\-]+/g, '')
+//     .replace(/\-\-+/g, '-')
+//     .replace(/^-+/, '')
+//     .replace(/-+$/, '')
+//   const isSlugExists = await tags.findOne({ sSlug: input }).lean()
+//   if (isSlugExists) {
+//     input = `${input}-${moment(isSlugExists.dCreatedAt).utc().format('DD-MMMM-YYYY')}`
+//     const isSlugExistsAgain = await tags.findOne({ sSlug: input }).lean()
+//     input = isSlugExistsAgain ? `${input}-${Date.now()}` : input
+//     return input
+//   } else {
+//     return input
+//   }
+// }
+
+/**
+ * Strips html and give back the string data.
+ * @param {*} content html content
+ * @returns removed html from the string.
+ */
+
+_.stripHtml = (content) => {
+  const str = content.toString()
+  return str.replace(/(<([^>]+)>)/ig, '')
+}
+
+/**
+ * Gives random element from array.
+ * @param {*} array the array you want to choose random from.
+ * @returns random element
+ */
+_.randomFromArray = function (array) {
+  return array[Math.floor(Math.random() * array.length)]
+}
+
+_.customSortByPriority = ({ data, sortBy, sortType = 'asc' }) => {
+  const sortByObject = sortBy.reduce((obj, item, index) => {
+    return {
+      ...obj,
+      [item]: index
+    }
+  }, {})
+  return data.sort((a, b) => {
+    let aSort
+    for (let i = 0; i < sortBy.length; i++) {
+      if (a.oSeries.sTitle.toLowerCase().includes(sortBy[i])) {
+        aSort = sortByObject[sortBy[i]]
+        break
+      }
+    }
+    if (typeof aSort !== 'number') aSort = Number(a.dStartTimestamp)
+
+    let bSort
+    for (let i = 0; i < sortBy.length; i++) {
+      if (b.oSeries.sTitle.toLowerCase().includes(sortBy[i])) {
+        bSort = sortByObject[sortBy[i]]
+        break
+      }
+    }
+    if (typeof bSort !== 'number') bSort = Number(b.dStartTimestamp)
+    return sortType === 'asc' ? aSort - bSort : bSort - aSort
+  })
+}
+
+_.convertToInstantArticle = (data) => {
+  return `
+    <!doctype html>
+    <html lang="en">
+      <head>
+        <meta charset="utf-8">
+        <link rel="canonical" href="${config.FRONTEND_URL}/${data?.oSeo?.sSlug}"/>
+        <meta property="op:markup_version" content="v1.0">
+        </head>
+      <body>
+        <article>
+          <header>
+            <figure>
+              <img src="${config.S3_CDN_URL + data?.oImg?.sUrl}"/>
+              ${data?.oImg?.sCaption ? `<figcaption>${data?.oImg?.sCaption}</figcaption>` : ''}
+            </figure>
+            <h1>${data?.sTitle}</h1>
+            ${data?.dPublishDate ? `<time class="op-published" datetime="${moment(Number(data?.dPublishDate)).toISOString()}">${moment(Number(data?.dPublishDate)).format('MMMM DD h:mm a')}</time>` : ''}
+            ${data?.dModifiedDate ? `<time class="op-modified" datetime="${moment(Number(data?.dModifiedDate)).toISOString()}">${moment(Number(data?.dModifiedDate)).format('MMMM DD h:mm a')}</time>` : ''}
+            ${data?.oDisplayAuthor
+    ? `<address>
+              <a href="${data?.oDisplayAuthor?.oSeo?.sSlug}" rel="facebook">${data?.oDisplayAuthor?.sDisplayName}</a>
+            </address>`
+    : ''}
+            <h3 class="op-kicker">${data?.sCategoryName}</h3>
+            <figure class="op-ad"><iframe src="https://www.facebook.com/adnw_request?placement=1547552395328474_1547552411995139&adtype=banner300x250" width="300" height="250"></iframe></figure>
+          </header>
+          <figure>
+            <img src="${config.S3_CDN_URL + data?.oImg?.sUrl}"/>
+            ${data?.oImg?.sCaption ? `<figcaption>${data?.oImg?.sCaption}</figcaption>` : ''}
+          </figure>
+          ${data?.sContent}
+          <figure class="op-tracker">
+            <iframe>
+              <script>
+                (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject'] = r;i[r] = i[r] || function(){(i[r].q=i[r].q || []).push(arguments)}, i[r].l=1 * new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+                ga('create', 'UA-49665093-1', 'auto');
+                ga('send', 'pageview');
+                ga('require', 'displayfeatures');
+                ga('set', 'campaignSource', 'Facebook');
+                ga('set', 'campaignMedium', 'Social Instant Article');
+                ga('set', 'referrer', 'ia_document.referrer');
+                ga('set', 'title', 'FBIA: '+ia_document.title);
+                
+              </script>
+              <!-- Start Alexa Certify Javascript -->
+              <script type="text/javascript">
+                _atrk_opts = { atrk_acct:"jusnq1rcy520uW", domain:"crictracker.com",dynamic: true};
+                (function() { var as = document.createElement('script'); as.type = 'text/javascript'; as.async = true; as.src = "https://certify-js.alexametrics.com/atrk.js"; var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(as, s); })();
+              </script>
+              <noscript><img src="https://certify.alexametrics.com/atrk.gif?account=jusnq1rcy520uW" style="display:none" height="1" width="1" alt=""/></noscript>
+              <!-- End Alexa Certify Javascript -->  
+            </iframe>
+          </figure>
+          <footer><small>Copyright © ${new Date().getFullYear()} CricTracker. All rights reserved.</small></footer>
+        </article>
+      </body>
+    </html>
+  `
+}
+
+module.exports = _

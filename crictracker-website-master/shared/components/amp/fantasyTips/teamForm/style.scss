@@ -1,0 +1,24 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.teamImg { width: 32px; }
+.title { margin-bottom: 2px; padding: 8px 12px; background: var(--theme-bg); border-radius: 8px 8px 0 0; font-weight: 500; }
+.item { background: var(--theme-bg); border-radius: 8px; font-weight: 500;
+	.head { padding: 6px 4px 6px 8px; background: transparent; font-weight: 600;
+		&::after { margin-left: 0; }
+		.status { margin-right: 2px; }
+		p { text-overflow: ellipsis; white-space: nowrap; overflow: hidden; max-width: calc(100vw - 240px);}
+	}
+	.mb-0 { margin-bottom: 0; }
+	&:first-child { border-radius: 0 0 8px 8px;}
+}
+.arrow { width: 24px; border: none; background: transparent;
+	&.active { transform: rotate(270deg);}
+}
+.status { width: 24px; height: 24px; line-height: 24px; background: $border-dark;
+	&.win { background: $success; color: $light-color; }
+	&.loss { background: $danger; color: $light-color; }
+	&.noResult{ background: var(--font-dark); color:#fff; }
+}
+.content { padding: 8px 4px 12px; overflow: auto; }
+.match { margin-bottom: 0; width: 120px; }

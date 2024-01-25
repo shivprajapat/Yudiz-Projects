@@ -1,0 +1,1553 @@
+
+type fetchMatchDataResponse {
+  sMessage: String
+}
+
+extend type Seos @key(fields: "iId") {
+  iId: ID @external
+}
+
+type MiniScorecard @key(fields:"iMatchId") {
+  iMatchId: ID
+  oSeries: LiveInningSeries
+  oVenue: LiveInningVenue
+  nPriority: Int
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+  sStatusStr: String
+  sStatusNote: String
+  sLiveGameStatusStr: String
+  bIsDomestic: Boolean
+  dStartDate: Date
+  dEndDate:Date
+  dStartTimestamp:Date
+  dEndTimestamp:Date
+  iVenueId: ID
+  sEquation: String
+  nLatestInningNumber: Int
+  oToss: ScorecardToss
+  oTeamScoreA: ScorecardTeamScore
+  oTeamScoreB: ScorecardTeamScore
+  iBattingTeamId: ID
+  iFieldingTeamId: ID
+  sLiveMatchNote: String
+  iWinnerId: ID
+  oWinner: oShortWinnerTeam
+  sResult: String
+  eProvider: String
+  dCreated: String
+  dUpdated: String
+  oSeo: Seo
+  oSeriesSeo: Seo
+  oSeriesSeos: Seos
+  aFantasyTipsSlug: [String]
+}
+
+type FullScorecard {
+  iMatchId: ID
+  iSeriesId: ID
+  iVenueId: ID
+  oMatch: LiveInningMatch
+  oSeries: LiveInningSeries
+  oVenue: LiveInningVenue
+  sEquation: String
+  nLatestInningNumber: Int
+  oToss: ScorecardToss
+  oTeamScoreA: ScorecardTeamScore
+  oTeamScoreB: ScorecardTeamScore
+  aActiveBatters: [ScorecardBatter]
+  aActiveBowlers: [ScorecardBowler]
+  sLiveMatchNote: String
+  sResult: String
+  iMomId: ID
+  iMosId: ID
+  oMom: LiveInningPlayer
+  bIsFollowOn: Boolean
+  sWinMargin: String
+  sCurrentOver: String
+  sPreviousOver: String
+  sLastFiveOvers: String
+  dCreated: String
+  dUpdated: String
+  sDayRemainingOver: String
+}
+
+type oPowerPlay {  
+  sPowerPlay: String
+  sStartOver: String
+  sEndOver: String
+}
+
+type oReview {  
+  nTotal: Int
+  nSuccess: Int
+  nFailed: Int
+  nAvailable: Int
+}
+
+type LiveInnings {
+  iMatchId: ID
+  oMatch: LiveInningMatch
+  sInningId: String
+  nInningNumber: Int
+  sName: String
+  sShortName: String
+  iBattingTeamId: ID
+  oBattingTeam: LiveInningTeam
+  oFieldingTeam: LiveInningTeam
+  iFieldingTeamId: ID
+  aBatters: [LiveInningBatter]
+  aBowlers: [LiveInningBowler]
+  aActiveBatters: [ScorecardBatter]
+  aActiveBowlers: [ScorecardBowler]
+  aFielders: [LiveInningFielder]
+  oLastWicket: LiveInningLastWicket
+  aFOWs: [LiveInningLastWicket]
+  oExtraRuns: LiveInningExtraRuns
+  oEquations: LiveInningEquation
+  oCurrentPartnership: LiveInningCurrentPartnership
+  sRecentScores: String
+  sLastFiveOvers: String
+  sLastTenOvers: String
+  sResultStr: String
+  sStatusStr: String
+  dCreated: String
+  dUpdated: String
+  aYetToBat: [oPlayer]
+  aPowerPlay: [oPowerPlay]
+  oBattingReview: oReview
+  oBowlingReview: oReview
+  aInningNote: [String]
+}
+
+type ScorecardBatter {
+  iBatterId: ID
+  oBatter: LiveInningPlayer
+  nRuns: Float
+  nBallFaced: Float
+  nFours: Float
+  nSixes: Float
+  sStrikeRate: String
+}
+
+type ScorecardBowler {
+  iBowlerId: ID
+  oBowler: LiveInningPlayer
+  sOvers: String
+  nRunsConceded: Float
+  nWickets: Float
+  nMaidens: Float
+  sEcon: String
+}
+
+type LiveInningMatch {
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+}
+
+type LiveInningTeam {
+  _id: ID
+  sTitle: String
+  sAbbr: String
+  oImg: oCommonImage
+  eTagStatus: String
+  oSeo: Seo
+}
+
+type LiveInningPlayer {
+  _id: ID
+  sTitle: String
+  sShortName: String
+  sFullName: String
+  sThumbUrl: String
+  eTagStatus: String
+  oSeo: Seo
+  oImg: oCommonImage
+  oPrimaryTeam: oTeamFront
+  oPlayingTeam: oTeamFront
+}
+
+type LiveInningBatter  {
+  iBatterId: ID
+  bIsBatting: Boolean
+  ePosition: String
+  nRuns: Int
+  nBallFaced: Int
+  nFours: Int
+  nSixes: Int
+  nDots: Int
+  nSingles: Int
+  nDoubles: Int
+  nThree: Int
+  nFives: Int
+  sHowOut: String
+  eDismissal: String
+  sStrikeRate: String
+  iBowlerId: ID
+  iFirstFielderId: ID
+  iSecondFielderId: ID
+  iThirdFielderId: ID
+  oBatter: LiveInningPlayer
+  oBowler: LiveInningPlayer
+  oFirstFielder: LiveInningPlayer
+  oSecondFielder: LiveInningPlayer
+  oThirdFielder: LiveInningPlayer
+}
+
+type LiveInningBowler {
+  iBowlerId: ID
+  oBowler: LiveInningPlayer
+  bIsBowling: Boolean
+  ePosition: String
+  sOvers: String
+  nMaidens: Int
+  nRunsConceded: Int
+  nWickets: Int
+  nNoBalls: Int
+  nWides: Int
+  nDotBalls: Int
+  sEcon: String
+  nBowled: Int
+  nLbw: Int
+}
+
+type LiveInningFielder {
+  iFielderId: ID
+  oFielder: LiveInningPlayer
+  nCatches: Int
+  nRunoutThrow: Int
+  nRunoutCatcher: Int
+  nRunoutDirect: Int
+  bIsSubstitute: Boolean
+  nStumping: Int
+}
+
+type LiveInningLastWicket {
+  iBatterId: ID
+  oBatter: LiveInningPlayer
+  nRuns: Int
+  nBallFaced: Int
+  sHowOut: String
+  nScoreDismissal: Int
+  sOverDismissal: String
+  iBowlerId: ID
+  oBowler: LiveInningPlayer
+  eDismissal: String
+  nWicketNumber: Int
+}
+
+type LiveInningExtraRuns {
+  nByes: Int
+  nLegByes: Int
+  nWides: Int
+  nNoBalls: Int
+  nPenalty: Int
+  nTotal: Int
+}
+
+type LiveInningVenue {
+  sName: String
+  sLocation: String
+}
+
+type LiveInningSeries {
+  _id: ID,
+  sTitle: String
+  sSrtTitle: String
+  nTotalTeams: String
+  sAbbr: String
+  sSeason: String
+  oSeo: Seo
+}
+
+type LiveInningEquation {
+  nRuns: Int
+  nWickets: Int
+  sOvers: String
+  nBowlersUsed: Int
+  sRunRate: String
+}
+
+type LiveInningCurrentPartnership {
+  nRuns: Int
+  nBalls: Int
+  sOvers: String
+  aBatters: [CurrentPartnershipBatter]
+}
+
+type CurrentPartnershipBatter {
+  iBatterId: ID
+  oBatter: LiveInningPlayer
+  nRuns: Int
+  nBalls: Int
+}
+
+type ScorecardToss {
+  sText: String
+  iWinnerId: ID
+  oWinnerTeam: LiveInningTeam
+  sDecision: String
+}
+
+type ScorecardTeamScore {
+  iTeamId: ID
+  oTeam: LiveInningTeam
+  sScoresFull: String
+  sScores: String
+  sOvers: String
+}
+
+input fetchMatchDataInput {
+  dStartDate: String
+  dEndDate: String
+}
+
+input fetchPlayerInput {
+  sName: String
+}
+
+type seriesSquadPlayer {
+  _id: ID
+  sAbout: String
+  sShortName: String
+  sFirstName: String
+  sLastName: String
+  sMiddleName: String
+  sFullName: String
+  dBirthDate: Date
+  sBirthPlace: String
+  sCountry: String
+  oImg: oCommonImage
+  sPlayingRole: String
+  sBattingStyle: String
+  sBowlingStyle: String
+  sFieldingPosition: String
+  sRecentMatchKey: String
+  dRecentAppearance: String
+  aFantasyPlayerRating: [oPlayerRating]
+  sNationality: String
+  sUrl: String
+  eProvider: String
+  eTagStatus: String
+  oSeo:Seo
+  bTagEnabled: Boolean
+  sTeamName:String
+  sTeamAbbr: String
+  dUpdated: String
+}
+
+input listFantasyPlayerInput {
+  iMatchId: ID!
+  iTeamId: ID
+}
+
+input fullScorecardInput {
+  iMatchId: ID!
+}
+
+input liveInningsInput {
+  iMatchId: ID!
+  nInningNumber: Int
+}
+
+type oCommonImage {
+  sText: String @shareable
+  sCaption: String @shareable
+  sAttribute: String @shareable
+  sUrl: String @shareable
+}
+
+type oTeams @key(fields: "sTitle") {
+  _id: ID
+  sTeamKey: String
+  sTitle: String
+  sAbbr: String
+  sTeamType: String
+  sCountry: String
+  sAltName: String
+  eProvider: String
+  eTagStatus: String
+  bTagEnabled: Boolean
+  oImg: oCommonImage
+  oSeo: Seo
+  sCountryFull: String
+  aMatch: [oMatchDetailsFront]
+  oJersey: oCommonImage
+}
+
+type oVenues {
+  _id: ID
+  sVenueKey: String
+  sName: String
+  sLocation: String
+  sTimezone: String
+  sKnownAs: String
+  sCountry: String
+  sCity: String
+  nOpenedYear: Int
+  sEnds: String
+  sHomeTo: String
+  bFloodLights: Boolean
+  eProvider: String
+  sDescription: String
+  sUrl: String
+}
+
+type oTeamDetail {
+  iTeamId: oTeams
+  sScoresFull: String
+  sScores: String
+  sOvers: String
+}
+
+type oVenueDetail {
+  _id: ID
+  sVenueKey: String
+  sName: String
+  sLocation: String
+  sTimezone: String
+  sKnownAs: String
+  sCountry: String
+  sCity: String
+  nOpenedYear: Int
+  sEnds: String
+  sHomeTo: String
+  bFloodLights: Boolean
+  eProvider: String
+  sDescription: String
+  sUrl: String
+}
+
+type oEnum {
+  _id: ID
+  sKey: String
+  sValue: String
+  eType: String
+}
+
+type oFixuresData @key(fields:"_id"){
+  _id: ID
+  oSeries: oShortSeries
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+  sStatusStr: String
+  sStatusNote: String
+  bPreSquad: Boolean
+  sLiveGameStatusStr: String
+  bIsDomestic: Boolean
+  dStartDate: Date
+  dEndDate: Date
+  dStartTimestamp: Date
+  dEndTimestamp: Date
+  oVenue: oShortVenue
+  sEquation: String
+  sUmpires: String
+  sReferee: String
+  sWinMargin: String
+  oWinner: oShortWinnerTeam
+  bIsCommentary: Boolean
+  nLatestInningNumber: Int
+  oToss: oTossType
+  oTeamScoreA: oTeamScoreType
+  oTeamScoreB: oTeamScoreType
+  sLiveMatchNote: String
+  sResult: String
+  sDescription: String
+  dCreated: String
+  dUpdated: String
+  oSeo: Seo
+}
+
+type oTossDetail {
+  sText: String
+  iWinnerId: String
+  eDecision: String
+}
+
+enum eStatusStrEnum {
+  live
+  completed
+  scheduled
+  cancelled
+}
+
+input oFixuresInput {
+  iSeriesId: ID
+  iTeamId: ID
+  iVenueId: ID
+  sSortBy: String
+  nOrder: Int
+  sStatusStr: eStatusStrEnum
+}
+
+type Exclusive {
+  sTitle: String
+  sPromocode: String
+  sUrl: String
+  sShortDescription: String
+  sImage: String
+}
+
+type OtherInfo {
+  sExpertAdvice: String
+  sNote: String
+  sDisclaimer: String
+}
+
+type FeatureImgInput {
+  sAltText:  String
+  sCaption: String
+  sAttribution: String
+  sImgUrl: String
+}
+
+type CategoryInput {
+  aCategoryId: ID
+  bIsPrimary: Boolean
+}
+
+type AdvanceFeatureInput {
+  bAllowComments: Boolean
+  bRequireApproval: Boolean
+  bAMP: Boolean
+  bFBInstant: Boolean
+  bBrandedContent: Boolean
+  bExclusive: Boolean
+  bEditorPick: Boolean
+}
+
+type Toss {
+  sText: String
+  iWinnerId: ID
+  eDecision: ID  
+}
+
+type TeamScore {
+ iTeamId: ID
+ sScoresFull: String
+ sScores: String
+ sOvers: String
+ oTeam: oTeams   
+}
+
+type Match {
+  iSeriesId: ID
+  _id: ID
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+  sStatusStr: String
+  sStatusNote: String
+  sLiveGameStatusStr: String
+  bIsDomestic: Boolean
+  dStartDate: Date
+  dEndDate: Date
+  dStartTimestamp: Date
+  dEndTimestamp: Date
+  sEquation: String
+  sUmpires: String
+  sReferee: String
+  sWinMargin: String
+  iWinnerId: ID
+  bIsCommentary: Boolean
+  bImp: Boolean
+  nLatestInningNumber: Int
+  oToss: Toss
+  oTeamScoreA: TeamScore
+  oTeamScoreB: TeamScore
+  sLiveMatchNote: String
+  sResult: String
+  sDescription: String
+  eProvider: String
+  aFantasyTips:[FantasyArticleShort]
+  oOverview: MatchOverview
+  oVenue: oVenues
+  oSeries: oFetchSeries
+  bFantasyTips: Boolean
+    dUpdated: String
+}
+
+type FantasyArticleShort {
+ _id: ID
+ ePlatformType: String
+ eState: FANTASYARTICLE
+ iAuthorId: ID
+ iAuthorDId: ID
+ iReviewerId: ID
+ dPublishDate: Date
+ dCreated: String
+ dUpdated: String
+ oReviewer: subAdmin
+ oDisplayAuthor: subAdmin
+}
+
+extend type subAdmin @key(fields: "_id"){
+  _id: ID @external
+}
+
+enum MatchFormat {
+  "ODI"
+  odi
+  "Test"
+  test
+  "T20I"
+  t20i
+  "List A"
+  lista
+  "First Class"
+  firstclass
+  "T20"
+  t20
+  "Women ODI"
+  womenodi
+  "Women 20"
+  woment20
+  "Youth ODI"
+  youthodi
+  "Youth T20"
+  youtht20
+  "Others"
+  others
+  "T10"
+  t10
+  "Other"
+  other
+  "All"
+  all
+}
+
+input listFantasyMatchInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aStatus: [MatchStatus]
+  aFilter: [MatchFormat]
+  eType: listFantasyMatchEnum!
+  aDate: [String]
+}
+
+enum listFantasyMatchEnum {
+  "match"
+  m
+  "trash"
+  t
+}
+
+enum MatchStatus {
+  completed
+  scheduled
+  live
+  cancelled
+}
+
+type listFantasyMatchResponse {
+  nTotal: Int
+  aResults: [Match]
+}
+
+type oRoundDetail {
+  sRoundKey: String
+  nOrder: Int
+  sName: String
+  sRoundType: String
+  sMatchFormat: String
+  dStartDate: Date
+  dEndDate: Date
+  sMatchesUrl: String
+  sTeamsUrl: String
+}
+
+type oFetchSeries @key(fields:"_id"){
+  _id: ID
+  sSeriesKey: String
+  sSrtTitle: String
+  sTitle: String
+  sAbbr: String
+  sSeason: String
+  dStartDate: Date
+  dEndDate: Date
+  nTotalMatches: Int
+  nTotalRounds: Int
+  nTotalTeams: Int
+  sSeriesType: String
+  sCategory: String
+  sGameFormat: String
+  sStatus: String
+  sCountry: String
+  sSquadType: String
+  nTable: Int
+  aRound: [oRoundDetail]
+  eProvider: String
+  dCreated: String
+  dUpdated: String
+  oSeo: Seo
+  iCategoryId: ID
+  oCategory: oSeriesCategory
+  isBlockedMini: Boolean
+}
+
+enum SERIESSTATESTYPES {
+  "All"
+  All
+  "Bowling"
+  Bwl
+  "Batting"
+  Bat
+  "Team"
+  Team
+}
+
+type oSeriesStatsTypes {
+  _id: ID
+  eGroupTitle: String
+  sType: String
+  sSeoType: String
+  sDescription: String
+  eSubType: String
+  aHeaders: [[String]]
+  eFullTitle: String
+  eProvider: String
+  dCreated: String
+  dUpdated: String
+}
+
+input fetchSeriesStatsTypesInput {
+  eGroupTitle: SERIESSTATESTYPES
+  aStateType: [String]
+}
+
+input fetchSeriesStatsInput {
+  _id: ID
+  iSeriesId: ID
+  eFormat: MatchFormat
+  nLimit: Int
+}
+
+type oSeriesStats {
+  _id : ID
+  iSeriesId: ID
+  iSeriesStatsId: ID
+  iPlayerId: oPlayerDetails @deprecated(reason: "Use oPlayer field")
+  iTeamId: oTeams @deprecated(reason: "Use oTeam field")
+  oPlayer: oPlayerDetails
+  oTeam: oTeams
+  nAverage: Float
+  nRuns: Float
+  nInnings: Float
+  sStrike: Float
+  nRun4: Float
+  nRun6: Float
+  nMatches: Float
+  nNotout: Float
+  nBalls: Float
+  nHighest: Float
+  nRun100: Float
+  nRun50: Float
+  nCatches: Float
+  nStumpings: Float
+  nOvers: Float
+  nWickets: Float
+  sBestInning: String
+  sBestMatch: String
+  nEcon: Float
+  nWicket4i: Float
+  nWicket5i: Float
+  nWicket10m: Float
+  nMaidens: Float
+  nRunsConceded: Float
+  dModified: String
+  eProvider: String
+  dCreated: String
+  dUpdated: String
+  eFormat: String
+}
+
+type oPlayerRating {
+  ePlatformType: String
+  nRating: Float
+}
+
+type oPlayerDetails {
+  _id: ID
+  sPlayerKey: String
+  sTitle: String
+  sAbout: String
+  sShortName: String
+  sFirstName: String
+  sLastName: String
+  sMiddleName: String
+  sFullName: String
+  dBirthDate: Date
+  sBirthPlace: String
+  sCountry: String
+  oImg: oCommonImage
+  sPlayingRole: String
+  sBattingStyle: String
+  sBowlingStyle: String
+  sFieldingPosition: String
+  sRecentMatchKey: String
+  dRecentAppearance: String
+  aFantasyPlayerRating: [oPlayerRating]
+  sNationality: String
+  nMatchesPlayed: Int
+  nRuns: Int
+  nWickets: Int
+  sNickName: String
+  aMajorTeams: [String]
+  sUrl: String
+  eProvider: String
+  dUpdated: String
+  oSeo: Seo
+  eTagStatus: String
+}
+
+input fetchPlayersFromApiInput {
+  "all- for all players"
+  sCountry: String!
+}
+
+type fetchPlayersFromApiResponse {
+  sMessage: String
+}
+
+type listPlayerResponse {
+  nTotal: Int
+  aResults:[oPlayer]
+}
+
+input listPlayerInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aCountryFilter:[String]
+  aRoleFilter: [String]
+}
+
+type oPlayer @key(fields: "_id") @key(fields: "sFullName") {
+    _id: ID
+    sCountry: String
+    oImg: oCommonImage
+    sFullName: String
+    sPlayingRole: String
+    sContent: String
+    sShortName: String
+    sFirstName: String
+    sLastName: String
+    sMiddleName: String
+    dBirthDate: Date
+    sBirthPlace: String
+    sLogoUrl: String
+    sBattingStyle: String
+    sBowlingStyle: String
+    sFieldingPosition: String
+    iRecentMatchId: ID
+    nRecentAppearance: Int
+    aFantasyPlayerRating: [oFantasyPlayerRatingRes]
+    nPriority: Int
+    nBattingPerformancePoint: Float
+    nBowlingPerformancePoint: Float
+    sNationality: String
+    nMatchesPlayed: Int
+    nRuns: Int
+    nWickets: Int
+    sNickName: String
+    aMajorTeams: [ID]
+    eTagStatus: TAGSTATUS
+    bTagEnabled: Boolean
+    sCountryFull: String
+    sSex: String
+    oSeo:Seo
+    sRecentMatchKey: String
+    dRecentAppearance: Date
+    oPrimaryTeam: oTeamFront
+    sAmpContent: String
+}
+
+type oShortPlayer @key(fields: "_id") { # for edit tag
+  _id: ID
+  sFirstName: String
+}
+
+
+input listTeamInput {
+  nSkip: Int
+  nLimit: Int
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aCountryFilter: [String]
+}
+
+type listTeamResponse {
+  nTotal: Int
+  aResults: [oTeams]
+}
+
+type getLiveMatchesResponse {
+  _id: ID
+  iSeriesId: ID
+  sSeriesKey: String
+  sMatchKey: String
+  sTitle: String
+  sSubtitle: String
+  iFormatId: ID
+  sFormatStr: String
+  iStatusId: ID
+  sStatusStr: String
+  sStatusNote: String
+  bVerified: Boolean
+  bPreSquad: Boolean
+  iLiveGameStatusId: ID
+  sLiveGameStatusStr: String
+  bIsDomestic: Boolean
+  dStartDate: Date
+  dEndDate: Date
+  dStartTimestamp: Date
+  dEndTimestamp: Date
+  iVenueId: ID
+  sEquation: String
+  sUmpires: String
+  sReferee: String
+  sWinMargin: String
+  bIsCommentary: Boolean
+  nLatestInningNumber: Int
+  oToss: oTossDetail
+  oTeamScoreA: oTeamDetail
+  oTeamScoreB: oTeamDetail
+  sLiveMatchNote: String
+  sResult: String
+  bIsWagon: Boolean
+  bFantasyTips: Boolean
+  eProvider: String
+  sETag: String
+}
+
+type fetchTeamsFromApiResponse {
+  sMessage: String
+}
+
+input oListAllFixturesInput {
+  nSkip: Int
+  nLimit: Int
+  sSearch: String
+  eCategory: FIXTURECATEGORY
+  eStatus: FIXTURESTATUS
+  iTeamId: ID
+  iSeriesId: ID
+  iVenueId: ID
+  dByMonth: String
+  sTimezone: String
+}
+
+enum FIXTURESTATUS {
+  "live"
+  l
+  "upcoming"
+  u
+  "recent"
+  r
+}
+
+enum FILTERRESPONSETYPE {
+  "Venue"
+  v
+  "Team"
+  t
+  "Series"
+  s
+  "Format"
+  f
+}
+
+enum FIXTURECATEGORY {
+  "international"
+  i
+  "domestic"
+  d
+  "league"
+  l
+  "women"
+  w
+}
+
+enum DHTYPE {
+  "3:30 matches"
+  first
+  "6:30 matches"
+  second
+}
+
+
+type oAllFixtures @key(fields:"_id"){
+  _id: ID
+  oSeries: oShortSeries
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+  sStatusStr: String
+  sStatusNote: String
+  sLiveGameStatusStr: String
+  bIsDomestic: Boolean
+  dStartDate: Date
+  dEndDate: Date
+  dStartTimestamp: Date
+  dEndTimestamp: Date
+  oVenue: oShortVenue
+  sEquation: String
+  sUmpires: String
+  sReferee: String
+  sWinMargin: String
+  oWinner: oShortWinnerTeam
+  bIsCommentary: Boolean
+  nLatestInningNumber: Int
+  oToss: oTossType
+  oTeamScoreA: oTeamScoreType
+  oTeamScoreB: oTeamScoreType
+  sLiveMatchNote: String
+  sResult: String
+  sDescription: String
+  oSeo: Seo
+}
+
+type oShortSeries {
+  _id: ID
+  sTitle: String
+  sGameFormat: String
+  sCategory: String
+  sSeason: String
+  dStartDate: Date
+  dEndDate: Date
+  sCountry: String 
+  sStatus: String
+  oSeo: Seo
+  iCategoryId: ID
+  oCategory: oSeriesCategory
+  sAbbr: String
+  nTotalMatches: Int
+  nTotalRounds: Int
+  nTotalTeams: Int
+}
+
+type oShortVenue @key(fields:"_id"){
+  _id: ID
+  sName: String 
+  sLocation: String
+  sTimezone: String
+}
+
+type oShortWinnerTeam {
+  _id: String
+  sTitle: String
+  sAbbr: String
+  oImg: oCommonImage
+}
+
+type  oTeamScoreType {
+  oTeam: oShortTeam
+  sScoresFull: String
+  sScores: String
+  sOvers: String
+}
+
+type oShortTeam @key(fields:"_id"){
+ _id: ID
+ sTitle: String 
+ sAbbr: String
+ oImg: oCommonImage
+ oJersey: oCommonImage
+}
+
+type oTossType {
+  sText: String
+  eDecision: String
+  oWinnerTeam: oShortTeam
+}
+
+input fetchMatchFromApiInput {
+  dStartDate: String
+  dEndDate: String
+}
+
+type fetchMatchFromApiResponse {
+  sMessage: String
+}
+
+type oListSeriesResponse {
+  aResults: [oFetchSeries]
+  nTotal: Int
+}
+
+input oListSeriesInput {
+  nSkip: Int
+  nLimit: Int
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+type oGetPlayerData {
+  nTotal: Int
+  aResults: [oPlayer]
+}
+
+input oListMatchSquadInput {
+  iMatchId: ID
+}
+
+type oMatchSquadPlayer {
+  iPlayerId: ID
+  sName: String
+  bPlaying11: Boolean
+  oTeam: oMatchSquadTeam
+  sRoleStr: String
+  bIn: Boolean
+  bOut: Boolean
+  sSplRoleStr: String
+}
+
+type oMatchSquadTeam {
+  _id: ID
+  sTitle: String
+  sAbbr: String
+}
+
+input oGetMatchBySlugInput {
+  sSlug: String!
+}
+
+input oGetMatchByIdInput {
+  _id: ID!
+}
+
+type oMatchDetailsFront @key(fields:"_id"){
+  _id: ID
+  oSeries: oShortSeries
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+  sStatusStr: String
+  sStatusNote: String
+  sLiveGameStatusStr: String
+  bIsDomestic: Boolean
+  dStartDate: Date
+  dEndDate: Date
+  dStartTimestamp: String
+  dEndTimestamp: String
+  oVenue: oShortVenue
+  sEquation: String
+  sUmpires: String
+  sReferee: String
+  sWinMargin: String
+  oWinner: oShortWinnerTeam
+  bIsCommentary: Boolean
+  nLatestInningNumber: Int
+  oToss: oTossType
+  oTeamScoreA: oTeamScoreType
+  oTeamScoreB: oTeamScoreType
+  sLiveMatchNote: String
+  sResult: String
+  sDescription: String
+  oSeo: Seo
+  oLiveScore: oLiveScore
+  aInning: [LiveInnings]
+  oMom: LiveInningPlayer
+  oMos: LiveInningPlayer
+  oCategory: oSeriesCategory
+  iEventId: ID
+  sShortTitle: String
+  aPollId: [ID]
+  aPoll: [poll]
+}
+
+type oLiveScore {
+  nRuns: Int
+  sOvers: String
+  nWickets: Int
+  nTarget: Int
+  nRunrate: Float
+  sRequiredRunrate: String
+}
+
+input oGetPlayerByIdFrontInput {
+  _id: ID!
+}
+
+type oBattingStats { 
+  nMatches: Int
+  nInnings: Int
+  nNotOut: Int
+  nRuns: Int
+  nPlayedBalls: Int
+  nHighest: Int
+  nRun100: Int
+  nRun50: Int
+  nRun4: Int
+  nRun6: Int
+  sAverage: String
+  sStrikeRate: String
+  nFastest50Balls: Int
+  nFastest100Balls: Int
+ }
+
+type oBowlingStats { 
+  nMatches: Int
+  nInnings: Int
+  nBalls: Int
+  sOvers: String
+  nRuns: Int
+  nWickets: Int
+  sBestBowlingInning: String
+  sBestBowlingMatch: String
+  sEconomy: String
+  sAverage: String
+  sStrikeRate: String
+  nWkt4i: Int
+  nWkt5i: Int
+  nWkt10m: Int
+  nHatTrick: Int
+  nMostExpensiveOver: Int
+ }
+
+type oPlayerStats { 
+  iPlayerId: ID
+  sMatchStatsTypes: String
+  oBatting: oBattingStats
+  oBowling: oBowlingStats
+  nPriority: Int
+ }
+
+
+type oPlayerFront @key(fields:"_id"){
+   _id: ID
+    sCountry: String
+    oImg: oCommonImage
+    sFullName: String
+    sPlayingRole: String
+    sContent: String
+    sShortName: String
+    sFirstName: String
+    sLastName: String
+    sMiddleName: String
+    dBirthDate: Date
+    sBirthPlace: String
+    sLogoUrl: String
+    sBattingStyle: String
+    sBowlingStyle: String
+    sFieldingPosition: String
+    iRecentMatchId: ID
+    nRecentAppearance: Int
+    aFantasyPlayerRating: [oFantasyPlayerRatingRes]
+    nPriority: Int
+    nBattingPerformancePoint: Float
+    nBowlingPerformancePoint: Float
+    sNationality: String
+    nMatchesPlayed: Int
+    nRuns: Int
+    nWickets: Int
+    sNickName: String
+    aMajorTeams: [ID]
+    eTagStatus: TAGSTATUS
+    bTagEnabled: Boolean
+    sCountryFull: String
+    sSex: String
+    oSeo:Seo
+    sRecentMatchKey: String
+    dRecentAppearance: Date
+    oPrimaryTeam: oTeamFront
+    oStats: [oPlayerStats]
+    sAbout: String,
+    aTeam: [oTeamPlayed]
+    sAmpContent: String
+}
+
+type oTeamPlayed{ 
+  oTeam: oTeamFront
+ }
+
+input oGetTeamByIdFrontInput {
+  _id: ID!
+}
+
+type oTeamFront @key(fields:"_id"){
+  _id: ID
+  sTitle: String
+  sAbbr: String
+  oImg: oCommonImage
+  sTeamType: String
+  sCountry: String
+  sAltName: String
+  oSeo: Seo
+  sCountryFull: String
+  eTagStatus: String
+  oJersey: oCommonImage
+}
+
+
+input oListAllFixturesFilter {
+  eCategory: FIXTURECATEGORY
+  eStatus: FIXTURESTATUS
+  iTeamId: ID
+  iSeriesId: ID
+  iVenueId: ID
+  dByMonth: String
+  sTimezone: String
+}
+
+type oListAllFixturesFilterResponse {
+  aVenue: [oVenueListType]
+  aSeries: [oSeriesListType]
+  aTeam: [oTeamListType]
+  aFormat: [oFormatListType]
+}
+
+type oGetTeamSearchResult {
+  aResults: [oTeams]
+}
+
+type oGetPlayerSearchResult {
+  aResults: [oPlayer]
+}
+
+type oVenueListType {
+  _id: ID
+  sName: String
+}
+
+type oFormatListType {
+  sName: String
+  sValue: String
+}
+
+type oSeriesListType {
+  _id: ID
+  sTitle: String
+}
+type oTeamListType {
+  _id: ID
+  sTitle: String
+}
+
+input listSeriesSquadInput {
+  iSeriesId: ID
+  iTeamId: ID
+}
+
+type SeriesSquadFront {
+  oTeam: oTeamFront
+  oPlayer: oPlayerFront
+  bIsOverseas: Boolean
+  
+}
+
+input getFiltersForMatchesFrontInput {
+  eStatus: FIXTURESTATUS
+  aTeamId: [ID]
+  aSeriesId: [ID]
+  aVenueId: [ID]
+  sTimezone: String
+  eFilterType: FILTERRESPONSETYPE
+  aCategory: [FIXTURECATEGORY]
+}
+
+input listAllFixturesMobileInput {
+  eStatus: FIXTURESTATUS
+  aTeamId: [ID]
+  aSeriesId: [ID]
+  aVenueId: [ID]
+  sTimezone: String
+  aCategory: [FIXTURECATEGORY]
+}
+
+input dailyHuntWidgetInput {
+  iSeriesId: ID!
+  eType: DHTYPE
+}
+
+input fetchFantasyPlayerStatsInput {
+  iSeriesId: ID!
+  aTeamId: [ID]!
+  nLimit: Int
+  aSeriesStatsType: [ESEOSUBTYPE]
+}
+
+type oFantasyPlayerStats {
+  eSeriesStatsType: String
+  aData: [oSeriesStats]
+}
+
+input getTeamFormInput {
+  iTeamId: ID!
+  dStartTimestamp: Int
+  nLimit: Int
+}
+
+input getHeadToHeadInput {
+  iTeamIds: [ID!]!
+  dStartTimestamp: Int
+  nLimit: Int
+}
+
+enum eFormat{ 
+  t20
+  odi
+  test
+  all
+ }
+
+input getRecentMatchesOfPlayerInput { 
+  _id: ID!
+  nLimit: Int
+  aFormatStr: [eFormat]!
+ }
+
+ input getSimilarPlayerByIdInput { 
+  _id: ID!
+  nLimit: Int
+ }
+
+input getRecentMatchesOfTeamInput { 
+  _id: ID!
+  nLimit: Int
+ }
+
+ type oVenue { 
+  _id: ID
+  sLocation: String
+  sName: String
+  }
+
+
+type oBattingData { 
+  iBatterId: ID
+  bIsBatting: Boolean
+  nRuns: Int
+  sStrikeRate: String
+ }
+
+ type oBowlingData { 
+  iBowlerId: ID
+  sOvers: String
+  nRunsConceded: Int
+  sEcon: String
+  nWickets: Int
+  }
+
+type oInningData { 
+   aBatters: [oBattingData]
+   aBowlers: [oBowlingData]
+ }
+
+type oMatchData { 
+  _id: ID
+  dStartDate: Date
+  oVenue: oVenue
+  sTitle: String
+  sShortTitle: String
+  oInningsData: oInningData
+  sFormatStr: String
+ }
+
+type oRecentMatch { 
+  sFormatStr: String
+  aMatchData: [oMatchData]
+  sPlayingRole: String
+ }
+
+ input getComparisonOfPlayersInput { 
+  iPlayerIdA: ID!
+  iPlayerIdB: ID!
+  }
+
+input getMatchesBetweenTeamsInput { 
+  iTeamIdA: ID!
+  iTeamIdB: ID!
+  nLimit: Int
+ }
+
+type oPlayerMatch { 
+  dStartDate: Date
+  sFormatStr: String
+  sTitle: String
+  sShortTitle: String
+ }
+
+type oMatchDataMobile { 
+  _id: ID
+  oVenue: oVenue
+  aBattingData: [oBattingData]
+  aBowlingData: [oBowlingData]
+  aMatch: [oPlayerMatch]
+ }
+
+ type oRecentMatchMobile { 
+  sFormatStr: String
+  aMatchData: [oMatchDataMobile]
+  sPlayingRole: String
+ }
+
+ type miniScoreCardSeries { 
+    _id: ID
+    sTitle: String
+    sSrtTitle: String
+  }
+
+ type getMiniScoreCardHeaderRes {  
+    _id: ID
+    nPriority: Int
+    oSeries: miniScoreCardSeries
+}
+
+ 
+extend type poll @key(fields: "_id") {
+  _id: ID @external
+}
+
+
+extend type Query {
+  fetchMatchData(input:fetchMatchDataInput): fetchMatchDataResponse
+  fetchPlayer(input:fetchPlayerInput): ID
+  listFantasyPlayer(input:listFantasyPlayerInput): [seriesSquadPlayer]
+  listTeam(input:listTeamInput): listTeamResponse
+  fetchVenues: [oVenues]
+  fetchFixuresData(input: oFixuresInput): [oFixuresData]
+  listFantasyMatch(input:listFantasyMatchInput):listFantasyMatchResponse
+  fetchSeries: [oFetchSeries]
+  fetchSeriesStatsTypes(input: fetchSeriesStatsTypesInput): [oSeriesStatsTypes]
+  fetchSeriesStats(input: fetchSeriesStatsInput): [oSeriesStats]
+  fetchMiniScorecardData: [MiniScorecard]
+  fetchFullScorecardData(input:fullScorecardInput): FullScorecard
+  fetchLiveInningsData(input:liveInningsInput): [LiveInnings]
+  fetchPlayersFromApi(input:fetchPlayersFromApiInput):fetchPlayersFromApiResponse
+  listPlayer(input:listPlayerInput):listPlayerResponse
+  getLiveMatches: [getLiveMatchesResponse]
+  listAllFixtures(input:oListAllFixturesInput):[oAllFixtures]
+  getTeamSearch(input: oPaginationInput): oGetTeamSearchResult
+  getPlayerSearch(input: oPaginationInput): oGetPlayerSearchResult
+  listMatchSquad(input:oListMatchSquadInput): [oMatchSquadPlayer]
+  getMatchBySlug(input:oGetMatchBySlugInput): oMatchDetailsFront
+  getPlayerByIdFront(input:oGetPlayerByIdFrontInput): oPlayerFront
+  getTeamByIdFront(input:oGetTeamByIdFrontInput): oTeamFront
+  getMatchById(input:oGetMatchByIdInput): oMatchDetailsFront
+  listAllFixturesFilter(input:oListAllFixturesFilter):oListAllFixturesFilterResponse
+  listSeriesSquad(input:listSeriesSquadInput): [SeriesSquadFront]
+  getFiltersForMatchesFront(input: getFiltersForMatchesFrontInput): oListAllFixturesFilterResponse
+  listAllFixturesMobile(input: listAllFixturesMobileInput): [oAllFixtures]
+  dailyHuntWidget(input: dailyHuntWidgetInput): MiniScorecard
+  fetchFantasyPlayerStats(input: fetchFantasyPlayerStatsInput): [oFantasyPlayerStats]
+  getTeamForm(input: getTeamFormInput): [oMatchDetailsFront]
+  getHeadToHead(input: getHeadToHeadInput): [oMatchDetailsFront]
+  getSimilarPlayerById(input: getSimilarPlayerByIdInput): [oPlayer]
+  # getRecentMatchesOfPlayer(input: getRecentMatchesOfPlayerInput): [oRecentMatch] 
+  getComparisonOfPlayers(input: getComparisonOfPlayersInput): [oPlayerFront]
+  getRecentMatchesOfTeam(input: getRecentMatchesOfTeamInput): [oMatchDetailsFront]
+  getMatchesBetweenTeams(input: getMatchesBetweenTeamsInput): [oMatchDetailsFront]
+  getRecentMatchesOfPlayer(input: getRecentMatchesOfPlayerInput): [oRecentMatchMobile]
+  getMiniScoreCardHeader: [getMiniScoreCardHeaderRes]
+}

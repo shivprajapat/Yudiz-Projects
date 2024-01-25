@@ -1,0 +1,16 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.imgBlock { width: 64px; position: relative;
+    img { border-radius: 50%; }
+}
+.point { margin-top: -10px; position: relative;}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 575px) {
+  .list {
+      > div { margin-bottom: 24px; 
+        &:last-child { margin-bottom: 0;}
+    }
+  }
+}

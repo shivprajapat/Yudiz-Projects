@@ -1,0 +1,143 @@
+.form-group-date {
+  margin-bottom: 22px;
+  position: relative;
+  .form-label {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.2px;
+    text-transform: uppercase;
+    //   color: var(--secondary-100);
+    line-height: 1.83;
+    margin-bottom: 8px;
+    span {
+      // color: var(--secondary-400);
+      margin-left: 5px;
+    }
+    i {
+      font-size: 20px;
+      margin-left: 5px;
+      vertical-align: -3px;
+    }
+  }
+  .form-control {
+    padding: 8px 10px 8px 12px;
+    // border-radius: 8px !important;
+    //   background-color: var(--secondary-700);
+    // border: none;
+    border-color: hsl(0, 0%, 80%);
+    box-shadow: inset 0 0 0 0 #757982;
+    //   color: var(--secondary-300);
+    font-size: 14px;
+    background-image: none;
+    &::-ms-expand {
+      display: none;
+    }
+    &:not(:read-only):focus {
+      // color: var(--secondary-300);
+      box-shadow: inset 0 0 0 1px #2a87d0;
+    }
+    //   &.error {
+    //     box-shadow: inset 0 0 0 1px $red-300;
+    //   }
+    //   &:disabled {
+    //     color: var(--secondary-500);
+    //   }
+    &.form-control-sm,
+    &.form-select-sm {
+      padding: 4px 10px;
+      font-size: 13px;
+    }
+  }
+  &.only-border .form-control {
+    box-shadow: inset 0 0 0 1px #757982;
+    background-color: transparent;
+    border-radius: 4px !important;
+  }
+  select.form-control,
+  select.form-control.form-control-sm {
+    padding-right: 32px !important;
+  }
+  .input-group {
+    .form-control {
+      padding-right: 40px;
+    }
+    .icon-right {
+      color: #757982;
+      position: absolute;
+      right: 0;
+      top: 0;
+      z-index: 9;
+    }
+    .input-group-text {
+      // background-color: var(--secondary-700);
+      border: none;
+      // color: var(--secondary-300);
+      font-size: 14px;
+      border-radius: 8px 0 0 8px;
+      border-right: 2px solid #757982;
+      & ~ .form-control {
+        padding-right: 10px;
+        border-radius: 0 8px 8px 0 !important;
+      }
+    }
+    &.padding-normal {
+      .form-control {
+        padding: 8px 10px 8px 12px;
+      }
+    }
+    &.border-left {
+      .form-control {
+        border-radius: 8px 0 0 8px !important;
+      }
+    }
+  }
+  .icon-chevron-down {
+    position: absolute;
+    font-size: 22px;
+    right: 10px;
+    top: 38px;
+    pointer-events: none;
+  }
+
+  textarea.form-control {
+    height: 76px;
+  }
+  //   @include media-max(768px) {
+  //     margin-bottom: 15px;
+  //     .form-label {
+  //       margin-bottom: 3px;
+  //     }
+  //     .icon-chevron-down {
+  //       top: 33px;
+  //     }
+  //   }
+}
+//   .invalid-feedback {
+//     display: block;
+//     padding: 0 1px;
+//     color: $red-300;
+//     text-align: right;
+//     font-size: $fs-12;
+//     font-weight: $fw-500;
+//     margin: 0;
+//     line-height: 1.33;
+//   }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+.react-datepicker__close-icon:after {
+  background-color: #595959 !important;
+}
+
+.react-datepicker-popper {
+    z-index: 9999 !important;
+}

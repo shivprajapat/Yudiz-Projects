@@ -1,0 +1,16 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.rankingTable { 
+  > div { margin-bottom: 0px;}
+  th,
+  td { padding: 5px 8px; height: 30px;
+    &:nth-child(2) { text-align: left; width: 25%; }
+  }
+  td { background: var(--light-bg); }
+}
+.bottomLink { border-top: 1px solid var(--border-input); margin: 0px -8px; }
+
+// .result { margin: 0px 1px; color: $light-color; width: 14px; height: 14px; font-size: 10px; line-height: 14px; background: $success; border-radius: 4px;
+//   &.loss { background: var(--danger); }
+// }

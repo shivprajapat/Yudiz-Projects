@@ -1,0 +1,14 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.latestMatches { 
+}
+.imgBlock { width: 36px; }
+.match { margin-right: 8px; width: 24px; height: 24px; line-height: 24px; border-radius: 6px;
+    &:last-child { margin-right: 0; }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  
+}

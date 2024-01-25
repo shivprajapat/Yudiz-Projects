@@ -1,0 +1,45 @@
+// helpers
+@import './variables.scss';
+@import './helpers/iconmoon';
+@import './helpers/css3mixins';
+@import './helpers/alert';
+@import './fantasy.scss';
+@import './helpers/loading';
+// views
+@import './views/auth/welcome.scss';
+@import './views/auth/auth-module.scss';
+@import './views/auth/login';
+
+// Home module
+@import './views/home/home-module';
+@import './views/home/leagues';
+@import './views/home/league-detail';
+@import './views/home/create-team';
+@import './views/home/preview-team';
+@import './views/home/chat';
+@import './views/home/create-contest';
+@import './views/home/breakups';
+@import './views/home/playerinfo';
+@import './views/home/score-card';
+@import './views/home/notification';
+@import './views/home/leagues-completed';
+@import './views/home/team-compare';
+@import './views/home/choose-winners';
+@import './views/home/share-contest';
+@import './views/home/game-leaderboard';
+@import './views/home/league';
+
+// user module
+@import './views/user/profile';
+@import './views/user/transactions';
+@import './views/user/deposit';
+@import './views/user/withdraw';
+@import './views/user/leaderboard';
+@import './views/user/verification';
+
+// cms module
+@import './views/cms/offers';
+@import './views/cms/offer-detail';
+@import './views/cms/point-system';
+@import './views/cms/cms';
+@import './views/cms/notfound';

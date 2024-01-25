@@ -1,0 +1,38 @@
+input addRole {
+  sName: String!
+  aPermissions: [String]!
+  aParent: [String]!
+  bIsDefault: Boolean
+}
+
+input deleteRole {
+  _id:ID!
+}
+
+input editRole {
+  _id:ID!
+  sName:String
+  bIsDefault:Boolean
+  aPermissions:[String]
+  aParent: [String]
+}
+
+type addRoleResponse {
+  oData: getRolesData
+  sMessage: String!
+}
+
+type deleteRoleResponse {
+  sMessage:String!
+}
+
+type editRoleResponse {
+  oData: getRolesData
+  sMessage: String!
+}
+
+extend type Mutation {
+  addRole(input: addRole): addRoleResponse!
+  deleteRole(input:deleteRole): deleteRoleResponse
+  editRole(input:editRole): editRoleResponse
+}

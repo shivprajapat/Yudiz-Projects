@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package setting;
+
+service Setting {
+    rpc findSetting (SettingRequest) returns (SettingResponse) {}
+    rpc getCurrencySymbol (Empty) returns (Symbol) {}
+}
+
+ message Empty {
+
+ }
+
+message SettingRequest {
+    string query = 1;
+    string projection = 2;
+}
+
+message SettingResponse {
+    string data = 1;
+}
+
+message Symbol {
+    string sLogo = 1;
+}

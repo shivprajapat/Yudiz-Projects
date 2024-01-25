@@ -1,0 +1,92 @@
+.card-1 {
+  background: $card-1;
+}
+.card-2 {
+  background: $card-2;
+}
+.card-3 {
+  background: $card-3;
+}
+.simple-card {
+  border: 1px solid $black-600;
+}
+.design-card {
+  border: 1px solid #d5d5d5;
+}
+.card-container {
+  height: 90%;
+  width: 100%;
+  padding: 14px 30px;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  // gap: 10px;
+  margin: 4px;
+  position: relative;
+  overflow: hidden;
+  .card-svg {
+    position: absolute;
+    right: -15px;
+    top: -15px;
+    width: 70px;
+    height: 70px;
+    opacity: 0.3;
+    rotate: 20deg;
+  }
+  .card-title {
+    font-size: $fs-12;
+    font-weight: $fw-400;
+  }
+  .card-count {
+    margin-bottom: 0px;
+    font-size: $fs-32;
+    font-weight: $fw-700;
+
+    @include media-min(xs) {
+      font-size: $fs-26;
+      font-weight: $fw-600;
+    }
+    @include media-min(md) {
+      font-size: $fs-28;
+      font-weight: $fw-600;
+    }
+    @include media-min(xl) {
+      font-size: $fs-30;
+      font-weight: $fw-600;
+    }
+  }
+  .card-button {
+    margin: 5px;
+    padding: 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: $fs-12;
+    font-weight: $fw-500;
+  }
+  .card-container-inner {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  .card-subscription-title {
+    margin: 0;
+    font-size: $fs-14;
+    color: $black-500;
+  }
+  .card-detail {
+    margin: 0;
+    font-size: $fs-22;
+    font-weight: $fw-600;
+
+    @include media-min(xs) {
+      font-size: $fs-18;
+    }
+    @include media-min(md) {
+      font-size: $fs-18;
+    }
+    @include media-min(xl) {
+      font-size: $fs-22;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.promotion { padding: 12px; cursor: pointer; background-image: linear-gradient(136deg, #30A8EF 0%, #2C3697 100%); color: #fff;
+    &::before { @extend %after-before; width: 100%; height: 100%; opacity: 0.1; z-index: 1; left: 0; top: 0; 
+        background-image: repeating-linear-gradient(135deg, #fff 0%, #fff 5%, transparent 5.1%, transparent 10%);
+    }
+    > * { position: relative; z-index: 2; }
+    h3 { font-weight: 500; }
+    .promoInfo { width: 72%; }
+    .branding { padding: 0px 8px 0px 14px; margin-left: 6px; width: calc(37% - 6px); font-size: 10px; line-height: 14px; flex-shrink: 0; border-left: 1px solid rgba(255, 255, 255, 0.18); }
+    .timer { font-size: 10px; line-height: 14px; font-weight: 400; letter-spacing: 0.2px;
+        .time { margin: 0px 6px; width: 44px; }
+    }
+    .product { margin: 0px 12px 0px 8px; width: 32px; }
+    .logo { width: 72px; }
+    .team { padding: 0px 20px; }
+    .matchInfo { gap: 10px;}
+    .teamScore{ min-width: 68px;}
+}

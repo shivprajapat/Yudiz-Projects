@@ -1,0 +1,11 @@
+input mergeTagInput {
+  _id: ID!
+}
+
+type mergeTagResponse {
+  sMessage: String
+}
+
+extend type Mutation {
+  mergeTag(input: mergeTagInput): mergeTagResponse
+}

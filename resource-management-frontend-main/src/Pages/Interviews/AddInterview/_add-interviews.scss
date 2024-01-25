@@ -1,0 +1,13 @@
+
+.add-interviews{
+    .interviews-form{
+      padding: 40px 28px 20px;
+      .input{margin-bottom: 0 !important;}
+    }
+    @media (max-width: 768px) {.interviews-form{padding: 20px 10px 0;}  }
+    @media (max-width: 576px) {
+        .interviews-form{padding: 20px 0;}
+         .d-flex.justify-content-between:first-child {flex-direction: column-reverse;}
+         .d-flex.justify-content-between:first-child div:nth-child(2) {margin-bottom: 10px;justify-content: flex-end;}
+    }
+  }

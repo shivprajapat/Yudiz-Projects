@@ -1,0 +1,12 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.CMSContent { padding: 24px 30px; position: relative; }
+
+@media (max-width: 1199px) {
+  .CMSContent { padding: 20px 24px; }
+}
+
+@media (max-width: 575px) {
+  .CMSContent { padding: 16px 12px; }
+}

@@ -1,0 +1,31 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: crictracker-dev-seo-ip
+  namespace: dev
+  annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name: crictracker-devstag
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:ap-south-1:693583001687:certificate/ccc86954-2650-41c1-bd31-62822e59076d
+    alb.ingress.kubernetes.io/subnets: subnet-077b67cb6983824ae, subnet-079a2bebf229cbae2, subnet-0b356724e236a1975
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS":443}, {"HTTP":80}]'
+    alb.ingress.kubernetes.io/actions.ssl-redirect: '{"Type": "redirect", "RedirectConfig": { "Protocol": "HTTPS", "Port": "443", "StatusCode": "HTTP_301"}}'
+    # external-dns.alpha.kubernetes.io/hostname: help-dev.beta.crictracker.com, globalwidget-dev.beta.crictracker.com, gateway-dev.beta.crictracker.com, admin-dev.beta.crictracker.com, cricweb-dev.beta.crictracker.com, article-dev.beta.crictracker.com, auth-dev.beta.crictracker.com, matchmanage-dev.beta.crictracker.com, seo-dev.beta.crictracker.com, career-dev.beta.crictracker.com, migrations-dev.beta.crictracker.com, subscription-dev.beta.crictracker.com, redis-server-dev.beta.crictracker.com
+    # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:ap-south-1:693583001687:regional/webacl/crictracker/7c9b6d8b-481d-40d0-b000-8074167ccfbb
+    # alb.ingress.kubernetes.io/wafv2-acl-arn: arn:aws:wafv2:ap-south-1:693583001687:regional/webacl/crictracker/7c9b6d8b-481d-40d0-b000-8074167ccfbb
+spec:
+  rules:
+    - host: seo-dev.beta.crictracker.com
+      http:
+        paths:
+          - path: /*
+            backend:
+              serviceName: ssl-redirect
+              servicePort: use-annotation
+          - path: /*
+            backend:
+              serviceName: crictracker-seo-dev
+              servicePort: 4003

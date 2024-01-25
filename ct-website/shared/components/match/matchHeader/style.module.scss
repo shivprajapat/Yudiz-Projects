@@ -1,0 +1,61 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.matchHeader { margin-bottom: 2px;
+  .share { 
+    svg { margin: 0 -3px 0px 7px; width: 20px; height: 20px; 
+      path { fill: $font-color; }
+    }
+    &:hover svg path { fill: $theme-color; }
+  }
+  .head { margin-bottom: 2px; padding: 12px 16px; background: var(--light-mode-bg); color: var(--font-color); border-radius: 12px; 
+    h4 { margin-bottom: 8px; }
+    .sep { margin: 0px 4px; }
+  }
+  h6 { margin-bottom: 6px; }
+  .matchInfo { padding: 12px 26px; background: var(--light-mode-bg); border-radius: 12px; 
+    p { margin-bottom: 13px; 
+      &:last-child { margin-bottom: 0;}
+    }
+  }
+  .name { min-width: 140px; }
+  .flag { margin-right: 12px; width: 48px;}
+  .badge { padding: 2px 8px; border-radius: 4px; }
+  .countdown {
+    h1 { margin: 4px 0 2px;
+      span { margin: 0px 8px }
+    }
+    p {
+      span { flex: 1 }
+    }
+  }
+}
+.winner svg {
+  path { fill: #FFBD00; }
+}
+
+@media (min-width: 768px) and (max-width: 1199px) {
+  .matchHeader {
+    .matchInfo { padding: 12px 20px;
+      .info { max-width: 30%; }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .matchHeader {
+    .btns { margin-top: 8px; padding-top: 8px; border-top: 1px solid $light; } 
+    .matchInfo {
+      .info { margin-top: 12px; }
+      p { margin-bottom: 4px; }
+    }
+    .name { min-width: inherit; }
+    .flag { width: 24px;}
+  }
+}
+@media (max-width: 575px) {
+  .matchHeader { 
+    .head { margin: 0 -12px 2px; padding: 8px 12px; border-radius: 0; }
+    .matchInfo { margin: 0 -7px 2px; padding: 8px 10px; }
+  }
+}

@@ -1,0 +1,51 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.liveBox {
+    border-top: 1px solid var(--border-light);
+    margin: 30px 0;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    .date {
+        top: -12px;
+        background-color: var(--light-mode-bg);
+    }
+
+    p {
+        margin-bottom: 5px;
+    }
+    &::before {
+        @extend %after-before;
+        left: -5px;
+        top: -5px;
+        width: 10px;
+        height: 10px;
+        border-radius: 50%;
+        background: gray;
+    }
+    
+    &:first-child {
+        &::before {
+            background: $danger;
+            box-shadow: 0 0 0px 4px rgba($danger, 0.2);
+        }
+    }
+    
+    &.iconBox {
+        &::before {
+            display: none;
+        }
+    }
+}
+
+.iconBox {
+    .icon {
+        background: var(--light-mode-bg);
+        left: -10px;
+        top: -16px;
+        width: 20px;
+    }
+}

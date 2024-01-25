@@ -1,0 +1,42 @@
+type TrendingNewscategory {
+  _id: ID
+  sName: String
+  sContent: String
+}
+
+type FeaturedImage {
+  sText: String @shareable
+  sCaption: String @shareable
+  sAttribute: String @shareable
+  sUrl: String @shareable
+}
+
+type TrendingNews {
+  _id: ID
+  iArticleId: ID
+  sTitle: String
+  dPublishDate: Date
+  nDuration: Int
+  oCategory: TrendingNewscategory
+  dCreated: String
+  dUpdated: String
+  oImg: FeaturedImage
+  sSubtitle: String
+  sSrtTitle: String
+  oTImg: FeaturedImage
+  oSeo: Seo
+}
+
+type listTrandingNewsResponse {
+  nTotal: Int
+  aResults: [TrendingNews]!
+}
+
+input getTrendingNewsInput {
+  nSkip: Int
+  nLimit: Int
+}
+
+extend type Query {
+  getTrendingNews(input: getTrendingNewsInput!): listTrandingNewsResponse!
+}

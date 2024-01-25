@@ -1,0 +1,35 @@
+@import 'assets/scss/helper/variables';
+
+.communities {
+  padding: 60px 0 0 0;
+  .col-xxl-4 {
+    margin-bottom: 48px;
+  }
+
+  @media (min-width: 1699px) and (max-width: 1920px) {
+    padding: 65px 80px;
+  }
+  @media (max-width: 1600px) {
+    padding: 40px 20px 20px;
+  }
+  // @media (min-width: 1400px) and (max-width: 1699px) {
+  //   padding: 40px 20px 20px;
+  // }
+  // @media (min-width: 1200px) and (max-width: 1399px) {
+  //   padding: 40px  20px 20px;
+  // }
+  // @media (min-width: 992px) and (max-width: 1199px) {
+  //   padding: 40px  20px 20px;
+  // }
+  @media (max-width: 767px) {
+    .col-md-2 {
+      display: none;
+    }
+    .col-xxl-4 {
+      margin-bottom: 40px;
+    }
+  }
+  @media (max-width: 767px) {
+    padding: 30px 0 0;
+  }
+}

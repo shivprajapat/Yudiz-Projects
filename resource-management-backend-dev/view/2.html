@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <form action="https://s3.ap-south-1.amazonaws.com/jr-web-developer" method="post" enctype="multipart/form-data">
+        <fieldset>
+            <input type="input" name="Content-Type" value="application/pdf" />
+            <input type="text" name="X-Amz-Algorithm" value="AWS4-HMAC-SHA256">
+            <input type="text" name="X-Amz-Credential" value="AKIAVEG4UMFNLMWKO2NW/20230124/ap-south-1/s3/aws4_request">
+            <input type="text" name="X-Amz-Date" value="20230124T113407Z">
+            <input type="text" name="X-Amz-Signature"
+                value="d6d698300d3e37441c373c1adb55bb38fbd00579e5003718ab01d848e7068de2">
+            <input type="text" name="Policy"
+                value="eyJleHBpcmF0aW9uIjoiMjAyMy0wMS0yNFQxMTozOTowN1oiLCJjb25kaXRpb25zIjpbWyJjb250ZW50LWxlbmd0aC1yYW5nZSIsMTAwLDUyNDI4ODBdLFsic3RhcnRzLXdpdGgiLCIkQ29udGVudC1UeXBlIiwiYXBwbGljYXRpb24vcGRmIl0seyJrZXkiOiIxNjc0NTYwMDQ3NjA5X2FiY2QucGRmIn0seyJDb250ZW50LVR5cGUiOiJhcHBsaWNhdGlvbi9wZGYifSx7ImJ1Y2tldCI6ImpyLXdlYi1kZXZlbG9wZXIifSx7IlgtQW16LUFsZ29yaXRobSI6IkFXUzQtSE1BQy1TSEEyNTYifSx7IlgtQW16LUNyZWRlbnRpYWwiOiJBS0lBVkVHNFVNRk5MTVdLTzJOVy8yMDIzMDEyNC9hcC1zb3V0aC0xL3MzL2F3czRfcmVxdWVzdCJ9LHsiWC1BbXotRGF0ZSI6IjIwMjMwMTI0VDExMzQwN1oifV19" />
+            <input type="text" name="key" value="1674560047609_abcd.pdf">
+
+            <input type="file" name="file">
+            <button type="submit">Upload</button>
+        </fieldset>
+    </form>
+    <script src="" async defer></script>
+</body>
+
+</html>

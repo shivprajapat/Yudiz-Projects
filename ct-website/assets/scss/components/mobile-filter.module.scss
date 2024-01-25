@@ -1,0 +1,23 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/mixins.scss';
+
+.filterToggle { position: fixed; width: 48px; height: 48px; bottom: 54px; right: 16px; background: $theme-medium2 url(../../images/icon/filter-solid-icon.svg) no-repeat center center / 24px auto; @include box-shadow(0 8px 12px rgba($theme-dark2, 0.28)); z-index: 5; }
+.mobFixtureFilter { position: fixed; width: 100vw; max-height: 75%; background: var(--light-mode-bg); bottom: 0; left: 0; z-index: 6; overflow-y: auto; border-radius: 8px 8px 0 0; @include transition(all 0.3s cubic-bezier(.20,-0.10,.90,1.20));  @include transform(translateY(100%));
+    &.active { @include transform(translateY(0)); }
+    .head { padding: 10px 20px; border-bottom: 1px solid $light;}
+    .innerBlock { padding: 12px 12px 16px; }
+    .formGroup { margin-bottom: 24px; width: 100%; }
+    .nameFilter {
+        .icon { display: none; }
+        button { margin: 0px 8px; min-width: 120px; }
+    }
+    .searchFilter input { border-radius: 2em; }
+}
+
+/***** Responsive CSS Start ******/
+
+
+
+@media (max-width: 575px) {
+
+}

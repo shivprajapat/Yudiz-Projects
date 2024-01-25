@@ -1,0 +1,116 @@
+@import 'assets/scss/helper/variables';
+
+.kyc-modal{
+    .modal-dialog{max-width: 1094px;
+        .modal-content{ background: $bg-primary; border-radius: 16px; @include box-shadow(0px 9px 16px rgba(0, 0, 0, 0.12));
+            .modal-body{padding: 60px 205px;
+                .kyc-modal-content{
+                    h5{font-size: 32px; line-height: 38px; margin: 60px 0px 24px;}
+                    p{font-size: 24px; line-height: 32px; margin-bottom: 0px;}
+                    .modal-btns{margin-top: 50px;
+                        .btn{min-width: 180px; text-decoration: none; font-size: 18px; line-height: 21px; padding: 16px 16px 9px;
+                            &:first-child{margin-right: 24px;}
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+}
+@media(min-width: 1400px) and (max-width: 1699px){
+    .kyc-modal{
+        .modal-dialog{max-width: 992px;
+            .modal-content{
+                .modal-body{padding: 50px 100px;}
+            }
+        }
+    }
+}
+
+@media(min-width: 1200px) and (max-width: 1399px){
+    .kyc-modal{
+        .modal-dialog{max-width: 992px;
+            .modal-content{
+                .modal-body{padding: 50px 100px;}
+            }
+        }
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1199px){
+    .kyc-modal{
+        .modal-dialog{max-width: 768px;
+            .modal-content{
+                .modal-body{padding: 35px 70px;
+                    .kyc-modal-content{
+                        img{width: 200px;}
+                        h5{font-size: 30px; line-height: 40px; margin: 30px 0px 20px;}
+                        p{font-size: 18px; line-height: 28px;}
+                        .modal-btns{ margin-top: 40px;
+                            .btn{min-width: 170px;}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 768px) and (max-width: 991px){
+    .kyc-modal{
+        .modal-dialog{max-width: 600px;
+            .modal-content{
+                .modal-body{padding: 35px 70px;
+                    .kyc-modal-content{
+                        img{width: 180px;}
+                        h5{font-size: 28px; line-height: 38px; margin: 25px 0px 15px;}
+                        p{font-size: 18px; line-height: 28px;}
+                        .modal-btns{ margin-top: 35px;
+                            .btn{min-width: 170px; font-size: 16px; line-height: 24px; padding: 12px 16px 7px;}
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px){
+    .kyc-modal{
+        .modal-dialog{max-width: 95%;
+            .modal-content{
+                .modal-body{padding: 25px 0px;
+                    .kyc-modal-content{
+                        img{width: 150px;}
+                        h5{font-size: 28px; line-height: 38px; margin: 20px 0px 15px;}
+                        p{font-size: 16px; line-height: 26px;}
+                        .modal-btns{ margin-top: 35px;
+                            .btn{min-width: 130px; font-size: 14px; line-height: 24px; padding: 12px 16px 7px;
+                                &:first-child{margin-right: 5px;}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media (min-width: 576px) and (max-width: 767px){
+    .kyc-modal{
+        .modal-dialog{max-width: 500px;
+            .modal-content{
+                .modal-body{
+                    .kyc-modal-content{
+                        .modal-btns{ 
+                            .btn{min-width: 150px; font-size: 15px; line-height: 24px; 
+                                &:first-child{margin-right: 15px;}
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

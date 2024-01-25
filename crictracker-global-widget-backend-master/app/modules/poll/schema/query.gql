@@ -1,0 +1,40 @@
+
+input getPollInput {
+  _id: ID
+}
+
+type pollField { 
+  _id: ID
+  sTitle: String
+  nVote: Int
+}
+
+type poll @key(fields: "_id") {
+  _id: ID
+  nTotalVote: Int
+  eStatus: pollStatus
+  sTitle: String
+  aField: [pollField]
+  dStartDate: Date
+  dEndDate: Date
+  sMatchPollTitle: String
+  sType: String
+}
+
+type listPollRes {
+ nTotal: Int
+ aPolls: [poll]
+}
+
+input listPollInput {
+  nSkip: Int
+  nLimit: Int
+  sSearch: String
+  aStatus: [pollStatus]
+}
+
+extend type Query {
+  getPollById(input: getPollInput!): poll
+  getPollByIdFront(input: getPollInput!): poll
+  listPoll(input: listPollInput!): listPollRes
+}

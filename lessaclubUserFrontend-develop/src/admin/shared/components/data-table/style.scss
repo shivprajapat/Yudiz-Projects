@@ -1,0 +1,256 @@
+@import 'assets/scss/helper/variables';
+
+// .breadcrumb-main {
+//   display: flex;
+// }
+.data-table-section {
+  // position: relative;
+  // height: 100%;
+  // margin-bottom: 50px;
+
+  .data-table {
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    overflow-y: auto;
+    height: 72vh;
+    &::-webkit-scrollbar {
+      width: 0;
+    }
+    &-header {
+      @include flex(center, space-between, null);
+
+      margin-bottom: 10px;
+
+      .select {
+        &__single-value {
+          font-size: 14px;
+          padding: 4px 5px;
+          width: 100%;
+          margin: 0;
+        }
+        &__menu {
+          padding: 0 !important;
+          width: 70px;
+          &-list {
+            .css-yt9ioa-option:active {
+              background-image: none !important;
+              background-color: $green-color !important;
+              color: $theme-color !important;
+            }
+          }
+        }
+        &__option {
+          border-radius: 0 !important;
+          padding: 5px 13px !important;
+          font-size: 14px !important;
+          line-height: 22px !important;
+          cursor: pointer;
+          &--is-selected,&--is-focused {
+            background-image: none !important;
+            background-color: $green-color !important;
+            color: $theme-color !important;
+          }
+        }
+      }
+      .bulk-action {
+        span {
+          text-transform: capitalize;
+          margin-right: 10px;
+          font-size: 18px;
+          color: $primary-color;
+          line-height: normal;
+        }
+        .select {
+          &__control {
+            padding: 0 !important;
+            min-height: 37px;
+            width: 70px;
+          }
+          &__indicators,
+          &__value-container {
+            align-items: center;
+            display: grid;
+            flex: 1 1 0%;
+            flex-wrap: wrap;
+            padding: 0 3px;
+          }
+          &__dropdown-indicator {
+            margin-left: auto;
+            padding-right: 2px !important;
+            svg {
+              fill: $white;
+              margin-left: 0;
+            }
+          }
+        }
+      }
+      .select {
+        &-input,
+        &__control {
+          padding: 10px 10px 5px 10px !important;
+          height: 100%;
+          min-height: 100%;
+          border-radius: 5px !important;
+        }
+        &__menu {
+          background-color: $theme-color;
+        }
+      }
+    }
+    &-tabs {
+      display: flex;
+    }
+    .table {
+      > :not(caption) > * > * {
+        padding: 17px 10px;
+        color: $white;
+      }
+      thead {
+        tr {
+          border-bottom: 1px solid $primary-color;
+          .text-end,
+          th {
+            text-transform: uppercase;
+            font-weight: 400;
+            color: $primary-color;
+            letter-spacing: 0.5px;
+            span {
+              letter-spacing: 0.5px;
+              color: $primary-color;
+            }
+          }
+        }
+      }
+      tbody {
+        tr {
+          vertical-align: middle;
+          border-bottom: 1px solid $primary-color;
+          &:last-child {
+            border: none;
+          }
+          .icon-btn {
+            img {
+              filter: brightness(0) invert(1);
+            }
+            &:focus {
+              box-shadow: none;
+            }
+          }
+
+          td {
+            font-size: 16px;
+            letter-spacing: 0.5px;
+            svg {
+              width: 25px;
+              height: 25px;
+            }
+            &:nth-child(1) {
+              min-width: 40px;
+            }
+            &:nth-child(2) {
+              min-width: 200px;
+            }
+            &:nth-child(3) {
+              width: 100px;
+            }
+            &:not(:first-child):last-child {
+              text-align: right;
+            }
+          }
+        }
+      }
+      .admin-switch {
+        .form-check-input {
+          background-color: $white;
+          cursor: pointer;
+          border: none;
+          &:checked {
+            background-color: $success;
+            padding: 10px 20px;
+            &:focus {
+              box-shadow: none;
+            }
+          }
+        }
+      }
+      .sort-header {
+        cursor: pointer;
+        &:hover {
+          color: $green-color;
+        }
+      }
+      // .form-check {
+      //   position: relative;
+      //   padding: 0;
+      //   &-input {
+      //     opacity: 0;
+      //     &[type='checkbox'] {
+      //       background-image: none;
+      //       position: absolute;
+      //       left: 0;
+      //       margin: 0;
+      //       z-index: 999;
+      //       width: 20px;
+      //       height: 20px;
+      //       background: transparent;
+      //       border: none;
+      //       cursor: pointer;
+      //       &:focus {
+      //         box-shadow: none;
+      //       }
+      //     }
+      //   }
+      //   &:not(.form-switch) input[type='checkbox'] {
+      //     &:checked {
+      //       & ~ label:after,
+      //       & ~ span:after {
+      //         border-color: $theme-color;
+      //       }
+      //       & ~ label:before,
+      //       & ~ span:before {
+      //         background-color: $green-color;
+      //         border-color: $green-color;
+      //       }
+      //     }
+      //     & ~ label:before,
+      //     & ~ span:before {
+      //       border: 1px solid $green-color;
+      //       border-radius: 2px;
+      //       content: '';
+      //       height: 20px;
+      //       left: 0;
+      //       position: absolute;
+      //       top: 0;
+      //       transition: all 0.2s linear;
+      //       width: 20px;
+      //     }
+      //     & ~ label:after,
+      //     & ~ span:after {
+      //       border-bottom: 2px solid transparent;
+      //       border-left: 2px solid transparent;
+      //       content: '';
+      //       height: 6px;
+      //       left: 5px;
+      //       position: absolute;
+      //       top: 6px;
+      //       -webkit-transform: rotate(-45deg);
+      //       transform: rotate(-45deg);
+      //       transition: all 0.2s linear;
+      //       width: 11px;
+      //     }
+      //   }
+      // }
+    }
+    @media (max-width: 475px) {
+      padding: 20px 10px;
+      &-header {
+        align-items: flex-end;
+        .bulk-action {
+          flex-direction: column;
+          align-items: flex-start !important;
+        }
+      }
+    }
+  }
+}

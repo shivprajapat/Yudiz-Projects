@@ -1,0 +1,24 @@
+type user @key(fields: "_id")  {
+  _id: ID
+  sFullName: String
+  sEmail: String
+  sMobNum: String
+  eStatus: String
+  dCreated: String
+  eGender: String
+  sUsername: String
+  sProPic: String
+  sBio: String
+  sCity: String
+  bIsEmailVerified: Boolean
+  bIsMobVerified: Boolean
+  aSLinks: [oSocialProfile]
+  eType: String
+  dDOB: Date
+  sToken: String
+  dUpdated: String
+  oCountry: CountyData
+  nBookmarkCount: Int
+  bNormalLogin: Boolean
+
+}

@@ -1,0 +1,42 @@
+
+type oAddFavouriteResponse {
+    sMessage: String
+}
+
+input oAddFavouriteInput {
+    iId: ID!
+    eType: FAVOURITE!
+}
+
+enum  FAVOURITE {
+    "general tags"
+    gt
+    "simple category"
+    s
+    "api series category"
+    as
+    "player tag"
+    p
+    "team tag"
+    t
+    "parent category"
+    pct
+}
+
+type oDeleteFavouriteResponse {
+    sMessage: String
+    oData: oDeleteFavouriteResData
+}
+
+type oDeleteFavouriteResData {
+    _id: ID
+}
+
+input oDeleteFavouriteInput {
+    iPageId: ID!
+}
+
+extend type Mutation {
+    addFavourite(input:oAddFavouriteInput!): oAddFavouriteResponse
+    deleteFavourite(input:oDeleteFavouriteInput!): oDeleteFavouriteResponse
+}

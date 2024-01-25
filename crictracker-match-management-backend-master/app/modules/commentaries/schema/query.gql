@@ -1,0 +1,120 @@
+input oListMatchCommentaryFrontInput {
+  iMatchId: ID
+  nInningNumber: Int
+  sEventId: String
+  nSkip: Int
+  nLimit: Int
+  eHighLight: HIGHLIGHT
+}
+
+enum HIGHLIGHT {  
+  "fours"
+  f
+  "sixes"
+  s
+  "wickets"
+  w
+}
+
+type oTeam {
+  sTeam: String,
+  sPlayers: String
+}
+
+type MatchCommentaries {
+  iMatchId: ID
+  oMatch: CommentaryMatch
+  nInningNumber: Int
+  sEventId: String
+  eEvent: COMMENTARY_EVENT
+  iBatterId: ID
+  oBatter: Player
+  oBowler: Player
+  oWicketBatter: Player
+  iBowlerId: Player
+  aBatters: [OeBatters]
+  aOverScores: [String]
+  aBowlers: [OeBowler]
+  iWicketBatterId: ID
+  sOver: String
+  sBall: String
+  sScore: String
+  nRuns: Int
+  nTimestamp: Int
+  sHowOut: String
+  bIsNoBallDismissal: Boolean
+  nBatterRuns: Int
+  nBatterBalls: Int
+  sText: String
+  sCommentary: String
+  oTeamA: oTeam
+  oTeamB: oTeam
+  dCreated: String
+  dUpdated: String
+  sWideRun: String
+  sNoBallRun: String
+  sByeRun: String
+  sBatrun: String
+  bIsNoball: String
+  bIsWideball: String
+  bIsSix: String
+  bIsFour: String
+  sLegbyeRun: String
+}
+
+type CommentaryMatch {
+   _id: ID
+  sTitle: String
+  sSubtitle: String
+  sFormatStr: String
+}
+
+type Player {
+  _id: ID
+  sTitle: String
+  sShortName: String
+  sFullName: String
+  sThumbUrl: String
+  oImg: oCommonImage
+  oPrimaryTeam: oTeamFront
+  oPlayingTeam: oTeamFront
+}
+
+type OeBatters {
+  iBatterId: ID
+  oBatter: Player
+  nRuns: Int
+  nBallFaced: Int
+  nFours: Int
+  nSixes: Int
+  oImg: oCommonImage
+}
+
+type OeBowler {
+  iBowlerId: ID
+  oBowler: Player
+  sOvers: String
+  nRunsConceded: Int
+  nWickets: Int
+  nMaidens: Int
+  oImg: oCommonImage
+}
+
+enum COMMENTARY_EVENT {
+  "ball"
+  b
+  "over end"
+  oe
+  "wicket"
+  w
+  "custom"
+  c
+  "player 11"
+  p11
+  "Toss information"
+  to
+}
+
+extend type Query {
+  listMatchCommentaries(input:oListMatchCommentaryFrontInput): [MatchCommentaries] 
+}

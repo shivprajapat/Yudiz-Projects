@@ -1,0 +1,19 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: series-statistics
+  namespace: production
+spec:
+  schedule: "0 */2 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - args:
+            - /bin/sh
+            - -ec
+            - 'curl -X PUT https:/matchmanage.crictracker.com/api/series-statistics'
+            image: curlimages/curl
+            name: series-statistics
+          restartPolicy: OnFailure

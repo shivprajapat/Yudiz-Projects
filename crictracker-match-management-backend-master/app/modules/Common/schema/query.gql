@@ -1,0 +1,18 @@
+input getWeatherConditionInput { 
+    _id: ID!
+ }
+
+type getWeatherConditionOutput { 
+    sMain: String
+    sDescription: String
+    sIcon: String
+    nTemp: Float
+    nHumidity: Int
+    nVisibility: Float
+    nWindSpeed: Float
+    nClouds: Int
+ }
+
+extend type Query {
+  getWeatherCondition(input:getWeatherConditionInput): getWeatherConditionOutput
+}

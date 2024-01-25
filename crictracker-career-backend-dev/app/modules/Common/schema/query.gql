@@ -1,0 +1,19 @@
+input oGetCountsCareer {
+    eType: CAREERCOUNTTYPE!
+}
+
+enum CAREERCOUNTTYPE {
+    "Job post"
+    jp
+    "enquiry"
+    eq
+}
+
+type  oCareerCounts {
+    nJP: Int
+    nER: Int
+} 
+
+extend type Query {
+    getCountsCareer(input:oGetCountsCareer!):oCareerCounts
+}

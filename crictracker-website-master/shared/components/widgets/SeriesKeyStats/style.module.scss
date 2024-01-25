@@ -1,0 +1,15 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.searchCard { 
+  background: var(--light-bg);
+  border: 1px solid;
+  box-sizing: border-box;
+  border: none;
+  color: var(--font-color);
+  margin: 0;
+  padding: 6px 16px;
+}
+
+/***** Responsive CSS Start ******/
+

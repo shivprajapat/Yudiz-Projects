@@ -1,0 +1,27 @@
+#Dockerfile for below image is present in Devops-Dockerfile repo on Github https://github.com/yudiz-solutions/devops-Dockerfiles/blob/main/Crictracker/crictracker-website:npmsharp
+#Image is Pushed on AWS ECR Public Repositories on Crictracker Account
+
+FROM public.ecr.aws/v0l2s9a1/crictracker-website:npmsharp
+
+WORKDIR /app
+
+COPY . /app
+COPY .npm /root/.npm
+
+ARG NODE_ENV
+ARG REACT_APP_API_URL
+ARG REACT_APP_INTERNAL_API_URL
+ARG REACT_APP_DOMAIN
+ARG REACT_APP_SUBSCRIPTION_URL
+ARG REACT_APP_S3_PREFIX
+ARG REACT_APP_ENV
+ARG SENTRY_AUTH_TOKEN
+ARG REACT_APP_ARTICLE_REST_URL
+
+
+RUN npm install && npm run build
+
+EXPOSE 3000
+EXPOSE 9209
+
+CMD ["pm2-runtime", "start", "ecosystem.config.js"]

@@ -1,0 +1,9 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  REACT_APP_API_URL: 'https://gateway.crictracker.com/'
+  REACT_APP_DOMAIN: 'https://www.crictracker.com/'
+  REACT_APP_ARTICLE_REST_URL: 'https://article.crictracker.com' 

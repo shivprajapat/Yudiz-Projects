@@ -1,0 +1,9 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  APOLLO_GRAPH_REF: 'crictracker-prod@current'
+  NODE_ENV: prod
+  INTROSPECTION: 'true'

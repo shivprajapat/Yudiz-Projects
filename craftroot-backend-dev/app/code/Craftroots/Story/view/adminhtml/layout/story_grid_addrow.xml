@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<page layout="admin-2columns-left" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <!-- <head>
+        <script src="Jawhara_Story::js/custom.js"/>
+    </head> -->
+    <body>
+    	<referenceContainer name="left">
+            <block class="Craftroots\Story\Block\Adminhtml\Grid\Edit\Tabs" name="story_add_tabs"/>
+        </referenceContainer>
+        <referenceContainer name="content">
+           <block class="Craftroots\Story\Block\Adminhtml\Grid\AddRow" name="add_row" cacheable="false" />
+        </referenceContainer>
+    </body>
+</page>

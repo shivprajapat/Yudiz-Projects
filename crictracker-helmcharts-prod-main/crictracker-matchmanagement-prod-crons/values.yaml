@@ -1,0 +1,55 @@
+replicaCount: 5
+image: 693583001687.dkr.ecr.ap-south-1.amazonaws.com/crictracker-matchmanagement:latest
+
+labels:
+  tier: backend
+  release: blue-green
+  environment: production
+
+namespace: production
+
+service:
+  internaltype: ClusterIP
+  internalport: 80
+  type: NodePort
+  port: 4004
+  healthcheck: /api/ping
+  pm2: 9209
+  grpcport: 3004  
+  
+resources:
+  requests:
+    memory: "200Mi"
+    cpu: "200m"
+  limits:
+    memory: "500Mi"
+    cpu: "1000m"
+
+livenessProbe:
+  periodSeconds: 10
+  successThreshold: 1
+  failureThreshold: 3
+  initialDelaySeconds: 20
+  timeoutSeconds: 30
+readinessProbe:
+  initialDelaySeconds: 20
+  timeoutSeconds: 30
+  failureThreshold: 3
+  periodSeconds: 10
+  successThreshold: 1
+
+autoscaling:
+  enabled: true
+  minReplicas: "5"
+  maxReplicas: "30"
+  targetCPU: "60"
+
+#Because we are using our private docker registry deployed in Kubernetes if you are using AWS(ECR) than you can disable this.
+imagePullSecrets:
+  enabled: false
+  name: regcred
+
+
+terminationGracePeriodSeconds: 50
+podprestophook:
+  enabled: true

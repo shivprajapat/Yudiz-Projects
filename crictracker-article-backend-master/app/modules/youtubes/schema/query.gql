@@ -1,0 +1,215 @@
+type oStatus {
+  sUploadStatus: String
+  sFailureReason: String
+  sRejectionReason: String
+  sPrivacyStatus: String
+  dPublishDate: Date
+  sLicense: String
+  bIsEmbeddable: Boolean
+  bIsPublicStatsViewable: Boolean
+  bIsMadeForKids: Boolean
+  bIsSelfDeclaredMadeForKids: Boolean
+}
+
+type oStats {
+  nViewCount: Int
+  nLikeCount: Int
+  nDislikeCount: Int
+  nFavoriteCount: Int
+  nCommentCount: Int
+}
+
+type oPlayerData {
+  sEmbedHtml: String
+  sEmbedHeight: String
+  sEmbedUrl: String
+  sEmbedWidth: String
+}
+
+type oThumbnailData {
+  sKey: String
+  sWidth: String
+  sHeight: String
+  sUrl: String
+}
+
+type oVideoData {
+  _id: ID
+  sKey: String
+  oPlaylist: oPlaylistData
+  bHasCustomThumbnail: Boolean
+  bIsLicensedContent: Boolean
+  sCaption: String
+  sDefinition: String
+  sDimension: String
+  sDuration: String
+  nDurationSeconds: Int
+  dPublishDate: Date
+  sTitle: String
+  sDescription: String
+  aThumbnails: [oThumbnailData]
+  sThumbnailUrl: String
+  sThumbnailWidth: String
+  sThumbnailHeight: String
+  aTags: [String]
+  oStatus: oStatus
+  oStats: oStats
+  oPlayer: oPlayerData
+  eStatus: String
+  dUpdated: String
+  dCreated: String
+  nViewCount: Int
+  sType: String
+  oSeo: Seo
+}
+
+type oGetVideosData {
+  nTotal: Int
+  aResults: [oVideoData]
+}
+
+type oGetVideosSearchData {
+  aResults: [oVideoData]
+}
+
+input oPaginationInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+input oGetVideosInput {
+  oGetVideosPaginationInput: oPaginationInput!
+  iPlaylistId: ID
+  eStatus: CommonStatus
+}
+
+enum CommonStatus {
+  "all"
+  all
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+type oPlaylistData {
+  _id: ID
+  sKey: String
+  sChannelId: String
+  sChannelTitle: String
+  sPrivacyStatus: String
+  sEmbedHtml: String
+  sEmbedUrl: String
+  dPublishDate: Date
+  sTitle: String
+  sDescription: String
+  aThumbnails: [oThumbnailData]
+  sThumbnailUrl: String
+  sThumbnailWidth: String
+  sThumbnailHeight: String
+  iCategoryId: ID
+  oCategory: oCategoryDetail
+  nVideosCount: Int
+  eStatus: String
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+}
+
+input oGetPlaylistsInput {
+  oGetPlaylistsPaginationInput: oPaginationInput!
+  eStatus: CommonStatus
+}
+
+input oTopPlaylistsInput {
+  oTopPlaylistsPaginationInput: oPaginationInput!
+}
+
+type oGetPlaylistData {
+  nTotal: Int
+  aResults: [oPlaylistData]
+}
+
+input listSeriesVideosInput {
+  iSeriesId: ID!
+  oVideoInput: oUserPaginationInput!
+}
+
+input oGetVideoById {
+  _id: ID!
+}
+
+input oGetPlaylistById {
+  _id: ID!
+}
+
+input oListCategoryRelatedVideos {
+  oGetVideosPaginationInput: oPaginationInput!
+  _id: ID!
+}
+
+input oListSimpleCategoryVideosInput {
+  iId: ID
+  oVideoInput: oUserPaginationInput!
+}
+
+type oCategoryVideo {
+  _id: ID
+  iPlaylistId: ID
+  sName: String
+  aVideos: [oVideoData]
+  oCategory: oCategoryFront
+  oSeo: Seo
+}
+
+type oListCategoryWiseVideoResponse {
+  nTotal: Int
+  aResults: [oCategoryVideo]
+}
+
+input oListWithoutCategoryVideoInput {
+  oInput: oPaginationInput!
+  iPlaylistId: ID!
+}
+
+type oListWithoutCategoryVideoResponse {
+  nTotal: Int
+  aResults: [oVideoData]
+  oPlaylist: oPlaylistData
+}
+
+input getHomePageVideoInput {
+  nSkip: Int!
+  nLimit: Int!
+}
+
+type getHomePageVideoResponse {
+  nTotal: Int
+  aResults: [oCategoryVideo]
+}
+
+input getVideoByPlaylistInput {
+  iPlaylistId: ID!
+}
+
+extend type Query {
+  getVideos(input: oGetVideosInput): oGetVideosData
+  getPlaylists(input: oGetPlaylistsInput): oGetPlaylistData
+  listSeriesVideos(input: listSeriesVideosInput): oGetVideosData
+  getSingleVideo(input: oGetVideoById): oVideoData
+  listCategoryRelatedVideos(input: oListCategoryRelatedVideos): oGetVideosData
+  listSimpleCategoryVideos(input: oListSimpleCategoryVideosInput): oGetVideosData
+  getVideoSearch(input: oPaginationInput): oGetVideosSearchData
+  topPlaylists(input: oTopPlaylistsInput): oGetPlaylistData
+  listCategoryWiseVideo(input: oPaginationInput): oListCategoryWiseVideoResponse
+  listWithoutCategoryVideo(input: oListWithoutCategoryVideoInput!): oListWithoutCategoryVideoResponse
+  getTrendingVideos(input: oPaginationInput): oGetVideosData
+  getHomePageVideo(input: getHomePageVideoInput): getHomePageVideoResponse
+  getVideoByPlaylist(input: getVideoByPlaylistInput): oVideoData
+  getPlaylistByIdFront(input: oGetPlaylistById!): oPlaylistData
+}

@@ -1,0 +1,25 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.dateSlider { background: var(--theme-light);
+  > div { padding: 4px 40px; }
+  .item { padding: 6px 9px; width: 64px; cursor: pointer; }
+}
+
+@media (max-width: 991px) {
+  .dateSlider {
+    .item { width: 60px;}
+  }
+}
+
+@media (max-width: 767px) {
+  .dateSlider {
+    > div { padding: 4px 30px; }
+    .item { width: 56px; padding: 6px 6px;  }
+  }
+}
+
+@media (max-width: 575px) {
+  .dateSlider { margin-left: -10px; margin-right: -10px; }
+  .dateSlider.stickySlider { position: sticky; top: 0px; z-index: 5; }
+}

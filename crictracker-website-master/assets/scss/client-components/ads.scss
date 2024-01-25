@@ -1,0 +1,6 @@
+.ads-box {
+  background-color: var(--light);
+  &:not(:empty) {
+    padding: 5px;
+  }
+}

@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: crictracker-redis-dev
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: crictracker-redis-dev
+  template:
+    metadata:
+      labels:
+        app: crictracker-redis-dev
+    spec:
+      volumes:
+        - name: crictracker-redis-dev-storage
+          persistentVolumeClaim:
+            claimName: crictracker-redis-dev-pvc
+      containers:
+      - name: crictracker-redis-dev
+        image: {{ .Values.image }}
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        
+        volumeMounts:
+        - mountPath: /data
+          name: crictracker-redis-dev-storage
+        - mountPath: /config
+          name: crictracker-redis-dev-storage

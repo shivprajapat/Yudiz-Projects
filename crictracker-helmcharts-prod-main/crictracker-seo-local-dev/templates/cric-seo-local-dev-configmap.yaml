@@ -1,0 +1,48 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  NODE_ENV: local-dev
+  PORT: '4003'
+  REDIS_HOST: 'crictracker-redis-local-dev-headless.local-dev.svc.cluster.local'
+  REDIS_PORT: '6379'
+  SUPPORT_EMAIL: 'Crictracker@yudizproject.tk'
+  AWS_REGION: "ap-south-1"
+  S3_BUCKET_NAME: 'crictracker-admin-panel-local-dev-08032022'
+  S3_BUCKET_URL: 'https://crictracker-admin-panel-local-dev-08032022.s3.ap-south-1.amazonaws.com/'
+  S3_BUCKET_PROFILE_PATH: 'profile-pic/'
+  S3_BUCKET_KYC_PATH: 'kyc/pan'
+  S3_BUCKET_FB_PATH: 'seo/fb/'
+  S3_BUCKET_TWITTER_PATH: 'seo/twitter/'
+  S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH: media/featureimage/
+  S3_BUCKET_ARTICLE_THUMBIMAGE_PATH: media/thumbnailimage/
+  S3_BUCKET_ARTICLE_CHAT_MEDIA_PATH: media/chatmedia/
+  # AUTH_SUBGRAPH_URL: 'https://auth-dev.crictracker.ml/'
+  AUTH_SUBGRAPH_URL: http://crictracker-authentication-local-dev-internal.local-dev.svc.cluster.local
+  HOME_PAGE_ID_EVENT: 'homepage-id-event'
+  HOME_PAGE_SLUG_EVENT: 'homepage-slug-event'  
+  HOME_PAGE_SLUG_CONSUMER: 'homepage-slug-consumer'
+  HOME_PAGE_ID_CONSUMER: 'homepage-id-consumer'
+  HOME_PAGE_SLUG_GROUP: 'homepage-slug-group'
+  HOME_PAGE_ID_GROUP: 'homepage-id-group'
+  SEO_STATUS_CHANGE_EVENT: 'seo-status-change-event'
+  SEO_STATUS_CHANGE_CONSUMER: 'seo-status-change-consumer'
+  SEO_STATUS_CHANGE_GROUP: 'seo-status-change-group'
+
+  BASE_SITEMAP: 'sitemap'
+  POST_SITEMAP: 'post-sitemap'
+  CATEGORY_SITEMAP: 'category-sitemap'
+  POST_TAG_SITEMAP: 'post_tag-sitemap'
+  AUTHOR_SITEMAP: 'author-sitemap'
+  SITEMAP_REDIS_KEY: 'sitemap'
+
+  SITEMAP_SLUG_EVENT: 'sitemap-slug-event'
+  SITEMAP_SLUG_CONSUMER: 'sitemap-slug-consumer'
+  SITEMAP_SLUG_GROUP: 'sitemap-slug-group'
+  SITEMAP_ID_EVENT: 'sitemap-id-event'
+  SITEMAP_ID_CONSUMER: 'sitemap-id-consumer'
+  SITEMAP_ID_GROUP: 'sitemap-id-group'
+  #SEO_GRPC_URL: 'crictracker-seo-local-dev-internal.local-dev.svc.cluster.local'
+  SEO_GRPC_URL: '0.0.0.0:3003'

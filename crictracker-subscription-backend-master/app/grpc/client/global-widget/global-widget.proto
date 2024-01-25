@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+message getPollByIdInput {
+  string iPollId = 1;
+}
+
+message oField {
+  string sTitle = 1;
+  int32 nVote = 2;
+}
+
+message oPollFields {
+  string sTitle = 1;
+  repeated oField aField = 2;
+  int32 nTotalVote = 3;
+  bool eStatus = 4;
+  string dStartDate = 5;
+  string dEndDate = 6;
+}
+ 
+service GlobalWidgetService {
+  rpc getPollById(getPollByIdInput) returns (oPollFields) {}
+}

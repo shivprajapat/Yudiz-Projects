@@ -1,0 +1,34 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.rankingStyle {
+  margin: -10px 0px;
+}
+
+.widget-title {
+  margin-bottom: 14px;
+  .icon {
+    width: 24px;
+    @include filter(invert(26%) sepia(93%) saturate(2578%) hue-rotate(218deg) brightness(94%) contrast(93%));
+
+    @media (prefers-color-scheme: dark) {
+      @include filter(invert(88%) sepia(34%) saturate(4957%) hue-rotate(187deg) brightness(101%) contrast(118%));
+    }
+  }
+}
+
+.iccRank {
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+.rank {
+  border-radius: 8px;
+  border: 1px solid $theme-medium;
+  background: var(--light-mode-bg);
+  margin-bottom: 6px;
+  padding: 4px 8px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

@@ -1,0 +1,38 @@
+syntax = "proto3";
+
+package user;
+
+service User {
+  rpc findUser(userRequest) returns (userResponse) {}
+  rpc findUsers(userRequest) returns (userResponse) {}
+  rpc countUsers(userRequest) returns (countResponse) {}
+  rpc updateUserStatistics(userStatisticsRequest) returns (Empty) {}
+  rpc findState(Request) returns (Response) {}
+  rpc findCity(Request) returns (Response) {}
+}
+
+message Empty {}
+
+message userRequest {
+  string query = 1;
+  string projection = 2;
+  string sorting = 3;
+}
+
+message userResponse { string userData = 1; }
+
+message countResponse { string count = 1; }
+
+// updateUserStatistics
+message userStatisticsRequest {
+  string query = 1;
+  string values = 2;
+  string options = 3;
+}
+
+message Request {
+  string query = 1;
+  string projection = 2;
+}
+
+message Response { string data = 1; }

@@ -1,0 +1,30 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.playerCard { margin-bottom: 18px; min-height: calc(100% - 18px); background: #fff; border-radius: 16px; overflow: hidden; text-align: center;
+  .title { margin-top: 0; padding: 6px; background: $font-color; color: #fff; }
+  a { color: inherit; text-decoration: none; }
+  p { margin-top: 0;}
+  .playerImg { position: relative; background: url(/static/img-back-shape.svg) no-repeat center center / 100% auto; }
+  .imgBlock { margin: 0 auto; width: 178px; display: block; border: #fff 8px solid; overflow: hidden; border-radius: 50%;
+  }
+  .award { padding: 4px; min-width: 112px; position: absolute; bottom: 0; left: 50%; @include transform(translateX(-50%)); background: $font-color; color: #fff; border-radius: 4px; 
+    &.purple { background: #692F9E; }
+    &.orange { background: #F54820; }
+  }
+  .score { margin: 8px 0 2px; font-size: 36px; line-height: 50px; font-weight: 800; }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+  .playerCard {
+    p { margin-bottom: 14px; }
+    .imgBlock { width: 154px; }
+    .score { font-size: 30px; line-height: 40px; }
+  }
+}
+
+@media (max-width: 1199px) {
+  .playerCard {  min-width: 218px; }
+}

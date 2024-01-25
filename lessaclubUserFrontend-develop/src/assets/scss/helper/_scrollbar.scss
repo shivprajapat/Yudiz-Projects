@@ -1,0 +1,20 @@
+@media (min-width: 1200px) {
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  /* Track */
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background: $grey-border;
+  }
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: $primary-color;
+    border-radius: 3px;
+  }
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: $skin-color;
+  }
+}

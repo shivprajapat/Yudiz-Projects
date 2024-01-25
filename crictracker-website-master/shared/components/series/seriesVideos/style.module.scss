@@ -1,0 +1,21 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.seriesVideoList { 
+  article { margin-bottom: 24px; min-height: calc(100% - 24px); }
+} 
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 991px) {
+  .seriesVideoList { 
+    article { margin-bottom: 16px; min-height: calc(100% - 16px); }
+  }
+}
+@media (max-width: 575px) {
+  .seriesVideoList { 
+    article { margin-bottom: 8px; min-height: calc(100% - 8px) }
+  }
+}
+
+

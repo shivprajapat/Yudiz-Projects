@@ -1,0 +1,67 @@
+# Mageplaza
+#
+# NOTICE OF LICENSE
+#
+# This source file is subject to the Mageplaza.com license that is
+# available through the world-wide-web at this URL:
+# https://www.mageplaza.com/LICENSE.txt
+#
+# DISCLAIMER
+#
+# Do not edit or add to this file if you wish to upgrade this extension to newer
+# version in the future.
+#
+# @category    Mageplaza
+# @package     Mageplaza_SizeChartGraphQl
+# @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+# @license     https://www.mageplaza.com/LICENSE.txt
+
+type Query {
+    mpSizeChart(
+        filter: SizeChartRulesFilterInput @doc(description: "Identifies which size chart rule attributes to search for and return.")
+        pageSize: Int = 5 @doc(description: "How many items should show on the page?")
+        currentPage: Int = 1 @doc(description: "Allow page number to start from 1")
+    ):SizeChartRulesOutput @resolver(class: "\\Mageplaza\\SizeChartGraphQl\\Model\\Resolver\\SizeChartRules") @doc(description: "Query search for the size chart rules that match the filtered criteria.")
+}
+
+interface ProductInterface {
+    mp_sizeChart: SizeChartRules @doc(description: "Mageplaza Size Chart applied on the product") @resolver(class: "Mageplaza\\SizeChartGraphQl\\Model\\Resolver\\SizeChartDataProvider")
+}
+
+input SizeChartRulesFilterInput {
+    rule_id: FilterTypeInput @doc(description: "The size chart rule id")
+    name: FilterTypeInput @doc(description: "The size chart rule name")
+    rule_description: FilterTypeInput @doc(description: "The size chart rule description")
+    rule_content: FilterTypeInput @doc(description: "The size chart rule content")
+    template_styles: FilterTypeInput @doc(description: "Template style of the size chart rule")
+    store_ids: FilterTypeInput @doc(description: "The size chart rule store ids")
+    display_type: FilterTypeInput @doc(description: "Display type of the size chart rule")
+    enabled: FilterTypeInput @doc(description: "Status of the size chart rule")
+    attribute_code: FilterTypeInput @doc(description: "Attribute shown beside the size chart")
+    demo_templates: FilterTypeInput @doc(description: "Demo template of the size chart rule")
+    priority: FilterTypeInput @doc(description: "Priority of the size chart rule")
+    updated_at: FilterTypeInput @doc(description: "Last modification date of the rule")
+    created_at: FilterTypeInput @doc(description: "Creation date of the rule")
+}
+
+type SizeChartRulesOutput {
+    total_count: Int @doc(description: "The total number of results returned when a query is applied")
+    items: [SizeChartRules] @doc(description: "Size chart rule data is satisfied")
+}
+
+type SizeChartRules {
+    rule_id: Int @doc(description: "The size chart rule id")
+    name: String @doc(description: "The size chart rule name")
+    rule_content: String @doc(description: "The size chart rule content")
+    template_styles: String @doc(description: "Template style of the size chart rule")
+    store_ids: String @doc(description: "The size chart rule store ids")
+    display_type: String @doc(description: "Display type of the size chart rule")
+    enabled: String @doc(description: "Status of the size chart rule")
+    conditions_serialized: String @doc(description: "Conditions of the size chart rule")
+    attribute_code: String @doc(description: "Attribute shown beside the size chart")
+    demo_templates: String @doc(description: "Demo template of the size chart rule")
+    priority: String @doc(description: "Priority of the size chart rule")
+    updated_at: String @doc(description: "Last modification date of the rule")
+    created_at: String @doc(description: "Creation date of the rule")
+    rule_description: String @doc(description: "The size chart rule description")
+}

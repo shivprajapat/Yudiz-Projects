@@ -1,0 +1,239 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: {{ .Values.namespace }}
+  name: {{ .Release.Name }}
+  labels:
+    app: {{ .Release.Name }}
+    environment: {{ .Values.labels.environment }}
+    tier: {{ .Values.labels.tier }}
+    release: {{ .Values.labels.release }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}
+    spec:
+      {{- if .Values.imagePullSecrets.enabled }} 
+      imagePullSecrets:
+      - name: {{ .Values.imagePullSecrets.name }}
+      {{- end }}
+      terminationGracePeriodSeconds: {{ .Values.terminationGracePeriodSeconds }}
+      containers:
+      - name: {{ .Release.Name }}
+        image: {{ .Values.image }}
+        {{- if .Values.podprestophook.enabled }} 
+        lifecycle:
+          preStop:
+            exec:
+              command: ["/bin/sh","-c","sleep 20"]
+        {{- end }}
+        resources:
+          requests:
+            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.resources.requests.cpu }}
+          limits:
+            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.resources.limits.cpu }}
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        livenessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.livenessProbe.periodSeconds }}
+          successThreshold: {{ .Values.livenessProbe.successThreshold }}
+          failureThreshold: {{ .Values.livenessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.livenessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.livenessProbe.timeoutSeconds }}
+        readinessProbe:
+          httpGet:
+            path: {{ .Values.service.healthcheck }}
+            port: {{ .Values.service.port }}
+            scheme: HTTP
+          periodSeconds: {{ .Values.readinessProbe.periodSeconds }}
+          successThreshold: {{ .Values.readinessProbe.successThreshold }}
+          failureThreshold: {{ .Values.readinessProbe.failureThreshold }}
+          initialDelaySeconds: {{ .Values.readinessProbe.initialDelaySeconds }}
+          timeoutSeconds: {{ .Values.readinessProbe.timeoutSeconds }}
+        env:
+          - name: ENTITY_SPORT_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: apikeys
+                key: ENTITY_SPORT_TOKEN
+
+          - name: MATCHMANAGEMENT_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: MATCHMANAGEMENT_DB_URL
+
+          - name: MIGRATION_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: MIGRATION_DB_URL
+
+          - name: ARTICLE_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: ARTICLE_DB_URL
+
+          - name: AUTHENTICATION_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: AUTHENTICATION_DB_URL
+
+          - name: SEO_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: SEO_DB_URL
+
+          - name: CAREER_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: CAREER_DB_URL
+
+          - name: SQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: mysql
+                key: SQL_PASSWORD
+          
+          - name: AWS_ACCESSKEYID
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: AWS_ACCESSKEYID
+
+          - name: AWS_SECRETKEY
+            valueFrom:
+              secretKeyRef:
+                name: aws-secrets
+                key: AWS_SECRETKEY
+
+          - name: GLOBAL_WIDGET_DB_URL
+            valueFrom:
+              secretKeyRef:
+                name: mongodb
+                key: GLOBAL_WIDGET_DB_URL           
+              
+          #configmaps
+
+          - name: REDIS_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_HOST      
+
+          - name: REDIS_PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: REDIS_PORT   
+
+          - name: PORT
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: PORT 
+            
+          - name: SQL_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SQL_HOST 
+
+          - name: SQL_DATABASE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SQL_DATABASE 
+
+          - name: SQL_USER
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: SQL_USER
+
+          - name: S3_BUCKET_NAME
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_NAME 
+
+          - name: S3_BUCKET_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_URL
+
+          - name: CREATE_TAG_ARTICLE
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: CREATE_TAG_ARTICLE
+
+          - name: FRONTEND_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: FRONTEND_URL
+          
+          - name: TEAM_SITEMAP
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: TEAM_SITEMAP
+          
+          - name: VENUE_SITEMAP
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: VENUE_SITEMAP
+
+          - name: S3_BUCKET_TEAM_THUMB_URL_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_TEAM_THUMB_URL_PATH
+          
+          - name: S3_BUCKET_ARTICLE_ATTACHMENTIMAGE_PATH
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_BUCKET_ARTICLE_ATTACHMENTIMAGE_PATH
+          
+          - name: PLAYER_SITEMAP
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: PLAYER_SITEMAP
+            
+          - name: NEWS_SITEMAP
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: NEWS_SITEMAP
+
+          - name: S3_CDN_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: S3_CDN_URL
+              
+          - name: CONNECTION
+            valueFrom:
+              configMapKeyRef:
+                name: {{ .Release.Name }}
+                key: CONNECTION          

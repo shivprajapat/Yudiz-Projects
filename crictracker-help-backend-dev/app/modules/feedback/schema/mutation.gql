@@ -1,0 +1,42 @@
+
+input feedbackInput {
+  sName: String!
+  sEmail: String!
+  sPhone: String
+  " Query type value s or e, where s: 'Site Feedback', e: 'Editorial Feedback' "
+  eQueryType: String!
+  sSubject: String!
+  sPageLink: String
+  sMessage: String!
+}
+
+input addFeedbackInput {
+  feedbackInput: feedbackInput
+}
+
+type deleteFeedbacksResponse {
+  sMessage: String!
+}
+
+input deleteFeedback {
+  _id:ID!
+}
+
+type addFeedbackResponse {
+  oData: FeedbackData
+  sMessage: String!
+}
+
+type deleteFeedbackResponse {
+  sMessage: String!
+}
+
+input bulkFeedbackActionInput {
+  aId: [ID]
+}
+
+extend type Mutation {
+  insertFeedback(input: addFeedbackInput): addFeedbackResponse!
+  deleteFeedback(input: deleteFeedback): deleteFeedbackResponse
+  bulkFeedbackDelete(input: bulkFeedbackActionInput): deleteFeedbacksResponse
+}

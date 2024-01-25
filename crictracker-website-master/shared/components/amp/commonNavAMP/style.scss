@@ -1,0 +1,24 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss'; 
+
+.commonNav { margin: 0 0 16px; padding: 6px 8px; background: var(--light-mode-bg); white-space: nowrap; overflow: auto;
+  .item { margin: 0 3px; @include flex-grow(0);
+    a { display: block; padding: 5px 8px; font-size: 12px; line-height: 18px; color: var(--font-color); font-weight: 700; background: transparent; border-radius: 2em; text-decoration: none;
+      &:hover { color: var(--theme-color-light); }
+      &.active { background: var(--theme-light); color: var(--font-color); }
+    }
+    &:first-child { margin-left: 0; }
+    &:last-child { margin-right: 0; }
+  }
+  &.themeLightNav {  background: var(--theme-light);
+    a.active { background: var(--light-mode-bg); }
+  }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 575px) {
+  .commonNav { margin: 0px -12px 12px; 
+    &.stickyNav { position: sticky; top: 0px; z-index: 5; @include box-shadow(0 2px 4px 0 rgba(var(--bs-dark-rgb), 0.2)); }
+  }
+}

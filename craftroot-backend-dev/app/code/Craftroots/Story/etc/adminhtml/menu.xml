@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Backend:etc/menu.xsd">
+    <menu>
+        <add id="Craftroots_Story::story" title="Manage Story" translate="title" module="Craftroots_Story"  parent="Craftroots_Base::manager" resource="Craftroots_Story::story" /> 
+        <add id="Craftroots_Story::add_row" title="Story Grid" module="Craftroots_Story" sortOrder="50" parent="Craftroots_Story::story" action="story/grid" resource="Craftroots_Story::add_row"/>
+    </menu>
+</config>

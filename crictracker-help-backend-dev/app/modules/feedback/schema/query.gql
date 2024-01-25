@@ -1,0 +1,64 @@
+type FeedbackData {
+  _id: ID
+  sName: String!
+  sEmail: String!
+  sPhone: String
+  eQueryType: String!
+  sSubject: String
+  sPageLink: String
+  sMessage: String
+  eStatus: String
+  dCreated: Date
+  dUpdated: Date
+}
+
+type getFeedbackData {
+  nTotal: Int
+  aResults: [FeedbackData]
+}
+
+enum FEEDBACKQUERYTYPE {
+  "Site Feedback"
+  s
+  "Editorial Feedback"
+  e
+  "App Feedback"
+  a
+}
+
+enum commonHelpfeedbackState {
+  "read"
+   r
+  "unread"
+   ur
+  "delete"
+   d
+}
+
+input getFeedbackInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  "s: 'Site Feedback', e: 'Editorial Feedback'"
+  eQueryType: [FEEDBACKQUERYTYPE]
+  aState: [commonHelpfeedbackState]!
+}
+
+type feedbackQueryType{
+  "s: 'Site Feedback', e: 'Editorial Feedback'"
+  sValue: String!
+  sLabel: String!
+}
+
+input getFeedbackById {
+  _id: ID!
+}
+
+
+extend type Query {
+  getFeedbacks(input: getFeedbackInput!): getFeedbackData
+  getFeedbackById(input:getFeedbackById): FeedbackData
+  getFeedbackQueryType: [feedbackQueryType]
+}

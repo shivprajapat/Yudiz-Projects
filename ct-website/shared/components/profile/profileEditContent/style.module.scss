@@ -1,0 +1,5 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.formsBtn button { margin-right: 12px; min-width: 70px;}
+input.verify { padding-right: 28px; background: url(../../../../assets/images/icon/verified-icon.svg) no-repeat right 10px center / 16px auto;}

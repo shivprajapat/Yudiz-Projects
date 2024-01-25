@@ -1,0 +1,43 @@
+.alert{
+    position: fixed;
+    z-index: 9999;
+    top: 10px;
+    right: 10px;
+    margin: 10px auto;
+    color: rgb(2, 2, 2);
+    border: none;
+    width: 300px;
+    animation: alert-right .5s;
+}
+
+.alert-close {
+    animation: alert-left .5s;
+}
+
+.sucess-alert {
+    background-color: #b3f7b3;
+    color: black;
+}
+
+.fail-alert {
+    background-color: #eb7874;
+    color: black;
+}
+
+@keyframes alert-right {
+	from {
+	  transform: translateX(100%);
+	}
+	to {
+	  transform: translateX(0);
+	}
+}
+
+@keyframes alert-left {
+	from {
+        transform: translateX(0);
+	}
+	to {
+        transform: translateX(100%);
+	}
+}

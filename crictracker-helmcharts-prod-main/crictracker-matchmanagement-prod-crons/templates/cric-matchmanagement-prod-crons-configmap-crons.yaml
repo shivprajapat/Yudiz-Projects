@@ -1,0 +1,35 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: {{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+data:
+  REDIS_HOST: "redis-cache.crictracker.com.private"
+  REDIS_PORT: "6379"
+  NODE_ENV: prod
+  PORT: "4004"
+  SUPPORT_EMAIL: 'Crictracker@yudizproject.tk'
+  AWS_REGION: "ap-south-1"
+  S3_BUCKET_NAME: 'media.crictracker.com'
+  S3_BUCKET_URL: 'https://media.crictracker.com.s3.ap-south-1.amazonaws.com/'
+  S3_BUCKET_PROFILE_PATH: profile-pic/
+  S3_BUCKET_KYC_PATH: kyc/pan/
+  S3_BUCKET_FB_PATH: seo/fb/
+  S3_BUCKET_TWITTER_PATH: seo/twitter/
+  S3_BUCKET_ARTICLE_FEATUREIMAGE_PATH: media/featureimage/
+  S3_BUCKET_ARTICLE_THUMBIMAGE_PATH: media/thumbnailimage/
+  S3_BUCKET_ARTICLE_CHAT_MEDIA_PATH:  media/chatmedia/
+  # SEO_SUBGRAPH_URL: 'https://gateway.crictracker.com/'
+  SEO_SUBGRAPH_URL: http://crictracker-seo-prod-internal.production.svc.cluster.local/graphql
+  # ARTICLE_SUBGRAPH_URL: 'https://article.crictracker.com'
+  ARTICLE_SUBGRAPH_URL: http://crictracker-article-prod-internal.production.svc.cluster.local
+  SEO_REST_URL: 'https://seo.crictracker.com/'
+  ENTITY_SPORT_BASE_URL: 'https://rest.entitysport.com/v2/'
+  ew: '11wickets-fantasy-tips'
+  de: 'dream11-fantasy-tips'
+  GLOBAL_WIDGET_GRPC_URL: 'crictracker-global-widget-prod-grpc.production.svc.cluster.local:80'
+
+  CONNECTION: '10'
+
+  CLOUD_FLARE_AUTH_EMAIL: 'server@crictracker.com'
+  CLOUD_FLARE_ZONE_ID: '76c6bee164b59ebaa0ad0d6bdc0d50ec'

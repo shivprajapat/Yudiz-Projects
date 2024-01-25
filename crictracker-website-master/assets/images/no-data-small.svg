@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="104px" height="104px" viewBox="0 0 104 104" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ic_no_favorite</title>
+    <g id="7-Dec-2021" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Crictracker_Home_No_favorite_18Aug2021" transform="translate(-819.000000, -113.000000)">
+            <g id="ic_no_favorite" transform="translate(819.000000, 113.000000)">
+                <polygon id="Star" fill="#F2F4F7" points="52 79.2151228 21.4351669 94.0688837 26.1168801 60.4099354 2.54506115 35.9311163 36.0033522 29.9825032 52 0 67.9966478 29.9825032 101.454939 35.9311163 77.8831199 60.4099354 82.5648331 94.0688837"></polygon>
+                <g id="sports_cricket_black_24dp" transform="translate(52.000000, 52.000000) scale(-1, -1) translate(-52.000000, -52.000000) translate(28.000000, 28.000000)">
+                    <rect id="Rectangle" x="0" y="0" width="47.660177" height="47.660177"></rect>
+                    <g id="Group" transform="translate(3.504425, 3.504425)" fill="#A7ACB4" fill-rule="nonzero">
+                        <g transform="translate(0.000000, 3.995044)">
+                            <path d="M26.0676637,17.5981699 L9.10870088,0.63920708 C8.32966726,-0.139826549 7.07122832,-0.139826549 6.29219469,0.63920708 L0.63920708,6.29219469 C-0.139826549,7.07122832 -0.139826549,8.32966726 0.63920708,9.10870088 L17.5981699,26.0676637 C18.3772035,26.8466973 19.6356425,26.8466973 20.4146761,26.0676637 L26.0676637,20.4146761 C26.8466973,19.6356425 26.8466973,18.3772035 26.0676637,17.5981699 Z" id="Path"></path>
+                            <polygon id="Rectangle" transform="translate(30.301640, 30.303210) rotate(-45.000000) translate(-30.301640, -30.303210) " points="28.3041366 24.3107007 32.2991425 24.3107007 32.2991425 36.2957185 28.3041366 36.2957185"></polygon>
+                        </g>
+                        <circle id="Oval" cx="32.959115" cy="6.99132743" r="6.99132743"></circle>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

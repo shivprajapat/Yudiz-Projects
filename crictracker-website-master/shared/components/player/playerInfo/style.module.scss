@@ -1,0 +1,12 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.playerInfo { background: var(--light-mode-bg) url(../../../../assets/images/icon/player-bg.svg) no-repeat left center / auto 100%; }
+.playerPic { width: 212px; height: 212px; }
+.info { margin-bottom: -16px; }
+.swap { width: 32px; height: 32px; top: 8px; right: 8px; }
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1199px) {
+    .playerPic { width: 180px; height: 180px; }
+}

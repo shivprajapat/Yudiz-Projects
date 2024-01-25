@@ -1,0 +1,29 @@
+syntax = "proto3";
+ 
+package match;
+
+service Match {
+    rpc findMatch (MatchRequest) returns (MatchResponse) {}
+    rpc findMatchLeague (MatchLeagueRequest) returns (MatchLeagueResponse) {}
+  }
+
+// Match findMatch Request
+message MatchRequest {
+    string _id = 1;
+}
+
+// Match findMatch Response
+message MatchResponse {
+    string _id = 1;
+    string eCategory =2;
+}
+
+// Match findMatchLeague Request
+message MatchLeagueRequest {
+    string _id = 1;
+}
+
+// Match findMatchLeague Response
+message MatchLeagueResponse {
+    string _id = 1;
+}

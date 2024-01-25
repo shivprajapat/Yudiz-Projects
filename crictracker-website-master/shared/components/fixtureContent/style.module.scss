@@ -1,0 +1,42 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.fixturesFilter {
+    select, input { padding-top: 5px; padding-bottom: 5px; border-radius: 2em; }
+    input ~ button { top: 5px !important; }
+    .nameFilter { width: 100%; background: var(--light-mode-bg); padding: 5px 1px; border-radius: 2em; 
+        > * { margin: 0px 4px; }
+        .icon { margin-left: 14px; width: 24px; @include flex-shrink(0); }
+        .formGroup { flex: 1; -webkit-flex: 1; }
+    }
+    .formatFilter { width: 190px; 
+        select { border-color: $theme-color; background-color: $theme-light; }
+    }
+    .formGroup { margin-bottom: 0; }
+}
+.filterBtn { width: 40px; height: 40px; background: var(--light-mode-bg); border-color: var(--border-light); position: absolute; right: 0; top: -16px; @include transform(translateY(-100%)); 
+    path, line { stroke: var(--font-color);}
+}
+.navFixtures { width: calc(100% - 52px);}
+
+.searchFilter { width: 100%;
+    input { padding-left: 48px; background: var(--light-mode-bg); border: none; background-image: url(../../../assets/images/icon/search-black-icon.svg); background-repeat: no-repeat ; background-size: 24px auto; background-position: left 16px center; }
+}
+
+@media (max-width: 1199px) {
+    .fixturesFilter {
+        .formatFilter { width: 170px; }
+    }
+}
+
+@media (max-width: 767px) {
+    .navFixtures { width: 100%;}
+    .fixturesFilter {  
+        .formatFilter { display: none; }
+    }
+}
+@media (max-width: 575px) {
+    .navFixtures { width: calc(100% + 24px); }
+    .catNav { top: 40px !important; }
+    .fixtureDateSlider { top: 79px !important;}
+}

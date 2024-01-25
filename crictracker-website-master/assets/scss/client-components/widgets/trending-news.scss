@@ -1,0 +1,17 @@
+.trendingNews h3 {
+  path { fill: #000; }
+}
+.trendingList {
+  article {
+    &:not(:last-child) .desc {
+      border-bottom: 1px solid var(--border-light);
+    }
+  }
+}
+.num {
+  min-width: 24px;
+  font-size: 21px;
+  line-height: 28px;
+}
+
+/***** Responsive CSS Start ******/

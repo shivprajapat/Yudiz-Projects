@@ -1,0 +1,44 @@
+$theme-font: 'Roboto', sans-serif;
+$theme-font-color: #11272E;
+$theme-color: #7402D3;
+$danger: #FF1E1E;
+$warning: #FF870B;
+$success-color: #16AD28;
+$hightlight: #FB378E;
+$hightlight-bg: #FFE238;
+$white: #fff;
+$black: #000;
+$font-light-color: #A6A6A6;
+$mute-color: #7F7F7F;
+$border-dark: #B2B2B2;
+$border-color: #D6D6D6;
+$success-bg: rgba(0, 174, 66, 0.14);
+$common-transition: all 0.3s ease-in-out;
+$gray: #5F6B7A;
+$darkGray: #212A34;
+$blue: #189EE1;
+@mixin transition($property) {
+    -webkit-transition: $property;
+    -ms-transition: $property;
+    transition: $property;
+}
+@mixin transform($property) {
+    -webkit-transform: $property;
+    -ms-transform: $property;
+    transform: $property;
+}
+@mixin box-shadow($property) {
+    -webkit-box-shadow: $property;
+    box-shadow: $property;
+}
+@mixin filter($property) {
+    -webkit-filter: $property;
+    filter: $property;
+}
+@mixin flex-shrink($property) {
+    -webkit-flex-shrink: $property;
+    flex-shrink: $property;
+}
+
+%after-before       { content: ""; position: absolute; display: block; }
+%theme-gradient     { background-image: linear-gradient(90deg, #AB38E8 0%, #7B37FE 100%); }

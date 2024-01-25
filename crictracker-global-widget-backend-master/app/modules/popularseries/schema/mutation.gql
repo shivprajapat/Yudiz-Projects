@@ -1,0 +1,37 @@
+enum CurrentSeriesStatus {
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+}
+
+input oCurrentSeriesCommonInput {
+  nPriority: Int!
+  iSeriesId: ID!
+}
+
+input oCurrentSeriesInput {
+  oInput: [oCurrentSeriesCommonInput]!
+}
+
+type oCommonCurrentSeriesResponse {
+  sMessage: String
+  oData: oCurrentSeriesData
+}
+
+type oAddCurrentSeriesResponse {
+  sMessage: String
+  aData: [oCurrentSeriesData]
+}
+
+input oUpdateCurrentSeriesInput {
+  _id: ID!
+  eStatus: CurrentSeriesStatus!
+}
+
+extend type Mutation {
+  addCurrentSeries(input: oCurrentSeriesInput): oAddCurrentSeriesResponse
+  updateCurrentSeries(input: oUpdateCurrentSeriesInput): oCommonCurrentSeriesResponse
+}

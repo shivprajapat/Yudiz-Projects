@@ -1,0 +1,42 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.shareList { border-bottom: 1px solid $border-light;
+  > * { flex: 1; }
+}
+.item { 
+  .icon { padding: 10px; width: 48px; height: 48px; @include filter(brightness(0)); @include transition($common-transition); }
+  &:hover .icon { @include filter(none); }
+  &.active .icon { animation: clapZoom 0.3s ease; @include filter(none); }
+  &.share::after { display: none; }
+  }
+.currentClap { position: absolute; width: 24px; height: 24px; line-height: 24px; opacity: 0; top: -16px; left: 50%; @include transform(translateX(-50%)); @include transition($common-transition);
+  .active & { animation: clapAnimation 0.6s ease-in-out; }
+}
+
+@keyframes clapAnimation {
+  0%    { @include transform(translate(-50%, -16px)); opacity: 0; }
+  10%   { @include transform(translate(-50%, -16px)); opacity: 1; }
+  92%   { @include transform(translate(-50%,-36px)); opacity: 1; }
+  100%  { @include transform(translate(-50%,-36px)); opacity: 0; }
+}
+@keyframes clapZoom {
+  0%    { @include transform(scale(1, 1)); }
+  50%   { @include transform(scale(1.2, 1.2)); }
+  100%  { @include transform(scale(1, 1)); }
+}
+
+@media (max-width: 1400px) {
+  .shareList { margin-bottom: 24px; top: 0; 
+    button { margin: 0px 8px;
+      .icon { margin: 0; padding: 8px; width: 40px; height: 40px; }
+    }
+  }
+}
+
+@media (max-width: 575px) {
+  .shareList { margin-bottom: 12px;
+    button { margin-bottom: 0px; }
+  }
+  .socialShareMenu { padding: 6px 8px; }
+}

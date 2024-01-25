@@ -1,0 +1,36 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.teamImg {
+  width: 50px;
+}
+.liveMatchCard { margin-bottom: 8px; padding: 10px 16px; background: var(--light-mode-bg); border-radius: 16px;
+  p { margin: 0; }
+  .team { width: 160px; 
+    .name {
+      b { margin: 0px 4px; }
+    }
+  }
+  .score { margin-top: 4px; }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .liveMatchCard { padding: 10px 16px 8px;
+    .team { width: 120px; }
+  }    
+}
+
+@media (max-width: 575px) {
+@media (max-width: 575px) {
+  .teamImg {
+    width: 30px;
+  }
+}
+  .liveMatchCard { padding: 10px 12px;
+    .team { width: 90px;
+      .name { font-size: 14px; line-height: 20px; }
+    }
+  }    
+}

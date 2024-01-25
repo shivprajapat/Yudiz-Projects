@@ -1,0 +1,28 @@
+input oBulkUpdateUsersInput {
+    eStatus: UserActionStatus!
+    aId: [ID!]!
+}
+
+type oBulkUpdateUsersResponse {
+    sMessage: String
+}
+
+type oDeleteUserResponse {
+    sMessage: String
+    oData: user
+}
+
+input oDeleteUserInput {
+    sReason: String
+}
+
+input oDeleteUserAdminInput {
+    iUserId: ID!
+    sReason: String
+}
+
+extend type Mutation {
+    bulkUpdateUsers(input: oBulkUpdateUsersInput!): oBulkUpdateUsersResponse
+    deleteUser(input: oDeleteUserInput): oDeleteUserResponse
+    deleteUserAdmin(input: oDeleteUserAdminInput): oDeleteUserResponse
+}

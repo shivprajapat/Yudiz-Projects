@@ -1,0 +1,79 @@
+syntax = "proto3";
+
+message messageResponse {
+    string sMessage = 1;
+}
+
+message oImg {
+    string sText = 1;
+    string sCaption = 2;
+    string sAttribute =3;
+    string sUrl =4;
+}
+
+message oCategory  {
+    string _id = 1;
+    string sName = 2;
+    string sContent = 3;
+}
+
+message Article {
+  string _id = 1;
+  string sTitle = 2;
+  string sSrtTitle = 3;
+  string sSubtitle = 4;
+  oImg oImg = 5;
+  oImg oTImg = 6;
+  string dPublishDate = 7;
+  float nDuration = 8;
+  oCategory oCategory =9;
+}
+
+message GlobalWidgetInput {
+  string type = 1;
+  repeated Article data  = 2;
+}
+
+message oMiniScorePriority { 
+    string iSeriesId = 1;
+    int32 nPriority = 2;
+    string sTitle = 3;
+    string sSrtTitle = 4;
+ }
+
+message getMiniScorePriorityRes { 
+    repeated oMiniScorePriority aMiniScorePriority = 1;
+ }
+
+message Empty { }
+
+message getPollByIdInput {
+  string iPollId = 1;
+}
+
+message oField {
+  string sTitle = 1;
+  int32 nVote = 2;
+}
+
+message oPollFields {
+  string sTitle = 1;
+  repeated oField aField = 2;
+  int32 nTotalVote = 3;
+  string eStatus = 4;
+  string dStartDate = 5;
+  string dEndDate = 6;
+  string sType = 7;
+  string sMatchPollTitle = 8;
+}
+
+message createPollRes {
+  string _id =1;
+}
+
+service GlobalWidgetService {
+  rpc updateGlobalWidgetByType(GlobalWidgetInput) returns (messageResponse) {}
+  rpc getMiniScorePriority(Empty) returns (getMiniScorePriorityRes) {}
+  rpc getPollById(getPollByIdInput) returns (oPollFields) {}
+  rpc createPoll(oPollFields) returns (createPollRes) {}
+}

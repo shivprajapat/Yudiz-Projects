@@ -1,0 +1,55 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.offcanvasComments { width: 485px; max-width: 100%; }
+.offcanvasHead { padding: 20px; } 
+.offcanvasBody { padding: 2px 20px 20px; 
+    .formGroup { margin-bottom: 14px; }
+    .commentsControl { padding: 10px 16px 10px 54px; background: var(--theme-bg) url(../../../assets/images/icon/comment-icon.svg) no-repeat left 4px top / 48px auto; border-radius: 16px;  }
+}
+.sorting { padding: 24px 0px 4px; border-bottom: 1px solid $light;  }
+.sortDropdown {
+    .active { color: $theme-color; }
+}
+.comment { padding: 16px 0; 
+    &:not(:last-child) { border-bottom: 1px solid $light; }
+}
+.footerlist {
+    button svg { margin-right: 6px; }
+}
+.active { color: $theme-color;
+    path { fill: $theme-color; }
+}
+.sortDropdown { margin-left: 6px; }
+.dropdownMenu { min-width: 100px; }
+.actionToggle::after { display: none; }
+.formCheck { margin-bottom: 10px; }
+.submitBlock { margin-top: 20px;
+    button { margin-bottom: 20px; 
+        &:last-child { margin-bottom: 4px; }
+    }
+}
+.modalBody { width: 444px; max-width: 100%;}
+
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+
+}
+@media (min-width: 576px) {
+    .offcanvasBody {  
+        .commentsControl { height: 120px !important; }
+    }
+}
+@media (max-width: 575px) {
+    .offcanvasComments { width: 100%; height: 80%; top: auto; }
+    .offcanvasHead { padding: 12px; border-bottom: 1px solid $light; }
+    .offcanvasBody { padding: 0px 12px 30px; }
+    .sorting { padding: 8px 0px 4px; }
+    .commentsGroup { position: absolute; bottom: 0; left: 0; width: 100%; 
+        .formGroup { margin: 0; }
+        .commentsControl { padding: 8px 40px 12px 36px; height: 40px; background-position: left -4px top; background-size: 40px auto; border-radius: 0; }
+        .postBtn { position: absolute; right: 12px; bottom: 12px; padding: 0; background: transparent; font-size: 14px; color: $theme-color; border: none; }  
+    }
+}

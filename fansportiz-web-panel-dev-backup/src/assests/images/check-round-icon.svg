@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="60px" height="60px" viewBox="0 0 60 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59 (86127) - https://sketch.com -->
+    <title>check-round-icon</title>
+    <desc>Created with Sketch.</desc>
+    <g id="Design_30/06/2020" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="05.1_Withdrawal_Approved-pop-up" transform="translate(-653.000000, -272.000000)">
+            <g id="Group-17" transform="translate(533.000000, 232.000000)">
+                <g id="Group-5" transform="translate(40.000000, 40.000000)">
+                    <g id="check-round-icon" transform="translate(80.000000, 0.000000)">
+                        <path d="M30,0 C46.5685425,-3.04359188e-15 60,13.4314575 60,30 C60,46.5685425 46.5685425,60 30,60 C13.4314575,60 2.02906125e-15,46.5685425 0,30 C-2.02906125e-15,13.4314575 13.4314575,3.04359188e-15 30,0 Z" id="Path" fill="#16AD28"></path>
+                        <polygon id="Path" fill="#FFFFFF" fill-rule="nonzero" points="23.752944 37.430489 15.6249492 29.4343241 12.8571429 32.1380633 23.752944 42.8571429 47.1428571 19.8465964 44.3945424 17.1428571"></polygon>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

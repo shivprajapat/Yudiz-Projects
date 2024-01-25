@@ -1,0 +1,38 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.scorecardNav { margin: 12px -6px; padding-bottom: 6px;
+  button { margin: 0 6px; padding: 5px 8px; background: transparent; font-size: 12px; line-height: 16px; font-weight: 700; display: block; color: var(--font-secondary); border-radius: 8px; text-transform: uppercase; border: 1px solid transparent;
+    &:hover { color: $theme-color; }
+    &.active { background: #fff; color: $theme-color; border-color: $theme-medium; }
+  }
+}
+
+.scorecardSlider { padding: 16px 0; border-bottom: 1px solid $light; overflow: hidden;
+  .item { cursor: pointer; width: 300px; background: var(--light-mode-bg); border-radius: 6px; font-size: 11px; line-height: 16px; color: $border-color; font-weight: 600; }  p { margin: 0; }
+  .dark { color: var(--font-color); }
+  .head { color: $font-light;}
+  .live::before { @extend %after-before; margin-right: 4px; position: relative; top: -4px; width: 6px; height: 6px; display: inline-block; border-radius: 50%; background: $danger;}
+  .switch label { color: var(--font-color); font-weight: 500; }
+  .series,.result { margin: 8px 0; font-weight: 500; text-overflow: ellipsis; }
+  .team { margin-bottom: 6px; font-size: 12px; line-height: 19px; position: relative; }
+  .teamName { color: var(--font-color); 
+    span { margin-left: 6px; }
+    > div { vertical-align: middle;}
+  }
+  .winner { width: 18px; }
+  .btnList { margin: 0px -4px;
+    a { margin: 0px 4px; padding: 4px; color: var(--font-secondary); border: 1px solid $border-light; border-radius: 2em; flex-grow: 1; 
+      &:hover { border-color: $theme-color; color: $theme-color; }
+    }
+  }
+  .teamFlag { width: 20px; }
+}
+
+@media (max-width: 440px) {
+  .scorecardNav { margin: 2px -6px 8px; padding-bottom: 6px; }
+  .scorecardSlider { 
+    .slider { margin: 0px -10px; }
+    .item { width: 300px; }
+  }
+}

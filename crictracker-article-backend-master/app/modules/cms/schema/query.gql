@@ -1,0 +1,50 @@
+enum CMSPageActionStatus {
+  "active"
+  a
+  "inactive"
+  i
+}
+
+type oCmsData {
+  _id: ID
+  sTitle: String
+  sContent: String
+  sAmpContent: String
+  eStatus: String
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+}
+
+input oGetCmsById {
+  _id: ID!
+}
+
+input oListCMSPageInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  eStatus: CMSPageActionStatus
+}
+
+type oListCMSPageResponse {
+  nTotal: Int
+  aResults: [oCmsData]
+}
+
+input oListUserCMSPageInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+}
+
+extend type Query {
+  getCMSPageById(input: oGetCmsById!): oCmsData
+  listCMSPage(input: oListCMSPageInput): oListCMSPageResponse
+  listUserCMSPage(input: oListUserCMSPageInput!): [oCmsData]
+  getUserCMSPage(input: oGetCmsById!): oCmsData
+}

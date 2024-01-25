@@ -1,0 +1,848 @@
+@import 'assets/scss/helper/variables';
+
+.admin-asset-detail-page {
+  .asset-detail {
+    margin: 0px 38px;
+    padding: 120px 67px;
+    background: $skin-color;
+    .img-row {
+      height: 25vh;
+      text-align: center;
+      img {
+        height: 100%;
+        width: auto;
+      }
+    }
+    .asset-detail-img {
+      img {
+        height: 756px;
+        width: 100%;
+        object-fit: contain;
+      }
+    }
+    .asset-detail-content {
+      padding-left: 55px;
+      .asset-owner-artist {
+          margin-top: 32px;
+          margin-bottom: 1rem;
+          padding-bottom: 26px;
+          border-bottom: 1px solid $grey-border-500;
+        }
+      .asset-title {
+        .asset-title-left {
+          h4 {
+            font-size: 40px;
+            line-height: 48px;
+            color: $black-400;
+            font-weight: 700;
+            margin-bottom: 20px;
+            word-break: break-all;
+          }
+          button {
+            margin-right: 10px;
+            &:last-child {
+              margin-right: 0px;
+            }
+          }
+        }
+
+        .asset-owner-artist {
+          margin-top: 32px;
+          padding-bottom: 26px;
+          border-bottom: 1px solid $grey-border-500;
+          .common-owner-artist {
+            margin: 0px 34px;
+            position: relative;
+            &.owner {
+              a {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+              }
+            }
+            &:first-child {
+              margin-left: 0px;
+            }
+            &:last-child {
+              margin-right: 0px;
+            }
+            img {
+              width: 56px;
+              height: 56px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+            .owner-artist-desc {
+              padding-left: 12px;
+              h6 {
+                font-size: 20px;
+                line-height: 24px;
+                color: $theme-color;
+                margin-bottom: 5px;
+              }
+              p {
+                font-size: 18px;
+                line-height: 26px;
+                color: $grey-400;
+                margin: 0px;
+              }
+            }
+          }
+        }
+      }
+      .asset-high-bid {
+        padding: 28px 0px 39px;
+        border-bottom: 1px solid $grey-border-500;
+        .place-by {
+          font-size: 20px;
+          line-height: 28px;
+          color: $header-text-color;
+          margin-bottom: 20px;
+        }
+        .edition {
+          font-size: 20px;
+          line-height: 28px;
+          color: $black-400;
+          margin-bottom: 30px;
+        }
+        .high-bid-btn {
+          .black-btn {
+            margin-right: 14px;
+          }
+          .fav-icon {
+            margin-left: 100px;
+            .wishlist-btn {
+              width: 44px;
+              height: 44px;
+              border-radius: 50%;
+              @include transition(all 0.5s);
+              border: none;
+              background: $secondary-black url('../../assets/images/css-img/white-heart.svg') no-repeat center center / 20px;
+              &:hover,
+              &.active {
+                background: $white url('../../assets/images/css-img/pink-heart.svg') no-repeat center center / 20px;
+              }
+            }
+            span {
+              font-size: 24px;
+              line-height: 30px;
+              color: $black-600;
+              margin: 8px 0px 0px 15px;
+              display: block;
+            }
+          }
+        }
+      }
+      .owned-asset-links {
+        padding: 26px 0px;
+        border-bottom: 1px solid $bg-primary;
+        ul {
+          margin: 0;
+          padding: 0;
+          li {
+            display: flex;
+            padding: 10px 0;
+            span {
+              font-size: 16px;
+              color: $bg-primary;
+              flex: 1;
+              margin-right: 10px;
+              font-weight: 600;
+            }
+            a {
+              flex: 4;
+              font-size: 16px;
+              line-height: 24px;
+              color: $bg-primary;
+              text-overflow: ellipsis;
+              overflow: hidden;
+              white-space: nowrap;
+            }
+          }
+        }
+      }
+      .asset-detail-desc {
+        padding: 26px 0px;
+        border-bottom: 1px solid $grey-border-500;
+        p {
+          font-size: 18px;
+          line-height: 24px;
+          color: $bg-primary;
+          width: 80%;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+        }
+      }
+      .asset-detail-list {
+        padding-top: 20px;
+        .asset-single-desc {
+          margin-bottom: 28px;
+          &:last-child {
+            margin-bottom: 0px;
+          }
+          .single-desc-left {
+            width: 58%;
+            img {
+              width: 41px;
+              height: 41px;
+              object-fit: cover;
+              border-radius: 50%;
+              margin-top: -10px;
+            }
+            .single-desc-inner {
+              margin-left: 22px;
+              h6 {
+                font-size: 16px;
+                line-height: 20px;
+                color: $black;
+                margin-bottom: 5px;
+              }
+              span {
+                color: $header-text-color;
+                font-size: 16px;
+                line-height: 20px;
+              }
+            }
+          }
+          .single-desc-right {
+            width: 38%;
+            h5 {
+              font-size: 18px;
+              line-height: 26px;
+              font-weight: 600;
+              margin-bottom: 5px;
+              color: $black;
+            }
+            span {
+              color: $grey-border-200;
+              font-size: 16px;
+              line-height: 20px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .artist-collection {
+    padding: 160px 68px;
+    .artist-coll-title {
+      margin: 0px 24px 20px;
+      h4 {
+        margin-bottom: 0px;
+        font-size: 40px;
+        line-height: 48px;
+        font-weight: 700;
+      }
+    }
+  }
+}
+
+@media (max-width: 1440px) {
+  .asset-detail-desc {
+    padding: 24px 0px;
+  }
+}
+
+@media (min-width: 1024px) and (max-width: 1440px) {
+  .owned-asset-links {
+    ul li {
+      span {
+        flex: 2 !important;
+      }
+      a {
+        flex: 3 !important;
+      }
+    }
+  }
+}
+@media (min-width: 1400px) and (max-width: 1699px) {
+  .admin-asset-detail-page {
+    .asset-detail {
+      padding: 100px 20px;
+      margin: 0px 30px;
+      .asset-detail-img {
+        img {
+          height: 650px;
+        }
+      }
+      .asset-detail-content {
+        padding-left: 30px;
+        .asset-title {
+          .asset-title-left {
+            h4 {
+              font-size: 35px;
+              line-height: 42px;
+              margin-bottom: 12px;
+            }
+            button {
+              min-width: 130px;
+            }
+          }
+
+          .asset-owner-artist {
+            margin-top: 30px;
+            padding-bottom: 24px;
+            .common-owner-artist {
+              margin: 0px 30px;
+              img {
+                width: 46px;
+                height: 46px;
+                margin-top: -6px;
+              }
+              .owner-artist-desc {
+                h6 {
+                  font-size: 18px;
+                  line-height: 22px;
+                  margin-bottom: 1px;
+                }
+                p {
+                  font-size: 16px;
+                  line-height: 24px;
+                }
+              }
+            }
+          }
+        }
+        .asset-high-bid {
+          padding: 26px 0px 37px;
+          .place-by,
+          .edition {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 16px;
+          }
+          .high-bid-btn {
+            & > button {
+              min-width: 145px;
+              padding: 14px 14px 8px;
+            }
+            .black-btn {
+              min-width: 145px;
+            }
+            .fav-icon {
+              margin-left: 80px;
+              .wishlist-btn {
+                width: 42px;
+                height: 42px;
+                background-size: 18px;
+              }
+              span {
+                font-size: 20px;
+                line-height: 28px;
+              }
+            }
+          }
+        }
+        .asset-detail-list {
+          .asset-single-desc {
+            margin-bottom: 22px;
+            .single-desc-left {
+              img {
+                width: 38px;
+                height: 38px;
+              }
+              .single-desc-inner {
+                margin-left: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .artist-collection {
+      padding: 100px 0px;
+      .artist-coll-title {
+        margin: 0px 18px 20px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .admin-asset-detail-page {
+    .asset-detail {
+      padding: 70px 20px;
+      margin: 0px 25px;
+      .asset-detail-img {
+        img {
+          height: 650px;
+        }
+      }
+      .asset-detail-content {
+        padding-left: 10px;
+        .asset-title {
+          .asset-title-left {
+            h4 {
+              font-size: 30px;
+              line-height: 28px;
+              margin-bottom: 12px;
+            }
+            button {
+              min-width: 100px;
+              font-size: 14px;
+              line-height: 22px;
+              margin-right: 8px;
+            }
+          }
+
+          .asset-owner-artist {
+            margin-top: 30px;
+            padding-bottom: 24px;
+            .common-owner-artist {
+              margin: 0px 30px;
+              img {
+                width: 42px;
+                height: 42px;
+                margin-top: -6px;
+              }
+              .owner-artist-desc {
+                h6 {
+                  font-size: 18px;
+                  line-height: 22px;
+                  margin-bottom: 1px;
+                }
+                p {
+                  font-size: 16px;
+                  line-height: 24px;
+                }
+              }
+            }
+          }
+        }
+        .asset-high-bid {
+          padding: 26px 0px 34px;
+          .place-by,
+          .edition {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 16px;
+          }
+          .high-bid-btn {
+            & > button {
+              min-width: 145px;
+              padding: 14px 14px 8px;
+            }
+            .black-btn {
+              min-width: 145px;
+            }
+            .fav-icon {
+              margin-left: 60px;
+              .wishlist-btn {
+                width: 42px;
+                height: 42px;
+                background-size: 18px;
+              }
+              span {
+                font-size: 20px;
+                line-height: 28px;
+              }
+            }
+          }
+        }
+        .asset-detail-list {
+          .asset-single-desc {
+            margin-bottom: 20px;
+            .single-desc-left {
+              img {
+                width: 38px;
+                height: 38px;
+              }
+              .single-desc-inner {
+                margin-left: 16px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .artist-collection {
+      padding: 70px 0px;
+      .artist-coll-title {
+        margin: 0px 13px 20px;
+        h4 {
+          font-size: 32px;
+          line-height: 42px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .admin-asset-detail-page {
+    .asset-detail {
+      padding: 50px 20px;
+      margin: 0px 25px;
+      .asset-detail-img {
+        img {
+          height: 650px;
+        }
+      }
+      .asset-detail-content {
+        padding-left: 10px;
+        .asset-title {
+          .asset-title-left {
+            h4 {
+              font-size: 30px;
+              line-height: 28px;
+              margin-bottom: 12px;
+            }
+            button {
+              min-width: 100px;
+              font-size: 14px;
+              line-height: 22px;
+              margin-right: 8px;
+            }
+          }
+
+          .asset-owner-artist {
+            margin-top: 30px;
+            padding-bottom: 24px;
+            .common-owner-artist {
+              margin: 0px 30px;
+              img {
+                width: 40px;
+                height: 40px;
+                margin-top: -6px;
+              }
+              .owner-artist-desc {
+                h6 {
+                  font-size: 18px;
+                  line-height: 22px;
+                  margin-bottom: 1px;
+                }
+                p {
+                  font-size: 16px;
+                  line-height: 24px;
+                }
+              }
+            }
+          }
+        }
+        .asset-high-bid {
+          padding: 26px 0px 34px;
+          .place-by,
+          .edition {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 16px;
+          }
+          .high-bid-btn {
+            & > button {
+              min-width: 140px;
+              padding: 14px 14px 8px;
+            }
+            .black-btn {
+              min-width: 140px;
+            }
+            .fav-icon {
+              margin-left: 24px;
+              .wishlist-btn {
+                width: 42px;
+                height: 42px;
+                background-size: 18px;
+              }
+              span {
+                font-size: 20px;
+                line-height: 28px;
+              }
+            }
+          }
+        }
+        .asset-detail-desc {
+          p {
+            width: 100%;
+          }
+        }
+        .asset-detail-list {
+          .asset-single-desc {
+            margin-bottom: 20px;
+            .single-desc-left {
+              width: 68%;
+              img {
+                width: 38px;
+                height: 38px;
+              }
+              .single-desc-inner {
+                margin-left: 16px;
+              }
+            }
+            .single-desc-right {
+              width: 28%;
+            }
+          }
+        }
+      }
+    }
+    .artist-collection {
+      padding: 50px 0px;
+      .artist-coll-title {
+        margin: 0px 13px 20px;
+        h4 {
+          font-size: 32px;
+          line-height: 42px;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .admin-asset-detail-page {
+    .asset-detail {
+      padding: 50px 20px;
+      margin: 0px 24px;
+      .asset-detail-img {
+        img {
+          height: 450px;
+        }
+      }
+      .asset-detail-content {
+        padding: 40px 0px 0px;
+        .asset-title {
+          .asset-title-left {
+            h4 {
+              font-size: 30px;
+              line-height: 28px;
+              margin-bottom: 12px;
+            }
+            button {
+              min-width: 100px;
+              font-size: 14px;
+              line-height: 22px;
+              margin-right: 8px;
+            }
+          }
+
+          .asset-owner-artist {
+            margin-top: 30px;
+            padding-bottom: 24px;
+            .common-owner-artist {
+              margin: 0px 30px;
+              img {
+                width: 40px;
+                height: 40px;
+                margin-top: -6px;
+              }
+              .owner-artist-desc {
+                h6 {
+                  font-size: 18px;
+                  line-height: 22px;
+                  margin-bottom: 1px;
+                }
+                p {
+                  font-size: 16px;
+                  line-height: 24px;
+                }
+              }
+            }
+          }
+        }
+        .asset-high-bid {
+          padding: 26px 0px 34px;
+          .place-by,
+          .edition {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 16px;
+          }
+          .high-bid-btn {
+            & > button {
+              min-width: 140px;
+              padding: 14px 14px 8px;
+            }
+            .black-btn {
+              min-width: 140px;
+            }
+            .fav-icon {
+              margin-left: 24px;
+              .wishlist-btn {
+                width: 42px;
+                height: 42px;
+                background-size: 18px;
+              }
+              span {
+                font-size: 20px;
+                line-height: 28px;
+              }
+            }
+          }
+        }
+        .asset-detail-desc {
+          p {
+            width: 100%;
+          }
+        }
+        .asset-detail-list {
+          .asset-single-desc {
+            margin-bottom: 20px;
+            .single-desc-left {
+              width: 68%;
+              img {
+                width: 38px;
+                height: 38px;
+              }
+              .single-desc-inner {
+                margin-left: 16px;
+              }
+            }
+            .single-desc-right {
+              width: 28%;
+            }
+          }
+        }
+      }
+    }
+    .artist-collection {
+      padding: 50px 0px;
+      .artist-coll-title {
+        margin: 0px 13px 20px;
+        h4 {
+          font-size: 32px;
+          line-height: 42px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 767px) {
+  .admin-asset-detail-page {
+    .asset-detail {
+      padding: 45px 10px;
+      margin: 0px 12px;
+      .asset-detail-img {
+        img {
+          height: 270px;
+        }
+      }
+      .asset-detail-content {
+        padding: 40px 0px 0px;
+        .asset-title {
+          .asset-title-left {
+            h4 {
+              font-size: 30px;
+              line-height: 28px;
+              margin-bottom: 8px;
+            }
+            button {
+              min-width: 100px;
+              font-size: 14px;
+              line-height: 22px;
+              margin-right: 8px;
+            }
+            .disable-btn {
+              padding: 10px 12px 5px;
+            }
+          }
+
+          .asset-owner-artist {
+            margin-top: 27px;
+            padding-bottom: 22px;
+            .common-owner-artist {
+              margin: 0px 5px;
+              img {
+                width: 32px;
+                height: 32px;
+                margin-top: -6px;
+              }
+              .owner-artist-desc {
+                padding-left: 8px;
+                h6 {
+                  font-size: 18px;
+                  line-height: 22px;
+                  margin-bottom: 1px;
+                }
+                p {
+                  font-size: 16px;
+                  line-height: 24px;
+                }
+              }
+            }
+          }
+        }
+        .asset-high-bid {
+          padding: 22px 0px;
+          .place-by,
+          .edition {
+            font-size: 18px;
+            line-height: 26px;
+            margin-bottom: 16px;
+          }
+          .high-bid-btn {
+            & > button {
+              min-width: 109px;
+              padding: 12px 14px 8px;
+              font-size: 14px;
+              line-height: 20px;
+            }
+            .black-btn {
+              margin-right: 8px;
+              min-width: 109px;
+            }
+            .fav-icon {
+              margin-left: 8px;
+              .wishlist-btn {
+                width: 42px;
+                height: 42px;
+                background-size: 18px;
+              }
+              span {
+                display: none;
+              }
+            }
+          }
+        }
+        .asset-detail-desc {
+          padding: 22px 0px;
+          p {
+            width: 100%;
+          }
+        }
+        .asset-detail-list {
+          .asset-single-desc {
+            margin-bottom: 20px;
+            .single-desc-left {
+              width: 68%;
+              img {
+                width: 38px;
+                height: 38px;
+              }
+              .single-desc-inner {
+                margin-left: 12px;
+                h6 {
+                  margin-bottom: 2px;
+                }
+              }
+            }
+            .single-desc-right {
+              width: 28%;
+              h5 {
+                margin-bottom: 2px;
+              }
+            }
+          }
+        }
+      }
+    }
+    .artist-collection {
+      padding: 45px 0px;
+      .artist-coll-title {
+        margin: 0px 0px 20px;
+        h4 {
+          font-size: 28px;
+          line-height: 38px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .admin-asset-detail-page .asset-detail .asset-detail-content .owned-asset-links ul li {
+    flex-direction: column;
+  }
+}

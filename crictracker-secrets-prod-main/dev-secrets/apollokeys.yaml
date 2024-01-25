@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Secret
+metadata:
+  name: apollokeys
+  namespace: dev
+data:
+  APOLLO_KEY: c2VydmljZTpjcmljdHJhY2tlci1kZXYtcHJvZDpNTzhLcEZQSUJocURibG16SFE4b0ZR

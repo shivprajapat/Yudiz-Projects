@@ -1,0 +1,38 @@
+type Author @key(fields: "_id") {
+  _id: ID
+  sFName: String
+  sEmail: String
+  sUName: String
+  sDisplayName: String
+  sNumber: String
+  eGender: String
+  eDesignation: String
+  sBio: String
+  sUrl: String
+  dCreated: String
+  oSeo: Seo
+  nArticleCount: Int
+  nViewCount: Int
+  bIsVerified: Boolean
+}
+
+type listAuthorResponse {
+  nTotal: Int
+  aResults: [Author]
+}
+
+input listAuthorInput {
+  sSearch: String
+  nSkip: Int!
+  nLimit: Int!
+  sAlphaSearch: String
+}
+
+input getAuthorInput {
+  _id: ID!
+}
+
+extend type Query {
+  listAuthors(input:listAuthorInput): listAuthorResponse
+  getAuthor(input:getAuthorInput): Author
+}

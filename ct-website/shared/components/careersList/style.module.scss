@@ -1,0 +1,22 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item {
+  &:hover p {
+    color: $font-color;
+  }
+  p {
+    margin-bottom: 12px;
+  }
+}
+.icon {
+  width: 48px;
+}
+
+/***** Responsive CSS Start ******/
+
+@media (min-width: 1200px) and (max-width: 1399px) {
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+}

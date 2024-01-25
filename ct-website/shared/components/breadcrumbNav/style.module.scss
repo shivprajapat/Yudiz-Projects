@@ -1,0 +1,15 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.breadcrumb {
+  ol { margin-bottom: 12px; display: block;
+    .item { display: inline;
+      + .item { padding-left: 0.5rem;
+        &::before { content: ">"; float: none; padding-right: 0.5rem; color: $font-color; }
+      }
+      &.active { color: $theme-color; max-width: 200px; }
+    }
+  }
+}
+
+/***** Responsive CSS Start ******/

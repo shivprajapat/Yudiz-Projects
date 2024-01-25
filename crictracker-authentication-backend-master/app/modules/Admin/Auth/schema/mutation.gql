@@ -1,0 +1,55 @@
+input adminLogin {
+    sUserName: String!
+    sPassword: String!
+}
+
+type adminLoginResponse {
+    sMessage: String
+    oData: adminLoginResponseInput
+}
+
+type adminLoginResponseInput {
+    sToken: String
+}
+
+input forgotPassword {
+    sEmail: String!
+}
+
+type forgotPasswordResponse {
+    sMessage: String!
+}
+
+input verifyOtp {
+    sOtp: String
+    sEmail: String!
+    eAuth: String!
+    eType: String!
+}
+
+type verifyOtpResponse {
+    sMessage: String!
+}
+
+input changePassword {
+  sEmail: String!
+  sNewPassword: String!
+  sConfirmNewPassword: String!
+}
+
+type resetPasswordResponse {
+    sMessage: String!
+}
+
+type adminLogoutResponse {
+    sMessage: String!
+}
+
+
+extend type Mutation {
+    adminLogin(input: adminLogin): adminLoginResponse!
+    forgotPassword(input: forgotPassword): forgotPasswordResponse!
+    verifyOtp(input: verifyOtp): verifyOtpResponse!
+    resetPassword(input: changePassword): resetPasswordResponse!
+    adminLogout: adminLogoutResponse
+}

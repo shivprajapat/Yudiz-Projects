@@ -1,0 +1,38 @@
+type permissions@key(fields: "_id") {
+  _id: ID!
+  eKey: String!
+  eType: String!
+  sTitle: String!
+  ePerType: String!
+}
+
+type parentRole {
+  _id: ID
+  sName: String
+}
+
+type getRolesData @key(fields: "_id") {
+  _id: ID
+  sName: String
+  aPermissions: [permissions]
+  aParent: [parentRole]
+  dUpdated: String
+  bIsDefault: Boolean
+}
+
+type getRolesResponse {
+  nTotal:Int
+  aResults: [getRolesData]
+}
+
+input getRoleById {
+  _id:ID!
+}
+
+extend type Query {
+  getPermissions: [permissions]
+  getUserPermissions: [String]
+  getRoles: getRolesResponse
+  getRoleById(input:getRoleById): getRolesData
+  getDefaultRoles: [getRolesData]
+}

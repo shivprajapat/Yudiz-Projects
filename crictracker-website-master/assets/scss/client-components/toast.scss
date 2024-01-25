@@ -1,0 +1,33 @@
+.toast-b {
+  top: 60px;
+  z-index: 9999;
+  color: #fff;
+  width: 320px;
+  max-width: 90%;
+  polygon {
+    fill: #fff;
+  }
+  &.danger {
+    background: $danger-bg;
+    .btnClose {
+      background: $danger;
+    }
+  }
+  &.success {
+    background: $success-bg;
+    .btnClose {
+      background: $success;
+    }
+  }
+  .btnClose {
+    padding: 2px;
+    width: 24px;
+    height: 24px;
+    
+  }
+  svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!--
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_SizeChart
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+-->
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" layout="admin-2columns-left" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <update handle="editor"/>
+    <body>
+        <referenceContainer name="content">
+            <block class="Magento\Backend\Block\Template" template="Mageplaza_SizeChart::sizechart/form/loadtemplates.phtml" name="mp.sizechart.form.before" as="mp_form_before"/>
+            <block class="Mageplaza\SizeChart\Block\Adminhtml\Rule\Edit" name="mageplaza_sizechart_rule_edit"/>
+        </referenceContainer>
+        <referenceContainer name="left">
+            <block class="Mageplaza\SizeChart\Block\Adminhtml\Rule\Edit\Tabs" name="mageplaza_sizechart_rule_tabs">
+                <block class="Mageplaza\SizeChart\Block\Adminhtml\Rule\Edit\Tab\Rule" name="mageplaza_sizechart_rule_edit_tab_rule"/>
+                <block class="Mageplaza\SizeChart\Block\Adminhtml\Rule\Edit\Tab\Template" name="mageplaza_sizechart_rule_edit_tab_template"/>
+                <block class="Mageplaza\SizeChart\Block\Adminhtml\Rule\Edit\Tab\Conditions" name="mageplaza_sizechart_rule_edit_tab_condition"/>
+                <block class="Mageplaza\SizeChart\Block\Adminhtml\Rule\Edit\Tab\Type" name="mageplaza_sizechart_rule_edit_tab_type"/>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">rule</argument>
+                    <argument name="block" xsi:type="string">mageplaza_sizechart_rule_edit_tab_rule</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">template</argument>
+                    <argument name="block" xsi:type="string">mageplaza_sizechart_rule_edit_tab_template</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">condition</argument>
+                    <argument name="block" xsi:type="string">mageplaza_sizechart_rule_edit_tab_condition</argument>
+                </action>
+                <action method="addTab">
+                    <argument name="name" xsi:type="string">type</argument>
+                    <argument name="block" xsi:type="string">mageplaza_sizechart_rule_edit_tab_type</argument>
+                </action>
+            </block>
+        </referenceContainer>
+    </body>
+</page>

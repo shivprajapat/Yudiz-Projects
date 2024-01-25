@@ -1,0 +1,76 @@
+@import 'assets/scss/helper/variables';
+
+.multi-range-slider {
+  position: relative;
+  width: 100%;
+}
+
+.multi-range-slider-track,
+.slider-range {
+  position: absolute;
+}
+
+.multi-range-slider-track,
+.slider-range {
+  border-radius: 3px;
+  height: 5px;
+}
+
+.multi-range-slider-track {
+  background-color: $header-text-color;
+  width: 100%;
+  z-index: 1;
+}
+
+.slider-range {
+  background-color: $skin-100;
+  z-index: 2;
+}
+
+.thumb,
+.thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.thumb {
+  pointer-events: none;
+  position: absolute;
+  height: 0;
+  width: 272px;
+  outline: none;
+}
+
+.thumb--zindex-3 {
+  z-index: 3;
+}
+
+.thumb--zindex-4 {
+  z-index: 4;
+}
+
+/* For Chrome browsers */
+.thumb::-webkit-slider-thumb {
+  background-image: radial-gradient($black-300 30%, $skin-100 40%, $skin-100);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 22px;
+  width: 22px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}
+
+/* For Firefox browsers */
+.thumb::-moz-range-thumb {
+  background-image: radial-gradient($black-300 30%, $skin-100 40%, $skin-100);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  height: 22px;
+  width: 22px;
+  margin-top: 4px;
+  pointer-events: all;
+  position: relative;
+}

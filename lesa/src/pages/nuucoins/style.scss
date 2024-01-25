@@ -1,0 +1,159 @@
+@import 'assets/scss/helper/variables';
+
+.nuu-coins-page{max-width: 1600px; width: 1600px; margin: 37px auto;
+    .nuu-coins-banner{position: relative; background: $black-300; padding: 95px 141px 135px;
+        .banner-img{position: absolute; bottom: 0px; right: 12%; width: 320px; height: 333px; object-fit: cover;}
+        .banner-content{ position: relative; z-index: 1;
+            h3{font-size: 64px; line-height: 76px; margin-bottom: 16px;font-weight: 500;}
+            p{font-size: 20px; line-height: 28px; color: $grey-color;
+                &:last-child{margin-bottom: 0px;}
+            }
+        }      
+    }
+    form .black-btn{font-weight: 400;}
+    .nuu-coins-content{margin-top: 40px;
+        .nuu-coins-form{padding: 43px 59px; border-radius: 16px; background: $skin-100;
+            form{margin-top: 52px;
+                .form-label{color: $theme-color;}
+                .form-control{background: transparent; color: $theme-color;
+                    &:focus{border-color: $theme-color;}
+                    &::placeholder{color: $theme-color;}
+                }
+                .black-btn{min-width: 100%; margin-top: 22px; font-size: 18px; line-height: 22px;}
+            }
+        }
+        .nuu-coins-table{ background: $black-300; border-radius: 16px;
+            & > h5 {padding: 30px 30px 20px; margin: 0px;}
+            tr{
+                &:last-child{
+                    td{border: none;}
+                }
+                th{background: $bg-primary; border: none;}
+                th,td{padding: 13px 60px 9px; color: $white; border-color: $bg-primary; font-weight: 400;}
+                td{
+                    color: $grey-color;
+                }
+            }
+            
+        }
+        .pagination{margin-top: 30px;}
+    }
+}
+
+@media(min-width: 1400px) and (max-width: 1699px) {
+    .nuu-coins-page { max-width: 1340px;
+        .nuu-coins-banner{padding: 95px 100px 135px;}
+        .nuu-coins-content{
+            .nuu-coins-form{padding: 40px;
+                form{margin-top: 42px;}
+            }
+            .nuu-coins-table{
+                & > h5{padding: 25px 25px 15px;}
+                tr{
+                    th, td{padding: 13px 40px 9px;}
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 1200px) and (max-width: 1399px) {
+    .nuu-coins-page { max-width: 1150px;
+        .nuu-coins-banner{padding: 95px 80px 120px;
+            .banner-content{
+                h3{font-size: 54px; line-height: 64px;}
+                p{font-size: 18px; line-height: 28px;}
+            }
+            .banner-img{width: 280px; height: 293px;}
+        }
+        .nuu-coins-content{
+            .nuu-coins-form{padding: 30px;
+                form{margin-top: 32px;
+                    .black-btn{margin-top: 16px;}
+                }
+            }
+            .nuu-coins-table{
+                & > h5{padding: 25px 25px 15px; font-size: 24px; line-height: 32px;}
+                tr{
+                    th, td{padding: 13px 40px 9px;}
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 992px) and (max-width: 1199px) {
+    .nuu-coins-page { max-width: 95%;
+        .nuu-coins-banner{padding: 80px 50px 100px;
+            .banner-content{
+                h3{font-size: 44px; line-height: 54px;}
+                p{font-size: 18px; line-height: 28px;}
+            }
+            .banner-img{width: 250px; height: 263px;}
+        }
+        .nuu-coins-content{
+            .nuu-coins-form{padding: 20px;
+                form{margin-top: 28px;
+                    .black-btn{margin-top: 12px;}
+                }
+            }
+            .nuu-coins-table{
+                & > h5{padding: 25px 25px 15px; font-size: 24px; line-height: 32px;}
+                tr{
+                    th, td{padding: 13px 25px 9px;}
+                }
+            }
+        }
+    }
+}
+
+@media(min-width: 768px) and (max-width: 991px) {
+    .nuu-coins-page { max-width: 94%;
+        .nuu-coins-banner{padding: 50px 30px 100px;
+            .banner-content{
+                h3{font-size: 38px; line-height: 48px;}
+                p{font-size: 16px; line-height: 26px;}
+            }
+            .banner-img{width: 220px; height: 233px;}
+        }
+        .nuu-coins-content{
+            .nuu-coins-form{padding: 20px;
+                form{margin-top: 28px;
+                    .black-btn{margin-top: 12px;}
+                }
+            }
+            .nuu-coins-table{ margin-top: 40px;
+                & > h5{padding: 25px 25px 15px; font-size: 24px; line-height: 32px;}
+                tr{
+                    th, td{padding: 13px 25px 9px;}
+                }
+            }
+        }
+    }
+}
+
+@media (max-width: 767px) {
+    .nuu-coins-page { max-width: 100%;
+        .nuu-coins-banner{padding: 33px 24px;
+            .banner-content{
+                h3{font-size: 32px; line-height: 40px;}
+                p{font-size: 16px; line-height: 26px;}
+            }
+            .banner-img{width: 180px; height: 193px; right: 0px;}
+        }
+        .nuu-coins-content{ margin: 41px 12px 0px;
+            .nuu-coins-form{padding: 30px 15px;
+                form{margin-top: 40px;
+                    .black-btn{margin-top: 12px;}
+                }
+            }
+            .nuu-coins-table{ margin-top: 40px; overflow-x: auto;
+                table{min-width: 767px;}
+                & > h5{padding: 23px 14px 10px; font-size: 24px; line-height: 32px;}
+                tr{
+                    th, td{padding: 13px 25px 9px;}
+                }
+            }
+        }
+    }
+}

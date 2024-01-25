@@ -1,0 +1,36 @@
+@import '../../../assets/scss/variables.scss';
+@import '../../../assets/scss/mixins.scss';
+   
+.videoList {
+    .adsItem,
+    article { margin-bottom: 30px; }
+    article { min-height: calc(100% - 30px); }
+}
+.link { letter-spacing: 0.4px; }
+
+@media (max-width: 1199px) {
+  
+}
+
+@media (max-width: 991px) {
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .videoList {
+        .adsItem,
+        article { margin-bottom: 24px; }
+        article { min-height: calc(100% - 24px); }
+    }
+}
+
+@media (max-width: 767px) {
+    .videoList {
+        .adsItem,
+        article { margin-bottom: 16px; }
+        article { min-height: calc(100% - 16px); }
+    }
+}
+
+@media (max-width: 575px) {
+
+}

@@ -1,0 +1,194 @@
+@import 'assets/scss/helper/variables';
+
+.single_item {
+  position: relative;
+
+  .card {
+    background-color: transparent;
+    overflow: hidden;
+
+    .card-images{ 
+      margin-bottom: 36px;
+overflow: hidden; width: 100%;
+height: 258px;
+    }
+    .card-img-top {
+     height: 100%;width: 100%;
+      transition: all 0.3s ease;
+      transform: scale(1);
+    }
+
+    .share-btn {
+      position: absolute;
+      top: 16px;
+      right: 17px;
+      border-radius: 100%;
+      width: 40px;
+      height: 40px;
+      background-color: $white;
+      border: none;
+      @include flex(center, center, null);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $green-color;
+      }
+    }
+
+    .card-body {
+      padding: 0;
+      margin-bottom: 19px;
+
+      .card-title a {
+        margin-bottom: 8px;
+        font-weight: 400;
+        font-size: 24px;
+        color: $white;
+
+        &:hover {
+          color: $green-color;
+        }
+      }
+
+      .user-txt {
+        @include flex(center, null, null);
+
+        a {
+          font-size: 16px !important;
+
+          &:hover {
+            color: $green-color;
+          }
+        }
+
+        span {
+          margin: 0 5px;
+        }
+      }
+
+      .card-text a {
+        margin-left: 8px;
+        font-size: 18px;
+      }
+
+      .user-txt,
+      p {
+        font-size: 18px;
+        font-weight: 400;
+        color: $primary-color;
+
+        a {
+          color: $white;
+          font-size: 20px;
+        }
+      }
+
+      .d-community {
+        margin-top: 7px;
+      }
+    }
+
+    .user-link {
+      p {
+        font-weight: 400;
+
+        img {
+          border-radius: 100%;
+          width: 24px;
+          height: 24px;
+          margin-right: 8px;
+        }
+      }
+
+      p,
+      span {
+        margin: 0;
+        font-size: 14px;
+        line-height: 17px;
+        font-weight: 300;
+      }
+
+      .days {
+        color: $primary-color;
+        margin-top: 7px;
+      }
+    }
+
+    .user-link,
+    .social-link {
+      @include flex(center, space-between, null);
+
+      p {
+        color: $white  !important;
+      }
+    }
+
+    .social-link {
+      padding-right: 15px !important;
+
+      a {
+        color: $grey-color;
+        font-weight: 600;
+        font-size: 16px;
+        line-height: 19px;
+        @include flex(center, null, null);
+        transition: all 0.3s ease;
+
+        &:hover p {
+          color: $green-color  !important;
+        }
+
+        img {
+          &:not(:last-child) {
+            margin-right: 11px;
+          }
+        }
+
+        p {
+          margin: 0;
+          padding-top: 4px;
+        }
+      }
+    }
+
+    &:hover {
+      .card-img-top {
+        transform: scale(1.2);
+      }
+    }
+
+    @media (min-width: 1400px) and (max-width: 1699px) {
+      .user-link p {
+        font-size: 15px;
+      }
+    }
+
+    @media (min-width: 1280px) and (max-width: 1366px) {
+      .card-images {
+        height: 240px !important;
+      }
+    }
+
+    @media (max-width: 1600px) {
+      .card-images {
+        height: 210px;
+      }
+    }
+
+    @media (max-width: 1200px) {
+      .card-images {
+        height: 260px;
+      }
+    }
+    @media (max-width: 768px) {
+      .card-images {
+        height: 280px;
+      }
+    }
+     @media (max-width: 768px) {
+      .card-images {
+        height: 240px;
+      }
+    }
+  }
+}

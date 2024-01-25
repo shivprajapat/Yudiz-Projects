@@ -1,0 +1,283 @@
+.league-detail {
+    .no-team {
+        height: calc(100% - 340px);
+    }
+    .live-tabs {
+        border-bottom: 1px solid #e1e7ec;
+    }
+    .league-detail-container {
+        height: calc(100% - 300px);
+        &.isPrivate {
+            height: calc(100% - 362px);
+            @media (max-width: 480px) {
+                height: calc(100% - 301px);
+            }
+        }
+        &.cashback-include {
+            height: calc(100% - 321px);
+            @media (max-width: 480px) {
+                height: calc(100% - 273px);
+            }
+        }
+        overflow-y: auto;
+        @media (max-width: 480px) {
+            height: calc(100% - 243px);
+        }
+        .image {
+            height: 105px;
+            width: 105px;
+            border-radius: 55px;
+        }
+    }
+    .player-list {
+        tbody {
+            td {
+                padding: 8px 15px;
+                &:nth-child(1) {
+                    width: 75px;
+                }
+                &:nth-child(2) {
+                    padding-left: 0;
+                }
+            }
+        }
+        &.player-list2 {
+            tbody {
+                // tr {
+                //     border-bottom: 1px solid #e9edf0;
+                // }
+                td {
+                    padding: 8px 15px;
+                    &:nth-child(1) {
+                        width: auto;
+                    }
+                    &:nth-child(2) {
+                        padding-left: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+.price-table {
+    &.team-com-on {
+        margin-bottom: 0px;
+    }
+    &.all-selected {
+        tbody tr:not(.selected) {
+            pointer-events: none;
+            opacity: 0.5;
+        }
+    }
+    td {
+        // border-top: none;
+        // border-bottom: none;
+        border-bottom: 1px solid #f8f9fa;
+    }
+    .border-bottom-none {
+        border-bottom: none;
+    }
+    thead {
+        td {
+            [dir='rtl'] & {
+                text-align: right;
+            }
+            font-weight: 500;
+            font-size: 12px;
+            color: #b8c4ce;
+            padding: 5px 15px;
+            border-bottom: 1px solid #f8f9fa;
+        }
+    }
+    tbody {
+        td {
+            [dir='rtl'] & {
+                text-align: right;
+            }
+            font-weight: 500;
+            font-size: 12px;
+            color: $gray;
+            padding: 18px 15px;
+            border-bottom: 1px solid black; 
+            b {
+                font-weight: 500;
+                color: #b8c4ce;
+                margin-right: 3px;
+            }
+            span {
+                cursor: pointer;
+            }
+        }
+        .switch-class {
+            color: #1F70FF;
+        }
+        .border-bottom-none {
+            border-bottom: none;
+        }
+    }
+    .empty-img {
+        height: 35px;
+        width: 40px;
+    }
+    .eImage {
+        height: 30px;
+        width: 30px;
+    }
+    .eImage2{
+        height: 35px;
+        width: 35px;
+    }
+    .marLeft50 {
+        margin-left: 50px;
+        width: 100%;
+    }
+}
+.team-com {
+    background-color: #ffffff;
+    padding: 10px 15px;
+    border-bottom: 1px solid #e1e7ec;
+    p {
+        font-size: 12px;
+        font-weight: 500;
+        color: $blue;
+        margin: 0;
+    }
+    button {
+        font-size: 12px;
+        font-weight: 500;
+        color: $theme-font-color;
+        i {
+            margin-left: 5px;
+            border: 1px solid currentColor;
+            @include css3-prefix("border-radius", "100%");
+            font-size: 13px;
+            padding: 3px;
+            vertical-align: -1px;
+        }
+    }
+}
+.selected-t {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #fff;
+    @include css3-prefix("box-shadow", "0 -2px 12px 0 #cfd6de");
+    @include css3-prefix("border-radius", "16px 16px 0 0");
+    .st-title {
+        font-size: 10px;
+        font-weight: 500;
+        color: $blue;
+        margin: 8px 0;
+        text-align: center;
+    }
+    .st-bottom {
+        .btn {
+            width: 50%;
+            font-size: 12px;
+            font-weight: 500;
+            color: #ffffff;
+            background-color: #212a34;
+            @include css3-prefix("border-radius", "0");
+            padding: 12px 10px;
+            text-transform: uppercase;
+            &.btn-blue {
+                background-color: #189ee1;
+            }
+        }
+        .fullWidth{
+            width: 100%;
+        }
+    }
+    .team-box {
+        width: calc(50% - 12px);
+        padding-bottom: 8px;
+        padding-left: 15px;
+        [dir='rtl'] & {
+            padding-left: 0;
+            padding-right: 15px;
+        }
+        .img {
+            height: 40px;
+            width: 40px;
+            @include css3-prefix("border-radius", "100%");
+            position: relative;
+            border: solid 1px #cfd6de;
+            img {
+                @include css3-prefix("border-radius", "100%");
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+            button {
+                position: absolute;
+                top: -8px;
+                left: -8px;
+                [dir='rtl'] & {
+                    right: -8px;
+                    left: auto;
+                }
+                color: #f73838;
+                font-size: 20px;
+            }
+        }
+        p {
+            font-size: 12px;
+            font-weight: 500;
+            color: $gray;
+            margin: 0;
+            padding: 0 5px;
+            max-width: 120px;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            [dir='rtl'] & {
+                text-align: right;
+            }
+            @media(max-width: 370px){
+                max-width: 90px;
+            }
+        }
+    }
+    .vs {
+        height: 24px;
+        width: 24px;
+        @include css3-prefix("border-radius", "100%");
+        border: solid 1px #e1e7ec;
+        font-size: 12px;
+        font-weight: 500;
+        color: $theme-font-color;
+        line-height: 23px;
+        text-align: center;
+        & ~ .team-box {
+            text-align: right;
+            padding-left: 0;
+            padding-right: 15px;
+            [dir='rtl'] & {
+                padding-bottom: 8px;
+                padding-left: 15px;
+            }
+            .img button {
+                left: auto;
+                right: -8px;
+                [dir='rtl'] & {
+                    left: -8px;
+                    right: auto;
+                }
+            }
+        }
+    }
+}
+.light-gray {
+    color: #8c8c8c;
+    font-size: 10px;
+}
+.lineups-btn {
+    color: #ffffff;
+    background-color: $success-color;
+}
+.color-blue-td {
+    span {
+        color: #3E95DF;
+    }
+}

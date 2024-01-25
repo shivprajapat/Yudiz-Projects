@@ -1,0 +1,153 @@
+@import 'assets/scss/helper/variables';
+.communities {
+  .single-community {
+    position: relative;
+    .white-btn {
+      z-index: 9;
+    }
+    margin-bottom: 20px;
+    @include flex(flex-start, flex-start, null);
+    flex-wrap: wrap;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &-box {
+      &-img {
+        margin-right: 32px;
+        img {
+          width: 134px;
+          height: 134px;
+          border-radius: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+    &-right {
+      flex: 1;
+      @include flex(center, space-between, null);
+      .white-btn {
+        min-width: 115px;
+      }
+      .content {
+        position: relative;
+        width: 830px;
+        h6 {
+          color: $white;
+          font-weight: 400;
+          margin: 0;
+          margin-bottom: 14px;
+          font-size: 24px;
+          line-height: 38px;
+          word-break: break-all;
+          display: inline-block;
+        }
+        p {
+          color: $primary-color;
+          font-size: 18px;
+          width: 100%;
+          word-break: break-all;
+          margin: 0;
+        }
+        &::after {
+          clear: both;
+          display: table;
+          content: '';
+        }
+        &-head {
+          padding-bottom: 16px;
+        }
+        &-follower {
+          @include flex(center, flex-start, null);
+          span {
+            position: relative;
+            font-weight: 400;
+            font-size: 18px;
+            line-height: 25px;
+            color: $grey-color;
+            &.count {
+              padding-right: 20px;
+              margin-right: 20px;
+              &::before {
+                content: '';
+                position: absolute;
+                top: 50%;
+                right: 0;
+                width: 1px;
+                height: 100%;
+                transform: translateY(-50%);
+                background-color: #bababa;
+              }
+            }
+          }
+        }
+      }
+      .white-btn {
+        min-width: 209px;
+      }
+    }
+    @media (max-width: 1400px) {
+      &-right .content {
+        width: 720px;
+      }
+    }
+    @media (max-width: 1199px) {
+      &-right .content {
+        width: 550px;
+      }
+    }
+    @media (max-width: 1024px) {
+      margin-bottom: 30px;
+      &-right .content {
+        width: 520px;
+        padding-top: 15px;
+      }
+    }
+    @media (max-width: 991px) {
+      &-right {
+        align-items: flex-start;
+        flex-direction: column;
+        .content {
+          padding-bottom: 30px;
+        }
+      }
+    }
+  }
+  @media (max-width: 767px) {
+    .single-community {
+      margin-bottom: 35px;
+
+      &-box {
+        align-items: flex-start;
+        &-img {
+          margin-right: 12px;
+          // flex: 15%;
+          img {
+            width: 74px;
+            height: 74px;
+          }
+        }
+        .modal-content {
+          padding: 20px;
+        }
+      }
+      &-right {
+        .content {
+          width: 100%;
+          &-head {
+            width: 100%;
+          }
+        }
+        h6 {
+          padding-right: 20px;
+        }
+      }
+    }
+    .back-arrow-box {
+      margin-bottom: 25px;
+      .arrow-heading {
+        font-size: 24px;
+        padding-left: 14px;
+      }
+    }
+  }
+}

@@ -1,0 +1,8 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.cricSpecial { background: var(--font-color-dark); color: $light-color;
+  a:hover { color: $theme-medium; }
+  img { object-fit: cover; }
+}
+.icon { width: 24px; }

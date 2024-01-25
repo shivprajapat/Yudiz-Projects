@@ -1,0 +1,15 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.item { margin-bottom: 1px; padding: 12px;
+    &:last-child { margin-bottom: 0; }
+}
+.label { width: 230px;}
+
+@media (max-width: 1199px) {
+    .label { width: 160px;}
+}
+
+@media (max-width: 991px) {
+    .label { width: 116px; }
+}

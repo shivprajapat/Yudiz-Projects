@@ -1,0 +1,86 @@
+"Save and Continue Edit","Save and Continue Edit"
+"Edit Rule '%1'","Edit Rule '%1'"
+"New SizeChart Rule","New SizeChart Rule"
+"Apply the rule only if the following conditions are met (leave blank for all products).","Apply the rule only if the following conditions are met (leave blank for all products)."
+Conditions,Conditions
+"Where To Show","Where To Show"
+Information,Information
+Name,Name
+Description,Description
+Active,Active
+"Store Views","Store Views"
+Priority,Priority
+"Default is 99, and 0 is highest.","Default is 99, and 0 is highest."
+"General Information","General Information"
+"Size Chart Template","Size Chart Template"
+"Template HTML","Template HTML"
+"Template CSS","Template CSS"
+Templates,Templates
+Load,Load
+"What To Show","What To Show"
+"How Size Chart will be shown","How Size Chart will be shown"
+"How to display","How to display"
+"Attribute Code","Attribute Code"
+"The line ""Size Chart"" will be displayed next to this attribute code.<br>Eg: size,shoes_size,men_size,women_size,etc.","The line ""Size Chart"" will be displayed next to this attribute code.<br>Eg: size,shoes_size,men_size,women_size,etc."
+"How To Show","How To Show"
+"Rule Information","Rule Information"
+"Size Chart","Size Chart"
+Promotions,Promotions
+"We found updated rules that are not applied. Please click ""Apply Rules"" to update your catalog.","We found updated rules that are not applied. Please click ""Apply Rules"" to update your catalog."
+"This rule no longer exists.","This rule no longer exists."
+"The Rule has been deleted.","The Rule has been deleted."
+"Rule to delete was not found.","Rule to delete was not found."
+"Manage Rules","Manage Rules"
+"New Rule","New Rule"
+Rules,Rules
+"Please correct the data sent.","Please correct the data sent."
+"Something went wrong while saving the Rule.","Something went wrong while saving the Rule."
+"Load message success!","Load message success!"
+"Cannot load template.","Cannot load template."
+"Rules has been deleted.","Rules has been deleted."
+"Something wrong when delete Rules.","Something wrong when delete Rules."
+"Something went wrong while updating status for %1.","Something went wrong while updating status for %1."
+"A total of %1 record(s) have been updated.","A total of %1 record(s) have been updated."
+"The rule has been saved.","The rule has been saved."
+"Module is disabled.","Module is disabled."
+"The %1 rule doesn't exist.","The %1 rule doesn't exist."
+"The rule can't be delete.","The rule can't be delete."
+"%1 should be a number and greater than 0.","%1 should be a number and greater than 0."
+"%1 is required.","%1 is required."
+"""enabled"" should be 0 or 1.","""enabled"" should be 0 or 1."
+"The rule can't be saved.","The rule can't be saved."
+"The rule that was requested doesn't exist. Verify the rule and try again.","The rule that was requested doesn't exist. Verify the rule and try again."
+"demo_templates is invalid.","demo_templates is invalid."
+"display_type is invalid.","display_type is invalid."
+"Inherit from Rule","Inherit from Rule"
+"Inherit from Category/Rule","Inherit from Category/Rule"
+No,No
+name,name
+"Size Chart Attribute %1 column","Size Chart Attribute %1 column"
+"Men Top","Men Top"
+"Men Bottom","Men Bottom"
+"Women Top","Women Top"
+"Women Bottom","Women Bottom"
+"Men Shoes","Men Shoes"
+"Women Shoes","Women Shoes"
+Popup,Popup
+"Inline: Under Add to Cart button","Inline: Under Add to Cart button"
+"Product Tab","Product Tab"
+General,General
+"Enable Module","Enable Module"
+"Select Yes to enable this module","Select Yes to enable this module"
+"Link Icon","Link Icon"
+"The icon to show on the popup link. Allowed file types: .svg, .jpg, .jpeg, .gif, .png. Recommended size <b>16x16</b> px. You can get more rule icons <a href=""https://www.flaticon.com/search?word=ruler"" target=""_blank"">here</a>.","The icon to show on the popup link. Allowed file types: .svg, .jpg, .jpeg, .gif, .png. Recommended size <b>16x16</b> px. You can get more rule icons <a href=""https://www.flaticon.com/search?word=ruler"" target=""_blank"">here</a>."
+"When the ""Inherit from Category/Rule"" option is picked, Size Chart which is applied for the product will follow the Size Chart rule or this config of current category (the category which product belong to on current page).","When the ""Inherit from Category/Rule"" option is picked, Size Chart which is applied for the product will follow the Size Chart rule or this config of current category (the category which product belong to on current page)."
+"Add Rule","Add Rule"
+Delete,Delete
+"Delete Rules","Delete Rules"
+"Are you sure you wan't to delete selected Rules?","Are you sure you wan't to delete selected Rules?"
+"Change status","Change status"
+Enable,Enable
+Disable,Disable
+ID,ID
+"Display Type","Display Type"
+"Created Date","Created Date"
+"Updated Date","Updated Date"
+Edit,Edit

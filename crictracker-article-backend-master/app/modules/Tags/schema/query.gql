@@ -1,0 +1,135 @@
+type tagGetData @key(fields: "_id") {
+  _id: ID
+  eType: String!
+  sName: String!
+  nCount: Int
+  sContent: String
+  eStatus: String!
+  iSubmittedBy: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  iId: ID
+}
+
+type tagData @key(fields: "_id") {
+  _id: ID
+  eType: String
+  sName: String
+  nCount: Int
+  sContent: String
+  eStatus: String
+  iSubmittedBy: ID
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  oSubAdmin: subAdmin
+  iId: ID
+  oTeam: oShortTeam 
+  oPlayer: oShortPlayer
+  oVenue: oShortVenue
+}
+
+extend type subAdmin @key(fields: "_id"){
+  _id: ID @external
+}
+
+type TagSocialType {
+  sTitle: String
+  sDescription: String
+  sPicture: String
+}
+
+type getTagsData {
+  nTotal: Int
+  aResults: [tagData]
+}
+
+input tagPaginationInput {
+  nSkip: Int!
+  nLimit: Int!
+  sSortBy: String
+  nOrder: Int
+  sSearch: String
+  aType: [String]
+}
+
+input getTagsInput {
+  getTagsPaginationInput: tagPaginationInput!
+  aStatusFiltersInput: [RequestedStatus!]!
+}
+
+enum RequestedStatus {
+  "requested"
+  r
+  "active"
+  a
+  "inactive"
+  i
+  "deleted"
+  d
+  "declined"
+  dec
+}
+
+input getTagById {
+  _id:ID!
+}
+
+type TagCount {
+  nRequest: Int
+  nActiveTag: Int
+  nRequestedTag: Int
+}
+
+input oGetTagByIdFrontInput {
+  _id: ID!
+  eType: TAGTYPE!
+}
+
+type oTagDataFront @key(fields: "_id"){
+  _id: ID
+  eType: String
+  sName: String
+  nCount: Int
+  sContent: String
+  eStatus: String
+  dUpdated: String
+  dCreated: String
+  oSeo: Seo
+  bIsFav: Boolean
+}
+
+type oGetTagArticlesFrontResponse {
+  nTotal: Int
+  aResults: [FrontArticle]
+}
+
+input oGetTagArticlesFrontInput {
+  _id: ID!
+  nSkip: Int
+  nLimit: Int
+  sSortBy: String
+  nOrder: Int
+  eType: TAGTYPE!
+}
+
+enum TAGTYPE {
+  "general tag"
+  gt
+  "player tag"
+  p
+  "team tag"
+  t
+  "venue tag"
+  v
+}
+
+
+extend type Query {
+  getTags(input: getTagsInput): getTagsData
+  getTagById(input:getTagById): oEditTagData
+  getTagCounts: TagCount
+  getTagByIdFront(input:oGetTagByIdFrontInput): oTagDataFront
+  getTagArticlesFront(input:oGetTagArticlesFrontInput): oGetTagArticlesFrontResponse
+}

@@ -1,0 +1,33 @@
+subgraphs:
+  admins:
+    routing_url: https://auth-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://auth-dev.crictracker.ml/graphql
+  article: 
+    routing_url: https://article-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://article-dev.crictracker.ml/graphql
+  seo: 
+    routing_url: https://seo-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://seo-dev.crictracker.ml/graphql
+  match-management: 
+    routing_url: https://matchmanage-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://matchmanage-dev.crictracker.ml/graphql
+  help: 
+    routing_url: https://help-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://help-dev.crictracker.ml/graphql
+  global-widget: 
+    routing_url: https://globalwidget-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://globalwidget-dev.crictracker.ml/graphql
+  career: 
+    routing_url: https://career-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://career-dev.crictracker.ml/graphql
+  migrations:
+    routing_url: https://migrations-dev.crictracker.ml/graphql
+    schema:
+      subgraph_url: https://migrations-dev.crictracker.ml/graphql

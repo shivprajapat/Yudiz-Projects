@@ -1,0 +1,20 @@
+.img-placeholder {
+    label {
+        border: 4px dashed #96C5EE;
+        background: #F6FAFE;
+        @include css3-prefix("border-radius", "8px");
+        min-height: 200px;
+        margin: 0;
+        cursor: pointer;
+        i {
+            font-size: 56px;
+            color: $theme-font-color;
+        }
+        p {
+            font-weight: 500;
+            font-size: 16px;
+            color: $theme-font-color;
+            margin: 15px 0 0 0;
+        }
+    }
+}

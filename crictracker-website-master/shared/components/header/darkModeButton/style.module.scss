@@ -1,0 +1,36 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+@media (max-width: 767px) {
+  .modeSwitch {
+    [data-mode=dark] & input { background-color: $theme-medium2 !important; }
+  }
+}
+
+.darkModeIcon{ display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: rgba(0, 0, 0, 0.2); padding: 5px; border-radius: 6px;
+  & > img { width: 20px; height: 20px;}
+  &:hover{ background-color: rgba(0, 0, 0, 0.3); }
+}
+
+.lightModeImg{
+  animation: animatedLightMode 0.2s ease-in-out;
+}
+
+.darkModeImg{
+  animation: animatedDarkMode 0.3s ease-in-out;
+}
+
+@keyframes animatedDarkMode {
+  from {opacity: 0; margin-top: -10px;}
+  to {opacity: 1; margin-top: 0px;}
+}
+@keyframes animatedLightMode {
+  from {opacity: 0; transform: rotate(0deg); margin-top: 30px;}
+  to {opacity: 1; transform: rotate(360deg); margin-top: 0px;}
+}
+
+.lightModeIcon{ display: flex; align-items: center; justify-content: center; cursor: pointer; background-color: rgba(255, 255, 255, 0.2); padding: 5px; border-radius: 6px; 
+  & > img { width: 20px; height: 20px; }
+  &:hover{ background-color: rgba(255, 255, 255, 0.3); }
+}
+/***** Responsive CSS Start ******/

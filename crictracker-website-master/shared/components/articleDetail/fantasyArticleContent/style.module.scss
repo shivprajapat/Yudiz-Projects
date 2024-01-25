@@ -1,0 +1,39 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.fantasySection { color: var(--font-secondary);
+  :last-child { margin-bottom: 0; }
+  table { border-collapse: separate !important; font-size: 14px; line-height: 20px;
+    tbody tr:first-child td { background: $theme-color; color: #fff; font-weight: 600; text-transform: capitalize;}
+    td { background: var(--theme-bg); width: auto; }
+  }
+  figure {
+    margin-bottom: 24px;
+    width: 100% !important;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    img {
+      margin-bottom: 0px;
+      border-radius: 16px;
+    }
+    figcaption {
+      font-style: italic;
+      color: #7b7b7b;
+      font-size: 12px;
+      line-height: 14px;
+      text-align: center;
+      margin-top: 5px;
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}
+.itemTitle { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid var(--light); }
+.iframeVideo { max-width: 520px;}
+
+@media (max-width: 767px) {
+  .itemTitle { margin-bottom: 8px; padding-bottom: 8px; }
+  .infoDesc { font-size: 16px; line-height: 24px; }
+}

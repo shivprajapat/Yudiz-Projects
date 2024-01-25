@@ -1,0 +1,48 @@
+<?php
+/**
+ * Mageplaza
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Mageplaza.com license that is
+ * available through the world-wide-web at this URL:
+ * https://www.mageplaza.com/LICENSE.txt
+ *
+ * DISCLAIMER
+ *
+ * Do not edit or add to this file if you wish to upgrade this extension to newer
+ * version in the future.
+ *
+ * @category    Mageplaza
+ * @package     Mageplaza_SizeChart
+ * @copyright   Copyright (c) Mageplaza (https://www.mageplaza.com/)
+ * @license     https://www.mageplaza.com/LICENSE.txt
+ */
+?>
+<script>
+    require(['jquery'], function ($) {
+        $('#sc_load_sample_template').on('click', function () {
+            var ruleContent = $('#rule_rule_content'),
+                tonggleRuleContent = $('#togglerule_rule_content');
+
+            $.ajax({
+                url: '<?php echo $block->getUrl('mpsizechart/rule/loadTemplate', ['form_key' => $block->getFormKey()]);?>',
+                data: {
+                    templateId: $('#rule_demo_templates').val()
+                },
+                cache: false,
+                showLoader: true,
+                success: function (result) {
+                    if (result.status) {
+                        if (ruleContent.css('display') === 'none') {
+                            tonggleRuleContent.trigger('click');
+                        }
+                        ruleContent.val(result.templateHtml);
+                        $('#rule_template_styles').val(result.templateCss);
+                        tonggleRuleContent.trigger('click');
+                    }
+                }
+            });
+        });
+    });
+</script>

@@ -1,0 +1,20 @@
+module.exports = {
+  SHARE_SOCIAL_TITLE: process.env.SHARE_SOCIAL_TITLE || 'Play Fantasy and win real cash | Fantasy',
+  SHARE_SOCIAL_DESCRIPTION: process.env.SHARE_SOCIAL_DESCRIPTION || 'Fantasy is one of finest Fantasy sports game where more probability of numbers can make you win loads of cash!',
+  PRIVATE_CONTEST_SOCIAL_TITLE: process.env.PRIVATE_CONTEST_SOCIAL_TITLE || 'Private Contest Invitation of Fantasy',
+  PRIVATE_CONTEST_SOCIAL_DESCRIPTION: process.env.PRIVATE_CONTEST_SOCIAL_DESCRIPTION || 'Fantasy is one of finest Fantasy sports game where more probability of numbers can make you win loads of cash!',
+  DYNAMIC_LINK_DOMAIN_URI_PREFIX: process.env.DYNAMIC_LINK_DOMAIN_URI_PREFIX || 'https://wlfantasy.page.link',
+  DYNAMIC_LINK_ANDROID_PACKAGE_NAME: process.env.DYNAMIC_LINK_ANDROID_PACKAGE_NAME || 'com.fantasy.wl',
+  IOS_BUNDLE_ID: process.env.IOS_BUNDLE_ID || 'com.app.FantasyApp',
+  IOS_CUSTOM_SCHEME: process.env.IOS_CUSTOM_SCHEME || 'fantasyapp.firebase.scheme',
+  IOS_APP_STORE_ID: process.env.IOS_APP_STORE_ID || '6443831473',
+  CASHFREE_ORDERID_PREFIX: process.env.CASHFREE_ORDERID_PREFIX || 'SG_',
+  TRANSACTION_LOG_BULK_INSERT_SIZE: Number(process.env.TRANSACTION_LOG_BULK_INSERT_SIZE) || 1,
+  APP_ENV: process.env.APP_ENV || 'fansportiz',
+  APP_LANG: process.env.APP_LANG || 'English',
+  AWS_REGION: process.env.AWS_REGION || 'ap-south-1',
+  API_LOGS_LOG_BULK_INSERT_SIZE: Number(process.env.API_LOGS_LOG_BULK_INSERT_SIZE) || 1,
+  PAGINATION_LIMIT: process.env.PAGINATION_LIMIT || 500,
+  USER_REMINDER_TITLE: process.env.USER_MESSAGE_TITLE || 'New Message Arrived',
+  REFERRAL_CODE_LENGTH: process.env.REFERRAL_CODE_LENGTH || 4
+}

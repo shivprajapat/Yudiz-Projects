@@ -1,0 +1,203 @@
+input oCategories {
+  aCategoryId: [ID]
+  iPrimaryId: ID
+}
+
+input oAdvanceFeature {
+  bAllowComments: Boolean
+  bRequireAdminApproval: Boolean
+  bAmp: Boolean
+  bFBEnable: Boolean
+  bBrandedContent: Boolean
+  bExclusiveArticle: Boolean
+  bEditorsPick: Boolean
+  bAllowLike: Boolean
+}
+
+input oFeaturedImageInput {
+  sText: String
+  sCaption: String
+  sAttribute: String
+  sUrl: String
+  oMeta: oMeta
+}
+
+enum eVisibilityEnum {
+  "public"
+  pb
+  "private"
+  pr
+}
+
+input oCreateArticleInput {
+  sTitle: String!
+  sSubtitle: String!
+  sSrtTitle: String!
+  sContent: String!
+  sInsContent: String
+  oImg: oFeaturedImageInput
+  oTImg: oFeaturedImageInput
+  iCategoryId: ID
+  aSeries: [ID]
+  aSecCategories: [ID]
+  aPlayer: [ID]
+  aTeam: [ID]
+  aVenue: [ID]
+  aTags: [ID]
+  sEditorNotes: String
+  oAdvanceFeature: oAdvanceFeature
+  eState: ARTICLESTATES
+  eVisibility: eVisibilityEnum
+  bPriority: Boolean
+  iAuthorDId: ID!
+  dModifiedDate: Date
+  iEventId: ID
+  oSeo: oSeoArticleInput!
+  aPollId: [ID]
+}
+
+
+"This is an enum for article states."
+enum ARTICLESTATES {
+  "draft"
+  d
+  "pending"
+  p
+  "rejeceted"
+  r
+  "changesRemaining"
+  cr
+  "changesSubmitted"
+  cs
+  "published"
+  pub
+  "trash"
+  t
+  "scheduled"
+  s
+}
+
+type createArticleResponse {
+  sMessage: String
+  oData: Article
+}
+
+
+input oCreateArticleCommentInput {
+  iArticleId: ID!
+  iReceiverId: ID!
+  sMessage: String
+  aPic: [String]
+}
+
+type createArticleCommentResponse {
+  sMessage: String
+  oData: Comment
+}
+
+input oStickyInput {
+  bHome: Boolean
+  bCategory: Boolean
+  bHomeCategory: Boolean
+}
+
+input oEditArticleInput {
+  _id:ID!
+  sTitle: String!
+  sSubtitle: String!
+  sSrtTitle: String!
+  sContent: String!
+  sInsContent: String
+  oImg: oFeaturedImageInput
+  oTImg: oFeaturedImageInput
+  iCategoryId: ID
+  aSeries: [ID]
+  aSecCategories: [ID]
+  aPlayer: [ID]
+  aTeam: [ID]
+  aVenue: [ID]
+  aTags: [ID]
+  sEditorNotes: String
+  oAdvanceFeature: oAdvanceFeature
+  eState: ARTICLESTATES
+  eVisibility: eVisibilityEnum
+  bPriority: Boolean
+  iAuthorDId: ID
+  dPublishDate: String
+  dPublishDisplayDate: String
+  dModifiedDate: Date
+  nViewCount: Int
+  oSticky: oStickyInput
+  iEventId: ID
+  oSeo: oSeoArticleInput!
+  aPollId: [ID]
+}
+
+type editArticleResponse {
+  sMessage: String
+  oData: Article
+}
+
+input oPickArticleInput {
+  iArticleId:ID!
+  eType: PICKARTICLE
+}
+
+enum PICKARTICLE {
+"pick"
+p
+"overtake" 
+o
+}
+
+type pickArticleResponse {
+  sMessage: String
+}
+
+input oOvertakeArticleInput {
+  iArticleId: ID!
+}
+
+type overtakeArticleInput {
+  sMessage: String
+}
+
+input editDisplayAuthorInput {
+  iArticleId: ID
+  iAuthorDId: ID
+}
+
+type editDisplayAuthorResponse {
+  sMessage: String
+}
+
+type oUpdateArticleStatusResponse {
+  sMessage: String
+}
+
+input oUpdateArticleStatusInput {
+  _id: ID!
+  eState: ARTICLEUPDATESTATE!
+}
+
+enum ARTICLEUPDATESTATE {
+  "trash"
+  t
+  "draft"
+  d
+}
+
+input oEditArticleViewsCount{
+  _id: ID!
+}
+
+extend type Mutation {
+  createArticle(input: oCreateArticleInput): createArticleResponse
+  createArticleComment(input: oCreateArticleCommentInput): createArticleCommentResponse
+  editArticle(input: oEditArticleInput): editArticleResponse
+  pickArticle(input: oPickArticleInput): pickArticleResponse
+  editDisplayAuthor(input:editDisplayAuthorInput):editDisplayAuthorResponse
+  updateArticleStatus(input:oUpdateArticleStatusInput!):oUpdateArticleStatusResponse
+  updatePickArticleData(input: oEditArticleInput): editArticleResponse
+  updateNewsArticleViewsCount(input: oEditArticleViewsCount): String
+}

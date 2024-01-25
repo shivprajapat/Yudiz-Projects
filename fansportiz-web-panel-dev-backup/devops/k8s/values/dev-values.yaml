@@ -1,0 +1,46 @@
+replicaCount: 2
+image: 352650027354.dkr.ecr.ap-south-1.amazonaws.com/fantasy-app-dev:latest
+
+namespace: dev
+
+labels:
+  tier: frontend
+  release: blue-green
+
+service:
+  type: NodePort
+  port: 80
+  healthcheck: /
+
+resources:
+  requests:
+    memory: "50Mi"
+    cpu: "20m"
+  limits:
+    memory: "200Mi"
+    cpu: "100m"
+
+
+livenessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 20
+  successThreshold: 1
+  failureThreshold: 3
+readinessProbe:
+  initialDelaySeconds: 10
+  periodSeconds: 10
+  timeoutSeconds: 20
+  successThreshold: 1
+  failureThreshold: 3
+
+autoscaling:
+  enabled: false
+  minReplicas: "1"
+  maxReplicas: "3"
+  targetCPU: "60"
+
+#Because we are using our private docker registry deployed in Kubernetes if you are using AWS(ECR) than you can disable this.
+imagePullSecrets:
+  enabled: true
+  name: regcred

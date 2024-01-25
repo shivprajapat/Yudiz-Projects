@@ -1,0 +1,29 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.playerCard { margin-bottom: 30px; min-height: calc(100% - 30px); background: var(--light-mode-bg); border-radius: 16px; overflow: hidden;
+  .title { padding: 6px; background: $font-color; color: #fff; }
+  .playerImg { position: relative; background: url(../../../assets/images/img-back-shape.svg) no-repeat center center / 100% auto; }
+  .imgBlock { width: 178px; height: 178px; border: 8px solid; border-color: var(--light-mode-bg); overflow: hidden;
+    img { object-fit: cover; }
+  }
+  .award { padding: 4px; min-width: 112px; position: absolute; bottom: 0; left: 50%; @include transform(translateX(-50%)); background: $font-color; color: #fff; border-radius: 4px; 
+    &.purple { background: #692F9E; }
+    &.orange { background: #F54820; }
+  }
+  .score { margin: 8px 0 2px; font-size: 36px; line-height: 50px; font-weight: 800; }
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+  .playerCard {
+    p { margin-bottom: 14px; }
+    .imgBlock { width: 154px; height: 154px; }
+    .score { font-size: 30px; line-height: 40px; }
+  }
+}
+
+@media (max-width: 1199px) {
+  .playerCard {  min-width: 218px; }
+}

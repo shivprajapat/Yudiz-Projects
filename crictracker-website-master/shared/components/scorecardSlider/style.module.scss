@@ -1,0 +1,26 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.scorecardNav { margin: 17px -4px 12px -4px; }
+.cardbtn { line-height: 18px; color: var(--font-secondary);
+  &:hover { color: var(--theme-color-medium); }
+  &.active { background: var(--light-mode-bg); color: var(--theme-color-light); border-color: var(--theme-medium); }
+}
+.scorecardSlider { border-bottom: 1px solid var(--light);}
+.item { cursor: pointer; width: 300px; font-size: 11px; line-height: 16px; color: var(--border-color); }
+.dark { color: var(--font-color); }
+.scoreCardLink { z-index: 1; }
+.head { color: $font-light;}
+.live::before { @extend %after-before; margin-right: 4px; position: relative; top: -4px; width: 6px; height: 6px; display: inline-block; border-radius: 50%; background: $danger;}
+// Phase 2
+// .switch label { color: var(--font-color); font-weight: 500; }
+.team { margin-bottom: 6px; line-height: 19px; }
+.winner { width: 18px; }
+.listBtn { border: solid var(--border-light);
+  &:hover { border-color: var(--theme-color-light); color: var(--theme-color-light) !important; }
+}
+.teamFlag { width: 20px; }
+
+@media (max-width: 440px) {
+  .scorecardNav { margin: 14px -6px 8px; }
+}

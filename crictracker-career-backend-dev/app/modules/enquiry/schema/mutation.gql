@@ -1,0 +1,77 @@
+
+input jobApplyInput {
+  iJobId: ID!
+  sFullName: String!
+  sEmail: String!
+  sPhone: String!
+  sCurrentEmployer: String
+  sCurrentCTC: String!
+  sExpectedCTC: String!
+  sCurrentLocation: String
+  iPreferredLocationId: ID!
+  sTotalExperience: String!
+  sUploadCV: String
+  sUploadSample: String
+  sMessage: String!
+  sReference: String
+}
+
+input applyJobInput {
+  jobApplyInput: jobApplyInput
+}
+
+input deleteEnquiry {
+  _id:ID!
+}
+
+
+type applyJobResponse {
+  sMessage: String!
+}
+
+type deleteEnquiryResponse {
+  sMessage:String!
+}
+
+
+enum EnquiryActionStatus {
+  "deleted"
+  d
+  "read"
+  r
+  "unread"
+  ur
+  "aproved"
+  ap
+  "rejected"
+  rj
+}
+
+type updateEnquiryStatusResponse {
+  sMessage: String!
+}
+
+
+input bulkEnquiryActionInput {
+  aId: [ID]
+  eStatus: EnquiryActionStatus
+}
+
+input generateCVPreSignedUrl {
+    sFileName: String!
+    sContentType: String!
+    sType: String!
+}
+
+type generateCVPreSignedUrlResponse {
+  sType: String!
+  sUploadUrl: String!
+  sS3Url: String!
+}
+
+extend type Mutation {
+  applyJob(input: applyJobInput): applyJobResponse!
+  bulkEnquiryUpdate(input: bulkEnquiryActionInput): updateEnquiryStatusResponse
+  deleteEnquiry(input: deleteEnquiry): deleteEnquiryResponse
+  generateCVPreSignedUrl(input: [generateCVPreSignedUrl]): [generateCVPreSignedUrlResponse]!
+}

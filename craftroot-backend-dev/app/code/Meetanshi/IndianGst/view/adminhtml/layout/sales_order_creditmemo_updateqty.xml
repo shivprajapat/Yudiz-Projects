@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<page xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:View/Layout/etc/page_configuration.xsd">
+    <body>
+        <referenceBlock name="creditmemo_totals">
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\Gst" name="gst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingCgst" name="shipping_cgst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingSgst" name="shipping_sgst"/>
+            <block class="Meetanshi\IndianGst\Block\Sales\Order\ShippingIgst" name="shipping_igst"/>
+        </referenceBlock>
+        <referenceBlock name="order_items">
+            <block class="Magento\Sales\Block\Adminhtml\Items\Column\Name" name="column_name"
+                   template="Meetanshi_IndianGst::items/column/name.phtml" group="column"/>
+        </referenceBlock>
+    </body>
+</page>

@@ -1,0 +1,14 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.icon { width: 32px; }
+.itemTitle { margin-bottom: 12px; padding-bottom: 12px; border-bottom: 1px solid $light; }
+
+/***** Responsive CSS Start ******/
+@media (max-width: 575px) {
+    .item { border-bottom: 1px solid $light;
+        &:not(:first-child) { padding-top: 20px;}
+        .itemTitle { margin: 0; padding: 6px 0; border: none; }
+        .list > :not(:first-child) & { padding-top: 20px;}
+    }
+}

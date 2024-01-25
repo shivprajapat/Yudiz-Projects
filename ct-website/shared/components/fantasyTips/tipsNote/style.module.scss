@@ -1,0 +1,14 @@
+@import '../../../../assets/scss/variables.scss';
+@import '../../../../assets/scss/mixins.scss';
+
+.tipsNote { padding: 12px; background: var(--theme-bg); border-radius: 16px;
+    .icon { width: 28px; }
+    &.note { color: $theme-dark2; 
+        .itemTitle { border-bottom-color: $theme-medium;}
+    }
+}
+
+/***** Responsive CSS Start ******/
+@media (max-width: 767px) {
+  
+}

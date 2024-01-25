@@ -1,0 +1,127 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.siteHeader { background: $theme-color;position: sticky; top: 0; z-index: 10; @include transition(0.2s all linear 0.1s);
+  &.fixedAnimation { position: sticky; top: -58px; transform: translateY(-100%); }
+  &.fixed { position: sticky; top: 0; transform: translateY(0%); width: 100%; background: $theme-color; }
+  .navbar { padding: 12px 0; font-size: 12px; line-height: 20px; z-index: 5; position: sticky; top: 0; 
+    .nav {
+      .userDropdown > button,
+      .navLink { margin-left: 16px; color: #fff; font-weight: 700;
+        &:hover { color: #fff;}
+        &.fillBtn,
+        &.outlineBtn  { border-radius: 2em }
+        &.fillBtn     { padding: 6px 12px; background: #fff; color: $theme-color; }
+        &.outlineBtn  { padding: 4px 12px; color: #fff; border: 2px solid #fff; 
+          svg { margin: 0 4px 0 -2px; }
+        }
+      }
+      .iconItem  { padding: 0; 
+        svg { width: 32px; height: 32px; }
+      }
+    }
+    .separator { margin-left: 16px; width: 1px; height: 32px; display: block; background: rgba(255,255,255,0.2); }
+    .userDropdown {
+      > button { padding: 0; width: 32px; height: 32px; border-radius: 50%; overflow: hidden;
+        img { object-fit: cover;}
+        &::after { display: none; }
+        > span { display: block !important; }
+      }
+      .dropdownMenu { min-width: 190px;}
+    }
+    .profileInfo { margin-bottom: 7px; padding-bottom: 9px; border-bottom: 1px solid $border-light2; cursor: pointer;
+      .profilePic { width: 32px; margin-right: 7px;
+        img { object-fit: cover;}
+      }
+    }
+  }
+  .logo { padding: 0; margin: 0; width: 150px;
+    > div { display: block;}
+  }
+  .modeSwitch { 
+    label { color: #fff; margin-right: 8px; }
+  }
+}
+.userDropdown {
+  .dropdownVerify { 
+    button { width: auto; border: 1px solid; }
+  }
+  .active { color: $theme-color; }
+}
+
+.langMenu { margin-left: 16px;
+  > button { display: flex; display: -webkit-flex; @include align-items(center); background-color: transparent; font-size: 12px; line-height: 18px; color: #fff; padding: 0px;
+    &::after { margin-left: 2px; width: 18px; height: 18px; background: url(../../../assets/images/icon/down-caret.svg) no-repeat center center / cover; border: none; @include transition($common-transition); }
+    &:hover,
+    &:focus{ color: #fff; }
+  }
+  &.show {
+    .dropdown-toggle { background: $light-bg; border-color: $light-bg; color: inherit; box-shadow: none; outline: none; 
+        &:hover,
+        &:focus{ background: $light-bg; border-color: $light-bg; color: inherit; box-shadow: none; outline: none; }
+        &::after { @include transform(rotate(90deg)); }
+    }
+  }
+  .dropdown-menu { margin-top: -8px; padding: 8px 0; min-width: 100%; background: $light-bg; border: none; 
+      button { width: 100%; background: transparent; border: none; display: flex; display: -webkit-flex; @include justify-content(space-between);
+          &:hover,
+          &:focus { color: inherit; }
+      }
+  }
+}
+
+/***** Responsive CSS Start ******/
+@media (min-width: 1400px) {
+  .userDropdown .dropdownMenu { right: 50% !important; @include transform(translate(calc(50% + 8px)) !important); }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .searchGroup { width: 440px; }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  .siteHeader {
+    .navbar { padding: 12px 0;
+      .nav {
+        .navLink { margin-left: 9px; }
+        .iconItem  {
+          svg { width: 26px; height: 26px; }
+        }
+      }
+      .separator { margin-left: 10px; height: 26px; }
+    }
+    .logo { width: 140px; }
+  }
+  .langMenu { margin-left: 10px;}
+}
+
+@media (max-width: 767px) {
+  .siteHeader { 
+    .navbar { padding: 10px 0;
+      .nav {
+        .navLink { margin-left: 9px; }
+        .iconItem  {
+          svg { width: 28px; height: 28px; }
+        }
+      }
+      .separator { margin-left: 9px; height: 26px; }
+    }
+    .logo { width: 140px; }
+  }
+  .langMenu { margin-left: 9px;}
+}
+
+@media (max-width: 575px) {
+  .siteHeader { 
+    .navbar {
+      .separator { margin-left: 6px; }
+      .nav {
+        .userDropdown > button,
+        .navLink { margin-left: 4px;
+          &.fillBtn { padding: 6px 10px; }
+        }
+      }
+    }
+  }
+  .langMenu { margin-left: 6px;}
+}

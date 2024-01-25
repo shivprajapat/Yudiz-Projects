@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="24px" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>nav-cup-icon</title>
+    <g id="nav-cup-icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M19,4 L17,4 L17,2 L7,2 L7,4 L5,4 C3.9,4 3,4.9 3,6 L3,7 C3,9.55 4.92,11.63 7.39,11.94 C8.02,13.44 9.37,14.57 11,14.9 L11,18 L7,18 L7,20 L17,20 L17,18 L13,18 L13,14.9 C14.63,14.57 15.98,13.44 16.61,11.94 C19.08,11.63 21,9.55 21,7 L21,6 C21,4.9 20.1,4 19,4 Z M5,7 L5,6 L7,6 L7,9.82 C5.84,9.4 5,8.3 5,7 Z M19,7 C19,8.3 18.16,9.4 17,9.82 L17,6 L19,6 L19,7 Z" id="Shape" fill="#5090F6" fill-rule="nonzero"></path>
+    </g>
+</svg>

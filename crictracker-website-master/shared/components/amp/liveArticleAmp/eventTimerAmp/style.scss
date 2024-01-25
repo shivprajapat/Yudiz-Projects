@@ -1,0 +1,17 @@
+.matchInfo { 
+    padding: 4px;
+    border-radius: 12px; 
+    border:1px solid var(--border-light);
+    color:var(--theme-color-medium);
+    p { margin-bottom: 13px; font-size: 16px;}
+    .countdown {
+                    text-align: center;
+                    h1 { 
+                        margin: 4px 0 2px;
+                        span { margin: 0px 8px }
+                    }
+                    p {
+                        span { flex: 1 }
+                    }
+    }
+}

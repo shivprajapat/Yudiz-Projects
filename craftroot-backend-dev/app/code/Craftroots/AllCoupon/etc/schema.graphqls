@@ -1,0 +1,18 @@
+type Query {
+    allcouponcodes: AllCouponCodes
+        @resolver(class: "Craftroots\\AllCoupon\\Model\\Resolver\\AllCoupon")
+        @doc(description: "Get All Coupon Codes")
+}
+
+type AllCouponCodes @doc(description: "Get All Coupon") {
+    data: [AllCouponCodesData] @doc(description: "Get All Coupon Codes Data")
+}
+
+type AllCouponCodesData @doc(description: "Get All Coupon Codes Data") {
+    couponTitle: String @doc(description: "Get All Coupon Title ") 
+    couponCode: String @doc(description: "Get All Coupon Code ")
+    couponDescription: String @doc(description: "Get All Coupon Description")
+    couponFromDate: String @doc(description: "Get All Coupon From Date")
+    coupontoDate: String @doc(description: "Get All Coupon To Date")
+   
+}

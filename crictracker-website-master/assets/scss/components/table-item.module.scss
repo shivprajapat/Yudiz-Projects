@@ -1,0 +1,33 @@
+@import "@assets/scss/variables.scss";
+@import "@assets/scss/mixins.scss";
+
+.item { padding: 6px 0; border-bottom: 1px solid var(--border-medium);
+  > :first-child { width: 44px; }
+  > :nth-child(2) { padding: 0px 18px; }
+  > :last-child { width: 44px; }
+  .itemImg { width: 44px; margin-right: 6px;
+    img { object-fit: cover; }
+  }
+  &.head { padding: 12px 0; color: $font-light2;
+    > :nth-child(2) { font-size: inherit; line-height: inherit; }
+  }
+  .subText { margin: 2px 0px 0px; color: $font-light2;}
+}
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 1399px) {
+  .item {
+    > :first-child { width: 36px; }
+    > :nth-child(2) { padding: 0px 12px; }
+    > :last-child { width: 40px; }
+    .itemImg { width: 32px; }
+  }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  .item {
+    > :nth-child(2) { padding: 0px 6px; }
+    .itemImg { margin-right: 4px; }
+  }
+}

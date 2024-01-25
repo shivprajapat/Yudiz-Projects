@@ -1,0 +1,10 @@
+@import '../../../../../assets/scss/variables.scss';
+@import '../../../../../assets/scss/mixins.scss';
+
+.icon { width: 32px; }
+.itemTitle { margin: 0 0 12px; padding-bottom: 12px; border-bottom: 1px solid $light; text-transform: uppercase; color: $theme-color; }
+.itemTitle b { display: flex; align-items: center; }
+/***** Responsive CSS Start ******/
+@media (max-width: 575px) {
+    .itemTitle { padding: 6px 0; }
+}

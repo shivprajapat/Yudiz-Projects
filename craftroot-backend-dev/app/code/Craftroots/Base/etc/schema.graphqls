@@ -1,0 +1,319 @@
+type Query {
+    latestProducts(
+        current_page: Int @doc(description: "Current Page")
+        limit: Int @doc(description: "Limit")
+    ): LatestProducts
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\LatestProducts")
+        @doc(description: "Get Latest products")
+    productReviews(
+        product_id: Int @doc(description: "Id of the Product")
+        current_page: Int @doc(description: "Current Page")
+        limit: Int @doc(description: "Limit")
+    ): ProductReviews
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\ProductReviews")
+        @doc(description: "List of customer reviews")
+        @cache(cacheable: false)
+    moreInfoProducts(
+        sku: String! @doc(description: "Sku of the Product")
+    ): MoreInfoProducts
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\MoreInfoProducts")
+        @doc(description: "Get products more Information")
+     cureentCurrencyCodes(
+        currentCurrencyCode: String! @doc(description: "Get Current Currency Code")
+    ): CureentCurrencyCodes
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\MultipleCurrencyCodes")
+        @doc(description: "Get Current Currency Code")    
+    relatedProduct(
+        sku: String! @doc(description: "Sku of the Product")
+    ): RelatedProduct
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\RelatedProducts")
+        @doc(description: "Get Related products")
+    recentViewedProducts(
+        pageSize: Int = 5
+            @doc(
+                description: "Specifies the maximum number of results to return at once. This attribute is optional."
+            )
+        currentPage: Int = 1
+            @doc(
+                description: "Specifies which page of results to return. The default value is 1."
+            )
+    ): RecentViewProducts
+        @resolver(
+            class: "Craftroots\\Base\\Model\\Resolver\\RecentViewedProducts"
+        )
+        @doc(
+            description: "The Recent viewed products query for logged in customer."
+        )
+    categoryFilters(
+        category_id: Int! @doc(description: "category filter id")
+    ): CategoryFilters
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\CategoryFilters")
+        @doc(description: "Get category products")
+    attributeRegion: AttributeRegion
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\AttributeRegion")
+        @doc(description: "Get Latest products")
+}
+
+type LatestProducts @doc(description: "Get Latest products") {
+    data: [LatestProductsData] @doc(description: "Get Latest products")
+    currentPage: Int @doc(description: "Current Page Number")
+    limit: Int @doc(description: "Page Size")
+}
+type CategoryFilters @doc(description: "Get Latest products") {
+    data: [CategoryFiltersData] @doc(description: "Get Latest products")
+}
+type AttributeRegion @doc(description: "Get region attributes data") {
+    data: [AttributeRegionData] @doc(description: "Get region attributes data")
+    attributeCode: String @doc(description: "Attribute Code of region")
+}
+type AttributeRegionData @doc(description: "For region attributes Data") {
+    value: String @doc(description: "value for region attributes")
+    label: String @doc(description: "label for region attributes")
+}
+
+type CategoryFiltersData {
+    value: String @doc(description: "category identifiers")
+    label: String @doc(description: "category label")
+    Child: [CategoryChildData] @doc(description: "Get all child product option")
+}
+type CategoryChildData @doc(description: "Get Latest products") {
+    value: String @doc(description: "category identifiers")
+    label: String @doc(description: "category label")
+}
+
+type LatestProductsData @doc(description: "Get Latest products") {
+    id: String @doc(description: "Id of product")
+    name: String @doc(description: "Get Latest products")
+    price: String @doc(description: "Get Latest products")
+    final_price: String @doc(description: "Get Latest products")
+    specialPrice: String @doc(description: "products special price")
+    regularPrice: String @doc(description: "products regular price")
+    sku: String @doc(description: "Get Latest products")
+    image: String @doc(description: "Get Latest products")
+    description: String @doc(description: "Get Latest products")
+    urlkey: String @doc(description: "Get Latest products")
+    id: Int
+    type: String @doc(description: "Product Type")
+    categoryId: Int @doc(description: "Product Category Id")
+    price_range: PriceRange!
+        @doc(
+            description: "A PriceRange object, indicating the range of prices for the product"
+        )
+        @resolver(
+            class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\PriceRange"
+        )
+    rating_summary: Float!
+        @doc(
+            description: "The average of all the ratings given to the product."
+        )
+        @resolver(
+            class: "Magento\\ReviewGraphQl\\Model\\Resolver\\Product\\RatingSummary"
+        )
+    review_count: Int!
+        @doc(
+            description: "The total count of all the reviews given to the product."
+        )
+        @resolver(
+            class: "Magento\\ReviewGraphQl\\Model\\Resolver\\Product\\ReviewCount"
+        )
+    child: [childData] @doc(description: "Get all child product option")
+    stock_status_data: StockDetails
+        @doc(description: "Get product Qty and Stock Status")
+}
+type ConfigurableOptions @doc(description: "Get configurable options") {
+    Attribute_id: String @doc(description: "Child attribute_id")
+    Attribute_code: String @doc(description: "Child attribute_code")
+    attribute_options: [ConfigurableOptionsValues]
+        @doc(description: "Child Attribute values")
+}
+type ConfigurableOptionsValues
+    @doc(description: "Child  Attribute Options Values") {
+    value: Int @doc(description: "attribute value")
+    label: String @doc(description: "attribute label")
+    code: String @doc(description: "attribute hex_code")
+}
+type StockDetails {
+    qty: Float @doc(description: "Product Qty")
+    stock_status: String @doc(description: "Product Stock status")
+}
+type MoreInfoProducts @doc(description: "Get more information about products") {
+    data: [MoreInfoProductsData]
+        @doc(description: "Get products attributesData")
+}
+
+type RelatedProduct @doc(description: "Get Related products Information") {
+    data: [RelatedProductsData] @doc(description: "Get Related products Data")
+}
+
+type RelatedProductsData @doc(description: "For Linked Products") {
+    id: String @doc(description: "Id of product")
+    name: String @doc(description: "Get products")
+    price: String @doc(description: "Get products")
+    final_price: String @doc(description: "Get products")
+    specialPrice: String @doc(description: "products special price")
+    regularPrice: String @doc(description: "products regular price")
+    sku: String @doc(description: "Get products")
+    image: String @doc(description: "Get products")
+    description: String @doc(description: "Get products")
+    urlkey: String @doc(description: "Get products")
+    type: String @doc(description: "Product Type")
+    price_range: PriceRange!
+        @doc(
+            description: "A PriceRange object, indicating the range of prices for the product"
+        )
+        @resolver(
+            class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\PriceRange"
+        )
+    rating_summary: Float!
+        @doc(
+            description: "The average of all the ratings given to the product."
+        )
+        @resolver(
+            class: "Magento\\ReviewGraphQl\\Model\\Resolver\\Product\\RatingSummary"
+        )
+    review_count: Int!
+        @doc(
+            description: "The total count of all the reviews given to the product."
+        )
+        @resolver(
+            class: "Magento\\ReviewGraphQl\\Model\\Resolver\\Product\\ReviewCount"
+        )
+    child: [childData] @doc(description: "Get all related child product option")
+    stock_status_data: StockDetails
+        @doc(description: "Get product Qty and Stock Status")
+}
+type childData @doc(description: "For related child Products") {
+    childId: String @doc(description: "Get child product Id")
+    childName: String @doc(description: "Get child product Name")
+    childSku: String @doc(description: "Get child product sku")
+    childImage: String @doc(description: "Get child product image")
+    childstockstatus: String @doc(description: "Get child product stock status")
+    configurable_options: [ConfigurableOptions] @doc(description: "Child Data")
+}
+type RecentViewProducts @doc(description: "Get Recent products Information") {
+    data: [RecentProductsData] @doc(description: "Get Recent products Data")
+    currentPage: Int @doc(description: "Current Page Number")
+    pageSize: Int @doc(description: "Page Size")
+}
+type RecentProductsData @doc(description: "For Recent Products") {
+    id: String @doc(description: "Id of product")
+    name: String @doc(description: "Get products")
+    price: String @doc(description: "Get products")
+    final_price: String @doc(description: "Get products")
+    specialPrice: String @doc(description: "products special price")
+    regularPrice: String @doc(description: "products regular price")
+    sku: String @doc(description: "Get products")
+    image: String @doc(description: "Get products")
+    description: String @doc(description: "Get products")
+    urlkey: String @doc(description: "Get products")
+    type: String @doc(description: "Product Type")
+    price_range: PriceRange!
+        @doc(
+            description: "A PriceRange object, indicating the range of prices for the product"
+        )
+        @resolver(
+            class: "Magento\\CatalogGraphQl\\Model\\Resolver\\Product\\PriceRange"
+        )
+    rating_summary: Float!
+        @doc(
+            description: "The average of all the ratings given to the product."
+        )
+        @resolver(
+            class: "Magento\\ReviewGraphQl\\Model\\Resolver\\Product\\RatingSummary"
+        )
+    review_count: Int!
+        @doc(
+            description: "The total count of all the reviews given to the product."
+        )
+        @resolver(
+            class: "Magento\\ReviewGraphQl\\Model\\Resolver\\Product\\ReviewCount"
+        )
+    child: [childData] @doc(description: "Get all Recent child product option")
+    stock_status_data: StockDetails
+        @doc(description: "Get product Qty and Stock Status")
+}
+
+type MoreInfoProductsData @doc(description: "Get products attributesData") {
+    label: String @doc(description: "Get product attribute label")
+    value: String @doc(description: "Get product attribute value")
+    attribute_code: String @doc(description: "Get product attribute code")
+}
+type Mutation {
+    addItemToWishlist(product_id: Int!): AddItemToWishlist
+        @resolver(class: "Craftroots\\Base\\Model\\Resolver\\AddItemToWishlist")
+        @doc(description: "Add Item to Wishlist")
+    removeFromWishlist(product_id: Int!): RemoveFromWishlist
+        @resolver(
+            class: "Craftroots\\Base\\Model\\Resolver\\RemoveFromWishlist"
+        )
+        @doc(description: "Remove Item From Wishlist")
+    recentViewedProducts(product_ids: [Int]!): RecentViewedOutput
+        @resolver(
+            class: "Craftroots\\Base\\Model\\Resolver\\SubmitRecentViewedProducts"
+        )
+        @doc(
+            description: "Submit recent viewed products by ids for current logged in customer."
+        )
+}
+type AddItemToWishlist {
+    success: String!
+    message: String!
+}
+type RemoveFromWishlist {
+    success: String!
+    message: String!
+}
+interface ProductInterface {
+    stock_status_data: getStockDetails
+        @doc(description: "Get product Qty and Stock Status")
+        @resolver(
+            class: "\\Craftroots\\Base\\Model\\Resolver\\ProductStockResolver"
+        )  
+}
+type getStockDetails {
+    qty: Float @doc(description: "Product Qty")
+    low_stock_qty: Float @doc(description: "Product Low Stock Qty")
+    stock_status: String @doc(description: "Product Stock status")
+}
+type RecentViewedOutput {
+    message: String @doc(description: "recent viewed return message")
+    total_count: Int @doc(description: "The number of recent viewed products")
+}
+type ProductReviews @doc(description: "Reviews mapping fields") {
+    data: [ProductReviewsData] @doc(description: "Reviews mapping fields")
+    ratingStarCount: String
+    avgRating: String
+    totalRating: String
+    totalStarts: String
+    current_page: Int
+    limit: Int
+    total_count: Int
+}
+
+type ProductReviewsData @doc(description: "Reviews mapping fields") {
+    created_at: String
+    review: String
+    review_id: String
+    product_name: String
+    product_img: String
+    rating: String
+    detail: String
+    url_key: String
+    nickname: String
+    status: String
+}
+
+interface CartItemInterface @typeResolver(class: "Magento\\QuoteGraphQl\\Model\\Resolver\\CartItemTypeResolver") {
+    id: String! @deprecated(reason: "Use `uid` instead")
+    uid: ID! @doc(description: "The unique ID for a `CartItemInterface` object")
+    quantity: Float!
+    prices: CartItemPrices @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\CartItemPrices")
+    product: ProductInterface!
+    prices: CartItemPrices @resolver(class: "\\Magento\\QuoteGraphQl\\Model\\Resolver\\CartItemPrices")
+    item_image: String @resolver(class: "Craftroots\\Base\\Model\\Resolver\\CartItemImage")
+}
+
+type CureentCurrencyCodes {
+    success: Boolean
+    message: String
+}

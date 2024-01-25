@@ -1,0 +1,26 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+@media (max-width: 767px) {
+  .mobileMenu { position: fixed; left: 0; bottom: 0; width: 100vw; background: var(--light-mode-bg); z-index: 6; @include box-shadow(2px 0px 8px rgba(0,0,0,0.1));
+    li { padding: 4px 4px; flex-grow: 1; min-width: 66px; }
+    svg { display: block; margin: 0px auto 2px; width: 26px; height: 26px; }
+    a { display: block; border-radius: 8px; font-size: 11px;
+      &.active { background: $theme-light; color: $theme-medium2;
+        path,polygon { fill: $theme-medium2; }
+      }
+      path,polygon { fill: $font-color; }
+     }
+     a:hover { color: $theme-medium2;
+      path,polygon { fill: $theme-medium2; }
+    }
+  }
+}
+
+@media (max-width: 350px) {
+  .mobileMenu {
+    li { min-width: 60px;
+    }
+    a { border-radius: 6px;}
+  }
+}

@@ -1,0 +1,7 @@
+require('./global')
+require('./app/utils/lib/redis')
+const server = require('./app')
+const { db } = require('./app/utils')
+require('./app/grpc/client')
+db.initialize()
+server.initializeSocket()

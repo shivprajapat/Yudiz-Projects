@@ -1,0 +1,33 @@
+.admin-apis {
+  margin-top: 20px;
+
+  .api-user-list {
+    td {
+      a {
+        padding: 0.5rem;
+        color: #d2fcc3 !important;
+        cursor: pointer;
+      }
+    }
+  }
+
+}
+.api-data {
+  div {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.5rem;
+    font-size: 1.1rem;
+    .title{
+      font-weight: 600;
+      span{
+        padding-left: 0.7rem;
+        padding-right: 1rem;
+      }
+    }
+    a{
+      cursor: pointer;
+    }
+  }
+}

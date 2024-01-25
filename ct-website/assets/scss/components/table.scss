@@ -1,0 +1,43 @@
+.table-responsive,
+.table-scroller { margin-bottom: 16px; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+table { margin: 0px; width: 100%; border-spacing: 0 4px; border-collapse: separate; border: none;
+  th, td { padding: 4px 14px; height: 44px;
+    &:first-child { border-radius: 8px 0 0 8px; }
+    &:last-child { border-radius: 0 8px 8px 0; }
+  }
+  th { background: $theme-color; color: #fff; text-transform: capitalize; }
+  td { background: var(--light-mode-bg); }
+  .highlight td { background: $theme-light;}
+  .icon-img { margin-right: 10px; display: inline-block; width: 36px; height: 36px; background: #fff; border-radius: 10px; overflow: hidden; vertical-align: middle; }
+  &.numbered {
+    th:first-child { width: 51px; }
+  }
+  &.bordered { border-spacing: 0; border-radius: 8px; overflow: hidden;
+    th, td { border-radius: 0; }
+    td { border-bottom: 1px solid var(--theme-bg); }
+  }
+}
+/***** Responsive CSS Start ******/
+
+@media (max-width: 991px) {
+  table { margin: -4px 0px 4px; width: 100%; border-spacing: 0 6px; border-collapse: separate;
+    th, td { padding: 4px 10px; height: 40px;
+      &:first-child { border-radius: 4px 0 0 4px; }
+      &:last-child { border-radius: 0 4px 4px 0; }
+    }
+    .icon-img { width: 24px; height: 24px; border-radius: 4px; }
+  }
+}
+
+@media (max-width: 575px) {
+  .table-responsive,
+  .table-scroller { margin-bottom: 12px; }
+  table { margin: -3px 0px 3px; width: 100%; border-spacing: 0 6px; border-collapse: separate;
+    th, td { padding: 5px 6px; height: 30px;
+      &:first-child { border-radius: 3px 0 0 3px; padding-left: 10px; }
+      &:last-child { border-radius: 0 3px 3px 0; padding-right: 10px; }
+    }
+    .icon-img { width: 23px; height: 23px; border-radius: 3px; }
+  }
+}
+

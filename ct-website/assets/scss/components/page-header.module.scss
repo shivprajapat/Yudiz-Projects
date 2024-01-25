@@ -1,0 +1,21 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.pageHeader { margin-bottom: 16px; padding: 24px; background: var(--light-mode-bg); border-radius: 16px;
+  .title { margin-bottom: 16px;
+    &:last-child { margin: 0; }
+  }
+  p { margin-bottom: 12px; 
+    &:last-child { margin: 0; }
+  }
+  .desc {  transition: 1s all ease-in-out; white-space: break-spaces;
+  }
+} 
+
+/***** Responsive CSS Start ******/
+
+@media (max-width: 575px) {
+  .pageHeader { margin-bottom: 12px; padding: 16px; border-radius: 12px;
+    .readMore { padding: 3px 10px; font-size: 11px; }
+  }
+}

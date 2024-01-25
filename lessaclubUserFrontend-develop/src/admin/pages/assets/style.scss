@@ -1,0 +1,74 @@
+@import 'assets/scss/helper/variables';
+
+.approve-btn {
+  @include transition(all 0.5s);
+  background: $bg-primary;
+  width: 4rem;
+  color: $grey-color;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 0.1rem 0.3rem;
+  margin: 0;
+  border: none;
+  border-radius: 6px;
+  text-transform: capitalize;
+  display: inline-block;
+  &:hover,
+  &.active {
+    background: black !important;
+    color: white !important;
+  }
+  &:focus {
+    background: $bg-primary;
+    color: $grey-color;
+  }
+}
+
+.assets-section {
+  margin-top: 20px;
+  .asset-list {
+    position: relative;
+    svg {
+      font-size: 1rem;
+      color: $green-200;
+      margin-left: 10px;
+    }
+  }
+}
+
+.admin-asset-name {
+  display: flex;
+  align-items: center;
+  height: 3rem;
+}
+
+.reject-msg-close-btn {
+  display: inline-block;
+  text-align: center;
+  font-size: 1.2rem;
+  transition: all 0.2s;
+  cursor: pointer;
+  color: white;
+  padding: 2px;
+}
+
+.reject-msg-close-btn:hover {
+  transform: scale(1.2);
+  color: grey;
+}
+
+.reject-msg-close-btn:active {
+  transform: scale(0.9);
+}
+
+.data-not-available-container {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+}
+
+.customer-filter .react-datepicker {
+  width: max-content;
+}

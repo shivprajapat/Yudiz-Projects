@@ -1,0 +1,14 @@
+@import '@assets/scss/variables.scss';
+@import '@assets/scss/mixins.scss';
+
+.articleMedium { 
+  h3 { margin-bottom: 5px; }
+  p { font-size: 13px; line-height: 18px; color: $border-color; }
+  .desc {
+    display: -webkit-box;
+  }
+}
+
+@media (min-width: 576px) {
+  .desc { display: -webkit-box; }
+}

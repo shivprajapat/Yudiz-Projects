@@ -1,0 +1,132 @@
+type WidgetArticleImage {
+  sText: String
+  sCaption: String
+  sAttribute: String
+  sUrl: String
+}
+
+type categoryData {
+  _id: ID
+  sName: String
+  sContent: String
+}
+
+type Cricspecial @key(fields: "iArticleId") {
+  _id: ID
+  iArticleId: ID
+  sTitle: String
+  oImg: WidgetArticleImage
+  oTImg: WidgetArticleImage
+  dPublishDate: Date
+  nDuration: Int
+  oCategory: categoryData
+  oSeo: Seo
+  dCreated: String
+  dUpdated: String
+}
+
+enum ESEOSUBTYPE {
+  "news"
+  n
+  "videos"
+  v
+  "fixtures"
+  f
+  "standings"
+  s
+  "stats"
+  st
+  "teams"
+  t
+  "squads"
+  sq
+  "archives"
+  ar
+  "fantasy tips"
+  ft
+  "score card"
+  sc
+  "overs"
+  o
+  "fixtures-and-results"
+  far
+  "results"
+  r
+  "commentary"
+  c
+  "upcoming"
+  u
+  "photos"
+  p
+  "batting-highest-strikerate-innings"
+  stBhsi
+  "batting-highest-average"
+  stBha
+  "batting-highest-strikerate"
+  stBhs
+  "batting-most-centuries"
+  stBmc
+  "batting-most-run6-innings"
+  stBmr6i
+  "batting-most-fours"
+  stBm4
+  "batting-most-run4-innings"
+  stBmr4i
+  "batting-most-runs"
+  stBmr
+  "batting-most-runs-innings"
+  stBmri
+  "batting-most-run50"
+  stBmr50
+  "batting-most-sixes"
+  stBms
+  "bowling-top-wicket-takers"
+  stBtwt
+  "bowling-best-economy-rates-innings"
+  stBberi
+  "bowling-best-averages"
+  stBba
+  "bowling-best-economy-rates"
+  stBber
+  "bowling-best-strike-rates"
+  stBbsr
+  "bowling-best-strike-rates-innings"
+  stBbsri
+  "bowling-five-wickets"
+  stBfiw
+  "bowling-best-bowling-figures"
+  stBbbf
+  "bowling-most-runs-conceded-innings"
+  stBmrci
+  "bowling-four-wickets"
+  stBfow
+  "bowling-maidens"
+  stBm
+  "team-total-runs"
+  stTtr
+  "team-total-run100"
+  stTtr100
+  "team-total-wickets"
+  stTtw
+  "batting-most-fifties"
+  stBmf
+}
+
+extend type Seo @key(fields: "iId eSubType") {
+  iId: ID @external
+  eSubType: ESEOSUBTYPE @external
+}
+
+type listCricspecialResponse {
+  nTotal: Int 
+  aResults: [Cricspecial]! 
+}
+
+input getCricspecialInput {
+  nSkip: Int
+  nLimit: Int
+}
+
+extend type Query {
+  getCricSpecial(input: getCricspecialInput!): listCricspecialResponse! 
+}

@@ -1,0 +1,167 @@
+.point-table {
+    .point-title {
+        background-color: #EBEDEF;
+        margin: 0;
+        padding: 10px 20px 0 20px;
+        font-weight: 500;
+        color: $darkGray;
+        font-size: 14px;
+    }
+    .table {
+        thead {
+            th {
+                font-weight: 500;
+                font-size: 12px;
+                color: $gray;
+                padding: 5px 20px;
+                border: none;
+                background-color: #EBEDEF;
+                // text-transform: uppercase;
+                &:nth-child(2) {
+                    text-align: center;
+                }
+                &:last-child {
+                    text-align: right;
+                }
+                [dir='rtl'] & {
+                    &:first-child {
+                        text-align: right;
+                    }
+                    &:nth-child(2) {
+                        text-align: center;
+                    }
+                    &:last-child {
+                        text-align: left;
+                    }
+                }
+            }
+        }
+        tbody {
+            tr {
+                td {
+                    font-weight: 500;
+                    font-size: 12px;
+                    color: #1F282F;
+                    padding: 10px 20px;
+                    border-top: none;
+                    border-bottom: 1px solid #dee2e6;
+                    &:nth-child(2) {
+                        text-align: center;
+                    }
+                    &:last-child {
+                        text-align: right;
+                    }
+                    [dir='rtl'] & {
+                        &:first-child {
+                            text-align: right;
+                        }
+                        &:nth-child(2) {
+                            text-align: center;
+                        }
+                        &:last-child {
+                            text-align: left;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+.point-system-container-second {
+    height: calc(100% - 128px);
+    padding-top: 0px;
+    overflow-y: auto;
+    .live-tabs {
+        // border-bottom: 1px solid #e1e7ec;
+        margin: 10px;
+        padding: 10px;
+        position: sticky;
+        top: 0px;
+        z-index: 1;
+        background-color: #EBEDEF;
+        border-radius: 8px;
+        li {
+            background-color: #EBEDEF;
+            text-align: center;
+            a {
+                padding: 6px 10px 6px 10px;
+                color: #3C434A;
+            }
+            
+            .active {
+                border-radius: 8px;
+                background-color: #1F70FF;
+                color: #FFFFFF;
+                padding: 6px 10px 6px 10px;
+            }
+        }
+    }
+}
+.point-system-container-third {
+    height: calc(100% - 105px);
+    padding-top: 0px;
+    overflow-y: auto;
+    .filter-title {
+        margin-left: 20px;
+        margin-top: 14px;
+        margin-bottom: 0px;
+        font-weight: 500;
+        font-size: 14px;
+        color: #7E8B96;
+        [dir='rtl'] & {
+            margin-right: 20px;
+            margin-left: auto;
+            text-align: right;
+        }
+    }
+    .live-tabs {
+        // border-bottom: 1px solid #e1e7ec;
+        margin: 0 0 5px 0;
+        padding: 10px 15px 10px 15px;
+        position: sticky;
+        top: 0px;
+        background: #fff;
+        z-index: 1;
+        li {
+            text-align: center;
+            margin: 5px;
+            
+            a {
+                font-weight: 500;
+                border-radius: 4px;
+                border: 1px solid #A5AEB5;
+                color: #A5AEB5;
+                width: 100%;
+            }
+            .active {
+                color: #1F70FF;
+                background-color: #EBF2FF;
+                border-color:  #1F70FF;
+            }
+
+
+        }
+    }
+}
+.point-system-container {
+    height: calc(100% - 105px);
+    padding-top: 0px;
+    overflow-y: auto;
+    .live-tabs {
+        border-bottom: 1px solid #e1e7ec;
+        margin: 0 0 5px 0;
+        position: sticky;
+        top: 0px;
+        background: #fff;
+        z-index: 1;
+        li {
+            text-align: center;
+        }
+    }
+}
+
+.centerFullWidth{
+    text-align: center;
+    width: 100%;
+}
+

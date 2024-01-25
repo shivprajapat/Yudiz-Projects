@@ -1,0 +1,77 @@
+@import 'assets/scss/helper/variables';
+.admin-navigation {
+  position: fixed;
+  background-color: $secondary-black;
+  left: 0;
+  right: 0;
+  top: 0;
+  padding: 12px 30px;
+  text-align: right;
+  z-index: 1;
+  transition: all 0.5s ease;
+  .admin-user {
+    display: inline-block;
+    .dropdown-toggle {
+      background-color: transparent !important;
+      border: none;
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 150px;
+      padding: 0;
+
+      span {
+        line-height: normal;
+        text-transform: capitalize;
+      }
+      img {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        margin-right: 10px;
+      }
+      &::after {
+        display: none;
+      }
+      &::before {
+        position: absolute;
+        content: '';
+        width: 15px;
+        height: 15px;
+        background: url('../../../../assets/images/icons/left-arrow.svg') no-repeat;
+        background-size: contain;
+        background-position: center;
+        border-radius: 10px;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%) rotate(90deg);
+        transition: all 0.3s ease;
+      }
+      &[aria-expanded='true']::before {
+        transform: translateY(-50%) rotate(-90deg);
+      }
+    }
+    .dropdown-menu {
+      background-color: $secondary-black;
+      padding: 0;
+      width: 100%;
+      overflow: hidden;
+      border: none;
+      .dropdown-item {
+        color: $white;
+        padding: 12px 15px;
+        font-size: 18px;
+        line-height: normal;
+        &:active,
+        &:hover {
+          background-color: $green-color;
+          color: $theme-color;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 767px) {
+    padding: 5px 20px;
+  }
+}

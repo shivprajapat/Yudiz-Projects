@@ -1,0 +1,46 @@
+
+  Options -MultiViews
+
+  RewriteEngine On
+
+  # Redirect Trailing Slashes If Not A Folder...
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^(.*)/$ /$1 [L,R=301]
+
+  # Handle Front Controller...
+  RewriteCond %{REQUEST_URI} !(\.css|\.js|\.png|\.jpg|\.jpeg|\.gif|\.mp4|robots\.txt|\.woff|\.woff2|\.svg|\.ico|\.pdf)$ [NC]
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteRule ^ index.php [L]
+
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_URI} !^/public/
+  RewriteRule ^(admin|frontend|css|js|images|fonts|plugins|storage|assets)/(.*)$ public/$1/$2 [L,NC]
+
+  RewriteRule ^admin/(css|js|images|fonts|plugins)/(.*)$ public/$1/$2 [L,NC]
+
+  # Handle Authorization Header
+  RewriteCond %{HTTP:Authorization} .
+  RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+
+<FilesMatch "^\.">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<Files "*.json">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+<Files "*.lock">
+    Order Deny,Allow
+    Deny from all
+</Files>
+
+<Limit GET HEAD POST PUT DELETE OPTIONS>
+Order Allow,Deny
+Allow from all
+</Limit>
+

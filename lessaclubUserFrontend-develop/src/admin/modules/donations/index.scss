@@ -1,0 +1,19 @@
+@import 'assets/scss/helper/variables';
+.donation-list{
+  .amount-col{
+    width:150px!important;
+    span {
+      display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      width: 100px;
+    }
+  }
+  .amount-col1{
+    width: 80px!important;
+    min-width: auto!important;
+  }
+  a{
+    color: $green-200!important;
+  }
+}
